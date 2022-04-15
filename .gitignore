@@ -4,3 +4,5 @@ target
 .project
 .springBeans
 .DS_Store
+/target/
+/bin/
