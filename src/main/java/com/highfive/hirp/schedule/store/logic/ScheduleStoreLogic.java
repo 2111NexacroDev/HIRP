@@ -1,5 +1,10 @@
 package com.highfive.hirp.schedule.store.logic;
 
-public class ScheduleStoreLogic {
+import org.springframework.stereotype.Repository;
+
+import com.highfive.hirp.schedule.store.ScheduleStore;
+
+@Repository
+public class ScheduleStoreLogic implements ScheduleStore {
 
 }

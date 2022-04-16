@@ -1,5 +1,10 @@
 package com.highfive.hirp.todo.store.logic;
 
-public class TodoStoreLogic {
+import org.springframework.stereotype.Repository;
+
+import com.highfive.hirp.todo.store.TodoStore;
+
+@Repository
+public class TodoStoreLogic implements TodoStore {
 
 }
