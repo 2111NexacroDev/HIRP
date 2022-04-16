@@ -1,8 +1,7 @@
 .settings
-target
 .classpath
 .project
 .springBeans
 .DS_Store
-/target/
 /bin/
+/target/
