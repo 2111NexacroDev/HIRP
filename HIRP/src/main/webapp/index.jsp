@@ -2,26 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&family=Lexend+Exa:wght@300&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
-        rel="stylesheet"><!-- 노토산스 코리안 서체 CDN -->
 
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-
-    <link rel="stylesheet" href="./css/reset.css"><!-- 브라우저 기본 스타일 리셋하는 CSS -->
-    <link rel="stylesheet" href="./css/common.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="./js/common.js"></script>
-</head>
+<%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 
 <!-- 
     id는 한 페이지 내에 동일한 id가 하나여야함
@@ -93,7 +75,7 @@
                             <img src="./resources/images/profile.jpg" alt="profile">
                             <!-- 유저마다 다른 사진 출력돼야함 -->
                         </figure>
-                        <h2 class="t-c">ㅇㅇㅇ대표이사</h2>
+                        <h2 class="t-c">이름 직급</h2>
                     </section>
                     <section>
                         <h2>근태관리</h2>
