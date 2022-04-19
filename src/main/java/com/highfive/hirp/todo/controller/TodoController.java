@@ -49,6 +49,7 @@ public class TodoController {
 	
 	// 메모 조회
 	public ModelAndView memoListView(ModelAndView mv) {
+		List<Memo> tList = tService.printAllMemo();
 		return mv;
 	}
 	
@@ -56,18 +57,21 @@ public class TodoController {
 	public ModelAndView memoRegister(ModelAndView mv
 			,@ModelAttribute Memo memo
 			,HttpServletRequest request) {
+		int result = tService.registerMemo(memo);
+		return mv;
+	}
+	
+	// 메모 수정(ajax)
+	public ModelAndView memoUpdate(ModelAndView mv
+			,@ModelAttribute Memo memo) {
+		int result = tService.modifyMemo(memo);
 		return mv;
 	}
 	
 	// 메모 삭제(ajax)
 	public ModelAndView memoDelete(ModelAndView mv
 			,@RequestParam("memoNo") int memoNo) {
-		return mv;
-	}
-	
-	// 메모 수정(ajax)
-	public ModelAndView memoUpdate(ModelAndView mv
-			,@RequestParam("memoNo") int memoNo) {
+		int result = tService.removeMemo(memoNo);
 		return mv;
 	}
 }
