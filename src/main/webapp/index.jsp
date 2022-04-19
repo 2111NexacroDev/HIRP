@@ -68,7 +68,7 @@
             </h1>
 
             <div class="row">
-                <div>
+                <div><!-- 컬럼1 -->
                     <section>
                         <figure class="figure--profile">
                             <img src="../resources/images/profile.jpg" alt="profile">
@@ -79,8 +79,8 @@
                     <section>
                         <h2>근태관리</h2>
                     </section>
-                </div>
-                <div>
+                </div><!-- //컬럼1 -->
+                <div><!-- 컬럼2 -->
                     <section>
                         <h2>일정</h2>
                         <div id="calendar"></div>
@@ -88,15 +88,15 @@
                     <section>
                         <h2>메일함</h2>
                     </section>
-                </div>
-                <div>
+                </div><!-- //컬럼2 -->
+                <div><!-- 컬럼3 -->
                     <section>
                         <h2>생일</h2>
                     </section>
                     <section>
                         <h2>결재 대기 문서</h2>
                     </section>
-                </div>
+                </div><!-- //컬럼3 -->
             </div>
         </article>
     </div>

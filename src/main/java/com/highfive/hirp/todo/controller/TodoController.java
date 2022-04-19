@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,8 +22,14 @@ public class TodoController {
 	private TodoService tService;
 	
 	// 할일 조회
+	@RequestMapping(value="/todo/list.hirp", method=RequestMethod.GET)
 	public ModelAndView todoListView(ModelAndView mv) {
-		List<Todo> tList = tService.printAllToDo();
+		try {
+			List<Todo> tList = tService.printAllToDo();			
+			mv.setViewName("todo/todoList");
+		} catch(Exception e) {
+			mv.setViewName("todo/todoList");
+		}
 		return mv;
 	}
 	
