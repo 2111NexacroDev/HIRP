@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
+<link rel="stylesheet" href="../../resources/css/main.css"><!-- 메인페이지 CSS -->
 
 <!-- 
     id는 한 페이지 내에 동일한 id가 하나여야함

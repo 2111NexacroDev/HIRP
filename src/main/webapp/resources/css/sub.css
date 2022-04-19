@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.subConts {
+	padding: 20px;
+}
+
+.todo--today {
+	float: left;
+	width: 60%;
+	padding: 20px;
+	box-shadow: 0 0 20px rgba(0,0,0,.05);
+}
+
+.todo--weed {
+	float: right;
+	width: 30%;
+}
+
+.section[class^="todo--"] li {
+	border-bottom: 1px solid #000;
+}
+
+.memo--list {
+	box-shadow: 0 0 20px rgba(0,0,0,.05);	
+}
