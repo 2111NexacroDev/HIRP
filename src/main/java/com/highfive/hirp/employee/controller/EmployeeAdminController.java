@@ -47,9 +47,10 @@ public class EmployeeAdminController {
 		return result;
 	}
 	
-	// 임시회원 조회(융경 쪽에서 데이터 받아야함)
+	// 임시회원 리스트 조회(융경 쪽에서 데이터 받아야함)
 	public NexacroResult tempEmpListView() {
 		NexacroResult result = new NexacroResult(); 
+		// 회원 레벨 업데이트 메소드 필요
 		return result;
 	}
 	
