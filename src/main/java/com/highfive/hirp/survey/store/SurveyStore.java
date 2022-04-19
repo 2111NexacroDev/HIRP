@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 import com.highfive.hirp.survey.domain.SurveyQuest;
@@ -61,5 +62,7 @@ public interface SurveyStore {
 	public int updateSurveySubAnswer(SqlSession sqlSession, SurveyAnswer surveyAnswer);
 	
 	//설문조사 검색
+	public List<Survey> selectSearchSurvey(SqlSession sqlSession, Search search);
+	
 
 }

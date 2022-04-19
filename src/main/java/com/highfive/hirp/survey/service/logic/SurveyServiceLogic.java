@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 import com.highfive.hirp.survey.domain.SurveyQuest;
@@ -139,4 +140,10 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	
 	//설문조사 검색
+	@Override
+	public List<Survey> printSeartchSurvey(Search search) {
+		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, search);
+		return searchSurvey;
+	}
+	
 }

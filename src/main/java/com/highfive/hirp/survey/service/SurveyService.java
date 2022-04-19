@@ -2,6 +2,7 @@ package com.highfive.hirp.survey.service;
 
 import java.util.List;
 
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 import com.highfive.hirp.survey.domain.SurveyQuest;
@@ -63,4 +64,5 @@ public interface SurveyService {
 	public int updateSurveySubAnswer(SurveyAnswer surveyAnswer);
 	
 	//설문조사 검색
+	public List<Survey> printSeartchSurvey(Search search);
 }

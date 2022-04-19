@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
+import com.highfive.hirp.survey.domain.SurveyAnswer;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.service.SurveyService;
@@ -38,7 +40,9 @@ public class SurveyController {
 	}
 
 	//내가 만든 설문 페이지 (리스트 조회)
-	public ModelAndView wroteSurvey(ModelAndView mv) {
+	public ModelAndView wroteSurvey(ModelAndView mv
+			, HttpServletRequest request) {
+		//아이디 가져옴
 		return mv;
 	}
 	
@@ -58,38 +62,78 @@ public class SurveyController {
 		return mv;
 	}
 	//대상자 리스트 가져오기 
-	public ModelAndView chooseEmpl(ModelAndView mv) {
+	public ModelAndView chooseEmpl(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
+		
 		return mv;
 	}
 	
+	//설문 수정 페이지
+	public ModelAndView surveyModifyPage(ModelAndView mv) {
+		
+		return mv;
+	}
 	//설문 수정
-	public ModelAndView surveyModify(ModelAndView mv) {
+	public ModelAndView surveyModify(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
+		
 		return mv;
 	}
 	//설문 마감
-	public ModelAndView surveyClose(ModelAndView mv) {
+	public ModelAndView surveyClose(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
+		
 		return mv;
 	}
 	//설문 삭제
-	public ModelAndView surveyDelete(ModelAndView mv) {
+	public ModelAndView surveyDelete(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
 		return mv;
 	}
 	
 	
 	//설문 응답 페이지 (설문 상세1)
-	public ModelAndView surveySubmitPage(ModelAndView mv) {
+	public ModelAndView surveySubmitPage(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
 		return mv;
 	}
 	//설문 응답 제출
-	public ModelAndView surveySubmit(ModelAndView mv) {
+	public ModelAndView surveySubmit(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo
+			,@ModelAttribute SurveyAnswer surveyAnswer1
+			,@ModelAttribute SurveyAnswer surveyAnswer2
+			,@ModelAttribute SurveyAnswer surveyAnswer3
+			,@ModelAttribute SurveyAnswer surveyAnswer4) {
+		//insert 할 거니까 설문응답번호 자동 생성됨.
+		return mv;
+	}
+	
+	//설문 응답 수정 페이지
+	public ModelAndView surveySubmitModifyPage(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
 		return mv;
 	}
 	//설문 응답 수정
-	public ModelAndView surveySubmitModify(ModelAndView mv) {
+	public ModelAndView surveySubmitModify(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo
+			,@ModelAttribute SurveyAnswer surveyAnswer1
+			,@ModelAttribute SurveyAnswer surveyAnswer2
+			,@ModelAttribute SurveyAnswer surveyAnswer3
+			,@ModelAttribute SurveyAnswer surveyAnswer4) {
+		//만약에 설문응답번호가 없으면 surveyNo으로 가져와서 set 해주기
 		return mv;
 	}
 	//설문 결과 페이지 (설문 상세2)
-	public ModelAndView surveySubmitResult(ModelAndView mv) {
+	public ModelAndView surveySubmitResult(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo) {
+		
+		return mv;
+	}
+	
+	//설문조사 검색
+	public ModelAndView surveySearch(ModelAndView mv
+			,@ModelAttribute Search search) {
+		List<Survey> searchList = sService.printSeartchSurvey(search);
 		return mv;
 	}
 }
