@@ -4,10 +4,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.employee.store.EmployeeAdminStore;
 
 @Service
-public class EmployeeAdminServiceImpl {
+public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	@Autowired
 	private SqlSession sqlSession;
 	
