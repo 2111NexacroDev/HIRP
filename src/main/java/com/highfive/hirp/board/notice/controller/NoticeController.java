@@ -23,6 +23,7 @@ import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
 import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.common.SaveAttachedFile;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
 import com.highfive.hirp.common.Search;
@@ -95,7 +96,7 @@ public class NoticeController {
 		try {
 			//프로젝트 경로에 파일 저장
 			if(uploadFile !=null && !uploadFile.getOriginalFilename().equals("")) {
-				HashMap<String,String> fileMap = saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
+				HashMap<String,String> fileMap = SaveAttachedFile.saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
 				String filePath = fileMap.get("filePath");
 				String fileRename = fileMap.get("fileName");
 				if(filePath !=null && !filePath.equals("")) {
@@ -119,39 +120,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	//공지사항 첨부파일 저장	
-	public HashMap<String,String> saveFile(MultipartFile file, HttpServletRequest request) {
-		String filePath="";
-		HashMap<String,String> fileMap = new HashMap<String, String>();
-		//파일 경로설정(상대경로)
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		//저장 폴더 선택
-		String savePath = root + "\\nuploadFiles";
-		//없으면 생성
-		File folder = new File(savePath);
-		if(!folder.exists()) folder.mkdir();
-		//날짜 포맷변경
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		//업로드한 파일명
-		String originalFileName = file.getOriginalFilename();
-		//파일 확장자명
-		String extensionName = originalFileName.substring(originalFileName.lastIndexOf("."));
-		//파일명 변경
-		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))+extensionName;
-		filePath = folder + "\\" + renameFileName;
-		//두가지 값을 map에 저장하여 리턴하기
-		fileMap.put("filePath", filePath);
-		fileMap.put("fileName", renameFileName);
-		
-		//파일저장
-		try {
-			file.transferTo(new File(filePath));//경로가 새로 지정될때마다 new를 해줘야한다.(파일저장)
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		//파일경로 리턴
-		return fileMap;
-	}
+	
 	
 	//공지글 수정
 	@RequestMapping(value="/notice/modify.kh", method=RequestMethod.POST)
@@ -165,9 +134,9 @@ public class NoticeController {
 			//프로젝트 경로에 파일 저장(reloadFile, request),기존파일 삭제하고 새파일 업로드
 			if(reloadFile !=null && !reloadFile.isEmpty()) {
 				//기존 파일 삭제(기존 파일 이름 필요)
-				deleteFile(boardFile.getFilePath(),request);
+				SaveAttachedFile.deleteFile(boardFile.getFilePath(),request);
 				//새로운 파일 업로드
-				HashMap<String,String> fileMap = saveFile(reloadFile,request);//새롭게 저장
+				HashMap<String,String> fileMap = SaveAttachedFile.saveFile(reloadFile,request);//새롭게 저장
 				String savePath = fileMap.get("filePath");
 				String fileRename = fileMap.get("fileName");
 				if(savePath !=null) {
@@ -193,14 +162,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	//첨부파일 삭제
-	public void deleteFile(String filePath, HttpServletRequest request) {
-		File deleteFile = new File(filePath);
-		if(deleteFile.exists()) {
-			// 파일이 존재하면 파일 삭제
-			deleteFile.delete();
-		}
-	}
+	
 	
 	
 	//공지글 삭제
