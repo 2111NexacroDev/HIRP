@@ -1,8 +1,8 @@
-package com.highfive.hirp.board.domain;
+package com.highfive.hirp.board.free.domain;
 
 import java.sql.Date;
 
-public class FreeBulletinBoard {
+public class FreeBoard {
 
 	private int freeNo;
 	private String emplId;
@@ -10,15 +10,13 @@ public class FreeBulletinBoard {
 	private String freeTitle;
 	private String freeContents;
 	private Date writeDate;
-	private String fileName;
-	private String fileRename;
 	private int recommendCount;
 	private String status;
 	
-	public FreeBulletinBoard() {}
+	public FreeBoard() {}
 
-	public FreeBulletinBoard(int freeNo, String emplId, String boardType, String freeTitle, String freeContents,
-			Date writeDate, String fileName, String fileRename, int recommendCount, String status) {
+	public FreeBoard(int freeNo, String emplId, String boardType, String freeTitle, String freeContents, Date writeDate,
+			int recommendCount, String status) {
 		super();
 		this.freeNo = freeNo;
 		this.emplId = emplId;
@@ -26,8 +24,6 @@ public class FreeBulletinBoard {
 		this.freeTitle = freeTitle;
 		this.freeContents = freeContents;
 		this.writeDate = writeDate;
-		this.fileName = fileName;
-		this.fileRename = fileRename;
 		this.recommendCount = recommendCount;
 		this.status = status;
 	}
@@ -80,22 +76,6 @@ public class FreeBulletinBoard {
 		this.writeDate = writeDate;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileRename() {
-		return fileRename;
-	}
-
-	public void setFileRename(String fileRename) {
-		this.fileRename = fileRename;
-	}
-
 	public int getRecommendCount() {
 		return recommendCount;
 	}
@@ -114,13 +94,12 @@ public class FreeBulletinBoard {
 
 	@Override
 	public String toString() {
-		return "FreeBulletinBoard [freeNo=" + freeNo + ", emplId=" + emplId + ", boardType=" + boardType
-				+ ", freeTitle=" + freeTitle + ", freeContents=" + freeContents + ", writeDate=" + writeDate
-				+ ", fileName=" + fileName + ", fileRename=" + fileRename + ", recommendCount=" + recommendCount
-				+ ", status=" + status + "]";
+		return "FreeBoard [freeNo=" + freeNo + ", emplId=" + emplId + ", boardType=" + boardType + ", freeTitle="
+				+ freeTitle + ", freeContents=" + freeContents + ", writeDate=" + writeDate + ", recommendCount="
+				+ recommendCount + ", status=" + status + "]";
 	}
 
 	
-	
+
 	
 }

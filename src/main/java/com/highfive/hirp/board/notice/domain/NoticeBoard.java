@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.domain;
+package com.highfive.hirp.board.notice.domain;
 
 import java.sql.Date;
 
@@ -10,15 +10,13 @@ public class NoticeBoard {
 	private String noticeTitle;
 	private String noticeContents;
 	private Date writeDate;
-	private String fileName;
-	private String frilRename;
 	private int noticeCount;
 	private String status;
 	
 	public NoticeBoard() {}
 
 	public NoticeBoard(int noticeNo, String emplId, String boardType, String noticeTitle, String noticeContents,
-			Date writeDate, String fileName, String frilRename, int noticeCount, String status) {
+			Date writeDate, int noticeCount, String status) {
 		super();
 		this.noticeNo = noticeNo;
 		this.emplId = emplId;
@@ -26,8 +24,6 @@ public class NoticeBoard {
 		this.noticeTitle = noticeTitle;
 		this.noticeContents = noticeContents;
 		this.writeDate = writeDate;
-		this.fileName = fileName;
-		this.frilRename = frilRename;
 		this.noticeCount = noticeCount;
 		this.status = status;
 	}
@@ -80,22 +76,6 @@ public class NoticeBoard {
 		this.writeDate = writeDate;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFrilRename() {
-		return frilRename;
-	}
-
-	public void setFrilRename(String frilRename) {
-		this.frilRename = frilRename;
-	}
-
 	public int getNoticeCount() {
 		return noticeCount;
 	}
@@ -116,10 +96,9 @@ public class NoticeBoard {
 	public String toString() {
 		return "NoticeBoard [noticeNo=" + noticeNo + ", emplId=" + emplId + ", boardType=" + boardType
 				+ ", noticeTitle=" + noticeTitle + ", noticeContents=" + noticeContents + ", writeDate=" + writeDate
-				+ ", fileName=" + fileName + ", frilRename=" + frilRename + ", noticeCount=" + noticeCount + ", status="
-				+ status + "]";
+				+ ", noticeCount=" + noticeCount + ", status=" + status + "]";
 	}
+
 	
-	
-	
+
 }

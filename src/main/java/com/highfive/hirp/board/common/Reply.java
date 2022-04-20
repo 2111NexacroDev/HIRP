@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.domain;
+package com.highfive.hirp.board.common;
 
 import java.sql.Date;
 

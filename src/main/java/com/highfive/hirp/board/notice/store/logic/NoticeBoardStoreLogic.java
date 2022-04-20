@@ -1,21 +1,22 @@
-package com.highfive.hirp.board.store.logic;
+package com.highfive.hirp.board.notice.store.logic;
 
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.highfive.hirp.board.domain.NoticeBoard;
-import com.highfive.hirp.board.domain.Reply;
+import com.highfive.hirp.board.common.PageInfo;
+import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.notice.domain.NoticeBoard;
+import com.highfive.hirp.board.notice.store.NoticeBoardStore;
 import com.highfive.hirp.common.Search;
-import com.highfive.hirp.board.store.NoticeStore;
 
 @Repository
-public class NoticeStoreLogic implements NoticeStore {
+public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
-	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession) {
-		List<NoticeBoard> nList = sqlSession.selectList("board-mapper.selectAllNotice");
+	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession, PageInfo pi) {
+		List<NoticeBoard> nList = sqlSession.selectList("board-mapper.selectAllNotice",pi);
 		return nList;
 	}
 
@@ -44,8 +45,8 @@ public class NoticeStoreLogic implements NoticeStore {
 	}
 
 	@Override
-	public int deleteNotice(SqlSession sqlSession, NoticeBoard noticeboard) {
-		int result = sqlSession.delete("board-mapper.deleteNotice",noticeboard);
+	public int deleteNotice(SqlSession sqlSession, int noticeNo) {
+		int result = sqlSession.delete("board-mapper.deleteNotice",noticeNo);
 		return result;
 	}
 
@@ -71,6 +72,18 @@ public class NoticeStoreLogic implements NoticeStore {
 	@Override
 	public int deleteNoticeReply(SqlSession sqlSession, Reply reply) {
 		int result = sqlSession.delete("board-mapper.deleteNoticeReply",reply);
+		return result;
+	}
+
+	@Override
+	public int selectListCount(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("board-mapper.selectListCount");
+		return result;
+	}
+
+	@Override
+	public int selectViewCount(SqlSession sqlSession, int noticeNo) {
+		int result = sqlSession.update("board-mapper.updateViewCount");
 		return result;
 	}
 

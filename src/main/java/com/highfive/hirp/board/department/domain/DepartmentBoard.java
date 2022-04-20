@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.domain;
+package com.highfive.hirp.board.department.domain;
 
 import java.sql.Date;
 
@@ -11,8 +11,6 @@ public class DepartmentBoard {
 	private String departmentTitle;
 	private String departmentContents;
 	private Date writeDate;
-	private String fileName;
-	private String fileRename;
 	private int departmentCount;
 	private String isNotice;
 	private String status;
@@ -20,8 +18,7 @@ public class DepartmentBoard {
 	public DepartmentBoard() {}
 
 	public DepartmentBoard(int departmentNo, String emplId, String deptCode, String boardType, String departmentTitle,
-			String departmentContents, Date writeDate, String fileName, String fileRename, int departmentCount,
-			String isNotice, String status) {
+			String departmentContents, Date writeDate, int departmentCount, String isNotice, String status) {
 		super();
 		this.departmentNo = departmentNo;
 		this.emplId = emplId;
@@ -30,8 +27,6 @@ public class DepartmentBoard {
 		this.departmentTitle = departmentTitle;
 		this.departmentContents = departmentContents;
 		this.writeDate = writeDate;
-		this.fileName = fileName;
-		this.fileRename = fileRename;
 		this.departmentCount = departmentCount;
 		this.isNotice = isNotice;
 		this.status = status;
@@ -93,22 +88,6 @@ public class DepartmentBoard {
 		this.writeDate = writeDate;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileRename() {
-		return fileRename;
-	}
-
-	public void setFileRename(String fileRename) {
-		this.fileRename = fileRename;
-	}
-
 	public int getDepartmentCount() {
 		return departmentCount;
 	}
@@ -137,10 +116,10 @@ public class DepartmentBoard {
 	public String toString() {
 		return "DepartmentBoard [departmentNo=" + departmentNo + ", emplId=" + emplId + ", deptCode=" + deptCode
 				+ ", boardType=" + boardType + ", departmentTitle=" + departmentTitle + ", departmentContents="
-				+ departmentContents + ", writeDate=" + writeDate + ", fileName=" + fileName + ", fileRename="
-				+ fileRename + ", departmentCount=" + departmentCount + ", isNotice=" + isNotice + ", status=" + status
-				+ "]";
+				+ departmentContents + ", writeDate=" + writeDate + ", departmentCount=" + departmentCount
+				+ ", isNotice=" + isNotice + ", status=" + status + "]";
 	}
+
 	
 	
 }

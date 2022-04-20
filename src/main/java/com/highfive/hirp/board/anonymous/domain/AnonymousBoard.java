@@ -1,8 +1,8 @@
-package com.highfive.hirp.board.domain;
+package com.highfive.hirp.board.anonymous.domain;
 
 import java.sql.Date;
 
-public class AnonymousBulletinBoard {
+public class AnonymousBoard {
 
 	private int anonymousNo;
 	private String emplId;
@@ -10,17 +10,14 @@ public class AnonymousBulletinBoard {
 	private String anonymousTitle;
 	private String anonymousContents;
 	private Date writeDate;
-	private String filename;
-	private String fileRename;
 	private int anonymousCount;
 	private int recommendCount;
 	private String status;
 	
-	public AnonymousBulletinBoard() {}
+	public AnonymousBoard() {}
 
-	public AnonymousBulletinBoard(int anonymousNo, String emplId, String boardType, String anonymousTitle,
-			String anonymousContents, Date writeDate, String filename, String fileRename, int anonymousCount,
-			int recommendCount, String status) {
+	public AnonymousBoard(int anonymousNo, String emplId, String boardType, String anonymousTitle,
+			String anonymousContents, Date writeDate, int anonymousCount, int recommendCount, String status) {
 		super();
 		this.anonymousNo = anonymousNo;
 		this.emplId = emplId;
@@ -28,8 +25,6 @@ public class AnonymousBulletinBoard {
 		this.anonymousTitle = anonymousTitle;
 		this.anonymousContents = anonymousContents;
 		this.writeDate = writeDate;
-		this.filename = filename;
-		this.fileRename = fileRename;
 		this.anonymousCount = anonymousCount;
 		this.recommendCount = recommendCount;
 		this.status = status;
@@ -83,22 +78,6 @@ public class AnonymousBulletinBoard {
 		this.writeDate = writeDate;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	public String getFileRename() {
-		return fileRename;
-	}
-
-	public void setFileRename(String fileRename) {
-		this.fileRename = fileRename;
-	}
-
 	public int getAnonymousCount() {
 		return anonymousCount;
 	}
@@ -125,11 +104,12 @@ public class AnonymousBulletinBoard {
 
 	@Override
 	public String toString() {
-		return "AnonymousBulletinBoard [anonymousNo=" + anonymousNo + ", emplId=" + emplId + ", boardType=" + boardType
+		return "AnonymousBoard [anonymousNo=" + anonymousNo + ", emplId=" + emplId + ", boardType=" + boardType
 				+ ", anonymousTitle=" + anonymousTitle + ", anonymousContents=" + anonymousContents + ", writeDate="
-				+ writeDate + ", filename=" + filename + ", fileRename=" + fileRename + ", anonymousCount="
-				+ anonymousCount + ", recommendCount=" + recommendCount + ", status=" + status + "]";
+				+ writeDate + ", anonymousCount=" + anonymousCount + ", recommendCount=" + recommendCount + ", status="
+				+ status + "]";
 	}
+
 
 	
 	
