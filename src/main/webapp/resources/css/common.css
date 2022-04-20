@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #666;
+    background: rgb(133, 133, 133);
 }
 
 ::selection {
@@ -15,8 +15,11 @@
     color: white;
 }
 
-html {
+* {
     box-sizing: border-box;
+}
+
+html {
     -ms-overflow-style: scrollbar;
 }
 
@@ -267,7 +270,6 @@ img {
 #snb+article {
     min-height: 100vh;
     padding-left: 250px;
-    background-color: #fff;
 }
 
 #snb h1 {
@@ -385,4 +387,8 @@ img {
     background: url(../images/icons/ic_gnb.png) no-repeat -483px -661px;
     width: 27px;
     height: 27px;
+}
+
+article {
+    min-height: 100vh;
 }
