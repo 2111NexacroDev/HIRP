@@ -1,17 +1,18 @@
-package com.highfive.hirp.board.store;
+package com.highfive.hirp.board.notice.store;
 
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.highfive.hirp.board.domain.NoticeBoard;
-import com.highfive.hirp.board.domain.Reply;
+import com.highfive.hirp.board.common.PageInfo;
+import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.common.Search;
 
-public interface NoticeStore {
+public interface NoticeBoardStore {
 //공지사항 게시글
 	//공지사항 리스트 출력
-	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession);
+	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession,PageInfo pi);
 	//공지사항 디테일 출력
 	public NoticeBoard selectOneNotice(SqlSession sqlSession, int noticeNo);
 	//공지사항 검색 리스트 출력
@@ -21,7 +22,15 @@ public interface NoticeStore {
 	//공지사항 수정
 	public int updateNotice(SqlSession sqlSession, NoticeBoard noticeboard);
 	//공지사항 삭제
-	public int deleteNotice(SqlSession sqlSession, NoticeBoard noticeboard);
+	public int deleteNotice(SqlSession sqlSession, int noticeNo);
+	//공지사항 리스트 개수
+	public int selectListCount(SqlSession sqlSession);
+	//조회수
+	public int selectViewCount(SqlSession sqlSession, int noticeNo);
+	
+	
+	
+	
 	
 //공지사항 댓글
 	//공지사항 댓글 조회

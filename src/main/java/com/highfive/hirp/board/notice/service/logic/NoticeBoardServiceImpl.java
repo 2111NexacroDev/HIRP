@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.service.logic;
+package com.highfive.hirp.board.notice.service.logic;
 
 import java.util.List;
 
@@ -7,26 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.highfive.hirp.board.domain.NoticeBoard;
-import com.highfive.hirp.board.domain.Reply;
-
-import com.highfive.hirp.board.service.NoticeService;
-import com.highfive.hirp.board.store.NoticeStore;
+import com.highfive.hirp.board.common.PageInfo;
+import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.notice.domain.NoticeBoard;
+import com.highfive.hirp.board.notice.service.NoticeBoardService;
+import com.highfive.hirp.board.notice.store.NoticeBoardStore;
 import com.highfive.hirp.common.Search;
 
 
 @Service
-public class NoticeServiceImpl implements NoticeService {
+public class NoticeBoardServiceImpl implements NoticeBoardService {
 
 	@Autowired
-	private NoticeStore nStore;
+	private NoticeBoardStore nStore;
 	
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
-	public List<NoticeBoard> printAllNotice() {
-		List<NoticeBoard> nList = nStore.selectAllNotice(sqlSession);
+	public List<NoticeBoard> printAllNotice(PageInfo pi) {
+		List<NoticeBoard> nList = nStore.selectAllNotice(sqlSession,pi);
 		return nList;
 	}
 
@@ -55,10 +55,11 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int removeNotice(NoticeBoard noticeboard) {
-		int result = nStore.deleteNotice(sqlSession, noticeboard);
+	public int removeNotice(int noticeNo) {
+		int result = nStore.deleteNotice(sqlSession, noticeNo);
 		return result;
 	}
+
 
 	@Override
 	public List<Reply> printAllNoticeReply(Reply reply) {
@@ -73,16 +74,29 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int modifyNotice(Reply reply) {
+	public int modifyNoticeReply(Reply reply) {
 		int result = nStore.updateNoticeReply(sqlSession, reply);
 		return result;
 	}
 
 	@Override
-	public int removeNotice(Reply reply) {
+	public int removeNoticeReply(Reply reply) {
 		int result = nStore.deleteNoticeReply(sqlSession, reply);
 		return result;
 	}
+
+	@Override
+	public int getListCount() {
+		int listCount = nStore.selectListCount(sqlSession);
+		return listCount;
+	}
+
+	@Override
+	public int viewCount(int noticeNo) {
+		int viewCount = nStore.selectViewCount(sqlSession,noticeNo);
+		return viewCount;
+	}
+
 
 
 }
