@@ -10,8 +10,10 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
+		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/schedule-mapper.xml" />
+		<mapper resource="mappers/employee-mapper.xml" />
 	</mappers>
 </configuration>
