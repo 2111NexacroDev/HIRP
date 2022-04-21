@@ -1,5 +1,7 @@
 package com.highfive.hirp.board.common;
 
+import com.highfive.hirp.common.PageInfo;
+
 public class BoardPagination {
 
 	public static PageInfo getPageInfo(int currentPage, int totalCount) {

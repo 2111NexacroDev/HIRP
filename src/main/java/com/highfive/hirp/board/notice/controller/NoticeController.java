@@ -21,11 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.common.SaveAttachedFile;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 @Controller

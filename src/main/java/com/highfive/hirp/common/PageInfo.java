@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.common;
+package com.highfive.hirp.common;
 
 public class PageInfo {
 	private int currentPage; // 현재 페이지
