@@ -16,74 +16,74 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession, PageInfo pi) {
-		List<NoticeBoard> nList = sqlSession.selectList("board-mapper.selectAllNotice",pi);
+		List<NoticeBoard> nList = sqlSession.selectList("noticeboard-mapper.selectAllNotice",pi);
 		return nList;
 	}
 
 	@Override
 	public NoticeBoard selectOneNotice(SqlSession sqlSession, int noticeNo) {
-		NoticeBoard noticeboard = sqlSession.selectOne("board-mapper.selectOneNotice",noticeNo);
+		NoticeBoard noticeboard = sqlSession.selectOne("noticeboard-mapper.selectOneNotice",noticeNo);
 		return noticeboard;
 	}
 
 	@Override
 	public List<NoticeBoard> selectSearchNotice(SqlSession sqlSession, Search search) {
-		List<NoticeBoard> nList = sqlSession.selectList("board-mapper.selectSearchNotice",search);
+		List<NoticeBoard> nList = sqlSession.selectList("noticeboard-mapper.selectSearchNotice",search);
 		return nList;
 	}
 
 	@Override
 	public int insertNotice(SqlSession sqlSession, NoticeBoard noticeboard) {
-		int result = sqlSession.insert("board-mapper.insertNotice",noticeboard);
+		int result = sqlSession.insert("noticeboard-mapper.insertNotice",noticeboard);
 		return result;
 	}
 
 	@Override
 	public int updateNotice(SqlSession sqlSession, NoticeBoard noticeboard) {
-		int result = sqlSession.update("board-mapper.updateNotice",noticeboard);
+		int result = sqlSession.update("noticeboard-mapper.updateNotice",noticeboard);
 		return result;
 	}
 
 	@Override
 	public int deleteNotice(SqlSession sqlSession, int noticeNo) {
-		int result = sqlSession.delete("board-mapper.deleteNotice",noticeNo);
+		int result = sqlSession.delete("noticeboard-mapper.deleteNotice",noticeNo);
 		return result;
 	}
 
 
 	@Override
 	public List<Reply> selectAllNoticeReply(SqlSession sqlSession, Reply reply) {
-		List<Reply> nReply = sqlSession.selectList("board-mapper.selectAllNoticeReply", reply);
+		List<Reply> nReply = sqlSession.selectList("noticeboard-mapper.selectAllNoticeReply", reply);
 		return nReply;
 	}
 
 	@Override
 	public int insertNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.insert("board-mapper.insertNoticeReply",reply);
+		int result = sqlSession.insert("noticeboard-mapper.insertNoticeReply",reply);
 		return result;
 	}
 
 	@Override
 	public int updateNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.update("board-mapper.updateNoticeReply",reply);
+		int result = sqlSession.update("noticeboard-mapper.updateNoticeReply",reply);
 		return result;
 	}
 
 	@Override
 	public int deleteNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.delete("board-mapper.deleteNoticeReply",reply);
+		int result = sqlSession.delete("noticeboard-mapper.deleteNoticeReply",reply);
 		return result;
 	}
 
 	@Override
 	public int selectListCount(SqlSession sqlSession) {
-		int result = sqlSession.selectOne("board-mapper.selectListCount");
+		int result = sqlSession.selectOne("noticeboard-mapper.selectListCount");
 		return result;
 	}
 
 	@Override
 	public int selectViewCount(SqlSession sqlSession, int noticeNo) {
-		int result = sqlSession.update("board-mapper.updateViewCount");
+		int result = sqlSession.update("noticeboard-mapper.updateViewCount");
 		return result;
 	}
 
