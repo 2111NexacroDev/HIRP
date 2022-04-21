@@ -35,6 +35,7 @@ public class ChatServiceImpl implements ChatService{
 		List<Employee> empList = cStore.selectEmployeeListByName(sqlSession, name);
 		return empList;
 	}
+	
 	//채팅방 추가(대화 상대, 채팅방 이름 설정)
 	@Override
 	public int insertChattingRoom(ChatRoom chatRoom) {
@@ -113,8 +114,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 	//채팅방 나가기(채팅 대화상대에서 삭제)
 	@Override
-	public int deleteMyIdChatRoomJoin(String emplId) {
-		int result = cStore.deleteMyIdChatRoomJoin(sqlSession, emplId);
+	public int deleteMyIdChatRoomJoin(ChatRoomJoin chatRoomJoin) {
+		int result = cStore.deleteMyIdChatRoomJoin(sqlSession, chatRoomJoin);
 		return result;
 	}
 	//채팅방 삭제

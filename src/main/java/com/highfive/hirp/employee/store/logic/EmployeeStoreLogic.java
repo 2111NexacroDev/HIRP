@@ -1,5 +1,7 @@
 package com.highfive.hirp.employee.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -29,6 +31,13 @@ public class EmployeeStoreLogic implements EmployeeStore {
 	@Override
 	public Employee selectOneById(SqlSession sqlSession, String employeeId) {
 		Employee employeeOne = sqlSession.selectOne("EmployeeMapper.selectOneById", employeeId);
+		return employeeOne;
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public List<Employee> find_pwd(Employee employee, SqlSession sqlSession) {
+		List<Employee> employeeOne = sqlSession.selectList("EmployeeMapper.find_pwd", employee);
 		return employeeOne;
 	}
 }
