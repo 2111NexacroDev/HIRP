@@ -1,4 +1,4 @@
-package com.highfive.hirp.time.domain;
+package com.highfive.hirp.time.user.domain;
 
 import java.sql.Date;
 

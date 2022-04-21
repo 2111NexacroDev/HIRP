@@ -11,9 +11,13 @@
 	<typeAliases>
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
+		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
+		<typeAlias type="com.highfive.hirp.time.domain.Time" alias="Time"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/schedule-mapper.xml" />
 		<mapper resource="mappers/employee-mapper.xml" />
+		<mapper resource="mappers/group-mapper.xml" />
+		<mapper resource="mappers/time-mapper.xml" />
 	</mappers>
 </configuration>
