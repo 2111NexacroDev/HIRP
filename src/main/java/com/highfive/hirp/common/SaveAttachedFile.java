@@ -1,4 +1,4 @@
-package com.highfive.hirp.board.common;
+package com.highfive.hirp.common;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
