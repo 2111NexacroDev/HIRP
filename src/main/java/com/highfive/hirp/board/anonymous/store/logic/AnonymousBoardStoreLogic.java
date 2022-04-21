@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
 import com.highfive.hirp.board.anonymous.store.AnonymousBoardStore;
 import com.highfive.hirp.board.common.BoardRecommend;
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 @Repository

@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.store.NoticeBoardStore;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 @Repository

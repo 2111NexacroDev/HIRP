@@ -1,15 +1,25 @@
 package com.highfive.hirp.chat.domain;
 
 public class ChatRoomJoin {
+	private int joinchatNo;
 	private int chatroomNo;
 	private String joinchatId;
 	
 	public ChatRoomJoin() {}
 
-	public ChatRoomJoin(int chatroomNo, String joinchatId) {
+	public ChatRoomJoin(int joinchatNo, int chatroomNo, String joinchatId) {
 		super();
+		this.joinchatNo = joinchatNo;
 		this.chatroomNo = chatroomNo;
 		this.joinchatId = joinchatId;
+	}
+
+	public int getJoinchatNo() {
+		return joinchatNo;
+	}
+
+	public void setJoinchatNo(int joinchatNo) {
+		this.joinchatNo = joinchatNo;
 	}
 
 	public int getChatroomNo() {
@@ -30,8 +40,9 @@ public class ChatRoomJoin {
 
 	@Override
 	public String toString() {
-		return "ChatRoomJoin [chatroomNo=" + chatroomNo + ", joinchatId=" + joinchatId + "]";
+		return "ChatRoomJoin [joinchatNo=" + joinchatNo + ", chatroomNo=" + chatroomNo + ", joinchatId=" + joinchatId
+				+ "]";
 	}
-	
+
 	
 }

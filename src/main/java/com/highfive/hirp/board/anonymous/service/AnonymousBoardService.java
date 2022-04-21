@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
 import com.highfive.hirp.board.common.BoardRecommend;
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 public interface AnonymousBoardService {

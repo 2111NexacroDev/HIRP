@@ -23,31 +23,10 @@ public class AlramController {
 	
 	@Autowired
 	private AlramService aService;
-	
+
 	//알림 셋팅 페이지로 이동
 	@RequestMapping(value="/alram/settingPage", method=RequestMethod.GET)
 	public ModelAndView alramSettingPage(ModelAndView mv) {
-		return mv;
-	}
-	
-	//알림 설정 정보 추가
-	//여기에 따로 만들게 아니라 다른 사람들 한 거에서 실행될 때마다 나오도록 해야할 듯.
-	@RequestMapping(value="/alram/setting_update", method=RequestMethod.POST)
-	public ModelAndView addAlramSetting(
-			ModelAndView mv
-			, HttpServletRequest request) {
-		
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		//아이디 컬럼에 userid가 있을 때
-		String emplId = "사용자 아이디";
-		AlramSetting alramSetting = aService.selectAlramSetting(emplId);
-		
-		if(alramSetting == null) {
-			int result = aService.insertAlramSetting(emplId);	 //기본값으로 전부 y로 추가
-		} 
-		
 		return mv;
 	}
 	
@@ -95,5 +74,10 @@ public class AlramController {
 		
 		return mv;
 	}
+	
+	
+	//알림 추가
+	//여기에 따로 만들게 아니라 다른 사람들 한 거에서 실행될 때마다 나오도록 해야할 듯.
+	
 	
 }

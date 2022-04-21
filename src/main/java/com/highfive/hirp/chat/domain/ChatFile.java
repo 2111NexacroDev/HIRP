@@ -1,5 +1,7 @@
 package com.highfive.hirp.chat.domain;
 
+import java.sql.Date;
+
 public class ChatFile {
 	private int chatfileNo;
 	private int msgNo;
@@ -85,6 +87,8 @@ public class ChatFile {
 				+ ", chatfileName=" + chatfileName + ", chatfileRename=" + chatfileRename + ", chatfileExtension="
 				+ chatfileExtension + ", chatfilePath=" + chatfilePath + "]";
 	}
+
+	
 	
 	
 }

@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
 import com.highfive.hirp.board.notice.store.NoticeBoardStore;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 

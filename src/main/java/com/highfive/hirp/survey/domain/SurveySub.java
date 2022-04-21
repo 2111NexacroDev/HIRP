@@ -4,14 +4,16 @@ public class SurveySub {
 	private int subNo;
 	private int surveyNo;
 	private String subId;
+	private String subAnswerstatus;
 	
 	public SurveySub() {}
 
-	public SurveySub(int subNo, int surveyNo, String subId) {
+	public SurveySub(int subNo, int surveyNo, String subId, String subAnswerstatus) {
 		super();
 		this.subNo = subNo;
 		this.surveyNo = surveyNo;
 		this.subId = subId;
+		this.subAnswerstatus = subAnswerstatus;
 	}
 
 	public int getSubNo() {
@@ -38,9 +40,18 @@ public class SurveySub {
 		this.subId = subId;
 	}
 
+	public String getSubAnswerstatus() {
+		return subAnswerstatus;
+	}
+
+	public void setSubAnswerstatus(String subAnswerstatus) {
+		this.subAnswerstatus = subAnswerstatus;
+	}
+
 	@Override
 	public String toString() {
-		return "SurveySub [subNo=" + subNo + ", surveyNo=" + surveyNo + ", subId=" + subId + "]";
+		return "SurveySub [subNo=" + subNo + ", surveyNo=" + surveyNo + ", subId=" + subId + ", subAnswerstatus="
+				+ subAnswerstatus + "]";
 	}
 	
 	

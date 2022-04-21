@@ -2,9 +2,9 @@ package com.highfive.hirp.board.department.service;
 
 import java.util.List;
 
-import com.highfive.hirp.board.common.PageInfo;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.department.domain.DepartmentBoard;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 public interface DepartmentBoardService {
