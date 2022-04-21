@@ -44,7 +44,7 @@ public interface ChatStore {
 	//채팅 대화상대 추가
 	public int insertChatRoomJoinOnly(SqlSession sqlSession, ChatRoomJoin chatRoomJoin);
 	//채팅방 나가기 (채팅 대화 상대에서 삭제)
-	public int deleteMyIdChatRoomJoin(SqlSession sqlSession, String emplId);
+	public int deleteMyIdChatRoomJoin(SqlSession sqlSession, ChatRoomJoin chatRoomJoin);
 	//채팅방 삭제
 	public int deleteChatRoom(SqlSession sqlSession, ChatRoom chatRoom);
 

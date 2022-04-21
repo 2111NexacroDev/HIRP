@@ -105,8 +105,8 @@ public class ChatStoreLogic implements ChatStore{
 	}
 	//채팅방 나가기
 	@Override
-	public int deleteMyIdChatRoomJoin(SqlSession sqlSession, String emplId) {
-		int result = sqlSession.delete("ChatMapper.deleteMyIdChatRoomJoin", emplId);
+	public int deleteMyIdChatRoomJoin(SqlSession sqlSession, ChatRoomJoin chatRoomJoin) {
+		int result = sqlSession.delete("ChatMapper.deleteMyIdChatRoomJoin", chatRoomJoin);
 		return result;
 	}
 	//채팅방 삭제

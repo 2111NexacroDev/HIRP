@@ -43,7 +43,8 @@ public interface ChatService {
 	//채팅 대화상대 추가
 	public int insertChatRoomJoinOnly(ChatRoomJoin chatRoomJoin);
 	//채팅방 나가기 (채팅 대화상대에서 삭제)
-	public int deleteMyIdChatRoomJoin(String emplId);
+	public int deleteMyIdChatRoomJoin(ChatRoomJoin chatRoomJoin);
+	//chatroomjoin에 채팅방 번호랑 현재 자신 아이디 넘겨주기
 	//채팅방 삭제
 	public int deleteChatRoom(ChatRoom chatRoom);
 	//chatRoom 에다가 채팅방 번호랑 채팅방 생성자 아이디 담아서 두 개 일치하는 거 지우기
