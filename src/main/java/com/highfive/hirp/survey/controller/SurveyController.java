@@ -61,6 +61,7 @@ public class SurveyController {
 			, HttpServletRequest request) {
 		return mv;
 	}
+
 	//대상자 리스트 가져오기 
 	public ModelAndView chooseEmpl(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {

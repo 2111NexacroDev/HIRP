@@ -1,5 +1,7 @@
 package com.highfive.hirp.chat.domain;
 
+import java.sql.Date;
+
 public class ChatFile {
 	private int chatfileNo;
 	private int msgNo;
@@ -8,11 +10,12 @@ public class ChatFile {
 	private String chatfileRename;
 	private String chatfileExtension;
 	private String chatfilePath;
+	private Date chatfileTime;
 	
 	public ChatFile() {}
 
 	public ChatFile(int chatfileNo, int msgNo, int chatroomNo, String chatfileName, String chatfileRename,
-			String chatfileExtension, String chatfilePath) {
+			String chatfileExtension, String chatfilePath, Date chatfileTime) {
 		super();
 		this.chatfileNo = chatfileNo;
 		this.msgNo = msgNo;
@@ -21,6 +24,7 @@ public class ChatFile {
 		this.chatfileRename = chatfileRename;
 		this.chatfileExtension = chatfileExtension;
 		this.chatfilePath = chatfilePath;
+		this.chatfileTime = chatfileTime;
 	}
 
 	public int getChatfileNo() {
@@ -79,12 +83,22 @@ public class ChatFile {
 		this.chatfilePath = chatfilePath;
 	}
 
+	public Date getChatfileTime() {
+		return chatfileTime;
+	}
+
+	public void setChatfileTime(Date chatfileTime) {
+		this.chatfileTime = chatfileTime;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatFile [chatfileNo=" + chatfileNo + ", msgNo=" + msgNo + ", chatroomNo=" + chatroomNo
 				+ ", chatfileName=" + chatfileName + ", chatfileRename=" + chatfileRename + ", chatfileExtension="
-				+ chatfileExtension + ", chatfilePath=" + chatfilePath + "]";
+				+ chatfileExtension + ", chatfilePath=" + chatfilePath + ", chatfileTime=" + chatfileTime + "]";
 	}
+
+	
 	
 	
 }
