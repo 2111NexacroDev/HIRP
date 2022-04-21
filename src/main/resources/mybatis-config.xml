@@ -12,6 +12,9 @@
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mappers/alram-mapper.xml" />
+		<mapper resource="mappers/chat-mapper.xml" />
 		<mapper resource="mappers/schedule-mapper.xml" />
+		<mapper resource="mappers/survey-mapper.xml" />
 	</mappers>
 </configuration>
