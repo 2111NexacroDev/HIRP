@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,10 +36,10 @@ public class ReservationController {
 	}
 	
 	// 예약 수정 화면 로드 나눠야하나
-	public ModelAndView reservationUpdateView(ModelAndView mv) {
-		
-		return mv;
-	}	
+	//@RequestMapping()
+	public String reservationUpdateView() {
+		return "";
+	}
 	
 	// 예약 수정
 	public ModelAndView reservationUpdate(ModelAndView mv

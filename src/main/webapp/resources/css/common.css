@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #666;
+    background: rgb(133, 133, 133);
 }
 
 ::selection {
@@ -15,8 +15,11 @@
     color: white;
 }
 
-html {
+* {
     box-sizing: border-box;
+}
+
+html {
     -ms-overflow-style: scrollbar;
 }
 
@@ -267,7 +270,6 @@ img {
 #snb+article {
     min-height: 100vh;
     padding-left: 250px;
-    background-color: #fff;
 }
 
 #snb h1 {
@@ -387,83 +389,6 @@ img {
     height: 27px;
 }
 
-#main #calendar * {
-    border: none;
-}
-
-#main .fc-col-header th {
-    padding: 10px 0;
-}
-
-#main .fc .fc-daygrid-day-top {
-    display: block;
-    text-align: center;
-}
-
-#main .fc-day-sun {
-    color: red;
-}
-
-#main .fc-day-sat {
-    color: rgb(103, 103, 255);
-}
-
-#main .fc-daygrid-day-events {
-    display: none;
-}
-
-#main .row {
-    padding: 24px 24px 60px;
-}
-
-#main .row>div>section {
-    min-height: 50px;
-    padding: 16px 24px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    font-size: 13px;
-    border-radius: 6px;
-    box-shadow: 0 4px 14px 0 rgb(168 184 201 / 10%);
-}
-
-@media screen and (min-width: 1201px) {
-    #main .row {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #main .row>div:nth-child(1) {
-        width: 28.5%;
-    }
-
-    #main .row>div:nth-child(2) {
-        width: 36.5%;
-    }
-
-    #main .row>div:nth-child(3) {
-        width: 32.5%;
-    }
-}
-
-#main .row>div>section>h2 {
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 27px;
-    font-weight: 500;
-    color: #3b3b3b;
-    letter-spacing: -1px;
-}
-
-.figure--profile {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 20px auto 10px;
-    border: 1px solid #ddd;
-    overflow: hidden;
-}
-
-.figure--profile+h2 {
-    font-size: 20px !important;
-    letter-spacing: -1px;
+article {
+    min-height: 100vh;
 }
