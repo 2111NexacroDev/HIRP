@@ -4,13 +4,13 @@
 <header id="gnb">
     <button type="button" id="gnb__btn--burger"></button>
     <h1 id="gnb__logo">
-        <a href="#">
+        <a href="/">
             <img src="../resources/images/logo_hirp.png" alt="HIRP">
         </a>
     </h1>
     <nav>
         <ul>
-            <li><a href="#" class="on">홈</a></li>
+            <li><a href="/" class="on">홈</a></li>
             <li><a href="#">메일</a></li>
             <li><a href="#">게시판</a></li>
             <li><a href="/todo/list.hirp">개인업무관리</a></li>
