@@ -82,25 +82,25 @@ public class EmployeeController {
 		return mv;
 	}
 	
-	// 비밀번호 찾기
-	@RequestMapping(value= "/find_mem_pwd.kh", method=RequestMethod.POST)
-	public String find_pwd(HttpServletResponse response, @RequestParam("memberId")String memberId, @RequestParam("memberPhone")String memberPhone, Model model) throws Exception {
-		Member member= new Member();
-		member.setMemberId(memberId);
-		member.setMemberPhone(memberPhone);
-		try {
-			List<Member>resultList = mService.find_pwd(response, member);
-			if(!resultList.isEmpty()) {
-				String mem = resultList.get(0).getMemberPw().toString(); 
-				model.addAttribute("pwd", mem);
-				return "member/find_mem_pwd";
-			}else{
-				model.addAttribute("msg","일반 회원 비밀번호 찾기 실패");
-				return "common/errorPage";
-			}
-		}catch(Exception e) {
-			model.addAttribute("msg",e.toString());
-			return "common/errorPage";
-		}
-	}
+//	// 비밀번호 찾기
+//	@RequestMapping(value= "/find_mem_pwd.kh", method=RequestMethod.POST)
+//	public String find_pwd(HttpServletResponse response, @RequestParam("memberId")String memberId, @RequestParam("memberPhone")String memberPhone, Model model) throws Exception {
+//		Member member= new Member();
+//		member.setMemberId(memberId);
+//		member.setMemberPhone(memberPhone);
+//		try {
+//			List<Member>resultList = mService.find_pwd(response, member);
+//			if(!resultList.isEmpty()) {
+//				String mem = resultList.get(0).getMemberPw().toString(); 
+//				model.addAttribute("pwd", mem);
+//				return "member/find_mem_pwd";
+//			}else{
+//				model.addAttribute("msg","일반 회원 비밀번호 찾기 실패");
+//				return "common/errorPage";
+//			}
+//		}catch(Exception e) {
+//			model.addAttribute("msg",e.toString());
+//			return "common/errorPage";
+//		}
+//	}
 }
