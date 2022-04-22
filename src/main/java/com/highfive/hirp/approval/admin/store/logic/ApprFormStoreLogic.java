@@ -3,10 +3,12 @@ package com.highfive.hirp.approval.admin.store.logic;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.admin.store.ApprFormStore;
 
+@Repository
 public class ApprFormStoreLogic implements ApprFormStore {
 
 	@Override
