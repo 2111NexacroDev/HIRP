@@ -1,5 +1,10 @@
 package com.highfive.hirp.time.user.service.logic;
 
-public class TimeServiceImpl {
+import org.springframework.stereotype.Service;
+
+import com.highfive.hirp.time.user.service.TimeService;
+
+@Service
+public class TimeServiceImpl implements TimeService {
 
 }
