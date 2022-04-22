@@ -23,7 +23,7 @@ public interface SurveyService {
 	public List<Survey> selectWroteSurvey(String emplId); 
 	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
 	public List<Survey> selectSubSurveyById(String emplId); 
-	//설문조사 대상자 가져오기 (응답여부 확인 가능)
+	//설문조사 대상자 리스트 가져오기 (응답여부 확인 가능)
 	public List<SurveySub> selectSurveySubByNo(int surveyNo); 
 	
 	//설문 등록

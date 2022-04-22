@@ -27,27 +27,42 @@ public class SurveyController {
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
 	public ModelAndView surveyMain(ModelAndView mv) {
+		//내가 대상자인 것 중 진행중이면서 응답하지 않은 설문 리스트
+		//최근 생성된 설문 리스트
+		//설문 리스트에 대한 나의 참여 여부
 		return mv;
 	}
 	
 	//진행중인 설문 페이지 (리스트 조회)
 	public ModelAndView ProceedSurvey(ModelAndView mv) {
+		//진행중인 설문 리스트
+		//진행중인 설문 리스트에 대한 나의 참여 여부
+		//응답자 리스트 보기 (응답여부까지) -> 팝업창
 		return mv;
 	}
 	
 	//마감된 설문 페이지 (리스트 조회)
 	public ModelAndView closedSurvey(ModelAndView mv) {
+		//마감된 설문 리스트
+		//마감된 설문 리스트에 대한 나의 참여 여부
 		return mv;
 	}
 
 	//내가 만든 설문 페이지 (리스트 조회)
 	public ModelAndView wroteSurvey(ModelAndView mv
 			, HttpServletRequest request) {
-		//아이디 가져옴
+		//아이디 가져옴 (세션에서)
+		//내가 만든 설문 리스트
+		
 		return mv;
 	}
 	
 
+	//설문 등록 페이지 
+	public ModelAndView writeSurveyPage(ModelAndView mv) {
+		
+		return mv;
+	}
 	
 	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
 	public ModelAndView writeSurvey(ModelAndView mv
@@ -61,21 +76,29 @@ public class SurveyController {
 			,@ModelAttribute SurveyQuestCh qCh3
 			,@ModelAttribute SurveyQuestCh qCh4
 			, HttpServletRequest request) {
+		
+		//설문 등록
+		//설문 문항 추가 1~4 (비어있지 않을 때)
+		//설문 보기 추가 1~4 (비어있지 않을 때)
+		//설문 대상자 리스트 추가
 		return mv;
 	}
 
-	//대상자 리스트 가져오기 
-	public ModelAndView chooseEmpl(ModelAndView mv
-			,@RequestParam("surveyNo") int surveyNo) {
-		
+	//대상자 리스트 가져오기(설문 등록할 때 쓰려고)
+	public ModelAndView chooseEmpl(ModelAndView mv) {
+		//대상자 리스트 가져오기
+		//자기 소속 부서일 때는 부서 사람 OR 하위
+		//
 		return mv;
 	}
+	
 	
 	//설문 수정 페이지
 	public ModelAndView surveyModifyPage(ModelAndView mv) {
 		
 		return mv;
 	}
+	
 	//설문 수정
 	public ModelAndView surveyModify(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {
