@@ -19,5 +19,5 @@ public interface EmployeeService {
 	public Employee employeeMyPage(String employeeId);
 	
 	// 비밀번호 찾기
-	public List<Employee> find_pwd(HttpServletResponse response, Employee employee) throws Exception;
+	//public List<Member> find_pwd(HttpServletResponse response, Member member);
 }

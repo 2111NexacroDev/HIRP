@@ -1,9 +1,6 @@
 package com.highfive.hirp.employee.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,26 +81,26 @@ public class EmployeeController {
 		}
 		return mv;
 	}
-	
-	// 비밀번호 찾기
-	@RequestMapping(value= "/employee/findpw.kh", method=RequestMethod.POST)
-	public String find_pwd(HttpServletResponse response, @RequestParam("emplId")String emplId, @RequestParam("emplName")String emplName, Model model) throws Exception {
-		Employee employee= new Employee();
-		employee.setEmplId(emplId);
-		employee.setEmplName(emplName);
-		try {
-			List<Employee> resultList = eService.find_pwd(response, employee);
-			if(!resultList.isEmpty()) {
-				String mem = resultList.get(0).getEmplPw().toString(); 
-				model.addAttribute("pwd", mem);
-				return "member/find_mem_pwd";
-			}else{
-				model.addAttribute("msg","비밀번호 찾기 실패");
-				return "common/errorPage";
-			}
-		}catch(Exception e) {
-			model.addAttribute("msg",e.toString());
-			return "common/errorPage";
-		}
-	}
+
+//	// 비밀번호 찾기
+//	@RequestMapping(value= "/find_mem_pwd.kh", method=RequestMethod.POST)
+//	public String find_pwd(HttpServletResponse response, @RequestParam("memberId")String memberId, @RequestParam("memberPhone")String memberPhone, Model model) throws Exception {
+//		Member member= new Member();
+//		member.setMemberId(memberId);
+//		member.setMemberPhone(memberPhone);
+//		try {
+//			List<Member>resultList = mService.find_pwd(response, member);
+//			if(!resultList.isEmpty()) {
+//				String mem = resultList.get(0).getMemberPw().toString(); 
+//				model.addAttribute("pwd", mem);
+//				return "member/find_mem_pwd";
+//			}else{
+//				model.addAttribute("msg","일반 회원 비밀번호 찾기 실패");
+//				return "common/errorPage";
+//			}
+//		}catch(Exception e) {
+//			model.addAttribute("msg",e.toString());
+//			return "common/errorPage";
+//		}
+//	}
 }

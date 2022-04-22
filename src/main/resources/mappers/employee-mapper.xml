@@ -6,8 +6,8 @@
 <mapper namespace="EmplpyeeMapper">
 	<resultMap type="com.highfive.hirp.employee.domain.Employe"
 		id="employeResultMap">
-		<id property="" column " />
-		<result property="" column="" />
+<!-- 		<id property="" column " /> -->
+<!-- 		<result property="" column="" /> -->
 	</resultMap>
 
 	<!-- 회원가입 -->
@@ -25,11 +25,7 @@
 	</select>
 	
 	<!-- 마이페이지 조회 -->
-	<select>
+<!-- 	<select> -->
 	
-	</select>
-	
-	<!-- 비밀번호 찾기 -->
-	<select>
-	
-	</select>
+<!-- 	</select> -->
+</mapper>
