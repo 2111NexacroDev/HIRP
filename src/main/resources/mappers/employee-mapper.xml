@@ -4,11 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="EmplpyeeMapper">
-<!-- 	<resultMap type="com.highfive.hirp.employee.domain.Employee" -->
-<!-- 		id="employeeResultMap"> -->
-<!--		<id property="" column " /> -->
+
+	<resultMap type="com.highfive.hirp.employee.domain.Employee"
+		id="employeResultMap">
+<!-- 		<id property="" column " /> -->
 <!-- 		<result property="" column="" /> -->
-<!-- 	</resultMap> -->
+	</resultMap>
 
  	<!-- 회원가입 -->
 <!-- 	<insert id="insertEmployee" -->

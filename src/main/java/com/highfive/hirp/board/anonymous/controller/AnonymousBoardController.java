@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
 import com.highfive.hirp.board.anonymous.service.AnonymousBoardService;
 import com.highfive.hirp.board.common.BoardAttachedFile;
+import com.highfive.hirp.board.common.BoardRecommend;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
@@ -76,7 +77,7 @@ public class AnonymousBoardController {
 	
 	//익명글 추천
 	@RequestMapping(value="anonymous/reccomend.hirp",method=RequestMethod.GET)
-	public ModelAndView AnonymousRecommend(ModelAndView mv) {
+	public ModelAndView AnonymousRecommend(ModelAndView mv,@ModelAttribute BoardRecommend recommend) {
 		//추천
 		
 		//추천 취소

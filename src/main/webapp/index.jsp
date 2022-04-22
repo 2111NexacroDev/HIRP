@@ -17,16 +17,9 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <!-- 서브 메뉴 있을 경우
-        <aside id="snb">
-            <h1>
-                캘린더
-            </h1>
-            <a class="btn--function" href="#">일정등록</a>
-        </aside>-->
-
         <article id="main">
             <nav id="nav--right">
+                <button class="btn--chat" type="button"></button>
                 <button class="btn--alarm" type="button">
                     <span>3</span>
                 </button>
@@ -47,7 +40,8 @@
             </h1>
 
             <div class="row">
-                <div><!-- 컬럼1 -->
+                <div>
+                    <!-- 컬럼1 -->
                     <section>
                         <figure class="figure--profile">
                             <img src="../resources/images/profile.jpg" alt="profile">
@@ -59,7 +53,8 @@
                         <h2>근태관리</h2>
                     </section>
                 </div><!-- //컬럼1 -->
-                <div><!-- 컬럼2 -->
+                <div>
+                    <!-- 컬럼2 -->
                     <section>
                         <h2>일정</h2>
                         <div id="calendar"></div>
@@ -68,7 +63,8 @@
                         <h2>메일함</h2>
                     </section>
                 </div><!-- //컬럼2 -->
-                <div><!-- 컬럼3 -->
+                <div>
+                    <!-- 컬럼3 -->
                     <section>
                         <h2>생일</h2>
                     </section>
