@@ -44,7 +44,7 @@ public class ApprFormServiceImpl implements ApprFormService{
 	}
 
 	@Override
-	public int removeForm(String formNo) {
+	public int removeForm(int formNo) {
 		int result = aStore.deleteForm(sqlSession,formNo);
 		return result;
 	}
