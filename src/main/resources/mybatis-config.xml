@@ -18,7 +18,6 @@
 		<typeAlias type="com.highfive.hirp.mail.domain.Mail" alias="Mail"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.MailFile" alias="MailFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
-		<typeAlias type="com.highfive.hirp.project.domain.Board" alias="Board"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 	</typeAliases>
 	<mappers>
