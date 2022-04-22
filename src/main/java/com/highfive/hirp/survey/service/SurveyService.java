@@ -1,5 +1,6 @@
 package com.highfive.hirp.survey.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.highfive.hirp.common.Search;
@@ -64,5 +65,5 @@ public interface SurveyService {
 	public int updateSurveySubAnswer(SurveyAnswer surveyAnswer);
 	
 	//설문조사 검색
-	public List<Survey> printSeartchSurvey(Search search);
+	public List<Survey> printSeartchSurvey(HashMap<Search, String> searchInfo);
 }
