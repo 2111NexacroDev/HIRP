@@ -13,22 +13,11 @@ public class TimeController {
 	private TimeService tService;
 	
 	// 사용자 출근 등록
-	public
-		int
-	return null;
 	
 	// 사용자 퇴근 등록
-	public
-		int
-	return null;
-		
+
 	// 사용자 연차 내역 조회
-	public
-		int
-	return null;
-	
+
 	// 사용자 근태 조정 신청
-	public
-		int
-	return null;
+
 }
