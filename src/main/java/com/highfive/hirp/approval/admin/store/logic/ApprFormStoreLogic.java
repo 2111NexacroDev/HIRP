@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.admin.store.ApprFormStore;
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
 @Repository
 public class ApprFormStoreLogic implements ApprFormStore {
 
@@ -36,7 +39,7 @@ public class ApprFormStoreLogic implements ApprFormStore {
 	}
 
 	@Override
-	public int deleteForm(SqlSession sqlSession, String formNo) {
+	public int deleteForm(SqlSession sqlSession, int formNo) {
 		int result = sqlSession.delete("",formNo);
 		return result;
 	}
