@@ -45,19 +45,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employee;
 	}
 
-	// 비밀번호 찾기
-	@Override
-	public List<Employee> find_pwd(HttpServletResponse response, Employee employee) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out;
-		out = response.getWriter();
-		List<Employee> pwd = eStore.find_pwd(employee, sqlSession);
-		if (pwd == null) {
-			out.println("<script>");
-			out.println("alert('가입된 아이디가 없습니다.');");
-			return null;
-		} else {
-			return pwd;
-		}
-	}
+//	// 비밀번호 찾기
+//	@Override
+//	public List<Employee> find_pwd(HttpServletResponse response, Employee employee) throws Exception {
+//		response.setContentType("text/html;charset=utf-8");
+//		PrintWriter out;
+//		out = response.getWriter();
+//		List<Employee> pwd = eStore.find_pwd(employee, sqlSession);
+//		if (pwd == null) {
+//			out.println("<script>");
+//			out.println("alert('가입된 아이디가 없습니다.');");
+//			return null;
+//		} else {
+//			return pwd;
+//		}
+//	}
 }
