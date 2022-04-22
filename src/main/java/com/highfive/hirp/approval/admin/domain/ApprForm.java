@@ -1,4 +1,4 @@
-package com.highfive.hirp.approval.domain;
+package com.highfive.hirp.approval.admin.domain;
 
 import java.sql.Date;
 
