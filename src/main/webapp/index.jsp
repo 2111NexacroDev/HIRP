@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
+<link rel="stylesheet" href="../../resources/css/main.css"><!-- 메인페이지 CSS -->
 
 <!-- 
     id는 한 페이지 내에 동일한 id가 하나여야함
@@ -13,29 +14,7 @@
 
 <body class="bg--gray">
     <!-- 배경색 회색되는 css넣어놨음. 배경색 필요할 때 클래스 bg--gray 추가하기 -->
-    <header id="gnb">
-        <button type="button" id="gnb__btn--burger"></button>
-        <h1 id="gnb__logo">
-            <a href="#">
-                <img src="../resources/images/logo_hirp.png" alt="HIRP">
-            </a>
-        </h1>
-        <nav>
-            <ul>
-                <li><a href="#" class="on">홈</a></li>
-                <li><a href="#">메일</a></li>
-                <li><a href="#">게시판</a></li>
-                <li><a href="#">개인업무관리</a></li>
-                <li><a href="#">프로젝트관리</a></li>
-                <li><a href="#">일정관리</a></li>
-                <li><a href="#">전자결재</a></li>
-                <li><a href="#">설문조사</a></li>
-                <li><a href="#">근태관리</a></li>
-                <li><a href="#">공용품 예약/관리</a></li>
-            </ul>
-            <button type="button" id="gnb__btn--org">조직도</button>
-        </nav>
-    </header>
+    <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
         <!-- 서브 메뉴 있을 경우
@@ -68,7 +47,7 @@
             </h1>
 
             <div class="row">
-                <div>
+                <div><!-- 컬럼1 -->
                     <section>
                         <figure class="figure--profile">
                             <img src="../resources/images/profile.jpg" alt="profile">
@@ -79,8 +58,8 @@
                     <section>
                         <h2>근태관리</h2>
                     </section>
-                </div>
-                <div>
+                </div><!-- //컬럼1 -->
+                <div><!-- 컬럼2 -->
                     <section>
                         <h2>일정</h2>
                         <div id="calendar"></div>
@@ -88,15 +67,15 @@
                     <section>
                         <h2>메일함</h2>
                     </section>
-                </div>
-                <div>
+                </div><!-- //컬럼2 -->
+                <div><!-- 컬럼3 -->
                     <section>
                         <h2>생일</h2>
                     </section>
                     <section>
                         <h2>결재 대기 문서</h2>
                     </section>
-                </div>
+                </div><!-- //컬럼3 -->
             </div>
         </article>
     </div>
