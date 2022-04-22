@@ -3,7 +3,6 @@ package com.highfive.hirp.dept.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.highfive.hirp.alram.service.AlarmService;
 import com.highfive.hirp.dept.service.DeptService;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
