@@ -15,5 +15,5 @@ public interface ApprFormService {
 	//폼 수정
 	public int modifyForm(ApprForm form);
 	//폼 삭제
-	public int removeForm(String formNo);
+	public int removeForm(int formNo);
 }

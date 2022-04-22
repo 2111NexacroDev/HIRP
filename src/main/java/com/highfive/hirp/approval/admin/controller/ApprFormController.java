@@ -1,14 +1,20 @@
 package com.highfive.hirp.approval.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.highfive.hirp.approval.admin.service.ApprFormService;
 import com.highfive.hirp.approval.admin.service.logic.ApprFormServiceImpl;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 import com.nexacro17.xapi.data.DataSet;
 
+@Controller
 public class ApprFormController {
-
-	private ApprFormServiceImpl aService;
+	
+	@Autowired
+	private ApprFormService aService;
 	
 	//전자결재 폼 전체 조회
 	public NexacroResult printAllApprForm() {

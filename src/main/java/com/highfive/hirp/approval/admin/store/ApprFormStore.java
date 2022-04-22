@@ -16,6 +16,6 @@ public interface ApprFormStore {
 
 	int updateForm(SqlSession sqlSession, ApprForm form);
 
-	int deleteForm(SqlSession sqlSession, String formNo);
+	int deleteForm(SqlSession sqlSession, int formNo);
 
 }

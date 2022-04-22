@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.common.PageInfo;
+import com.highfive.hirp.project.domain.Board;
 import com.highfive.hirp.project.domain.Project;
 import com.highfive.hirp.project.service.ProjectService;
 import com.highfive.hirp.project.store.ProjectStore;
@@ -16,34 +18,46 @@ public class ProjectServiceImpl implements ProjectService{
 	private ProjectStore pStore;
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
-	public List<Project> selectAllProject() {
-		List<Project> pList = pStore.selectAllProject(sqlSession);
+	public List<Project> printAll(PageInfo pi) {
+		List<Project> pList = pStore.selectAll(sqlSession, pi);
 		return pList;
 	}
-	
+
 	@Override
-	public int deleteProject() {
-		int result = pStore.deleteProject(sqlSession);
+	public int printOneByNo(int projectNo) {
+		int result = pStore.selectOneByNo(sqlSession, projectNo);
 		return result;
 	}
-	
+
 	@Override
-	public int updateProject() {
-		int result = pStore.updateProject(sqlSession);
+	public int removeProject(int projectNo) {
+		int result = pStore.deleteProject(sqlSession, projectNo);
 		return result;
 	}
-	
+
 	@Override
-	public int insertBoard() {
-		int result = pStore.insertBoard(sqlSession);
+	public int updateProject(int projectNo) {
+		int result = pStore.updateProject(sqlSession, projectNo);
 		return result;
 	}
-	
+
 	@Override
-	public int deleteBoard() {
-		int result = pStore.deleteBoard(sqlSession);
+	public List<Board> printAllBoard(int projectNo) {
+		List<Board> bList = pStore.selectAllBoard(sqlSession, projectNo);
+		return bList;
+	}
+
+	@Override
+	public int registerBoard(Board board) {
+		int result = pStore.insertBoard(sqlSession, board);
+		return result;
+	}
+
+	@Override
+	public int removeBoard(int boardNo) {
+		int result = pStore.deleteBoard(sqlSession, boardNo);
 		return result;
 	}
 	
