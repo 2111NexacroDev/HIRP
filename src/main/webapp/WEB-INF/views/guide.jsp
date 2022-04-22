@@ -158,7 +158,7 @@
                     </h3>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">2등분</h4>
+                        <!-- <h4 class="col-12 mb-20">2등분</h4> -->
                         <div class="col-6">
                             <div>칸</div>
                         </div>
@@ -168,7 +168,7 @@
                     </div>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">3등분</h4>
+                        <!-- <h4 class="col-12 mb-20">3등분</h4> -->
                         <div class="col-4">
                             <div>칸</div>
                         </div>
@@ -181,7 +181,7 @@
                     </div>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">4등분</h4>
+                        <!-- <h4 class="col-12 mb-20">4등분</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>
@@ -197,7 +197,7 @@
                     </div>
 
                     <div class="row mt-20 no-space">
-                        <h4 class="col-12 mb-20">여백 필요 없을 경우</h4>
+                        <!-- <h4 class="col-12 mb-20">여백 필요 없을 경우</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>
@@ -225,7 +225,7 @@
                     </div>
 
                     <div class="row mt-20 child-same-height">
-                        <h4 class="col-12 mb-20">자식 요소 높이 통일 필요할 경우</h4>
+                        <!-- <h4 class="col-12 mb-20">자식 요소 높이 통일 필요할 경우</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>
