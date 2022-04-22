@@ -15,22 +15,11 @@ public class TimeAdminController {
 	private TimeAdminService taService;
 
 	// 출근 내역 조회
-	public
-		int
-	return null;
-	
+
 	// 퇴근 내역 조회
-	public
-		int
-	return null;
 	
 	// 연차 신청 내역 조회
-	public
-		int
-	return null;
 	
 	// 근태 조정 신청 내역 조회
-	public
-		int
-	return null;
+
 }
