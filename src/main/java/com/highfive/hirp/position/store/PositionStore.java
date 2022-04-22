@@ -9,9 +9,9 @@ import com.highfive.hirp.position.domain.Position;
 public interface PositionStore {
 
 	List<Position> selectAllPosition(SqlSession sqlSession);
-	int insertPosition(SqlSession sqlSession);
-	int updatePosition(SqlSession sqlSession);
-	int deletePosition(SqlSession sqlSession);
-	int updateChangePosition(SqlSession sqlSession);
+	int insertPosition(SqlSession sqlSession, Position position);
+	int updatePosition(SqlSession sqlSession, Position position);
+	int deletePosition(SqlSession sqlSession, String positionCode);
+	int updateChangePosition(SqlSession sqlSession, String positionSequence);
 
 }

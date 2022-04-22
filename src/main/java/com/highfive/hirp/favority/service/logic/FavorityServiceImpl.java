@@ -23,8 +23,8 @@ public class FavorityServiceImpl implements FavorityService{
 	}
 	
 	@Override
-	public int deleteFavority(Favority favority) {
-		int result = fStore.deleteFavority(sqlSession, favority);
+	public int deleteFavority(int favorityNo) {
+		int result = fStore.deleteFavority(sqlSession, favorityNo);
 		return result;
 	}
 	

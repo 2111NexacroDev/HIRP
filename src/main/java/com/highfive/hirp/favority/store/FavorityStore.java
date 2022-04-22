@@ -7,6 +7,6 @@ import com.highfive.hirp.favority.domain.Favority;
 public interface FavorityStore {
 
 	int insertFavority(SqlSession sqlSession, Favority favority);
-	int deleteFavority(SqlSession sqlSession, Favority favority);
+	int deleteFavority(SqlSession sqlSession, int favorityNo);
 
 }

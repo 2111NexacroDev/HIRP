@@ -22,24 +22,28 @@ public class PositionServiceImpl implements PositionService {
 		List<Position> pList = pStore.selectAllPosition(sqlSession);
 		return pList;
 	}
+	
 	@Override
-	public int insertPosition() {
-		int result = pStore.insertPosition(sqlSession);
+	public int insertPosition(Position position) {
+		int result = pStore.insertPosition(sqlSession, position);
 		return result;
 	}
+	
 	@Override
-	public int updatePosition() {
-		int result = pStore.updatePosition(sqlSession);
+	public int updatePosition(Position position) {
+		int result = pStore.updatePosition(sqlSession, position);
 		return result;
 	}
+	
 	@Override
-	public int deletePosition() {
-		int result = pStore.deletePosition(sqlSession);
+	public int deletePosition(String positionCode) {
+		int result = pStore.deletePosition(sqlSession, positionCode);
 		return result;
 	}
+	
 	@Override
-	public int updateChangePosition() {
-		int result = pStore.updateChangePosition(sqlSession);
+	public int updateChangePosition(String positionSequence) {
+		int result = pStore.updateChangePosition(sqlSession, positionSequence);
 		return result;
 	}
 	
