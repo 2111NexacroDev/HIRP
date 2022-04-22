@@ -81,7 +81,7 @@ public class EmployeeController {
 		}
 		return mv;
 	}
-	
+
 //	// 비밀번호 찾기
 //	@RequestMapping(value= "/find_mem_pwd.kh", method=RequestMethod.POST)
 //	public String find_pwd(HttpServletResponse response, @RequestParam("memberId")String memberId, @RequestParam("memberPhone")String memberPhone, Model model) throws Exception {
