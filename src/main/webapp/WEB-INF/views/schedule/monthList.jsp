@@ -7,25 +7,16 @@
 
 <body>
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
+    <aside id="snb">
+        <h1>
+            캘린더
+        </h1>
+        <a class="btn--function" href="#">일정등록</a>
+    </aside>
 
     <div id="conts">
-        <aside id="snb">
-            <h1>
-                캘린더
-            </h1>
-            <a class="btn--function" href="#">일정등록</a>
-        </aside>
-
         <article id="sub" class="bg--gray">
-            <nav id="nav--right">
-                <button class="btn--alarm" type="button">
-                    <span>3</span>
-                </button>
-                <button class="btn--profile" type="button">
-                    <img src="../resources/images/profile.jpg" alt="profile">
-                    <!-- 유저마다 다른 사진 출력돼야함 -->
-                </button>
-            </nav>
+            <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
             <form class="form--srch" action="">

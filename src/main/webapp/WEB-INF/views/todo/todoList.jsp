@@ -10,15 +10,7 @@
 
     <div id="conts">
         <article id="sub" class="bg--gray">
-            <nav id="nav--right">
-                <button class="btn--alarm" type="button">
-                    <span>3</span>
-                </button>
-                <button class="btn--profile" type="button">
-                    <img src="../resources/images/profile.jpg" alt="profile">
-                    <!-- 유저마다 다른 사진 출력돼야함 -->
-                </button>
-            </nav>
+            <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <h1 class="basic-border-bottom">
                 개인업무관리
@@ -31,12 +23,33 @@
                     <section class="todo--today">
                         <h2>TODAY</h2>
                         <ul>
-                            <li><input name="" type="text" value="항목 예시 1"></li>
-                            <li><input name="" type="text" value="항목 예시 2"></li>
-                            <li><input name="" type="text" value="항목 예시 3"></li>
-                            <li><input name="" type="text" value="항목 예시 4"></li>
-                            <li><input name="" type="text" value="항목 예시 5"></li>
+                            <li>
+                                <input id="todo1" type="checkbox">
+                                <label for="todo1"></label>
+                                <input name="" type="text" value="항목 예시 1">
+                            </li>
+                            <li>
+                                <input id="todo2" type="checkbox">
+                                <label for="todo2"></label>
+                                <input name="" type="text" value="항목 예시 2">
+                            </li>
+                            <li>
+                                <input id="todo3" type="checkbox">
+                                <label for="todo3"></label>
+                                <input name="" type="text" value="항목 예시 3">
+                            </li>
+                            <li>
+                                <input id="todo4" type="checkbox">
+                                <label for="todo4"></label>
+                                <input name="" type="text" value="항목 예시 4">
+                            </li>
+                            <li>
+                                <input id="todo5" type="checkbox">
+                                <label for="todo5"></label>
+                                <input name="" type="text" value="항목 예시 5">
+                            </li>
                         </ul>
+                        <button class="btn--plus" type="button"></button>
                     </section>
                     <section class="todo--week">
                         <h2>WEEK</h2>
@@ -59,6 +72,7 @@
                         <li><textarea></textarea></li>
                         <li><textarea></textarea></li>
                     </ul>
+                    <button class="btn--plus" type="button"></button>
                 </section>
             </div>
         </article>
