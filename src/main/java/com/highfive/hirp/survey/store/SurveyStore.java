@@ -1,5 +1,6 @@
 package com.highfive.hirp.survey.store;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -62,7 +63,7 @@ public interface SurveyStore {
 	public int updateSurveySubAnswer(SqlSession sqlSession, SurveyAnswer surveyAnswer);
 	
 	//설문조사 검색
-	public List<Survey> selectSearchSurvey(SqlSession sqlSession, Search search);
+	public List<Survey> selectSearchSurvey(SqlSession sqlSession, HashMap<Search, String> searchInfo);
 	
 
 }

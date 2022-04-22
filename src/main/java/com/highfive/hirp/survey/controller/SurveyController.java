@@ -1,5 +1,6 @@
 package com.highfive.hirp.survey.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,7 @@ public class SurveyController {
 		return mv;
 	}
 	
+
 	
 	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
 	public ModelAndView writeSurvey(ModelAndView mv
@@ -130,11 +132,16 @@ public class SurveyController {
 		
 		return mv;
 	}
-	
-	//설문조사 검색
+	//설문 검색
 	public ModelAndView surveySearch(ModelAndView mv
-			,@ModelAttribute Search search) {
-		List<Survey> searchList = sService.printSeartchSurvey(search);
+			,@ModelAttribute Search search
+			,@RequestParam("surveyStatus") String surveyStatus) {
+		//surveyStatus 담아서 진행중/마감 설문조사 나누어 검색하기
+		//내가 만든 설문은 surveyStatus 비워진 상태, session에서 아이디값 가져오기
+//		HashMap<Search, String> 에 담아서 보내주기
+		HashMap<Search, String> searchInfo = null;
+		List<Survey> searchList = sService.printSeartchSurvey(searchInfo);
 		return mv;
 	}
+
 }

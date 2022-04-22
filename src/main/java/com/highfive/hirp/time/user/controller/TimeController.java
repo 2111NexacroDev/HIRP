@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 
 import com.highfive.hirp.time.user.service.TimeService;
 
-
 @Controller
 public class TimeController {
 	
