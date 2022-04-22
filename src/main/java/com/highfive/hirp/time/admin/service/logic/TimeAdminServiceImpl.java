@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.highfive.hirp.time.admin.service.TimeAdminService;
 
 @Service
-public class TimeAdminServiceImpl implements TimeAdminService  {
+public class TimeAdminServiceImpl implements TimeAdminService {
+
 
 }

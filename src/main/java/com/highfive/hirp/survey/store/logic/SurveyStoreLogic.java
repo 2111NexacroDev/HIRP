@@ -1,5 +1,6 @@
 package com.highfive.hirp.survey.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -55,6 +56,8 @@ public class SurveyStoreLogic implements SurveyStore{
 		List<SurveySub> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByNo", surveyNo);
 		return surveySubList;
 	}
+	
+
 
 	//설문조사 등록
 	//설문 추가
@@ -138,10 +141,9 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문조사 검색
 	@Override
-	public List<Survey> selectSearchSurvey(SqlSession sqlSession, Search search) {
-		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectSearchSurvey", search);
+	public List<Survey> selectSearchSurvey(SqlSession sqlSession, HashMap<Search, String> searchInfo) {
+		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectSearchSurvey", searchInfo);
 		return surveyList;
 	}
-	
 	
 }

@@ -12,31 +12,31 @@ public class PositionStoreLogic implements PositionStore {
 
 	@Override
 	public List<Position> selectAllPosition(SqlSession sqlSession) {
-		List<Position> pList = sqlSession.selectList("");
+		List<Position> pList = sqlSession.selectList("PositionMapper.selectAllPosition");
 		return pList;
 	}
 
 	@Override
-	public int insertPosition(SqlSession sqlSession) {
-		int result = sqlSession.insert("");
+	public int insertPosition(SqlSession sqlSession, Position position) {
+		int result = sqlSession.insert("PositionMapper.insertPosition", position);
 		return result;
 	}
 
 	@Override
-	public int updatePosition(SqlSession sqlSession) {
-		int result = sqlSession.update("");
+	public int updatePosition(SqlSession sqlSession, Position position) {
+		int result = sqlSession.update("PositionMapper.updatePosition", position);
 		return result;
 	}
 
 	@Override
-	public int deletePosition(SqlSession sqlSession) {
-		int result = sqlSession.delete("");
+	public int deletePosition(SqlSession sqlSession, String positionCode) {
+		int result = sqlSession.delete("PositionMapper.deletePosition", positionCode);
 		return result;
 	}
 
 	@Override
-	public int updateChangePosition(SqlSession sqlSession) {
-		int result = sqlSession.update("");
+	public int updateChangePosition(SqlSession sqlSession, String positionSequence) {
+		int result = sqlSession.update("PositionMapper.updateChangePosition", positionSequence);
 		return result;
 	}
 

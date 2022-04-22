@@ -1,5 +1,6 @@
 package com.highfive.hirp.survey.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -141,8 +142,8 @@ public class SurveyServiceLogic implements SurveyService{
 	
 	//설문조사 검색
 	@Override
-	public List<Survey> printSeartchSurvey(Search search) {
-		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, search);
+	public List<Survey> printSeartchSurvey(HashMap<Search, String> searchInfo) {
+		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, searchInfo);
 		return searchSurvey;
 	}
 	
