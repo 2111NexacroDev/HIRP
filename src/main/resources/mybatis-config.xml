@@ -28,9 +28,16 @@
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
 		<mapper resource="mappers/time-mapper.xml" />
+
+		<mapper resource="mappers/noticeboard-mapper.xml" />
+		<mapper resource="mappers/anonymousboard-mapper.xml" />
+		<mapper resource="mappers/freeboard-mapper.xml" />
+		<mapper resource="mappers/departmentboard-mapper.xml" />
+
 		<mapper resource="mappers/favority-mapper.xml" />
 		<mapper resource="mappers/mail-mapper.xml" />
 		<mapper resource="mappers/position-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />
+
 	</mappers>
 </configuration>
