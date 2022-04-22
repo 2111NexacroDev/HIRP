@@ -1,6 +1,6 @@
-package com.highfive.hirp.alram.domain;
+package com.highfive.hirp.alarm.domain;
 
-public class AlramSetting {
+public class AlarmSetting {
 	private String emplId;
 	private String alramMail;
 	private String alramNoticeboard;
@@ -16,9 +16,9 @@ public class AlramSetting {
 	private String alramPaycomplete;
 	private String alramSurvey;
 	
-	public AlramSetting() {}
+	public AlarmSetting() {}
 
-	public AlramSetting(String emplId, String alramMail, String alramNoticeboard, String alramFreeboard,
+	public AlarmSetting(String emplId, String alramMail, String alramNoticeboard, String alramFreeboard,
 			String alramAnonymousboard, String alramDeptboard, String alramAllschedule, String alramTeamschedule,
 			String alramPersonalschedule, String alramPayarrive, String alramPaycancle, String alramPaycompanion,
 			String alramPaycomplete, String alramSurvey) {

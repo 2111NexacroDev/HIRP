@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.highfive.hirp.alram.controller" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="266" width="482" x="1489" y="120"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="com.highfive.hirp.alram.domain" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="709" width="707" x="6" y="-55"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="com.highfive.hirp.alram.service" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="356" width="329" x="1094" y="-46"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="com.highfive.hirp.alram.store" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="357" width="343" x="724" y="-45"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="com.highfive.hirp.alram.store.logic" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="363" width="345" x="726" y="384"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="com.highfive.hirp.alram.service.logic" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="349" width="314" x="1094" y="395"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="7" language="java" name="com.highfive.hirp.alram.domain.Alram" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/domain/Alram.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="289" y="240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.highfive.hirp.alram.domain.AlramCode" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/domain/AlramCode.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="96" y="133"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.highfive.hirp.alram.domain.AlramSetting" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/domain/AlramSetting.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="604" width="303" x="404" y="20"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="com.highfive.hirp.alram.store.AlramStore" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/store/AlramStore.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="897" y="157"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="com.highfive.hirp.alram.store.logic.AlramStoreLogic" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/store/logic/AlramStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="897" y="568"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.highfive.hirp.alram.service.logic.AlramServiceImpl" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/service/logic/AlramServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1257" y="589"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="com.highfive.hirp.alram.service.AlramService" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/service/AlramService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1257" y="150"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="com.highfive.hirp.alram.controller.AlramController" project="HIRP" 
+    file="/HIRP/src/main/java/com/highfive/hirp/alram/controller/AlramController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1741" y="276"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="15">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="16" name="aService"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="19" name="aStore"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="21">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="22">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

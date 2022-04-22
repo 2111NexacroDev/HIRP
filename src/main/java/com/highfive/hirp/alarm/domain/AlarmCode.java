@@ -1,14 +1,14 @@
-package com.highfive.hirp.alram.domain;
+package com.highfive.hirp.alarm.domain;
 
-public class AlramCode {
+public class AlarmCode {
 	private String emplId;
 	private String alramCode;
 	
-	public AlramCode() {
+	public AlarmCode() {
 		
 	}
 
-	public AlramCode(String emplId, String alramCode) {
+	public AlarmCode(String emplId, String alramCode) {
 		super();
 		this.emplId = emplId;
 		this.alramCode = alramCode;
