@@ -36,7 +36,7 @@ public class EmployeeStoreLogic implements EmployeeStore {
 	
 	// 비밀번호 찾기
 	@Override
-	public List<Employee> find_pwd(Employee employee, SqlSession sqlSession) {
+	public List<Employee> findPwd(Employee employee, SqlSession sqlSession) {
 		List<Employee> employeeOne = sqlSession.selectList("EmployeeMapper.find_pwd", employee);
 		return employeeOne;
 	}

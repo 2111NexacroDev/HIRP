@@ -92,11 +92,11 @@ public class EmployeeController {
 		employee.setEmplId(emplId);
 		employee.setEmplName(emplName);
 		try {
-			List<Employee> resultList = eService.find_pwd(response, employee);
+			List<Employee> resultList = eService.findPwd(response, employee);
 			if(!resultList.isEmpty()) {
 				String mem = resultList.get(0).getEmplPw().toString(); 
 				model.addAttribute("pwd", mem);
-				return "member/find_mem_pwd";
+				return "member/findPwd";
 			}else{
 				model.addAttribute("msg","비밀번호 찾기 실패");
 				return "common/errorPage";

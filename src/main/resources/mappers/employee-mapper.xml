@@ -4,19 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="EmplpyeeMapper">
-	<resultMap type="com.highfive.hirp.employee.domain.Employe"
-		id="employeResultMap">
-		<id property="" column " />
+	<!-- <resultMap type="com.highfive.hirp.employee.domain.Employee">
+		<id employeResultMap="">
+		<id property="" column "" />
 		<result property="" column="" />
 	</resultMap>
 
-	<!-- 회원가입 -->
+	회원가입
 	<insert id="insertEmployee"
 		parameterType="com.highfive.hirp.employee.domain.Employee">
 		INSERT INTO
 	</insert>
 
-	<!-- 로그인 -->
+	로그인
 	<select id="selectLoginEmployee"
 		parameterType="com.highfive.hirp.employee.domain.Employee" resultMap="employeeResultMap">
 		SELECT *
@@ -24,12 +24,13 @@
 		WHERE
 	</select>
 	
-	<!-- 마이페이지 조회 -->
+	마이페이지 조회
 	<select>
 	
 	</select>
 	
-	<!-- 비밀번호 찾기 -->
+	비밀번호 찾기
 	<select>
 	
-	</select>
+	</select> -->
+</mapper>
