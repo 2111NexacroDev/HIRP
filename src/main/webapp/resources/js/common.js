@@ -3,10 +3,19 @@ $(function () {
         $('#gnb').toggleClass('on');
     });
 
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'ko'
+    $('.btn--close').on('click', function () {
+        $(this).parent().parent().stop().fadeOut(100);
     });
-    calendar.render();
+
+    $('.closeWindow').on('click', function () {
+        $(this).parent().parent().parent().stop().fadeOut(100);
+    });
 });
+
+function openAlert(alertWindow) {
+    $(alertWindow).siblings('.section--alert').css('display', 'flex');
+}
+
+function openModal(modalWindow) {
+    $(modalWindow).siblings('.section--modal').css('display', 'flex');
+}

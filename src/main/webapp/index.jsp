@@ -5,6 +5,16 @@
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../resources/css/main.css"><!-- 메인페이지 CSS -->
 
+<script>
+    // 잠깐 여기둠... 작업 시작 시 옮겨야함
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'ko'
+    });
+    calendar.render();
+</script>
+
 <!-- 
     id는 한 페이지 내에 동일한 id가 하나여야함
     양식 가져다 쓸 때 공통되는 내용 아니면 id 꼭 바꿔서 써주기
