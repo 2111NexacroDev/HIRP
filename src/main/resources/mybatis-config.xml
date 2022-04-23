@@ -8,8 +8,12 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 		<!-- 만약에 NULL 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
 	</settings>
+	
 	<typeAliases>
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
+		<typeAlias type="com.highfive.hirp.reservation.domain.Reservation" alias="Reservation"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
 		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.Time" alias="Time"></typeAlias>		
@@ -20,11 +24,17 @@
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 	</typeAliases>
+	
 	<mappers>
 		<mapper resource="mappers/survey-mapper.xml" />
 		<mapper resource="mappers/alram-mapper.xml" />
 		<mapper resource="mappers/chat-mapper.xml" />
+		
 		<mapper resource="mappers/schedule-mapper.xml" />
+		<mapper resource="mappers/reservation-mapper.xml" />
+		<mapper resource="mappers/todo-mapper.xml" />
+		<mapper resource="mappers/adminemployee-mapper.xml" />
+		
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
 		<mapper resource="mappers/time-mapper.xml" />
@@ -33,11 +43,10 @@
 		<mapper resource="mappers/anonymousboard-mapper.xml" />
 		<mapper resource="mappers/freeboard-mapper.xml" />
 		<mapper resource="mappers/departmentboard-mapper.xml" />
-
 		<mapper resource="mappers/favority-mapper.xml" />
+		
 		<mapper resource="mappers/mail-mapper.xml" />
 		<mapper resource="mappers/position-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />
-
 	</mappers>
 </configuration>
