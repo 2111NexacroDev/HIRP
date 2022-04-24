@@ -31,6 +31,7 @@ public class AlarmController {
 	public ModelAndView alarmSettingPage(ModelAndView mv) {
 		return mv;
 	}
+	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
 	
 	//알림 설정 정보 업데이트
 	@RequestMapping(value="/alarm/setting_update", method=RequestMethod.POST)

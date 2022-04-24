@@ -1,12 +1,12 @@
 package com.highfive.hirp.survey.domain;
 
-public class SurveySubUpdate {
+public class SurveyUpdate {
 	private String emplId;
 	private int surveyNo;
 	
-	public SurveySubUpdate() {}
+	public SurveyUpdate() {}
 	
-	public SurveySubUpdate(String emplId, int surveyNo) {
+	public SurveyUpdate(String emplId, int surveyNo) {
 		super();
 		this.emplId = emplId;
 		this.surveyNo = surveyNo;

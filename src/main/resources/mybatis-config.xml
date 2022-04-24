@@ -21,9 +21,10 @@
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mappers/alarm-mapper.xml" />
 		<mapper resource="mappers/survey-mapper.xml" />
-		<mapper resource="mappers/alram-mapper.xml" />
 		<mapper resource="mappers/chat-mapper.xml" />
+		<mapper resource="mappers/dept-mapper.xml"/>
 		<mapper resource="mappers/schedule-mapper.xml" />
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
