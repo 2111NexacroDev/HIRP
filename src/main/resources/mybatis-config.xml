@@ -10,6 +10,9 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
+		<typeAlias type="com.highfive.hirp.reservation.domain.Reservation" alias="Reservation"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
 		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.Time" alias="Time"></typeAlias>		
@@ -26,6 +29,10 @@
 		<mapper resource="mappers/chat-mapper.xml" />
 		<mapper resource="mappers/dept-mapper.xml"/>
 		<mapper resource="mappers/schedule-mapper.xml" />
+		<mapper resource="mappers/reservation-mapper.xml" />
+		<mapper resource="mappers/todo-mapper.xml" />
+		<mapper resource="mappers/adminemployee-mapper.xml" />
+		
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
 		<mapper resource="mappers/time-mapper.xml" />

@@ -14,49 +14,49 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 
 	@Override
 	public List<Employee> selectAllEmployee(SqlSession sqlSession) {
-		List<Employee> eList = sqlSession.selectList("EmployeeMapper.selectAllEmployee");
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployee");
 		return eList;
 	}
 
 	@Override
 	public List<Employee> selectAllRetiree(SqlSession sqlSession) {
-		List<Employee> rList = sqlSession.selectList("EmployeeMapper.selectAllRetiree");
+		List<Employee> rList = sqlSession.selectList("EmployeeAdminMapper.selectAllRetiree");
 		return rList;
 	}
 
 	@Override
 	public List<Employee> selectSearchEmployee(SqlSession sqlSession, DataSet search) {
-		List<Employee> searchList = sqlSession.selectList("EmployeeMapper.selectSearchEmployee", search);
+		List<Employee> searchList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmployee", search);
 		return searchList;
 	}
 
 	@Override
 	public List<Employee> selectTempEmployee(SqlSession sqlSession) {
-		List<Employee> tList = sqlSession.selectList("EmployeeMapper.selectTempEmployee");
+		List<Employee> tList = sqlSession.selectList("EmployeeAdminMapper.selectTempEmployee");
 		return tList;
 	}
 
 	@Override
 	public Employee selectOneEmployee(SqlSession sqlSession) {
-		Employee employee = sqlSession.selectOne("EmployeeMapper.selectOneEmployee");
+		Employee employee = sqlSession.selectOne("EmployeeAdminMapper.selectOneEmployee");
 		return employee;
 	}
 
 	@Override
 	public int modifyEmployeeInfo(SqlSession sqlSession, Employee employee) {
-		int result = sqlSession.update("EmployeeMapper.modifyEmployeeInfo");
+		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo");
 		return result;
 	}
 
 	@Override
 	public int resignEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeMapper.resignEmployee");
+		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee");
 		return result;
 	}
 
 	@Override
 	public int updateLevelEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeMapper.updateLevelEmployee");
+		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee");
 		return result;
 	}
 

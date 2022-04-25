@@ -573,10 +573,18 @@ img {
     border-radius: 4px;
 }
 
+.btn--star {
+    background: url(../images/icons/btn_bookmark.png) no-repeat;
+    background-position: center center;
+    border-radius: 4px;
+}
+
+
 @media screen and (min-width: 1201px) {
 
     .btn--alarm:hover,
-    .btn--chat:hover {
+    .btn--chat:hover,
+    .btn--star:hover {
         background-color: #eee;
     }
 }
@@ -597,9 +605,12 @@ img {
     height: 40px;
 }
 
+#nav--right button:last-of-type {
+    margin-left: 8px;
+}
+
 .btn--alarm {
     position: relative;
-    margin-right: 8px;
 }
 
 .btn--alarm span {
