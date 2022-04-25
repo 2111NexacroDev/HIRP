@@ -156,12 +156,6 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.delete("SurveyMapper.deleteSurvey", surveyNo);
 		return result;
 	}
-	//설문조사 문항 삭제
-	@Override
-	public int deleteSurveyQuest(SqlSession sqlSession, int surveyQuestNo) {
-		int result = sqlSession.delete("SurveyMapper.deleteSurveyQuest", surveyQuestNo);
-		return result;
-	}
 
 
 	//설문조사 응답

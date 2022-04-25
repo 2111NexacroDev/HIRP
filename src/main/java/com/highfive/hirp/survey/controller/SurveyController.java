@@ -138,10 +138,11 @@ public class SurveyController {
 	public ModelAndView surveyDelete(ModelAndView mv
 			,@ModelAttribute Survey survey) {
 		//설문조사 삭제
+		
+		//SURVEY_TBL만 수정하면 아래 연관된 테이블 전부 삭제되도록 TRIGGER 걸어둠
 		//설문조사 대상자 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)
 		//설문조사 응답 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)
-		
-		//설문조사 문항 삭제
+		//설문조사 문항 삭제 (TRIGGER 걸려있음)
 		//survey 에서 q1~q4에 담겨있는 번호 가져와서 담아서 delete 해주기
 		//설문조사 문항 보기 삭제 (SURVEY_QUEST QUEST_NO에 제약조건 걸려있음)
 		return mv;

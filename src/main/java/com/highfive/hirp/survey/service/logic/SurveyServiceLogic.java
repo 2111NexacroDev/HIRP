@@ -160,12 +160,6 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.deleteSurvey(sqlSession, surveyNo);
 		return result;
 	}
-	//설문조사 문항 삭제
-	@Override
-	public int deleteSurveyQuest(int surveyQuestNo) {
-		int result = sStore.deleteSurveyQuest(sqlSession, surveyQuestNo);
-		return result;
-	}
 
 	//응답
 	//설문조사 응답 내용 추가

@@ -70,8 +70,6 @@ public interface SurveyStore {
 	//설문조사 삭제
 	//설문조사 정보 삭제
 	public int deleteSurvey(SqlSession sqlSession, int surveyNo);
-	//설문조사 문항 삭제
-	public int deleteSurveyQuest(SqlSession sqlSession, int surveyQuestNo);
 
 	//설문조사 응답
 	//설문조사 응답 내용 추가
