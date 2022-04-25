@@ -31,6 +31,7 @@ public class AlarmController {
 	public ModelAndView alarmSettingPage(ModelAndView mv) {
 		return mv;
 	}
+	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
 	
 	//알림 설정 정보 업데이트
 	@RequestMapping(value="/alarm/setting_update", method=RequestMethod.POST)
@@ -60,22 +61,41 @@ public class AlarmController {
 //		String emplId = employee.getEmplId();
 		String emplId = "사용자 아이디";
 		List<Alarm> allAlarm = aService.selectAllAlarm(emplId);
-		List<Alarm> mailAlarm = aService.selectAlarmByCode(emplId, "00");
-		List<Alarm> allBoardAlarm = aService.selectAlarmByCode(emplId, "1%");
-		List<Alarm> noticeBoardAlarm = aService.selectAlarmByCode(emplId, "10");
-		List<Alarm> freeBoardAlarm = aService.selectAlarmByCode(emplId, "11");
-		List<Alarm> anonymousBoardAlarm = aService.selectAlarmByCode(emplId, "12");
-		List<Alarm> deptBoardAlarm = aService.selectAlarmByCode(emplId, "13");
-		List<Alarm> allScheduleAlarm = aService.selectAlarmByCode(emplId, "2%");
-		List<Alarm> everyScheduleAlarm = aService.selectAlarmByCode(emplId, "20");
-		List<Alarm> deptScheduleAlarm = aService.selectAlarmByCode(emplId, "21");
-		List<Alarm> myScheduleAlarm = aService.selectAlarmByCode(emplId, "23");
-		List<Alarm> allPayAlarm = aService.selectAlarmByCode(emplId, "3%");
-		List<Alarm> payArriveAlarm = aService.selectAlarmByCode(emplId, "30");
-		List<Alarm> payCancleAlarm = aService.selectAlarmByCode(emplId, "31");
-		List<Alarm> payCompanionAlarm = aService.selectAlarmByCode(emplId, "32");
-		List<Alarm> payCompleteAlarm = aService.selectAlarmByCode(emplId, "33");
-		List<Alarm> surveyAlarm = aService.selectAlarmByCode(emplId, "40");
+		
+		return mv;
+	}
+	
+	//코드별로 알림 가져오기
+	public ModelAndView printAlarmByCode(
+			ModelAndView mv
+			,HttpServletRequest request
+			,@RequestParam("alarmCode") String alarmCode) {
+		
+//		HttpSession session = request.getSession();
+//		Employee employee = (Employee) session.getAttribute("loginMember");
+//		String emplId = employee.getEmplId();
+		String emplId = "사용자 아이디";
+		
+		List<Alarm> alarmList = aService.selectAlarmByCode(emplId, alarmCode);
+		//화면에서 나눠진 항목을 클릭할 때 alarmCode를 같이 넘겨주어 조회
+		
+//		List<Alarm> mailAlarm = aService.selectAlarmByCode(emplId, "00");
+//		List<Alarm> allBoardAlarm = aService.selectAlarmByCode(emplId, "1%");
+//		List<Alarm> noticeBoardAlarm = aService.selectAlarmByCode(emplId, "10");
+//		List<Alarm> freeBoardAlarm = aService.selectAlarmByCode(emplId, "11");
+//		List<Alarm> anonymousBoardAlarm = aService.selectAlarmByCode(emplId, "12");
+//		List<Alarm> deptBoardAlarm = aService.selectAlarmByCode(emplId, "13");
+//		List<Alarm> allScheduleAlarm = aService.selectAlarmByCode(emplId, "2%");
+//		List<Alarm> everyScheduleAlarm = aService.selectAlarmByCode(emplId, "20");
+//		List<Alarm> deptScheduleAlarm = aService.selectAlarmByCode(emplId, "21");
+//		List<Alarm> myScheduleAlarm = aService.selectAlarmByCode(emplId, "23");
+//		List<Alarm> allPayAlarm = aService.selectAlarmByCode(emplId, "3%");
+//		List<Alarm> payArriveAlarm = aService.selectAlarmByCode(emplId, "30");
+//		List<Alarm> payCancleAlarm = aService.selectAlarmByCode(emplId, "31");
+//		List<Alarm> payCompanionAlarm = aService.selectAlarmByCode(emplId, "32");
+//		List<Alarm> payCompleteAlarm = aService.selectAlarmByCode(emplId, "33");
+//		List<Alarm> surveyAlarm = aService.selectAlarmByCode(emplId, "40");
+		
 		//게시판, 일정, 전자결제 전체 알림 가져올 때 like 사용할 생각
 		//잘 안되면 service나 store 하나 더 만들어서 따로 사용하기
 		//한번에 가져와서 화면에서 나누어서 뿌려주기

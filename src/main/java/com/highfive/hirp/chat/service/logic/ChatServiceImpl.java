@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.chat.domain.ChatFile;
+import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
@@ -50,17 +51,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	//채팅방 목록 가져오기
-	//내가 참여한 채팅방 번호 목록 가져오기
+	//내가 참여한 채팅방 목록 가져오기
 	@Override
-	public List<Integer> selectMyChattingRoomNum(String emplId) {
-		List<Integer> roomNumList = cStore.selectMyChattingRoomNum(sqlSession, emplId);
-		return roomNumList;
-	}
-	//채팅방 번호로 채팅방 목록 가져오기
-	@Override
-	public List<ChatRoom> selectMyChattingRoomList(int chatroomNo) {
-		List<ChatRoom> chatRoomList = cStore.selectMyChattingRoomList(sqlSession, chatroomNo);
-		return chatRoomList;
+	public List<ChatRoom> selectMyChattingRoom(String emplId) {
+		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, emplId);
+		return roomList;
 	}
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
@@ -73,6 +68,12 @@ public class ChatServiceImpl implements ChatService{
 	public ChatFile selectChatFileByMsgNo(int msgNo) {
 		ChatFile chatFile = cStore.selectChatFileByMsgNo(sqlSession, msgNo);
 		return chatFile;
+	}
+	//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+	@Override
+	public List<ChatList> selectChatListByRoomNo(int chatroomNo) {
+		List<ChatList> chatList = cStore.selectChatListByRoomNo(sqlSession, chatroomNo);
+		return chatList;
 	}
 
 	//채팅 추가
@@ -90,15 +91,15 @@ public class ChatServiceImpl implements ChatService{
 
 	//채팅방별 첨부파일 리스트 가져오기
 	@Override
-	public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo) {
-		List<ChatFile> chatFileList = cStore.selectChatFileByChattingRoomNo(sqlSession, chatroomNo);
-		return chatFileList;
+	public List<ChatList> selectChatFileListByChatRoomNo(int chatroomNo) {
+		List<ChatList> chatList = cStore.selectChatFileListByChatRoomNo(sqlSession, chatroomNo);
+		return chatList;
 	}
 	//내가 받은 첨부파일 리스트 가져오기
 	@Override
-	public List<ChatFile> selectChatFileById(String emplId) {
-		List<ChatFile> chatFileList = cStore.selectChatFileById(sqlSession, emplId);
-		return chatFileList;
+	public List<ChatList> selectChatFileListById(String emplId) {
+		List<ChatList> chatList = cStore.selectChatFileListById(sqlSession, emplId);
+		return chatList;
 	}
 	//채팅방 정보 변경 (이름 변경)
 	@Override
@@ -120,8 +121,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	//채팅방 삭제
 	@Override
-	public int deleteChatRoom(ChatRoom chatRoom) {
-		int result = cStore.deleteChatRoom(sqlSession, chatRoom);
+	public int deleteChatRoom(int chatroomNo) {
+		int result = cStore.deleteChatRoom(sqlSession, chatroomNo);
 		return result;
 	}
+
+
+
 }

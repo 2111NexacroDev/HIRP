@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class Message {
 	private int msgNo;
-	private int chatroom_no;
+	private int chatroomNo;
 	private String msgSendid;
 	private String msgContents;
 	private Date msgSenddate;
 	
 	public Message() {}
 
-	public Message(int msgNo, int chatroom_no, String msgSendid, String msgContents, Date msgSenddate) {
+	public Message(int msgNo, int chatroomNo, String msgSendid, String msgContents, Date msgSenddate) {
 		super();
 		this.msgNo = msgNo;
-		this.chatroom_no = chatroom_no;
+		this.chatroomNo = chatroomNo;
 		this.msgSendid = msgSendid;
 		this.msgContents = msgContents;
 		this.msgSenddate = msgSenddate;
@@ -28,12 +28,12 @@ public class Message {
 		this.msgNo = msgNo;
 	}
 
-	public int getChatroom_no() {
-		return chatroom_no;
+	public int getChatroomNo() {
+		return chatroomNo;
 	}
 
-	public void setChatroom_no(int chatroom_no) {
-		this.chatroom_no = chatroom_no;
+	public void setChatroomNo(int chatroomNo) {
+		this.chatroomNo = chatroomNo;
 	}
 
 	public String getMsgSendid() {
@@ -62,9 +62,9 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [msgNo=" + msgNo + ", chatroom_no=" + chatroom_no + ", msgSendid=" + msgSendid
-				+ ", msgContents=" + msgContents + ", msgSenddate=" + msgSenddate + "]";
+		return "Message [msgNo=" + msgNo + ", chatroomNo=" + chatroomNo + ", msgSendid=" + msgSendid + ", msgContents="
+				+ msgContents + ", msgSenddate=" + msgSenddate + "]";
 	}
-	
+
 	
 }
