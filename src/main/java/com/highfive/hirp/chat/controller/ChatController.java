@@ -95,22 +95,36 @@ public class ChatController {
 	//채팅방별 첨부파일 모두 보기
 	public ModelAndView myChattingRoomFile(ModelAndView mv
 			,@RequestParam("chatroomNo") int chatroomNo) {
+		//이것도 첨부파일, 채팅 조인해서 채팅 정보 (시간, 보낸 사람 등) 같이 갖고오면 될 듯
+		//채팅방별로 채팅, 첨부파일 내용 같이 가져오기
+		//첨부파일 있는 거만 가져오면 될 듯
+		
+		
 		return mv;
 	}
 	//내가 받은 첨부파일 모두 보기
 	public ModelAndView allMyFile(ModelAndView mv) {
 		 //아이디 세션에서 가져오기
+		//내가 받은 첨부파일 리스트 가져오기
+		//이것도 chatList로 반환, 첨부파일 있는 것만 가져오면 됨.
+		//조인....? 서브쿼리....?
+		
 		return mv;
 	}
 	//채팅방 이름 변경
 	public ModelAndView chattingRoomRename(ModelAndView mv
-			,@RequestParam("chatroomNo") int chatroomNo) {
+			,@RequestParam("ChatRoom") ChatRoom chatRoom) {
+		//채팅방 정보 넘겨 받아서 채팅방 이름 변경 (정보 update)
+		
 		return mv;
 	}
 	//채팅 대화상대 초대
 	public ModelAndView chattingAddJoin(ModelAndView mv
 			,@RequestParam("chatroomNo") int chatroomNo
 			,@RequestParam("joinList") List<String> joinList) {
+		//채팅 대화상대 추가
+		//list로 받아서 대화상대를 다수 추가하면 for문으로 insert 해주기
+		
 		return mv;
 	}
 	//채팅방 나가기
@@ -123,8 +137,9 @@ public class ChatController {
 	public ModelAndView chattingRoomDelete(ModelAndView mv
 			,@RequestParam("chatroomNo") int chatroomNo) {
 		
-		//본인이 만든 채팅방일 때만 해당 버튼 누를 수 있도록 처리 해놓기
+		//JSP에서 본인이 만든 채팅방일 때만 해당 버튼 누를 수 있도록 처리 해놓기
 		//채팅방 번호가 걸려있는 모든 채팅 데이터 삭제
+		//CHATROOM_TBL만 지우면 나머지도 같이 사라지게 REFERENCES 처리 했음.
 		return mv;
 	}
 }

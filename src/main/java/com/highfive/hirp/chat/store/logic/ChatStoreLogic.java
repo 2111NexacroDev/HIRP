@@ -81,15 +81,15 @@ public class ChatStoreLogic implements ChatStore{
 
 	//채팅방별 첨부파일 리스트 가져오기
 	@Override
-	public List<ChatFile> selectChatFileByChattingRoomNo(SqlSession sqlSession, int chatroomNo) {
-		List<ChatFile> chatfileList = sqlSession.selectList("ChatMapper.selectChatFileByChattingRoomNo", chatroomNo);
-		return chatfileList;
+	public List<ChatList> selectChatFileListByChatRoomNo(SqlSession sqlSession, int chatroomNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	//내가 받은 첨부파일 리스트 가져오기
 	@Override
-	public List<ChatFile> selectChatFileById(SqlSession sqlSession, String emplId) {
-		List<ChatFile> chatFileList = sqlSession.selectList("ChatMapper.selectChatFileById", emplId);
-		return chatFileList;
+	public List<ChatList> selectChatFileListById(SqlSession sqlSession, String emplId) {
+		List<ChatList> chatList = sqlSession.selectList("ChatMapper.selectChatFileListById", emplId);
+		return chatList;
 	}
 	//채팅방 정보 변경(이름 변경)
 	@Override
@@ -112,8 +112,8 @@ public class ChatStoreLogic implements ChatStore{
 	}
 	//채팅방 삭제
 	@Override
-	public int deleteChatRoom(SqlSession sqlSession, ChatRoom chatRoom) {
-		int result = sqlSession.delete("ChatMapper.deleteChatRoom", chatRoom);
+	public int deleteChatRoom(SqlSession sqlSession, int chatroomNo) {
+		int result = sqlSession.delete("ChatMapper.deleteChatRoom", chatroomNo);
 		return result;
 	}
 

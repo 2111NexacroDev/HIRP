@@ -37,9 +37,11 @@ public interface ChatStore {
 	public int insertChatFile(SqlSession sqlSession, ChatFile chatfile);
 	
 	//채팅방별 첨부파일 리스트 가져오기
-	public List<ChatFile> selectChatFileByChattingRoomNo(SqlSession sqlSession, int chatroomNo);
+//	public List<ChatFile> selectChatFileByChattingRoomNo(SqlSession sqlSession, int chatroomNo);
+	public List<ChatList> selectChatFileListByChatRoomNo(SqlSession sqlSession, int chatroomNo);
 	//내가 받은 첨부파일 리스트 가져오기
-	public List<ChatFile> selectChatFileById(SqlSession sqlSession, String emplId);
+//	public List<ChatFile> selectChatFileById(SqlSession sqlSession, String emplId);
+	public List<ChatList> selectChatFileListById(SqlSession sqlSession, String emplId);
 	//채팅방 정보 변경 (이름 변경)
 	public int updateChatRoomInfo(SqlSession sqlSession, ChatRoom chatRoom);
 	//채팅 대화상대 추가
@@ -47,6 +49,6 @@ public interface ChatStore {
 	//채팅방 나가기 (채팅 대화 상대에서 삭제)
 	public int deleteMyIdChatRoomJoin(SqlSession sqlSession, ChatRoomJoin chatRoomJoin);
 	//채팅방 삭제
-	public int deleteChatRoom(SqlSession sqlSession, ChatRoom chatRoom);
+	public int deleteChatRoom(SqlSession sqlSession, int chatroomNo);
 
 }

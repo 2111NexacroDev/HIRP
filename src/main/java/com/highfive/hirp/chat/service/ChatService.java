@@ -37,10 +37,13 @@ public interface ChatService {
 	public int insertChatFile(ChatFile chatfile);
 	
 	//채팅방별 첨부파일 리스트 가져오기
-	//public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo);
-	public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo);
+//	public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo);
+	public List<ChatList> selectChatFileListByChatRoomNo(int chatroomNo);
+	//첨부파일 + 채팅 = chatList로 가져오는데 대신 첨부파일 있는 것만 가져오면 될 듯
 	//내가 받은 첨부파일 리스트 가져오기
-	public List<ChatFile> selectChatFileById(String emplId);
+//	public List<ChatFile> selectChatFileById(String emplId);
+	public List<ChatList> selectChatFileListById(String emplId);
+	
 	//채팅방 정보 변경 (이름 변경)
 	public int updateChatRoomInfo(ChatRoom chatRoom);
 	//채팅 대화상대 추가
@@ -49,7 +52,5 @@ public interface ChatService {
 	public int deleteMyIdChatRoomJoin(ChatRoomJoin chatRoomJoin);
 	//chatroomjoin에 채팅방 번호랑 현재 자신 아이디 넘겨주기
 	//채팅방 삭제
-	public int deleteChatRoom(ChatRoom chatRoom);
-	//chatRoom 에다가 채팅방 번호랑 채팅방 생성자 아이디 담아서 두 개 일치하는 거 지우기
-
+	public int deleteChatRoom(int chatroomNo);
 }
