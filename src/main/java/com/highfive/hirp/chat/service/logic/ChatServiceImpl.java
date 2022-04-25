@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.chat.domain.ChatFile;
+import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
@@ -50,17 +51,11 @@ public class ChatServiceImpl implements ChatService{
 	}
 	
 	//채팅방 목록 가져오기
-	//내가 참여한 채팅방 번호 목록 가져오기
+	//내가 참여한 채팅방 목록 가져오기
 	@Override
-	public List<Integer> selectMyChattingRoomNum(String emplId) {
-		List<Integer> roomNumList = cStore.selectMyChattingRoomNum(sqlSession, emplId);
-		return roomNumList;
-	}
-	//채팅방 번호로 채팅방 목록 가져오기
-	@Override
-	public List<ChatRoom> selectMyChattingRoomList(int chatroomNo) {
-		List<ChatRoom> chatRoomList = cStore.selectMyChattingRoomList(sqlSession, chatroomNo);
-		return chatRoomList;
+	public List<ChatRoom> selectMyChattingRoom(String emplId) {
+		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, emplId);
+		return roomList;
 	}
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
@@ -73,6 +68,12 @@ public class ChatServiceImpl implements ChatService{
 	public ChatFile selectChatFileByMsgNo(int msgNo) {
 		ChatFile chatFile = cStore.selectChatFileByMsgNo(sqlSession, msgNo);
 		return chatFile;
+	}
+	//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+	@Override
+	public List<ChatList> selectChatListByRoomNo(int chatroomNo) {
+		List<ChatList> chatList = cStore.selectChatListByRoomNo(sqlSession, chatroomNo);
+		return chatList;
 	}
 
 	//채팅 추가
@@ -124,4 +125,6 @@ public class ChatServiceImpl implements ChatService{
 		int result = cStore.deleteChatRoom(sqlSession, chatRoom);
 		return result;
 	}
+
+
 }

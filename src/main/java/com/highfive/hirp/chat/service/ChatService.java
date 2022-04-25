@@ -3,6 +3,7 @@ package com.highfive.hirp.chat.service;
 import java.util.List;
 
 import com.highfive.hirp.chat.domain.ChatFile;
+import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
@@ -20,10 +21,11 @@ public interface ChatService {
 	public int insertChatRoomJoin(List<String> emplIdList);
 	
 	//채팅방 목록 가져오기
-	//내가 참여한 채팅방 번호 목록 가져오기
-	public List<Integer> selectMyChattingRoomNum(String emplId);
-	//채팅방 번호로 채팅방 목록 가져오기
-	public List<ChatRoom> selectMyChattingRoomList(int chatroomNo);
+	//내가 참여한 채팅방 목록 가져오기
+	public List<ChatRoom> selectMyChattingRoom(String emplId);
+	// 채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+	public List<ChatList> selectChatListByRoomNo(int chatroomNo);
+	//일단 얘네 두개 남겨놓겠음
 	//채팅방 별로 채팅 내용 가져오기
 	public List<Message> selectMessageByRoomNo(int chatroomNo);
 	//보내진 첨부파일 가져오기
@@ -35,6 +37,7 @@ public interface ChatService {
 	public int insertChatFile(ChatFile chatfile);
 	
 	//채팅방별 첨부파일 리스트 가져오기
+	//public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo);
 	public List<ChatFile> selectChatFileByChattingRoomNo(int chatroomNo);
 	//내가 받은 첨부파일 리스트 가져오기
 	public List<ChatFile> selectChatFileById(String emplId);

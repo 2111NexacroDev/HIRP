@@ -35,12 +35,20 @@ public class ChatController {
 	//채팅방 추가 페이지
 	public ModelAndView insertChattingRoomPage(ModelAndView mv
 			,@ModelAttribute Employee employee) {
+		//직원 리스트 출력
+		//직원 이름으로 검색
+		//위에 컨트롤러 사용하면 될 듯
+		//채팅방 추가 페이지 조회
+		
 		return mv;
 	}
 	//채팅방 추가
 	public ModelAndView insertChattingRoom(ModelAndView mv
 			,@ModelAttribute ChatRoom chatroom
 			,@RequestParam("joinList") List<String> joinList) {
+		//채팅방 정보 추가
+		//채팅방 참가자 리스트 추가
+		
 		return mv;
 	}
 	
@@ -51,12 +59,21 @@ public class ChatController {
 	
 	//채팅방 목록 페이지
 	public ModelAndView chattingRoomList(ModelAndView mv) {
+		//내가 참여한 채팅방 목록 가져오기
+		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+		
+		//마지막 채팅 내용 표시????
+		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
+		
 		return mv;
 	}
 	//채팅방 내부 페이지
 	public ModelAndView chattingRoomPage(ModelAndView mv
-			,@RequestParam("chatroomNo") int chatroomNo) {
-		//채팅방 정보, 채팅 내역 다 가져오기
+			,@RequestParam("chatRoom") ChatRoom chatRoom) {
+		//채팅방 목록 페이지에서 chatroom 정보 가져오기
+		
+		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+		//조인해서 같이 가져와야 할 듯 (chatList 도메인 만들었음)
 		return mv;
 	}
 	//채팅 전송 (첨부파일 가능)
@@ -64,6 +81,8 @@ public class ChatController {
 			,@ModelAttribute Message Message
 			,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			,HttpServletRequest request) {
+		//채팅 추가
+		//첨부파일 추가
 		return mv;
 	}
 	//첨부파일 저장 메소드는 common에서 가져다 쓰기
@@ -78,8 +97,9 @@ public class ChatController {
 			,@RequestParam("chatroomNo") int chatroomNo) {
 		return mv;
 	}
-	//내가 받은 첨부파일 모두 보기 //아이디 세션에서 가져오면 될 듯
+	//내가 받은 첨부파일 모두 보기
 	public ModelAndView allMyFile(ModelAndView mv) {
+		 //아이디 세션에서 가져오기
 		return mv;
 	}
 	//채팅방 이름 변경
