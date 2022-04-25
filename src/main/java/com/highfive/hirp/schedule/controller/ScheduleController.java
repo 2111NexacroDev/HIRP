@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,8 +22,10 @@ public class ScheduleController {
 	private ScheduleService sService;
 	
 	// 일정 조회
+	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET)
 	public ModelAndView scheduleListView(ModelAndView mv) {
-		List<Schedule> sList = sService.printAllSchedule();
+		//List<Schedule> sList = sService.printAllSchedule();
+		mv.setViewName("schedule/scheduleList");
 		return mv;
 	}
 	

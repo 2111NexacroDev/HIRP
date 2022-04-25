@@ -149,3 +149,39 @@ section[class^="todo--"] li {
 }
 
 /* 개인업무관리 끝 */
+
+/* 일정 관리 */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+	background-color: transparent;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+	margin: 1.5em 0 0;
+	padding: 0 20px;
+}
+
+.fc-header-toolbar>div:nth-child(2)>div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fc .fc-button-group button {
+	background-color: transparent;
+	color: #333;
+	border: none;
+	border-bottom: 2px solid transparent;
+	border-radius: 0 !important;
+	outline: none;
+}
+
+.fc .fc-button-group button.fc-button-active,
+.fc .fc-button-group button:hover {
+	background-color: transparent !important;
+	font-weight: 700;
+	color: #000 !important;
+	border-color: #000;
+}
+
+/* 일정 관리 끝 */

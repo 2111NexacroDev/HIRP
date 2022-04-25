@@ -15,7 +15,16 @@
             </h1>
             <a class="btn--function" href="#">등록 버튼</a>
 
-            snb 메뉴디자인
+            <ul>
+            	<li>
+            		<a href="">2depth명</a>
+            		<ul>
+            			<li><a href="#">메뉴1</a></li>
+            			<li><a href="#">메뉴2</a></li>
+            			<li><a href="#">메뉴3</a></li>
+            		</ul>
+            	</li>
+            </ul>
         </aside>
 
         <article id="sub" class="">
@@ -33,9 +42,13 @@
             -->
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
-            <h1 class="basic-border-bottom">
-                가이드페이지
-            </h1>
+            <!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
+            <form class="form--srch" action="">
+                <input type="text" name="" placeholder="통합검색">
+                <button type="submit"></button>
+            </form>
+
+            <h1 class="basic-border-bottom">가이드페이지</h1>
 
             <div id="guide" class="subConts">
                 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
