@@ -9,6 +9,7 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
+import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
@@ -19,11 +20,11 @@ public interface SurveyStore {
 
 	//설문조사 리스트 조회
 	//전체 리스트 조회(최신)
-	public List<Survey> selectAllSurvey(SqlSession sqlSession);
+	public List<SurveyMyStatus> selectAllSurvey(SqlSession sqlSession);
 	//진행중인 리스트 조회
-	public List<Survey> selectProceedSurvey(SqlSession sqlSession);
+	public List<SurveyMyStatus> selectProceedSurvey(SqlSession sqlSession);
 	//마감된 설문리스트 조회
-	public List<Survey> selectClosedSurvey(SqlSession sqlSession);
+	public List<SurveyMyStatus> selectClosedSurvey(SqlSession sqlSession);
 	//내가 작성한 설문 리스트 조회
 	public List<Survey> selectWroteSurvey(SqlSession sqlSession);
 	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회

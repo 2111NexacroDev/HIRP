@@ -31,16 +31,27 @@ public class SurveyController {
 	//설문조사 메인페이지 (최신 리스트 조회)
 	public ModelAndView surveyMain(ModelAndView mv) {
 		//내가 대상자인 것 중 진행중이면서 응답하지 않은 설문 리스트
+		
 		//최근 생성된 설문 리스트
 		//설문 리스트에 대한 나의 참여 여부
+		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		return mv;
 	}
 	
 	//진행중인 설문 페이지 (리스트 조회)
-	public ModelAndView ProceedSurvey(ModelAndView mv) {
+	public ModelAndView proceedSurvey(ModelAndView mv) {
 		//진행중인 설문 리스트
 		//진행중인 설문 리스트에 대한 나의 참여 여부
+		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
+		
+		//응답자 리스트 보기는 버튼 누르면 아래 컨트롤러 실행되도록 해야겠다
+		return mv;
+	}
+	//응답자 리스트 보기
+	public ModelAndView proceedSurveySubList(ModelAndView mv
+			, @RequestParam("surveyNo") int surveyNo) {
 		//응답자 리스트 보기 (응답여부까지) -> 팝업창
+		
 		return mv;
 	}
 	
@@ -48,6 +59,8 @@ public class SurveyController {
 	public ModelAndView closedSurvey(ModelAndView mv) {
 		//마감된 설문 리스트
 		//마감된 설문 리스트에 대한 나의 참여 여부
+		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
+		
 		return mv;
 	}
 
@@ -165,6 +178,7 @@ public class SurveyController {
 		//번호로 설문조사 정보 가져오기
 		//설문조사에 포함된 설문문항 가져오기
 		//설문조사 보기 가져오기
+		//설문조사 번호, 내 아이디로 나의 응답 가져오기
 		
 		//응답 수정 페이지
 		//응답 제출 페이지

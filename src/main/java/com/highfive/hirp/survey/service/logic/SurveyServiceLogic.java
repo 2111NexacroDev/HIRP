@@ -11,6 +11,7 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
+import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
@@ -30,20 +31,20 @@ public class SurveyServiceLogic implements SurveyService{
 	//리스트 조회
 	//전체 설문조사 리스트 조회 (최신 설문)
 	@Override
-	public List<Survey> selectAllSurvey() {
-		List<Survey> allSurveyList = sStore.selectAllSurvey(sqlSession);
+	public List<SurveyMyStatus> selectAllSurvey() {
+		List<SurveyMyStatus> allSurveyList = sStore.selectAllSurvey(sqlSession);
 		return allSurveyList;
 	}
 	//진행중인 설문조사 리스트 조회
 	@Override
-	public List<Survey> selectProceedSurvey() {
-		List<Survey> proceedSurveyList = sStore.selectProceedSurvey(sqlSession);
+	public List<SurveyMyStatus> selectProceedSurvey() {
+		List<SurveyMyStatus> proceedSurveyList = sStore.selectProceedSurvey(sqlSession);
 		return proceedSurveyList;
 	}
 	//마감된 설문조사 리스트 조회
 	@Override
-	public List<Survey> selectClosedSurvey() {
-		List<Survey> closedSurveyList = sStore.selectClosedSurvey(sqlSession);
+	public List<SurveyMyStatus> selectClosedSurvey() {
+		List<SurveyMyStatus> closedSurveyList = sStore.selectClosedSurvey(sqlSession);
 		return closedSurveyList;
 	}
 	//내가 작성한 설문조사 리스트 조회

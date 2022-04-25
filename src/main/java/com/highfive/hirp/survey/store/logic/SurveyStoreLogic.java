@@ -11,6 +11,7 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
+import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
@@ -24,20 +25,20 @@ public class SurveyStoreLogic implements SurveyStore{
 	//설문조사 리스트 조회
 	//전체 리스트 조회(최신)
 	@Override
-	public List<Survey> selectAllSurvey(SqlSession sqlSession) {
-		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectAllSurvey");
+	public List<SurveyMyStatus> selectAllSurvey(SqlSession sqlSession) {
+		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectAllSurvey");
 		return surveyList;
 	}
 	//진행중인 리스트 조회
 	@Override
-	public List<Survey> selectProceedSurvey(SqlSession sqlSession) {
-		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectProceedSurvey");
+	public List<SurveyMyStatus> selectProceedSurvey(SqlSession sqlSession) {
+		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectProceedSurvey");
 		return surveyList;
 	}
 	//마감된 설문리스트 조회
 	@Override
-	public List<Survey> selectClosedSurvey(SqlSession sqlSession) {
-		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectClosedSurvey");
+	public List<SurveyMyStatus> selectClosedSurvey(SqlSession sqlSession) {
+		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectClosedSurvey");
 		return surveyList;
 	}
 	//내가 작성한 설문 리스트 조회
