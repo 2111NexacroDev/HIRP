@@ -3,7 +3,21 @@
   <Form id="deptManage" width="1280" height="720" titletext="New Form">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
-        <Grid id="Grid00" taborder="0" left="5" top="200" width="200" bottom="10"/>
+        <Grid id="Grid00" taborder="0" left="5" top="200" width="200" bottom="10" binddataset="ds_dept" autofittype="col" treeinitstatus="expand,all" treeusecheckbox="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="122"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:DEPT_NAME" displaytype="treeitemcontrol" edittype="tree" font="normal 12px/normal &quot;Noto Sans KR&quot;" treelevel="bind:DEPT_LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
         <Static id="static_dept01" taborder="1" text="부서 관리" left="10" top="5" width="166" height="41"/>
         <Static id="static_dept02" taborder="2" text="조직도" left="10" top="46" width="166" height="41"/>
         <Static id="static_dept03" taborder="3" text="부서" left="10" top="111" width="50" height="30"/>
@@ -13,21 +27,21 @@
         <Button id="Button00_00_00" taborder="7" text="검색" left="170" top="155" width="30" height="30"/>
         <Static id="static_deptName" taborder="8" text="부서이름" left="270" top="100" width="157" height="37" font="normal 15pt/normal &quot;Arial&quot;"/>
         <Static id="static_deptInfo" taborder="9" text="부서 정보" left="270" top="160" width="157" height="30" border="0px none,0px none,1px black"/>
-        <Static id="Static00_00_00" taborder="10" text="부서 색상" left="270" top="335" width="157" height="30"/>
-        <Static id="Static00_00_00_00" taborder="11" text="부서장" left="270" top="380" width="157" height="30"/>
-        <Static id="Static00_00_00_01" taborder="12" text="생성일" left="270" top="425" width="157" height="30"/>
-        <Static id="Static00_00_00_02" taborder="13" text="상위 부서" left="270" top="470" width="157" height="30"/>
-        <Static id="Static00_00_00_03" taborder="14" text="하위 부서" left="270" top="515" width="157" height="30"/>
-        <Static id="Static00_00_01" taborder="15" text="부서메일아이디" left="270" top="200" width="157" height="30"/>
-        <Static id="Static00_00_01_00" taborder="16" text="부서코드" left="270" top="245" width="157" height="30"/>
-        <Static id="Static00_00_01_00_00" taborder="17" text="부서약어" left="270" top="290" width="157" height="30"/>
+        <Static id="st_deptcolor" taborder="10" text="부서 색상" left="270" top="335" width="157" height="30"/>
+        <Static id="st_deptmaster" taborder="11" text="부서장" left="270" top="380" width="157" height="30"/>
+        <Static id="st_depthiredate" taborder="12" text="생성일" left="270" top="425" width="157" height="30"/>
+        <Static id="st_upperdept" taborder="13" text="상위 부서" left="270" top="470" width="157" height="30"/>
+        <Static id="st_deptlowerdept" taborder="14" text="하위 부서" left="270" top="515" width="157" height="30"/>
+        <Static id="st_deptname" taborder="15" text="부서명" left="270" top="200" width="157" height="30"/>
+        <Static id="st_deptcode" taborder="16" text="부서코드" left="270" top="245" width="157" height="30"/>
+        <Static id="st_deptsecond" taborder="17" text="부서약어" left="270" top="290" width="157" height="30"/>
         <Button id="btn_edit" taborder="18" text="수정" left="550" top="200" width="30" height="30"/>
-        <Static id="Static00_00_00_04" taborder="19" text="부서 색상" left="393" top="335" width="157" height="30"/>
-        <Static id="Static00_00_00_00_00" taborder="20" text="부서장" left="393" top="380" width="157" height="30"/>
-        <Static id="Static00_00_00_01_00" taborder="21" text="생성일" left="393" top="425" width="157" height="30"/>
-        <Static id="Static00_00_01_01" taborder="22" text="부서메일아이디" left="393" top="200" width="157" height="30"/>
-        <Static id="Static00_00_01_00_01" taborder="23" text="부서코드" left="393" top="245" width="157" height="30"/>
-        <Static id="Static00_00_01_00_00_00" taborder="24" text="부서약어" left="393" top="290" width="157" height="30"/>
+        <Static id="st_deptcolor2" taborder="19" text="부서 색상" left="393" top="335" width="157" height="30"/>
+        <Static id="st_deptmaster2" taborder="20" text="부서장" left="393" top="380" width="157" height="30"/>
+        <Static id="st_depthiredate2" taborder="21" text="생성일" left="393" top="425" width="157" height="30"/>
+        <Static id="st_deptname2" taborder="22" left="393" top="200" width="157" height="30" text="부서명"/>
+        <Static id="st_deptcode2" taborder="23" text="부서코드" left="393" top="245" width="157" height="30"/>
+        <Static id="st_deptsecond2" taborder="24" text="부서약어" left="393" top="290" width="157" height="30"/>
         <Button id="btn_edit00" taborder="25" text="수정" left="550" top="245" width="30" height="30"/>
         <Button id="btn_edit00_00" taborder="26" text="수정" left="550" top="290" width="30" height="30"/>
         <Button id="btn_edit00_01" taborder="27" text="수정" left="550" top="335" width="30" height="30"/>
@@ -36,17 +50,205 @@
         <Div id="Div01" taborder="30" left="222" top="5" width="2" background="#b7b7b7" bottom="5"/>
         <Div id="Div02" taborder="31" left="10" top="190" width="190" height="2" background="#b7b7b7"/>
         <Button id="Button00" taborder="32" text="상위 부서명" left="393" top="475" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
-        <Button id="Button00_00" taborder="33" text="상위 부서명" left="393" top="520" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
+        <Button id="Button00_00" taborder="33" text="하위부서명" left="393" top="520" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
+        <Button id="btn_submit" taborder="34" text="저장" left="420" top="615" width="100" height="30" letterSpacing="0px"/>
+        <Button id="btn_cancel" taborder="35" text="취소" left="540" top="615" width="100" height="30" letterSpacing="0px"/>
+        <Button id="btn_colorchart" taborder="36" left="610" top="333" width="15" height="15" background="#FFD8D8"/>
+        <Button id="btn_colorchart00" taborder="37" left="624" top="333" width="15" height="15" background="#FAE0D4"/>
+        <Button id="btn_colorchart01" taborder="38" left="638" top="333" width="15" height="15" background="#FAECC5"/>
+        <Button id="btn_colorchart02" taborder="39" left="652" top="333" width="15" height="15" background="#FAF4C0"/>
+        <Button id="btn_colorchart03" taborder="40" left="666" top="333" width="15" height="15" background="#E4F7BA"/>
+        <Button id="btn_colorchart04" taborder="41" left="680" top="333" width="15" height="15" background="#CEFBC9"/>
+        <Button id="btn_colorchart05" taborder="42" left="694" top="333" width="15" height="15" background="#D4F4FA"/>
+        <Button id="btn_colorchart06" taborder="43" left="708" top="333" width="15" height="15" background="#D9E5FF"/>
+        <Button id="btn_colorchart07" taborder="44" left="722" top="333" width="15" height="15" background="#DAD9FF"/>
+        <Button id="btn_colorchart08" taborder="45" left="736" top="333" width="15" height="15" background="#E8D9FF"/>
+        <Button id="btn_colorchart09" taborder="46" left="750" top="333" width="15" height="15" background="#FFD9FA"/>
+        <Button id="btn_colorchart10" taborder="47" left="764" top="333" width="15" height="15" background="#FFD9EC"/>
+        <Button id="btn_colorchart11" taborder="48" left="610" top="347" width="15" height="15" background="#FFA7A7"/>
+        <Button id="btn_colorchart00_00" taborder="49" left="624" top="347" width="15" height="15" background="#FFC19E"/>
+        <Button id="btn_colorchart01_00" taborder="50" left="638" top="347" width="15" height="15" background="#FFE08C"/>
+        <Button id="btn_colorchart02_00" taborder="51" left="652" top="347" width="15" height="15" background="#FAED7D"/>
+        <Button id="btn_colorchart03_00" taborder="52" left="666" top="347" width="15" height="15" background="#CEF279"/>
+        <Button id="btn_colorchart04_00" taborder="53" left="680" top="347" width="15" height="15" background="#B7F0B1"/>
+        <Button id="btn_colorchart05_00" taborder="54" left="694" top="347" width="15" height="15" background="#B2EBF4"/>
+        <Button id="btn_colorchart06_00" taborder="55" left="708" top="347" width="15" height="15" background="#B2CCFF"/>
+        <Button id="btn_colorchart07_00" taborder="56" left="722" top="347" width="15" height="15" background="#B5B2FF"/>
+        <Button id="btn_colorchart08_00" taborder="57" left="736" top="347" width="15" height="15" background="#D1B2FF"/>
+        <Button id="btn_colorchart09_00" taborder="58" left="750" top="347" width="15" height="15" background="#FFB2F5"/>
+        <Button id="btn_colorchart10_00" taborder="59" left="764" top="347" width="15" height="15" background="#FFB2D9"/>
+        <Edit id="edt_deptName" taborder="60" left="603" top="200" width="133" height="30"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
-this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	
-};
-]]></Script>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
     <Objects>
-      <Dataset id="ds_dept"/>
+      <Dataset id="ds_dept">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="20"/>
+          <Column id="DEPT_NAME" type="STRING" size="30"/>
+          <Column id="DEPT_SECONDNAME" type="STRING" size="10"/>
+          <Column id="DEPT_COLOR" type="STRING" size="50"/>
+          <Column id="DEPT_MASTER" type="STRING" size="20"/>
+          <Column id="DEPT_HIREDATE" type="DATE" size="20"/>
+          <Column id="DEPT_UPPERCODE" type="STRING" size="20"/>
+          <Column id="DEPT_LEVEL" type="INT" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_CODE">10</Col>
+            <Col id="DEPT_NAME">하이그룹</Col>
+            <Col id="DEPT_SECONDNAME">HIGRP</Col>
+            <Col id="DEPT_COLOR">#FFD8D8</Col>
+            <Col id="DEPT_MASTER">ID1</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">NULL</Col>
+            <Col id="DEPT_LEVEL">0</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1010</Col>
+            <Col id="DEPT_NAME">경영관리팀</Col>
+            <Col id="DEPT_SECONDNAME">BM</Col>
+            <Col id="DEPT_COLOR">#FAE0D4</Col>
+            <Col id="DEPT_MASTER">ID2</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1020</Col>
+            <Col id="DEPT_NAME">영업팀</Col>
+            <Col id="DEPT_SECONDNAME">SALES</Col>
+            <Col id="DEPT_COLOR">#FAECC5</Col>
+            <Col id="DEPT_MASTER">ID3</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">102010</Col>
+            <Col id="DEPT_NAME">국내영업팀</Col>
+            <Col id="DEPT_SECONDNAME">DS</Col>
+            <Col id="DEPT_COLOR">#FFFED7</Col>
+            <Col id="DEPT_MASTER">ID4</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1020</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">102020</Col>
+            <Col id="DEPT_NAME">해외영업팀</Col>
+            <Col id="DEPT_SECONDNAME">OS</Col>
+            <Col id="DEPT_COLOR">#FFFED7</Col>
+            <Col id="DEPT_MASTER">ID5</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1020</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">102030</Col>
+            <Col id="DEPT_NAME">영업관리팀</Col>
+            <Col id="DEPT_SECONDNAME">SM</Col>
+            <Col id="DEPT_COLOR">#FFFED7</Col>
+            <Col id="DEPT_MASTER">ID6</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1020</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1030</Col>
+            <Col id="DEPT_NAME">상품기획팀</Col>
+            <Col id="DEPT_SECONDNAME">SOP</Col>
+            <Col id="DEPT_COLOR">#FAF4C0</Col>
+            <Col id="DEPT_MASTER">ID7</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1040</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+            <Col id="DEPT_NAME">구매팀</Col>
+            <Col id="DEPT_SECONDNAME">PCD</Col>
+            <Col id="DEPT_COLOR">#E4F7BA</Col>
+            <Col id="DEPT_MASTER">ID8</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1050</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+            <Col id="DEPT_NAME">물류팀</Col>
+            <Col id="DEPT_SECONDNAME">DTB</Col>
+            <Col id="DEPT_COLOR">#CEFBC9</Col>
+            <Col id="DEPT_MASTER">ID9</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1060</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+            <Col id="DEPT_NAME">품질팀</Col>
+            <Col id="DEPT_SECONDNAME">QA</Col>
+            <Col id="DEPT_COLOR">#D4F4FA</Col>
+            <Col id="DEPT_MASTER">ID10</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1070</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+            <Col id="DEPT_NAME">생산팀</Col>
+            <Col id="DEPT_SECONDNAME">PROD</Col>
+            <Col id="DEPT_COLOR">#D9E5FF</Col>
+            <Col id="DEPT_MASTER">ID11</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">107010</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+            <Col id="DEPT_NAME">생산공정팀</Col>
+            <Col id="DEPT_SECONDNAME">PRODP</Col>
+            <Col id="DEPT_COLOR">#EBF7FF</Col>
+            <Col id="DEPT_MASTER">ID12</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1070</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">107020</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+            <Col id="DEPT_NAME">생산관리팀</Col>
+            <Col id="DEPT_SECONDNAME">PRODM</Col>
+            <Col id="DEPT_COLOR">#EBF7FF</Col>
+            <Col id="DEPT_MASTER">ID13</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1070</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">107030</Col>
+            <Col id="DEPT_LEVEL">2</Col>
+            <Col id="DEPT_NAME">생산외주팀</Col>
+            <Col id="DEPT_SECONDNAME">PRODOS</Col>
+            <Col id="DEPT_COLOR">#EBF7FF</Col>
+            <Col id="DEPT_MASTER">ID14</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">1070</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_CODE">1080</Col>
+            <Col id="DEPT_LEVEL">1</Col>
+            <Col id="DEPT_NAME">제조팀</Col>
+            <Col id="DEPT_SECONDNAME">MFT</Col>
+            <Col id="DEPT_COLOR">#DAD9FF</Col>
+            <Col id="DEPT_MASTER">ID15</Col>
+            <Col id="DEPT_HIREDATE">20220426</Col>
+            <Col id="DEPT_UPPERCODE">10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
     </Objects>
+    <Bind>
+      <BindItem id="item0" compid="st_deptname2" propid="text" datasetid="ds_dept" columnid="DEPT_SECONDNAME"/>
+    </Bind>
   </Form>
 </FDL>
