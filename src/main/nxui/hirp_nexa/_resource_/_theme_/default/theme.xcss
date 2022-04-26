@@ -4,7 +4,6 @@ nexacro17 Application Theme
 default.xtheme
 last-modified : 2021-10-26
 */
-
 /* Frame/Form */
 .Form
 {
@@ -349,21 +348,26 @@ last-modified : 2021-10-26
 	color : #666666;
 	-nexa-border : 1px solid #dbdee2;
 	-nexa-padding : 4px 4px 4px 4px;
+	opacity: 0.8;
+	cursor: pointer;
 }
 
 .Grid .body .row .cell[status=mouseover]
 {
-	background : #f6f6f6;
+	background : #333333;
+	opacity: 1;
 }
 
 .Grid .body .row .cell[userstatus=selected]
 {
-	background : #f2f9ff;
+	background : #333333;
+	opacity: 1;
 }
 
 .Grid .body .row .cell[status=disabled]
 {
 	color : #999999;
+	opacity: 0.8;
 }
 
 /* subcell (Same as cell) */

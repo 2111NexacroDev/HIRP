@@ -1,0 +1,82 @@
+﻿{
+  "name": "Framework",
+  "version": "17.1.3.900",
+  "description": "nexacro platform 17 Unified Framework Library",
+  "license": "",
+  "scripts": [
+    "SystemBase.js",
+    "SystemBase_HTML5.js",
+    "SystemBase_Runtime.js",
+    "BasicObjs.js",
+    "ErrorDefine.js",
+    "Platform_HTML5.js",
+    "Platform_Runtime.js",
+    "Platform.js",
+    "CssObjs.js",
+    "Device.js",
+    "Device_Android.js",
+    "Device_Windows.js",
+    "Device_iOS.js"
+  ],
+  "scriptsfilter": [
+    {
+      "name": "SystemBase_HTML5.js",
+      "target": "WRE,iOS_NRE"
+    },
+    {
+      "name": "SystemBase_Runtime.js",
+      "target": "NRE"
+    },
+    {
+      "name": "Platform_HTML5.js",
+      "target": "WRE,iOS_NRE"
+    },
+    {
+      "name": "Platform_Runtime.js",
+      "target": "NRE"
+    },
+    {
+      "name": "Device_Android.js",
+      "target": "NRE"
+    },
+    {
+      "name": "Device_Windows.js",
+      "target": "NRE"
+    },
+    {
+      "name": "Device_iOS.js",
+      "target": "NRE,iOS_NRE"
+    }
+  ],
+  "objInfo": [
+    "metainfo/nexacroAPI.info",
+    "metainfo/EnumInfo.info",
+    "metainfo/UnitInfo.info",
+    "metainfo/RefreshInfo.info",
+    "metainfo/Environment.info",
+    "metainfo/Screen.info",
+    "metainfo/Application.info",
+    "metainfo/Tray.info",
+    "metainfo/TrayPopupMenu.info",
+    "metainfo/Point.info",
+    "metainfo/Rect.info",
+    "metainfo/Size.info",
+    "metainfo/EventObject.info",
+    "metainfo/UserEvent.info",
+    "metainfo/Crypto.info",
+    "metainfo/System.info",
+    "metainfo/Decimal.info",
+    "metainfo/Image.info",
+    "metainfo/ErrorEventInfo.info",
+    "metainfo/EventInfo.info",
+    "metainfo/ExitEventInfo.info",
+    "metainfo/NotificationEventInfo.info",
+    "metainfo/TimerEventInfo.info",
+    "metainfo/DuplicateExecutionEventInfo.info",
+    "metainfo/Object.info",
+    "metainfo/EventSinkObject.info",
+    "metainfo/ProtocolAdaptor.info",
+    "metainfo/DeviceAdaptor.info"
+  ]
+}
+
