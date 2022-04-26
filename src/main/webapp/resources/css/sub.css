@@ -151,37 +151,102 @@ section[class^="todo--"] li {
 /* 개인업무관리 끝 */
 
 /* 일정 관리 */
-.fc .fc-prev-button,
-.fc .fc-next-button {
-	background-color: transparent;
+.fc * {
+    text-align: left;
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-	margin: 1.5em 0 0;
-	padding: 0 20px;
+    margin: 1.5em 0 0;
+    padding: 0 20px;
+    align-items: flex-end;
 }
 
 .fc-header-toolbar>div:nth-child(2)>div {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.fc .fc-button .fc-icon {
+    color: #999;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.fc .fc-button-primary:hover {
+    background: none !important;
+}
+
+.fc .fc-scrollgrid-liquid {
+    border-left: none;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+    padding: 8px 4px;
+}
+
+.fc .fc-daygrid-day-top {
+    flex-direction: row;
 }
 
 .fc .fc-button-group button {
-	background-color: transparent;
-	color: #333;
-	border: none;
-	border-bottom: 2px solid transparent;
-	border-radius: 0 !important;
-	outline: none;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    outline: none;
 }
 
 .fc .fc-button-group button.fc-button-active,
 .fc .fc-button-group button:hover {
-	background-color: transparent !important;
-	font-weight: 700;
-	color: #000 !important;
-	border-color: #000;
+    background-color: transparent !important;
+    font-weight: 700;
+    color: #000 !important;
+    border-color: #000;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.fc .fc-toolbar-title {
+    margin: 0 16px;
+}
+
+.fc .fc-today-button {
+    margin-left: 10px;
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
+}
+
+.fc .fc-today-button,
+.fc .fc-today-button:hover,
+.fc .fc-today-button:disabled,
+.fc .fc-today-button:disabled:hover {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    border-radius: 0;
+    opacity: 1;
 }
 
 /* 일정 관리 끝 */

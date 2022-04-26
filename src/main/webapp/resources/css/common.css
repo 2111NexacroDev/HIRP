@@ -523,15 +523,15 @@ img {
 }
 
 #snb ul {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 #snb ul>li {
-	margin-top: 10px;
-} 
+    margin-top: 10px;
+}
 
 #snb ul>li>ul {
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 .btn--function {
@@ -577,19 +577,17 @@ img {
 .btn--alarm {
     background: url(../images/icons/ic_snb.png) no-repeat;
     background-position: -43px -43px;
-    border-radius: 4px;
 }
 
 .btn--chat {
     background: url(../images/icons/btn_chat.png) no-repeat;
     background-position: center center;
-    border-radius: 4px;
 }
 
 .btn--star {
     background: url(../images/icons/btn_bookmark.png) no-repeat;
     background-position: center center;
-    border-radius: 4px;
+    mragin-left: 8px;
 }
 
 
@@ -616,6 +614,7 @@ img {
 #nav--right button:not(:last-of-type) {
     width: 40px;
     height: 40px;
+    border-radius: 4px;
 }
 
 #nav--right button:last-of-type {
