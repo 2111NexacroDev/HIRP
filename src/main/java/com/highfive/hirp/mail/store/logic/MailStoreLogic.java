@@ -13,56 +13,140 @@ import com.highfive.hirp.mail.store.MailStore;
 public class MailStoreLogic implements MailStore{
 
 	@Override
-	public List<Mail> selectAllMail(SqlSession sqlSession) {
-		List<Mail> mList = sqlSession.selectList("MailMapper.selectAllMail");
+	public int sendMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.sendMail", mail);
+		return result;
+	}
+
+	@Override
+	public List<Mail> selectReceivedMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectReceivedMail");
 		return mList;
 	}
 
 	@Override
-	public int insertMail(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.insert("MailMapper.insertMail", mail);
+	public int selectOneReceivedMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneReceivedMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int deleteMail(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.delete("MailMapper.deleteMail", mail);
+	public List<Mail> selectSentMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectSentMail");
+		return mList;
+	}
+
+	@Override
+	public int selectOneSentMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneSentMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int insertReplyMail(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.insert("MailMapper.insertReplyMail", mail);
+	public List<Mail> selectTemporaryMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectTemporaryMail");
+		return mList;
+	}
+
+	@Override
+	public int selectOneTemporaryMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneTemporaryMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int insertrelayMail(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.insert("MailMapper.insertRelayMail", mail);
+	public List<Mail> selectMyMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectMyMail");
+		return mList;
+	}
+
+	@Override
+	public int selectOneMyMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneMyMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int insertMailFile(SqlSession sqlSession, MailFile mailFile) {
-		int result = sqlSession.insert("MailMapper.insertMailFile", mailFile);
+	public List<Mail> selectImportantMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectImportantMail");
+		return mList;
+	}
+
+	@Override
+	public int selectOneImportantMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneImportantMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int insertAddress(SqlSession sqlSession, Address address) {
-		int result = sqlSession.insert("MailMapper.insertAddress", address);
+	public List<Mail> selectWasteBasketMail(SqlSession sqlSession) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectWasteBasketMail");
+		return mList;
+	}
+
+	@Override
+	public int selectOneWasteBasketMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.selectOne("MailMapper.selectOneWasteBasketMail", mailNo);
 		return result;
 	}
 
 	@Override
-	public int updateAddress(SqlSession sqlSession, Address address) {
-		int result = sqlSession.insert("MailMapper.updateAddress", address);
+	public int doSendBugReport(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.doSendBugReport", mail);
 		return result;
 	}
 
 	@Override
-	public int deleteAddress(SqlSession sqlSession, Address address) {
-		int result = sqlSession.delete("MailMapper.deleteAddress", address);
+	public List<Mail> searchMail(SqlSession sqlSession, Mail mail) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.searchMail", mail);
+		return mList;
+	}
+
+	@Override
+	public int modifyMail(SqlSession sqlSession, int mailNo, Mail mail) {
+		int result = sqlSession.update("MailMapper.modifyMail", mailNo);
+		return result;
+	}
+
+	@Override
+	public int replyMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.update("MailMapper.replyMail", mail);
+		return result;
+	}
+
+	@Override
+	public int relayMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.update("MailMapper.relayMail", mail);
+		return result;
+	}
+
+	@Override
+	public int modifyMailFile(SqlSession sqlSession, MailFile mailFile) {
+		int result = sqlSession.insert("MailMapper.modifyMailFile", mailFile);
+		return result;
+	}
+
+	@Override
+	public int restoreMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.update("MailMapper.restoreMail", mailNo);
+		return result;
+	}
+
+	@Override
+	public int removeMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.delete("MailMapper.removeMail", mail);
+		return result;
+	}
+
+	@Override
+	public int registerAddress(SqlSession sqlSession, Address address) {
+		int result = sqlSession.insert("MailMapper.registerAddress", address);
+		return result;
+	}
+
+	@Override
+	public int removeAddress(SqlSession sqlSession, Address address) {
+		int result = sqlSession.delete("MailMapper.removeAddress", address);
 		return result;
 	}
 
