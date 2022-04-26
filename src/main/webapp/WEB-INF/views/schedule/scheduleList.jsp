@@ -9,11 +9,11 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-	    <aside id="snb">
-	        <h1>일정관리</h1>
-	        <a class="btn--function" href="#">일정등록</a>
-	    </aside>
-    
+        <aside id="snb">
+            <h1>일정관리</h1>
+            <a class="btn--function" href="#">일정등록</a>
+        </aside>
+
         <article id="sub">
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
@@ -22,37 +22,36 @@
                 <button type="submit"></button>
             </form>
 
-            <h1 class="basic-border-bottom">일정조회</h1>
+            <h1 class="basic-border-bottom">일정목록</h1>
 
             <div id="scheduleList" class="subConts padding-0">
                 <div id="calendar"></div>
             </div>
         </article>
     </div>
-    
+
     <script>
-    $(function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-       		headerToolbar: {
-        		left: 'dayGridMonth,dayGridWeek,timeGrid,listWeek',
-        		center: 'prev,title,next,today',
-        		right: '',
-        	},
-        	buttonText: {
-    			today:    '오늘',
-    			month:    '월간',
-    			week:     '주간',
-    			timeGrid: '일간',
-    			list:     '목록'
-        	},
-            initialView: 'dayGridMonth',
-            locale: 'ko',
-            views: {
-            }
+        $(function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'dayGridMonth,dayGridWeek,timeGrid,listWeek',
+                    center: 'prev,title,next,today',
+                    right: '',
+                },
+                buttonText: {
+                    today: '오늘',
+                    month: '월간',
+                    week: '주간',
+                    timeGrid: '일간',
+                    list: '목록'
+                },
+                initialView: 'dayGridMonth',
+                locale: 'ko',
+                views: {}
+            });
+            calendar.render();
         });
-        calendar.render();
-    });
     </script>
 </body>
 
