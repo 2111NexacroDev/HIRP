@@ -3,11 +3,10 @@
   <Application id="Application_Desktop" screenid="Desktop_screen">
     <Layout>
       <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" left="0" top="0" width="1280" height="720" titletext="LeftFrame">
-        <HFrameSet id="HFrameSet00" separatesize="200,200,*">
+        <HFrameSet id="HFrameSet00" separatesize="200,*">
           <Frames>
             <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl" showtitleicon="false"/>
-            <ChildFrame id="subMenuFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Work.xfdl"/>
-            <ChildFrame id="ChildFrame00" formurl="" showtitlebar="false" showtitleicon="true"/>
+            <ChildFrame id="ChildFrame00" formurl="FrameBase::Form_Work.xfdl" showtitlebar="false" showtitleicon="true"/>
           </Frames>
         </HFrameSet>
       </MainFrame>

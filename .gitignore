@@ -5,3 +5,8 @@
 .DS_Store
 /bin/
 /target/
+
+*.geninfo
+*.xfdl$
+*.xml$
+*/$temporary$/*
