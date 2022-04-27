@@ -250,3 +250,20 @@ section[class^="todo--"] li {
 }
 
 /* 일정 관리 끝 */
+
+/* 공용품 예약/관리 */
+.h2--reservation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.h2--reservation button {
+    width: 20px;
+    height: 20px;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
+    outline: none;
+    opacity: .5;
+}
+
+/* 공용품 예약/관리 끝 */
