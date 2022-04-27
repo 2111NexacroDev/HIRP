@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_home" width="1080" height="720" titletext="home">
+    <Layouts>
+      <Layout width="1080" height="720" screenid="Desktop_screen">
+        <Button id="Button00" taborder="0" text="홈화면이지롱" left="5" top="5" right="5" bottom="5"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+  </Form>
+</FDL>
