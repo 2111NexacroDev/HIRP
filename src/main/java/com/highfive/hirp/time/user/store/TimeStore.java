@@ -1,5 +1,7 @@
 package com.highfive.hirp.time.user.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.highfive.hirp.time.user.domain.Time;
@@ -15,7 +17,7 @@ public interface TimeStore {
 	int insertWorkEnd(SqlSession sqlSession, Time time);
 
 	// 사용자 연차 내역 조회
-	Time selectTimeView(SqlSession sqlSession, Vacation vacation);
+	List<Time> selectTimeView(SqlSession sqlSession, Vacation vacation);
 
 	// 사용자 근태 조정 신청
 	int updateTimeModify(SqlSession sqlSession, TimeModify timeModify);

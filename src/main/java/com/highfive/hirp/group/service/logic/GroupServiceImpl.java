@@ -1,5 +1,6 @@
 package com.highfive.hirp.group.service.logic;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,8 +38,8 @@ public class GroupServiceImpl implements GroupService {
 
 	// 상세 회원 정보 열람
 	@Override
-	public Group detailAllGroup(String emplId) {
-		Group group = gStore.selectDetailGroup(sqlSession, emplId);
-		return group;
+	public Member detailGroupMember(String emplId) {
+		Member member = gStore.selectDetailGroup(sqlSession, emplId);
+		return member;
 	}
 }

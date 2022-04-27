@@ -1,5 +1,7 @@
 package com.highfive.hirp.time.user.service.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,8 +38,8 @@ public class TimeServiceImpl implements TimeService{
 
 	// 사용자 연차 내역 조회
 	@Override
-	public Time selectTimeView(Vacation vacation) {
-		Time time = tStore.selectTimeView(sqlSession, vacation);
+	public List<Time> selectTimeView(Vacation vacation) {
+		List<Time> time = tStore.selectTimeView(sqlSession, vacation);
 		return time;
 	}
 

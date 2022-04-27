@@ -1,5 +1,6 @@
 package com.highfive.hirp.group.service;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import com.highfive.hirp.common.Search;
@@ -14,6 +15,5 @@ public interface GroupService {
 	public List<Group> searchAllGroup(Search search);
 
 	// 상세 회원 정보 열람
-	public Group detailAllGroup(String emplId);
-
+	public Member detailGroupMember(String emplId);
 }

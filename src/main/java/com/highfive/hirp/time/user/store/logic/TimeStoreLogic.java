@@ -1,5 +1,7 @@
 package com.highfive.hirp.time.user.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -27,8 +29,8 @@ public class TimeStoreLogic implements TimeStore{
 
 	// 사용자 연차 내역 조회
 	@Override
-	public Time selectTimeView(SqlSession sqlSession, Vacation vacation) {
-		Time time = sqlSession.selectOne("TimeMapper.selectTimeView", vacation);
+	public List<Time> selectTimeView(SqlSession sqlSession, Vacation vacation) {
+		List<Time> time = sqlSession.selectOne("TimeMapper.selectTimeView", vacation);
 		return time;
 	}
 

@@ -1,5 +1,7 @@
 package com.highfive.hirp.time.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class TimeController {
 		
 	// 사용자 연차 내역 조회
 	public ModelAndView timeView (ModelAndView mv, @ModelAttribute Vacation vacation, HttpServletRequest request) {
-		Time time = tService.selectTimeView(vacation);
+		List<Time> tList = tService.selectTimeView(vacation);
 		return mv;
 	}
 	

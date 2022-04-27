@@ -1,5 +1,6 @@
 package com.highfive.hirp.group.store.logic;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,8 +29,8 @@ public class GroupStoreLogic implements GroupStore{
 
 	// 상세 회원 정보 열람
 	@Override
-	public Group selectDetailGroup(SqlSession sqlSession, String emplId) {
-		Group group = sqlSession.selectOne("GroupMapper.selectDetailGroup", emplId);
-		return group;
+	public Member selectDetailGroup(SqlSession sqlSession, String emplId) {
+		Member member = sqlSession.selectOne("GroupMapper.selectDetailGroup", emplId);
+		return member;
 	}
 }

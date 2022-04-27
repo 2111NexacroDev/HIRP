@@ -1,5 +1,6 @@
 package com.highfive.hirp.group.store;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,5 +17,5 @@ public interface GroupStore {
 	public List<Group> selectSearchGroup(SqlSession sqlSession, Search search);
 
 	// 상세 회원 정보 열람
-	public Group selectDetailGroup(SqlSession sqlSession, String emplId);
+	public Member selectDetailGroup(SqlSession sqlSession, String emplId);
 }
