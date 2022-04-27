@@ -522,16 +522,37 @@ img {
     padding: 0 0 16px !important;
 }
 
-#snb ul {
-    margin-top: 20px;
-}
-
 #snb ul>li {
     margin-top: 10px;
 }
 
 #snb ul>li>ul {
     padding-left: 20px;
+}
+
+#snb>ul>li>a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#snb>ul>li>a:before {
+    content: "\f107";
+    font-family: "Fontawesome";
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+#snb>ul>li:hover>a:before {}
+
+#snb>ul {
+    margin-top: 20px;
+}
+
+#snb>ul>li {
+    margin-top: 24px;
 }
 
 .btn--function {
@@ -565,6 +586,10 @@ img {
 
 #conts h1 strong {
     font-weight: 700;
+}
+
+#conts h2 {
+    font-size: 18px;
 }
 
 .btn--profile {
