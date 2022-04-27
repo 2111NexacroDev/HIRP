@@ -16,14 +16,14 @@
             <a class="btn--function" href="#">등록 버튼</a>
 
             <ul>
-            	<li>
-            		<a href="">2depth명</a>
-            		<ul>
-            			<li><a href="#">메뉴1</a></li>
-            			<li><a href="#">메뉴2</a></li>
-            			<li><a href="#">메뉴3</a></li>
-            		</ul>
-            	</li>
+                <li>
+                    <a href="">2depth명</a>
+                    <ul>
+                        <li><a href="#">메뉴1</a></li>
+                        <li><a href="#">메뉴2</a></li>
+                        <li><a href="#">메뉴3</a></li>
+                    </ul>
+                </li>
             </ul>
         </aside>
 
@@ -155,7 +155,17 @@
                                 최대값 화면의 800px,
                                 많이 입력하면 너비 넓어지게 만들어둠
                             </p>
-                            <label class="mr-20" for="">항목1</label><input type="text" placeholder="입력">
+                            <ul>
+                                <li>
+                                    <label for="">항목1</label><input type="text" name="">
+                                </li>
+                                <li>
+                                    <label for="">항목2</label><input type="text" name="">
+                                </li>
+                                <li>
+                                    <label for="">항목3</label><input type="date" name="">
+                                </li>
+                            </ul>
                             <div class="btns-wrap mt-20 t-r">
                                 <button class="point" type="button">확인</button>
                                 <button class="finished closeWindow" type="button">닫기</button>

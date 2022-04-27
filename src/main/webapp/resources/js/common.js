@@ -10,6 +10,10 @@ $(function () {
     $('.closeWindow').on('click', function () {
         $(this).parent().parent().parent().stop().fadeOut(100);
     });
+
+    $('.bg-black').on('click', function () {
+        $(this).parent().stop().fadeOut(100);
+    });
 });
 
 function openAlert(alertWindow) {

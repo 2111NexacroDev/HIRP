@@ -522,10 +522,6 @@ img {
     padding: 0 0 16px !important;
 }
 
-#snb ul {
-    margin-top: 20px;
-}
-
 #snb ul>li {
     margin-top: 10px;
 }
@@ -534,9 +530,35 @@ img {
     padding-left: 20px;
 }
 
+#snb>ul>li>a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#snb>ul>li>a:before {
+    content: "\f107";
+    font-family: "Fontawesome";
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+#snb>ul>li:hover>a:before {}
+
+#snb>ul {
+    margin-top: 20px;
+}
+
+#snb>ul>li {
+    margin-top: 24px;
+}
+
 .btn--function {
     position: relative;
     display: block;
+    width: 100%;
     height: 44px;
     font-size: 14px;
     margin: 6px 0;
@@ -565,6 +587,10 @@ img {
 
 #conts h1 strong {
     font-weight: 700;
+}
+
+#conts h2 {
+    font-size: 18px;
 }
 
 .btn--profile {
