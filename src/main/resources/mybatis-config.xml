@@ -10,17 +10,42 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
+		<typeAlias type="com.highfive.hirp.reservation.domain.Reservation" alias="Reservation"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
+		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
 		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
-		<typeAlias type="com.highfive.hirp.time.domain.Time" alias="Time"></typeAlias>
+		<typeAlias type="com.highfive.hirp.time.user.domain.Time" alias="Time"></typeAlias>		
+		<typeAlias type="com.highfive.hirp.favority.domain.Favority" alias="Favority"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Address" alias="Address"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Mail" alias="Mail"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.MailFile" alias="MailFile"></typeAlias>
+		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
+		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mappers/alarm-mapper.xml" />
 		<mapper resource="mappers/survey-mapper.xml" />
-		<mapper resource="mappers/alram-mapper.xml" />
 		<mapper resource="mappers/chat-mapper.xml" />
+		<mapper resource="mappers/dept-mapper.xml"/>
 		<mapper resource="mappers/schedule-mapper.xml" />
+		<mapper resource="mappers/reservation-mapper.xml" />
+		<mapper resource="mappers/todo-mapper.xml" />
+		<mapper resource="mappers/adminemployee-mapper.xml" />
+		
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
 		<mapper resource="mappers/time-mapper.xml" />
+
+		<mapper resource="mappers/noticeboard-mapper.xml" />
+		<mapper resource="mappers/anonymousboard-mapper.xml" />
+		<mapper resource="mappers/freeboard-mapper.xml" />
+		<mapper resource="mappers/departmentboard-mapper.xml" />
+
+		<mapper resource="mappers/favority-mapper.xml" />
+		<mapper resource="mappers/mail-mapper.xml" />
+		<mapper resource="mappers/position-mapper.xml" />
+		<mapper resource="mappers/project-mapper.xml" />
+
 	</mappers>
 </configuration>

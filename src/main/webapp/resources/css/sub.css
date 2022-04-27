@@ -4,14 +4,12 @@
     padding: 20px;
 }
 
-.padding-0 {
-    padding: 0 !important;
-}
-
 /* 개인업무관리 */
 #todo section {
+    position: relative;
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .05);
 }
 
 #todo section h2 {
@@ -19,6 +17,16 @@
     font-weight: 700;
     font-size: 24px;
     color: #000;
+}
+
+#todo .btn--plus {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 24px;
+    height: 24px;
+    background: url("../images/icons/btn_plus.png") no-repeat center center;
+    outline: none;
 }
 
 .todo__wrap {
@@ -30,11 +38,54 @@
 
 .todo--today {
     width: 60%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .05);
+}
+
+.todo--today li {
+    position: relative;
+    padding-right: 90px;
+    padding-left: 30px;
+}
+
+.todo--today label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #999;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.todo--today input[type="checkbox"] {
+    position: fixed;
+    width: 0;
+    height: 0;
+    left: -999px;
+}
+
+.todo--today input[type="checkbox"]:checked+label {
+    border-color: #0392a7;
+}
+
+.todo--today input[type="checkbox"]:checked+label:before {
+    content: "\2713";
+    display: inline-block;
+}
+
+.todo--today input[type="checkbox"]:checked+label+input {
+    text-decoration: line-through;
 }
 
 .todo--week {
     width: 38.5%;
+}
+
+.todo--week a:before {
+    content: "\003E";
+    font-family: sans-serif;
+    margin-right: 10px;
 }
 
 section[class^="todo--"] {
@@ -45,6 +96,7 @@ section[class^="todo--"] {
 
 section[class^="todo--"] li {
     margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
 }
 
 .todo--today input[type="text"],
@@ -54,10 +106,9 @@ section[class^="todo--"] li {
     height: 40px;
     line-height: 38px;
     padding: 0 10px;
-    border: 1px solid #ccc;
-    border-width: 0 0 1px 0;
     font-size: 16px;
     outline: none;
+    border: none;
 }
 
 .memo--list {
@@ -93,6 +144,109 @@ section[class^="todo--"] li {
     background-color: #fff999;
     box-shadow: 5px 5px 10px -2px rgba(33, 33, 33, .3);
     outline: none;
+    font-size: 16px;
+    line-height: 1.8;
 }
 
 /* 개인업무관리 끝 */
+
+/* 일정 관리 */
+.fc * {
+    text-align: left;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin: 1.5em 0 0;
+    padding: 0 20px;
+    align-items: flex-end;
+}
+
+.fc-header-toolbar>div:nth-child(2)>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.fc .fc-button .fc-icon {
+    color: #999;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.fc .fc-button-primary:hover {
+    background: none !important;
+}
+
+.fc .fc-scrollgrid-liquid {
+    border-left: none;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+    padding: 8px 4px;
+}
+
+.fc .fc-daygrid-day-top {
+    flex-direction: row;
+}
+
+.fc .fc-button-group button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    outline: none;
+}
+
+.fc .fc-button-group button.fc-button-active,
+.fc .fc-button-group button:hover {
+    background-color: transparent !important;
+    font-weight: 700;
+    color: #000 !important;
+    border-color: #000;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.fc .fc-toolbar-title {
+    margin: 0 16px;
+}
+
+.fc .fc-today-button {
+    margin-left: 10px;
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
+}
+
+.fc .fc-today-button,
+.fc .fc-today-button:hover,
+.fc .fc-today-button:disabled,
+.fc .fc-today-button:disabled:hover {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    border-radius: 0;
+    opacity: 1;
+}
+
+/* 일정 관리 끝 */

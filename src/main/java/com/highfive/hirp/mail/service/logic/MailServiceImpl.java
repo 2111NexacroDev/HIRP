@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
+import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
 import com.highfive.hirp.mail.store.MailStore;
 @Service
@@ -17,66 +19,141 @@ public class MailServiceImpl implements MailService{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// 메일 전체조회
 	@Override
-	public List<Mail> selectAll() {
-		List<Mail> mList = mStore.selectAllMail(sqlSession);
+	public int sendMail(Mail mail) {
+		int result = mStore.sendMail(sqlSession, mail);
+		return result;
+	}
+	
+	@Override
+	public List<Mail> selectReceivedMail() {
+		List<Mail> mList = mStore.selectReceivedMail(sqlSession);
 		return mList;
 	}
 	
-	// 메일 저장
 	@Override
-	public int sendMail() {
-		int result = mStore.insertMail(sqlSession);
+	public int selectOneReceivedMail(int mailNo) {
+		int result = mStore.selectOneReceivedMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 메일 삭제
 	@Override
-	public int removeMail() {
-		int result = mStore.deleteMail(sqlSession);
+	public List<Mail> selectSentMail() {
+		List<Mail> mList = mStore.selectSentMail(sqlSession);
+		return mList;
+	}
+	
+	@Override
+	public int selectOneSentMail(int mailNo) {
+		int result = mStore.selectOneSentMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 답장
 	@Override
-	public int replyMail() {
-		int result = mStore.insertReplyMail(sqlSession);
+	public List<Mail> selectTemporaryMail() {
+		List<Mail> mList = mStore.selectTemporaryMail(sqlSession);
+		return mList;
+	}
+	
+	@Override
+	public int selectOneTemporaryMail(int mailNo) {
+		int result = mStore.selectOneTemporaryMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 전달
 	@Override
-	public int relayMail() {
-		int result = mStore.insertrelayMail(sqlSession);
+	public List<Mail> selectMyMail() {
+		List<Mail> mList = mStore.selectMyMail(sqlSession);
+		return mList;
+	}
+	
+	@Override
+	public int selectOneMyMail(int mailNo) {
+		int result = mStore.selectOneMyMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 첨부파일 저장
 	@Override
-	public int modifyMailFile() {
-		int result = mStore.insertMailFile(sqlSession);
+	public List<Mail> selectImportantMail() {
+		List<Mail> mList = mStore.selectImportantMail(sqlSession);
+		return mList;
+	}
+	
+	@Override
+	public int selectOneImportantMail(int mailNo) {
+		int result = mStore.selectOneImportantMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 주소록 추가
 	@Override
-	public int registerAddress() {
-		int result = mStore.insertAddress(sqlSession);
+	public List<Mail> selectWasteBasketMail() {
+		List<Mail> mList = mStore.selectWasteBasketMail(sqlSession);
+		return mList;
+	}
+	
+	@Override
+	public int selectOneWasteBasketMail(int mailNo) {
+		int result = mStore.selectOneWasteBasketMail(sqlSession, mailNo);
 		return result;
 	}
 	
-	// 주소록 수정
 	@Override
-	public int modifyAddress() {
-		int result = mStore.updateAddress(sqlSession);
+	public int doSendBugReport(Mail mail) {
+		int result = mStore.doSendBugReport(sqlSession, mail);
 		return result;
 	}
 	
-	// 주소록 삭제
 	@Override
-	public int removeAddress() {
-		int result = mStore.deleteAddress(sqlSession);
+	public List<Mail> searchMail(Mail mail) {
+		List<Mail> mList = mStore.searchMail(sqlSession, mail);
+		return mList;
+	}
+	
+	@Override
+	public int modifyMail(int mailNo, Mail mail) {
+		int result = mStore.modifyMail(sqlSession, mailNo, mail);
+		return result;
+	}
+	
+	@Override
+	public int replyMail(Mail mail) {
+		int result = mStore.replyMail(sqlSession, mail);
+		return result;
+	}
+	
+	@Override
+	public int relayMail(Mail mail) {
+		int result = mStore.relayMail(sqlSession, mail);
+		return result;
+	}
+	
+	@Override
+	public int modifyMailFile(MailFile mailFile) {
+		int result = mStore.modifyMailFile(sqlSession, mailFile);
+		return result;
+	}
+	
+	@Override
+	public int restoreMail(int mailNo) {
+		int result = mStore.restoreMail(sqlSession, mailNo);
+		return result;
+	}
+	
+	@Override
+	public int removeMail(Mail mail) {
+		int result = mStore.removeMail(sqlSession, mail);
+		return result;
+	}
+	
+	@Override
+	public int registerAddress(Address address) {
+		int result = mStore.registerAddress(sqlSession, address);
+		return result;
+	}
+	
+	@Override
+	public int removeAddress(Address address) {
+		int result = mStore.removeAddress(sqlSession, address);
 		return result;
 	}
 	

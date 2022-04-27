@@ -41,8 +41,14 @@
 
 @media screen and (min-width: 1201px) {
     #main .row {
-        display: flex;
         justify-content: space-between;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    #main .row>div {
+        padding-right: 0;
+        padding-left: 0;
     }
 
     #main .row>div:nth-child(1) {

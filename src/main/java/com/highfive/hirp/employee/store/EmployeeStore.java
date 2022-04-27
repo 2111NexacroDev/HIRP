@@ -3,7 +3,6 @@ package com.highfive.hirp.employee.store;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 
 import com.highfive.hirp.employee.domain.Employee;
 

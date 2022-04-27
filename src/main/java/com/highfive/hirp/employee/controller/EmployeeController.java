@@ -25,7 +25,7 @@ public class EmployeeController {
 	private EmployeeService eService;
 
 	// 회원가입
-	@RequestMapping(value = "/employee/register.hirp", method = RequestMethod.POST)
+	@RequestMapping(value = "/employee/register.kh", method = RequestMethod.POST)
 	public String memberRegister(Model model, @ModelAttribute Employee employee) {
 		try {
 			int result = eService.registerEmployee(employee);
@@ -42,7 +42,7 @@ public class EmployeeController {
 	}
 
 	// 로그인
-	@RequestMapping(value = "/employee/login.hirp", method = RequestMethod.POST)
+	@RequestMapping(value = "/employee/login.kh", method = RequestMethod.POST)
 	public String employeeLogin(HttpServletRequest request, @RequestParam("emplId") String emplId,
 			@RequestParam("emplPw") String emplPw) {
 		Employee employee = new Employee();
@@ -67,7 +67,7 @@ public class EmployeeController {
 	}
 
 	// 마이페이지 출력
-	@RequestMapping(value="/employee/mypage.hirp", method=RequestMethod.GET)
+	@RequestMapping(value="/employee/mypage.kh", method=RequestMethod.GET)
 	public ModelAndView employeeMypage(ModelAndView mv, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String employeeId = (String) session.getAttribute("employeeId");
@@ -86,8 +86,8 @@ public class EmployeeController {
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping(value= "/employee/findpw.hirp", method=RequestMethod.POST)
-	public String findPwd(HttpServletResponse response, @RequestParam("emplId")String emplId, @RequestParam("emplName")String emplName, Model model) throws Exception {
+	@RequestMapping(value= "/employee/findpw.kh", method=RequestMethod.POST)
+	public String find_pwd(HttpServletResponse response, @RequestParam("emplId")String emplId, @RequestParam("emplName")String emplName, Model model) throws Exception {
 		Employee employee= new Employee();
 		employee.setEmplId(emplId);
 		employee.setEmplName(emplName);

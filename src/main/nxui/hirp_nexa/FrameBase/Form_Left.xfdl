@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Left" width="200" height="720" titletext="Form_Left" background="#404040">
+    <Layouts>
+      <Layout width="200" height="720" screenid="Desktop_screen">
+        <Button id="logo_admin" taborder="0" left="5" top="10" height="151" background="url('theme::default/images/logo_hirp_admin.png') no-repeat center center" right="5" border="0px none" text=""/>
+        <Grid id="gnb_admin" taborder="1" left="5" top="170" right="5" autofittype="col" binddataset="gds_menu" treeinitstatus="expand,all" border="0px none" bottom="10" background="transparent">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="40"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME" displaytype="text" edittype="tree" treelevel="bind:MENU_LEVEL" font="normal 14px/normal &quot;Noto Sans KR&quot;" textAlign="left" border="0px none" color="#ffffff" letterSpacing="-0.5px" padding="0px 0px 0px 50px" borderRadius="4px"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="ImageViewer00" taborder="2" left="5" top="170" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://00_icon_home.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00" taborder="3" left="5" top="210" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://btn_empl.png') repeat right" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00" taborder="4" left="5" top="250" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://10_icon_org.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00" taborder="5" left="5" top="290" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://btn_dept.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00_00" taborder="6" left="5" top="329" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://06_icon_doc.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="7" left="5" top="370" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme://08_icon_att.png') repeat center top" border="0px none"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};]]></Script>
+  </Form>
+</FDL>

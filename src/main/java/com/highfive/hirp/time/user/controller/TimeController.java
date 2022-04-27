@@ -26,26 +26,25 @@ public class TimeController {
 		int result = tService.insertWorkStart(time);
 		return mv;
 	}
-	
+
 	// 사용자 퇴근 등록
 	public ModelAndView timeEnd (ModelAndView mv, @ModelAttribute Time time, HttpServletRequest request) {
 		int result = tService.insertWorkEnd(time);
 		return mv;
 	}
-		
+
 	// 사용자 연차 내역 조회
 	public ModelAndView timeView (ModelAndView mv, @ModelAttribute Vacation vacation, HttpServletRequest request) {
 		List<Time> tList = tService.selectTimeView(vacation);
 		return mv;
 	}
-	
+
 	// 사용자 근태 조정 신청
 	public ModelAndView timeModify (ModelAndView mv, @ModelAttribute TimeModify timeModify, HttpServletRequest request) {
 		int result = tService.updateTimeModify(timeModify);
 		return mv;
 	}
 }
-
 
 // 이미 있는 거를 덮어 씌우는 건 update
 // 없었는데 새로 생기는건 insert

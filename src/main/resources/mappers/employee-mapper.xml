@@ -8,29 +8,29 @@
 		<id employeResultMap="">
 		<id property="" column "" />
 		<result property="" column="" />
-	</resultMap>
+	</resultMap> -->
 
-	회원가입
-	<insert id="insertEmployee"
+	<!-- 회원가입 -->
+	<!-- <insert>
 		parameterType="com.highfive.hirp.employee.domain.Employee">
 		INSERT INTO
-	</insert>
+	</insert> -->
 
-	로그인
-	<select id="selectLoginEmployee"
+	<!-- 로그인 -->
+	<!-- <select id="selectLoginEmployee"
 		parameterType="com.highfive.hirp.employee.domain.Employee" resultMap="employeeResultMap">
 		SELECT *
 		FROM
 		WHERE
-	</select>
+	</select> -->
 	
-	마이페이지 조회
-	<select>
+	<!-- 마이페이지 조회 -->
+	<!-- <select>
+
+	</select> -->
 	
-	</select>
-	
-	비밀번호 찾기
-	<select>
+	<!-- 비밀번호 찾기 -->
+	<!-- <select>
 	
 	</select> -->
 </mapper>

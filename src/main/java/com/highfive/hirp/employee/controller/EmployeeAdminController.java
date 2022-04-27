@@ -33,18 +33,24 @@ public class EmployeeAdminController {
 	}
 	
 	// 사원 검색 (와이어프레임엔 없음)
-	// 이거 서치키워드 어떤 식으로 전달하는지 모르겠어서 생각좀 해봐야함
-	/* public NexacroResult empSearchListView(
-			@ParamDataSet(name="in_emp") 		DataSet search) {
+	public NexacroResult empSearchListView(
+			@ParamDataSet(name="searchList") 		DataSet search) { //이거 매개변수 맞는지 체크해야함
 		List<Employee> searchList = eAService.printSearchEmployee(search);
 		NexacroResult result = new NexacroResult(); 
 		return result;
-	}*/
+	}
 	
 	// 사원 정보 상세 조회
 	public NexacroResult empDetailView() {
 		NexacroResult result = new NexacroResult(); 
 		Employee employee = eAService.printEmployeeInfo();
+		return result;
+	}
+	
+	// 임시회원 리스트 조회(융경 쪽에서 데이터 받아야함)
+	public NexacroResult tempEmpListView() {
+		NexacroResult result = new NexacroResult(); 
+		List<Employee> tempEmpList = eAService.printAllTempEmployee();
 		return result;
 	}
 	
@@ -63,13 +69,6 @@ public class EmployeeAdminController {
 			@ParamVariable(name="empNo") int empNo) {
 		NexacroResult result = new NexacroResult(); 
 		int resignResult = eAService.resignEmployee(empNo);
-		return result;
-	}
-	
-	// 임시회원 리스트 조회(융경 쪽에서 데이터 받아야함)
-	public NexacroResult tempEmpListView() {
-		NexacroResult result = new NexacroResult(); 
-		List<Employee> tempEmpList = eAService.printAllTempEmployee();
 		return result;
 	}
 	

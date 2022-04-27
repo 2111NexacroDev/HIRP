@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.survey.domain.SurveyAnswer;
 
 @Controller
 public class ChatController {
@@ -29,11 +33,22 @@ public class ChatController {
 		return mv;
 	}
 	//채팅방 추가 페이지
-	public ModelAndView insertChattingRoomPage(ModelAndView mv) {
+	public ModelAndView insertChattingRoomPage(ModelAndView mv
+			,@ModelAttribute Employee employee) {
+		//직원 리스트 출력
+		//직원 이름으로 검색
+		//위에 컨트롤러 사용하면 될 듯
+		//채팅방 추가 페이지 조회
+		
 		return mv;
 	}
 	//채팅방 추가
-	public ModelAndView insertChattingRoom(ModelAndView mv) {
+	public ModelAndView insertChattingRoom(ModelAndView mv
+			,@ModelAttribute ChatRoom chatroom
+			,@RequestParam("joinList") List<String> joinList) {
+		//채팅방 정보 추가
+		//채팅방 참가자 리스트 추가
+		
 		return mv;
 	}
 	
@@ -44,10 +59,21 @@ public class ChatController {
 	
 	//채팅방 목록 페이지
 	public ModelAndView chattingRoomList(ModelAndView mv) {
+		//내가 참여한 채팅방 목록 가져오기
+		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+		
+		//마지막 채팅 내용 표시????
+		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
+		
 		return mv;
 	}
 	//채팅방 내부 페이지
-	public ModelAndView chattingRoomPage(ModelAndView mv) {
+	public ModelAndView chattingRoomPage(ModelAndView mv
+			,@RequestParam("chatRoom") ChatRoom chatRoom) {
+		//채팅방 목록 페이지에서 chatroom 정보 가져오기
+		
+		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
+		//조인해서 같이 가져와야 할 듯 (chatList 도메인 만들었음)
 		return mv;
 	}
 	//채팅 전송 (첨부파일 가능)
@@ -55,42 +81,65 @@ public class ChatController {
 			,@ModelAttribute Message Message
 			,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			,HttpServletRequest request) {
+		//채팅 추가
+		//첨부파일 추가
 		return mv;
 	}
-	//첨부파일 저장
-	public HashMap<String, String> saveFile(MultipartFile file, HttpServletRequest request) {
-		String filePath = "";
-		HashMap<String, String> fileMap = new HashMap<String, String>();
-		
-		return fileMap;
-	}
-	//첨부파일 다운로드 리턴타입 이게 맞나
-	public ModelAndView fileDownload(ModelAndView mv) {
-		return mv;
-	}
+	//첨부파일 저장 메소드는 common에서 가져다 쓰기
+	
+	//첨부파일 다운로드 리턴타입 (수업 때는 jsp에서 함)
+//	public ModelAndView fileDownload(ModelAndView mv) {
+//		return mv;
+//	}
 	
 	//채팅방별 첨부파일 모두 보기
-	public ModelAndView myChattingRoomFile(ModelAndView mv) {
+	public ModelAndView myChattingRoomFile(ModelAndView mv
+			,@RequestParam("chatroomNo") int chatroomNo) {
+		//이것도 첨부파일, 채팅 조인해서 채팅 정보 (시간, 보낸 사람 등) 같이 갖고오면 될 듯
+		//채팅방별로 채팅, 첨부파일 내용 같이 가져오기
+		//첨부파일 있는 거만 가져오면 될 듯
+		
+		
 		return mv;
 	}
 	//내가 받은 첨부파일 모두 보기
 	public ModelAndView allMyFile(ModelAndView mv) {
+		 //아이디 세션에서 가져오기
+		//내가 받은 첨부파일 리스트 가져오기
+		//이것도 chatList로 반환, 첨부파일 있는 것만 가져오면 됨.
+		//조인....? 서브쿼리....?
+		
 		return mv;
 	}
 	//채팅방 이름 변경
-	public ModelAndView chattingRoomRename(ModelAndView mv) {
+	public ModelAndView chattingRoomRename(ModelAndView mv
+			,@RequestParam("ChatRoom") ChatRoom chatRoom) {
+		//채팅방 정보 넘겨 받아서 채팅방 이름 변경 (정보 update)
+		
 		return mv;
 	}
 	//채팅 대화상대 초대
-	public ModelAndView chattingAddJoin(ModelAndView mv) {
+	public ModelAndView chattingAddJoin(ModelAndView mv
+			,@RequestParam("chatroomNo") int chatroomNo
+			,@RequestParam("joinList") List<String> joinList) {
+		//채팅 대화상대 추가
+		//list로 받아서 대화상대를 다수 추가하면 for문으로 insert 해주기
+		
 		return mv;
 	}
 	//채팅방 나가기
-	public ModelAndView chattingRoomLeave(ModelAndView mv) {
+	public ModelAndView chattingRoomLeave(ModelAndView mv
+			,@RequestParam("chatroomNo") int chatroomNo) {
+		//아이디 세션에서 가져와서 두 개 담아서 chatRoomJoin으로 넘겨주기
 		return mv;
 	}
 	//채팅방 삭제 (본인이 만든 채팅방인 경우만)
-	public ModelAndView chattingRoomDelete(ModelAndView mv) {
+	public ModelAndView chattingRoomDelete(ModelAndView mv
+			,@RequestParam("chatroomNo") int chatroomNo) {
+		
+		//JSP에서 본인이 만든 채팅방일 때만 해당 버튼 누를 수 있도록 처리 해놓기
+		//채팅방 번호가 걸려있는 모든 채팅 데이터 삭제
+		//CHATROOM_TBL만 지우면 나머지도 같이 사라지게 REFERENCES 처리 했음.
 		return mv;
 	}
 }
