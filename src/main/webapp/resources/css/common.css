@@ -558,6 +558,7 @@ img {
 .btn--function {
     position: relative;
     display: block;
+    width: 100%;
     height: 44px;
     font-size: 14px;
     margin: 6px 0;
