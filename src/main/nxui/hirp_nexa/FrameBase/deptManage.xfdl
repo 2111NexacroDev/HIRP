@@ -119,16 +119,17 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.btn_upper.set_visible("false");
 	this.st_lowerdept.set_visible("false");
 	this.btn_lower.set_visible("false");
-
-	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
-	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
-	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
-	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
-	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
-	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
-	trace("mastername:" + masterName);
-	this.st_deptmaster2.set_text(masterName);
+	
+	//load 되었을 때 DB에서 empl도 select 해오기
+	this.transaction(
+		"empl_select"// 1.ID
+		,"HirpURL::admin/empllist.hirp"// 2.URL		
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"ds_empl=out_empl" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
 	
 	//load 되었을 때 DB에서 dept select 해오기
 	this.transaction(
@@ -140,7 +141,18 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);
 	
-	//load 되었을 때 DB에서 empl도 select 해오기
+	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
+	trace(this.ds_dept.rowposition);
+	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
+	trace(this.edt_deptcode.value);
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
+	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
+	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
+	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
+	trace("mastername:" + masterName);
+	this.st_deptmaster2.set_text(masterName);
+
 }
 
 
@@ -150,12 +162,24 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	{
 		if(nErrorCode < 0)
 		{
-			this.alert("조회 실패 : " + sErrorMsg);
+			this.alert("부서 조회 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("조회 성공 : " + this.ds_dept.getRowCount() + "건");
+		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+	
+	if(id=="empl_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("사원 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
 	}
 }
+
+
 
 
 //ds_dept rowposition이 변경될 때
@@ -270,9 +294,6 @@ this.fn_deptMasterEditCallback = function(id, rtn){
 	//취소 버튼 누르면 cancel
 	
 }
-
-
-
 
 
 //부서 추가 팝업창 띄우기
@@ -689,33 +710,49 @@ this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
           <Column id="emplId" type="STRING" size="256"/>
           <Column id="divisionCode" type="STRING" size="256"/>
           <Column id="positionCode" type="STRING" size="256"/>
+          <Column id="emplPw" type="STRING" size="256"/>
           <Column id="emplName" type="STRING" size="256"/>
           <Column id="startDate" type="DATE" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="directNo" type="STRING" size="256"/>
+          <Column id="phoneNo" type="STRING" size="256"/>
+          <Column id="recruitCategory" type="STRING" size="256"/>
+          <Column id="salaryCategory" type="STRING" size="256"/>
+          <Column id="referrer" type="STRING" size="256"/>
+          <Column id="isStatus" type="STRING" size="256"/>
+          <Column id="birthday" type="STRING" size="256"/>
+          <Column id="gender" type="STRING" size="256"/>
+          <Column id="isMarriage" type="STRING" size="256"/>
+          <Column id="isDisability" type="STRING" size="256"/>
+          <Column id="isVeterans" type="STRING" size="256"/>
+          <Column id="endDate" type="DATE" size="256"/>
+          <Column id="endReason" type="STRING" size="256"/>
+          <Column id="profile" type="STRING" size="256"/>
         </ColumnInfo>
         <Rows>
           <Row>
             <Col id="emplId">ID1</Col>
             <Col id="divisionCode">10</Col>
             <Col id="positionCode">10</Col>
-            <Col id="emplName">아무개</Col>
+            <Col id="emplPw">아무개</Col>
           </Row>
           <Row>
             <Col id="emplId">ID2</Col>
             <Col id="divisionCode">1010</Col>
             <Col id="positionCode">10</Col>
-            <Col id="emplName">홍길동</Col>
+            <Col id="emplPw">홍길동</Col>
           </Row>
           <Row>
             <Col id="emplId">ID3</Col>
             <Col id="divisionCode">1020</Col>
             <Col id="positionCode">10</Col>
-            <Col id="emplName">박보검</Col>
+            <Col id="emplPw">박보검</Col>
           </Row>
           <Row>
             <Col id="emplId">ID4</Col>
             <Col id="divisionCode">1030</Col>
             <Col id="positionCode">10</Col>
-            <Col id="emplName">일용자</Col>
+            <Col id="emplPw">일용자</Col>
           </Row>
         </Rows>
       </Dataset>
