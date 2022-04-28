@@ -1,0 +1,88 @@
+﻿<!--[if gt IE 8]><!DOCTYPE html><!--<![endif]-->
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" pageEncoding="utf-8" />	
+	<meta http-equiv="x-ua-compatible" content="IE=Edge"/>
+    <title></title>	
+
+	<!-- editor -->
+	<link rel="stylesheet" type="text/css" href="./css/editor.css">	
+	
+	<!-- Highlight -->
+	<link rel="stylesheet" type="text/css" href="./css/javacolors.css">
+	<link rel="stylesheet" type="text/css" href="./css/jscolors.css">
+	<link rel="stylesheet" type="text/css" href="./css/xmlcolors.css">
+	
+	<script type="text/javascript">
+		var intervalId = null;
+		function setContent(content)
+		{	
+			document.body.innerHTML = content;
+			
+			var checkLoadImage = false;
+			var image;
+			var images = document.getElementsByTagName("img");
+			var width, height;
+			for (var i=0,len=images.length; i<len; i++)
+			{
+				image = images[i];
+				width = image.getAttribute("width");
+				height = image.getAttribute("height");				
+				if ( !width && !height )
+				{
+					checkLoadImage = true;
+					break;
+				}
+			}
+			
+			if ( checkLoadImage )
+			{
+				intervalId = self.setInterval(checkImage, 100);
+			}
+			else
+			{
+				self.setTimeout(onLoadContent, 0);
+			}
+		}
+		
+		function checkImage()
+		{
+			var images = document.getElementsByTagName("img");
+			var len = images.length;
+			var completeLen = 0;
+			for (var i=0; i<len; i++)
+			{
+				if ( images[i].complete )
+				{
+					completeLen++;
+				}
+			}
+			
+			if ( completeLen == len )
+			{
+				self.clearInterval(intervalId);
+				onLoadContent();
+			}
+		}
+		
+		function onLoadContent()
+		{
+			var wb = window.NEXACROWEBBROWSER;			
+			if ( wb )
+			{
+				// HTML
+				wb.on_fire_onusernotify(wb, "loadContent");
+			}
+			else
+			{				
+				// Runtime
+				window.document.title = "loadContent";
+			}
+			
+			document.body.style.visibility = "visible";
+		}
+	</script>
+</head>
+<body style="width:auto; height:auto; visibility:hidden; ">
+</body>
+</html>
