@@ -109,7 +109,7 @@
 
 section[class^="todo--"] {
     padding: 40px;
-    max-height: 50vh;
+    max-height: 360px;
     overflow-y: auto;
 }
 
@@ -176,6 +176,7 @@ section[class^="todo--"] li {
     display: none;
 }
 
+.memo--list li:hover textarea+.btns-wrap,
 .memo--list textarea:focus+.btns-wrap {
     display: block;
 }

@@ -38,10 +38,8 @@ public class TodoController {
 	 * 
 	 * - POST 요청은 캐시되지 않는다.
 	 * - POST 요청은 브라우저 히스토리에 남지 않는다.
-	 * - 
-POST 요청은 북마크 되지 않는
-	 * - 
-POST 요청은 데이터 길이에 제한이 없다.
+	 * - POST 요청은 북마크 되지 않는
+	 * - POST 요청은 데이터 길이에 제한이 없다.
 	 */
 
 	// 할일 조회
@@ -72,59 +70,116 @@ POST 요청은 데이터 길이에 제한이 없다.
 	// 할일 등록(ajax)
 	@ResponseBody
 	@RequestMapping(value="/todo/write.hirp", method=RequestMethod.POST)
-	public ModelAndView todoRegister(ModelAndView mv
-			,@ModelAttribute Todo todo
+	public String todoRegister(
+			@ModelAttribute Todo todo
+			,@RequestParam("todoConts") String todoConts
 			,HttpServletRequest request) {
+		todo.setEmplId("user1");
+		// 임시 처리, 후에 세션으로 수정해야함.
+		// 날짜를 추가해줘야해서 Todo 객체 이용하는 것으로 코딩함.
+		todo.setTodoConts(todoConts);
 		int result = tService.registerToDo(todo);
 		if(result > 0) {
-			mv.setViewName("todo/todoList");
+			return "success";
+		} else {
+			return "fail";
 		}
-		return mv;
 	}
 	
 	// 할일 수정(ajax)		
 	@ResponseBody
 	@RequestMapping(value="/todo/modify.hirp", method=RequestMethod.POST)
-	public ModelAndView todoUpdate(ModelAndView mv
-			,@ModelAttribute Todo todo) {
+	public String todoUpdate(
+			@ModelAttribute Todo todo
+			,@RequestParam("todoNo") int todoNo
+			,@RequestParam("todoConts") String todoConts
+			,HttpServletRequest request) {
+		todo.setTodoNo(todoNo);
+		todo.setTodoConts(todoConts);
 		int result = tService.modifyToDo(todo);
-		return mv;
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+
+	
+	// 할일 체크(ajax)		
+	@ResponseBody
+	@RequestMapping(value="/todo/checked.hirp", method=RequestMethod.POST)
+	public String todoChecked(
+			@ModelAttribute Todo todo
+			,@RequestParam("isFinished") String isFinished
+			,@RequestParam("todoNo") int todoNo
+			,HttpServletRequest request) {
+		todo.setIsFinished(isFinished);
+		todo.setTodoNo(todoNo);
+		int result = tService.checkedToDo(todo);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 할일 삭제(ajax)	
 	@ResponseBody
-	@RequestMapping(value="/todo/remove.hirp", method=RequestMethod.POST)
-	public ModelAndView todoDelete(ModelAndView mv
-			,@RequestParam("todoNo") int todoNo) {
+	@RequestMapping(value="/todo/remove.hirp", method=RequestMethod.GET)
+	public String todoDelete(
+			@RequestParam("todoNo") int todoNo) {
 		int result = tService.removeToDo(todoNo);
-		return mv;
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 메모 등록(ajax)	
 	@ResponseBody
 	@RequestMapping(value="/memo/write.hirp", method=RequestMethod.POST)
-	public ModelAndView memoRegister(ModelAndView mv
-			,@ModelAttribute Memo memo
+	public String memoRegister(
+			@ModelAttribute Memo memo
+			,@RequestParam("memoConts") String memoConts
 			,HttpServletRequest request) {
+		memo.setEmplId("user1");
+		memo.setMemoConts(memoConts);
 		int result = tService.registerMemo(memo);
-		return mv;
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 메모 수정(ajax)	
 	@ResponseBody
 	@RequestMapping(value="/memo/modify.hirp", method=RequestMethod.POST)
-	public ModelAndView memoUpdate(ModelAndView mv
-			,@ModelAttribute Memo memo) {
+	public String memoUpdate(
+			@ModelAttribute Memo memo
+			,@RequestParam("memoNo") int memoNo
+			,@RequestParam("memoConts") String memoConts) {
+		memo.setMemoNo(memoNo);
+		memo.setMemoConts(memoConts);
 		int result = tService.modifyMemo(memo);
-		return mv;
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 메모 삭제(ajax)	
 	@ResponseBody
-	@RequestMapping(value="/memo/remove.hirp", method=RequestMethod.POST)
-	public ModelAndView memoDelete(ModelAndView mv
-			,@RequestParam("memoNo") int memoNo) {
+	@RequestMapping(value="/memo/remove.hirp", method=RequestMethod.GET)
+	public String memoDelete(
+			@RequestParam("memoNo") int memoNo) {
 		int result = tService.removeMemo(memoNo);
-		return mv;
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 }
