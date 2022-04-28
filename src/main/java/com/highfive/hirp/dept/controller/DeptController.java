@@ -27,7 +27,7 @@ public class DeptController {
 	}
 	
 	//부서 전체 list 조회
-	@RequestMapping(value="/admin/deptlist.nexa", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/deptlist.hirp", method=RequestMethod.GET)
 	public NexacroResult selectDeptList() {
 		// ErrorCode, ErrorMsg, Dataset 선언
 		int 	nErrorCode = 0;
