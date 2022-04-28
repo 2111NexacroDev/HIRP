@@ -11,7 +11,7 @@
 }
 
 ::selection {
-    background: #00b6c2;
+    background: #0b2a60;
     color: white;
 }
 
@@ -123,7 +123,7 @@ img {
 
 @media screen and (min-width: 1201px) {
     a:hover {
-        color: #00a1b9;
+        color: #00498c;
     }
 }
 
@@ -268,6 +268,14 @@ img {
 
     .col-3 {
         width: 25%;
+    }
+
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
     }
 }
 

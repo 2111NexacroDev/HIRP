@@ -42,7 +42,7 @@
 
 .todo--today li {
     position: relative;
-    padding-right: 90px;
+    padding-right: 120px;
     padding-left: 30px;
 }
 
@@ -66,16 +66,35 @@
 }
 
 .todo--today input[type="checkbox"]:checked+label {
-    border-color: #0392a7;
+    border-color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label:before {
-    content: "\2713";
+    content: "\f00c";
     display: inline-block;
+    font-family: "Fontawesome";
+    color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label+input {
     text-decoration: line-through;
+}
+
+.todo--today li .btns-wrap {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    display: none;
+    font-size: 0;
+}
+
+.todo--today li input:focus+.btns-wrap,
+.todo--today li:hover input+.btns-wrap {
+    display: block;
+}
+
+.todo--today li .btns-wrap button:not(:last-of-type) {
+    margin-right: 4px;
 }
 
 .todo--week {
@@ -126,6 +145,7 @@ section[class^="todo--"] li {
 }
 
 .memo--list li {
+    position: relative;
     width: 25%;
     padding: 0 15px;
     margin-bottom: 30px;
@@ -140,12 +160,47 @@ section[class^="todo--"] li {
     width: 100%;
     min-height: 300px;
     padding: 20px;
+    padding-top: 40px;
     border: none;
     background-color: #fff999;
     box-shadow: 5px 5px 10px -2px rgba(33, 33, 33, .3);
     outline: none;
     font-size: 16px;
     line-height: 1.8;
+}
+
+.memo--list li .btns-wrap {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    display: none;
+}
+
+.memo--list textarea:focus+.btns-wrap {
+    display: block;
+}
+
+.memo--list li .btns-wrap .point,
+.memo--list li .btns-wrap .finished {
+    padding: 2px;
+    background: none;
+    border: none;
+    font-size: 0;
+}
+
+.memo--list li .btns-wrap .point:after,
+.memo--list li .btns-wrap .finished:after {
+    font-family: "Fontawesome";
+    font-size: 20px;
+    color: #999;
+}
+
+.memo--list li .btns-wrap .point:after {
+    content: "\f00c";
+}
+
+.memo--list li .btns-wrap .finished:after {
+    content: "\f00d";
 }
 
 /* 개인업무관리 끝 */
