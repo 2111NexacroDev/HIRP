@@ -4,5 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="TodoMapper">
-
+	<resultMap type="Todo" id="todoResultMap">
+		<id property="todoNo" column="BOARD_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="todoDate" column="TODO_DATE"/>
+		<result property="todoConts" column="TODO_CONTS"/>
+		<result property="isFinished" column="IS_FINISHED"/>
+	</resultMap>
+	<resultMap type="Memo" id="memoResultMap">
+		<id property="memoNo" column="MEMO_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="memoConts" column="MEMO_CONTS"/>
+	</resultMap>
+	
+	<select id="selectAllToDo" resultMap="todoResultMap">
+		SELECT * FROM TODO_TBL WHERE TO_CHAR(TODO_DATE, 'YYMMDD') = TO_CHAR(SYSDATE, 'YYMMDD')
+	</select>
+	<insert id="insertToDo">
+		INSERT INTO TODO_TBL VALUES(TODO_SEQ.NEXTVAL, #{EMPL_ID}, #{TODO_DATE}, #{TODO_CONTS}, #{IS_FINISHED})
+	</insert>
+	
+	<select id="selectAllMemo" resultMap="memoResultMap">
+		SELECT * FROM MEMO_TBL
+	</select>
 </mapper>

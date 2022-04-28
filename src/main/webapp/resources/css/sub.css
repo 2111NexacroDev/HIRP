@@ -66,7 +66,7 @@
 }
 
 .todo--today input[type="checkbox"]:checked+label {
-    border-color: #0392a7;
+    border-color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label:before {
