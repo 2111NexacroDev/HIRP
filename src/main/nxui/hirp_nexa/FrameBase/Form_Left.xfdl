@@ -57,6 +57,7 @@ this.fn_openForm = function(obj, e) {
 	
 	var objChildFrame = new ChildFrame(sMenuId, 0, 0, 1080, 720);
 	sWorkFramePath.addChild(sMenuId, objChildFrame);
+	objChildFrame.set_showtitlebar(false);
 /*	objChildFrame.set_formurl("FrameBase::deptManage.xfdl");*/
 	objChildFrame.set_formurl(sFormUrl);
 	objChildFrame.show();
