@@ -41,6 +41,7 @@
     <Service prefixid="font" type="resource" url="./_resource_/_font_/" version="0" cachelevel="session" include_subdir="false"/>
     <Service prefixid="Base" type="form" url="./Base/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="FrameBase" type="form" url="./FrameBase/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="HirpURL" type="JSP" version="0" cachelevel="session" include_subdir="false" communicationversion="0" url="http://127.0.0.1:8888"/>
   </Services>
   <Protocols/>
   <DeviceAdaptors/>
