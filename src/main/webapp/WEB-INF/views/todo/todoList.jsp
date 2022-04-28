@@ -18,24 +18,21 @@
             </h1>
 
             <div id="todo" class="subConts">
-                <!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
-            	필요 없으면 지울 것 -->
                 <div class="todo__wrap">
                     <section class="todo--today">
                         <h2>TODAY</h2>
                         <ul>
-                        	<c:forEach items="${tList }" var="todo">
-                            <li>
-                                <input id="todo${todo.todoNo }" type="checkbox">
-                                <label for="todo${todo.todoNo }"></label>
-                                <input name="" type="text" value="${todo.todoConts }">
-                            </li>
+                            <c:forEach items="${tList }" var="todo">
+                                <li>
+                                    <input id="todo${todo.todoNo }" type="checkbox">
+                                    <label for="todo${todo.todoNo }"></label>
+                                    <input name="" type="text" value="${todo.todoConts }">
+                                    <div class="btns-wrap">
+                                        <button class="point">수정</button>
+                                        <button class="finished">삭제</button>
+                                    </div>
+                                </li>
                             </c:forEach>
-                            <li>
-                                <input id="todo2" type="checkbox">
-                                <label for="todo2"></label>
-                                <input name="" type="text" value="">
-                            </li>
                         </ul>
                         <button class="btn--plus" type="button"></button>
                     </section>
@@ -53,16 +50,49 @@
                 <section class="memo--list">
                     <h2>MEMO</h2>
                     <ul>
-                      	<c:forEach items="${mList }" var="memo">
-                          <li><textarea name="memo${memo.memoNo }">${memo.memoConts}</textarea></li>
+                        <c:forEach items="${mList }" var="memo">
+                            <li>
+                                <textarea name="memo${memo.memoNo }">${memo.memoConts}</textarea>
+                                <div class="btns-wrap">
+                                    <button class="point">수정</button>
+                                    <button class="finished">삭제</button>
+                                </div>
+                            </li>
                         </c:forEach>
-                        <li><textarea></textarea></li>
                     </ul>
                     <button class="btn--plus" type="button"></button>
                 </section>
             </div>
         </article>
     </div>
+
+    <script>
+        $('.todo--today .btn--plus').on('click', function () {
+            $('.todo--today ul').append(
+                '<li>' +
+                '<input id="todoNew" type="checkbox">' +
+                '<label for="todoNew"></label>' +
+                '<input name="" type="text" value="">' +
+                '<div class="btns-wrap">' +
+                '<button class="point">등록</button>' +
+                '<button class="finished">삭제</button>' +
+                '</div>' +
+                '</li>'
+            );
+        });
+
+        $('.memo--list .btn--plus').on('click', function () {
+            $('.memo--list ul').append(
+                '<li>' +
+                '<textarea name="memo${memo.memoNo }"></textarea>' +
+                '<div class="btns-wrap">' +
+                '<button class="point">등록</button>' +
+                '<button class="finished">삭제</button>' +
+                '</div>' +
+                '</li>'
+            );
+        });
+    </script>
 </body>
 
 </html>

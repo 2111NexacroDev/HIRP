@@ -82,27 +82,27 @@ POST 요청은 데이터 길이에 제한이 없다.
 		return mv;
 	}
 	
-	// 할일 수정(ajax)	@ResponseBody
+	// 할일 수정(ajax)		
+	@ResponseBody
 	@RequestMapping(value="/todo/modify.hirp", method=RequestMethod.POST)
-	
 	public ModelAndView todoUpdate(ModelAndView mv
 			,@ModelAttribute Todo todo) {
 		int result = tService.modifyToDo(todo);
 		return mv;
 	}
 	
-	// 할일 삭제(ajax)	@ResponseBody
+	// 할일 삭제(ajax)	
+	@ResponseBody
 	@RequestMapping(value="/todo/remove.hirp", method=RequestMethod.POST)
-	
 	public ModelAndView todoDelete(ModelAndView mv
 			,@RequestParam("todoNo") int todoNo) {
 		int result = tService.removeToDo(todoNo);
 		return mv;
 	}
 	
-	// 메모 등록(ajax)	@ResponseBody
+	// 메모 등록(ajax)	
+	@ResponseBody
 	@RequestMapping(value="/memo/write.hirp", method=RequestMethod.POST)
-	
 	public ModelAndView memoRegister(ModelAndView mv
 			,@ModelAttribute Memo memo
 			,HttpServletRequest request) {
@@ -110,18 +110,18 @@ POST 요청은 데이터 길이에 제한이 없다.
 		return mv;
 	}
 	
-	// 메모 수정(ajax)	@ResponseBody
+	// 메모 수정(ajax)	
+	@ResponseBody
 	@RequestMapping(value="/memo/modify.hirp", method=RequestMethod.POST)
-	
 	public ModelAndView memoUpdate(ModelAndView mv
 			,@ModelAttribute Memo memo) {
 		int result = tService.modifyMemo(memo);
 		return mv;
 	}
 	
-	// 메모 삭제(ajax)	@ResponseBody
+	// 메모 삭제(ajax)	
+	@ResponseBody
 	@RequestMapping(value="/memo/remove.hirp", method=RequestMethod.POST)
-	
 	public ModelAndView memoDelete(ModelAndView mv
 			,@RequestParam("memoNo") int memoNo) {
 		int result = tService.removeMemo(memoNo);
