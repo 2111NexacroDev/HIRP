@@ -4,10 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@sonof.iptime.org:8521:xe"></property>
-		<property name="username" value="HIRP"></property>
-		<property name="password" value="HIRP"></property>
+		<property name="driverClassName" 	value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" 				value="jdbc:oracle:thin:@sonof.iptime.org:8521:xe"></property>
+		<property name="username" 			value="HIRP"></property>
+		<property name="password" 			value="HIRP"></property>
 	</bean>
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">

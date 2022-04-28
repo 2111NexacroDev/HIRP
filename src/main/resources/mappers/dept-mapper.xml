@@ -4,5 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="DeptMapper">
-
+	<select id="selectAllDept" resultType="Dept">
+		SELECT * FROM DEPT_TBL;
+	</select>
 </mapper>

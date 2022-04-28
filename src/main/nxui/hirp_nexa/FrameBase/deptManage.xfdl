@@ -77,10 +77,10 @@
         <Button id="btn_colorchart08_00" taborder="57" left="739" top="289" width="15" height="15" background="#D1B2FF"/>
         <Button id="btn_colorchart09_00" taborder="58" left="753" top="289" width="15" height="15" background="#FFB2F5"/>
         <Button id="btn_colorchart10_00" taborder="59" left="767" top="289" width="15" height="15" background="#FFB2D9"/>
-        <Edit id="edt_deptName" taborder="60" left="624" top="140" width="133" height="30" visible="false"/>
+        <Edit id="edt_deptname" taborder="60" left="394" top="140" width="133" height="30" visible="false"/>
         <Button id="btn_colorchartfromds" taborder="61" left="470" top="283" width="15" height="15" background=""/>
-        <Edit id="edt_deptcode" taborder="62" left="624" top="185" width="133" height="30" visible="false"/>
-        <Edit id="edt_deptsecond" taborder="63" left="624" top="230" width="133" height="30" visible="false"/>
+        <Edit id="edt_deptcode" taborder="62" left="394" top="185" width="133" height="30" visible="false"/>
+        <Edit id="edt_deptsecond" taborder="63" left="394" top="230" width="133" height="30" visible="false"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
@@ -106,14 +106,15 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 // 	trace(nRow);
 // 	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
 
+	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
 	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
-	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
 	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
 	
 	//load 되었을 때 DB에서 dept select 해오기
 	this.transaction(
 		"dept_select"// 1.ID
-		,"HirpURL::admin/dept.nexa"// 2.URL		
+		,"HirpURL::admin/deptlist.nexa"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
 		,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
 		,"" // 5.InVar : F->S(var)
@@ -146,8 +147,8 @@ this.grid_deptList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEv
 	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
 	
 	//edit
-		this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
-	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
 	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
 };
 
@@ -222,30 +223,32 @@ this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 };
 
 
-
-//edit second 저장 안 됨.
-//저장 버튼
+//저장 버튼 -- 수정 완료
 this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	//edit에 있는 값을 ds에 저장
 	var nRow = this.ds_dept.rowposition;
+	var nCode = this.edt_deptcode.value;
+	var nName = this.edt_deptname.value;
+	var nSecond = this.edt_deptsecond.value;
+	//trace(nCode, nName, nSecond);
+	if(nCode != null || nCode.length > 0){
+		trace(nCode);
+		this.ds_dept.setColumn(nRow, "DEPT_CODE", nCode);
+	}
+	if(nName != null || nName.length > 0){
+		trace(nName);
+		this.ds_dept.setColumn(nRow, "DEPT_NAME", nName);
+	}
+	if(nSecond != null || nSecond.length > 0){
+		trace(nSecond);
+		this.ds_dept.setColumn(nRow, "DEPT_SECONDNAME", nSecond);
+	}
 	
-	var code = this.edt_deptcode.value;
-	var name = this.edt_deptName.value;
-	var second = this.edt_deptsecond.value;
-	if(code != null ||  code.length != 0) {
-		this.ds_dept.setColumn(nRow, "DEPT_CODE", code);
-	}
-	if(name != null ||  name.length != 0) {
-		this.ds_dept.setColumn(nRow, "DEPT_NAME", name);
-	}
-	if(second != null || name.length != 0) {
-		this.ds_dept.setColumn(nRow, "DEPT_SECONDNANE", second);
-	}
-	
-// 	this.edt_deptName.set_visible("false");
-// 	this.edt_deptcode.set_visible("false");
-// 	this.edt_deptsecond.set_visible("false");
+	this.edt_deptname.set_visible("false");
+	this.edt_deptcode.set_visible("false");
+	this.edt_deptsecond.set_visible("false");
+
 };
 
 //취소 버튼
@@ -254,14 +257,15 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	// edit 안에 있는 값 원래 ds에 있는 값으로 돌려놓기
 	var nRow = this.ds_dept.rowposition;
 	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
-	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
 	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
 };
+
 
 //dept name 수정 버튼
 this.btn_edit_deptname_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.edt_deptName.set_visible("true");
+	this.edt_deptname.set_visible("true");
 };
 //dept code 수정 버튼
 this.btn_edit_deptcode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
