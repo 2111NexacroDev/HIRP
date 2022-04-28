@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#project {
+	width: inherit;
+	margin: auto;
+	border: 1px solid black;
+}
+
+#btn {
+	display: flex;
+}
+
+#btnSubmit {
+	flex: 1;
+	margin: auto;
+	display: block;
+}
+
+#btnCancel {
+	flex: 1;
+	margin: 0px 5%;
+	display: block;
+}

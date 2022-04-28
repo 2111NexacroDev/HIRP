@@ -14,7 +14,7 @@
             <li><a href="#">메일</a></li>
             <li><a href="#">게시판</a></li>
             <li><a href="/todo/list.hirp">개인업무관리</a></li>
-            <li><a href="#">프로젝트관리</a></li>
+            <li><a href="/project/list.hirp">프로젝트관리</a></li>
             <li><a href="#">일정관리</a></li>
             <li><a href="#">전자결재</a></li>
             <li><a href="#">설문조사</a></li>

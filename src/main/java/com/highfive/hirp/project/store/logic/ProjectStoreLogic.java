@@ -14,15 +14,27 @@ import com.highfive.hirp.project.store.ProjectStore;
 public class ProjectStoreLogic implements ProjectStore{
 
 	@Override
+	public int selectListCount(SqlSession sqlSession) {
+		int totalCount = sqlSession.selectOne("ProjectMapper.selectListCount");
+		return totalCount;
+	}
+	
+	@Override
 	public List<Project> selectAll(SqlSession sqlSession, PageInfo pi) {
 		List<Project> pList = sqlSession.selectList("ProjectMapper.selectAllList", pi);
 		return pList;
 	}
+	
+	@Override
+	public int insertProject(SqlSession sqlSession, Project project) {
+		int result = sqlSession.insert("ProjectMapper.insertProject", project);
+		return result;
+	}
 
 	@Override
-	public int selectOneByNo(SqlSession sqlSession, int projectNo) {
-		int result = sqlSession.selectOne("ProjectMapper.selectOneByNo", projectNo);
-		return result;
+	public Project selectOneByNo(SqlSession sqlSession, int projectNo) {
+		Project project = sqlSession.selectOne("ProjectMapper.selectOneByNo", projectNo);
+		return project;
 	}
 
 	@Override
