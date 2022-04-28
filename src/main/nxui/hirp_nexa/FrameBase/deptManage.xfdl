@@ -35,15 +35,15 @@
         <Static id="st_deptname" taborder="15" text="부서명" left="280" top="140" width="157" height="30"/>
         <Static id="st_deptcode" taborder="16" text="부서코드" left="280" top="185" width="157" height="30"/>
         <Static id="st_deptsecond" taborder="17" text="부서약어" left="280" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptname" taborder="18" left="560" top="140" width="30" height="30" cssclass="edit_icon"/>
+        <Button id="btn_edit_deptname" taborder="18" left="560" top="140" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptname_onclick"/>
         <Static id="st_deptcolor2" taborder="19" text="부서 색상" left="403" top="275" width="157" height="30"/>
         <Static id="st_deptmaster2" taborder="20" text="부서장" left="403" top="320" width="157" height="30"/>
         <Static id="st_depthiredate2" taborder="21" text="생성일" left="403" top="365" width="157" height="30"/>
         <Static id="st_deptname2" taborder="22" left="403" top="140" width="157" height="30" text="부서명"/>
         <Static id="st_deptcode2" taborder="23" text="부서코드" left="403" top="185" width="157" height="30"/>
         <Static id="st_deptsecond2" taborder="24" text="부서약어" left="403" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptcode" taborder="25" left="560" top="185" width="30" height="30" cssclass="edit_icon"/>
-        <Button id="btn_edit_deptsecond" taborder="26" left="560" top="230" width="30" height="30" cssclass="edit_icon"/>
+        <Button id="btn_edit_deptcode" taborder="25" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcode_onclick"/>
+        <Button id="btn_edit_deptsecond" taborder="26" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
         <Button id="btn_edit_deptcolor" taborder="27" left="560" top="275" width="30" height="30" cssclass="edit_icon"/>
         <Button id="btn_edit_deptmaster" taborder="28" left="560" top="320" width="30" height="30" cssclass="edit_icon"/>
         <Div id="Div00" taborder="29" left="278" top="130" width="60" height="2" background="#b7b7b7"/>
@@ -51,34 +51,36 @@
         <Div id="Div02" taborder="31" left="20" top="190" width="190" height="2" background="#b7b7b7"/>
         <Button id="btn_upper" taborder="32" text="상위 부서명" left="403" top="415" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
         <Button id="Button00_00" taborder="33" text="하위부서명" left="403" top="460" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
-        <Button id="btn_submit" taborder="34" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save"/>
-        <Button id="btn_cancel" taborder="35" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel"/>
-        <Button id="btn_colorchart" taborder="36" left="620" top="273" width="15" height="15" background="#FFD8D8"/>
-        <Button id="btn_colorchart00" taborder="37" left="634" top="273" width="15" height="15" background="#FAE0D4"/>
-        <Button id="btn_colorchart01" taborder="38" left="648" top="273" width="15" height="15" background="#FAECC5"/>
-        <Button id="btn_colorchart02" taborder="39" left="662" top="273" width="15" height="15" background="#FAF4C0"/>
-        <Button id="btn_colorchart03" taborder="40" left="676" top="273" width="15" height="15" background="#E4F7BA"/>
-        <Button id="btn_colorchart04" taborder="41" left="690" top="273" width="15" height="15" background="#CEFBC9"/>
-        <Button id="btn_colorchart05" taborder="42" left="704" top="273" width="15" height="15" background="#D4F4FA"/>
-        <Button id="btn_colorchart06" taborder="43" left="718" top="273" width="15" height="15" background="#D9E5FF"/>
-        <Button id="btn_colorchart07" taborder="44" left="732" top="273" width="15" height="15" background="#DAD9FF"/>
-        <Button id="btn_colorchart08" taborder="45" left="746" top="273" width="15" height="15" background="#E8D9FF"/>
-        <Button id="btn_colorchart09" taborder="46" left="760" top="273" width="15" height="15" background="#FFD9FA"/>
-        <Button id="btn_colorchart10" taborder="47" left="774" top="273" width="15" height="15" background="#FFD9EC"/>
-        <Button id="btn_colorchart11" taborder="48" left="620" top="287" width="15" height="15" background="#FFA7A7"/>
-        <Button id="btn_colorchart00_00" taborder="49" left="634" top="287" width="15" height="15" background="#FFC19E"/>
-        <Button id="btn_colorchart01_00" taborder="50" left="648" top="287" width="15" height="15" background="#FFE08C"/>
-        <Button id="btn_colorchart02_00" taborder="51" left="662" top="287" width="15" height="15" background="#FAED7D"/>
-        <Button id="btn_colorchart03_00" taborder="52" left="676" top="287" width="15" height="15" background="#CEF279"/>
-        <Button id="btn_colorchart04_00" taborder="53" left="690" top="287" width="15" height="15" background="#B7F0B1"/>
-        <Button id="btn_colorchart05_00" taborder="54" left="704" top="287" width="15" height="15" background="#B2EBF4"/>
-        <Button id="btn_colorchart06_00" taborder="55" left="718" top="287" width="15" height="15" background="#B2CCFF"/>
-        <Button id="btn_colorchart07_00" taborder="56" left="732" top="287" width="15" height="15" background="#B5B2FF"/>
-        <Button id="btn_colorchart08_00" taborder="57" left="746" top="287" width="15" height="15" background="#D1B2FF"/>
-        <Button id="btn_colorchart09_00" taborder="58" left="760" top="287" width="15" height="15" background="#FFB2F5"/>
-        <Button id="btn_colorchart10_00" taborder="59" left="774" top="287" width="15" height="15" background="#FFB2D9"/>
-        <Edit id="edt_deptName" taborder="60" left="613" top="140" width="133" height="30"/>
+        <Button id="btn_submit" taborder="34" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="35" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Button id="btn_colorchart" taborder="36" left="613" top="275" width="15" height="15" background="#FFD8D8"/>
+        <Button id="btn_colorchart00" taborder="37" left="627" top="275" width="15" height="15" background="#FAE0D4"/>
+        <Button id="btn_colorchart01" taborder="38" left="641" top="275" width="15" height="15" background="#FAECC5"/>
+        <Button id="btn_colorchart02" taborder="39" left="655" top="275" width="15" height="15" background="#FAF4C0"/>
+        <Button id="btn_colorchart03" taborder="40" left="669" top="275" width="15" height="15" background="#E4F7BA"/>
+        <Button id="btn_colorchart04" taborder="41" left="683" top="275" width="15" height="15" background="#CEFBC9"/>
+        <Button id="btn_colorchart05" taborder="42" left="697" top="275" width="15" height="15" background="#D4F4FA"/>
+        <Button id="btn_colorchart06" taborder="43" left="711" top="275" width="15" height="15" background="#D9E5FF"/>
+        <Button id="btn_colorchart07" taborder="44" left="725" top="275" width="15" height="15" background="#DAD9FF"/>
+        <Button id="btn_colorchart08" taborder="45" left="739" top="275" width="15" height="15" background="#E8D9FF"/>
+        <Button id="btn_colorchart09" taborder="46" left="753" top="275" width="15" height="15" background="#FFD9FA"/>
+        <Button id="btn_colorchart10" taborder="47" left="767" top="275" width="15" height="15" background="#FFD9EC"/>
+        <Button id="btn_colorchart11" taborder="48" left="613" top="289" width="15" height="15" background="#FFA7A7"/>
+        <Button id="btn_colorchart00_00" taborder="49" left="627" top="289" width="15" height="15" background="#FFC19E"/>
+        <Button id="btn_colorchart01_00" taborder="50" left="641" top="289" width="15" height="15" background="#FFE08C"/>
+        <Button id="btn_colorchart02_00" taborder="51" left="655" top="289" width="15" height="15" background="#FAED7D"/>
+        <Button id="btn_colorchart03_00" taborder="52" left="669" top="289" width="15" height="15" background="#CEF279"/>
+        <Button id="btn_colorchart04_00" taborder="53" left="683" top="289" width="15" height="15" background="#B7F0B1"/>
+        <Button id="btn_colorchart05_00" taborder="54" left="697" top="289" width="15" height="15" background="#B2EBF4"/>
+        <Button id="btn_colorchart06_00" taborder="55" left="711" top="289" width="15" height="15" background="#B2CCFF"/>
+        <Button id="btn_colorchart07_00" taborder="56" left="725" top="289" width="15" height="15" background="#B5B2FF"/>
+        <Button id="btn_colorchart08_00" taborder="57" left="739" top="289" width="15" height="15" background="#D1B2FF"/>
+        <Button id="btn_colorchart09_00" taborder="58" left="753" top="289" width="15" height="15" background="#FFB2F5"/>
+        <Button id="btn_colorchart10_00" taborder="59" left="767" top="289" width="15" height="15" background="#FFB2D9"/>
+        <Edit id="edt_deptName" taborder="60" left="403" top="140" width="133" height="30" visible="false"/>
         <Button id="btn_colorchartfromds" taborder="61" left="470" top="283" width="15" height="15" background=""/>
+        <Edit id="edt_deptcode" taborder="62" left="403" top="185" width="133" height="30" visible="false"/>
+        <Edit id="edt_deptsecond" taborder="63" left="620" top="225" width="133" height="30" visible="false"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
@@ -86,6 +88,44 @@ var objDate = new nexacro.Date();
 var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
 var dd = objDate.getDate().toString().padLeft(2, "0");
 var today = objDate.getYear() + mm + dd;
+
+//load 되었을 때
+this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+//COLOR 가져오는 거 테스트 해봤음.
+//BINDING 하는 곳에서 BACKGROUND에 DEPT_COLOR 바인딩해서 해결.
+// trace(this.ds_dept.getColumn(this, "DEPT_COLOR"));
+// trace(this.btn_colorchartfromds.background);
+// this.btn_colorchartfromds.set_background(this.ds_dept.getColumn(this, "DEPT_COLOR"));
+
+//onload 했을 땐 상위부서가 없음 (최상위 그룹이라서)
+	this.btn_upper.set_text("");
+// 	var upperCode = this.ds_dept.getColumn(this, "DEPT_UPPERCODE");
+// 	trace(upperCode);
+// 	var nRow = this.ds_dept.findRow("DEPT_CODE", upperCode);
+// 	trace(nRow);
+// 	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
+
+	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
+	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
+};
+
+//그리드 부서 cell 선택했을 때 상위부서 이름 가져오기
+this.grid_deptList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	//상위부서 이름 가져오기
+	var upperCode = this.ds_dept.getColumn(e.row, "DEPT_UPPERCODE");
+	trace(upperCode);
+	var nRow = this.ds_dept.findRow("DEPT_CODE", upperCode);
+	trace(nRow);
+	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
+	
+	//edit
+		this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
+	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
+};
 
 //부서 삭제 팝업창 띄우기 -- 일단 ds에서 삭제 완료
 this.btn_delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -158,32 +198,55 @@ this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 };
 
 
-this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
-{
-//COLOR 가져오는 거 테스트 해봤음.
-//BINDING 하는 곳에서 BACKGROUND에 DEPT_COLOR 바인딩해서 해결.
-// trace(this.ds_dept.getColumn(this, "DEPT_COLOR"));
-// trace(this.btn_colorchartfromds.background);
-// this.btn_colorchartfromds.set_background(this.ds_dept.getColumn(this, "DEPT_COLOR"));
 
-//onload 했을 땐 상위부서가 없음 (최상위 그룹이라서)
-	this.btn_upper.set_text("");
-// 	var upperCode = this.ds_dept.getColumn(this, "DEPT_UPPERCODE");
-// 	trace(upperCode);
-// 	var nRow = this.ds_dept.findRow("DEPT_CODE", upperCode);
-// 	trace(nRow);
-// 	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
+//edit second 저장 안 됨.
+//저장 버튼
+this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//edit에 있는 값을 ds에 저장
+	var nRow = this.ds_dept.rowposition;
+	var code = this.edt_deptcode.value;
+	var name = this.edt_deptName.value;
+	var second = this.edt_deptsecond.value;
+	if(code != null ||  code.length != 0) {
+		this.ds_dept.setColumn(nRow, "DEPT_CODE", code);
+	}
+	if(name != null ||  name.length != 0) {
+		this.ds_dept.setColumn(nRow, "DEPT_NAME", name);
+	}
+	if(second != null) {
+		this.ds_dept.setColumn(nRow, "DEPT_SECONDNANE", second);
+	}
+	
+	this.edt_deptName.set_visible("false");
+	this.edt_deptcode.set_visible("false");
+	this.edt_deptsecond.set_visible("false");
 };
 
-//그리드 부서 cell 선택했을 때 상위부서 이름 가져오기
-this.grid_deptList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+//취소 버튼
+this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	//상위부서 이름 가져오기
-	var upperCode = this.ds_dept.getColumn(e.row, "DEPT_UPPERCODE");
-	trace(upperCode);
-	var nRow = this.ds_dept.findRow("DEPT_CODE", upperCode);
-	trace(nRow);
-	this.btn_upper.set_text(this.ds_dept.getColumn(nRow, "DEPT_NAME"));
+	// edit 안에 있는 값 원래 ds에 있는 값으로 돌려놓기
+	var nRow = this.ds_dept.rowposition;
+	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_CODE"));
+	this.edt_deptName.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_NAME"));
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "DEPT_SECONDNAME"));
+};
+
+//dept name 수정 버튼
+this.btn_edit_deptname_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.edt_deptName.set_visible("true");
+};
+//dept code 수정 버튼
+this.btn_edit_deptcode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.edt_deptcode.set_visible("true");
+};
+//dept second name 수정 버튼
+this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.edt_deptsecond.set_visible("true");
 };
 ]]></Script>
     <Objects>
@@ -191,7 +254,7 @@ this.grid_deptList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEv
         <ColumnInfo>
           <Column id="DEPT_CODE" type="STRING" size="20"/>
           <Column id="DEPT_NAME" type="STRING" size="30"/>
-          <Column id="DEPT_SECONDNAME" type="STRING" size="10"/>
+          <Column id="DEPT_SECONDNAME" type="STRING" size="50"/>
           <Column id="DEPT_COLOR" type="STRING" size="50"/>
           <Column id="DEPT_MASTER" type="STRING" size="20"/>
           <Column id="DEPT_HIREDATE" type="DATE" size="20"/>
@@ -360,7 +423,6 @@ this.grid_deptList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEv
       <BindItem id="item4" compid="st_deptmaster2" propid="text" datasetid="ds_dept" columnid="DEPT_MASTER"/>
       <BindItem id="item5" compid="st_depthiredate2" propid="text" datasetid="ds_dept" columnid="DEPT_HIREDATE"/>
       <BindItem id="item7" compid="static_deptName" propid="text" datasetid="ds_dept" columnid="DEPT_NAME"/>
-      <BindItem id="item8" compid="edt_deptName" propid="value" datasetid="ds_dept" columnid="DEPT_NAME"/>
       <BindItem id="item9" compid="btn_colorchartfromds" propid="background" datasetid="ds_dept" columnid="DEPT_COLOR"/>
     </Bind>
   </Form>
