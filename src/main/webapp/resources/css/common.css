@@ -746,6 +746,11 @@ article {
     font-size: 20px;
 }
 
+.section--modal__conts ul label {
+    display: inline-block;
+    width: 70px;
+}
+
 .section--alert .bg-black,
 .section--modal .bg-black {
     position: absolute;

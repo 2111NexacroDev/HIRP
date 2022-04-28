@@ -25,7 +25,7 @@
     right: 40px;
     width: 24px;
     height: 24px;
-    background: url("../images/icons/btn_plus.png") no-repeat center center;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
     outline: none;
 }
 
@@ -83,8 +83,8 @@
 }
 
 .todo--week a:before {
-    content: "\003E";
-    font-family: sans-serif;
+    content: "\f105";
+    font-family: "FontAwesome";
     margin-right: 10px;
 }
 
