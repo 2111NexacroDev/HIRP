@@ -70,8 +70,10 @@
 }
 
 .todo--today input[type="checkbox"]:checked+label:before {
-    content: "\2713";
+    content: "\f00c";
     display: inline-block;
+    font-family: "Fontawesome";
+    color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label+input {
@@ -158,7 +160,7 @@ section[class^="todo--"] li {
     width: 100%;
     min-height: 300px;
     padding: 20px;
-    padding-bottom: 40px;
+    padding-top: 40px;
     border: none;
     background-color: #fff999;
     box-shadow: 5px 5px 10px -2px rgba(33, 33, 33, .3);
