@@ -269,6 +269,14 @@ img {
     .col-3 {
         width: 25%;
     }
+
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
 }
 
 .grid-guide-wrap .row>*>* {
