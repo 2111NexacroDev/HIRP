@@ -1,6 +1,5 @@
 package com.highfive.hirp.dept.domain;
 
-import java.sql.Date;
 
 public class Dept {
 	private String deptCode;

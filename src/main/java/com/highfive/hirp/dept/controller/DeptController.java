@@ -67,11 +67,47 @@ public class DeptController {
 	
 	//부서 추가
 	public NexacroResult insertDept(
-			@ParamDataSet(name="in_dept") DataSet dept) {
-		
+			@ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
+		
+		int 	i;
+		int iResult = 0;
+
+		
+		for(i = 0; i < inDept.getRowCount(); i++) {
+			String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
+			String deptName = dsGet(inDept, i, "DEPT_NAME");
+			String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
+			String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
+			String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
+			String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
+			String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
+			int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
+					Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
+			
+			Dept dept = new Dept(
+					deptCode
+					, 	deptName
+					, 	deptSecondname
+					, 	deptColor
+					, 	deptMaster
+					, 	deptHiredate
+					, 	deptUppercode
+					, 	deptLevel);
+			
+			int rowType = inDept.getRowType(i);
+			if( rowType == DataSet.ROW_TYPE_INSERTED) {
+				iResult += dService.insertDept(dept);
+			}
+		}
+				
+			
 		return result;
 	}
+	
+	
 	//부서정보 수정
 //	public NexacroResult updateDept(
 //			@ParamDataSet(name="in_dept") DataSet dept) {
@@ -117,29 +153,33 @@ public class DeptController {
 			dService.deleteDept(deptCode);
 		}
 		
-		String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
-		String deptName = dsGet(inDept, i, "DEPT_NAME");
-		String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
-		String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
-		String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
-		String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
-		String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
-		int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
-				Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
 		
-		Dept dept = new Dept(
-				deptCode
-				, 	deptName
-				, 	deptSecondname
-				, 	deptColor
-				, 	deptMaster
-				, 	deptHiredate
-				, 	deptUppercode
-				, 	deptLevel);
 		
 		// INSERT, UPDATE
 		// RowType에 따라서 INSERT OR UPDATE
 		for(i = 0; i < inDept.getRowCount(); i++) {
+			
+			String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
+			String deptName = dsGet(inDept, i, "DEPT_NAME");
+			String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
+			String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
+			String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
+			String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
+			String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
+			int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
+					Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
+			
+			Dept dept = new Dept(
+					deptCode
+					, 	deptName
+					, 	deptSecondname
+					, 	deptColor
+					, 	deptMaster
+					, 	deptHiredate
+					, 	deptUppercode
+					, 	deptLevel);
+			
+			
 			int rowType = inDept.getRowType(i);
 			if( rowType == DataSet.ROW_TYPE_INSERTED) {
 				iResult += dService.insertDept(dept);
