@@ -52,30 +52,30 @@
         <Button id="btn_lower" taborder="32" text="하위부서명" left="403" top="460" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
         <Button id="btn_submit" taborder="33" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
         <Button id="btn_cancel" taborder="34" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
-        <Button id="btn_colorchart" taborder="35" left="613" top="275" width="15" height="15" background="#FFD8D8"/>
-        <Button id="btn_colorchart00" taborder="36" left="627" top="275" width="15" height="15" background="#FAE0D4"/>
-        <Button id="btn_colorchart01" taborder="37" left="641" top="275" width="15" height="15" background="#FAECC5"/>
-        <Button id="btn_colorchart02" taborder="38" left="655" top="275" width="15" height="15" background="#FAF4C0"/>
-        <Button id="btn_colorchart03" taborder="39" left="669" top="275" width="15" height="15" background="#E4F7BA"/>
-        <Button id="btn_colorchart04" taborder="40" left="683" top="275" width="15" height="15" background="#CEFBC9"/>
-        <Button id="btn_colorchart05" taborder="41" left="697" top="275" width="15" height="15" background="#D4F4FA"/>
-        <Button id="btn_colorchart06" taborder="42" left="711" top="275" width="15" height="15" background="#D9E5FF"/>
-        <Button id="btn_colorchart07" taborder="43" left="725" top="275" width="15" height="15" background="#DAD9FF"/>
-        <Button id="btn_colorchart08" taborder="44" left="739" top="275" width="15" height="15" background="#E8D9FF"/>
-        <Button id="btn_colorchart09" taborder="45" left="753" top="275" width="15" height="15" background="#FFD9FA"/>
-        <Button id="btn_colorchart10" taborder="46" left="767" top="275" width="15" height="15" background="#FFD9EC"/>
-        <Button id="btn_colorchart11" taborder="47" left="613" top="289" width="15" height="15" background="#FFA7A7"/>
-        <Button id="btn_colorchart00_00" taborder="48" left="627" top="289" width="15" height="15" background="#FFC19E"/>
-        <Button id="btn_colorchart01_00" taborder="49" left="641" top="289" width="15" height="15" background="#FFE08C"/>
-        <Button id="btn_colorchart02_00" taborder="50" left="655" top="289" width="15" height="15" background="#FAED7D"/>
-        <Button id="btn_colorchart03_00" taborder="51" left="669" top="289" width="15" height="15" background="#CEF279"/>
-        <Button id="btn_colorchart04_00" taborder="52" left="683" top="289" width="15" height="15" background="#B7F0B1"/>
-        <Button id="btn_colorchart05_00" taborder="53" left="697" top="289" width="15" height="15" background="#B2EBF4"/>
-        <Button id="btn_colorchart06_00" taborder="54" left="711" top="289" width="15" height="15" background="#B2CCFF"/>
-        <Button id="btn_colorchart07_00" taborder="55" left="725" top="289" width="15" height="15" background="#B5B2FF"/>
-        <Button id="btn_colorchart08_00" taborder="56" left="739" top="289" width="15" height="15" background="#D1B2FF"/>
-        <Button id="btn_colorchart09_00" taborder="57" left="753" top="289" width="15" height="15" background="#FFB2F5"/>
-        <Button id="btn_colorchart10_00" taborder="58" left="767" top="289" width="15" height="15" background="#FFB2D9"/>
+        <Button id="btn_colorchart01" taborder="35" left="613" top="275" width="15" height="15" background="#FFD8D8"/>
+        <Button id="btn_colorchart02" taborder="36" left="627" top="275" width="15" height="15" background="#FAE0D4"/>
+        <Button id="btn_colorchart03" taborder="37" left="641" top="275" width="15" height="15" background="#FAECC5"/>
+        <Button id="btn_colorchart04" taborder="38" left="655" top="275" width="15" height="15" background="#FAF4C0"/>
+        <Button id="btn_colorchart05" taborder="39" left="669" top="275" width="15" height="15" background="#E4F7BA"/>
+        <Button id="btn_colorchart06" taborder="40" left="683" top="275" width="15" height="15" background="#CEFBC9"/>
+        <Button id="btn_colorchart07" taborder="41" left="697" top="275" width="15" height="15" background="#D4F4FA"/>
+        <Button id="btn_colorchart08" taborder="42" left="711" top="275" width="15" height="15" background="#D9E5FF"/>
+        <Button id="btn_colorchart09" taborder="43" left="725" top="275" width="15" height="15" background="#DAD9FF"/>
+        <Button id="btn_colorchart10" taborder="44" left="739" top="275" width="15" height="15" background="#E8D9FF"/>
+        <Button id="btn_colorchart11" taborder="45" left="753" top="275" width="15" height="15" background="#FFD9FA"/>
+        <Button id="btn_colorchart12" taborder="46" left="767" top="275" width="15" height="15" background="#FFD9EC"/>
+        <Button id="btn_colorchart13" taborder="47" left="613" top="289" width="15" height="15" background="#FFA7A7"/>
+        <Button id="btn_colorchart14" taborder="48" left="627" top="289" width="15" height="15" background="#FFC19E"/>
+        <Button id="btn_colorchart15" taborder="49" left="641" top="289" width="15" height="15" background="#FFE08C"/>
+        <Button id="btn_colorchart16" taborder="50" left="655" top="289" width="15" height="15" background="#FAED7D"/>
+        <Button id="btn_colorchart17" taborder="51" left="669" top="289" width="15" height="15" background="#CEF279"/>
+        <Button id="btn_colorchart18" taborder="52" left="683" top="289" width="15" height="15" background="#B7F0B1"/>
+        <Button id="btn_colorchart19" taborder="53" left="697" top="289" width="15" height="15" background="#B2EBF4"/>
+        <Button id="btn_colorchart20" taborder="54" left="711" top="289" width="15" height="15" background="#B2CCFF"/>
+        <Button id="btn_colorchart21" taborder="55" left="725" top="289" width="15" height="15" background="#B5B2FF"/>
+        <Button id="btn_colorchart22" taborder="56" left="739" top="289" width="15" height="15" background="#D1B2FF"/>
+        <Button id="btn_colorchart23" taborder="57" left="753" top="289" width="15" height="15" background="#FFB2F5"/>
+        <Button id="btn_colorchart24" taborder="58" left="767" top="289" width="15" height="15" background="#FFB2D9"/>
         <Edit id="edt_deptname" taborder="59" left="394" top="140" width="133" height="30" visible="false"/>
         <Button id="btn_colorchartfromds" taborder="60" left="470" top="283" width="15" height="15" background=""/>
         <Edit id="edt_deptcode" taborder="61" left="394" top="185" width="133" height="30" visible="false"/>
@@ -122,24 +122,14 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	//load 되었을 때 DB에서 empl도 select 해오기
 	this.transaction(
-		"empl_select"// 1.ID
-		,"HirpURL::admin/empllist.hirp"// 2.URL		
+		"tr_select"// 1.ID
+		,"HirpURL::admin/deptinfo.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_empl=out_empl" // 4.OutDs : S->F jsp(SELECT)
+		,"ds_empl=out_empl ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
 		,"" // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);
 	
-	
-	//load 되었을 때 DB에서 dept select 해오기
-	this.transaction(
-		"dept_select"// 1.ID
-		,"HirpURL::admin/deptlist.hirp"// 2.URL		
-		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
-		,"" // 5.InVar : F->S(var)
-		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-	);
 	
 	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
 	trace(this.ds_dept.rowposition);
@@ -158,7 +148,7 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {	
-	if(id=="dept_select")
+	if(id=="tr_select")
 	{
 		if(nErrorCode < 0)
 		{
@@ -166,17 +156,9 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			return;
 		}
 		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
-	}
-	
-	if(id=="empl_select")
-	{
-		if(nErrorCode < 0)
-		{
-			this.alert("사원 조회 실패 : " + sErrorMsg);
-			return;
-		}
 		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
 	}
+	
 }
 
 
@@ -435,6 +417,7 @@ this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
 {
 	this.edt_deptsecond.set_visible("true");
 };
+
 ]]></Script>
     <Objects>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
