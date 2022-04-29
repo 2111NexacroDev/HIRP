@@ -1,0 +1,1348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[.Static.WF_sta_editor
+{
+	background		: #e4e5e9;
+	-nexa-border		: 1px solid #9da4ae;
+	border-radius 		: 4px;
+}
+
+.Static.WF_sta_thumbBox
+{
+	background		: #ffffff;
+	-nexa-border		: 1px solid #9da4ae;
+	border-radius 		: 4px;
+}
+
+.Static.WF_sta_thumbtitle
+{
+	background		: #e4e5e9;
+	-nexa-border		: 1px solid #93a5ba;
+	border-radius 		: 3px 3px 0px 0px;
+	color			: #9da4ae;
+	-nexa-padding		: 0px 0px 0px 12px;
+	
+}
+
+/***************/
+.ImageViewer.WF_imgvwr_thumb
+{
+	background			: #f3f4f6;
+	-nexa-border			: 1px solid #9da4ae;
+	color				: ;
+	cursor				: ;
+	font				: ;
+	opacity				: 1;
+	-nexa-padding			: ;
+	box-shadow			: ;
+}
+.ImageViewer.WF_imgvwr_thumb[status=mouseover], .ImageViewer.WF_imgvwr_thumb[status=focused]
+{
+	-nexa-border			: 1px solid #5659e7;
+}
+.ImageViewer.WF_imgvwr_thumb[status=disabled]
+{
+
+}
+
+/****** 썸네일 사진기모양 *******/
+.Button.WF_btn_thumbPhoto, .Button.WF_btn_thumbPhoto[status=disabled], .Button.WF_btn_thumbPhoto[status=focused]
+{	
+	background		: url('imagerc::richtexteditor/WF_btn_thumbPhoto.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+.Button.WF_btn_thumbPhoto[status=mouseover],.Button.WF_btn_thumbPhoto[userstatus=pushed],.Button.WF_btn_thumbPhoto[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/WF_btn_thumbPhoto_O.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+
+/****** 썸네일 적용하기 *******/
+.Button.WF_btn_thumbUse, .Button.WF_btn_thumbUse[status=disabled], .Button.WF_btn_thumbUse[status=focused]
+{	
+	background		: url('imagerc::richtexteditor/WF_btn_thumbUse.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+.Button.WF_btn_thumbUse[status=mouseover], .Button.WF_btn_thumbUse[userstatus=pushed], .Button.WF_btn_thumbUse[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/WF_btn_thumbUse_O.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+
+/****** 사진삭제 ******/
+.Button.WF_btn_thumbCls, .Button.WF_btn_thumbCls[status=focused], .Button.WF_btn_thumbCls[userstatus=selected], .Button.WF_btn_thumbCls[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/WF_btn_thumbCls.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+.Button.WF_btn_thumbCls[status=mouseover], .Button.WF_btn_thumbCls[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/WF_btn_thumbCls_O.png') no-repeat center center;
+	-nexa-border			: 0px none #ffffff;
+}
+
+/***************/
+.TextArea.Editor_tex_none,.TextArea.Editor_tex_none[status=focused]
+{
+	background			: #ffffff;
+	-nexa-border			: 1px solid #9da4ae;
+	color				: #46586e;
+	cursor				: ;
+	font				: ;
+	-nexa-padding			: 3px 0px 3px 5px;
+	-nexa-text-align 		: left;
+	border-radius 			: 4px 4px 0px 0px;
+}
+.TextArea.Editor_tex_none[status=mouseover]
+{
+	background		: #ffffff;
+	-nexa-border			: 1px solid #9da4ae;
+}
+.TextArea.Editor_tex_none[status=disabled], .TextArea.Editor_tex_none[status=readonly]
+{
+	background		: #ffffff;
+	-nexa-border			: 1px solid #9da4ae;
+	color			: #b2bfce;
+}
+
+/****** 탭버튼 ********/
+.Button.Editor_tab, .Button.Editor_tab[status=disabled], .Button.Editor_tab[status=focused]
+{
+	background			: #e4e5e9;
+	-nexa-border			: 1px solid #93a5ba;
+	color				: #93a5ba;
+	font				: 9pt Verdana, malgun gothic;
+	border-radius 			: 0px 0px 4px 4px;
+}
+/*******/
+.Button.Editor_tab[status=mouseover], .Button.Editor_tab[userstatus=pushed]
+{
+	background			: #e4e5e9;
+	-nexa-border			: 1px solid #93a5ba;
+	color				: #46586e;
+	font				: 9pt Verdana, malgun gothic;
+	border-radius 			: 0px 0px 4px 4px;
+}
+.Button.Editor_tab[userstatus=selected]
+{
+	-nexa-border			: 0px none;
+	color				: #46586e;
+	font				: 9pt Verdana, malgun gothic;
+	border-radius 			: 0px 0px 4px 4px;
+	-nexa-edge : url('imagerc::richtexteditor/Editor_tab_S.png') 6px 6px;
+}
+
+/****** 레이아웃 ******/
+.Button.Editor_btn_layout, .Button.Editor_btn_layout[status=focused], .Button.Editor_btn_layout[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_layout.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_layout[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_layout.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_layout[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_layout.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_layout[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_layout_D.png') no-repeat center center #ffffff;
+}
+
+/********** 코드 하이라이트 **********/
+.Button.Editor_btn_highlight, .Button.Editor_btn_highlight[status=focused], .Button.Editor_btn_highlight[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_highlight.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_highlight[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_highlight.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_highlight[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_highlight.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_highlight[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_highlight_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 인용구 **********/
+.Button.Editor_btn_quo, .Button.Editor_btn_quo[status=focused], .Button.Editor_btn_quo[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_quo.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_quo[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_quo.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_quo[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_quo.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_quo[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_quo_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 왼쪽정렬 **********/
+.Button.Editor_btn_alignL, .Button.Editor_btn_alignL[status=focused], .Button.Editor_btn_alignL[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignL.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignL[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignL.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignL[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignL.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignL[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignL_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 가운데정렬 **********/
+.Button.Editor_btn_alignC, .Button.Editor_btn_alignC[status=focused], .Button.Editor_btn_alignC[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignC.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignC[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignC.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignC[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignC.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignC[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignC_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 오른쪽정렬 **********/
+.Button.Editor_btn_alignR, .Button.Editor_btn_alignR[status=focused], .Button.Editor_btn_alignR[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignR.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignR[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignR.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignR[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignR.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignR[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignR_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 양쪽정렬 **********/
+.Button.Editor_btn_alignJ, .Button.Editor_btn_alignJ[status=focused], .Button.Editor_btn_alignJ[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignJ.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignJ[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignJ.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignJ[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignJ.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignJ[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignJ_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 상단 정렬 **********/
+.Button.Editor_btn_alignT, .Button.Editor_btn_alignT[status=focused], .Button.Editor_btn_alignT[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignT.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignT[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignT.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignT[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignT.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignT[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignT_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 중단 정렬 **********/
+.Button.Editor_btn_alignM, .Button.Editor_btn_alignM[status=focused], .Button.Editor_btn_alignM[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignM.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignM[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignM.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignM[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignM.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignM[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignM_D.png') no-repeat center center #ffffff;
+}
+
+/********** 하단 정렬 **********/
+.Button.Editor_btn_alignB, .Button.Editor_btn_alignB[status=focused], .Button.Editor_btn_alignB[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignB.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_alignB[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignB.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_alignB[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignB.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_alignB[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_alignB_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 좌측들여쓰기 **********/
+.Button.Editor_btn_justL, .Button.Editor_btn_justL[status=focused], .Button.Editor_btn_justL[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justL.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_justL[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justL.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_justL[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justL.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_justL[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justL_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 우측들여쓰기 **********/
+.Button.Editor_btn_justR, .Button.Editor_btn_justR[status=focused], .Button.Editor_btn_justR[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justR.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_justR[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justR.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_justR[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justR.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_justR[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_justR_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 리스트숫자 **********/
+.Button.Editor_btn_listOdr, .Button.Editor_btn_listOdr[status=focused], .Button.Editor_btn_listOdr[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_listOdr.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_listOdr[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_listOdr.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_listOdr[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_listOdr.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_listOdr[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_listOdr_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 리스트 **********/
+.Button.Editor_btn_list, .Button.Editor_btn_list[status=focused], .Button.Editor_btn_list[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_list.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_list[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_list.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_list[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_list.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_list[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_list_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 링크삭제 **********/
+.Button.Editor_btn_linkDel, .Button.Editor_btn_linkDel[status=focused], .Button.Editor_btn_linkDel[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_linkDel.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_linkDel[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_linkDel.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_linkDel[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_linkDel.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_linkDel[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_linkDel_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 링크 **********/
+.Button.Editor_btn_link, .Button.Editor_btn_link[status=focused], .Button.Editor_btn_link[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_link.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_link[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_link.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_link[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_link.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_link[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_link_D.png') no-repeat center center #ffffff;
+}
+
+
+.Button.Editor_btn_bgclr2, .Button.Editor_btn_bgclr2[status=focused], .Button.Editor_btn_bgclr2[userstatus=selected]
+{
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 0px 1px 0px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_bgclr2.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_bgclr2[status=mouseover]
+{
+	-nexa-border			: 2px solid #56e7ca;
+	-nexa-padding			: 2px 0px 1px 0px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_bgclr2.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_bgclr2[userstatus=pushed]
+{
+	-nexa-border			: 2px solid #afb1f4;
+	-nexa-padding			: 2px 0px 1px 0px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_bgclr2.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_bgclr2[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 0px 1px 0px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_bgclr2_D.png');
+	-nexa-icon-position 		: left;
+}
+
+
+/********** 폰트컬러 **********/
+.Button.Editor_btn_ftclr, .Button.Editor_btn_ftclr[status=focused], .Button.Editor_btn_ftclr[userstatus=selected]
+{
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 0px 1px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_ftclr.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_ftclr[status=mouseover]
+{
+	-nexa-border			: 2px solid #56e7ca;
+	-nexa-padding			: 2px 0px 1px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_ftclr.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_ftclr[userstatus=pushed]
+{
+	-nexa-border			: 2px solid #afb1f4;
+	-nexa-padding			: 2px 0px 1px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_ftclr.png');
+	-nexa-icon-position 		: left;
+}
+.Button.Editor_btn_ftclr[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 0px 1px;
+	background			: #ffffff;
+	-nexa-icon 			: url('imagerc::richtexteditor/Editor_btn_ftclr_D.png');
+	-nexa-icon-position 		: left;
+}
+
+
+/********** 볼드체 **********/
+.Button.Editor_btn_bold, .Button.Editor_btn_bold[status=focused], .Button.Editor_btn_bold[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_bold.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_bold[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_bold.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_bold[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_bold.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_bold[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_bold_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 이탤릭체 **********/
+.Button.Editor_btn_italic, .Button.Editor_btn_italic[status=focused], .Button.Editor_btn_italic[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_italic.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_italic[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_italic.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_italic[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_italic.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_italic[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_italic_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 언더라인 **********/
+.Button.Editor_btn_underline, .Button.Editor_btn_underline[status=focused], .Button.Editor_btn_underline[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_underline.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_underline[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_underline.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_underline[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_underline.png') no-repeat center center #afb1f4;
+}
+
+.Button.Editor_btn_underline[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_underline_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** strike **********/
+.Button.Editor_btn_strike, .Button.Editor_btn_strike[status=focused], .Button.Editor_btn_strike[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_strike.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_strike[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_strike.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_strike[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_strike.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_strike[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_strike_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 심볼 **********/
+.Button.Editor_btn_symbol, .Button.Editor_btn_symbol[status=focused], .Button.Editor_btn_symbol[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_symbol.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_symbol[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_symbol.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_symbol[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_symbol.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_symbol[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_symbol_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 그리드 **********/
+.Button.Editor_btn_grid,.Button.Editor_btn_grid[status=focused],.Button.Editor_btn_grid[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_grid[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_grid[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_grid[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid_D.png') no-repeat center center #ffffff;
+}
+
+
+/****** 폰트 ******/
+.Button.Editor_btn_font, .Button.Editor_btn_font[status=focused], .Button.Editor_btn_font[userstatus=selected]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align 		: middle;
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 5px 1px 20px;
+	color				: #34495e;
+	font				: 9pt Verdana, malgun gothic;
+	background			: url('imagerc::richtexteditor/Editor_btn_font.png') no-repeat left center #ffffff;
+}
+.Button.Editor_btn_font[status=mouseover]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align 		: middle;
+	background			: url('imagerc::richtexteditor/Editor_btn_font.png') no-repeat left center #ffffff;
+	-nexa-border			: 2px solid #56e7ca;
+	-nexa-padding			: 2px 5px 1px 20px;
+	color				: #34495e;
+	font				: 9pt Verdana, malgun gothic;
+}
+.Button.Editor_btn_font[userstatus=pushed]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align 		: middle;
+	background			: url('imagerc::richtexteditor/Editor_btn_font.png') no-repeat left center #ffffff;
+	-nexa-border			: 2px solid #afb1f4;
+	-nexa-padding			: 2px 5px 1px 20px;
+	color				: #34495e;
+	font				: 9pt Verdana, malgun gothic;
+}
+.Button.Editor_btn_font[status=disabled]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align 		: middle;
+	background			: url('imagerc::richtexteditor/Editor_btn_font_D.png') no-repeat left center #ffffff;
+	-nexa-border			: 2px solid #ffffff;
+	-nexa-padding			: 2px 5px 1px 20px;
+	color				: #b2bfce;
+	font				: 9pt Verdana, malgun gothic;
+}
+
+
+/****** 사이즈 ******/
+.Button.Editor_btn_size, .Button.Editor_btn_size[status=focused], .Button.Editor_btn_size[userstatus=selected]
+{
+	-nexa-border			: 2px solid #ffffff;
+	font				: 9pt Verdana, malgun gothic;
+	color				: #46586e;
+	-nexa-padding			: 1px 0px 0px 0px;
+	background			: #ffffff;
+	-nexa-icon : url('imagerc::richtexteditor/Editor_btn_size.png');
+	-nexa-icon-position : left;
+	-nexa-text-align : left;
+}
+.Button.Editor_btn_size[status=mouseover]
+{
+	-nexa-border			: 2px solid #56e7ca;
+	font				: 9pt Verdana, malgun gothic;
+	color				: #46586e;
+	-nexa-padding			: 1px 0px 0px 0px;
+	background			: #ffffff;
+	-nexa-icon : url('imagerc::richtexteditor/Editor_btn_size.png');
+	-nexa-icon-position : left;
+	-nexa-text-align : left;
+}
+.Button.Editor_btn_size[userstatus=pushed]
+{
+	-nexa-border			: 2px solid #afb1f4;
+	font				: 9pt Verdana, malgun gothic;
+	color				: #46586e;
+	-nexa-padding			: 1px 0px 0px 0px;
+	background			: #ffffff;
+	-nexa-icon : url('imagerc::richtexteditor/Editor_btn_size.png');
+	-nexa-icon-position : left;
+	-nexa-text-align : left;
+}
+.Button.Editor_btn_size[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	font				: 9pt Verdana, malgun gothic;
+	color				: #46586e;
+	-nexa-padding			: 1px -18px 0px 0px;
+	background			: #ffffff;
+	-nexa-icon : url('imagerc::richtexteditor/Editor_btn_size.png');
+	-nexa-icon-position : left;
+	-nexa-text-align : left;
+}
+
+
+/********** 파일업로드 **********/
+.Button.Editor_btn_file, .Button.Editor_btn_file[status=focused], .Button.Editor_btn_file[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_fileAdd.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_file[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_fileAdd.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_file[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_fileAdd.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_file[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_fileAdd_D.png') no-repeat center center #ffffff;
+}
+
+
+/********** 이미지 **********/
+.Button.Editor_btn_image, .Button.Editor_btn_image[status=focused], .Button.Editor_btn_image[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_imgAdd.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_image[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_imgAdd.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_image[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_imgAdd.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_image[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_imgAdd_D.png') no-repeat center center #ffffff;
+}
+
+
+/*********************** 펼쳤을때 ****************************/
+.Button.Editor_btn_algn01, .Button.Editor_btn_algn01[status=focused], .Button.Editor_btn_algn01[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn01.png') no-repeat no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn01[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn01.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn01[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn01.png') no-repeat center center #afb1f4;
+}
+
+/********** bg컬러 **********/
+.Button.Editor_btn_bdsize, .Button.Editor_btn_bdsize[status=focused], .Button.Editor_btn_bdsize[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bold2.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_bdsize[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bold2.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_bdsize[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bold2.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_bdsize[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bold2.png') no-repeat center center #ffffff;
+}
+/********** bg컬러 **********/
+.Button.Editor_btn_bgclr, .Button.Editor_btn_bgclr[status=focused], .Button.Editor_btn_bgclr[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bgclr.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_bgclr[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bgclr.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_bgclr[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bgclr.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_bgclr[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_bgclr_D.png') no-repeat center center #ffffff;
+}
+
+/***********/
+.Button.Editor_penclr, .Button.Editor_penclr[status=focused], .Button.Editor_penclr[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_penclr.png') no-repeat center center #ffffff;
+}
+.Button.Editor_penclr[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_penclr.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_penclr[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_penclr.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_penclr[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_penclr_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn01[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn01_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn02, .Button.Editor_btn_algn02[status=focused], .Button.Editor_btn_algn02[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn02.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn02[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn02.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn02[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn02.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn02[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn02_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn03, .Button.Editor_btn_algn03[status=focused], .Button.Editor_btn_algn03[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn03.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn03[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn03.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn03[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn03.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn03[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn03_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn04, .Button.Editor_btn_algn04[status=focused], .Button.Editor_btn_algn04[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn04.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn04[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn04.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn04[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn04.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn04[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn04_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn05, .Button.Editor_btn_algn05[status=focused], .Button.Editor_btn_algn05[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn05.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn05[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn05.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn05[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn05.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn05[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn05_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn06, .Button.Editor_btn_algn06[status=focused], .Button.Editor_btn_algn06[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn06.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn06[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn06.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn06[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn06.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn06[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn06.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn07, .Button.Editor_btn_algn07[status=focused], .Button.Editor_btn_algn07[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn07.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn07[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn07.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn07[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn07.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn07[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn07_D.png') no-repeat center center #ffffff;
+}
+/***********/
+.Button.Editor_btn_algn08, .Button.Editor_btn_algn08[status=focused], .Button.Editor_btn_algn08[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn08.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algn08[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn08.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algn08[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn08.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algn08[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algn08_D.png') no-repeat center center #ffffff;
+}
+
+/*******/
+.Button.Editor_btn_grid2, .Button.Editor_btn_grid2[status=focused], .Button.Editor_btn_grid2[userstatus=selected]
+{ 
+	background			: url('imagerc::richtexteditor/Editor_btn_grid2.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_grid2[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid2.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_grid2[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid2.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_grid2[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_grid2_D.png') no-repeat center center #ffffff;
+}
+
+/****** 에디터펼침버튼 *****/
+.Button.Editor_btn_dn, .Button.Editor_btn_dn[status=focused], .Button.Editor_btn_dn[userstatus=selected], .Button.Editor_btn_dn[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_dn.png') no-repeat center top #e4e5e9;
+	-nexa-border			: 0px none, 0px none, 0px none, 1px solid #93a5ba;
+}
+.Button.Editor_btn_dn[status=mouseover], .Button.Editor_btn_dn[userstatus=pushed]
+{
+	-nexa-border		: 0px none, 0px none, 0px none, 1px solid #93a5ba;
+	background		: url('imagerc::richtexteditor/Editor_btn_dn_O.png') no-repeat center top #e4e5e9;
+}
+/********/
+.Button.Editor_btn_up, .Button.Editor_btn_up[status=focused], .Button.Editor_btn_up[userstatus=selected], .Button.Editor_btn_up[status=disabled]
+{
+	-nexa-border			: 0px none, 0px none, 0px none, 1px solid #93a5ba;
+	background			: url('imagerc::richtexteditor/Editor_btn_up.png') no-repeat center top #e4e5e9;
+}
+.Button.Editor_btn_up[status=mouseover], .Button.Editor_btn_up[userstatus=pushed]
+{
+	-nexa-border			: 0px none, 0px none, 0px none, 1px solid #93a5ba;
+	background			: url('imagerc::richtexteditor/Editor_btn_up_O.png') no-repeat center top #e4e5e9;
+}
+
+/****** 박스라운드 .Static *******/
+.Static.Editor_sta_box
+{
+	background		: #ffffff;
+	-nexa-border		: 1px solid #93a5bb;
+	border-radius : 4px;
+	
+}
+
+/***************/
+.Grid.Editor_grd_pop2
+{
+	background			: #ffffff;
+	-nexa-border			: 1px solid #e4e5e9;
+	color				: #46586e;
+}
+.Grid.Editor_grd_pop2 .body
+{
+	-nexa-border			: 0px none;
+	background			: #ffffff;
+	color				: #46586e;
+	font				: 11pt Verdana, malgun gothic;
+}
+
+
+
+/**** 템플릿형태버튼 *****/
+.Button.Editor_btn_table01, .Button.Editor_btn_table01[status=focused], .Button.Editor_btn_table01[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table01.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table01[status=mouseover], .Button.Editor_btn_table01[userstatus=pushed], .Button.Editor_btn_table01[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table01.png') no-repeat center center #ffffff;
+}
+/*******/
+.Button.Editor_btn_table02, .Button.Editor_btn_table02[status=focused], .Button.Editor_btn_table02[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table02.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table02[status=mouseover], .Button.Editor_btn_table02[userstatus=pushed], .Button.Editor_btn_table02[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table02.png') no-repeat center center #ffffff;
+}
+/*******/
+.Button.Editor_btn_table03, .Button.Editor_btn_table03[status=focused], .Button.Editor_btn_table03[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table03.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table03[status=mouseover], .Button.Editor_btn_table03[userstatus=pushed], .Button.Editor_btn_table03[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table03.png') no-repeat center center #ffffff;
+}
+/*******/
+.Button.Editor_btn_table04, .Button.Editor_btn_table04[status=focused], .Button.Editor_btn_table04[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table04.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table04[status=mouseover], .Button.Editor_btn_table04[userstatus=pushed], .Button.Editor_btn_table04[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table04.png') no-repeat center center #ffffff;
+}
+/*******/
+.Button.Editor_btn_table05, .Button.Editor_btn_table05[status=focused], .Button.Editor_btn_table05[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table05.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table05[status=mouseover], .Button.Editor_btn_table05[userstatus=pushed], .Button.Editor_btn_table05[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table05.png') no-repeat center center #ffffff;
+}
+/*******/
+.Button.Editor_btn_table06, .Button.Editor_btn_table06[status=focused], .Button.Editor_btn_table06[status=disabled]
+{
+	-nexa-border			: 2px solid #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_table06.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_table06[status=mouseover], .Button.Editor_btn_table06[userstatus=pushed], .Button.Editor_btn_table06[userstatus=selected]
+{
+	-nexa-border			: 2px solid #1abd9c;
+	background			: url('imagerc::richtexteditor/Editor_btn_table06.png') no-repeat center center #ffffff;
+}/*******/
+
+/*********/
+.Grid.Editor_grd_pop
+{
+	background			: transparent;
+	-nexa-border			: 0px none;
+	color				: #46586e;
+}
+.Grid.Editor_grd_pop .body
+{
+	background		: transparent;
+	color			: #46586e;
+	font			: 9pt Verdana, malgun gothic;
+}.Grid.Editor_grd_pop .body[status=mouseover]
+{
+	-nexa-border			: 0px none #e5e5e5;
+	background			: #e4e5e9;
+	color				: #46586e;
+	font				: 9pt Verdana, malgun gothic;
+	
+}
+.Grid.Editor_grd_pop2 .body[status=mouseover]
+{
+	-nexa-border			: 0px none #e5e5e5;
+	background			: #e4e5e9;
+	color				: #46586e;
+	font				: 11pt Verdana, malgun gothic;
+}
+.Grid.Editor_grd_pop .body .row .cell
+{
+	-nexa-border : 0px none;
+	
+}
+
+
+/***** 템플릿형태 *****/
+.Static.Editor_sta_tmpp01
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp01.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp01[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp01.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp02
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp02.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp02[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp02.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp03
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp03.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp03[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp03.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp04
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp04.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp04[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp04.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp05
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp05.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp05[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp05.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp06
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp06.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp06[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp06.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp07
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp07.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp07[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp07.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+/**********/
+.Static.Editor_sta_tmpp08
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp08.png') center middle;
+	-nexa-border			: 2px solid #ffffff;
+}
+.Static.Editor_sta_tmpp08[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_sta_tmpp08.png') center middle;
+	-nexa-border			: 2px solid #5759e7;
+}
+
+/**********/
+.Button.Editor_btn_rsiz, .Button.Editor_btn_rsiz[status=disabled], .Button.Editor_btn_rsiz[status=focused]
+{
+	-nexa-border			: 0px none #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_rsiz.png') center center;
+	cursor				: n-resize;
+}
+.Button.Editor_btn_rsiz[status=mouseover], .Button.Editor_btn_rsiz[userstatus=pushed], .Button.Editor_btn_rsiz[userstatus=selected]
+{
+	-nexa-border			: 0px none #ffffff;
+	background			: url('imagerc::richtexteditor/Editor_btn_rsiz_O.png') center center;
+	cursor				: n-resize;
+}
+
+/****** 리셋버튼 ********/
+.Button.Editor_btn_reset, .Button.Editor_btn_reset[status=focused], .Button.Editor_btn_reset[userstatus=selected]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_reset.png') no-repeat center center;
+}
+.Button.Editor_btn_reset[status=mouseover]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_reset_O.png') no-repeat center center;
+}
+.Button.Editor_btn_reset[userstatus=pushed]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_reset_O.png') no-repeat center center;
+}
+.Button.Editor_btn_reset[status=disabled]
+{
+	background			: url('imagerc::richtexteditor/Editor_btn_reset.png') no-repeat center center;
+}
+
+
+/******* 정렬_자리차지,좌측위치,어울림,우측위치 *******/
+.Button.Editor_btn_algnOcc, .Button.Editor_btn_algnOcc[status=focused], .Button.Editor_btn_algnOcc[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnOcc.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algnOcc[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnOcc.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algnOcc[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnOcc.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algnOcc[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnOcc_D.png') no-repeat center center #ffffff;
+}
+
+/********/
+.Button.Editor_btn_algnL, .Button.Editor_btn_algnL[status=focused], .Button.Editor_btn_algnL[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnL.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algnL[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnL.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algnL[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnL.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algnL[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnL_D.png') no-repeat center center #ffffff;
+}
+
+/********/
+.Button.Editor_btn_algnR, .Button.Editor_btn_algnR[status=focused], .Button.Editor_btn_algnR[userstatus=selected]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnR.png') no-repeat center center #ffffff;
+}
+.Button.Editor_btn_algnR[status=mouseover]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnR.png') no-repeat center center #56e7ca;
+}
+.Button.Editor_btn_algnR[userstatus=pushed]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnR.png') no-repeat center center #afb1f4;
+}
+.Button.Editor_btn_algnR[status=disabled]
+{
+	background		: url('imagerc::richtexteditor/Editor_btn_algnR_D.png') no-repeat center center #ffffff;
+}
+
+
+/*********** 파일첨부 그리드 ***************/
+.Grid.WF_grd_fileAdd
+{
+	background			: transparent;
+	-nexa-border			: 1px solid #93a5ba, 0px none #9f8f71, 1px solid #e4e5e9, 0px none #9f8f71;
+	color				: #46586e;
+	font				: ;
+}
+.Grid.WF_grd_fileAdd .body
+{
+	background			: #ffffff;
+	-nexa-border			: 0px none #e5e5e5;
+	background			: #ffffff;
+	color				: #46586e;
+}
+.Grid.WF_grd_fileAdd .body[status=mouseover]
+{
+	color			: #00bff3;
+	font			: 9pt Verdana, malgun gothic;
+}
+
+/************************************ popup ************************************/
+.Div.POP_.Div_bg
+{
+	background			: #ffffff;
+	-nexa-border			: 1px solid #93a5ba;
+	border-radius 			: 15px;
+	
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont8
+{
+	font : 8pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont10
+{
+	font : 10pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont12
+{
+	font : 12pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont14
+{
+	font : 14pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont18
+{
+	font : 18pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont24
+{
+	font : 24pt "돋움";
+}
+
+.Grid .body .row .cell.Editor_grd_popCellFont36
+{
+	font : 36pt "돋움";
+}
+]]></XCSS>

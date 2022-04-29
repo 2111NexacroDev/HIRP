@@ -37,10 +37,21 @@ public class NoticeController {
 	@Autowired
 	public NoticeBoardService nService;
 	
-	@RequestMapping(value="notice/writeView.hirp")
-	public String noticeWriteView() {
-		return "notice/noticeWriteView";
+	
+	@RequestMapping(value="board/main.hirp")
+	public String boardMain() {
+		return "/board/boardMain";
 	}
+	
+	@RequestMapping(value="board/writeView.hirp")
+	public String boardWriteView() {
+		return "/board/boardWriteView";
+	}
+	
+//	@RequestMapping(value="notice/writeView.hirp")
+//	public String noticeWriteView() {
+//		return "notice/noticeWriteView";
+//	}
 	
 	//공지사항 전체 리스트 조회
 	@RequestMapping(value="notice/list.hirp",method=RequestMethod.GET)
@@ -90,24 +101,26 @@ public class NoticeController {
 	}
 	
 	//공지글 등록
-	@RequestMapping(value="/notice/register.kh", method=RequestMethod.POST)	
+	@RequestMapping(value="notice/register.hirp", method=RequestMethod.POST)	
 	public ModelAndView registerNotice(ModelAndView mv
 			,@ModelAttribute NoticeBoard noticeboard
-			,@ModelAttribute BoardAttachedFile boardFile
-			,@RequestParam(value="uploadFile",required=false)MultipartFile uploadFile
-			,HttpServletRequest request) {
+//			,@ModelAttribute BoardAttachedFile boardFile
+//			,@RequestParam(value="uploadFile",required=false)MultipartFile uploadFile
+//			,HttpServletRequest request
+			) 
+			{
 		try {
 			//프로젝트 경로에 파일 저장
-			if(uploadFile !=null && !uploadFile.getOriginalFilename().equals("")) {
-				HashMap<String,String> fileMap = SaveAttachedFile.saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
-				String filePath = fileMap.get("filePath");
-				String fileRename = fileMap.get("fileName");
-				if(filePath !=null && !filePath.equals("")) {
-					boardFile.setFileName(uploadFile.getOriginalFilename());
-					boardFile.setFileRename(fileRename);
-					boardFile.setFilePath(filePath);
-				}
-			}
+//			if(uploadFile !=null && !uploadFile.getOriginalFilename().equals("")) {
+//				HashMap<String,String> fileMap = SaveAttachedFile.saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
+//				String filePath = fileMap.get("filePath");
+//				String fileRename = fileMap.get("fileName");
+//				if(filePath !=null && !filePath.equals("")) {
+//					boardFile.setFileName(uploadFile.getOriginalFilename());
+//					boardFile.setFileRename(fileRename);
+//					boardFile.setFilePath(filePath);
+//				}
+//			}
 			//디비에 해당 데이터 저장
 			int result = nService.registerNotice(noticeboard);
 			if(result > 0) {

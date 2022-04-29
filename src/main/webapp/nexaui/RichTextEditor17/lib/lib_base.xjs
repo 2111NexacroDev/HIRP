@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[/*
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+		FUNCTION LIST
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	1. gfnIsString	 		: string 여부 반환
+	2. gfnIsNumber	 		: number 여부 반환
+	3. gfnIsBoolean	 		: boolean 여부 반환
+	4. gfnIsNull	 		: null 여부 반환
+	5. gfnIsUndefined		: undefined 여부 반환
+	6. gfnIsObject	 		: object 여부 반환
+	7. gfnIsArray	 		: array 여부 반환
+	8. gfnIsDate	 		: date 여부 반환
+	9. gfnIsFunction		: function 여부 반환
+	10. gfnIsRegExp	 		: regExp 여부 반환
+	11. gfnIsPrimitive		: primitive type (undefined, null, boolean, string, number) 여부 반환
+	12. gfnIsEmpty	 		: 빈값 여부 반환
+	13. gfnIsXComponent		: nexacro component 여부 반환
+	14. gfnIsSpace	 		: space 여부 반환
+	15. gfnIif	 			: 첫 값의 True/False를 검사해 그 결과에 따라 두번째 또는 세번째 값을 반환
+	16. gfnDecode	 		: 입력된 값 또는 수식을 검사해 적당한 값을 반환
+	17. gfnGetUniqueId		: 유일한 ID 를 반환
+	18. gfnGetSequenceId	: Form 내에서 지정된 접두문자열에 순번이 붙여진 ID 를 반환
+	19. gfnFormat	 		: 문자열 내의 {0},{1}...{n}값을 전달받은 arguments로 치환
+*/
+
+this._toString = (Object.prototype.toString);
+this._hasOwnProperty = (Object.prototype.hasOwnProperty);
+this._ALPHA_CHAR_CODES = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102];	//alphabet character code => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f]
+this._formatRegExp = /\{(\d+)\}/g;			//문자열 {n}… 값을 검색후 결과를 저장하기위한 정규식
+
+/**
+ * value의 string 여부 반환
+ * @param {*} value 확인할 value.
+ * @return {boolean} string 여부.
+ * @example
+ * trace(this.gfnIsString("test string!!!"));	// output : true
+ * trace(this.gfnIsString(1234));	// output : false
+ * @memberOf this
+ */
+this.gfnIsString = function(value) 
+{
+	return typeof value === 'string';
+};
+		
+/**
+ * value의 number 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} number 여부.
+ * @example
+ * trace(this.gfnIsNumber(1234));	// output : true
+ * trace(this.gfnIsNumber("1234"));	// output : false		 
+ * @memberOf this
+ */		
+this.gfnIsNumber = function(value) {
+	return typeof value === 'number' && isFinite(value);
+};	
+
+/**
+ * value의 boolean 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} boolean 여부.
+ * @example
+ * trace(this.gfnIsBoolean(true));	// output : true
+ * trace(this.gfnIsBoolean("true"));	// output : false		 
+ * @memberOf this
+ */
+this.gfnIsBoolean = function(value) 
+{
+	return typeof value == 'boolean';
+};
+	  
+/**
+ * value의 null 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} null 여부.
+ * @example
+ * trace(this.gfnIsNull(null));	// output : true
+ * var a; // undefined
+ * trace(this.gfnIsNull(a));	// output : false		
+ * trace(this.gfnIsNull(""));	// output : false
+ * @memberOf this
+ */
+this.gfnIsNull = function(value)
+{
+	return value === null;
+};
+
+/**
+ * value의 undefined 여부 반환.
+ * @param {*} value 확인할 value.		 
+ * @return {boolean} undefined 여부.
+ * @example
+ * var a;
+ * trace(this.gfnIsUndefined(a));	// output : true
+ *
+ * var a = "";
+ * trace(this.gfnIsUndefined(a));	// output : false
+ * @memberOf this
+ */
+this.gfnIsUndefined = function(value)
+{
+	return value === undefined;
+};
+
+/**
+ * value의 Object 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} Object 여부.
+ * @example
+ * var o = new Object();	
+ * trace(this.gfnIsObject(o));	// output : true
+ * 
+ * var o = {};				
+ * trace(this.gfnIsObject(o));	// output : true
+ *
+ * var o = [1,2,3];
+ * trace(this.gfnIsObject(o));	// output : false
+ *
+ * var o = new Button();
+ * trace(this.gfnIsObject(o));	// output : false
+ *
+ * var o = new Rect();
+ * trace(this.gfnIsObject(o));	// output : false
+ *
+ * @memberOf this
+ */
+this.gfnIsObject = function(value)
+{
+	var pThis = this;
+	
+	if ( value === null || value === undefined ) return false;
+	
+	// nexacro Component
+	if ( pThis.gfnIsXComponent(value) ) return false;
+	
+	// nexacro Object (e.g. Dataset)
+	if( value instanceof nexacro.Object ) return false;
+	
+	return typeof value == "object" && 
+		   'constructor' in value &&
+		   value.constructor === Object;
+};			
+
+/**
+ * value의 Array 여부 반환.
+ * @function gfnIsArray
+ * @param {*} value 확인할 value.
+ * @return {boolean} Array 여부.
+ * @example
+ * var a = new Array();
+ * trace(this.gfnIsArray(a));	// output : true
+ *
+ * var a = [1,2,3];
+ * trace(this.gfnIsArray(a));	// output : true
+ * @memberOf this
+ */
+this.gfnIsArray = Array.isArray ? function(value) {
+	return Array.isArray(value);
+}:
+function(value) {
+	var pThis = this;
+	return pThis._toString.call( value ) === '[object Array]';
+};
+
+/**
+ * value의 Date 여부 반환.
+ * @param {date} value 확인할 value.
+ * @return {boolean} Date 여부.
+ * @example
+ * var a = new Date();
+ * trace(this.gfnIsDate(a));	// output : true
+ *
+ * var a = "20130501";
+ * trace(this.gfnIsDate(a));	// output : false 	 
+ * @memberOf this
+ */
+this.gfnIsDate = function(value) 
+{
+	var pThis = this;
+	
+	return pThis._toString.call( value ) === '[object Date]';
+};
+
+/**
+ * value의 Function 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} Function 여부.
+ * @example
+ * trace(this.gfnIsFunction(this.gfnIsFunction));	// output : true
+ *
+ * this.testFunction = function()
+ * {
+ * }
+ * trace(this.gfnIsFunction(this.testFunction));	// output : true
+ * @memberOf this
+ */
+this.gfnIsFunction = function(value)
+{
+	var pThis = this;
+
+	return pThis._toString.call( value ) === '[object Function]';
+};
+
+/**
+ * value의 RegExp 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} 정규식 패턴 여부.
+ * @example
+ * var a = new RegExp();
+ * trace(this.gfnIsRegExp(a));	// output : true
+ * 
+ * var a = /[a-z]/g;
+ * trace(this.gfnIsRegExp(a));	// output : true		 
+ * @memberOf this
+ */
+this.gfnIsRegExp = function(value) 
+{
+	var pThis = this;
+	
+	return pThis._toString.call( value ) === '[object RegExp]';
+};	
+
+/**
+ * primitive type (undefined, null, boolean, string, number) 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} primitive type 여부.
+ * @memberOf this
+ */
+this.gfnIsPrimitive = function(value)
+{
+	return value === null || /^[usbn]/.test(typeof value);
+};
+
+/**
+ * value의 빈값 여부 반환.<br>
+ * 1. null, undefined type : true 반환<br>
+ * 2. string, array type : length 가 0인 경우 true 반환<br>
+ * 3. object type : 하위 속성이 존재할 경우 true 반환<br>
+ * 4. boolean, number, date type : false 반환
+ *
+ * @param {*} value 확인할 value.
+ * @return {boolean} empty 여부.
+ * @example
+ * var a;	// undefined
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = null;	// null
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = "";	// string
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = "abc";	// string
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = [];	// array
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = [1,2,3];	// array
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = new Array();	// array
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = new Array(3);	// array
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = {};	// object
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = {a:'1', b:'2'};	// object
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = new Object();	// object
+ * trace(this.gfnIsEmpty(a));	// output : true
+ *
+ * var a = new Object();	// object
+ * a.test = "abc";
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = true;	// boolean
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = 0;	// number
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * var a = new Date();	// date
+ * trace(this.gfnIsEmpty(a));	// output : false
+ *
+ * @memberOf this
+ */
+this.gfnIsEmpty = function(value)
+{
+	// null, undefined ==> true
+	if ( value == null ) return true;
+	
+	var pThis = this;
+	
+	// String, Array ==> length == 0
+	if ( pThis.gfnIsString(value) || pThis.gfnIsArray(value) )
+	{
+		return value.length == 0 ? true : false;
+	}
+	else if ( pThis.gfnIsObject(value) )
+	{
+		for (var p in value) 
+		{
+			if ( value.hasOwnProperty(p) )
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	return false;
+};
+
+/**
+ * value의 nexacro component 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} nexacro component 여부.
+ * @example
+ * var a = new Button();		//Component
+ * trace(this.gfnIsXComponent(a));	// output : true
+ *
+ * var a = new Dataset();		//InVisible Object
+ * trace(this.gfnIsXComponent(a));	// output : false
+ *
+ * var a = new String();		//Object
+ * trace(this.gfnIsXComponent(a));	// output : false
+ *
+ * @memberOf this
+ */
+this.gfnIsXComponent = function(value) 
+{
+	if ( value === null || value === undefined  ) return false;
+	
+	return value instanceof nexacro.Component;
+};
+
+/**
+ * value의 Space 여부 반환.
+ * @param {*} value 확인할 value.
+ * @return {boolean} Space 여부.
+ * @example
+ * var a = " ";
+ * trace(this.gfnIsSpace(a));	// true
+ *
+ * var a = "\t";
+ * trace(this.gfnIsSpace(a));	// false		 
+ * @memberOf this
+ */
+this.gfnIsSpace = function(value) 
+{
+	return value == ' ';
+};
+
+/**
+ * 첫 값의 True/False를 검사해 그 결과에 따라 두번째 또는 세번째 값을 반환.
+ * @param {*} expr 비교할 값. expr의 값으로 True/False 여부를 확인합니다.
+ *                 expr이 Integer인경우 0이면 False아니면 True인식합니다.
+ * @param {*} trueValue expr이 True에 해당하는 값일 경우 Return 되는 값.
+ * @param {*} falseValue expr이 False에 해당하는 값일 경우 Return 되는 값.
+ * @return {*} expr에 따라 Return 된 값.
+ * @example
+ *
+ * trace(this.gfnIif(2-1=1, "True", "False")); // output : True
+ *
+ * var a = 98;
+ * var b = this.gfnIif(a > 100, 100, a);
+ * trace(b);	// output : 98
+ *
+ * @memberOf this
+ */	
+this.gfnIif = function(expr, trueValue, falseValue) 
+{
+	return expr ? trueValue : falseValue;
+};
+
+/**
+ * 입력된 값 또는 수식을 검사해 적당한 값을 반환.<br>
+ * decoce(비교값, CASE1, 결과값1 [, CASE2, 결과값2, ... ], 디폴트 값);<br>
+ * 표현식의 값이 기준값1이면 값1을 출력하고, 기준값2이면 값2를 출력한다.<br>
+ * 그리고 기준값이 없으면 디폴트 값을 출력한다.<br>
+ * @param {*} * 1. 비교값
+ * @param {*} * 2. CASE
+ * @param {*} * 3. 결과값 (2,3 반복)
+ * @param {*=} * (2,3 반복)
+ * @param {*=} * 4.디폴트값
+ * @return {*} decode에 의해서 선택된 값.
+ * @example
+ * trace(this.gfnDecode("1", "1", "One", "2", "Two", "Default")); // output : One;
+ * 
+ * trace(this.gfnDecode(100, 1, "일", 10, "십", 100, "백"));	// output : 백
+ *
+ * @memberOf this
+ */		 
+this.gfnDecode = function() 
+{
+	var i;
+	var count = arguments.length;
+	for( i = 1 ; i < count ; i+=2 )
+	{
+		if( arguments[0] === arguments[i] )
+		{
+			return arguments[i+1];
+		}
+	}
+	
+	return arguments[i-2];
+};
+
+/**
+ * 유일한 ID 를 반환
+ * @public
+ * @param {string=} prefix id 앞에 붙일 문자열
+ * @param {string=} separator id 생성시 구분용 문자(default: '-' ).
+ * @return {string} id
+ * @example
+ *
+ * trace(this.gfnGetUniqueId()); 
+ * // output : 3e52d1f6-f0d2-4970-a590-ba7656b07859
+ * 
+ * trace(this.gfnGetUniqueId("Button_")); 
+ * // output : Button_4e601da1-63f4-4cfa-849b-01b8a7f14d40
+ * 
+ * trace(this.gfnGetUniqueId("", "_")); 
+ * // output : 4e601da1_63f4_4cfa_849b_01b8a7f14d40
+ * 
+ * trace(this.gfnGetUniqueId("Button_", "_")); 
+ * // output : Button_4e601da1_63f4_4cfa_849b_01b8a7f14d40
+ * 
+ * @memberOf this
+ */
+this.gfnGetUniqueId = function(prefix, separator)
+{
+	if ( this.gfnIsEmpty(prefix) ) prefix = "";
+	if ( this.gfnIsEmpty(separator) ) {
+		separator = 45;
+	} else {
+		separator = separator.charCodeAt(0);
+	}
+	
+	var pThis = this,
+		charcode = pThis._ALPHA_CHAR_CODES,
+		math = Math;
+	var seq = 0;
+	var seq0;
+	var tmpArray = new Array(36);
+	var idx = -1;
+	
+	while (seq < 8) 
+	{
+		tmpArray[++idx] = charcode[math.random() * 16 | 0];
+		seq++;
+	}
+	seq = 0;
+	while (seq < 3) 
+	{
+		tmpArray[++idx] = separator;//45 => "-", 95=> "_"
+		seq0 = 0;
+		while (seq0 < 4) 
+		{
+			tmpArray[++idx] = charcode[math.random() * 16  | 0];
+			seq0++;
+		}
+		seq++;
+	}
+	tmpArray[++idx] = separator; //45 => "-", 95=> "_"
+
+	var tmpStr = (new Date()).getTime();
+	tmpStr = ("0000000" + tmpStr.toString(16)).substr(-8);
+	seq = 0;
+	while (seq < 8) 
+	{
+		tmpArray[++idx] = tmpStr.charCodeAt(seq);
+		seq++;
+	}
+	seq = 0;
+	while (seq < 4) 
+	{
+		tmpArray[++idx] = charcode[math.random() * 16 | 0];
+		seq++;
+	}
+	
+	return prefix + String.fromCharCode.apply(null, tmpArray);	
+}
+
+/**
+ * Form 내에서 지정된 접두문자열에 순번이 붙여진 ID 를 반환
+ * @public
+ * @param {form} prefix 순번 앞에 붙일 문자열
+ * @param {string} prefix 순번 앞에 붙일 문자열
+ * @return {string} id
+ * @example
+ *
+ * // this = Form
+ * trace(this.gfnGetSequenceId(this, "Button")); // output : Button0
+ * trace(this.gfnGetSequenceId(this, "Button")); // output : Button1
+ * 
+ * // this = Form
+ * trace(this.gfnGetSequenceId(this, "chk_")); // output : chk_0
+ * trace(this.gfnGetSequenceId(this, "chk_")); // output : chk_1
+ * 
+ * @memberOf this
+ */		
+this.gfnGetSequenceId = function(form, prefix)
+{
+	if ( this.gfnIsEmpty(form) ) 
+	{
+		trace("1st argument doesn't exist !!");
+		return null;
+	}
+	
+	if ( this.gfnIsEmpty(prefix) ) 
+	{
+		trace("2nd argument doesn't exist !!");
+		return null;
+	}
+	
+	if ( !(form instanceof Form) ) 
+	{				
+		trace("1st argument must be a Form !!");
+		return null;
+	}
+	
+	var cache = form._sequenceIdCache;
+	if ( this.gfnIsEmpty(cache) )
+	{
+		cache = form._sequenceIdCache = {};
+	}
+	
+	var sequence = cache[prefix];
+	if ( this.gfnIsEmpty(sequence) )
+	{
+		sequence = -1;
+	}
+	sequence++;
+	
+	cache[prefix] = sequence;
+	
+	return prefix + sequence;
+}
+
+/**
+ * 문자열 내의 {0},{1}...{n}값을 전달받은 arguments로 치환.
+ * @param {string} str 대상 문자열.
+ * @param {arguments} arguments 식별자 {N}을 대체할 값.
+ * @return {string} 치환된 문자열.
+ * @requires this._formatRegExp
+ * @example
+ * var str = "I {0} a {1} {2}.";
+ * this.format(str, "am", "cool", "guy"); //return "I am a cool guy."
+ *
+ * @memberOf this
+ */	 	         
+this.gfnFormat = function() 
+{
+	var str = arguments[0];
+	var args;
+	
+	var iterant = arguments;
+
+	if (!iterant || !iterant.length) 
+	{
+		args = [];
+	}else{
+		if ( this.gfnIsArray(iterant) )
+		{
+			if ( iterant.length == 1 ) args = iterant;
+			else if ( iterant.length == 2 ) args = iterant.slice(start);
+			else args = iterant.slice(start, end);
+		}else{
+			if (typeof iterant === "string") 
+			{
+				iterant = iterant.split("");
+			}
+
+			var i, array = [],
+			end = iterant.length;
+
+			for (i = 1; i < end; i++) 
+			{
+				array.push(iterant[i]);
+			}
+			
+			args = array;
+		}
+	}
+
+	return str.replace(this._formatRegExp, function(m, i) {
+		return args[i];
+	});
+}]]></Script>

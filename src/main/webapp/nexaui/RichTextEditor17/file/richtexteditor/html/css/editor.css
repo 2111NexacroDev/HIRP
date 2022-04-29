@@ -1,0 +1,98 @@
+body {
+	color: #000000; 
+	font-family: Verdana, "malgun gothic";
+	font-size: 10pt; 
+	background-color: #ffffff; 
+	line-height: 1.5;
+}
+
+p {
+	margin:0;
+}
+
+div {
+	margin:0;
+}
+
+blockquote {
+	margin: 0px 0px 30px;
+	padding: 10px;
+	color: #46586e;
+	font-family: verdana, dotum;
+	font-size: 12px;
+}
+
+blockquote.quote1 { 
+	border: 1px dashed #acb8c7; 
+	background: #ffffff;
+}
+
+blockquote.quote2 {
+	border: 1px dashed #56e7ca; 
+	background: #ffffff;
+}
+
+blockquote.quote3 {
+	border: 1px dashed #8385ed; 
+	background: #ffffff;
+}
+
+blockquote.quote4 {
+	border: 1px dashed #998675; 
+	background: #ffffff; 
+}
+
+blockquote.quote5 {
+	border: 1px dashed #acb8c7; 
+	background: #e4e5e9; 
+}
+
+blockquote.quote6 {
+	border: 1px solid #acb8c7;
+	background: #ffffff;
+}
+
+blockquote.quote7 {
+	border: 1px solid #56e7ca; 
+	background: #ffffff; 
+}
+	
+blockquote.quote8 {
+	border: 1px solid #8385ed; 
+	background: #ffffff; 
+}
+
+blockquote.quote9 {
+	border: 1px solid #998675; 
+	background: #ffffff; 
+}
+
+blockquote.quote10{
+	border: 1px solid #acb8c7;
+	background: #e4e5e9; 
+}
+
+blockquote.quote11{
+	border: 2px solid #acb8c7; 
+	background: #e4e5e9; 
+}
+
+blockquote.quote12{
+	border: 0px none #acb8c7; 
+	background: #e4e5e9; 
+}
+
+blockquote.quote13{
+	border: 0px none #acb8c7; 
+	background: #aff4e6; 
+}
+
+blockquote.quote14{
+	border: 0px none #acb8c7; 
+	background: #afb1f4; 
+}
+
+blockquote.quote15{
+	border: 0px none #acb8c7;
+	background: #fff799; 
+}
