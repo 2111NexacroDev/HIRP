@@ -56,14 +56,54 @@
         <Button id="btn_colorchartfromds" taborder="36" left="470" top="283" width="15" height="15" background=""/>
         <Edit id="edt_deptcode" taborder="37" left="394" top="185" width="133" height="30" visible="false"/>
         <Edit id="edt_deptsecond" taborder="38" left="394" top="230" width="133" height="30" visible="false"/>
-        <MaskEdit id="MaskEdit00" taborder="39" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" format="@@@@-@@-@@" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged"/>
+        <MaskEdit id="MaskEdit00" taborder="39" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged" format="@@@@@@@@"/>
+        <Grid id="Grid00" taborder="40" left="627" top="52" width="338" height="391" binddataset="ds_dept">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="deptCode"/>
+                <Cell col="1" text="deptName"/>
+                <Cell col="2" text="deptSecondname"/>
+                <Cell col="3" text="deptColor"/>
+                <Cell col="4" text="deptMaster"/>
+                <Cell col="5" text="deptHiredate"/>
+                <Cell col="6" text="deptUppercode"/>
+                <Cell col="7" text="deptLevel"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:deptCode"/>
+                <Cell col="1" text="bind:deptName"/>
+                <Cell col="2" text="bind:deptSecondname"/>
+                <Cell col="3" text="bind:deptColor"/>
+                <Cell col="4" text="bind:deptMaster"/>
+                <Cell col="5" text="bind:deptHiredate"/>
+                <Cell col="6" text="bind:deptUppercode"/>
+                <Cell col="7" text="bind:deptLevel"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
 var objDate = new nexacro.Date();
-var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
-var dd = objDate.getDate().toString().padLeft(2, "0");
-var today = objDate.getYear() + mm + dd;
+// var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
+// var dd = objDate.getDate().toString().padLeft(2, "0");
+// var today = objDate.getYear() + mm + dd;
 
 //load 되었을 때
 this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
@@ -83,8 +123,8 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	//load 되었을 때 DB에서 empl도 select 해오기
 	this.transaction(
-		"tr_select"// 1.ID
-		,"HirpURL::admin/deptinfo.hirp"// 2.URL		
+		"dept_select"// 1.ID
+		,"HirpURL::admin/deptInfo.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
 		,"ds_empl=out_empl ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
 		,"" // 5.InVar : F->S(var)
@@ -93,11 +133,11 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	
 	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
-	trace(this.ds_dept.rowposition);
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
-	trace(this.edt_deptcode.value);
-	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
-	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
+// 	trace(this.ds_dept.rowposition);
+// 	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
+// 	trace(this.edt_deptcode.value);
+// 	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
+// 	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
 	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
 	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
 	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
@@ -105,23 +145,6 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.st_deptmaster2.set_text(masterName);
 
 }
-
-
-this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
-{	
-	if(id=="tr_select")
-	{
-		if(nErrorCode < 0)
-		{
-			this.alert("부서 조회 실패 : " + sErrorMsg);
-			return;
-		}
-		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
-		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
-	}
-	
-}
-
 
 
 
@@ -182,11 +205,6 @@ this.ds_dept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRo
 		}
 		
 	}
-	
-	//edit
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(e.newrow, "deptCode"));
-	this.edt_deptname.set_value(this.ds_dept.getColumn(e.newrow, "deptName"));
-	this.edt_deptsecond.set_value(this.ds_dept.getColumn(e.newrow, "deptSecondname"));
 };
 
 
@@ -224,7 +242,7 @@ this.fn_addCallback = function(id, rtn) {
 		this.ds_dept.setColumn(nRow+1,"deptSecondname",sVal[2]);
 		this.ds_dept.setColumn(nRow+1,"deptColor",sVal[3]);
 		
-		this.ds_dept.setColumn(nRow+1,"deptHiredate", today );
+		this.ds_dept.setColumn(nRow+1,"deptHiredate", objDate );
 		this.ds_dept.setColumn(nRow+1,"deptUppercode", this.ds_dept.getColumn(nRow, "deptCode"));
 		this.ds_dept.setColumn(nRow+1,"deptLevel", this.ds_dept.getColumn(nRow, "deptLevel") + 1);
 	}
@@ -253,8 +271,20 @@ this.fn_deleteCallback = function(id, rtn){
 	if(rtn == "delete") {
 		this.ds_dept.deleteRow(this.ds_dept.rowposition);
 		//여기서 서버 연결해주어야 하나?
+		
+		//삭제
+		this.transaction(
+			"dept_delete"// 1.ID
+			,"HirpURL::admin/deptDelete.hirp"// 2.URL
+			,"in_dept=ds_dept:D" // 3.InDs : F->S jsp(I,U,D)
+			,"" // 4.OutDs : S->F jsp(SELECT)
+			,"" // 5.InVar : F->S(var)
+			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+		);
 	}
 	//취소를 누르면 rtn이 cancel
+	
+	
 }
 
 
@@ -278,15 +308,15 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var nMaster = this.st_deptmaster2.text; //master name 값
 	
 	//trace(nCode, nName, nSecond);
-	if(nCode != null || nCode.length > 0){
+	if(nCode != null){
 		trace(nCode);
 		this.ds_dept.setColumn(nRow, "deptCode", nCode);
 	}
-	if(nName != null || nName.length > 0){
+	if(nName != null){
 		trace(nName);
 		this.ds_dept.setColumn(nRow, "deptName", nName);
 	}
-	if(nSecond != null || nSecond.length > 0){
+	if(nSecond != null){
 		trace(nSecond);
 		this.ds_dept.setColumn(nRow, "deptSecondname", nSecond);
 	}
@@ -322,6 +352,19 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	this.btn_edit_deptcode.set_visible("true");
 	this.btn_edit_deptsecond.set_visible("true");
 	this.btn_edit_deptcolor.set_visible("true");
+	
+	//저장
+	this.transaction(
+		"dept_save"// 1.ID
+		,"HirpURL::admin/deptSave.hirp"// 2.URL
+		,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
+
+	
 };
 
 //취소 버튼
@@ -362,18 +405,23 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 //dept name 수정 버튼
 this.btn_edit_deptname_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	//edit
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
+ 	
 	this.edt_deptname.set_visible("true");
 	obj.set_visible("false");
 };
 //dept code 수정 버튼
 this.btn_edit_deptcode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
 	this.edt_deptcode.set_visible("true");
 	obj.set_visible("false");
 };
 //dept second name 수정 버튼
 this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
 	this.edt_deptsecond.set_visible("true");
 	obj.set_visible("false");
 };
@@ -465,6 +513,44 @@ this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	this.ds_dept.set_rowposition(upperRow);
 	
 };
+
+
+//트랜잭션 callback 함수
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{	
+	if(id=="dept_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
+		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
+	}
+	
+	if(id=="dept_save")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 저장 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 저장 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+	
+	if(id=="dept_delete")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 삭제 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 삭제 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+	
+}
+
 ]]></Script>
     <Objects>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
@@ -508,36 +594,6 @@ this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
             <Col id="deptHiredate">20220426</Col>
             <Col id="deptUppercode">10</Col>
             <Col id="deptLevel">1</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102010</Col>
-            <Col id="deptName">국내영업팀</Col>
-            <Col id="deptSecondname">DS</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID4</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102020</Col>
-            <Col id="deptName">해외영업팀</Col>
-            <Col id="deptSecondname">OS</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID5</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102030</Col>
-            <Col id="deptName">영업관리팀</Col>
-            <Col id="deptSecondname">SM</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID6</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
           </Row>
           <Row>
             <Col id="deptCode">1030</Col>
