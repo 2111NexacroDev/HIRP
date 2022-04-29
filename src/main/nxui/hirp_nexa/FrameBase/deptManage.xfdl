@@ -95,13 +95,15 @@
             </Format>
           </Formats>
         </Grid>
+        <Button id="testbtn" taborder="39" text="Button00" left="293" top="583" width="115" height="37" onclick="testbtn_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
 var objDate = new nexacro.Date();
-// var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
-// var dd = objDate.getDate().toString().padLeft(2, "0");
-// var today = objDate.getYear() + mm + dd;
+var yy = objDate.getYear().toString().substr(2, 2);
+var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
+var dd = objDate.getDate().toString().padLeft(2, "0");
+var today = yy + "/"+mm+"/"+dd;
 
 //load 되었을 때
 this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
@@ -236,7 +238,7 @@ this.fn_addCallback = function(id, rtn) {
 		this.ds_dept.setColumn(nRow+1,"deptSecondname",sVal[2]);
 		this.ds_dept.setColumn(nRow+1,"deptColor",sVal[3]);
 		
-		this.ds_dept.setColumn(nRow+1,"deptHiredate", objDate );
+		this.ds_dept.setColumn(nRow+1,"deptHiredate", today );
 		this.ds_dept.setColumn(nRow+1,"deptUppercode", this.ds_dept.getColumn(nRow, "deptCode"));
 		this.ds_dept.setColumn(nRow+1,"deptLevel", this.ds_dept.getColumn(nRow, "deptLevel") + 1);
 	}
@@ -529,6 +531,11 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	
 }
 
+
+this.testbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+};
 ]]></Script>
     <Objects>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
