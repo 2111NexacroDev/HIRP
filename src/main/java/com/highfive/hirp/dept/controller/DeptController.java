@@ -57,15 +57,9 @@ public class DeptController {
 		return result;
 	}
 	
-	//부서 이름 검색 //넥사에서 해결
-//	public NexacroResult selectDeptSearch(
-//			@ParamVariable(name="in_searchName") String searchName) {
-//		
-//		NexacroResult result = new NexacroResult();
-//		return result;
-//	}
 	
 	//부서 추가
+	@RequestMapping(value="/admin/deptInsert.hirp", method=RequestMethod.POST)
 	public NexacroResult insertDept(
 			@ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
 		int 	nErrorCode = 0;
@@ -77,15 +71,15 @@ public class DeptController {
 
 		
 		for(i = 0; i < inDept.getRowCount(); i++) {
-			String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
-			String deptName = dsGet(inDept, i, "DEPT_NAME");
-			String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
-			String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
-			String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
-			String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
-			String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
-			int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
-					Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
+			String deptCode 	 = dsGet(inDept, i, "deptCode");
+			String deptName = dsGet(inDept, i, "deptName");
+			String deptSecondname 	 = dsGet(inDept, i, "deptSecondname");
+			String deptColor 	 = dsGet(inDept, i, "deptColor");
+			String deptMaster 	 = dsGet(inDept, i, "deptMaster");
+			String deptHiredate = dsGet(inDept, i, "deptHiredate");
+			String deptUppercode 	 = dsGet(inDept, i, "deptUppercode");
+			int deptLevel 	 = dsGet(inDept, i, "deptLevel") != "" ?
+					Integer.parseInt(dsGet(inDept, i, "deptLevel")) : 0;
 			
 			Dept dept = new Dept(
 					deptCode
@@ -102,7 +96,17 @@ public class DeptController {
 				iResult += dService.insertDept(dept);
 			}
 		}
-				
+		
+		if(iResult < 0) {
+			nErrorCode 	= -1;
+			strErrorMsg = "FAIL";
+		} else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCC";
+		}
+		
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 			
 		return result;
 	}
@@ -121,25 +125,12 @@ public class DeptController {
 	public NexacroResult deleteDept(
 			 @ParamDataSet(name="in_dept") 	DataSet inDept) {
 
-		NexacroResult result = new NexacroResult();
-		
-		return result;
-	}
-	
-	
-	//저장 버튼 누르면 db에 저장되도록 하는 거
-	//왜 자꾸 null값이래.......
-	//부서 정보 수정 저장
-	@RequestMapping(value="/admin/deptSave.hirp", method=RequestMethod.POST)
-	public NexacroResult updateDept(
-			 @ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
 		
 		int 	i;
-		int iResult = 0;
-		int uResult = 0;
+		int dResult = 0;
 		if(inDept == null) {
 			System.out.println("saveDept");
 			System.out.println(inDept);
@@ -148,26 +139,49 @@ public class DeptController {
 		// DELETE
 		// 삭제했던 로우가 있으면 for문으로 반복해서 삭제
 		for(i = 0; i < inDept.getRemovedRowCount(); i++) {
-			String deptCode = inDept.getRemovedData(i,  "DEPT_CODE").toString();
+			String deptCode = inDept.getRemovedData(i,  "deptCode").toString();
 			System.out.println("delete:" + deptCode);
-			dService.deleteDept(deptCode);
+			dResult = dService.deleteDept(deptCode);
 		}
 		
+		if(dResult < 0) {
+			nErrorCode 	= -1;
+			strErrorMsg = "FAIL";
+		} else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCC";
+		}
 		
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		
-		// INSERT, UPDATE
-		// RowType에 따라서 INSERT OR UPDATE
+		return result;
+	}
+	
+	//부서 정보 수정
+	@RequestMapping(value="/admin/deptSave.hirp", method=RequestMethod.POST)
+	public NexacroResult updateDept(
+			 @ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		
+		int 	i;
+		int uResult = 0;
+
+		// UPDATE
+		// RowType에 따라서 UPDATE
 		for(i = 0; i < inDept.getRowCount(); i++) {
 			
-			String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
-			String deptName = dsGet(inDept, i, "DEPT_NAME");
-			String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
-			String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
-			String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
-			String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
-			String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
-			int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
-					Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
+			String deptCode 	 = dsGet(inDept, i, "deptCode");
+			String deptName = dsGet(inDept, i, "deptName");
+			String deptSecondname 	 = dsGet(inDept, i, "deptSecondname");
+			String deptColor 	 = dsGet(inDept, i, "deptColor");
+			String deptMaster 	 = dsGet(inDept, i, "deptMaster");
+			String deptHiredate = dsGet(inDept, i, "deptHiredate");
+			String deptUppercode 	 = dsGet(inDept, i, "deptUppercode");
+			int deptLevel 	 = dsGet(inDept, i, "deptLevel") != "" ?
+					Integer.parseInt(dsGet(inDept, i, "deptLevel")) : 0;
 			
 			Dept dept = new Dept(
 					deptCode
@@ -181,17 +195,15 @@ public class DeptController {
 			
 			
 			int rowType = inDept.getRowType(i);
-			if( rowType == DataSet.ROW_TYPE_INSERTED) {
-				iResult += dService.insertDept(dept);
-			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
-				String orgDeptCode = inDept.getSavedData(i, "DEPT_CODE").toString();
+			if( rowType == DataSet.ROW_TYPE_UPDATED) {
+				String orgDeptCode = inDept.getSavedData(i, "deptCode").toString();
 				System.out.println("orgDeptCode: " + orgDeptCode);
 				dept.setDeptCode(orgDeptCode);
 				uResult += dService.updateDept(dept);
 			}
 		}
 		
-		if(iResult < 0 && uResult < 0) {
+		if(uResult < 0) {
 			nErrorCode 	= -1;
 			strErrorMsg = "FAIL";
 		} else {
@@ -204,6 +216,80 @@ public class DeptController {
 		
 		return result;
 	}
+	
+	//저장 버튼 누르면 db에 전부 저장 가능
+	//부서 정보 수정 저장
+//	@RequestMapping(value="/admin/deptSave.hirp", method=RequestMethod.POST)
+//	public NexacroResult updateDept(
+//			 @ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
+//		int 	nErrorCode = 0;
+//		String  strErrorMsg = "START";
+//		NexacroResult result = new NexacroResult();
+//		
+//		int 	i;
+//		int iResult = 0;
+//		int uResult = 0;
+//
+//		
+//		// DELETE
+//		// 삭제했던 로우가 있으면 for문으로 반복해서 삭제
+//		for(i = 0; i < inDept.getRemovedRowCount(); i++) {
+//			String deptCode = inDept.getRemovedData(i,  "deptCode").toString();
+//			System.out.println("delete:" + deptCode);
+//			dService.deleteDept(deptCode);
+//		}
+//		
+//		
+//		
+//		// INSERT, UPDATE
+//		// RowType에 따라서 INSERT OR UPDATE
+//		for(i = 0; i < inDept.getRowCount(); i++) {
+//			
+//			String deptCode 	 = dsGet(inDept, i, "deptCode");
+//			String deptName = dsGet(inDept, i, "deptName");
+//			String deptSecondname 	 = dsGet(inDept, i, "deptSecondname");
+//			String deptColor 	 = dsGet(inDept, i, "deptColor");
+//			String deptMaster 	 = dsGet(inDept, i, "deptMaster");
+//			String deptHiredate = dsGet(inDept, i, "deptHiredate");
+//			String deptUppercode 	 = dsGet(inDept, i, "deptUppercode");
+//			int deptLevel 	 = dsGet(inDept, i, "deptLevel") != "" ?
+//					Integer.parseInt(dsGet(inDept, i, "deptLevel")) : 0;
+//			
+//			Dept dept = new Dept(
+//					deptCode
+//					, 	deptName
+//					, 	deptSecondname
+//					, 	deptColor
+//					, 	deptMaster
+//					, 	deptHiredate
+//					, 	deptUppercode
+//					, 	deptLevel);
+//			
+//			
+//			int rowType = inDept.getRowType(i);
+//			if( rowType == DataSet.ROW_TYPE_INSERTED) {
+//				iResult += dService.insertDept(dept);
+//			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
+//				String orgDeptCode = inDept.getSavedData(i, "deptCode").toString();
+//				System.out.println("orgDeptCode: " + orgDeptCode);
+//				dept.setDeptCode(orgDeptCode);
+//				uResult += dService.updateDept(dept);
+//			}
+//		}
+//		
+//		if(iResult < 0 && uResult < 0) {
+//			nErrorCode 	= -1;
+//			strErrorMsg = "FAIL";
+//		} else {
+//			nErrorCode 	= 0;
+//			strErrorMsg = "SUCC";
+//		}
+//		
+//		result.addVariable("ErrorCode", nErrorCode);
+//		result.addVariable("ErrorMsg", strErrorMsg);
+//		
+//		return result;
+//	}
 	
 	// Dataset value
 	public String dsGet(DataSet ds, int rowno, String colid) throws Exception

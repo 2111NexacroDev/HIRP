@@ -16,7 +16,7 @@
 	
 	</resultMap>
 	<select id="selectAllDept" resultMap="deptResultMap">
-		SELECT * FROM DEPT_TBL
+		SELECT * FROM DEPT_TBL ORDER BY DEPT_CODE ASC
 	</select>
 	<insert id="insertDept">
 		INSERT INTO DEPT_TBL VALUES(#{deptCode}, #{deptName}, 
