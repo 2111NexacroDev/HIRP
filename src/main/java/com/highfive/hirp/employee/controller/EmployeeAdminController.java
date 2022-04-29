@@ -4,9 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.highfive.hirp.dept.domain.Dept;
+import com.highfive.hirp.dept.service.DeptService;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
+import com.highfive.hirp.position.domain.Position;
+import com.highfive.hirp.position.service.PositionService;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
@@ -15,13 +21,38 @@ import com.nexacro17.xapi.data.DataSet;
 @Controller
 public class EmployeeAdminController {
 	@Autowired
+	private DeptService dService;
+
+	@Autowired
+	private PositionService pService;
+	
+	@Autowired
 	private EmployeeAdminService eAService;
 	
 	// 재직자 조회
+	@RequestMapping(value="/admin/emplinfo.hirp", method=RequestMethod.GET)
 	public NexacroResult empListView() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
 		// 쿼리문 퇴사일 NULL인 사람만 조회할 것
+		
+		// out_empl, out_dept, out_pos
+		//List<Dept> dList = dService.selectAllDept();
+		//List<Position> pList = pService.selectAllPosition();
 		List<Employee> empList = eAService.printAllEmployee();
+		if(!empList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+			//result.addDataSet("out_dept", dList);
+			//result.addDataSet("out_pos", pList);
+			result.addDataSet("out_empl", empList);
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 	

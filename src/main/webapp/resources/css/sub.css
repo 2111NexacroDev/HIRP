@@ -140,6 +140,7 @@ section[class^="todo--"] li {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    min-height: 300px;
     margin: 0 -15px;
     padding: 20px;
 }
@@ -202,6 +203,22 @@ section[class^="todo--"] li {
 
 .memo--list li .btns-wrap .finished:after {
     content: "\f00d";
+}
+
+.no-data {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0 !important;
+    border-bottom: none !important;
+}
+
+.no-data p {
+    font-weight: 300;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.8;
 }
 
 /* 개인업무관리 끝 */

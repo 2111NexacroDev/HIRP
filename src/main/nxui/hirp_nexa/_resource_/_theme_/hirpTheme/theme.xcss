@@ -306,16 +306,16 @@ last-modified : 2021-10-26
 .Grid
 {
 	background : #ffffff;
-	-nexa-border : 2px solid #125dae, 1px solid #b7b1b2, 1px solid #b7b1b2, 1px solid #b7b1b2;
+	-nexa-border : 1px solid #cccccc, 1px solid #cccccc, 1px solid #cccccc, 1px solid #cccccc;
 }
 
 /* head */
 .Grid .head .row .cell
 {
-	font : bold 12px "Gulim";
-	color : #2f2f2f;
-	background : linear-gradient(to top, #eff0f0, #f9fafa);
-	-nexa-border : 1px solid #cacaca;
+	font : normal 12px "Noto Sans KR";
+	color : #333;
+	background : #ffffff;
+	-nexa-border : 1px solid #ccc;
 	-nexa-padding : 4px 4px 4px 4px;
 	-nexa-text-align : center;
 }
@@ -351,13 +351,13 @@ last-modified : 2021-10-26
 
 .Grid .body .row .cell[status=mouseover]
 {
-	background : #333333;
+	background : #f4f4f4;
 	opacity: 1;
 }
 
 .Grid .body .row .cell[userstatus=selected]
 {
-	background : #333333;
+	background : #f4f4f4;
 	opacity: 1;
 }
 
@@ -406,6 +406,97 @@ last-modified : 2021-10-26
 /* bodycellprogressbar (Same as ProgressBarControl) */
 /* bodycelltextarea (Same as TextAreaControl) */
 /* bodycelltreeitem */
+
+/* GNB */
+/* head */
+.Grid.gnb .head .row .cell
+{
+	font : bold 12px "Noto Sans KR";
+	color : #2f2f2f;
+	background : linear-gradient(to top, #eff0f0, #f9fafa);
+	-nexa-border : 1px solid #cacaca;
+	-nexa-padding : 4px 4px 4px 4px;
+	-nexa-text-align : center;
+}
+
+.Grid.gnb .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+
+.Grid.gnb .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}
+/* headcellbutton (Same as ButtonControl) */
+/* headcellcalendar (Same as CalendarControl) */
+/* headcellcheckbox (Same as CheckBoxControl) */
+/* headcellcombo (Same as ComboControl) */
+/* headcelledit (Same as EditControl) */
+/* headcellexpandbutton */
+/* headcellimage (No style applied) */
+/* headcellmaskedit (Same as MaskEditControl) */
+/* headcellprogressbar (Same as ProgressBarControl) */
+/* headcelltextarea (Same as TextAreaControl) */
+/* headcelltreeitem */
+
+/* body */
+.Grid.gnb .body .row .cell
+{
+	color : #ffffff;
+	-nexa-border : 1px solid #dbdee2;
+	-nexa-padding : 4px 4px 4px 4px;
+	opacity: 0.8;
+}
+
+.Grid.gnb .body .row .cell[status=mouseover]
+{
+	background : #333333;
+	opacity: 1;
+	color : #ffffff;
+}
+
+.Grid.gnb .body .row .cell[userstatus=selected]
+{
+	background : #333333;
+	opacity: 1;
+	color : #ffffff;
+}
+
+.Grid.gnb .body .row .cell[status=disabled]
+{
+	color : #ffffff;
+	opacity: 0.8;
+}
+
+/* subcell (Same as cell) */
+.Grid.gnb .body .row .cell .subcell
+{
+	color : #666666;
+	-nexa-border : 1px solid #dbdee2;
+	-nexa-padding : 4px 4px 4px 4px;
+}
+.Grid.gnb .body .row .cell .subcell[status=mouseover]
+{
+	background : #f6f6f6;
+}
+.Grid.gnb .body .row .cell .subcell[status=disabled]
+{
+	color : #999999;
+}
+.Grid.gnb .body .row .cell .subcell[userstatus=selected]
+{
+	background : #f2f9ff;
+}
+.Grid.gnb .body .row .cell .subcell[userstatus=blinked]
+{
+    background : #125dae;
+	color : #ffffff;
+}
+.Grid.gnb .body .selection
+{
+	-nexa-border : 2px solid #125dae;
+}
 
 /* summary */
 .Grid .summary
@@ -2035,6 +2126,31 @@ last-modified : 2021-10-26
 	-nexa-border : 0px solid #000000;
 
 }
+
+.Button.point {
+    background: #0b2a60;
+    -nexa-border: 1px solid #0b2a60;
+    color: #fff;
+}
+
+.Button.ongoing {
+    background: #a6c76c;
+    -nexa-border: 1px solid #a6c76c;
+    color: #fff;
+}
+
+.Button.finished {
+    background: #A3A3A3;
+    -nexa-border: 1px solid #A3A3A3;
+    color: #fff;
+}
+
+.Button.emergency {
+    background: #fa573c;
+    -nexa-border: 1px solid #fa573c;
+    color: #fff;
+}
+
 .Button[status=focused],.FileDownload[status=mouseover],.FileDownload[status=focused],.FileUpload .fileuploaditem .fileuploaditembutton[status=mouseover],.FileUpload .fileuploaditem .fileuploaditembutton[status=focused]
 {
 	background : linear-gradient(to top,#e7e7e7,#fefefe);
