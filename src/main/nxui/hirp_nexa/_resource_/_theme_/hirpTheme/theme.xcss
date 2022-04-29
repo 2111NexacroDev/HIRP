@@ -1990,7 +1990,7 @@ last-modified : 2021-10-26
 	-nexa-icon : URL('theme://images/btn_expand.png');
 }.Button.edit_icon
 {
-	-nexa-icon : url('theme://images/11_icon_edit.png');
+	-nexa-icon : url('theme://images/11_icon_edit_mini.png');
 	-nexa-border : 0px none;
 	background : none;
 	box-shadow : 0px 0px 0px 0px;

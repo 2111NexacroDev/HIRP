@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="deptAddPopup" width="500" height="350" titletext="New Form">
+  <Form id="deptAddPopup" width="500" height="350" titletext="New Form" onload="deptAddPopup_onload">
     <Layouts>
       <Layout height="350" mobileorientation="landscape" width="500">
         <Static id="static_dept01" taborder="0" text="부서 추가" left="59" top="19" width="166" height="41" font="normal 500 14pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
@@ -57,6 +57,19 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	var deptRtn = "";
 	var deptname = this.edt_deptname.value;
+	var deptcolor = "";
+	
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		var bStatus = objBtn.getSelectStatus();
+		
+		if(bStatus){ //status가 true일 때
+			trace("저장된 컬러:" + objBtn.background);
+			deptcolor = objBtn.background;
+		}
+	}
+
 	
 	//deptname이 비어있을 때
 	if(deptname == null ||  deptname.length == 0) {
@@ -70,7 +83,7 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		deptRtn += this.edt_deptname.value;
 		deptRtn += ":" + this.medt_deptcode.value;
 		deptRtn += ":" + this.edt_deptsecond.value;
-		//deptRtn[3] = "색상";
+		deptRtn += ":" + deptcolor;
 	}
 	
 	//저장 버튼 누르면 정보 넘겨주기
@@ -83,6 +96,58 @@ this.edt_deptname_oninput = function(obj:nexacro.Edit,e:nexacro.InputEventInfo)
 {
 	this.static_msg.set_text("");
 };
+
+
+//load 됐을 때 color chart 생성
+this.deptAddPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+	var paramColor = this.parent.ds_color;	//파라미터로 받은 ds_color
+	this.ds_color.copyData(paramColor);	//받아온 ds_color 데이터를 popup ds_color로 복사
+	
+	var nX = 174;
+	var nY = 221;
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = new Button("btn_color" + i, nX, nY, 15, 15);
+		this.addChild("btn_color" + i, objBtn);
+		objBtn.set_background(this.ds_color.getColumn(i, "COLOR_VAL"));
+		objBtn.setEventHandler("onclick", this.btn_color_onclick, this);
+		objBtn.show();
+		nX += 14;
+		if(i ==  11){
+			nX = 174;
+			nY += 14;
+		}
+	}
+};
+
+this.btn_color_onclick = function(obj, e)
+{
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		var bStatus = objBtn.getSelectStatus();
+		
+		if(bStatus){ //status가 true 인 친구를 false로 바꿔줌.
+			objBtn.setSelectStatus(false);
+			objBtn.set_border("");
+			break;
+		}
+	}
+	obj.setSelectStatus(true);
+	obj.set_border("2px solid red");
+
+	trace("컬러: " + obj.background);
+}
 ]]></Script>
+    <Objects>
+      <Dataset id="ds_color">
+        <ColumnInfo>
+          <Column id="COLOR_ID" type="STRING" size="256"/>
+          <Column id="COLOR_VAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>

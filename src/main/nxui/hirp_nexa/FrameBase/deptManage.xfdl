@@ -43,7 +43,7 @@
         <Static id="st_deptsecond2" taborder="23" text="부서약어" left="403" top="230" width="157" height="30"/>
         <Button id="btn_edit_deptcode" taborder="24" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcode_onclick"/>
         <Button id="btn_edit_deptsecond" taborder="25" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
-        <Button id="btn_edit_deptcolor" taborder="26" left="560" top="275" width="30" height="30" cssclass="edit_icon"/>
+        <Button id="btn_edit_deptcolor" taborder="26" left="560" top="275" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcolor_onclick"/>
         <Button id="btn_edit_deptmaster" taborder="27" left="560" top="320" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptmaster_onclick"/>
         <Div id="Div00" taborder="28" left="278" top="130" width="60" height="2" background="#b7b7b7"/>
         <Div id="Div01" taborder="29" left="232" top="5" width="2" background="#b7b7b7" bottom="5"/>
@@ -52,50 +52,11 @@
         <Button id="btn_lower" taborder="32" text="하위부서명" left="403" top="460" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
         <Button id="btn_submit" taborder="33" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
         <Button id="btn_cancel" taborder="34" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
-        <Button id="btn_colorchart01" taborder="35" left="613" top="275" width="15" height="15" background="#FFD8D8"/>
-        <Button id="btn_colorchart02" taborder="36" left="627" top="275" width="15" height="15" background="#FAE0D4"/>
-        <Button id="btn_colorchart03" taborder="37" left="641" top="275" width="15" height="15" background="#FAECC5"/>
-        <Button id="btn_colorchart04" taborder="38" left="655" top="275" width="15" height="15" background="#FAF4C0"/>
-        <Button id="btn_colorchart05" taborder="39" left="669" top="275" width="15" height="15" background="#E4F7BA"/>
-        <Button id="btn_colorchart06" taborder="40" left="683" top="275" width="15" height="15" background="#CEFBC9"/>
-        <Button id="btn_colorchart07" taborder="41" left="697" top="275" width="15" height="15" background="#D4F4FA"/>
-        <Button id="btn_colorchart08" taborder="42" left="711" top="275" width="15" height="15" background="#D9E5FF"/>
-        <Button id="btn_colorchart09" taborder="43" left="725" top="275" width="15" height="15" background="#DAD9FF"/>
-        <Button id="btn_colorchart10" taborder="44" left="739" top="275" width="15" height="15" background="#E8D9FF"/>
-        <Button id="btn_colorchart11" taborder="45" left="753" top="275" width="15" height="15" background="#FFD9FA"/>
-        <Button id="btn_colorchart12" taborder="46" left="767" top="275" width="15" height="15" background="#FFD9EC"/>
-        <Button id="btn_colorchart13" taborder="47" left="613" top="289" width="15" height="15" background="#FFA7A7"/>
-        <Button id="btn_colorchart14" taborder="48" left="627" top="289" width="15" height="15" background="#FFC19E"/>
-        <Button id="btn_colorchart15" taborder="49" left="641" top="289" width="15" height="15" background="#FFE08C"/>
-        <Button id="btn_colorchart16" taborder="50" left="655" top="289" width="15" height="15" background="#FAED7D"/>
-        <Button id="btn_colorchart17" taborder="51" left="669" top="289" width="15" height="15" background="#CEF279"/>
-        <Button id="btn_colorchart18" taborder="52" left="683" top="289" width="15" height="15" background="#B7F0B1"/>
-        <Button id="btn_colorchart19" taborder="53" left="697" top="289" width="15" height="15" background="#B2EBF4"/>
-        <Button id="btn_colorchart20" taborder="54" left="711" top="289" width="15" height="15" background="#B2CCFF"/>
-        <Button id="btn_colorchart21" taborder="55" left="725" top="289" width="15" height="15" background="#B5B2FF"/>
-        <Button id="btn_colorchart22" taborder="56" left="739" top="289" width="15" height="15" background="#D1B2FF"/>
-        <Button id="btn_colorchart23" taborder="57" left="753" top="289" width="15" height="15" background="#FFB2F5"/>
-        <Button id="btn_colorchart24" taborder="58" left="767" top="289" width="15" height="15" background="#FFB2D9"/>
-        <Edit id="edt_deptname" taborder="59" left="394" top="140" width="133" height="30" visible="false"/>
-        <Button id="btn_colorchartfromds" taborder="60" left="470" top="283" width="15" height="15" background=""/>
-        <Edit id="edt_deptcode" taborder="61" left="394" top="185" width="133" height="30" visible="false"/>
-        <Edit id="edt_deptsecond" taborder="62" left="394" top="230" width="133" height="30" visible="false"/>
-        <Grid id="grd_color" taborder="63" left="631" top="74" width="235" height="122" binddataset="ds_color">
-          <Formats>
-            <Format id="default">
-              <Columns>
-                <Column size="80"/>
-              </Columns>
-              <Rows>
-                <Row size="24"/>
-              </Rows>
-              <Band id="body">
-                <Cell text="bind:COLOR_VAL"/>
-              </Band>
-            </Format>
-          </Formats>
-        </Grid>
-        <MaskEdit id="MaskEdit00" taborder="64" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" format="@@@@-@@-@@" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged"/>
+        <Edit id="edt_deptname" taborder="35" left="394" top="140" width="133" height="30" visible="false"/>
+        <Button id="btn_colorchartfromds" taborder="36" left="470" top="283" width="15" height="15" background=""/>
+        <Edit id="edt_deptcode" taborder="37" left="394" top="185" width="133" height="30" visible="false"/>
+        <Edit id="edt_deptsecond" taborder="38" left="394" top="230" width="133" height="30" visible="false"/>
+        <MaskEdit id="MaskEdit00" taborder="39" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" format="@@@@-@@-@@" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
@@ -229,53 +190,9 @@ this.ds_dept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRo
 };
 
 
-//상위 부서 버튼
-this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	//상위부서 버튼 클릭 시 상위부서 정보 조회
-	var upperRow = this.ds_dept.findRow("deptName", this.btn_upper.text);
-	trace("상위부서 : " + this.btn_upper.text);
-	this.ds_dept.set_rowposition(upperRow);
-	
-};
 
 
 
-//dept Master 수정 버튼
-//dept master 선택창 띄우기
-this.btn_edit_deptmaster_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	var nLeft = system.clientToScreenX(this, 10);
-    var nTop  = system.clientToScreenY(this, 10);
-	
-	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
-	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
-	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
-	objChild.set_openalign("center middle");
-	objChild.set_dragmovetype("all");
-	
-	var nRow = this.ds_dept.rowposition;
-	//현재 선택된 deptcode 넘겨줌
-	var deptCode = this.ds_dept.getColumn(nRow, "deptCode");
-	objChild.showModal(this.getOwnerFrame(), {"deptcode":deptCode, "ds_empl":this.ds_empl}, this, "fn_deptMasterEditCallback");
-};
-
-//부서장 수정 팝업 리턴
-this.fn_deptMasterEditCallback = function(id, rtn){
-	trace(rtn);
-	//저장 버튼 누르면 master 아이디 가져와서 deptMaster에 집어넣기
-	if(rtn != "cancel"){
-		//id값 가져옴
-		//임시로 static에 넣고 저장할 때 ds에 추가 되도록 (취소 누르면 원래 ds에 있는 값 출력)
-		
-		//master 아이디값과 같은 이름 set 해주기
-		var name = this.ds_empl.lookup("emplId", rtn, "emplName");
-		trace("master update name:" + name);
-		this.st_deptmaster2.set_text(name);
-	}
-	//취소 버튼 누르면 cancel
-	
-}
 
 
 //부서 추가 팝업창 띄우기
@@ -290,7 +207,7 @@ this.btn_deptAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	objChild.set_formurl("FrameBase::deptAddPopup.xfdl");
 	objChild.set_openalign("center middle");
 	objChild.set_dragmovetype("all");
-	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_addCallback");
+	objChild.showModal(this.getOwnerFrame(), {"ds_color" : this.ds_color}, this, "fn_addCallback");
 };
 
 //추가 팝업 닫히면서 부서 추가 -- 색상 제외하고 완료
@@ -300,11 +217,12 @@ this.fn_addCallback = function(id, rtn) {
 	var nRow = this.ds_dept.rowposition;
 	if(rtn != "cancel"){
 		var sVal = rtn.split(":");
-		trace("deptname: " + sVal[0] + " deptcode: " + sVal[1] + " deptsecond: " + sVal[2]);
+		trace("deptname: " + sVal[0] + " deptcode: " + sVal[1] + " deptsecond: " + sVal[2] + " deptcolor: " + sVal[3]);
  		this.ds_dept.insertRow(nRow+1); //선택한 cell의 다음 위치에 삽입
 		this.ds_dept.setColumn(nRow+1,"deptCode",sVal[1]);
 		this.ds_dept.setColumn(nRow+1,"deptName",sVal[0]);
 		this.ds_dept.setColumn(nRow+1,"deptSecondname",sVal[2]);
+		this.ds_dept.setColumn(nRow+1,"deptColor",sVal[3]);
 		
 		this.ds_dept.setColumn(nRow+1,"deptHiredate", today );
 		this.ds_dept.setColumn(nRow+1,"deptUppercode", this.ds_dept.getColumn(nRow, "deptCode"));
@@ -349,7 +267,7 @@ this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 };
 
 
-//저장 버튼 -- 수정 완료
+//저장 버튼
 this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	//edit에 있는 값을 ds에 저장
@@ -378,10 +296,32 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
  	trace("dept save master id:" + masterId);
  	this.ds_dept.setColumn(nRow, "deptMaster", masterId);
 	
+	//color chart
+	//color값 편집중 일 때 (수정 버튼이 안 보일 때)
+	if(this.btn_edit_deptcolor.visible == false) {
+		//선택한 color값 가져오기
+		for(var i=0; i<this.ds_color.rowcount; i++)
+		{
+			var objBtn = this.components["btn_color" + i];
+			var bStatus = objBtn.getSelectStatus();
+			
+			if(bStatus){ //status가 true일 때
+				trace("저장된 컬러:" + objBtn.background);
+				this.ds_dept.setColumn(nRow, "deptColor", objBtn.background);
+			}
+			objBtn.destroy(); //만들어진 버튼 삭제
+		}
+	}
+	
+	//edit창 안 보이게 하기
 	this.edt_deptname.set_visible("false");
 	this.edt_deptcode.set_visible("false");
 	this.edt_deptsecond.set_visible("false");
-
+	//수정 버튼 보이게 하기
+	this.btn_edit_deptname.set_visible("true");
+	this.btn_edit_deptcode.set_visible("true");
+	this.btn_edit_deptsecond.set_visible("true");
+	this.btn_edit_deptcolor.set_visible("true");
 };
 
 //취소 버튼
@@ -399,6 +339,23 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var masterName = this.ds_empl.lookup("emplId", masterId, "emplName");
 	trace("dept cancel master name:" + masterName);
 	this.st_deptmaster2.set_text(masterName);
+	
+	this.edt_deptname.set_visible("false");
+	this.edt_deptcode.set_visible("false");
+	this.edt_deptsecond.set_visible("false");
+	
+	//color chart
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		objBtn.destroy(); //만들어진 버튼 삭제
+	}
+	
+	//수정 버튼 보이게 하기
+	this.btn_edit_deptname.set_visible("true");
+	this.btn_edit_deptcode.set_visible("true");
+	this.btn_edit_deptsecond.set_visible("true");
+	this.btn_edit_deptcolor.set_visible("true");
 };
 
 
@@ -406,18 +363,108 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 this.btn_edit_deptname_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.edt_deptname.set_visible("true");
+	obj.set_visible("false");
 };
 //dept code 수정 버튼
 this.btn_edit_deptcode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.edt_deptcode.set_visible("true");
+	obj.set_visible("false");
 };
 //dept second name 수정 버튼
 this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.edt_deptsecond.set_visible("true");
+	obj.set_visible("false");
 };
 
+//dept color 수정 버튼
+this.btn_edit_deptcolor_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	obj.set_visible("false"); //수정 버튼 안 보이게 처리
+	var nX = 394;
+	var nY = 275;
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = new Button("btn_color" + i, nX, nY, 15, 15);
+		this.addChild("btn_color" + i, objBtn);
+		objBtn.set_background(this.ds_color.getColumn(i, "COLOR_VAL"));
+		objBtn.setEventHandler("onclick", this.btn_color_onclick, this);
+		objBtn.show();
+		nX += 14;
+		if(i ==  11){
+			nX = 394;
+			nY += 14;
+		}
+	}
+};
+
+this.btn_color_onclick = function(obj, e)
+{
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		var bStatus = objBtn.getSelectStatus();
+		
+		if(bStatus){ //status가 true 인 친구를 false로 바꿔줌.
+			objBtn.setSelectStatus(false);
+			objBtn.set_border("");
+			break;
+		}
+	}
+	obj.setSelectStatus(true);
+	obj.set_border("2px solid red");
+
+	trace("컬러: " + obj.background);
+}
+
+
+
+//dept Master 수정 버튼
+//dept master 선택창 띄우기
+this.btn_edit_deptmaster_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+    var nTop  = system.clientToScreenY(this, 10);
+	
+	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
+	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
+	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("all");
+	
+	var nRow = this.ds_dept.rowposition;
+	//현재 선택된 deptcode 넘겨줌
+	var deptCode = this.ds_dept.getColumn(nRow, "deptCode");
+	objChild.showModal(this.getOwnerFrame(), {"deptcode":deptCode, "ds_empl":this.ds_empl}, this, "fn_deptMasterEditCallback");
+};
+
+//부서장 수정 팝업 리턴
+this.fn_deptMasterEditCallback = function(id, rtn){
+	trace(rtn);
+	//저장 버튼 누르면 master 아이디 가져와서 deptMaster에 집어넣기
+	if(rtn != "cancel"){
+		//id값 가져옴
+		//임시로 static에 넣고 저장할 때 ds에 추가 되도록 (취소 누르면 원래 ds에 있는 값 출력)
+		
+		//master 아이디값과 같은 이름 set 해주기
+		var name = this.ds_empl.lookup("emplId", rtn, "emplName");
+		trace("master update name:" + name);
+		this.st_deptmaster2.set_text(name);
+	}
+	//취소 버튼 누르면 cancel
+	
+}
+
+//상위 부서 버튼
+this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//상위부서 버튼 클릭 시 상위부서 정보 조회
+	var upperRow = this.ds_dept.findRow("deptName", this.btn_upper.text);
+	trace("상위부서 : " + this.btn_upper.text);
+	this.ds_dept.set_rowposition(upperRow);
+	
+};
 ]]></Script>
     <Objects>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">

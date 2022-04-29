@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="deptColorPicker" width="250" height="280" titletext="New Form">
+  <Form id="deptColorPicker" width="250" height="190" titletext="New Form">
     <Layouts>
-      <Layout height="280" width="250">
-        <Button id="btn_submit" taborder="0" text="저장" left="40" top="230" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
-        <Button id="btn_cancel" taborder="1" text="취소" left="130" top="230" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+      <Layout height="190" width="250">
+        <Button id="btn_submit" taborder="0" text="저장" left="40" top="130" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="1" text="취소" left="130" top="130" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
         <Static id="st_deptcolor2" taborder="2" text="부서 색상" left="40" top="45" width="157" height="30"/>
         <Static id="static_dept01" taborder="3" text="색상 선택" left="30" top="10" width="166" height="41" font="normal 500 14pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
         <Button id="btn_colorchart01" taborder="4" left="41" top="79" width="15" height="15" background="#FFD8D8"/>
