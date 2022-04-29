@@ -11,34 +11,34 @@
         <Static id="static_deptInfo02" taborder="5" text="*" left="93" top="70" width="10" height="30" border="0px none,0px none,1px black" color="#ff2323"/>
         <Edit id="edt_deptname" taborder="6" left="174" top="70" width="216" height="30" oninput="edt_deptname_oninput"/>
         <Edit id="edt_deptsecond" taborder="7" left="174" top="170" width="216" height="30"/>
-        <Button id="btn_colorchart" taborder="8" left="174" top="221" width="15" height="15" background="#FFD8D8"/>
-        <Button id="btn_colorchart00" taborder="9" left="188" top="221" width="15" height="15" background="#FAE0D4"/>
-        <Button id="btn_colorchart01" taborder="10" left="202" top="221" width="15" height="15" background="#FAECC5"/>
-        <Button id="btn_colorchart02" taborder="11" left="216" top="221" width="15" height="15" background="#FAF4C0"/>
-        <Button id="btn_colorchart03" taborder="12" left="230" top="221" width="15" height="15" background="#E4F7BA"/>
-        <Button id="btn_colorchart04" taborder="13" left="244" top="221" width="15" height="15" background="#CEFBC9"/>
-        <Button id="btn_colorchart05" taborder="14" left="258" top="221" width="15" height="15" background="#D4F4FA"/>
-        <Button id="btn_colorchart06" taborder="15" left="272" top="221" width="15" height="15" background="#D9E5FF"/>
-        <Button id="btn_colorchart07" taborder="16" left="286" top="221" width="15" height="15" background="#DAD9FF"/>
-        <Button id="btn_colorchart08" taborder="17" left="300" top="221" width="15" height="15" background="#E8D9FF"/>
-        <Button id="btn_colorchart09" taborder="18" left="314" top="221" width="15" height="15" background="#FFD9FA"/>
-        <Button id="btn_colorchart10" taborder="19" left="328" top="221" width="15" height="15" background="#FFD9EC"/>
-        <Button id="btn_colorchart11" taborder="20" left="174" top="235" width="15" height="15" background="#FFA7A7"/>
-        <Button id="btn_colorchart00_00" taborder="21" left="188" top="235" width="15" height="15" background="#FFC19E"/>
-        <Button id="btn_colorchart01_00" taborder="22" left="202" top="235" width="15" height="15" background="#FFE08C"/>
-        <Button id="btn_colorchart02_00" taborder="23" left="216" top="235" width="15" height="15" background="#FAED7D"/>
-        <Button id="btn_colorchart03_00" taborder="24" left="230" top="235" width="15" height="15" background="#CEF279"/>
-        <Button id="btn_colorchart04_00" taborder="25" left="244" top="235" width="15" height="15" background="#B7F0B1"/>
-        <Button id="btn_colorchart05_00" taborder="26" left="258" top="235" width="15" height="15" background="#B2EBF4"/>
-        <Button id="btn_colorchart06_00" taborder="27" left="272" top="235" width="15" height="15" background="#B2CCFF"/>
-        <Button id="btn_colorchart07_00" taborder="28" left="286" top="235" width="15" height="15" background="#B5B2FF"/>
-        <Button id="btn_colorchart08_00" taborder="29" left="300" top="235" width="15" height="15" background="#D1B2FF"/>
-        <Button id="btn_colorchart09_00" taborder="30" left="314" top="235" width="15" height="15" background="#FFB2F5"/>
-        <Button id="btn_colorchart10_00" taborder="31" left="328" top="235" width="15" height="15" background="#FFB2D9"/>
-        <Button id="btn_submit" taborder="32" text="저장" left="165" top="280" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
-        <Button id="btn_cancel" taborder="33" text="취소" left="255" top="280" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
-        <Static id="static_msg" taborder="34" left="174" top="95" width="216" height="30" border="0px none,0px none,1px black" font="normal 7pt/normal &quot;KR&quot;" color="#ff1414"/>
-        <MaskEdit id="medt_deptcode" taborder="35" left="174" top="120" width="216" height="30" textAlign="left"/>
+        <Button id="btn_submit" taborder="8" text="저장" left="165" top="280" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="9" text="취소" left="255" top="280" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Static id="static_msg" taborder="10" left="174" top="95" width="216" height="30" border="0px none,0px none,1px black" font="normal 7pt/normal &quot;KR&quot;" color="#ff1414"/>
+        <MaskEdit id="medt_deptcode" taborder="11" left="174" top="120" width="216" height="30" textAlign="left"/>
+        <Button id="btn_colorchart01" taborder="12" left="174" top="221" width="15" height="15" background="#FFD8D8"/>
+        <Button id="btn_colorchart02" taborder="13" left="188" top="221" width="15" height="15" background="#FAE0D4"/>
+        <Button id="btn_colorchart03" taborder="14" left="202" top="221" width="15" height="15" background="#FAECC5"/>
+        <Button id="btn_colorchart04" taborder="15" left="216" top="221" width="15" height="15" background="#FAF4C0"/>
+        <Button id="btn_colorchart05" taborder="16" left="230" top="221" width="15" height="15" background="#E4F7BA"/>
+        <Button id="btn_colorchart06" taborder="17" left="244" top="221" width="15" height="15" background="#CEFBC9"/>
+        <Button id="btn_colorchart07" taborder="18" left="258" top="221" width="15" height="15" background="#D4F4FA"/>
+        <Button id="btn_colorchart08" taborder="19" left="272" top="221" width="15" height="15" background="#D9E5FF"/>
+        <Button id="btn_colorchart09" taborder="20" left="286" top="221" width="15" height="15" background="#DAD9FF"/>
+        <Button id="btn_colorchart10" taborder="21" left="300" top="221" width="15" height="15" background="#E8D9FF"/>
+        <Button id="btn_colorchart11" taborder="22" left="314" top="221" width="15" height="15" background="#FFD9FA"/>
+        <Button id="btn_colorchart12" taborder="23" left="328" top="221" width="15" height="15" background="#FFD9EC"/>
+        <Button id="btn_colorchart13" taborder="24" left="174" top="235" width="15" height="15" background="#FFA7A7"/>
+        <Button id="btn_colorchart14" taborder="25" left="188" top="235" width="15" height="15" background="#FFC19E"/>
+        <Button id="btn_colorchart15" taborder="26" left="202" top="235" width="15" height="15" background="#FFE08C"/>
+        <Button id="btn_colorchart16" taborder="27" left="216" top="235" width="15" height="15" background="#FAED7D"/>
+        <Button id="btn_colorchart17" taborder="28" left="230" top="235" width="15" height="15" background="#CEF279"/>
+        <Button id="btn_colorchart18" taborder="29" left="244" top="235" width="15" height="15" background="#B7F0B1"/>
+        <Button id="btn_colorchart19" taborder="30" left="258" top="235" width="15" height="15" background="#B2EBF4"/>
+        <Button id="btn_colorchart20" taborder="31" left="272" top="235" width="15" height="15" background="#B2CCFF"/>
+        <Button id="btn_colorchart21" taborder="32" left="286" top="235" width="15" height="15" background="#B5B2FF"/>
+        <Button id="btn_colorchart22" taborder="33" left="300" top="235" width="15" height="15" background="#D1B2FF"/>
+        <Button id="btn_colorchart23" taborder="34" left="314" top="235" width="15" height="15" background="#FFB2F5"/>
+        <Button id="btn_colorchart24" taborder="35" left="328" top="235" width="15" height="15" background="#FFB2D9"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//부서코드는 숫자로만 입력되도록 maskedit으로 작성하였음.

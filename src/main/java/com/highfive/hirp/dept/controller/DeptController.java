@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.dept.service.DeptService;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
@@ -19,6 +21,9 @@ public class DeptController {
 	@Autowired
 	private DeptService dService;
 	
+	@Autowired
+	private EmployeeAdminService eAService;
+	
 	//부서 관리 페이지 이동
 	public NexacroResult deptMainPage() {
 		
@@ -26,27 +31,27 @@ public class DeptController {
 		return result;
 	}
 	
-	//부서 전체 list 조회
-	@RequestMapping(value="/admin/deptlist.hirp", method=RequestMethod.GET)
+	//부서, 직원 전체 list 조회
+	@RequestMapping(value="/admin/deptinfo.hirp", method=RequestMethod.GET)
 	public NexacroResult selectDeptList() {
 		// ErrorCode, ErrorMsg, Dataset 선언
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		
-		List<Dept> deptList = dService.selectAllDept();
-		System.out.println(deptList);
-		if(!deptList.isEmpty()) {
-			nErrorCode 	= 0;
+		// out_dept, out_pos
+		List<Dept> dList = dService.selectAllDept();
+		List<Employee> eList = eAService.printAllEmployee();
+		if(!dList.isEmpty() && !eList.isEmpty()) {
+			nErrorCode = 0;
 			strErrorMsg = "SUCC";
+			result.addDataSet("out_dept", dList);
+			result.addDataSet("out_empl", eList);
 		}else {
-			nErrorCode 	= -1;
+			nErrorCode = -1;
 			strErrorMsg = "Fail";
 		}
-		result.addDataSet("out_dept", deptList);
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
-		
 		return result;
 	}
 	
