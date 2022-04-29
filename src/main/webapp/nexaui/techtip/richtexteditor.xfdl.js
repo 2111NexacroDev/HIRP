@@ -197,19 +197,19 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Static("st_editor","0","0",null,null,"0","0",null,null,null,null,this);
+            obj = new Static("st_editor","0","80",null,null,"0","-80",null,null,null,null,this);
             obj.set_taborder("16");
             obj.set_visible("false");
             obj.set_cssclass("WF_sta_editor");
             this.addChild(obj.name, obj);
 
-            obj = new Static("st_thumbnail","0","542",null,"152","0",null,null,null,null,null,this);
+            obj = new Static("st_thumbnail","0","622",null,"152","0",null,null,null,null,null,this);
             obj.set_taborder("14");
             obj.set_cssclass("WF_sta_thumbBox");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
-            obj = new Div("div_tableLayout","559","737","185","363",null,null,null,null,null,null,this);
+            obj = new Div("div_tableLayout","559","1087","185","363",null,null,null,null,null,null,this);
             obj.set_taborder("4");
             obj.getSetter("scrollbars").set("none");
             obj.set_visible("false");
@@ -233,7 +233,7 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/></Columns><Rows><Row size=\"16\"/></Rows><Band id=\"body\"><Cell displaytype=\"normal\" text=\"bind:Column0\"/><Cell col=\"1\" text=\"bind:Column1\"/><Cell col=\"2\" text=\"bind:Column2\"/><Cell col=\"3\" text=\"bind:Column3\"/><Cell col=\"4\" text=\"bind:Column4\"/><Cell col=\"5\" text=\"bind:Column5\"/><Cell col=\"6\" text=\"bind:Column6\"/><Cell col=\"7\" text=\"bind:Column7\"/><Cell col=\"8\" text=\"bind:Column8\"/><Cell col=\"9\" text=\"bind:Column9\"/></Band></Format></Formats>");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Div("div_selected","12","142","0","0",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Div("div_selected","12","132","0","0",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("11");
             obj.getSetter("scrollbars").set("none");
             obj.set_formscrollbartype("none none");
@@ -252,22 +252,22 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/><Column size=\"16\"/></Columns><Rows><Row size=\"16\"/></Rows><Band id=\"body\"><Cell text=\"bind:Column0\" background=\"#2462af\"/><Cell col=\"1\" text=\"bind:Column1\" background=\"#2462af\"/><Cell col=\"2\" text=\"bind:Column2\" background=\"#2462af\"/><Cell col=\"3\" text=\"bind:Column3\" background=\"#2462af\"/><Cell col=\"4\" text=\"bind:Column4\" background=\"#2462af\"/><Cell col=\"5\" text=\"bind:Column5\" background=\"#2462af\"/><Cell col=\"6\" text=\"bind:Column6\" background=\"#2462af\"/><Cell col=\"7\" text=\"bind:Column7\" background=\"#2462af\"/><Cell col=\"8\" text=\"bind:Column8\" background=\"#2462af\"/><Cell col=\"9\" text=\"bind:Column9\" background=\"#2462af\"/></Band></Format></Formats>");
             this.div_tableLayout.form.div_selected.addChild(obj.name, obj);
 
-            obj = new Static("st_tableLayout","16","122","45","20",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Static("st_tableLayout","16","112","45","20",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("12");
             obj.set_text("Table");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Static("st_row","58","122","20","20",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Static("st_row","58","112","20","20",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("20");
             obj.set_text("0");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Static("st_tableLayout00","81","122","11","20",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Static("st_tableLayout00","81","112","11","20",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("14");
             obj.set_text("x");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Static("st_col","90","122","20","20",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Static("st_col","90","112","20","20",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("21");
             obj.set_text("0");
             this.div_tableLayout.addChild(obj.name, obj);
@@ -277,37 +277,37 @@
             obj.set_text("Cancel");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Static("st_tableLayout01","16","9","138","20",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Static("st_tableLayout01","16","-1","138","20",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("28");
             obj.set_text("Table template");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template0","10","31","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template0","10","21","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("29");
             obj.set_cssclass("Editor_btn_table01");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template2","93","31","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template2","93","21","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("30");
             obj.set_cssclass("Editor_btn_table02");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template3","93","60","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template3","93","50","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("31");
             obj.set_cssclass("Editor_btn_table04");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template1","10","60","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template1","10","50","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("32");
             obj.set_cssclass("Editor_btn_table03");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template5","93","89","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template5","93","79","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("33");
             obj.set_cssclass("Editor_btn_table06");
             this.div_tableLayout.addChild(obj.name, obj);
 
-            obj = new Button("btn_template4","10","89","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
+            obj = new Button("btn_template4","10","79","82","28",null,null,null,null,null,null,this.div_tableLayout.form);
             obj.set_taborder("34");
             obj.set_cssclass("Editor_btn_table05");
             this.div_tableLayout.addChild(obj.name, obj);
@@ -642,7 +642,7 @@
             obj.set_taborder("2");
             this.div_char.addChild(obj.name, obj);
 
-            obj = new Div("div_color","16","736","527","344",null,null,null,null,null,null,this);
+            obj = new Div("div_color","16","1086","527","344",null,null,null,null,null,null,this);
             obj.set_taborder("11");
             obj.getSetter("scrollbars").set("none");
             obj.set_visible("false");
@@ -674,7 +674,7 @@
             obj.set_text("닫기");
             this.div_link.addChild(obj.name, obj);
 
-            obj = new Static("st_thumbnailInfo","0","542",null,"31","0",null,null,null,null,null,this);
+            obj = new Static("st_thumbnailInfo","0","622",null,"31","0",null,null,null,null,null,this);
             obj.set_taborder("15");
             obj.set_cssclass("WF_sta_thumbtitle");
             obj.set_visible("false");
@@ -776,7 +776,7 @@
             obj.set_tooltiptext("오른쪽 맞춤");
             this.div_editImage.addChild(obj.name, obj);
 
-            obj = new Div("div_thumbnail","1","574",null,"118","1",null,null,null,null,null,this);
+            obj = new Div("div_thumbnail","1","654",null,"118","1",null,null,null,null,null,this);
             obj.set_taborder("18");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
@@ -813,7 +813,7 @@
             obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"100\"/></Columns><Rows><Row size=\"24\"/></Rows><Band id=\"body\"><Cell displaytype=\"normal\" text=\"bind:code\"/></Band></Format></Formats>");
             this.div_highlight.addChild(obj.name, obj);
 
-            obj = new Div("div_toolbar","2","1",null,"30","2",null,null,null,null,null,this);
+            obj = new Div("div_toolbar","2","81",null,"30","2",null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_visible("false");
             obj.set_formscrollbartype("none none");
@@ -1136,7 +1136,7 @@
             obj.set_cssclass("Editor_btn_alignB");
             this.div_toolbar.addChild(obj.name, obj);
 
-            obj = new TextArea("txt_htmlEditor","0","30",null,null,"0","26",null,null,null,null,this);
+            obj = new TextArea("txt_htmlEditor","0","110",null,null,"0","-54",null,null,null,null,this);
             obj.set_taborder("3");
             obj.getSetter("wordwrap").set("char");
             obj.getSetter("position").set("absolute");
@@ -1144,13 +1144,13 @@
             obj.set_cssclass("Editor_tex_none");
             this.addChild(obj.name, obj);
 
-            obj = new WebBrowser("web_editor","0","30",null,null,"0","26",null,null,null,null,this);
+            obj = new WebBrowser("web_editor","0","110",null,null,"0","-54",null,null,null,null,this);
             obj.set_taborder("1");
             obj.getSetter("onerror").set("web_editor_onerror");
             obj.getSetter("position").set("absolute");
             this.addChild(obj.name, obj);
 
-            obj = new Div("div_mode","1",null,null,"25","1","2",null,null,null,null,this);
+            obj = new Div("div_mode","1",null,null,"25","1","-78",null,null,null,null,this);
             obj.set_taborder("2");
             obj.getSetter("position").set("absolute");
             obj.set_visible("false");
@@ -1168,8 +1168,13 @@
             obj.set_cssclass("Editor_tab");
             this.div_mode.addChild(obj.name, obj);
 
-            obj = new Edit("edt_focus","0","0","0","0",null,null,null,null,null,null,this);
+            obj = new Edit("edt_focus","0","80","0","0",null,null,null,null,null,null,this);
             obj.set_taborder("21");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00","575","15","120","50",null,null,null,null,null,null,this);
+            obj.set_taborder("22");
+            obj.set_text("양식 등록");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this

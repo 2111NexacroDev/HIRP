@@ -19,19 +19,17 @@
                             <button class="btn--close"></button>
                             <h3>모달창</h3>
                             <p class="mb-20">
-                              
+                              <div>
+                               <div>
+		                            <div class="bor-round shadow" style="width: 180px; height:180px;">조직도</div>
+                      		  </div>
+                      		  <div>
+		                            <div class="bor-round shadow" style="width: 180px; height:180px;">조직도</div>
+                      		  </div>
+                      		  </div>
                             </p>
-                            <ul>
-                                <li>
-                                    <label for="">항목1</label><input type="text" name="">
-                                </li>
-                                <li>
-                                    <label for="">항목2</label><input type="text" name="">
-                                </li>
-                                <li>
-                                    <label for="">항목3</label><input type="date" name="">
-                                </li>
-                            </ul>
+                           <div >
+                           </div>
                             <div class="btns-wrap mt-20 t-r">
                                 <button class="point" type="button">확인</button>
                                 <button class="finished closeWindow" type="button">닫기</button>

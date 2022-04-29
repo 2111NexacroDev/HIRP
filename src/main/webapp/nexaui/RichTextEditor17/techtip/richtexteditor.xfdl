@@ -4,9 +4,9 @@
   <Form id="RichTextEditor" inheritanceid="" position="absolute" titletext="RichTextEditor" onload="RichTextEditor_onload" left="0" top="0" width="710" height="532" onclick="RichTextEditor_onclick" onclose="RichTextEditor_onclose" onsize="RichTextEditor_onsize" ontimer="RichTextEditor_ontimer">
     <Layouts>
       <Layout>
-        <Static id="st_editor" taborder="16" left="0" top="0" visible="false" cssclass="WF_sta_editor" right="0" bottom="0"/>
-        <Static id="st_thumbnail" taborder="14" cssclass="WF_sta_thumbBox" left="0" top="542" height="152" visible="false" right="0"/>
-        <Div id="div_tableLayout" taborder="4" left="559" top="737" width="185" height="363" scrollbars="none" visible="false" onsetfocus="div_tableLayout_onsetfocus" onkillfocus="div_onkillfocus" formscrollbartype="none none" formscrolltype="none">
+        <Static id="st_editor" taborder="16" left="0" top="80" visible="false" cssclass="WF_sta_editor" right="0" bottom="-80"/>
+        <Static id="st_thumbnail" taborder="14" cssclass="WF_sta_thumbBox" left="0" top="622" height="152" visible="false" right="0"/>
+        <Div id="div_tableLayout" taborder="4" left="559" top="1087" width="185" height="363" scrollbars="none" visible="false" onsetfocus="div_tableLayout_onsetfocus" onkillfocus="div_onkillfocus" formscrollbartype="none none" formscrolltype="none">
           <Layouts>
             <Layout width="627" height="572">
               <Static id="Static01" taborder="19" left="0" top="0" width="185" height="346" cssclass="Editor_sta_box"/>
@@ -43,7 +43,7 @@
                   </Format>
                 </Formats>
               </Grid>
-              <Div id="div_selected" taborder="11" left="12" top="142" width="0" height="0" scrollbars="none" formscrollbartype="none none" formscrolltype="none">
+              <Div id="div_selected" taborder="11" left="12" top="132" width="0" height="0" scrollbars="none" formscrollbartype="none none" formscrolltype="none">
                 <Layouts>
                   <Layout>
                     <Grid id="grd_tableLayout" taborder="0" binddataset="ds_tableLayout" scrollbars="none" readonly="true" useinputpanel="false" selecttype="cell" left="0" top="0" width="161" height="161" oncellclick="div_tableLayout_div_selected_grd_tableLayout_oncellclick" onmousemove="tableLayout_onmousemove" scrollbartype="none none" scrolltype="none">
@@ -82,18 +82,18 @@
                   </Layout>
                 </Layouts>
               </Div>
-              <Static id="st_tableLayout" taborder="12" text="Table" left="16" top="122" width="45" height="20"/>
-              <Static id="st_row" taborder="20" left="58" top="122" width="20" height="20" text="0"/>
-              <Static id="st_tableLayout00" taborder="14" text="x" left="81" top="122" width="11" height="20"/>
-              <Static id="st_col" taborder="21" text="0" left="90" top="122" width="20" height="20"/>
+              <Static id="st_tableLayout" taborder="12" text="Table" left="16" top="112" width="45" height="20"/>
+              <Static id="st_row" taborder="20" left="58" top="112" width="20" height="20" text="0"/>
+              <Static id="st_tableLayout00" taborder="14" text="x" left="81" top="112" width="11" height="20"/>
+              <Static id="st_col" taborder="21" text="0" left="90" top="112" width="20" height="20"/>
               <Button id="btn_close" taborder="16" text="Cancel" left="56" top="314" width="71" height="21" onclick="div_tableLayout_btn_close_onclick"/>
-              <Static id="st_tableLayout01" taborder="28" text="Table template" left="16" top="9" width="138" height="20"/>
-              <Button id="btn_template0" taborder="29" left="10" top="31" width="82" height="28" cssclass="Editor_btn_table01" onclick="pasteTableTemplate_onclick"/>
-              <Button id="btn_template2" taborder="30" cssclass="Editor_btn_table02" left="93" top="31" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
-              <Button id="btn_template3" taborder="31" cssclass="Editor_btn_table04" left="93" top="60" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
-              <Button id="btn_template1" taborder="32" cssclass="Editor_btn_table03" left="10" top="60" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
-              <Button id="btn_template5" taborder="33" cssclass="Editor_btn_table06" left="93" top="89" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
-              <Button id="btn_template4" taborder="34" left="10" top="89" width="82" height="28" cssclass="Editor_btn_table05" onclick="pasteTableTemplate_onclick"/>
+              <Static id="st_tableLayout01" taborder="28" text="Table template" left="16" top="-1" width="138" height="20"/>
+              <Button id="btn_template0" taborder="29" left="10" top="21" width="82" height="28" cssclass="Editor_btn_table01" onclick="pasteTableTemplate_onclick"/>
+              <Button id="btn_template2" taborder="30" cssclass="Editor_btn_table02" left="93" top="21" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
+              <Button id="btn_template3" taborder="31" cssclass="Editor_btn_table04" left="93" top="50" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
+              <Button id="btn_template1" taborder="32" cssclass="Editor_btn_table03" left="10" top="50" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
+              <Button id="btn_template5" taborder="33" cssclass="Editor_btn_table06" left="93" top="79" width="82" height="28" onclick="pasteTableTemplate_onclick"/>
+              <Button id="btn_template4" taborder="34" left="10" top="79" width="82" height="28" cssclass="Editor_btn_table05" onclick="pasteTableTemplate_onclick"/>
             </Layout>
           </Layouts>
         </Div>
@@ -278,7 +278,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Div id="div_color" taborder="11" left="16" top="736" width="527" height="344" scrollbars="none" visible="false" url="techtip::richtexteditor_colorpicker.xfdl" onkillfocus="div_onkillfocus">
+        <Div id="div_color" taborder="11" left="16" top="1086" width="527" height="344" scrollbars="none" visible="false" url="techtip::richtexteditor_colorpicker.xfdl" onkillfocus="div_onkillfocus">
           <Layouts/>
         </Div>
         <Div id="div_link" taborder="12" left="1144" top="416" width="223" height="66" visible="false" onkillfocus="div_onkillfocus">
@@ -291,7 +291,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Static id="st_thumbnailInfo" taborder="15" left="0" cssclass="WF_sta_thumbtitle" visible="false" right="0" height="31" top="542"/>
+        <Static id="st_thumbnailInfo" taborder="15" left="0" cssclass="WF_sta_thumbtitle" visible="false" right="0" height="31" top="622"/>
         <Div id="div_editImage" taborder="17" left="791" top="812" width="280" height="141" visible="false" onkillfocus="div_onkillfocus">
           <Layouts>
             <Layout>
@@ -359,7 +359,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Div id="div_thumbnail" taborder="18" left="1" top="574" height="118" visible="false" right="1">
+        <Div id="div_thumbnail" taborder="18" left="1" top="654" height="118" visible="false" right="1">
           <Layouts>
             <Layout/>
           </Layouts>
@@ -393,7 +393,7 @@
             </Layout>
           </Layouts>
         </Div>
-        <Div id="div_toolbar" taborder="0" left="2" top="1" height="30" visible="false" onmouseenter="div_toolbar_onmouseenter" formscrollbartype="none none" formscrolltype="none" right="2">
+        <Div id="div_toolbar" taborder="0" left="2" top="81" height="30" visible="false" onmouseenter="div_toolbar_onmouseenter" formscrollbartype="none none" formscrolltype="none" right="2">
           <Layouts>
             <Layout>
               <Button id="btn_template" taborder="2" position="absolute" tooltiptext="템플릿" onclick="toolbarButton_onclick" left="547" top="4" width="22" height="22" cssclass="Editor_btn_layout" visible="false"/>
@@ -439,9 +439,9 @@
             </Layout>
           </Layouts>
         </Div>
-        <TextArea id="txt_htmlEditor" taborder="3" wordwrap="char" style="caretcolor:#0099adff;compositecolor:white;" position="absolute" left="0" top="30" visible="false" cssclass="Editor_tex_none" right="0" bottom="26"/>
-        <WebBrowser id="web_editor" taborder="1" onerror="web_editor_onerror" position="absolute" left="0" top="30" onloadcompleted="web_editor_onloadcompleted" onusernotify="web_editor_onusernotify" style="border:1 solid #9da4aeff ;" right="0" bottom="26"/>
-        <Div id="div_mode" taborder="2" style="color:#ccccccff;" position="absolute" left="1" visible="false" right="1" bottom="2" height="25">
+        <TextArea id="txt_htmlEditor" taborder="3" wordwrap="char" style="caretcolor:#0099adff;compositecolor:white;" position="absolute" left="0" top="110" visible="false" cssclass="Editor_tex_none" right="0" bottom="-54"/>
+        <WebBrowser id="web_editor" taborder="1" onerror="web_editor_onerror" position="absolute" left="0" top="110" onloadcompleted="web_editor_onloadcompleted" onusernotify="web_editor_onusernotify" style="border:1 solid #9da4aeff ;" right="0" bottom="-54"/>
+        <Div id="div_mode" taborder="2" style="color:#ccccccff;" position="absolute" left="1" visible="false" right="1" bottom="-78" height="25">
           <Layouts>
             <Layout width="672" height="27">
               <Button id="btn_edit" taborder="4" text="Editor" left="4" width="102" height="21" cssclass="Editor_tab" onclick="div_mode_btn_edit_onclick" top="0"/>
@@ -449,7 +449,8 @@
             </Layout>
           </Layouts>
         </Div>
-        <Edit id="edt_focus" taborder="21" left="0" top="0" width="0" height="0"/>
+        <Edit id="edt_focus" taborder="21" left="0" top="80" width="0" height="0"/>
+        <Button id="Button00" taborder="22" text="양식 등록" left="575" top="15" width="120" height="50"/>
       </Layout>
     </Layouts>
     <Bind>
@@ -1197,7 +1198,7 @@ var selectedImage;
 var initConfig = {
 	editor : {
 		// editor.html 의 경로
-		url : "http://localhost:8888/nexaui/richtexteditor/html/editor.html",
+		url : "http://localhost/RichTextEditor17/ui/file/richtexteditor/html/editor.html",
 		
 		// 툴바 영역을 보일지 여부
 		showToolbar : true,
