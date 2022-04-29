@@ -91,89 +91,89 @@ public class DeptController {
 	}
 	
 	
-//	//저장 버튼 누르면 db에 저장되도록 하는 거
-//	//왜 자꾸 null값이래.......
-//	//부서 정보 수정 저장
-//	@RequestMapping(value="/admin/deptSave.hirp", method=RequestMethod.POST)
-//	public NexacroResult updateDept(
-//			 @ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
-//		int 	nErrorCode = 0;
-//		String  strErrorMsg = "START";
-//		NexacroResult result = new NexacroResult();
-//		
-//		int 	i;
-//		int iResult = 0;
-//		int uResult = 0;
-//		if(inDept == null) {
-//			System.out.println("saveDept");
-//			System.out.println(inDept);
-//		}
-//		
-//		// DELETE
-//		// 삭제했던 로우가 있으면 for문으로 반복해서 삭제
-//		for(i = 0; i < inDept.getRemovedRowCount(); i++) {
-//			String deptCode = inDept.getRemovedData(i,  "DEPT_CODE").toString();
-//			System.out.println("delete:" + deptCode);
-//			dService.deleteDept(deptCode);
-//		}
-//		
-//		String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
-//		String deptName = dsGet(inDept, i, "DEPT_NAME");
-//		String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
-//		String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
-//		String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
-//		String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
-//		String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
-//		int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
-//				Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
-//		
-//		Dept dept = new Dept(
-//				deptCode
-//				, 	deptName
-//				, 	deptSecondname
-//				, 	deptColor
-//				, 	deptMaster
-//				, 	deptHiredate
-//				, 	deptUppercode
-//				, 	deptLevel);
-//		
-//		// INSERT, UPDATE
-//		// RowType에 따라서 INSERT OR UPDATE
-//		for(i = 0; i < inDept.getRowCount(); i++) {
-//			int rowType = inDept.getRowType(i);
-//			if( rowType == DataSet.ROW_TYPE_INSERTED) {
-//				iResult += dService.insertDept(dept);
-//			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
-//				String orgDeptCode = inDept.getSavedData(i, "DEPT_CODE").toString();
-//				System.out.println("orgDeptCode: " + orgDeptCode);
-//				dept.setDeptCode(orgDeptCode);
-//				uResult += dService.updateDept(dept);
-//			}
-//		}
-//		
-//		if(iResult < 0 && uResult < 0) {
-//			nErrorCode 	= -1;
-//			strErrorMsg = "FAIL";
-//		} else {
-//			nErrorCode 	= 0;
-//			strErrorMsg = "SUCC";
-//		}
-//		
-//		result.addVariable("ErrorCode", nErrorCode);
-//		result.addVariable("ErrorMsg", strErrorMsg);
-//		
-//		return result;
-//	}
-//	
-//	// Dataset value
-//	public String dsGet(DataSet ds, int rowno, String colid) throws Exception
-//	{
-//	    String value;
-//	    value = ds.getString(rowno, colid);
-//	    if( value == null )
-//	        return "";
-//	    else
-//	        return value;
-//	} 
+	//저장 버튼 누르면 db에 저장되도록 하는 거
+	//왜 자꾸 null값이래.......
+	//부서 정보 수정 저장
+	@RequestMapping(value="/admin/deptSave.hirp", method=RequestMethod.POST)
+	public NexacroResult updateDept(
+			 @ParamDataSet(name="in_dept") 	DataSet inDept) throws Exception {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		
+		int 	i;
+		int iResult = 0;
+		int uResult = 0;
+		if(inDept == null) {
+			System.out.println("saveDept");
+			System.out.println(inDept);
+		}
+		
+		// DELETE
+		// 삭제했던 로우가 있으면 for문으로 반복해서 삭제
+		for(i = 0; i < inDept.getRemovedRowCount(); i++) {
+			String deptCode = inDept.getRemovedData(i,  "DEPT_CODE").toString();
+			System.out.println("delete:" + deptCode);
+			dService.deleteDept(deptCode);
+		}
+		
+		String deptCode 	 = dsGet(inDept, i, "DEPT_CODE");
+		String deptName = dsGet(inDept, i, "DEPT_NAME");
+		String deptSecondname 	 = dsGet(inDept, i, "DEPT_SECONDNAME");
+		String deptColor 	 = dsGet(inDept, i, "DEPT_COLOR");
+		String deptMaster 	 = dsGet(inDept, i, "DEPT_MASTER");
+		String deptHiredate = dsGet(inDept, i, "DEPT_HIREDATE");
+		String deptUppercode 	 = dsGet(inDept, i, "DEPT_UPPERCODE");
+		int deptLevel 	 = dsGet(inDept, i, "DEPT_LEVEL") != "" ?
+				Integer.parseInt(dsGet(inDept, i, "DEPT_LEVEL")) : 0;
+		
+		Dept dept = new Dept(
+				deptCode
+				, 	deptName
+				, 	deptSecondname
+				, 	deptColor
+				, 	deptMaster
+				, 	deptHiredate
+				, 	deptUppercode
+				, 	deptLevel);
+		
+		// INSERT, UPDATE
+		// RowType에 따라서 INSERT OR UPDATE
+		for(i = 0; i < inDept.getRowCount(); i++) {
+			int rowType = inDept.getRowType(i);
+			if( rowType == DataSet.ROW_TYPE_INSERTED) {
+				iResult += dService.insertDept(dept);
+			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
+				String orgDeptCode = inDept.getSavedData(i, "DEPT_CODE").toString();
+				System.out.println("orgDeptCode: " + orgDeptCode);
+				dept.setDeptCode(orgDeptCode);
+				uResult += dService.updateDept(dept);
+			}
+		}
+		
+		if(iResult < 0 && uResult < 0) {
+			nErrorCode 	= -1;
+			strErrorMsg = "FAIL";
+		} else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCC";
+		}
+		
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		
+		return result;
+	}
+	
+	// Dataset value
+	public String dsGet(DataSet ds, int rowno, String colid) throws Exception
+	{
+	    String value;
+	    value = ds.getString(rowno, colid);
+	    if( value == null )
+	        return "";
+	    else
+	        return value;
+	} 
 	
 }
