@@ -45,7 +45,10 @@
                     	<c:forEach items="${pList }" var="project">
 	                        <tr>
 	                            <td>${project.projectNo }</td>
-	                            <td>${project.projectName }</td>
+	                            <c:url var="pDetail" value="/project/detail.hirp">
+									<c:param name="projectNo" value="${project.projectNo }"></c:param>
+								</c:url>
+	                            <td><a href="${pDetail}">${project.projectName }</a></td>
 	                            <td>${project.startDate }</td>
 	                            <td>${project.endDate }</td>
 	                            <td>${project.projectManager }</td>

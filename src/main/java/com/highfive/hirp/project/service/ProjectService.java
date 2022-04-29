@@ -13,7 +13,7 @@ public interface ProjectService {
 	public Project printOneByNo(int projectNo); // 프로젝트 상세 조회
 	public int registerProject(Project project); // 프로젝트 생성
 	public int removeProject(int projectNo); // 프로젝트 삭제
-	public int updateProject(int projectNo); // 프로젝트 수정
+	public int updateProject(Project project); // 프로젝트 수정
 	
 	public List<Board> printAllBoard(int projectNo); // 칸반보드 전체 조회
 	public int registerBoard(Board board); // 칸반보드 추가

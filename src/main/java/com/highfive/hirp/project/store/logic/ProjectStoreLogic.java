@@ -2,6 +2,7 @@ package com.highfive.hirp.project.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,11 @@ public class ProjectStoreLogic implements ProjectStore{
 	
 	@Override
 	public List<Project> selectAll(SqlSession sqlSession, PageInfo pi) {
-		List<Project> pList = sqlSession.selectList("ProjectMapper.selectAllList", pi);
+		int limit = pi.getListLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Project> pList = sqlSession.selectList("ProjectMapper.selectAllList", pi, rowBounds);
 		return pList;
 	}
 	
@@ -44,8 +49,8 @@ public class ProjectStoreLogic implements ProjectStore{
 	}
 
 	@Override
-	public int updateProject(SqlSession sqlSession, int projectNo) {
-		int result = sqlSession.update("ProjectMapper.updateProject", projectNo);
+	public int updateProject(SqlSession sqlSession, Project project) {
+		int result = sqlSession.update("ProjectMapper.updateProject", project);
 		return result;
 	}
 

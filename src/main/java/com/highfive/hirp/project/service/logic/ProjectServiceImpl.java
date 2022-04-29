@@ -50,8 +50,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int updateProject(int projectNo) {
-		int result = pStore.updateProject(sqlSession, projectNo);
+	public int updateProject(Project project) {
+		int result = pStore.updateProject(sqlSession, project);
 		return result;
 	}
 

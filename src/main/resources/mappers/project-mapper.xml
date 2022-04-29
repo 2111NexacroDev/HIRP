@@ -20,7 +20,15 @@
 		SELECT * FROM PROJECT_TBL ORDER BY PROJECT_NO DESC
 	</select>
 	
+	<select id="selectOneByNo" resultMap="projectResultMap">
+		SELECT * FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+	</select>
+	
 	<insert id="insertProject" parameterType="Project">
 		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
 	</insert>
+	
+	<delete id="deleteProject" parameterType="Project">
+		DELETE FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+	</delete>
 </mapper>

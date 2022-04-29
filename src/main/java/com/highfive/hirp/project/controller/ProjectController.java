@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
 import com.highfive.hirp.project.domain.Board;
@@ -34,35 +36,35 @@ public class ProjectController {
 			List<Project> pList = pService.printAll(pi);
 			if(!pList.isEmpty()) {
 				mv.addObject("pList", pList);
+				mv.addObject("pi", pi);
 				mv.setViewName("project/projectList");
 			}else {
 				mv.addObject("msg", "프로젝트 조회 실패");
-				mv.setViewName("");
+				mv.setViewName("common/errorPage");
 			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
-			mv.setViewName("");
+			mv.setViewName("common/errorPage");
 		}
-		mv.setViewName("project/projectList");
 		return mv;
 	}
 	
 	// 프로젝트 상세 조회
-	@RequestMapping(value="/project/Detail.hirp", method=RequestMethod.GET)
+	@RequestMapping(value="/project/detail.hirp", method=RequestMethod.GET)
 	public ModelAndView projectDetailView(ModelAndView mv
-			, @RequestParam("projectNo") int projectNo) {
+			, @RequestParam("projectNo") Integer projectNo) {
 		try {
 			Project project = pService.printOneByNo(projectNo);
 			if(project != null) {
 				mv.addObject("project", project);
-				mv.setViewName("project/projectDetail");
+				mv.setViewName("project/projectDetailView");
 			}else {
 				mv.addObject("msg", "프로젝트 상세조회 실패");
-				mv.setViewName("");
+				mv.setViewName("common/errorPage");
 			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
-			mv.setViewName("");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -96,30 +98,69 @@ public class ProjectController {
 				mv.setViewName("redirect:/project/list.hirp");
 			}else {
 				mv.addObject("msg", "프로젝트 등록 실패");
-				mv.setViewName("");
+				mv.setViewName("common/errorPage");
 			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
-			mv.setViewName("");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
 	
 	// 프로젝트 삭제
+	@RequestMapping(value="/project/remove.hirp", method=RequestMethod.GET)
 	public ModelAndView deleteProject(ModelAndView mv
 			, @RequestParam("projectNo") int projectNo) {
+		try {
+			int result = pService.removeProject(projectNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/project/list.hirp");
+			}else {
+				mv.addObject("msg", "프로젝트 삭제 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
 	// 프로젝트 수정
+	@RequestMapping(value="/project/modify.hirp", method=RequestMethod.POST)
 	public ModelAndView updateProject(ModelAndView mv
-			, @RequestParam("projectNo") int projectNo) {
+			, @ModelAttribute Project project
+			, @RequestParam("projectNo") int projectNo
+			, @RequestParam("projectName") String projectName
+			, @RequestParam("startDate") Date startDate
+			, @RequestParam("endDate") Date endDate
+			, @RequestParam("projectManager") String projectManager) {
+		try {
+			int result = pService.updateProject(project);
+			if(result > 0) {
+				mv.setViewName("redirect:/project/detail.hirp");
+			}else {
+				mv.addObject("msg", "프로젝트 수정 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
 	// 프로젝트 칸반보드 목록
 	public ModelAndView boardList(ModelAndView mv
 			, @RequestParam("projectNo") int projectNo) {
+		try {
+			List<Board> bList = pService.printAllBoard(projectNo);
+			if(!bList.isEmpty()) {
+				
+			}
+		}catch(Exception e) {
+			
+		}
 		return mv;
 	}
 	
