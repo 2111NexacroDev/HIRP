@@ -10,6 +10,7 @@ public interface TodoService {
 	public List<Todo> printAllToDo();
 	public int registerToDo(Todo todo);
 	public int modifyToDo(Todo todo);
+	public int checkedToDo(Todo todo);
 	public int removeToDo(int todoNo);
 	
 	public List<Memo> printAllMemo();
