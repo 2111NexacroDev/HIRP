@@ -27,7 +27,7 @@
 
 
             obj = new Dataset("ds_empl", this);
-            obj._setContents("<ColumnInfo><Column id=\"emplId\" type=\"STRING\" size=\"256\"/><Column id=\"divisionCode\" type=\"STRING\" size=\"256\"/><Column id=\"positionCode\" type=\"STRING\" size=\"256\"/><Column id=\"emplName\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"emplId\">ID1</Col><Col id=\"divisionCode\">10</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">아무개</Col></Row><Row><Col id=\"emplId\">ID2</Col><Col id=\"divisionCode\">1010</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">홍길동</Col></Row><Row><Col id=\"emplId\">ID3</Col><Col id=\"divisionCode\">1020</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">박보검</Col></Row><Row><Col id=\"emplId\">ID4</Col><Col id=\"divisionCode\">1030</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">일용자</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"emplId\" type=\"STRING\" size=\"256\"/><Column id=\"divisionCode\" type=\"STRING\" size=\"256\"/><Column id=\"positionCode\" type=\"STRING\" size=\"256\"/><Column id=\"emplPw\" type=\"STRING\" size=\"256\"/><Column id=\"emplName\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"256\"/><Column id=\"directNo\" type=\"STRING\" size=\"256\"/><Column id=\"phoneNo\" type=\"STRING\" size=\"256\"/><Column id=\"recruitCategory\" type=\"STRING\" size=\"256\"/><Column id=\"salaryCategory\" type=\"STRING\" size=\"256\"/><Column id=\"referrer\" type=\"STRING\" size=\"256\"/><Column id=\"isStatus\" type=\"STRING\" size=\"256\"/><Column id=\"birthday\" type=\"STRING\" size=\"256\"/><Column id=\"gender\" type=\"STRING\" size=\"256\"/><Column id=\"isMarriage\" type=\"STRING\" size=\"256\"/><Column id=\"isDisability\" type=\"STRING\" size=\"256\"/><Column id=\"isVeterans\" type=\"STRING\" size=\"256\"/><Column id=\"endDate\" type=\"DATE\" size=\"256\"/><Column id=\"endReason\" type=\"STRING\" size=\"256\"/><Column id=\"profile\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"emplId\">ID1</Col><Col id=\"divisionCode\">10</Col><Col id=\"positionCode\">10</Col><Col id=\"emplPw\">아무개</Col></Row><Row><Col id=\"emplId\">ID2</Col><Col id=\"divisionCode\">1010</Col><Col id=\"positionCode\">10</Col><Col id=\"emplPw\">홍길동</Col></Row><Row><Col id=\"emplId\">ID3</Col><Col id=\"divisionCode\">1020</Col><Col id=\"positionCode\">10</Col><Col id=\"emplPw\">박보검</Col></Row><Row><Col id=\"emplId\">ID4</Col><Col id=\"divisionCode\">1030</Col><Col id=\"positionCode\">10</Col><Col id=\"emplPw\">일용자</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -220,154 +220,28 @@
             obj.set_cssclass("cancel");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_colorchart","613","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("35");
-            obj.set_background("#FFD8D8");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart00","627","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("36");
-            obj.set_background("#FAE0D4");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart01","641","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("37");
-            obj.set_background("#FAECC5");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart02","655","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("38");
-            obj.set_background("#FAF4C0");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart03","669","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("39");
-            obj.set_background("#E4F7BA");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart04","683","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("40");
-            obj.set_background("#CEFBC9");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart05","697","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("41");
-            obj.set_background("#D4F4FA");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart06","711","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("42");
-            obj.set_background("#D9E5FF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart07","725","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("43");
-            obj.set_background("#DAD9FF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart08","739","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("44");
-            obj.set_background("#E8D9FF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart09","753","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("45");
-            obj.set_background("#FFD9FA");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart10","767","275","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("46");
-            obj.set_background("#FFD9EC");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart11","613","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("47");
-            obj.set_background("#FFA7A7");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart00_00","627","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("48");
-            obj.set_background("#FFC19E");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart01_00","641","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("49");
-            obj.set_background("#FFE08C");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart02_00","655","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("50");
-            obj.set_background("#FAED7D");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart03_00","669","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("51");
-            obj.set_background("#CEF279");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart04_00","683","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("52");
-            obj.set_background("#B7F0B1");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart05_00","697","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("53");
-            obj.set_background("#B2EBF4");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart06_00","711","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("54");
-            obj.set_background("#B2CCFF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart07_00","725","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("55");
-            obj.set_background("#B5B2FF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart08_00","739","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("56");
-            obj.set_background("#D1B2FF");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart09_00","753","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("57");
-            obj.set_background("#FFB2F5");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_colorchart10_00","767","289","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("58");
-            obj.set_background("#FFB2D9");
-            this.addChild(obj.name, obj);
-
             obj = new Edit("edt_deptname","394","140","133","30",null,null,null,null,null,null,this);
-            obj.set_taborder("59");
+            obj.set_taborder("35");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_colorchartfromds","470","283","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("60");
+            obj.set_taborder("36");
             obj.set_background("");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_deptcode","394","185","133","30",null,null,null,null,null,null,this);
-            obj.set_taborder("61");
+            obj.set_taborder("37");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_deptsecond","394","230","133","30",null,null,null,null,null,null,this);
-            obj.set_taborder("62");
+            obj.set_taborder("38");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
-            obj = new Grid("grd_color","631","74","235","122",null,null,null,null,null,null,this);
-            obj.set_taborder("63");
-            obj.set_binddataset("ds_color");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/></Columns><Rows><Row size=\"24\"/></Rows><Band id=\"body\"><Cell text=\"bind:COLOR_VAL\"/></Band></Format></Formats>");
-            this.addChild(obj.name, obj);
-
             obj = new MaskEdit("MaskEdit00","393","365","158","30",null,null,null,null,null,null,this);
-            obj.set_taborder("64");
+            obj.set_taborder("39");
             obj.set_readonly("true");
             obj.set_background("transparent");
             obj.set_border("0px none");
@@ -443,8 +317,21 @@
         	this.st_lowerdept.set_visible("false");
         	this.btn_lower.set_visible("false");
 
+        	//load 되었을 때 DB에서 empl도 select 해오기
+        	this.transaction(
+        		"tr_select"// 1.ID
+        		,"HirpURL::admin/deptinfo.hirp"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"ds_empl=out_empl ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
+        		,"" // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        	);
+
+
         	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
+        	trace(this.ds_dept.rowposition);
         	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
+        	trace(this.edt_deptcode.value);
         	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
         	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
         	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
@@ -453,32 +340,25 @@
         	trace("mastername:" + masterName);
         	this.st_deptmaster2.set_text(masterName);
 
-        	//load 되었을 때 DB에서 dept select 해오기
-        	this.transaction(
-        		"dept_select"// 1.ID
-        		,"HirpURL::admin/deptlist.hirp"// 2.URL
-        		,"" // 3.InDs : F->S jsp(I,U,D)
-        		,"ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
-        		,"" // 5.InVar : F->S(var)
-        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-        	);
-
-        	//load 되었을 때 DB에서 empl도 select 해오기
         }
 
 
         this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
         {
-        	if(id=="dept_select")
+        	if(id=="tr_select")
         	{
         		if(nErrorCode < 0)
         		{
-        			this.alert("조회 실패 : " + sErrorMsg);
+        			this.alert("부서 조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("조회 성공 : " + this.ds_dept.getRowCount() + "건");
+        		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
+        		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
         	}
+
         }
+
+
 
 
         //ds_dept rowposition이 변경될 때
@@ -546,53 +426,6 @@
         };
 
 
-        //상위 부서 버튼
-        this.btn_upper_onclick = function(obj,e)
-        {
-        	//상위부서 버튼 클릭 시 상위부서 정보 조회
-        	var upperRow = this.ds_dept.findRow("deptName", this.btn_upper.text);
-        	trace("상위부서 : " + this.btn_upper.text);
-        	this.ds_dept.set_rowposition(upperRow);
-
-        };
-
-
-
-        //dept Master 수정 버튼
-        //dept master 선택창 띄우기
-        this.btn_edit_deptmaster_onclick = function(obj,e)
-        {
-        	var nLeft = system.clientToScreenX(this, 10);
-            var nTop  = system.clientToScreenY(this, 10);
-
-        	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
-        	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
-        	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
-        	objChild.set_openalign("center middle");
-        	objChild.set_dragmovetype("all");
-
-        	var nRow = this.ds_dept.rowposition;
-        	//현재 선택된 deptcode 넘겨줌
-        	var deptCode = this.ds_dept.getColumn(nRow, "deptCode");
-        	objChild.showModal(this.getOwnerFrame(), {"deptcode":deptCode, "ds_empl":this.ds_empl}, this, "fn_deptMasterEditCallback");
-        };
-
-        //부서장 수정 팝업 리턴
-        this.fn_deptMasterEditCallback = function(id, rtn){
-        	trace(rtn);
-        	//저장 버튼 누르면 master 아이디 가져와서 deptMaster에 집어넣기
-        	if(rtn != "cancel"){
-        		//id값 가져옴
-        		//임시로 static에 넣고 저장할 때 ds에 추가 되도록 (취소 누르면 원래 ds에 있는 값 출력)
-
-        		//master 아이디값과 같은 이름 set 해주기
-        		var name = this.ds_empl.lookup("emplId", rtn, "emplName");
-        		trace("master update name:" + name);
-        		this.st_deptmaster2.set_text(name);
-        	}
-        	//취소 버튼 누르면 cancel
-
-        }
 
 
 
@@ -610,7 +443,7 @@
         	objChild.set_formurl("FrameBase::deptAddPopup.xfdl");
         	objChild.set_openalign("center middle");
         	objChild.set_dragmovetype("all");
-        	objChild.showModal(this.getOwnerFrame(), {}, this, "fn_addCallback");
+        	objChild.showModal(this.getOwnerFrame(), {"ds_color" : this.ds_color}, this, "fn_addCallback");
         };
 
         //추가 팝업 닫히면서 부서 추가 -- 색상 제외하고 완료
@@ -620,11 +453,12 @@
         	var nRow = this.ds_dept.rowposition;
         	if(rtn != "cancel"){
         		var sVal = rtn.split(":");
-        		trace("deptname: " + sVal[0] + " deptcode: " + sVal[1] + " deptsecond: " + sVal[2]);
+        		trace("deptname: " + sVal[0] + " deptcode: " + sVal[1] + " deptsecond: " + sVal[2] + " deptcolor: " + sVal[3]);
          		this.ds_dept.insertRow(nRow+1); //선택한 cell의 다음 위치에 삽입
         		this.ds_dept.setColumn(nRow+1,"deptCode",sVal[1]);
         		this.ds_dept.setColumn(nRow+1,"deptName",sVal[0]);
         		this.ds_dept.setColumn(nRow+1,"deptSecondname",sVal[2]);
+        		this.ds_dept.setColumn(nRow+1,"deptColor",sVal[3]);
 
         		this.ds_dept.setColumn(nRow+1,"deptHiredate", today );
         		this.ds_dept.setColumn(nRow+1,"deptUppercode", this.ds_dept.getColumn(nRow, "deptCode"));
@@ -669,7 +503,7 @@
         };
 
 
-        //저장 버튼 -- 수정 완료
+        //저장 버튼
         this.btn_submit_onclick = function(obj,e)
         {
         	//edit에 있는 값을 ds에 저장
@@ -698,10 +532,32 @@
          	trace("dept save master id:" + masterId);
          	this.ds_dept.setColumn(nRow, "deptMaster", masterId);
 
+        	//color chart
+        	//color값 편집중 일 때 (수정 버튼이 안 보일 때)
+        	if(this.btn_edit_deptcolor.visible == false) {
+        		//선택한 color값 가져오기
+        		for(var i=0; i<this.ds_color.rowcount; i++)
+        		{
+        			var objBtn = this.components["btn_color" + i];
+        			var bStatus = objBtn.getSelectStatus();
+
+        			if(bStatus){ //status가 true일 때
+        				trace("저장된 컬러:" + objBtn.background);
+        				this.ds_dept.setColumn(nRow, "deptColor", objBtn.background);
+        			}
+        			objBtn.destroy(); //만들어진 버튼 삭제
+        		}
+        	}
+
+        	//edit창 안 보이게 하기
         	this.edt_deptname.set_visible("false");
         	this.edt_deptcode.set_visible("false");
         	this.edt_deptsecond.set_visible("false");
-
+        	//수정 버튼 보이게 하기
+        	this.btn_edit_deptname.set_visible("true");
+        	this.btn_edit_deptcode.set_visible("true");
+        	this.btn_edit_deptsecond.set_visible("true");
+        	this.btn_edit_deptcolor.set_visible("true");
         };
 
         //취소 버튼
@@ -719,6 +575,23 @@
         	var masterName = this.ds_empl.lookup("emplId", masterId, "emplName");
         	trace("dept cancel master name:" + masterName);
         	this.st_deptmaster2.set_text(masterName);
+
+        	this.edt_deptname.set_visible("false");
+        	this.edt_deptcode.set_visible("false");
+        	this.edt_deptsecond.set_visible("false");
+
+        	//color chart
+        	for(var i=0; i<this.ds_color.rowcount; i++)
+        	{
+        		var objBtn = this.components["btn_color" + i];
+        		objBtn.destroy(); //만들어진 버튼 삭제
+        	}
+
+        	//수정 버튼 보이게 하기
+        	this.btn_edit_deptname.set_visible("true");
+        	this.btn_edit_deptcode.set_visible("true");
+        	this.btn_edit_deptsecond.set_visible("true");
+        	this.btn_edit_deptcolor.set_visible("true");
         };
 
 
@@ -726,16 +599,107 @@
         this.btn_edit_deptname_onclick = function(obj,e)
         {
         	this.edt_deptname.set_visible("true");
+        	obj.set_visible("false");
         };
         //dept code 수정 버튼
         this.btn_edit_deptcode_onclick = function(obj,e)
         {
         	this.edt_deptcode.set_visible("true");
+        	obj.set_visible("false");
         };
         //dept second name 수정 버튼
         this.btn_edit_deptsecond_onclick = function(obj,e)
         {
         	this.edt_deptsecond.set_visible("true");
+        	obj.set_visible("false");
+        };
+
+        //dept color 수정 버튼
+        this.btn_edit_deptcolor_onclick = function(obj,e)
+        {
+        	obj.set_visible("false"); //수정 버튼 안 보이게 처리
+        	var nX = 394;
+        	var nY = 275;
+        	for(var i=0; i<this.ds_color.rowcount; i++)
+        	{
+        		var objBtn = new Button("btn_color" + i, nX, nY, 15, 15);
+        		this.addChild("btn_color" + i, objBtn);
+        		objBtn.set_background(this.ds_color.getColumn(i, "COLOR_VAL"));
+        		objBtn.setEventHandler("onclick", this.btn_color_onclick, this);
+        		objBtn.show();
+        		nX += 14;
+        		if(i ==  11){
+        			nX = 394;
+        			nY += 14;
+        		}
+        	}
+        };
+
+        this.btn_color_onclick = function(obj, e)
+        {
+        	for(var i=0; i<this.ds_color.rowcount; i++)
+        	{
+        		var objBtn = this.components["btn_color" + i];
+        		var bStatus = objBtn.getSelectStatus();
+
+        		if(bStatus){ //status가 true 인 친구를 false로 바꿔줌.
+        			objBtn.setSelectStatus(false);
+        			objBtn.set_border("");
+        			break;
+        		}
+        	}
+        	obj.setSelectStatus(true);
+        	obj.set_border("2px solid red");
+
+        	trace("컬러: " + obj.background);
+        }
+
+
+
+        //dept Master 수정 버튼
+        //dept master 선택창 띄우기
+        this.btn_edit_deptmaster_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+            var nTop  = system.clientToScreenY(this, 10);
+
+        	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
+        	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
+        	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
+        	objChild.set_openalign("center middle");
+        	objChild.set_dragmovetype("all");
+
+        	var nRow = this.ds_dept.rowposition;
+        	//현재 선택된 deptcode 넘겨줌
+        	var deptCode = this.ds_dept.getColumn(nRow, "deptCode");
+        	objChild.showModal(this.getOwnerFrame(), {"deptcode":deptCode, "ds_empl":this.ds_empl}, this, "fn_deptMasterEditCallback");
+        };
+
+        //부서장 수정 팝업 리턴
+        this.fn_deptMasterEditCallback = function(id, rtn){
+        	trace(rtn);
+        	//저장 버튼 누르면 master 아이디 가져와서 deptMaster에 집어넣기
+        	if(rtn != "cancel"){
+        		//id값 가져옴
+        		//임시로 static에 넣고 저장할 때 ds에 추가 되도록 (취소 누르면 원래 ds에 있는 값 출력)
+
+        		//master 아이디값과 같은 이름 set 해주기
+        		var name = this.ds_empl.lookup("emplId", rtn, "emplName");
+        		trace("master update name:" + name);
+        		this.st_deptmaster2.set_text(name);
+        	}
+        	//취소 버튼 누르면 cancel
+
+        }
+
+        //상위 부서 버튼
+        this.btn_upper_onclick = function(obj,e)
+        {
+        	//상위부서 버튼 클릭 시 상위부서 정보 조회
+        	var upperRow = this.ds_dept.findRow("deptName", this.btn_upper.text);
+        	trace("상위부서 : " + this.btn_upper.text);
+        	this.ds_dept.set_rowposition(upperRow);
+
         };
 
         });
@@ -752,6 +716,7 @@
             this.btn_edit_deptname.addEventHandler("onclick",this.btn_edit_deptname_onclick,this);
             this.btn_edit_deptcode.addEventHandler("onclick",this.btn_edit_deptcode_onclick,this);
             this.btn_edit_deptsecond.addEventHandler("onclick",this.btn_edit_deptsecond_onclick,this);
+            this.btn_edit_deptcolor.addEventHandler("onclick",this.btn_edit_deptcolor_onclick,this);
             this.btn_edit_deptmaster.addEventHandler("onclick",this.btn_edit_deptmaster_onclick,this);
             this.btn_upper.addEventHandler("onclick",this.btn_upper_onclick,this);
             this.btn_submit.addEventHandler("onclick",this.btn_submit_onclick,this);
