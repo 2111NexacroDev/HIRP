@@ -94,8 +94,8 @@ button.basic {
 }
 
 button.point {
-    background-color: #00b6c2;
-    border: 1px solid #00b6c2;
+    background-color: #0b2a60;
+    border: 1px solid #0b2a60;
     color: #fff;
 }
 
@@ -155,11 +155,11 @@ img {
 }
 
 .bg-point {
-    background-color: #00b6c2;
+    background-color: #0b2a60;
 }
 
 .color-point {
-    color: #00a1b9;
+    color: #00498c;
 }
 
 .color-white {
@@ -310,7 +310,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #00a1b9;
+    background: #0b2a60;
     height: 100%;
     width: 200px;
     overflow: hidden;
@@ -353,7 +353,7 @@ img {
 
 #gnb nav a.on {
     /* 클래스로 on이 붙어 있을 때 강조디자인 추가 */
-    background-color: #0392a7;
+    background-color: #00498c;
     opacity: 1;
 }
 
@@ -361,7 +361,7 @@ img {
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
-        background-color: #0392a7;
+        background-color: #00498c;
         opacity: 1;
     }
 }
@@ -450,12 +450,12 @@ img {
 }
 
 #btn--burger.on {
-    background-color: #0392a7;
+    background-color: #00498c;
 }
 
 @media screen and (min-width: 1201px) {
     #btn--burger:hover {
-        background-color: #0392a7;
+        background-color: #00498c;
     }
 }
 
@@ -752,6 +752,11 @@ article {
 .section--modal__conts h3 {
     margin-bottom: 20px;
     font-size: 20px;
+}
+
+.section--modal__conts ul label {
+    display: inline-block;
+    width: 70px;
 }
 
 .section--alert .bg-black,
