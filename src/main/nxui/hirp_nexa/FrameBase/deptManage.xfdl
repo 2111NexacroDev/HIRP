@@ -55,47 +55,6 @@
         <Button id="btn_colorchartfromds" taborder="35" left="470" top="283" width="15" height="15" background=""/>
         <Edit id="edt_deptsecond" taborder="36" left="394" top="230" width="133" height="30" visible="false"/>
         <MaskEdit id="MaskEdit00" taborder="37" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged" format="@@@@@@@@"/>
-        <Grid id="Grid00" taborder="38" left="627" top="52" width="338" height="391" binddataset="ds_dept">
-          <Formats>
-            <Format id="default">
-              <Columns>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-              </Columns>
-              <Rows>
-                <Row band="head" size="24"/>
-                <Row size="24"/>
-              </Rows>
-              <Band id="head">
-                <Cell text="deptCode"/>
-                <Cell col="1" text="deptName"/>
-                <Cell col="2" text="deptSecondname"/>
-                <Cell col="3" text="deptColor"/>
-                <Cell col="4" text="deptMaster"/>
-                <Cell col="5" text="deptHiredate"/>
-                <Cell col="6" text="deptUppercode"/>
-                <Cell col="7" text="deptLevel"/>
-              </Band>
-              <Band id="body">
-                <Cell text="bind:deptCode"/>
-                <Cell col="1" text="bind:deptName"/>
-                <Cell col="2" text="bind:deptSecondname"/>
-                <Cell col="3" text="bind:deptColor"/>
-                <Cell col="4" text="bind:deptMaster"/>
-                <Cell col="5" text="bind:deptHiredate"/>
-                <Cell col="6" text="bind:deptUppercode"/>
-                <Cell col="7" text="bind:deptLevel"/>
-              </Band>
-            </Format>
-          </Formats>
-        </Grid>
-        <Button id="testbtn" taborder="39" text="Button00" left="293" top="583" width="115" height="37" onclick="testbtn_onclick"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
@@ -244,6 +203,17 @@ this.fn_addCallback = function(id, rtn) {
 	}
 	//취소를 누르면 rtn이 cancel
 	
+	
+	//추가
+	this.transaction(
+		"dept_add"// 1.ID
+		,"HirpURL::admin/deptInsert.hirp"// 2.URL
+		,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
 }
 
 //부서 삭제 팝업창 띄우기 -- 일단 ds에서 삭제 완료
@@ -272,7 +242,7 @@ this.fn_deleteCallback = function(id, rtn){
 		this.transaction(
 			"dept_delete"// 1.ID
 			,"HirpURL::admin/deptDelete.hirp"// 2.URL
-			,"in_dept=ds_dept:D" // 3.InDs : F->S jsp(I,U,D)
+			,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
 			,"" // 4.OutDs : S->F jsp(SELECT)
 			,"" // 5.InVar : F->S(var)
 			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
@@ -509,14 +479,14 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
 	}
 	
-	if(id=="dept_save")
+	if(id=="dept_add")
 	{
 		if(nErrorCode < 0)
 		{
-			this.alert("부서 저장 실패 : " + sErrorMsg);
+			this.alert("부서 추가 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("부서 저장 성공 : " + this.ds_dept.getRowCount() + "건");
+		this.alert("부서 추가 성공 : " + this.ds_dept.getRowCount() + "건");
 	}
 	
 	if(id=="dept_delete")
@@ -529,6 +499,15 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		this.alert("부서 삭제 성공 : " + this.ds_dept.getRowCount() + "건");
 	}
 	
+	if(id=="dept_save")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 저장 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 저장 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
 }
 
 
