@@ -57,7 +57,7 @@ public class TodoController {
 			}else {
 				// 나중에 에러 페이지 하나 만들어서 그리로 가게 처리해줄 것.
 				// mv.setViewName("common/errorPage");
-				System.out.println("Todo list 조회 실패");
+				mv.setViewName("todo/todoList");
 			}
 		} catch(Exception e) {
 			// 나중에 에러 페이지 하나 만들어서 그리로 가게 처리해줄 것.
