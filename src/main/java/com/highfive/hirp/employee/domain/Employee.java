@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Employee {
 	private String emplId;
-	private String divisionCode;
+	private String deptCode;
 	private String positionCode;
 	private String emplPw;
 	private String emplName;
@@ -28,13 +28,13 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(String emplId, String divisionCode, String positionCode, String emplPw, String emplName,
-			Date startDate, String email, String directNo, String phoneNo, String recruitCategory,
-			String salaryCategory, String referrer, String isStatus, String birthday, String gender, String isMarriage,
-			String isDisability, String isVeterans, Date endDate, String endReason, String profile) {
+	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName, Date startDate,
+			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
+			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
+			String isVeterans, Date endDate, String endReason, String profile) {
 		super();
 		this.emplId = emplId;
-		this.divisionCode = divisionCode;
+		this.deptCode = deptCode;
 		this.positionCode = positionCode;
 		this.emplPw = emplPw;
 		this.emplName = emplName;
@@ -64,12 +64,12 @@ public class Employee {
 		this.emplId = emplId;
 	}
 
-	public String getDivisionCode() {
-		return divisionCode;
+	public String getDeptCode() {
+		return deptCode;
 	}
 
-	public void setDivisionCode(String divisionCode) {
-		this.divisionCode = divisionCode;
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
 	}
 
 	public String getPositionCode() {
@@ -226,12 +226,12 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [emplId=" + emplId + ", divisionCode=" + divisionCode + ", positionCode=" + positionCode
-				+ ", emplPw=" + emplPw + ", emplName=" + emplName + ", startDate=" + startDate + ", email=" + email
-				+ ", directNo=" + directNo + ", phoneNo=" + phoneNo + ", recruitCategory=" + recruitCategory
-				+ ", salaryCategory=" + salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus
-				+ ", birthday=" + birthday + ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability="
-				+ isDisability + ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason
-				+ ", profile=" + profile + "]";
+		return "Employee [emplId=" + emplId + ", deptCode=" + deptCode + ", positionCode=" + positionCode + ", emplPw="
+				+ emplPw + ", emplName=" + emplName + ", startDate=" + startDate + ", email=" + email + ", directNo="
+				+ directNo + ", phoneNo=" + phoneNo + ", recruitCategory=" + recruitCategory + ", salaryCategory="
+				+ salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus + ", birthday=" + birthday
+				+ ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability=" + isDisability
+				+ ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason + ", profile="
+				+ profile + "]";
 	}
 }
