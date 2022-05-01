@@ -2,13 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="NoticeBoardMapper">
-
+<mapper namespace="NoticeBoardMapper">
+<resultMap type="NoticeBoard" id="noticeResultMap">
+<id 	property="noticeNo" column="NOTICE_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="noticeTitle" column="NOTICE_TITLE"></result>
+<result property="noticeContents" column="NOTICE_CONTENTS"></result>
+<result property="writeDate" column="NOTICE_WRITE_DATE"></result>
+<result property="noticeCount" column="NOTICE_COUNT"></result>
+<result property="status" column="NOTICE_STATUS"></result>
+</resultMap>
 
 
 <insert id="insertNotice">
-	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,DEFAULT,'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
+	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,#{boardCode},'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
 </insert>
+<select id="selectNoticeNo" resultType="int">
+	SELECT NOTICE_NO FROM BOARD_NOTICE_TBL WHERE BOARD_CODE = #{boardCode} AND EMPL_ID = 'khuser01'AND NOTICE_TITLE = #{noticeTitle} AND NOTICE_CONTENTS = #{noticeContents}
+</select>
+<insert id="insertNoticeFile">
+	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
+</insert>
+
 
 
 </mapper>

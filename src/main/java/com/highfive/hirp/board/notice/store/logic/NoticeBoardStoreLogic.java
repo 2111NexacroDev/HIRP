@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.store.NoticeBoardStore;
@@ -34,8 +35,14 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public int insertNotice(SqlSession sqlSession, NoticeBoard noticeboard) {
-		int result = sqlSession.insert("noticeboard-mapper.insertNotice",noticeboard);
+		int result = sqlSession.insert("NoticeBoardMapper.insertNotice",noticeboard);
 		return result;
+	}
+	
+	@Override
+	public int selectNoticeNo(SqlSession sqlSession, NoticeBoard noticeboard) {
+		int noticeNo = sqlSession.selectOne("NoticeBoardMapper.selectNoticeNo", noticeboard);
+		return noticeNo;
 	}
 
 	@Override
@@ -86,5 +93,13 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 		int result = sqlSession.update("noticeboard-mapper.updateViewCount");
 		return result;
 	}
+
+	@Override
+	public int insertNoticeFile(SqlSession sqlSession, BoardAttachedFile boardFile) {
+		int fileResult = sqlSession.insert("NoticeBoardMapper.insertNoticeFile",boardFile);
+		return fileResult;
+	}
+
+
 
 }

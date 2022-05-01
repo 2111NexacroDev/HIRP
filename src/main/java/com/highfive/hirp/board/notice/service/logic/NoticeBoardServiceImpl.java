@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
@@ -31,7 +32,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	}
 
 	@Override
-	public NoticeBoard printOneNotice(int noticeNo) {
+	public NoticeBoard printNoticeDetail(int noticeNo) {
 		NoticeBoard noticeboard = nStore.selectOneNotice(sqlSession,noticeNo);
 		return noticeboard;
 	}
@@ -48,6 +49,12 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		return result;
 	}
 
+	@Override
+	public int printNoticeNo(NoticeBoard noticeboard) {
+		int noticeNo = nStore.selectNoticeNo(sqlSession,noticeboard);
+		return noticeNo;
+	}
+	
 	@Override
 	public int modifyNotice(NoticeBoard noticeboard) {
 		int result = nStore.updateNotice(sqlSession, noticeboard);
@@ -96,6 +103,14 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		int viewCount = nStore.selectViewCount(sqlSession,noticeNo);
 		return viewCount;
 	}
+
+	@Override
+	public int registerNoticeFile(BoardAttachedFile boardFile) {
+		int fileResult = nStore.insertNoticeFile(sqlSession, boardFile);
+		return fileResult;
+	}
+
+
 
 
 

@@ -37,6 +37,10 @@ public class NoticeController {
 	@Autowired
 	public NoticeBoardService nService;
 	
+
+	@Autowired(required=false)
+	public SaveAttachedFile saveAttachedFile;
+	
 	
 	@RequestMapping(value="board/main.hirp")
 	public String boardMain() {
@@ -48,10 +52,6 @@ public class NoticeController {
 		return "/board/boardWriteView";
 	}
 	
-//	@RequestMapping(value="notice/writeView.hirp")
-//	public String noticeWriteView() {
-//		return "notice/noticeWriteView";
-//	}
 	
 	//공지사항 전체 리스트 조회
 	@RequestMapping(value="notice/list.hirp",method=RequestMethod.GET)
@@ -75,7 +75,7 @@ public class NoticeController {
 	//공지사항 게시글 조회
 	@RequestMapping(value="notice/detail.hirp",method=RequestMethod.GET)
 	public ModelAndView noticeDetailView(ModelAndView mv, @RequestParam("noticeNo")int noticeNo) {
-		NoticeBoard noticeboard = nService.printOneNotice(noticeNo);
+		NoticeBoard noticeboard = nService.printNoticeDetail(noticeNo);
 		if(noticeboard != null) {
 			mv.addObject("noticeboard",noticeboard);
 			mv.setViewName("notice/noticeDetail");
@@ -101,30 +101,33 @@ public class NoticeController {
 	}
 	
 	//공지글 등록
-	@RequestMapping(value="notice/register.hirp", method=RequestMethod.POST)	
+	@RequestMapping(value="/notice/register.hirp", method=RequestMethod.POST)	
 	public ModelAndView registerNotice(ModelAndView mv
 			,@ModelAttribute NoticeBoard noticeboard
-//			,@ModelAttribute BoardAttachedFile boardFile
-//			,@RequestParam(value="uploadFile",required=false)MultipartFile uploadFile
-//			,HttpServletRequest request
-			) 
-			{
+			,@RequestParam(value="uploadFile",required=false)MultipartFile uploadFile
+			,HttpServletRequest request
+			){
 		try {
-			//프로젝트 경로에 파일 저장
-//			if(uploadFile !=null && !uploadFile.getOriginalFilename().equals("")) {
-//				HashMap<String,String> fileMap = SaveAttachedFile.saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
-//				String filePath = fileMap.get("filePath");
-//				String fileRename = fileMap.get("fileName");
-//				if(filePath !=null && !filePath.equals("")) {
-//					boardFile.setFileName(uploadFile.getOriginalFilename());
-//					boardFile.setFileRename(fileRename);
-//					boardFile.setFilePath(filePath);
-//				}
-//			}
-			//디비에 해당 데이터 저장
 			int result = nService.registerNotice(noticeboard);
+			int noticeNo = nService.printNoticeNo(noticeboard);
+			//프로젝트 경로에 파일 저장
+			BoardAttachedFile boardFile = null;
+			if(uploadFile !=null && !uploadFile.getOriginalFilename().equals("")) {
+				HashMap<String,String> fileMap = saveAttachedFile.saveFile(uploadFile,request);//업로드한 파일 저장하고 경로 리턴 
+				String filePath = fileMap.get("filePath");
+				String fileRename = fileMap.get("fileName");
+				if(filePath !=null && !filePath.equals("")) {
+					boardFile.setFileName(uploadFile.getOriginalFilename());
+					boardFile.setFileRename(fileRename);
+					boardFile.setFilePath(filePath);
+				}
+				boardFile.setBoardNo(noticeNo);
+				
+			}
+			//디비에 해당 데이터 저장
+			int fileResult = nService.registerNoticeFile(boardFile);
 			if(result > 0) {
-				mv.setViewName("redirect:/notice/list.hirp");
+				mv.setViewName("redirect:/board/main.hirp");
 			}else {
 				mv.addObject("msg","공지사항 등록 실패");
 				mv.setViewName("common/errorPage");

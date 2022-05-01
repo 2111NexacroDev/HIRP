@@ -27,6 +27,8 @@
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 		<!-- 민선 -->
 		<typeAlias type="com.highfive.hirp.dept.domain.Dept" alias="Dept"></typeAlias>
+		<!-- 우정 -->
+		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->
