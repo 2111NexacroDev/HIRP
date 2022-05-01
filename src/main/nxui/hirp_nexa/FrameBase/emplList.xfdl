@@ -30,7 +30,7 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
-                <Cell col="1" text="bind:divisionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
+                <Cell col="1" text="bind:deptCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" cssclass="colDept" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" font="normal 12px/normal &quot;Noto Sans KR&quot;"/>
                 <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="3" text="bind:directNo" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="4" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
@@ -101,7 +101,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
       <Dataset id="ds_empl" onload="ds_empl_onload">
         <ColumnInfo>
           <Column id="emplName" type="STRING" size="256"/>
-          <Column id="divisionCode" type="STRING" size="256"/>
+          <Column id="deptCode" type="STRING" size="256"/>
           <Column id="positionCode" type="STRING" size="256"/>
           <Column id="directNo" type="STRING" size="256"/>
           <Column id="detail" type="STRING" size="256"/>

@@ -35,17 +35,13 @@ public class EmployeeAdminController {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
-		// 쿼리문 퇴사일 NULL인 사람만 조회할 것
+		// 쿼리문 퇴사일 NULL이고 임시회원 아닌 사람만 조회할 것
 		
-		// out_empl, out_dept, out_pos
-		//List<Dept> dList = dService.selectAllDept();
-		//List<Position> pList = pService.selectAllPosition();
+		// out_empl
 		List<Employee> empList = eAService.printAllEmployee();
 		if(!empList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
-			//result.addDataSet("out_dept", dList);
-			//result.addDataSet("out_pos", pList);
 			result.addDataSet("out_empl", empList);
 		}else {
 			nErrorCode = -1;
