@@ -27,6 +27,10 @@
 	<insert id="insertProject" parameterType="Project">
 		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
 	</insert>
+
+	<update id="updateProject" parameterType="Project">
+		UPDATE PROJECT_TBL SET PROJECT_NAME=#{projectName}, START_DATE=#{startDate}, END_DATE=#{endDate}, PROJECT_MANAGER=#{projectManager} WHERE PROJECT_NO=#{projectNo}
+	</update>
 	
 	<delete id="deleteProject" parameterType="Project">
 		DELETE FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}

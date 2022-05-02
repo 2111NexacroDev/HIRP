@@ -2,9 +2,11 @@ package com.highfive.hirp.mail.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
@@ -13,14 +15,24 @@ import com.highfive.hirp.mail.store.MailStore;
 public class MailStoreLogic implements MailStore{
 
 	@Override
+	public int selectListCount(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("MailMapper.selectListCount");
+		return result;
+	}
+	
+	@Override
 	public int sendMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.insert("MailMapper.sendMail", mail);
 		return result;
 	}
 
 	@Override
-	public List<Mail> selectReceivedMail(SqlSession sqlSession) {
-		List<Mail> mList = sqlSession.selectList("MailMapper.selectReceivedMail");
+	public List<Mail> selectReceivedMail(SqlSession sqlSession, PageInfo pi) {
+		int limit = pi.getListLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Mail> mList = sqlSession.selectList("MailMapper.selectReceivedMail", pi, rowBounds);
 		return mList;
 	}
 

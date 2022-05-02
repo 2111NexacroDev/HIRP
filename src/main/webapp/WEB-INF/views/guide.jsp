@@ -15,7 +15,16 @@
             </h1>
             <a class="btn--function" href="#">등록 버튼</a>
 
-            snb 메뉴디자인
+            <ul>
+                <li>
+                    <a href="">2depth명</a>
+                    <ul>
+                        <li><a href="#">메뉴1</a></li>
+                        <li><a href="#">메뉴2</a></li>
+                        <li><a href="#">메뉴3</a></li>
+                    </ul>
+                </li>
+            </ul>
         </aside>
 
         <article id="sub" class="">
@@ -33,9 +42,13 @@
             -->
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
-            <h1 class="basic-border-bottom">
-                가이드페이지
-            </h1>
+            <!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
+            <form class="form--srch" action="">
+                <input type="text" name="" placeholder="통합검색">
+                <button type="submit"></button>
+            </form>
+
+            <h1 class="basic-border-bottom">가이드페이지</h1>
 
             <div id="guide" class="subConts">
                 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
@@ -94,14 +107,17 @@
                     추가
                 -->
 
-                <input id="valueA" class="mt-20" name="samevalue" type="radio" value="래디오1"><label
-                    for="valueA">예시값1</label><br>
-                <input id="valueB" class="mt-20" name="samevalue" type="radio" value="래디오2"><label
-                    for="valueB">예시값2</label><br>
+                <!-- 체크박스랑 래디오 쓸 때 라벨 꼭 데리고 다니기, id와 for는 같아야함 -->
+                <input id="valueA" class="mt-20" name="samevalue" type="radio" value="래디오1">
+                <label for="valueA">예시값1</label><br>
+
+                <input id="valueB" class="mt-20" name="samevalue" type="radio" value="래디오2">
+                <label for="valueB">예시값2</label><br>
 
                 <input class="mt-20" type="date"><br>
 
-                <input class="mt-20" type="checkbox"><br>
+                <input id="check1" class="mt-20" type="checkbox">
+                <label for="check1">체크박스값</label><br>
 
                 <select class="mt-20" name="" id="">
                     <option value="">옵션1</option>
@@ -110,8 +126,52 @@
                 </select>
 
                 <div class="basic-border mt-20 padding-20">
-                    <button class="basic" type="button" onclick="openAlert();">안내창 띄움</button>
-                    <button class="basic" type="button" onclick="openModal();">모달창 띄움</button>
+                    <button class="basic" type="button" onclick="openAlert(this);">안내창 띄움</button>
+                    <section class="section--alert">
+                        <div class="bg-black"></div>
+                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+                        <div class="section--alert__conts">
+                            <button class="btn--close"></button>
+                            <p>
+                                확인을 누르시면<br>
+                                ~~이 진행됩니다. 삭제하시겠습니까?
+                            </p>
+                            <div class="btns-wrap mt-20">
+                                <button class="point" type="button">확인</button>
+                                <button class="finished closeWindow" type="button">닫기</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <button class="basic" type="button" onclick="openModal(this);">모달창 띄움</button>
+                    <section class="section--modal">
+                        <div class="bg-black"></div>
+                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+                        <div class="section--modal__conts">
+                            <button class="btn--close"></button>
+                            <h3>모달창</h3>
+                            <p class="mb-20">
+                                필요한 내용 쫘르륵
+                                최대값 화면의 800px,
+                                많이 입력하면 너비 넓어지게 만들어둠
+                            </p>
+                            <ul>
+                                <li>
+                                    <label for="">항목1</label><input type="text" name="">
+                                </li>
+                                <li>
+                                    <label for="">항목2</label><input type="text" name="">
+                                </li>
+                                <li>
+                                    <label for="">항목3</label><input type="date" name="">
+                                </li>
+                            </ul>
+                            <div class="btns-wrap mt-20 t-r">
+                                <button class="point" type="button">확인</button>
+                                <button class="finished closeWindow" type="button">닫기</button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
                 <!-- 칸 나누는 법 예시 -->
@@ -121,7 +181,7 @@
                     </h3>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">2등분</h4>
+                        <!-- <h4 class="col-12 mb-20">2등분</h4> -->
                         <div class="col-6">
                             <div>칸</div>
                         </div>
@@ -131,7 +191,7 @@
                     </div>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">3등분</h4>
+                        <!-- <h4 class="col-12 mb-20">3등분</h4> -->
                         <div class="col-4">
                             <div>칸</div>
                         </div>
@@ -144,7 +204,7 @@
                     </div>
 
                     <div class="row mt-20">
-                        <h4 class="col-12 mb-20">4등분</h4>
+                        <!-- <h4 class="col-12 mb-20">4등분</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>
@@ -160,7 +220,7 @@
                     </div>
 
                     <div class="row mt-20 no-space">
-                        <h4 class="col-12 mb-20">여백 필요 없을 경우</h4>
+                        <!-- <h4 class="col-12 mb-20">여백 필요 없을 경우</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>
@@ -188,7 +248,7 @@
                     </div>
 
                     <div class="row mt-20 child-same-height">
-                        <h4 class="col-12 mb-20">자식 요소 높이 통일 필요할 경우</h4>
+                        <!-- <h4 class="col-12 mb-20">자식 요소 높이 통일 필요할 경우</h4> -->
                         <div class="col-3">
                             <div>칸</div>
                         </div>

@@ -25,7 +25,7 @@
     right: 40px;
     width: 24px;
     height: 24px;
-    background: url("../images/icons/btn_plus.png") no-repeat center center;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
     outline: none;
 }
 
@@ -42,7 +42,7 @@
 
 .todo--today li {
     position: relative;
-    padding-right: 90px;
+    padding-right: 120px;
     padding-left: 30px;
 }
 
@@ -66,16 +66,35 @@
 }
 
 .todo--today input[type="checkbox"]:checked+label {
-    border-color: #0392a7;
+    border-color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label:before {
-    content: "\2713";
+    content: "\f00c";
     display: inline-block;
+    font-family: "Fontawesome";
+    color: #00498c;
 }
 
 .todo--today input[type="checkbox"]:checked+label+input {
     text-decoration: line-through;
+}
+
+.todo--today li .btns-wrap {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    display: none;
+    font-size: 0;
+}
+
+.todo--today li input:focus+.btns-wrap,
+.todo--today li:hover input+.btns-wrap {
+    display: block;
+}
+
+.todo--today li .btns-wrap button:not(:last-of-type) {
+    margin-right: 4px;
 }
 
 .todo--week {
@@ -83,14 +102,14 @@
 }
 
 .todo--week a:before {
-    content: "\003E";
-    font-family: sans-serif;
+    content: "\f105";
+    font-family: "FontAwesome";
     margin-right: 10px;
 }
 
 section[class^="todo--"] {
     padding: 40px;
-    max-height: 50vh;
+    max-height: 360px;
     overflow-y: auto;
 }
 
@@ -126,6 +145,7 @@ section[class^="todo--"] li {
 }
 
 .memo--list li {
+    position: relative;
     width: 25%;
     padding: 0 15px;
     margin-bottom: 30px;
@@ -140,6 +160,7 @@ section[class^="todo--"] li {
     width: 100%;
     min-height: 300px;
     padding: 20px;
+    padding-top: 40px;
     border: none;
     background-color: #fff999;
     box-shadow: 5px 5px 10px -2px rgba(33, 33, 33, .3);
@@ -148,4 +169,158 @@ section[class^="todo--"] li {
     line-height: 1.8;
 }
 
+.memo--list li .btns-wrap {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    display: none;
+}
+
+.memo--list li:hover textarea+.btns-wrap,
+.memo--list textarea:focus+.btns-wrap {
+    display: block;
+}
+
+.memo--list li .btns-wrap .point,
+.memo--list li .btns-wrap .finished {
+    padding: 2px;
+    background: none;
+    border: none;
+    font-size: 0;
+}
+
+.memo--list li .btns-wrap .point:after,
+.memo--list li .btns-wrap .finished:after {
+    font-family: "Fontawesome";
+    font-size: 20px;
+    color: #999;
+}
+
+.memo--list li .btns-wrap .point:after {
+    content: "\f00c";
+}
+
+.memo--list li .btns-wrap .finished:after {
+    content: "\f00d";
+}
+
 /* 개인업무관리 끝 */
+
+/* 일정 관리 */
+.fc * {
+    text-align: left;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin: 1.5em 0 0;
+    padding: 0 20px;
+    align-items: flex-end;
+}
+
+.fc-header-toolbar>div:nth-child(2)>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.fc .fc-button .fc-icon {
+    color: #999;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.fc .fc-button-primary:hover {
+    background: none !important;
+}
+
+.fc .fc-scrollgrid-liquid {
+    border-left: none;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+    padding: 8px 4px;
+}
+
+.fc .fc-daygrid-day-top {
+    flex-direction: row;
+}
+
+.fc .fc-button-group button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    outline: none;
+}
+
+.fc .fc-button-group button.fc-button-active,
+.fc .fc-button-group button:hover {
+    background-color: transparent !important;
+    font-weight: 700;
+    color: #000 !important;
+    border-color: #000;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.fc .fc-toolbar-title {
+    margin: 0 16px;
+}
+
+.fc .fc-today-button {
+    margin-left: 10px;
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
+}
+
+.fc .fc-today-button,
+.fc .fc-today-button:hover,
+.fc .fc-today-button:disabled,
+.fc .fc-today-button:disabled:hover {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    border-radius: 0;
+    opacity: 1;
+}
+
+/* 일정 관리 끝 */
+
+/* 공용품 예약/관리 */
+.h2--reservation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.h2--reservation button {
+    width: 20px;
+    height: 20px;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
+    outline: none;
+    opacity: .5;
+}
+
+
+/* 공용품 예약/관리 끝 */

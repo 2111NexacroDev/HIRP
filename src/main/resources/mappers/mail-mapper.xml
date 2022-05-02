@@ -4,5 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="MailMapper">
-
+	<resultMap type="Mail" id="MailResultMap">
+		<id property="mailNo" column="MAIL_NO"/>
+		<result property="mailSender" column="MAIL_SENDER"/>
+		<result property="mailRecpient" column="MAIL_RECPIENT"/>
+		<result property="mailReferrer" column="MAIL_REFERRER"/>
+		<result property="mailTitle" column="MAIL_TITLE"/>
+		<result property="mailContents" column="MAIL_CONTENTS"/>
+		<result property="mailDate" column="MAIL_DATE"/>
+		<result property="importantMail" column="IMPORTANT_MAIL"/>
+		<result property="temporaryStorage" column="TEMPORARY_STORAGE"/>
+		<result property="mailWasteBasket" column="MAIL_WASTEBASKET"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM MAIL_TBL
+	</select>
+	
+	<!-- 받은 메일함 -->
+	<select id="selectReceivedMail" resultMap="MailResultMap">
+		SELECT * FROM MAIL_TBL ORDER BY MAIL_NO DESC
+	</select>
 </mapper>

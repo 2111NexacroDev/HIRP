@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,9 +22,11 @@ public class ReservationController {
 	private ReservationService rService;
 	
 	// 예약, 공용품 조회
+	@RequestMapping(value="/reservation/list.hirp", method=RequestMethod.GET)
 	public ModelAndView reservationListView(ModelAndView mv) {
-		List<Reservation> rList = rService.printAllReservation();
-		List<Utility> uList = rService.printAllUtility();
+		//List<Reservation> rList = rService.printAllReservation();
+		//List<Utility> uList = rService.printAllUtility();		
+		mv.setViewName("reservation/reservationList");
 		return mv;
 	}
 	

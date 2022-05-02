@@ -16,3 +16,12 @@
 	background-color: #4F98FF;
 	color: #111;
 }
+
+.KanbanCard {
+	cursor: move;
+	pisition: absolute;
+	background-color: #2196F3;
+	color: white;
+	border: 1px solid #d3d3d3;
+	text-align: center;
+}

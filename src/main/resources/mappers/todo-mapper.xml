@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TodoMapper">
+	<resultMap type="Todo" id="todoResultMap">
+		<id property="todoNo" column="TODO_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="todoDate" column="TODO_DATE"/>
+		<result property="todoConts" column="TODO_CONTS"/>
+		<result property="isFinished" column="IS_FINISHED"/>
+	</resultMap>
+	<resultMap type="Memo" id="memoResultMap">
+		<id property="memoNo" column="MEMO_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="memoConts" column="MEMO_CONTS"/>
+	</resultMap>
+	
+	<select id="selectAllToDo" resultMap="todoResultMap">
+		SELECT * FROM TODO_TBL WHERE TO_CHAR(TODO_DATE, 'YYMMDD') = TO_CHAR(SYSDATE, 'YYMMDD') ORDER BY TODO_DATE DESC
+	</select>
+	<insert id="insertToDo">
+		INSERT INTO TODO_TBL VALUES(TODO_SEQ.NEXTVAL, #{emplId}, SYSDATE, #{todoConts}, DEFAULT)
+	</insert>
+	<update id="updateToDo">
+		UPDATE TODO_TBL SET TODO_CONTS = #{todoConts} WHERE TODO_NO = #{todoNo}
+	</update>
+	<update id="checkedToDo">
+		UPDATE TODO_TBL SET IS_FINISHED = #{isFinished} WHERE TODO_NO = #{todoNo}
+	</update>
+	<delete id="deleteToDo">
+		DELETE FROM TODO_TBL WHERE TODO_NO = #{todoNo}
+	</delete>
+	
+	<select id="selectAllMemo" resultMap="memoResultMap">
+		SELECT * FROM MEMO_TBL ORDER BY ENROLL_DATE ASC
+	</select>
+	<insert id="insertMemo">
+		INSERT INTO MEMO_TBL VALUES(MEMO_SEQ.NEXTVAL, #{emplId}, SYSDATE, #{memoConts})
+	</insert>
+	<update id="updateMemo">
+		UPDATE MEMO_TBL SET MEMO_CONTS = #{memoConts} WHERE MEMO_NO = #{memoNo}
+	</update>
+	<delete id="deleteMemo">
+		DELETE FROM MEMO_TBL WHERE MEMO_NO = #{memoNo}
+	</delete>
+</mapper>

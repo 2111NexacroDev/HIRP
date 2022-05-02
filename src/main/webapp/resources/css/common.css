@@ -11,7 +11,7 @@
 }
 
 ::selection {
-    background: #00b6c2;
+    background: #0b2a60;
     color: white;
 }
 
@@ -41,7 +41,6 @@ input {
 }
 
 input[type="text"] {
-    width: 100%;
     padding: 0 10px;
     height: 30px;
     line-height: 28px;
@@ -58,6 +57,18 @@ select {
     color: #333;
 }
 
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("../images/bg_select_arrow.png") no-repeat 90% center/10px auto;
+}
+
+select::-ms-expand {
+    display: none;
+    /* for IE10, 11*/
+}
+
 textarea {
     width: 100%;
     padding: 20px;
@@ -70,7 +81,10 @@ input[type="text"]::placeholder {
 }
 
 button {
-    padding: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+    line-height: 1;
+    outline: none;
 }
 
 button.basic {
@@ -80,8 +94,8 @@ button.basic {
 }
 
 button.point {
-    background-color: #00b6c2;
-    border: 1px solid #00b6c2;
+    background-color: #0b2a60;
+    border: 1px solid #0b2a60;
     color: #fff;
 }
 
@@ -109,7 +123,7 @@ img {
 
 @media screen and (min-width: 1201px) {
     a:hover {
-        color: #00a1b9;
+        color: #00498c;
     }
 }
 
@@ -141,11 +155,11 @@ img {
 }
 
 .bg-point {
-    background-color: #00b6c2;
+    background-color: #0b2a60;
 }
 
 .color-point {
-    color: #00a1b9;
+    color: #00498c;
 }
 
 .color-white {
@@ -164,8 +178,16 @@ img {
     margin-top: 20px;
 }
 
+.mr-20 {
+    margin-right: 20px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.ml-20 {
+    margin-left: 20px;
 }
 
 .padding-0 {
@@ -247,6 +269,14 @@ img {
     .col-3 {
         width: 25%;
     }
+
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
 }
 
 .grid-guide-wrap .row>*>* {
@@ -262,6 +292,16 @@ img {
     box-shadow: 5px 5px 10px -2px rgba(33, 33, 33, .3);
 }
 
+.btn--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    background: url("../images/bg_close.png") no-repeat center center/100% auto;
+}
+
 /* header */
 #gnb {
     z-index: 10;
@@ -270,7 +310,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #00a1b9;
+    background: #0b2a60;
     height: 100%;
     width: 200px;
     overflow: hidden;
@@ -313,7 +353,7 @@ img {
 
 #gnb nav a.on {
     /* 클래스로 on이 붙어 있을 때 강조디자인 추가 */
-    background-color: #0392a7;
+    background-color: #00498c;
     opacity: 1;
 }
 
@@ -321,7 +361,7 @@ img {
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
-        background-color: #0392a7;
+        background-color: #00498c;
         opacity: 1;
     }
 }
@@ -410,12 +450,12 @@ img {
 }
 
 #btn--burger.on {
-    background-color: #0392a7;
+    background-color: #00498c;
 }
 
 @media screen and (min-width: 1201px) {
     #btn--burger:hover {
-        background-color: #0392a7;
+        background-color: #00498c;
     }
 }
 
@@ -455,6 +495,7 @@ img {
 }
 
 #gnb+#conts {
+    position: relative;
     padding-left: 200px;
 }
 
@@ -475,6 +516,7 @@ img {
     top: 0;
     width: 250px;
     height: 100%;
+    padding: 24px;
     background-color: #fff;
     border-right: 1px solid #ddd;
 }
@@ -485,15 +527,49 @@ img {
 }
 
 #snb h1 {
-    padding: 24px 24px 16px;
+    padding: 0 0 16px !important;
+}
+
+#snb ul>li {
+    margin-top: 10px;
+}
+
+#snb ul>li>ul {
+    padding-left: 20px;
+}
+
+#snb>ul>li>a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#snb>ul>li>a:before {
+    content: "\f107";
+    font-family: "Fontawesome";
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+#snb>ul>li:hover>a:before {}
+
+#snb>ul {
+    margin-top: 20px;
+}
+
+#snb>ul>li {
+    margin-top: 24px;
 }
 
 .btn--function {
     position: relative;
     display: block;
+    width: 100%;
     height: 44px;
     font-size: 14px;
-    margin: 6px 24px;
+    margin: 6px 0;
     letter-spacing: -1px;
     line-height: 44px;
     padding: 0px;
@@ -507,17 +583,22 @@ img {
 @media screen and (min-width: 1201px) {
     .btn--function:hover {
         box-shadow: 0 2px 6px rgb(0 0 0 / 20%);
+        color: inherit;
     }
 }
 
 #conts h1 {
-    padding: 24px 24px 16px;
+    padding: 24px 20px 16px;
     font-size: 22px;
     letter-spacing: -1px;
 }
 
 #conts h1 strong {
     font-weight: 700;
+}
+
+#conts h2 {
+    font-size: 18px;
 }
 
 .btn--profile {
@@ -530,19 +611,25 @@ img {
 .btn--alarm {
     background: url(../images/icons/ic_snb.png) no-repeat;
     background-position: -43px -43px;
-    border-radius: 4px;
 }
 
 .btn--chat {
     background: url(../images/icons/btn_chat.png) no-repeat;
     background-position: center center;
-    border-radius: 4px;
 }
+
+.btn--star {
+    background: url(../images/icons/btn_bookmark.png) no-repeat;
+    background-position: center center;
+    mragin-left: 8px;
+}
+
 
 @media screen and (min-width: 1201px) {
 
     .btn--alarm:hover,
-    .btn--chat:hover {
+    .btn--chat:hover,
+    .btn--star:hover {
         background-color: #eee;
     }
 }
@@ -554,17 +641,22 @@ img {
 }
 
 #nav--right button {
+    padding: 0;
     vertical-align: middle;
 }
 
 #nav--right button:not(:last-of-type) {
     width: 40px;
     height: 40px;
+    border-radius: 4px;
+}
+
+#nav--right button:last-of-type {
+    margin-left: 4px;
 }
 
 .btn--alarm {
     position: relative;
-    margin-right: 8px;
 }
 
 .btn--alarm span {
@@ -583,7 +675,7 @@ img {
 .form--srch {
     position: absolute;
     top: 15px;
-    right: 170px;
+    right: 210px;
 }
 
 .form--srch input {
@@ -619,4 +711,60 @@ img {
 
 article {
     min-height: 100vh;
+}
+
+.section--alert__conts {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    padding: 60px 40px 46px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid #ccc;
+}
+
+.section--alert,
+.section--modal {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.section--modal__conts {
+    position: relative;
+    max-width: 800px;
+    padding: 60px 20px 30px;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 1px solid #ccc;
+}
+
+.section--modal__conts h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.section--modal__conts ul label {
+    display: inline-block;
+    width: 70px;
+}
+
+.section--alert .bg-black,
+.section--modal .bg-black {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .4);
 }

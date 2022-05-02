@@ -38,6 +38,12 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
+	public int checkedToDo(Todo todo) {
+		int result = tStore.checkedToDo(sqlSession, todo);
+		return result;
+	}
+
+	@Override
 	public int removeToDo(int todoNo) {
 		int result = tStore.deleteToDo(sqlSession, todoNo);
 		return result;

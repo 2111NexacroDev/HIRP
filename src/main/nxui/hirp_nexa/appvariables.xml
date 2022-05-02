@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppVariables version="2.0">
+  <Datasets>
+    <Dataset id="gds_menu">
+      <ColumnInfo>
+        <Column id="MENU_ID" type="STRING" size="256"/>
+        <Column id="MENU_NAME" type="STRING" size="256"/>
+        <Column id="MENU_LEVEL" type="STRING" size="256"/>
+        <Column id="FORM_URL" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row>
+          <Col id="MENU_ID">10</Col>
+          <Col id="MENU_NAME">홈</Col>
+          <Col id="MENU_LEVEL">0</Col>
+          <Col id="FORM_URL">FrameBase::form_home.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">20</Col>
+          <Col id="MENU_NAME">사원관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">30</Col>
+          <Col id="MENU_NAME">부서관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+          <Col id="FORM_URL">FrameBase::deptManage.xfdl</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">40</Col>
+          <Col id="MENU_NAME">직급관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">50</Col>
+          <Col id="MENU_NAME">전자결재관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_ID">60</Col>
+          <Col id="MENU_NAME">근태관리</Col>
+          <Col id="MENU_LEVEL">0</Col>
+        </Row>
+      </Rows>
+    </Dataset>
+  </Datasets>
+  <Variables/>
+  <DataObjects/>
+</AppVariables>

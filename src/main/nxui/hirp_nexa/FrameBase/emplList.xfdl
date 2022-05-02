@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="emplList" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="Static00" taborder="1" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
+        <Static id="Static00_00" taborder="2" text="사원관리" left="200" top="0" width="1080" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60"/>
+        <Static id="Static01" taborder="3" text="재직자 목록" left="200" top="60" width="1080" height="60" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px"/>
+        <Grid id="Grid00" taborder="4" top="121" width="1080" height="269" right="0"/>
+        <Static id="Static01_00" taborder="5" text="퇴사자 목록" left="200" top="400" width="1080" height="60" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px"/>
+        <Grid id="Grid00_00" taborder="6" width="1080" height="260" right="0" bottom="0"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+  </Form>
+</FDL>

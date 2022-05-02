@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -127,18 +128,23 @@ public class ProjectController {
 	}
 	
 	// 프로젝트 수정
-	@RequestMapping(value="/project/modify.hirp", method=RequestMethod.POST)
+	@RequestMapping(value="/project/modify.hirp", method=RequestMethod.GET)
 	public ModelAndView updateProject(ModelAndView mv
-			, @ModelAttribute Project project
 			, @RequestParam("projectNo") int projectNo
 			, @RequestParam("projectName") String projectName
-			, @RequestParam("startDate") Date startDate
-			, @RequestParam("endDate") Date endDate
+			, @RequestParam("startDate") String startDate
+			, @RequestParam("endDate") String endDate
 			, @RequestParam("projectManager") String projectManager) {
 		try {
+			Project project = new Project();
+			project.setProjectNo(projectNo);
+			project.setProjectName(projectName);
+			project.setStartDate(Date.valueOf(startDate));
+			project.setEndDate(Date.valueOf(endDate));
+			project.setProjectManager(projectManager);
 			int result = pService.updateProject(project);
 			if(result > 0) {
-				mv.setViewName("redirect:/project/detail.hirp");
+				mv.setViewName("redirect:/project/detail.hirp?projectNo="+projectNo);
 			}else {
 				mv.addObject("msg", "프로젝트 수정 실패");
 				mv.setViewName("common/errorPage");
@@ -165,8 +171,11 @@ public class ProjectController {
 	}
 	
 	// 칸반보드 추가
+	@ResponseBody
+	@RequestMapping(value="/project/boardAdd.hirp", method=RequestMethod.POST)
 	public ModelAndView insertBoard(ModelAndView mv
 			, @ModelAttribute Board board) {
+		
 		return mv;
 	}
 	

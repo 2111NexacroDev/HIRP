@@ -1,10 +1,16 @@
 package com.highfive.hirp.dept.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.highfive.hirp.alram.service.AlramService;
+import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.dept.service.DeptService;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
@@ -15,27 +21,48 @@ public class DeptController {
 	@Autowired
 	private DeptService dService;
 	
-	//부서 관리 페이지
+	@Autowired
+	private EmployeeAdminService eAService;
+	
+	//부서 관리 페이지 이동
 	public NexacroResult deptMainPage() {
 		
 		NexacroResult result = new NexacroResult();
 		return result;
 	}
-	//부서 선택해서 부서 정보 조회 (ajax)
-	public NexacroResult selectDeptInfo(
-			@ParamVariable(name="in_deptCode") String deptCode) {
-		
+	
+	//부서, 직원 전체 list 조회
+	@RequestMapping(value="/admin/deptinfo.hirp", method=RequestMethod.GET)
+	public NexacroResult selectDeptList() {
+		// ErrorCode, ErrorMsg, Dataset 선언
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
+		// out_dept, out_pos
+		List<Dept> dList = dService.selectAllDept();
+		List<Employee> eList = eAService.printAllEmployee();
+		if(!dList.isEmpty() && !eList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+			result.addDataSet("out_dept", dList);
+			result.addDataSet("out_empl", eList);
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 	
-	//부서 이름 검색
-	public NexacroResult selectDeptSearch(
-			@ParamVariable(name="in_searchName") String searchName) {
-		
-		NexacroResult result = new NexacroResult();
-		return result;
-	}
+	//부서 이름 검색 //넥사에서 해결
+//	public NexacroResult selectDeptSearch(
+//			@ParamVariable(name="in_searchName") String searchName) {
+//		
+//		NexacroResult result = new NexacroResult();
+//		return result;
+//	}
+	
 	//부서 추가
 	public NexacroResult insertDept(
 			@ParamDataSet(name="in_dept") DataSet dept) {

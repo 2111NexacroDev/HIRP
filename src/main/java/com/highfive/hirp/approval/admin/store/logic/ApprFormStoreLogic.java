@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.admin.store.ApprFormStore;
+
 @Repository
 public class ApprFormStoreLogic implements ApprFormStore {
 
