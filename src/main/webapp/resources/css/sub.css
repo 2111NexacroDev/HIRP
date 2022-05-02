@@ -4,6 +4,13 @@
     padding: 20px;
 }
 
+.subConts.align--middle {
+    min-height: calc(100vh - 63px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* 개인업무관리 */
 #todo section {
     position: relative;

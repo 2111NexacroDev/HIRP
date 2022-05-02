@@ -35,14 +35,18 @@ public class EmployeeAdminController {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
-		// 쿼리문 퇴사일 NULL이고 임시회원 아닌 사람만 조회할 것
 		
-		// out_empl
+		// 재직자 조회
 		List<Employee> empList = eAService.printAllEmployee();
-		if(!empList.isEmpty()) {
+		
+		// 퇴사자 조회
+		List<Employee> retireeList = eAService.printAllRetiree();
+		
+		if(!empList.isEmpty() && !retireeList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
 			result.addDataSet("out_empl", empList);
+			result.addDataSet("out_retiree", retireeList);
 		}else {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
@@ -52,25 +56,23 @@ public class EmployeeAdminController {
 		return result;
 	}
 	
-	// 퇴사자 조회
-	public NexacroResult retireeListView() {
-		NexacroResult result = new NexacroResult(); 
-		List<Employee> retireeList = eAService.printAllRetiree();
-		return result;
-	}
-	
-	// 사원 검색 (와이어프레임엔 없음)
-	public NexacroResult empSearchListView(
-			@ParamDataSet(name="searchList") 		DataSet search) { //이거 매개변수 맞는지 체크해야함
-		List<Employee> searchList = eAService.printSearchEmployee(search);
-		NexacroResult result = new NexacroResult(); 
-		return result;
-	}
-	
 	// 사원 정보 상세 조회
-	public NexacroResult empDetailView() {
+	@RequestMapping(value="/admin/empDetail.hirp", method=RequestMethod.POST)
+	public NexacroResult empDetailView(
+			@ParamVariable(name="emplId") String 	emplId) {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
-		Employee employee = eAService.printEmployeeInfo();
+		Employee employee = eAService.printEmployeeInfo(emplId);
+		if(employee != null) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 	

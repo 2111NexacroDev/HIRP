@@ -18,7 +18,7 @@
             </Format>
           </Formats>
         </Grid>
-        <Static id="static_dept01" taborder="1" text="부서 관리" left="20" top="15" width="166" height="41" font="normal 500 15pt/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="static_dept01" taborder="1" text="부서 관리" left="20" top="15" width="166" height="41" font="normal 500 15pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
         <Static id="static_dept02" taborder="2" text="조직도" left="20" top="56" width="166" height="41" font="normal 500 12pt/normal &quot;Noto Sans KR&quot;"/>
         <Static id="static_dept03" taborder="3" text="부서" left="27" top="121" width="50" height="30" font="normal 10pt/normal &quot;Noto Sans KR&quot;"/>
         <Button id="btn_deptAdd" taborder="4" left="160" top="127" width="15" height="15" cssclass="add_icon" onclick="btn_deptAdd_onclick"/>
@@ -463,6 +463,11 @@ this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var upperRow = this.ds_dept.findRow("deptName", this.btn_upper.text);
 	trace("상위부서 : " + this.btn_upper.text);
 	this.ds_dept.set_rowposition(upperRow);
+	
+};
+
+this.static_dept01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
 	
 };
 ]]></Script>
