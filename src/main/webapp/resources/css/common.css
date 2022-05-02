@@ -166,12 +166,20 @@ img {
     color: #fff;
 }
 
+.color-grey {
+    color: #747474;
+}
+
 .t-c {
     text-align: center;
 }
 
 .t-r {
     text-align: right;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }
 
 .mt-20 {
@@ -551,6 +559,10 @@ img {
     font-family: "Fontawesome";
     margin-right: 10px;
     transition: all .3s;
+}
+
+#snb>ul.no-icon>li>a:before {
+	display: none;	
 }
 
 #snb>ul>li:hover>a:before {}

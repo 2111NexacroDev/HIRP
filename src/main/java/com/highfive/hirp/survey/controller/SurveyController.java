@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,22 +31,27 @@ public class SurveyController {
 	private SurveyService sService;
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
+	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
 	public ModelAndView surveyMain(ModelAndView mv) {
 		//내가 대상자인 것 중 진행중이면서 응답하지 않은 설문 리스트
 		
 		//최근 생성된 설문 리스트
 		//설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
+		
+		mv.setViewName("survey/mainSurveyPage");
 		return mv;
 	}
 	
 	//진행중인 설문 페이지 (리스트 조회)
+	@RequestMapping(value="/survey/proceed.hirp", method=RequestMethod.GET)
 	public ModelAndView proceedSurvey(ModelAndView mv) {
 		//진행중인 설문 리스트
 		//진행중인 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		
 		//응답자 리스트 보기는 버튼 누르면 아래 컨트롤러 실행되도록 해야겠다
+		mv.setViewName("survey/proceedSurveyPage");
 		return mv;
 	}
 	//응답자 리스트 보기
@@ -56,21 +63,23 @@ public class SurveyController {
 	}
 	
 	//마감된 설문 페이지 (리스트 조회)
+	@RequestMapping(value="/survey/closed.hirp", method=RequestMethod.GET)
 	public ModelAndView closedSurvey(ModelAndView mv) {
 		//마감된 설문 리스트
 		//마감된 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
-		
+		mv.setViewName("survey/closedSurveyPage");
 		return mv;
 	}
 
 	//내가 만든 설문 페이지 (리스트 조회)
+	@RequestMapping(value="/survey/mySurvey.hirp", method=RequestMethod.GET)
 	public ModelAndView wroteSurvey(ModelAndView mv
 			, HttpServletRequest request) {
 		//아이디 가져옴 (세션에서)
 		//내가 만든 설문 리스트
 		//설문조사 번호로 설문 대상자 리스트 가져오기
-		
+		mv.setViewName("survey/wroteSurveyPage");
 		return mv;
 	}
 	

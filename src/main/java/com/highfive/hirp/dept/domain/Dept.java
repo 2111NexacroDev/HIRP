@@ -1,6 +1,5 @@
 package com.highfive.hirp.dept.domain;
 
-import java.sql.Date;
 
 public class Dept {
 	private String deptCode;
@@ -8,14 +7,14 @@ public class Dept {
 	private String deptSecondname;
 	private String deptColor;
 	private String deptMaster;
-	private Date deptHiredate;
+	private String deptHiredate;
 	private String deptUppercode;
 	private int deptLevel;
 	
 	public Dept() {}
 
 	public Dept(String deptCode, String deptName, String deptSecondname, String deptColor, String deptMaster,
-			Date deptHiredate, String deptUppercode, int deptLevel) {
+			String deptHiredate, String deptUppercode, int deptLevel) {
 		super();
 		this.deptCode = deptCode;
 		this.deptName = deptName;
@@ -67,11 +66,11 @@ public class Dept {
 		this.deptMaster = deptMaster;
 	}
 
-	public Date getDeptHiredate() {
+	public String getDeptHiredate() {
 		return deptHiredate;
 	}
 
-	public void setDeptHiredate(Date deptHiredate) {
+	public void setDeptHiredate(String deptHiredate) {
 		this.deptHiredate = deptHiredate;
 	}
 

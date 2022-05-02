@@ -2171,6 +2171,13 @@ last-modified : 2021-10-26
 	background : linear-gradient(to top,#ad0000,#930000);
 }
 
+.Button.deptButton
+{
+	font: normal 8pt/normal "Noto Sans KR";
+	background : #ffffff;
+	
+}
+
 .Grid .body .row .cell .cellbutton
 {
 	-nexa-border : 1px solid #333333;

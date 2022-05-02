@@ -4,4 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="NoticeBoardMapper">
 
+
+
+<insert id="insertNotice">
+	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,DEFAULT,'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
+</insert>
+
+
 </mapper>

@@ -19,9 +19,9 @@ if (nexacro.Environment)
         nexacro._addService("xcssrc", "file", "./_resource_/_xcss_/", "session", null, "", "0", "");
         nexacro._addService("imagerc", "file", "./_resource_/_images_/", "session", null, "", "0", "");
         nexacro._addService("font", "file", "./_resource_/_font_/", "session", null, "", "0", "");
-        nexacro._addService("Base", "form", "./Base/", "session", null, "", "0", "0");
-        nexacro._addService("FrameBase", "form", "./FrameBase/", "session", null, "", "0", "0");
-        nexacro._addService("HirpURL", "JSP", "http://127.0.0.1:8888", "session", null, "", "0", "0");
+        nexacro._addService("lib", "js", "./lib/", "session", null, "", "0", "0");
+        nexacro._addService("techtip", "form", "./techtip/", "session", null, "", "0", "0");
+        nexacro._addService("file", "file", "./file/", "session", null, "", "0", "0");
     	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacro17lib/component/");
     	nexacro._theme_uri = "./_resource_/_theme_/";
     	// load components
@@ -49,7 +49,10 @@ if (nexacro.Environment)
         		{"id":"Plugin", "classname":"nexacro.Plugin", "type":"JavaScript"},
         		{"id":"Dataset", "classname":"nexacro.NormalDataset", "type":"JavaScript"},
         		{"id":"ListView", "classname":"nexacro.ListView", "type":"JavaScript"},
-        		{"id":"DataObject", "classname":"nexacro.DataObject", "type":"JavaScript"}
+        		{"id":"WebBrowser", "classname":"nexacro.WebBrowser", "type":"JavaScript"},
+        		{"id":"FileUpTransfer", "classname":"nexacro.FileUpTransfer", "type":"JavaScript"},
+        		{"id":"FileDownTransfer", "classname":"nexacro.FileDownTransfer", "type":"JavaScript"},
+        		{"id":"FileDialog", "classname":"nexacro.FileDialog", "type":"JavaScript"}
         ];
     	nexacro._addClasses(registerclass);
     };
