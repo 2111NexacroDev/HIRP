@@ -2,7 +2,7 @@ package com.highfive.hirp.employee.domain;
 
 import java.sql.Date;
 
-public class Employee {
+public class Employee { // db와 같게 소문자로 만들어줘야함
 	private String emplId;
 	private String divisionCode;
 	private String positionCode;
@@ -23,15 +23,14 @@ public class Employee {
 	private String isVeterans;
 	private Date endDate;
 	private String endReason;
-	private String profile;
+	private String emplProfile;
 
-	public Employee() {
-	}
+	public Employee() {}
 
 	public Employee(String emplId, String divisionCode, String positionCode, String emplPw, String emplName,
 			Date startDate, String email, String directNo, String phoneNo, String recruitCategory,
 			String salaryCategory, String referrer, String isStatus, String birthday, String gender, String isMarriage,
-			String isDisability, String isVeterans, Date endDate, String endReason, String profile) {
+			String isDisability, String isVeterans, Date endDate, String endReason, String emplProfile) {
 		super();
 		this.emplId = emplId;
 		this.divisionCode = divisionCode;
@@ -53,7 +52,7 @@ public class Employee {
 		this.isVeterans = isVeterans;
 		this.endDate = endDate;
 		this.endReason = endReason;
-		this.profile = profile;
+		this.emplProfile = emplProfile;
 	}
 
 	public String getEmplId() {
@@ -216,12 +215,12 @@ public class Employee {
 		this.endReason = endReason;
 	}
 
-	public String getProfile() {
-		return profile;
+	public String getEmplProfile() {
+		return emplProfile;
 	}
 
-	public void setProfile(String profile) {
-		this.profile = profile;
+	public void setEmplProfile(String emplProfile) {
+		this.emplProfile = emplProfile;
 	}
 
 	@Override
@@ -232,6 +231,6 @@ public class Employee {
 				+ ", salaryCategory=" + salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus
 				+ ", birthday=" + birthday + ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability="
 				+ isDisability + ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason
-				+ ", profile=" + profile + "]";
+				+ ", emplProfile=" + emplProfile + "]";
 	}
 }

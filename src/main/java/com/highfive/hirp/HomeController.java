@@ -46,5 +46,4 @@ public class HomeController {
 		mv.setViewName("guide");
 		return mv;
 	}
-	
 }

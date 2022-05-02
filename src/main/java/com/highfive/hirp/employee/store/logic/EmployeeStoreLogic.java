@@ -16,10 +16,9 @@ public class EmployeeStoreLogic implements EmployeeStore {
 	// 값을 넣어서 수정,삭제,등록 할때는 int // 조회하거나 값 담아올때는
 	@Override
 	public int insertEmployee(SqlSession sqlSession, Employee employee) {
-		int result = sqlSession.insert("EmployeeMapper.insertEmployee", employee);
+		int result = sqlSession.insert("EmployeeMapper.insertEmployee", employee); // .()값을 mapper id값과 같게 적어줘야함
 		return result;
 	}
-	
 	
 	// 로그인
 	@Override
@@ -28,17 +27,25 @@ public class EmployeeStoreLogic implements EmployeeStore {
 		return employeeOne;
 	}
 
+	// 비밀번호 찾기
+	@Override
+	public Employee selectFindPwd(SqlSession sqlSession, Employee employee) {
+		Employee employeePwd = sqlSession.selectOne("EmployeeMapper.selectFindPwd", employee);
+		return employeePwd;
+	}
+	
+	// 비밀번호 재설정
+	@Override
+	public int updatePwd(SqlSession sqlSession, Employee employee) {
+		int result = sqlSession.update("EmployeeMapper.updatePwd", employee);
+		return result;
+	}
+	
+	
 	// 마이페이지 출력
 	@Override
 	public Employee selectOneById(SqlSession sqlSession, String employeeId) {
 		Employee employeeOne = sqlSession.selectOne("EmployeeMapper.selectOneById", employeeId);
-		return employeeOne;
-	}
-	
-	// 비밀번호 찾기
-	@Override
-	public List<Employee> findPwd(Employee employee, SqlSession sqlSession) {
-		List<Employee> employeeOne = sqlSession.selectList("EmployeeMapper.findPwd", employee);
 		return employeeOne;
 	}
 }

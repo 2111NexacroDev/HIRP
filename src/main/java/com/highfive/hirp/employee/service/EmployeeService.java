@@ -1,11 +1,6 @@
 package com.highfive.hirp.employee.service;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
 import com.highfive.hirp.employee.domain.Employee;
-import com.highfive.hirp.group.domain.Group;
 
 public interface EmployeeService {
 
@@ -15,9 +10,12 @@ public interface EmployeeService {
 	// 로그인
 	public Employee loginMember(Employee employee);
 
+	// 비밀번호 찾기
+	public Employee findPwd(Employee employee);
+	
+	// 비밀번호 재설정
+	public int modifyPwd(Employee employee);
+	
 	// 마이페이지 출력
 	public Employee employeeMyPage(String employeeId);
-	
-	// 비밀번호 찾기
-	public List<Employee> findPwd(HttpServletResponse response, Employee employee) throws Exception;
 }

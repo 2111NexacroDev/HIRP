@@ -3,34 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmplpyeeMapper">
-	<!-- <resultMap type="com.highfive.hirp.employee.domain.Employee">
-		<id employeResultMap="">
-		<id property="" column "" />
-		<result property="" column="" />
-	</resultMap> -->
+<mapper namespace="EmployeeMapper">
+	<resultMap type="com.highfive.hirp.employee.domain.Employee" id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
+		<id property="emplId" column="EMPL_ID" />
+		<result property="divisionCode" column="DIVISION_CODE" />
+		<result property="positionCode" column="POSITION_CODE" />
+		<result property="emplPw" column="EMPL_PW" />
+		<result property="emplName" column="EMPL_NAME" />
+		<result property="startDate" column="START_DATE" />
+		<result property="email" column="EMAIL" />
+		<result property="directNo" column="DIRECT_NO" />
+		<result property="phoneNo" column="PHONE_NO" />
+		<result property="recruitCategory" column="RECRUIT_CATEGORY" />
+		<result property="salaryCategory" column="SALARY_CATEGORY" />
+		<result property="referrer" column="REFERRER" />
+		<result property="isStatus" column="IS_STATUS" />
+		<result property="birthday" column="BIRTHDAY" />
+		<result property="gender" column="GENDER" />
+		<result property="isMarriage" column="IS_MARRIAGE" />
+		<result property="isDisability" column="IS_DISABILITY" />
+		<result property="isVeterans" column="IS_VETERANS" />
+		<result property="endDate" column="END_DATE" />
+		<result property="endReason" column="END_REASON" />
+		<result property="emplProfile" column="EMPL_PROFILE" />
+	</resultMap>
 
 	<!-- 회원가입 -->
-	<!-- <insert>
-		parameterType="com.highfive.hirp.employee.domain.Employee">
-		INSERT INTO
-	</insert> -->
+	<insert id="insertEmployee" parameterType="Employee"> <!-- 마이바티스에 줄이려고 써둠. id값 storelogic값과 같아야함 // 위에 타입, 아이디 중 적어줌 -->
+		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER)VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender})
+	</insert>
 
 	<!-- 로그인 -->
-	<!-- <select id="selectLoginEmployee"
-		parameterType="com.highfive.hirp.employee.domain.Employee" resultMap="employeeResultMap">
-		SELECT *
-		FROM
-		WHERE
-	</select> -->
-	
-	<!-- 마이페이지 조회 -->
-	<!-- <select>
-
-	</select> -->
+	<select id="selectLoginEmployee" parameterType="Employee" resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, _string) 여러개면 resultMap -->
+		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_PW = #{emplPw}
+	</select>	
 	
 	<!-- 비밀번호 찾기 -->
-	<!-- <select>
+	<select id="selectFindPwd" parameterType="Employee" resultMap="employeeResultMap">
+		SELECT *
+		FROM EMPL_TBL
+		WHERE EMPL_ID = #{emplId} AND EMPL_NAME = #{emplName} AND BIRTHDAY = #{birthday} 
+	</select>
 	
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePwd" parameterType="Employee">
+		UPDATE EMPL_TBL SET EMPL_PW = #{emplPw} WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<!-- 마이페이지 -->
+	<!-- <select>
 	</select> -->
+	
 </mapper>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +22,27 @@ public class TimeController {
 	
 	@Autowired
 	private TimeService tService;
+	
+	// 출,퇴근 내역 화면(근태관리 메인)
+	@RequestMapping(value="/time/list.hirp", method=RequestMethod.GET)
+	public ModelAndView timeListView (ModelAndView mv) {
+		mv.setViewName("time/timeList");
+		return mv;
+	}
+	
+	// 연차 내역 화면
+	@RequestMapping(value="/time/vacation.hirp", method=RequestMethod.GET)
+	public ModelAndView vacationListView (ModelAndView mv) {
+		mv.setViewName("time/vacationList");
+		return mv;
+	}
+		
+	// 근태 조정 신청 화면
+	@RequestMapping(value="/time/modify.hirp", method=RequestMethod.GET)
+	public ModelAndView modifyListView (ModelAndView mv) {
+		mv.setViewName("time/modifyList");
+		return mv;
+	}	
 	
 	// 사용자 출근 등록
 	public ModelAndView timeStart (ModelAndView mv, @ModelAttribute Time time, HttpServletRequest request) {
