@@ -51,6 +51,13 @@
                                     </div>
                                 </li>
                             </c:forEach>
+                            <c:choose>
+                                <c:when test="${empty tList}">
+                                    <li class="no-data">
+                                        <p>등록된 내용이 없습니다.</p>
+                                    </li>
+                                </c:when>
+                            </c:choose>
                         </ul>
                         <button class="btn--plus" type="button"></button>
                     </section>
@@ -90,6 +97,13 @@
                                 </div>
                             </li>
                         </c:forEach>
+                        <c:choose>
+                            <c:when test="${empty mList}">
+                                <li class="no-data">
+                                    <p>아직 등록된 메모가 없습니다. <br>오른쪽 위의 + 버튼을 눌러 업무를 관리해보세요!</p>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                     <button class="btn--plus" type="button"></button>
                 </section>

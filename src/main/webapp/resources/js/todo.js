@@ -1,4 +1,7 @@
 $('.todo--today .btn--plus').on('click', function () {
+    if ($('.todo--today .no-data').length != 0) {
+        $('.todo--today .no-data').hide();
+    }
     $('.todo--today ul').append(
         '<li>' +
         '<input id="todoNew" type="checkbox">' +
@@ -13,6 +16,9 @@ $('.todo--today .btn--plus').on('click', function () {
 });
 
 $('.memo--list .btn--plus').on('click', function () {
+    if ($('.memo--list .no-data').length != 0) {
+        $('.memo--list .no-data').hide();
+    }
     $('.memo--list ul').append(
         '<li>' +
         '<textarea name="memoConts"></textarea>' +

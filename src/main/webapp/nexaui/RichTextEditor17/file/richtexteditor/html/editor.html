@@ -1,0 +1,527 @@
+﻿<!--[if gt IE 8]><!DOCTYPE html><!--<![endif]-->
+<html style="height: 100%; overflow: hidden; margin: 0;">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" pageEncoding="utf-8" />	
+	<meta http-equiv="x-ua-compatible" content="IE=Edge"/>
+    <title></title>
+	<script type="text/javascript" src="./js/editor.js"></script>
+	<script type="text/javascript" src="./js/history.js"></script>
+	<script type="text/javascript" src="./js/table.js"></script>
+	<script type="text/javascript" src="./js/util.js"></script>
+	<!-- Highlight -->
+	<script type="text/javascript" src="./js/highlight/Highlight.js"></script>
+	<script type="text/javascript" src="./js/highlight/ParseJava.js"></script>
+	<script type="text/javascript" src="./js/highlight/ParseJavascript.js"></script>
+	<script type="text/javascript" src="./js/highlight/ParseXml.js"></script>
+	<script type="text/javascript" src="./js/highlight/TokenizeJava.js"></script>
+	<script type="text/javascript" src="./js/highlight/TokenizeJavascript.js"></script>
+	
+	<script type="text/javascript">
+		var _editor;
+		var _editorTable;
+		var _editorHighlight;
+		
+		var onLoadCallBackName;
+		var resizedImage;
+		var selectedImage;
+		
+		var editorConfig = {
+			// 에디터에서만 적용할 스타일
+			decoStyle : " .area_type{	border-bottom-color: #999;	border-bottom-style: dashed;	border-bottom-width: 1px;	border-collapse: separate;	border-left-color: #999;	border-left-style: dashed;	border-left-width: 1px;	border-right-color: #999;	border-right-style: dashed;	border-right-width: 1px;	border-top-color: #999;	border-top-style: dashed;	border-top-width: 1px;	color: #46586e;	font-family: verdana;	font-size: 12px;	line-height: 1.5;	vertical-align: top;	word-wrap: break-word;	A:link {color: #80FF00} A:visited {color: #FF00FF}}",			
+			
+			// 에디터 본문에 적용할 스타일 링크
+			linkStyle : ["./css/editor.css"]
+		};		
+		
+		function fn_onload()
+		{
+		}
+		
+		// initialize editor
+		function initEditor(nexacroCallBackName)
+		{
+			onLoadCallBackName = nexacroCallBackName;
+			
+			_editor = new RichTextEditor.Editor(editorConfig, onNotifyEditor);
+		}
+		
+		// Table 사용
+		function addTable()
+		{
+			var config = {
+				selectedColor: "#ceefff",		// 마우스드래그에 의해 선택되어지는 셀 색상
+				borderRange: "all",				// 표 테두리 유형 기본값
+				borderColor: "#2462af",			// 표 선 색상 기본값
+				borderHeight: 1,				// 표 선 크기 기본값
+				borderType: "solid"				// 표 선 유형 기본값				
+			};
+			
+			var container = _editor.container;
+			var editor = _editor.editor;
+			var editSelection = _editor.selection;
+			
+			_editorTable = new RichTextEditor.Table(document, container, editor, editSelection, config);		
+			
+			_editorTable._editor = _editor;
+		}
+		
+		// Highlight 사용
+		function addHighlight()
+		{
+			var editor = _editor.editor;
+			var editSelection = _editor.selection;
+			var highlightParser = ["javascript", "java", "xml/html"];
+			
+			_editorHighlight = new RichTextEditor.Highlight(editor, editSelection, highlightParser);
+		}		
+		
+		// nexacro 변수 정보
+		var nexacroNameValue = {};
+		function setNexacroNameValue(name, value)
+		{
+			nexacroNameValue[name] = value;
+		}
+		
+		// I/F (this scope -> nexacro)
+		function callNexacro()
+		{
+			if ( arguments.length == 0 ) return;
+			
+			var args = [];
+			for (var i=0,len=arguments.length; i<len; i++)
+			{
+				args.push(arguments[i]);
+			}
+			
+			var userdata = args.join("|");
+			var wb = window.NEXACROWEBBROWSER;			
+			if ( wb )
+			{
+				// HTML
+				wb.on_fire_onusernotify(wb, userdata);
+			}
+			else
+			{
+				// Runtime
+				window.document.title = userdata;
+			}
+		}
+		
+		// _editor 에서 호출됨
+		function onNotifyEditor()
+		{
+			var type = arguments[0];
+			
+			if ( type == "onLoad" )
+			{
+				// RichTextEditor.Editor 초기화 완료
+				callNexacro(onLoadCallBackName);
+			}			
+			else if ( type == "notifyEvent" )
+			{
+				// event 발생
+				comEventHandler(arguments[1]);
+			}
+		}
+		
+		var onFireKeyDown = false;
+		function comEventHandler(evt)
+		{
+			var node, 
+				range, 
+				evtType,
+				keyCode;
+				
+			node = evt.target || evt.srcElement;
+			evtType = evt.type;
+			evtKeyCode = evt.charCode || evt.keyCode;
+			
+			if (evtType == "mousedown")
+			{
+				if (node && node.tagName && node.tagName.toLowerCase() == "img")
+				{
+					resizedImage = node;
+				}
+				
+				callNexacro("editorMouseDown");
+			}
+			else if (evtType == "mouseup")
+			{
+				if ( !resizedImage )
+				{
+					node = resizedImage;
+					resizedImage = null;
+				}
+				
+				_editor.saveSelection();
+				
+				if (node)
+				{
+					if (node && node.tagName && node.tagName.toLowerCase() == "img")
+					{						
+						if (nexacroNameValue["chk_ratio"] == true)
+						{
+							keepImageAspectRatio(node);
+						}
+						
+						selectedImage = node;
+						
+						setImageInfo(node, true);
+						return;
+					}
+					else
+					{
+						selectedImage = null;
+					}
+				}
+
+				var param = "{";
+				param += getQueryCommandString();
+				param += ", \"L\": \""+ (evt._ahref || "") + "\"";
+				param += ", \"DFS\": \""+ (_editor.editorDoc.body.style.fontSize || "") + "\"";
+				param += "}";		
+				
+				callNexacro("editorMouseUp", param);
+			}
+			else if (evtType =="keydown")
+			{
+				onFireKeyDown = true;
+				
+				if(evtKeyCode == 13)
+				{
+					if ( _editorHighlight )
+					{
+						_editorHighlight.makePartBr(evt);
+					}
+				}
+				
+				callNexacro("editorKeyDown");
+			}
+			else if (evtType =="keyup")
+			{
+				if ( !onFireKeyDown ) return;
+				
+				onFireKeyDown = false;
+				
+				_editor.saveSelection();
+				
+				var param = "{";
+				param += getQueryCommandString();
+				param += ", \"L\": \""+ (evt._ahref || "") + "\"";
+				param += ", \"DFS\": \""+ (_editor.editorDoc.body.style.fontSize || "") + "\"";
+				param += "}";
+				
+				callNexacro("editorKeyUp", param);
+			}
+		}	
+		
+		function getQueryCommandString()
+		{
+			var fontName = _editor.queryCommandValue('FontName');
+			if ( fontName )
+			{
+				fontName = fontName.replace(/"/g, "'");
+			}
+		
+			var val = "";
+			val += "\"FN\": \""+ (fontName || "") + "\"";
+			val += ", \"FS\": \""+ (_editor.queryCommandValue('FontSize' || "")) + "\"";
+			val += ", \"FC\": \""+ (_editor.queryCommandValue('ForeColor') || "0") + "\"";
+			val += ", \"BC\": \""+ (_editor.queryCommandValue('BackColor') || "16777215") + "\"";
+			val += ", \"B\": \""+ (_editor.queryCommandValue('Bold') || "") + "\"";
+			val += ", \"I\": \""+ (_editor.queryCommandValue('Italic') || "") + "\"";
+			val += ", \"U\": \""+ (_editor.queryCommandValue('Underline') || "") + "\"";
+			val += ", \"S\": \""+ (_editor.queryCommandValue('Strikethrough') || "") + "\"";
+			val += ", \"JL\": \""+ (_editor.queryCommandValue('JustifyLeft') || "") + "\"";
+			val += ", \"JC\": \""+ (_editor.queryCommandValue('JustifyCenter') || "") + "\"";
+			val += ", \"JR\": \""+ (_editor.queryCommandValue('JustifyRight') || "") + "\"";
+			val += ", \"JF\": \""+ (_editor.queryCommandValue('JustifyFull') || "") + "\"";
+			
+			return val;
+		}
+		
+		function keepImageAspectRatio(img)
+		{
+			var border,  
+				width = img._preWidth, 	// 기존 width
+				height = img._preHeight, 
+				cWidth = img.clientWidth,	// 변경된 width
+				cHeight = img.clientHeight,
+				diffWidth, diffHeight,
+				ratio = 1;
+			
+			if (!isNaN(width) && !isNaN(height))
+			{
+				border = img.border || 0;
+				cWidth = cWidth - (border * 2);
+				cHeight = cHeight - (border * 2);
+
+				diffWidth = cWidth - width;
+				
+				if (-1 <= diffWidth && diffWidth <= 1)
+				{
+					ratio = width / height;
+					cWidth = Math.round(ratio * cHeight);
+				}
+				else	// width를 기준으로 ratio대비 height 변경
+				{
+					ratio = height / width;
+					cHeight = Math.round(ratio * cWidth);
+				}
+				
+				RichTextEditor.Util.setStyle(img, {'width' : cWidth + 'px', 'height' : cHeight + 'px'});
+				_editor.history.saveHistory();
+			}
+		}
+		
+		function setImageInfo(node, showDiv)
+		{
+			_editor.focusEditor();
+			
+			if ( RichTextEditor.Browser == "IE" )
+			{
+				// 이미지 사이즈 조정 방지 (Runtime에 문제 발생)
+				if (_editor.editorWin.getSelection)
+				{
+					var sel = _editor.selection.getSelection();
+					sel.removeAllRanges();
+				}
+			}
+			
+			var width = node.clientWidth,
+				height = node.clientHeight,
+				borderWidth = node.style.borderWidth || 0,
+				borderStyle = node.style.borderStyle || 'none',
+				styleFloat = node.style.cssFloat || 'none';
+				
+			node._preWidth = node.clientWidth;
+			node._preHeight = node.clientHeight;
+			
+			var imgRect = node.getBoundingClientRect();
+			
+			callNexacro("setImageInfo", width, height, imgRect.right, imgRect.bottom, borderWidth, borderStyle, styleFloat, showDiv);		
+		}
+		
+		// call from nexacro
+		function setFocus()
+		{
+			document.body.focus();
+			_editor.focusEditor();
+		}
+		
+		// call from nexacro
+		function addImage(id, src)
+		{
+			var image = RichTextEditor.Util.createEle(_editor.editorDoc, 'img', {'id' : id});
+			
+			var pThis = _editor;
+			RichTextEditor.Util.addEvent(image, "load", function (evt)
+			{
+				// IE8 error
+				//var image = evt.target || evt.srcElement;
+				var html = "<p>" + image.outerHTML + "</p><p id=\""+id+"_focus\"></p>";				
+				pThis.pasteHtmlAtCaret(html);
+			});
+			
+			image.src = src;		
+		}
+		
+		// call from nexacro
+		function changeImageStyle(name, value)
+		{
+			if ( RichTextEditor.Lib.isEmpty(selectedImage) )
+			{
+				return;
+			}
+			
+			var checkRatio = false;
+			if ( name == "width" || name == "height" )
+			{
+				checkRatio = true;
+			}
+			else
+			{
+				checkRatio = false;
+			}
+			
+			var arg = {};
+			arg[name] = value;
+			
+			RichTextEditor.Util.setStyle(selectedImage, arg);
+			
+			if ( checkRatio && nexacroNameValue["chk_ratio"] == true)
+			{
+				keepImageAspectRatio(selectedImage);
+			}
+			else
+			{
+				_editor.history.saveHistory();
+			}
+			
+			setImageInfo(selectedImage, "false");
+		}
+		
+		// call from nexacro
+		function removeImage(src)
+		{
+			var imgs = _editor.editorDoc.getElementsByTagName("img");
+			var cnt = 0;
+			for (var i=imgs.length-1; i>-1; i--)
+			{
+				if ( imgs[i].src == src )
+				{
+					RichTextEditor.DomUtil.remove(imgs[i]);
+					cnt++;
+				}
+			}
+			
+			if ( cnt > 0 )
+			{
+				// 이미지를 삭제하면 history 를 초기화 한다.
+				// 서버에서 이미지를 삭제하기 때문에 undo 해 봐야 못쓴다.
+				_editor.history.initHistory({
+					'content': _editor.getContent()
+				});
+			}
+		}
+		
+		// call from nexacro
+		function setContent(content, initHistory)
+		{
+			_editor.setContent(content);
+			_editor.setCaretToTop();
+			
+			if ( initHistory )
+			{
+				_editor.history.initHistory({
+					'content': content
+				});
+			}
+		}
+		
+		// call from nexacro
+		function pasteHtmlAtCaret(html)
+		{
+			_editor.focusEditor();
+			if ( RichTextEditor.Browser == "IE" )
+			{
+				_editor.restoreSelection();
+			}
+			_editor.pasteHtmlAtCaret(html, false);
+		}
+		
+		// call from nexacro
+		function highlight(code)
+		{
+			if ( _editorHighlight )
+			{
+				var selText = _editor.selection.getSelectionText();
+				_editorHighlight.highlightText(selText, code);
+				_editor.history.saveHistory();
+			}
+		}
+		
+		// call from nexacro
+		function execCommand(cmd, value)
+		{
+			var history = _editor.history;
+
+			_editor.focusEditor();			
+			if ( RichTextEditor.Browser == "IE" )
+			{
+				_editor.restoreSelection();
+			}
+			
+			var doc = _editor.editorDoc;
+			var isSelectedTd = false;
+			if ( _editorTable )
+			{
+				isSelectedTd = _editorTable.isSelectedTd();
+			}
+			
+			if ( isSelectedTd )
+			{
+				var selection = _editor.selection;						
+				var selectedTd = _editorTable.getTdArr();
+				
+				if (selectedTd)
+				{
+					for (var i=0; i<selectedTd.length; i++)
+					{
+						selection.selectControlContents(selectedTd[i]);
+						doc.execCommand(cmd, false, value);
+						history.saveHistory();
+					}
+				}
+				selection.removeSelection();				
+			}
+			else
+			{
+				doc.execCommand(cmd, false, value);
+				history.saveHistory();
+			}
+		}
+		
+		// call from nexacro
+		function executeTableFunc(funcName, value)
+		{
+			if ( _editorTable )
+			{
+				var func = _editorTable[funcName];
+				if (func)
+				{
+					func.call(_editorTable, value);
+					_editor.history.saveHistory();
+				}
+			}
+		}
+		
+		// call from nexacro
+		function getHTMLValue(name)
+		{
+			// 값을 바로 nexacro로 전달하지 못하므로 input element에 담아두고
+			// nexacro 에서 element 에 접근하여 값을 취득한다.
+			// 반환값은 string 이므로 형변환이 필요할 수 있다.
+			var val = null;
+			switch(name)
+			{
+				case "editor.content" :
+					val = _editor.getContent();
+					break;
+				case "editor.textContent" :
+					val = _editor.getTextContent();
+					break;					
+				case "editor.editable" :
+					val = _editor.editable;
+					break;
+				case "editor.selectedContents" :
+					val = _editor.selectedContents;
+					break;
+				case "image.getSetSize" :
+					val = "0,0";					
+					if ( !RichTextEditor.Lib.isEmpty(selectedImage) )
+					{
+						var naturalWidth = selectedImage.naturalWidth;
+						var naturalHeight = selectedImage.naturalHeight;						
+						if (!RichTextEditor.Lib.isEmpty(naturalWidth) && !RichTextEditor.Lib.isEmpty(naturalHeight))
+						{
+							val = naturalWidth +","+ naturalHeight;
+							RichTextEditor.Util.setStyle(selectedImage, {'width' : naturalWidth + 'px', 'height' : naturalHeight + 'px'});
+							_editor.history.saveHistory();
+						}
+					}
+				case "table.border.color" :
+					val = _editorTable.borderProperty.color;
+					break;					
+				default :
+					;
+			}			
+			document.getElementById("transfer").value = val;
+		}
+		
+	</script>
+</head>
+<body scroll="no" style="margin: 0px; border: 0px; height:100%; overflow:hidden;" onload="fn_onload()">
+<input id="transfer" type="text" style="display:none;" value="">
+</body>
+</html>

@@ -16,6 +16,20 @@
 	
 	</resultMap>
 	<select id="selectAllDept" resultMap="deptResultMap">
-		SELECT * FROM DEPT_TBL
+		SELECT * FROM DEPT_TBL ORDER BY DEPT_CODE ASC
 	</select>
+	<insert id="insertDept">
+		INSERT INTO DEPT_TBL VALUES(#{deptCode}, #{deptName}, 
+		#{deptSecondname}, #{deptColor}, #{deptMaster}, DEFAULT, #{deptUppercode}, #{deptLevel})
+	</insert>
+	<update id="updateDept">
+		UPDATE DEPT_TBL 
+		SET DEPT_NAME = #{deptName}, DEPT_SECONDNAME = #{deptSecondname}, DEPT_COLOR = #{deptColor}, 
+		DEPT_MASTER = #{deptMaster}, DEPT_HIREDATE = #{deptHiredate}, 
+		DEPT_UPPERCODE = #{deptUppercode}, DEPT_LEVEL = #{deptLevel}
+		WHERE DEPT_CODE = #{deptCode}
+	</update>
+	<delete id="deleteDept">
+		DELETE FROM DEPT_TBL WHERE DEPT_CODE = #{deptCode}
+	</delete>
 </mapper>

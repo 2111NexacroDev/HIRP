@@ -32,38 +32,36 @@
         <Static id="st_depthiredate" taborder="12" text="생성일" left="280" top="365" width="157" height="30"/>
         <Static id="st_upperdept" taborder="13" text="상위 부서" left="280" top="410" width="157" height="30"/>
         <Static id="st_lowerdept" taborder="14" text="하위 부서" left="280" top="455" width="157" height="30"/>
-        <Static id="st_deptname" taborder="15" text="부서명" left="280" top="140" width="157" height="30"/>
-        <Static id="st_deptcode" taborder="16" text="부서코드" left="280" top="185" width="157" height="30"/>
+        <Static id="st_deptname" taborder="15" text="부서명" left="280" top="185" width="157" height="30"/>
+        <Static id="st_deptcode" taborder="16" text="부서코드" left="280" top="140" width="157" height="30"/>
         <Static id="st_deptsecond" taborder="17" text="부서약어" left="280" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptname" taborder="18" left="560" top="140" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptname_onclick"/>
+        <Button id="btn_edit_deptname" taborder="18" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptname_onclick"/>
         <Static id="st_deptcolor2" taborder="19" text="부서 색상" left="403" top="275" width="157" height="30"/>
         <Static id="st_deptmaster2" taborder="20" text="부서장" left="403" top="320" width="157" height="30"/>
-        <Static id="st_deptname2" taborder="21" left="403" top="140" width="157" height="30" text="부서명"/>
-        <Static id="st_deptcode2" taborder="22" text="부서코드" left="403" top="185" width="157" height="30"/>
+        <Static id="st_deptname2" taborder="21" left="403" top="185" width="157" height="30" text="부서명"/>
+        <Static id="st_deptcode2" taborder="22" text="부서코드" left="404" top="140" width="157" height="30"/>
         <Static id="st_deptsecond2" taborder="23" text="부서약어" left="403" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptcode" taborder="24" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcode_onclick"/>
-        <Button id="btn_edit_deptsecond" taborder="25" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
-        <Button id="btn_edit_deptcolor" taborder="26" left="560" top="275" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcolor_onclick"/>
-        <Button id="btn_edit_deptmaster" taborder="27" left="560" top="320" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptmaster_onclick"/>
-        <Div id="Div00" taborder="28" left="278" top="130" width="60" height="2" background="#b7b7b7"/>
-        <Div id="Div01" taborder="29" left="232" top="5" width="2" background="#b7b7b7" bottom="5"/>
-        <Div id="Div02" taborder="30" left="20" top="190" width="190" height="2" background="#b7b7b7"/>
-        <Button id="btn_upper" taborder="31" text="상위 부서명" left="403" top="415" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;" onclick="btn_upper_onclick"/>
-        <Button id="btn_lower" taborder="32" text="하위부서명" left="403" top="460" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;"/>
-        <Button id="btn_submit" taborder="33" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
-        <Button id="btn_cancel" taborder="34" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
-        <Edit id="edt_deptname" taborder="35" left="394" top="140" width="133" height="30" visible="false"/>
-        <Button id="btn_colorchartfromds" taborder="36" left="470" top="283" width="15" height="15" background=""/>
-        <Edit id="edt_deptcode" taborder="37" left="394" top="185" width="133" height="30" visible="false"/>
-        <Edit id="edt_deptsecond" taborder="38" left="394" top="230" width="133" height="30" visible="false"/>
-        <MaskEdit id="MaskEdit00" taborder="39" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" format="@@@@-@@-@@" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged"/>
+        <Button id="btn_edit_deptsecond" taborder="24" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
+        <Button id="btn_edit_deptcolor" taborder="25" left="560" top="275" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcolor_onclick"/>
+        <Button id="btn_edit_deptmaster" taborder="26" left="560" top="320" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptmaster_onclick"/>
+        <Div id="Div00" taborder="27" left="278" top="130" width="60" height="2" background="#b7b7b7"/>
+        <Div id="Div01" taborder="28" left="232" top="5" width="2" background="#b7b7b7" bottom="5"/>
+        <Div id="Div02" taborder="29" left="20" top="190" width="190" height="2" background="#b7b7b7"/>
+        <Button id="btn_upper" taborder="30" text="상위 부서명" left="403" top="415" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;" onclick="btn_upper_onclick" cssclass="deptButton"/>
+        <Button id="btn_submit" taborder="31" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="32" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Edit id="edt_deptname" taborder="33" left="394" top="185" width="133" height="30" visible="false"/>
+        <Button id="btn_colorchartfromds" taborder="34" left="470" top="283" width="15" height="15" background=""/>
+        <Edit id="edt_deptsecond" taborder="35" left="394" top="230" width="133" height="30" visible="false"/>
+        <MaskEdit id="MaskEdit00" taborder="36" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged" format="@@@@@@@@"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
 var objDate = new nexacro.Date();
+var yy = objDate.getYear().toString().substr(2, 2);
 var mm = (objDate.getMonth()+1).toString().padLeft(2, "0");
 var dd = objDate.getDate().toString().padLeft(2, "0");
-var today = objDate.getYear() + mm + dd;
+var today = yy + "/"+mm+"/"+dd;
 
 //load 되었을 때
 this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
@@ -79,25 +77,17 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.st_upperdept.set_visible("false");
 	this.btn_upper.set_visible("false");
 	this.st_lowerdept.set_visible("false");
-	this.btn_lower.set_visible("false");
 	
 	//load 되었을 때 DB에서 empl도 select 해오기
 	this.transaction(
-		"tr_select"// 1.ID
-		,"HirpURL::admin/deptinfo.hirp"// 2.URL		
+		"dept_select"// 1.ID
+		,"HirpURL::admin/deptInfo.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
 		,"ds_empl=out_empl ds_dept=out_dept" // 4.OutDs : S->F jsp(SELECT)
 		,"" // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);
 	
-	
-	//load 되었을 때 선택된 데이터값을 edt에 set 해줌.
-	trace(this.ds_dept.rowposition);
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
-	trace(this.edt_deptcode.value);
-	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
-	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
 	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
 	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
 	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
@@ -106,29 +96,20 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 }
 
-
-this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
-{	
-	if(id=="tr_select")
-	{
-		if(nErrorCode < 0)
-		{
-			this.alert("부서 조회 실패 : " + sErrorMsg);
-			return;
-		}
-		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
-		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
-	}
-	
-}
-
-
-
+var lowerCount = 0; //하위 부서 개수
 
 //ds_dept rowposition이 변경될 때
 //상위, 하위 부서 보였다 안보였다 하게 함.
 this.ds_dept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
 {
+	//하위 부서 버튼이 존재할 때 삭제함.
+	for(var i=0; i<lowerCount; i++)
+	{
+		var objBtn = this.components["btn_lower" + i];
+		objBtn.destroy(); //만들어진 버튼 삭제
+	}
+	//삭제 되고 나면 0으로 초기화
+	lowerCount = 0;
 
 	//master 아이디값과 같은 이름 set 해주기
 	var masterId = this.ds_dept.getColumn(e.newrow, "deptMaster");
@@ -148,7 +129,6 @@ this.ds_dept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRo
 		this.st_upperdept.set_visible("false");
 		this.btn_upper.set_visible("false");
 		this.st_lowerdept.set_visible("false");
-		this.btn_lower.set_visible("false");
 	} else {
 		var upperRow = this.ds_dept.findRow("deptCode", upperCode);
 		trace("upperRow:" + upperRow); //상위부서 row num
@@ -159,37 +139,50 @@ this.ds_dept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRo
 		
 		//하위부서가 있을 때 if문 처리하기
 		var lowerCodeList = [];
-		var lowerIndex = 0;
 		var rowCount = this.ds_dept.rowcount;
 		for(var i = 0; i < rowCount ; i++) {
-			if(this.ds_dept.getColumn(i, "deptUppercode") == myCode){
-				lowerCodeList[lowerIndex] = this.ds_dept.getColumn(rowCount, "deptUppercode");
-				lowerIndex += 1;
+			if(this.ds_dept.getColumn(i, "deptUppercode") == myCode){ //내 코드가 누군가의 상위부서 코드일 때
+				lowerCodeList[lowerCount] = this.ds_dept.getColumn(i, "deptCode"); //그 누군가의 부서 코드를 저장
+				lowerCount += 1;
 			}
 		}
 		trace("rowCount:" + rowCount);	//총 row 갯수
-		trace("lowerIndex:" + lowerIndex); //하위부서 갯수
+		trace("lowerCount:" + lowerCount); //하위부서 갯수
 		
-		if(lowerIndex > 0) {
+		if(lowerCount > 0) {
 			//하위부서가 존재할 때
 			this.st_lowerdept.set_visible("true");
-			this.btn_lower.set_visible("true");
-			//하위부서 갯수만큼 버튼 추가 -- 해야됨.
+			//하위부서 갯수만큼 버튼 추가
+			var nX = 403;
+			var nY = 460;
+			for(var i=0; i < lowerCount ; i++)
+			{
+				var objBtn = new Button("btn_lower" + i, nX, nY, 70, 20);
+				this.addChild("btn_lower" + i, objBtn);
+				var name = this.ds_dept.lookup( "deptCode", lowerCodeList[i], "deptName" );
+				objBtn.set_text(name); //코드가 같은 부서의 이름
+				objBtn.set_cssclass("deptButton");
+				objBtn.setEventHandler("onclick", this.btn_lower_onclick, this);
+				objBtn.show();
+				nX += 80;
+			}
+
 		} else {
 			//하위부서가 존재하지 않을 때
 			this.st_lowerdept.set_visible("false");
-			this.btn_lower.set_visible("false");
 		}
 		
 	}
-	
-	//edit
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(e.newrow, "deptCode"));
-	this.edt_deptname.set_value(this.ds_dept.getColumn(e.newrow, "deptName"));
-	this.edt_deptsecond.set_value(this.ds_dept.getColumn(e.newrow, "deptSecondname"));
 };
 
 
+//하위 부서 버튼을 클릭하면
+this.btn_lower_onclick = function(obj, e)
+{
+	trace("선택한 버튼 : " + obj.text);
+	var rowNum = this.ds_dept.findRow("deptName", obj.text);
+	this.ds_dept.set_rowposition(rowNum);
+}
 
 
 
@@ -230,6 +223,17 @@ this.fn_addCallback = function(id, rtn) {
 	}
 	//취소를 누르면 rtn이 cancel
 	
+	
+	//추가
+	this.transaction(
+		"dept_add"// 1.ID
+		,"HirpURL::admin/deptInsert.hirp"// 2.URL
+		,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
 }
 
 //부서 삭제 팝업창 띄우기 -- 일단 ds에서 삭제 완료
@@ -253,8 +257,20 @@ this.fn_deleteCallback = function(id, rtn){
 	if(rtn == "delete") {
 		this.ds_dept.deleteRow(this.ds_dept.rowposition);
 		//여기서 서버 연결해주어야 하나?
+		
+		//삭제
+		this.transaction(
+			"dept_delete"// 1.ID
+			,"HirpURL::admin/deptDelete.hirp"// 2.URL
+			,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+			,"" // 4.OutDs : S->F jsp(SELECT)
+			,"" // 5.InVar : F->S(var)
+			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+		);
 	}
 	//취소를 누르면 rtn이 cancel
+	
+	
 }
 
 
@@ -272,21 +288,16 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	//edit에 있는 값을 ds에 저장
 	var nRow = this.ds_dept.rowposition;
-	var nCode = this.edt_deptcode.value;
 	var nName = this.edt_deptname.value;
 	var nSecond = this.edt_deptsecond.value;
 	var nMaster = this.st_deptmaster2.text; //master name 값
 	
-	//trace(nCode, nName, nSecond);
-	if(nCode != null || nCode.length > 0){
-		trace(nCode);
-		this.ds_dept.setColumn(nRow, "deptCode", nCode);
-	}
-	if(nName != null || nName.length > 0){
+	//trace(nName, nSecond);
+	if(nName != null){
 		trace(nName);
 		this.ds_dept.setColumn(nRow, "deptName", nName);
 	}
-	if(nSecond != null || nSecond.length > 0){
+	if(nSecond != null){
 		trace(nSecond);
 		this.ds_dept.setColumn(nRow, "deptSecondname", nSecond);
 	}
@@ -315,13 +326,24 @@ this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	//edit창 안 보이게 하기
 	this.edt_deptname.set_visible("false");
-	this.edt_deptcode.set_visible("false");
 	this.edt_deptsecond.set_visible("false");
 	//수정 버튼 보이게 하기
 	this.btn_edit_deptname.set_visible("true");
-	this.btn_edit_deptcode.set_visible("true");
 	this.btn_edit_deptsecond.set_visible("true");
 	this.btn_edit_deptcolor.set_visible("true");
+	
+	//저장
+	this.transaction(
+		"dept_save"// 1.ID
+		,"HirpURL::admin/deptSave.hirp"// 2.URL
+		,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
+
+	
 };
 
 //취소 버튼
@@ -329,7 +351,6 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	// edit 안에 있는 값 원래 ds에 있는 값으로 돌려놓기
 	var nRow = this.ds_dept.rowposition;
-	this.edt_deptcode.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptCode"));
 	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
 	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
 	
@@ -341,7 +362,6 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	this.st_deptmaster2.set_text(masterName);
 	
 	this.edt_deptname.set_visible("false");
-	this.edt_deptcode.set_visible("false");
 	this.edt_deptsecond.set_visible("false");
 	
 	//color chart
@@ -353,7 +373,6 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	//수정 버튼 보이게 하기
 	this.btn_edit_deptname.set_visible("true");
-	this.btn_edit_deptcode.set_visible("true");
 	this.btn_edit_deptsecond.set_visible("true");
 	this.btn_edit_deptcolor.set_visible("true");
 };
@@ -362,18 +381,17 @@ this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 //dept name 수정 버튼
 this.btn_edit_deptname_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	//edit
+	this.edt_deptname.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptName"));
+ 	
 	this.edt_deptname.set_visible("true");
 	obj.set_visible("false");
 };
-//dept code 수정 버튼
-this.btn_edit_deptcode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-	this.edt_deptcode.set_visible("true");
-	obj.set_visible("false");
-};
+
 //dept second name 수정 버튼
 this.btn_edit_deptsecond_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
+	this.edt_deptsecond.set_value(this.ds_dept.getColumn(this.ds_dept.rowposition, "deptSecondname"));
 	this.edt_deptsecond.set_visible("true");
 	obj.set_visible("false");
 };
@@ -465,6 +483,52 @@ this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	this.ds_dept.set_rowposition(upperRow);
 	
 };
+
+
+//트랜잭션 callback 함수
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{	
+	if(id=="dept_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
+		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
+	}
+	
+	if(id=="dept_add")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 추가 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 추가 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+	
+	if(id=="dept_delete")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 삭제 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 삭제 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+	
+	if(id=="dept_save")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("부서 저장 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("부서 저장 성공 : " + this.ds_dept.getRowCount() + "건");
+	}
+}
 ]]></Script>
     <Objects>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
@@ -508,36 +572,6 @@ this.btn_upper_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
             <Col id="deptHiredate">20220426</Col>
             <Col id="deptUppercode">10</Col>
             <Col id="deptLevel">1</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102010</Col>
-            <Col id="deptName">국내영업팀</Col>
-            <Col id="deptSecondname">DS</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID4</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102020</Col>
-            <Col id="deptName">해외영업팀</Col>
-            <Col id="deptSecondname">OS</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID5</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
-          </Row>
-          <Row>
-            <Col id="deptCode">102030</Col>
-            <Col id="deptName">영업관리팀</Col>
-            <Col id="deptSecondname">SM</Col>
-            <Col id="deptColor">#FFFED7</Col>
-            <Col id="deptMaster">ID6</Col>
-            <Col id="deptHiredate">20220426</Col>
-            <Col id="deptUppercode">1020</Col>
-            <Col id="deptLevel">2</Col>
           </Row>
           <Row>
             <Col id="deptCode">1030</Col>
