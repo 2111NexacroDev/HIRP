@@ -21,26 +21,6 @@ import com.highfive.hirp.todo.service.TodoService;
 public class TodoController {
 	@Autowired
 	private TodoService tService;
-	
-	/* GET과 POST의 구분.
-	 * GET 은 클라이언트에서 서버로 어떠한 리소스로 부터 정보를 요청하기 위해 사용되는 메서드이다. 
-	 * 예를들면 게시판의 게시물을 조회할 때 쓸 수 있다. GET을 통한 요청은 URL 주소 끝에 파라미터로 포함되어 전송되며, 
-	 * 이 부분을 쿼리 스트링 (query string) 이라고 부른다.
-	 * 
-	 * - GET 요청은 캐시가 가능하다. : GET을 통해 서버에 리소스를 요청할 때 웹 캐시가 요청을 가로채 
-	 *   서버로부터 리소스를 다시 다운로드하는 대신 리소스의 복사본을 반환한다. 
-	 *   HTTP 헤더에서 cache-control 헤더를 통해 캐시 옵션을 지정할 수 있다. 
-	 * - GET 요청은 브라우저 히스토리에 남는다. 
-	 * - GET 요청은 북마크 될 수 있다. 
-	 * - GET 요청은 길이 제한이 있다 : GET 요청의 길이 제한은 표준이 따로 있는건 아니고 브라우저마다 제한이 다름. 
-	 * - GET 요청은 중요한 정보를 다루면 안된다. ( 보안 ) 
-	 * - GET은 데이터를 요청할때만 사용 된다.
-	 * 
-	 * - POST 요청은 캐시되지 않는다.
-	 * - POST 요청은 브라우저 히스토리에 남지 않는다.
-	 * - POST 요청은 북마크 되지 않는
-	 * - POST 요청은 데이터 길이에 제한이 없다.
-	 */
 
 	// 할일 조회
 	@RequestMapping(value="/todo/list.hirp", method=RequestMethod.GET)
@@ -54,15 +34,17 @@ public class TodoController {
 				mv.addObject("tList", tList);
 				mv.addObject("mList", mList);
 				mv.setViewName("todo/todoList");
-			}else {
-				// 나중에 에러 페이지 하나 만들어서 그리로 가게 처리해줄 것.
-				// mv.setViewName("common/errorPage");
+			} else if(!tList.isEmpty() && mList.isEmpty()) {
+				mv.addObject("tList", tList);
 				mv.setViewName("todo/todoList");
+			} else if(tList.isEmpty() && !mList.isEmpty()) {
+				mv.addObject("mList", mList);
+				mv.setViewName("todo/todoList");
+			} else {
+				mv.setViewName("common/errorPage");
 			}
 		} catch(Exception e) {
-			// 나중에 에러 페이지 하나 만들어서 그리로 가게 처리해줄 것.
-			// mv.setViewName("common/errorPage");
-			System.out.println("exception");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}

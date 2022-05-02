@@ -25,20 +25,14 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 	}
 
 	@Override
-	public List<Employee> selectSearchEmployee(SqlSession sqlSession, DataSet search) {
-		List<Employee> searchList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmployee", search);
-		return searchList;
-	}
-
-	@Override
 	public List<Employee> selectTempEmployee(SqlSession sqlSession) {
 		List<Employee> tList = sqlSession.selectList("EmployeeAdminMapper.selectTempEmployee");
 		return tList;
 	}
 
 	@Override
-	public Employee selectOneEmployee(SqlSession sqlSession) {
-		Employee employee = sqlSession.selectOne("EmployeeAdminMapper.selectOneEmployee");
+	public Employee selectOneEmployee(SqlSession sqlSession, String emplId) {
+		Employee employee = sqlSession.selectOne("EmployeeAdminMapper.selectOneEmployee", emplId);
 		return employee;
 	}
 

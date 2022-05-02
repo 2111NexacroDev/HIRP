@@ -40,8 +40,9 @@ last-modified : 2021-10-26
 /* FileUpload */
 .Button,.FileDownload
 {
-	background : linear-gradient(to top,#eaeaea,#ffffff);
-	-nexa-border : 1px solid #c2c2c2;
+	background : #ffffff;
+	-nexa-border : 1px solid #333333;
+	color: #333333;
 }
 
 .ButtonControl
@@ -83,9 +84,9 @@ last-modified : 2021-10-26
 
 .Button[status=disabled],.FileDownload[status=disabled],.FileUpload .fileuploaditem .fileuploaditembutton[status=disabled]
 {
-	color : #bbbbbb;
-	background : #f5f5f5;
-	-nexa-border : 1px solid #d9d9d9;
+	background : #ffffff;
+	-nexa-border : 1px solid #333333;
+	color: #333333;
 }
 
 
@@ -357,7 +358,6 @@ last-modified : 2021-10-26
 
 .Grid .body .row .cell[userstatus=selected]
 {
-	background : #f4f4f4;
 	opacity: 1;
 }
 
@@ -2079,7 +2079,9 @@ last-modified : 2021-10-26
 .ListView .body .expandbar[userstatus=expand]
 {
 	-nexa-icon : URL('theme://images/btn_expand.png');
-}.Button.edit_icon
+}
+
+.Button.edit_icon
 {
 	-nexa-icon : url('theme://images/11_icon_edit_mini.png');
 	-nexa-border : 0px none;
@@ -2174,5 +2176,18 @@ last-modified : 2021-10-26
 	font: normal 8pt/normal "Noto Sans KR";
 	background : #ffffff;
 	
+}
+
+.Grid .body .row .cell .cellbutton
+{
+	-nexa-border : 1px solid #333333;
+	background : #ffffff;
+	color : #333333;
+}
+.Grid .body .row .cell .cellbutton[status=mouseover]
+{
+	-nexa-border : 1px solid #333333;
+	background : #ffffff;
+	color : #333333;
 }
 ]]></XCSS>
