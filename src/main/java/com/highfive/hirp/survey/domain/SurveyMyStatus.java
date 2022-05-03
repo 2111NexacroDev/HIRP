@@ -1,7 +1,7 @@
 package com.highfive.hirp.survey.domain;
 
 import java.sql.Date;
-
+//설문조사 + 나의 응답여부
 public class SurveyMyStatus {
 //	설문조사
 	private int surveyNo;
@@ -15,20 +15,15 @@ public class SurveyMyStatus {
 	private String surveyResult;
 	private String surveyEdit;
 	private String surveyStartcomment;
-	private String surveyQ1;
-	private String surveyQ2;
-	private String surveyQ3;
-	private String surveyQ4;
 	private String surveyStorage;
 //	응답여부
 	private String subAnswerstatus;
 	
 	public SurveyMyStatus() {}
-	
+
 	public SurveyMyStatus(int surveyNo, String surveyTitle, String surveyWriter, Date surveyDate, Date surveyUpdate,
 			String surveyStatus, Date surveyStartdate, Date surveyEnddate, String surveyResult, String surveyEdit,
-			String surveyStartcomment, String surveyQ1, String surveyQ2, String surveyQ3, String surveyQ4,
-			String surveyStorage, String subAnswerstatus) {
+			String surveyStartcomment, String surveyStorage, String subAnswerstatus) {
 		super();
 		this.surveyNo = surveyNo;
 		this.surveyTitle = surveyTitle;
@@ -41,14 +36,9 @@ public class SurveyMyStatus {
 		this.surveyResult = surveyResult;
 		this.surveyEdit = surveyEdit;
 		this.surveyStartcomment = surveyStartcomment;
-		this.surveyQ1 = surveyQ1;
-		this.surveyQ2 = surveyQ2;
-		this.surveyQ3 = surveyQ3;
-		this.surveyQ4 = surveyQ4;
 		this.surveyStorage = surveyStorage;
 		this.subAnswerstatus = subAnswerstatus;
 	}
-	
 
 	public int getSurveyNo() {
 		return surveyNo;
@@ -138,38 +128,6 @@ public class SurveyMyStatus {
 		this.surveyStartcomment = surveyStartcomment;
 	}
 
-	public String getSurveyQ1() {
-		return surveyQ1;
-	}
-
-	public void setSurveyQ1(String surveyQ1) {
-		this.surveyQ1 = surveyQ1;
-	}
-
-	public String getSurveyQ2() {
-		return surveyQ2;
-	}
-
-	public void setSurveyQ2(String surveyQ2) {
-		this.surveyQ2 = surveyQ2;
-	}
-
-	public String getSurveyQ3() {
-		return surveyQ3;
-	}
-
-	public void setSurveyQ3(String surveyQ3) {
-		this.surveyQ3 = surveyQ3;
-	}
-
-	public String getSurveyQ4() {
-		return surveyQ4;
-	}
-
-	public void setSurveyQ4(String surveyQ4) {
-		this.surveyQ4 = surveyQ4;
-	}
-
 	public String getSurveyStorage() {
 		return surveyStorage;
 	}
@@ -192,8 +150,7 @@ public class SurveyMyStatus {
 				+ surveyWriter + ", surveyDate=" + surveyDate + ", surveyUpdate=" + surveyUpdate + ", surveyStatus="
 				+ surveyStatus + ", surveyStartdate=" + surveyStartdate + ", surveyEnddate=" + surveyEnddate
 				+ ", surveyResult=" + surveyResult + ", surveyEdit=" + surveyEdit + ", surveyStartcomment="
-				+ surveyStartcomment + ", surveyQ1=" + surveyQ1 + ", surveyQ2=" + surveyQ2 + ", surveyQ3=" + surveyQ3
-				+ ", surveyQ4=" + surveyQ4 + ", surveyStorage=" + surveyStorage + ", subAnswerstatus=" + subAnswerstatus
+				+ surveyStartcomment + ", surveyStorage=" + surveyStorage + ", subAnswerstatus=" + subAnswerstatus
 				+ "]";
 	}
 	

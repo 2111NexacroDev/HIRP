@@ -17,15 +17,15 @@ import com.highfive.hirp.survey.domain.SurveyUpdate;
 public interface SurveyService {
 	//리스트 조회
 	//전체 리스트 조회(최신)
-	public List<SurveyMyStatus> selectAllSurvey();	
+	public List<SurveyMyStatus> selectAllSurvey(String emplId);	
 	//진행중인 리스트 조회
-	public List<SurveyMyStatus> selectProceedSurvey(); 
+	public List<SurveyMyStatus> selectProceedSurvey(String emplId); 
 	//마감된 설문 리스트 조회
-	public List<SurveyMyStatus> selectClosedSurvey(); 
+	public List<SurveyMyStatus> selectClosedSurvey(String emplId); 
 	//마감된 설문 리스트까지 surveyMyStatus 타입으로 변경
 	//내가 작성한 설문 리스트 조회
 	public List<Survey> selectWroteSurvey(String emplId); 
-	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
+	//내가 대상자이면서 응답하지 않은 것 중 진행중인 설문조사 리스트 조회
 	public List<Survey> selectSubSurveyById(String emplId); 
 	//sql문 작성해놓음.
 	//설문조사 대상자 리스트 가져오기 (응답여부 확인 가능)

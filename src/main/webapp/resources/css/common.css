@@ -137,6 +137,18 @@ button.emergency {
     color: #fff;
 }
 
+button.noneBackground {
+	background-color: #fff;
+    border: 0px none;
+    color: #000;
+}
+
+button.colorGrey {
+	background-color: #fff;
+    border: 0px none;
+    color: #ccc;
+}
+
 img {
     max-width: 100%;
 }
@@ -222,8 +234,16 @@ img {
     padding: 0 !important;
 }
 
+.padding-10 {
+    padding: 20px !important;
+}
+
 .padding-20 {
     padding: 20px !important;
+}
+
+.padding-bottom {
+    padding-bottom: 20px !important;
 }
 
 .bg--gray {
@@ -248,6 +268,10 @@ img {
 
 .bor-red {
     border: 1px solid red;
+}
+
+.bor-dashed {
+    border: 1px dashed #ccc;
 }
 
 .fz-0 {

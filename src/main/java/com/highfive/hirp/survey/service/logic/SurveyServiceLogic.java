@@ -31,26 +31,26 @@ public class SurveyServiceLogic implements SurveyService{
 	//리스트 조회
 	//전체 설문조사 리스트 조회 (최신 설문)
 	@Override
-	public List<SurveyMyStatus> selectAllSurvey() {
-		List<SurveyMyStatus> allSurveyList = sStore.selectAllSurvey(sqlSession);
+	public List<SurveyMyStatus> selectAllSurvey(String emplId) {
+		List<SurveyMyStatus> allSurveyList = sStore.selectAllSurvey(sqlSession, emplId);
 		return allSurveyList;
 	}
 	//진행중인 설문조사 리스트 조회
 	@Override
-	public List<SurveyMyStatus> selectProceedSurvey() {
-		List<SurveyMyStatus> proceedSurveyList = sStore.selectProceedSurvey(sqlSession);
+	public List<SurveyMyStatus> selectProceedSurvey(String emplId) {
+		List<SurveyMyStatus> proceedSurveyList = sStore.selectProceedSurvey(sqlSession, emplId);
 		return proceedSurveyList;
 	}
 	//마감된 설문조사 리스트 조회
 	@Override
-	public List<SurveyMyStatus> selectClosedSurvey() {
-		List<SurveyMyStatus> closedSurveyList = sStore.selectClosedSurvey(sqlSession);
+	public List<SurveyMyStatus> selectClosedSurvey(String emplId) {
+		List<SurveyMyStatus> closedSurveyList = sStore.selectClosedSurvey(sqlSession, emplId);
 		return closedSurveyList;
 	}
 	//내가 작성한 설문조사 리스트 조회
 	@Override
 	public List<Survey> selectWroteSurvey(String emplId) {
-		List<Survey> wroteSurveyList = sStore.selectWroteSurvey(sqlSession);
+		List<Survey> wroteSurveyList = sStore.selectWroteSurvey(sqlSession, emplId);
 		return wroteSurveyList;
 	}
 	//내가 대상자이면서 진행 중이고 응답하지 않은 설문 리스트 조회
