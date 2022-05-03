@@ -38,26 +38,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeOne;
 	}
 
+	// 비밀번호 찾기
+	@Override
+	public Employee findPwd(Employee employee) { // 여기 employee와 아래 employeePwd 처럼 다르게 써야함. 다른 곳과는 중복되도 상관없음
+		Employee employeePwd = eStore.selectFindPwd(sqlSession, employee);
+		return employeePwd;
+	}
+	
+	// 비밀번호 재설정
+	@Override
+	public int modifyPwd(Employee employee) {
+		int modifyPwd = eStore.updatePwd(sqlSession, employee);
+		return modifyPwd;
+	}
+	
 	// 마이페이지 출력
 	@Override
 	public Employee employeeMyPage(String employeeId) {
 		Employee employee = eStore.selectOneById(sqlSession, employeeId);
 		return employee;
 	}
-
-//	// 비밀번호 찾기
-//	@Override
-//	public List<Employee> find_pwd(HttpServletResponse response, Employee employee) throws Exception {
-//		response.setContentType("text/html;charset=utf-8");
-//		PrintWriter out;
-//		out = response.getWriter();
-//		List<Employee> pwd = eStore.find_pwd(employee, sqlSession);
-//		if (pwd == null) {
-//			out.println("<script>");
-//			out.println("alert('가입된 아이디가 없습니다.');");
-//			return null;
-//		} else {
-//			return pwd;
-//		}
-//	}
 }

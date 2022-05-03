@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>에러페이지</title>
 </head>
 <body>
-	${msg }
+	<h1>${msg}</h1>
 </body>
 </html>
