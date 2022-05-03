@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="deptDeletePopup" width="500" height="250" titletext="New Form">
+    <Layouts>
+      <Layout height="250" mobileorientation="landscape" width="500">
+        <Static id="static_dept01" taborder="0" text="부서 삭제" left="59" top="29" width="166" height="41" font="normal 500 14pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
+        <Static id="static_deptInfo01_00" taborder="1" text="부서를 삭제하면 하위 부서도 함께 삭제됩니다. " left="103" top="75" width="307" height="30" border="0px none,0px none,1px black"/>
+        <Button id="btn_submit" taborder="2" text="삭제" left="165" top="180" width="80" height="30" letterSpacing="0px" cssclass="delete" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="3" text="취소" left="255" top="180" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Static id="static_deptInfo01_00_00" taborder="4" text="삭제된 이후 부서 데이터는 복구할 수 없습니다." left="103" top="95" width="307" height="30" border="0px none,0px none,1px black"/>
+        <Static id="static_deptInfo01_00_00_00" taborder="5" text="부서를 삭제하시겠습니까?" left="103" top="115" width="307" height="30" border="0px none,0px none,1px black"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+//취소 버튼
+this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("cancel");
+};
+
+//삭제 버튼
+this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("delete");
+};
+]]></Script>
+  </Form>
+</FDL>

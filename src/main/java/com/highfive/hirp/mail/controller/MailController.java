@@ -1,14 +1,20 @@
 package com.highfive.hirp.mail.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.common.PageInfo;
+import com.highfive.hirp.common.Pagination;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
@@ -31,7 +37,22 @@ public class MailController {
 	}
 	
 	// 받은메일함 조회
-	public ModelAndView selectReceivedMailList(ModelAndView mv) {
+	@RequestMapping(value="/mail/receivedList.hirp", method=RequestMethod.GET)
+	public ModelAndView selectReceivedMailList(ModelAndView mv
+			, @RequestParam(value="page", required=false) Integer page) {
+		try {
+			int currentPage = (page != null) ? page : 1;
+			int totalCount = mService.getListCount();
+			PageInfo pi = Pagination.getPageInfo(currentPage, totalCount);
+			List<Mail> mList = mService.selectReceivedMail(pi);
+			if(!mList.isEmpty()) {
+				mv.addObject("mList", mList);
+				mv.addObject("pi", pi);
+				mv.setViewName("mail/mailReceivedList");
+			}
+		}catch(Exception e) {
+			
+		}
 		return mv;
 	}
 	

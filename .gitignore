@@ -10,3 +10,4 @@
 *.xfdl$
 *.xml$
 */$temporary$/*
+/$temporary$/

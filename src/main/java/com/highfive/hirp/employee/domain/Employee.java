@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Employee { // db와 같게 소문자로 만들어줘야함
 	private String emplId;
-	private String divisionCode;
+	private String deptCode;
 	private String positionCode;
 	private String emplPw;
 	private String emplName;
@@ -31,9 +31,10 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 			Date startDate, String email, String directNo, String phoneNo, String recruitCategory,
 			String salaryCategory, String referrer, String isStatus, String birthday, String gender, String isMarriage,
 			String isDisability, String isVeterans, Date endDate, String endReason, String emplProfile) {
+
 		super();
 		this.emplId = emplId;
-		this.divisionCode = divisionCode;
+		this.deptCode = deptCode;
 		this.positionCode = positionCode;
 		this.emplPw = emplPw;
 		this.emplName = emplName;
@@ -63,12 +64,12 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.emplId = emplId;
 	}
 
-	public String getDivisionCode() {
-		return divisionCode;
+	public String getDeptCode() {
+		return deptCode;
 	}
 
-	public void setDivisionCode(String divisionCode) {
-		this.divisionCode = divisionCode;
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
 	}
 
 	public String getPositionCode() {
@@ -225,12 +226,12 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 
 	@Override
 	public String toString() {
-		return "Employee [emplId=" + emplId + ", divisionCode=" + divisionCode + ", positionCode=" + positionCode
-				+ ", emplPw=" + emplPw + ", emplName=" + emplName + ", startDate=" + startDate + ", email=" + email
-				+ ", directNo=" + directNo + ", phoneNo=" + phoneNo + ", recruitCategory=" + recruitCategory
-				+ ", salaryCategory=" + salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus
-				+ ", birthday=" + birthday + ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability="
-				+ isDisability + ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason
-				+ ", emplProfile=" + emplProfile + "]";
+		return "Employee [emplId=" + emplId + ", deptCode=" + deptCode + ", positionCode=" + positionCode + ", emplPw="
+				+ emplPw + ", emplName=" + emplName + ", startDate=" + startDate + ", email=" + email + ", directNo="
+				+ directNo + ", phoneNo=" + phoneNo + ", recruitCategory=" + recruitCategory + ", salaryCategory="
+				+ salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus + ", birthday=" + birthday
+				+ ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability=" + isDisability
+				+ ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason + ", emplProfile="
+				+ emplProfile + "]";
 	}
 }

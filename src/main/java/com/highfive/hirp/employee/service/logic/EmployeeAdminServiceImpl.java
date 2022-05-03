@@ -32,20 +32,14 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	}
 
 	@Override
-	public List<Employee> printSearchEmployee(DataSet search) {
-		List<Employee> searchList = eAStore.selectSearchEmployee(sqlSession, search);
-		return searchList;
-	}
-
-	@Override
 	public List<Employee> printAllTempEmployee() {
 		List<Employee> tList = eAStore.selectTempEmployee(sqlSession);
 		return tList;
 	}
 
 	@Override
-	public Employee printEmployeeInfo() {
-		Employee emp = eAStore.selectOneEmployee(sqlSession);
+	public Employee printEmployeeInfo(String emplId) {
+		Employee emp = eAStore.selectOneEmployee(sqlSession, emplId);
 		return emp;
 	}
 

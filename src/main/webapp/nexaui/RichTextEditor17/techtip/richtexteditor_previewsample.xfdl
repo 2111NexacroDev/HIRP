@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="RichTextEditorPreviewSample" classname="RichTextEditorPreviewSample" left="0" top="0" width="800" height="600" titletext="Preview" onload="RichTextEditorPreviewSample_onload">
+    <Layouts>
+      <Layout>
+        <WebBrowser id="web_preview" left="5" top="8" taborder="0" style="border:1px solid gray ;" onloadcompleted="web_preview_onloadcompleted" onusernotify="web_preview_onusernotify" right="5" bottom="32"/>
+        <Button id="Button00" taborder="1" text="Close" left="699" top="571" width="96" height="26" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.previewUrl = "http://localhost/RichTextEditor17/ui/file/richtexteditor/html/preview.html";
+
+this.RichTextEditorPreviewSample_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.web_preview.set_url(this.previewUrl);
+}
+
+this.web_preview_onloadcompleted = function(obj:WebBrowser, e:nexacro.WebLoadCompEventInfo)
+{
+	if ( e.url == this.previewUrl )
+	{
+		var content = this.getOwnerFrame().content;
+		
+		obj.callMethod("setContent", this.getOwnerFrame().content);
+	}
+}
+
+this.web_preview_onusernotify = function(obj:WebBrowser, e:nexacro.WebTitleChangeEventInfo)
+{
+	if ( e.userdata == "loadContent" )
+	{
+		
+	}
+}
+
+this.Button00_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

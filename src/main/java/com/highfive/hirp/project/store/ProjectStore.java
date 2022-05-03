@@ -10,10 +10,12 @@ import com.highfive.hirp.project.domain.Project;
 
 public interface ProjectStore {
 
+	int selectListCount(SqlSession sqlSession);
 	List<Project> selectAll(SqlSession sqlSession, PageInfo pi);
-	int selectOneByNo(SqlSession sqlSession, int projectNo);
+	Project selectOneByNo(SqlSession sqlSession, int projectNo);
+	int insertProject(SqlSession sqlSession, Project project);
 	int deleteProject(SqlSession sqlSession, int projectNo);
-	int updateProject(SqlSession sqlSession, int projectNo);
+	int updateProject(SqlSession sqlSession, Project project);
 	
 	List<Board> selectAllBoard(SqlSession sqlSession, int projectNo);
 	int insertBoard(SqlSession sqlSession, Board board);

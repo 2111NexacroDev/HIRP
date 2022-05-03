@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
@@ -20,14 +21,20 @@ public class MailServiceImpl implements MailService{
 	private SqlSession sqlSession;
 	
 	@Override
+	public int getListCount() {
+		int result = mStore.selectListCount(sqlSession);
+		return result;
+	}
+	
+	@Override
 	public int sendMail(Mail mail) {
 		int result = mStore.sendMail(sqlSession, mail);
 		return result;
 	}
 	
 	@Override
-	public List<Mail> selectReceivedMail() {
-		List<Mail> mList = mStore.selectReceivedMail(sqlSession);
+	public List<Mail> selectReceivedMail(PageInfo pi) {
+		List<Mail> mList = mStore.selectReceivedMail(sqlSession, pi);
 		return mList;
 	}
 	
@@ -156,5 +163,5 @@ public class MailServiceImpl implements MailService{
 		int result = mStore.removeAddress(sqlSession, address);
 		return result;
 	}
-	
+
 }

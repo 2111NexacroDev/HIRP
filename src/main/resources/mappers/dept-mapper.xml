@@ -4,5 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="DeptMapper">
-
+	<resultMap type="Dept" id="deptResultMap">
+		<id property="deptCode" column="DEPT_CODE"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="deptSecondname" column="DEPT_SECONDNAME"/>
+		<result property="deptColor" column="DEPT_COLOR"/>
+		<result property="deptMaster" column="DEPT_MASTER"/>
+		<result property="deptHiredate" column="DEPT_HIREDATE"/>
+		<result property="deptUppercode" column="DEPT_UPPERCODE"/>
+		<result property="deptLevel" column="DEPT_LEVEL"/>
+	
+	</resultMap>
+	<select id="selectAllDept" resultMap="deptResultMap">
+		SELECT * FROM DEPT_TBL ORDER BY DEPT_CODE ASC
+	</select>
+	<insert id="insertDept">
+		INSERT INTO DEPT_TBL VALUES(#{deptCode}, #{deptName}, 
+		#{deptSecondname}, #{deptColor}, #{deptMaster}, DEFAULT, #{deptUppercode}, #{deptLevel})
+	</insert>
+	<update id="updateDept">
+		UPDATE DEPT_TBL 
+		SET DEPT_NAME = #{deptName}, DEPT_SECONDNAME = #{deptSecondname}, DEPT_COLOR = #{deptColor}, 
+		DEPT_MASTER = #{deptMaster}, DEPT_HIREDATE = #{deptHiredate}, 
+		DEPT_UPPERCODE = #{deptUppercode}, DEPT_LEVEL = #{deptLevel}
+		WHERE DEPT_CODE = #{deptCode}
+	</update>
+	<delete id="deleteDept">
+		DELETE FROM DEPT_TBL WHERE DEPT_CODE = #{deptCode}
+	</delete>
 </mapper>

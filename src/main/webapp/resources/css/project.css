@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.progress-bar {
+	width: 100%;
+	height: 30px;
+	background-color: #dedede;
+	font-weight: 600;
+	font-size: .8rem;
+}
+
+.progress-bar .progress {
+	width: 72%; /* 나타내고자하는 퍼센트 값 */
+	height: 30px;
+	padding: 0;
+	text-align: center;
+	background-color: #4F98FF;
+	color: #111;
+}
+
+.KanbanCard {
+	cursor: move;
+	pisition: absolute;
+	background-color: #2196F3;
+	color: white;
+	border: 1px solid #d3d3d3;
+	text-align: center;
+}

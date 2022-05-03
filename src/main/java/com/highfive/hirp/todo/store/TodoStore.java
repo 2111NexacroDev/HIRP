@@ -12,6 +12,7 @@ public interface TodoStore {
 	List<Todo> selectAllToDo(SqlSession sqlSession);
 	int insertToDo(SqlSession sqlSession, Todo todo);
 	int updateToDo(SqlSession sqlSession, Todo todo);
+	int checkedToDo(SqlSession sqlSession, Todo todo);
 	int deleteToDo(SqlSession sqlSession, int todoNo);
 	
 	List<Memo> selectAllMemo(SqlSession sqlSession);

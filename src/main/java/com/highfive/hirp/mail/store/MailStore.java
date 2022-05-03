@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 
 public interface MailStore {
 
+	int selectListCount(SqlSession sqlSession);
 	int sendMail(SqlSession sqlSession, Mail mail);
-	List<Mail> selectReceivedMail(SqlSession sqlSession);
+	List<Mail> selectReceivedMail(SqlSession sqlSession, PageInfo pi);
 	int selectOneReceivedMail(SqlSession sqlSession, int mailNo);
 	List<Mail> selectSentMail(SqlSession sqlSession);
 	int selectOneSentMail(SqlSession sqlSession, int mailNo);
