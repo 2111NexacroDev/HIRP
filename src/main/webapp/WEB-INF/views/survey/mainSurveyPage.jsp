@@ -26,40 +26,42 @@
             <div id="" class="subConts">
             	<!--  진행중인 설문 중 내가 대상자이면서, 아직 참여하지 않은 설문 -->
             	<div class="row">
-	            	<div class="col-4 basic-border bor-round padding-20">
-						<!-- 버튼은 둘 중 하나만 출력 -->
-						<button class="emergency" type="button">미참여</button>
-						<button class="finished" type="button">참여완료</button>	
-						<h2 class="mt-10">설문 제목</h2>
-						<p class="mt-10 color-grey">2022-04-11~2022-04-12</p>
-						<div class="row mt-10">
-	                        <div class="col-4">
-								<p class="color-grey">작성자</p>
-								<!-- display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
-	                        </div>
-	                        <div class="">
-	                            <p class="">민봉식 대표이사</p>
-	                        </div>
-	                    </div>
-	                    <div class="row mt-10">
-	                        <div class="col-4">
-								<div>
-	                            	<p class="color-grey">설문 결과</p>
-	                            </div>
-	                        </div>
-	                        <div class="">
-	                            <div>
-	                            	<p class="">공개</p>
-	                            </div>
-	                        </div>
-	                    </div>
-	                
-	                	<hr class="mt-20 mb-20">
+            		<!-- 박스, 갯수 추가하면 됨. -->
+	            	<div class="col-4 basic-border bor-round padding-0">
+	            		<div class="padding-20">
+		            		<!-- 버튼은 둘 중 하나만 출력 -->
+							<button class="emergency" type="button">미참여</button>
+							<button class="finished" type="button">참여완료</button>	
+							<h2 class="mt-10">설문 제목</h2>
+							<p class="mt-10 color-grey">2022-04-11~2022-04-12</p>
+							<div class="row mt-10">
+		                        <div class="col-4">
+									<p class="color-grey">작성자</p>
+									<!-- display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
+		                        </div>
+		                        <div class="">
+		                            <p class="">민봉식 대표이사</p>
+		                        </div>
+		                    </div>
+		                    <div class="row mt-10">
+		                        <div class="col-4">
+									<div>
+		                            	<p class="color-grey">설문 결과</p>
+		                            </div>
+		                        </div>
+		                        <div class="">
+		                            <div>
+		                            	<p class="">공개</p>
+		                            </div>
+		                        </div>
+		                    </div>
+	            		</div>
 	                	
-	                	<div class="t-c">
+	                	<div class="t-c padding-20 basic-border-top">
 	                		<a href="#">설문 참여</a>
 	                	</div>
 	                </div>
+	                <!-- 박스 끝 -->
             	</div>
             	<!--  진행중인 설문 중 내가 대상자이면서, 아직 참여하지 않은 설문 끝 -->
             
