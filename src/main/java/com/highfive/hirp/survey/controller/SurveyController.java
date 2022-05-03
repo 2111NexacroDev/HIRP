@@ -49,7 +49,7 @@ public class SurveyController {
 			//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 			List<SurveyMyStatus> latestList = sService.selectAllSurvey(emplId);
 			if(!latestList.isEmpty()){
-				mv.addObject("latestList", latestList);
+				mv.addObject("sList", latestList);
 				System.out.println(latestList);
 				mv.setViewName("survey/mainSurveyPage");
 			} else {
@@ -69,12 +69,26 @@ public class SurveyController {
 	//진행중인 설문 페이지 (리스트 조회)
 	@RequestMapping(value="/survey/proceed.hirp", method=RequestMethod.GET)
 	public ModelAndView proceedSurvey(ModelAndView mv) {
+		String emplId = "TESTID";
 		//진행중인 설문 리스트
 		//진행중인 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
+		try {
+			List<SurveyMyStatus> proceedList = sService.selectProceedSurvey(emplId);
+			if(!proceedList.isEmpty()) {
+				mv.addObject("sList", proceedList);
+				System.out.println("proceedList 출력 : " + proceedList);
+				mv.setViewName("survey/proceedSurveyPage");
+			} else {
+				mv.addObject("msg1", "진행중인 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		
 		//응답자 리스트 보기는 버튼 누르면 아래 컨트롤러 실행되도록 해야겠다
-		mv.setViewName("survey/proceedSurveyPage");
 		return mv;
 	}
 	//응답자 리스트 보기
@@ -88,10 +102,25 @@ public class SurveyController {
 	//마감된 설문 페이지 (리스트 조회)
 	@RequestMapping(value="/survey/closed.hirp", method=RequestMethod.GET)
 	public ModelAndView closedSurvey(ModelAndView mv) {
+		String emplId = "TESTID";
 		//마감된 설문 리스트
 		//마감된 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
-		mv.setViewName("survey/closedSurveyPage");
+		try {
+			List<SurveyMyStatus> closedList = sService.selectClosedSurvey(emplId);
+			if(!closedList.isEmpty()) {
+				mv.addObject("sList", closedList);
+				System.out.println("closedList 출력 : " + closedList);
+				mv.setViewName("survey/closedSurveyPage");
+			} else {
+				mv.addObject("msg1", "마감된 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 
@@ -99,10 +128,25 @@ public class SurveyController {
 	@RequestMapping(value="/survey/mySurvey.hirp", method=RequestMethod.GET)
 	public ModelAndView wroteSurvey(ModelAndView mv
 			, HttpServletRequest request) {
+		String emplId = "ID1";
 		//아이디 가져옴 (세션에서)
 		//내가 만든 설문 리스트
 		//설문조사 번호로 설문 대상자 리스트 가져오기
-		mv.setViewName("survey/wroteSurveyPage");
+		try {
+			List<Survey> wroteList = sService.selectWroteSurvey(emplId);
+			if(!wroteList.isEmpty()) {
+				mv.addObject("sList", wroteList);
+				System.out.println("wroteList 출력 : " + wroteList);
+				mv.setViewName("survey/wroteSurveyPage");
+			} else {
+				mv.addObject("msg1", "내가 작성한 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 	

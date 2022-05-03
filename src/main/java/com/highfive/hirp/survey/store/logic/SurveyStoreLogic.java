@@ -43,11 +43,11 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//내가 작성한 설문 리스트 조회
 	@Override
-	public List<Survey> selectWroteSurvey(SqlSession sqlSession) {
-		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectWroteSurvey");
+	public List<Survey> selectWroteSurvey(SqlSession sqlSession, String emplId) {
+		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectWroteSurvey", emplId);
 		return surveyList;
 	}
-	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
+	//내가 대상자이면서 응답하지 않은 것 중 진행중인 설문 리스트 조회
 	@Override
 	public List<Survey> selectSubSurveyById(SqlSession sqlSession, String emplId) {
 		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectSubSurveyById", emplId);

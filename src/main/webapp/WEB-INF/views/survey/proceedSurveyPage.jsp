@@ -36,79 +36,140 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        	<td>3</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<button class="emergency" type="button">미참여</button>
-								<!-- <button class="finished" type="button">참여완료</button> -->
-                            </td>
-                            <td>설문제목1</td>
-                            <td>2022-04-11~2022-04-12</td>
-                            <td>민봉식 대표이사</td>
-                            <td>
-                            	<button class="finished" type="button" onclick="openAlert(this);">보기</button>
-	                            <!-- 응답자 목록 section -->
-	                            <section class="section--alert">
-				                    <div class="bg-black">
-				                    </div>
-				                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-				                    <div class="section--alert__conts">
-				                        <button class="btn--close"></button>
-				                        <table class="table--basic mt-20">
-						                    <thead>
-						                        <tr>
-						                            <th>소속부서</th>
-						                            <th>성명</th>
-						                            <th>참여여부</th>
-						                        </tr>
-						                    </thead>
-						                    <tbody>
-						                        <tr>
-						                            <td>개발팀</td>
-						                            <td>이민선</td>
-						                            <td>X</td>
-						                        </tr>
-						                        <tr>
-						                            <td>개발팀</td>
-						                            <td>이융경</td>
-						                         	<td>O</td>
-						                        </tr>
-						                    </tbody>
-						                </table>
+                    	<!-- 위에서부터 1~로 번호 출력하기 -->
+<!--                     	<c:set var="row_num" value="0"/> -->
+                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
+                    		<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+                    	<c:forEach items="${sList }" var="survey">
+<%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
+								<c:set var="row_num" value="${row_num-1 }"/>
+                    		<tr>
+	                        	<td><c:out value="${row_num }"/> </td>
+	                            <td>
+	                            	<!-- 버튼은 둘 중 하나만 출력 -->
+	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
+	                            		<button class="finished" type="button">참여완료</button>
+	                            	</c:if>
+	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
+	                            		<button class="emergency" type="button">미참여</button>
+	                            	</c:if>
+	                            </td>
+	                            <td>${survey.surveyTitle }</td>
+	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
+	                            <td>${survey.surveyWriter }</td>
+	                            <td>
+	                            	<button class="finished" type="button" onclick="openAlert(this);">보기</button>
+		                            <!-- 응답자 목록 section -->
+		                            <section class="section--alert">
+					                    <div class="bg-black">
+					                    </div>
+					                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+					                    <div class="section--alert__conts">
+					                        <button class="btn--close"></button>
+					                        <table class="table--basic mt-20">
+							                    <thead>
+							                        <tr>
+							                            <th>소속부서</th>
+							                            <th>성명</th>
+							                            <th>참여여부</th>
+							                        </tr>
+							                    </thead>
+							                    <tbody>
+							                        <tr>
+							                            <td>개발팀</td>
+							                            <td>이민선</td>
+							                            <td>X</td>
+							                        </tr>
+							                        <tr>
+							                            <td>개발팀</td>
+							                            <td>이융경</td>
+							                         	<td>O</td>
+							                        </tr>
+							                    </tbody>
+							                </table>
+							                
+					                        <div class="btns-wrap mt-20">
+					                            <button class="point" type="button">확인</button>
+					                            <button class="finished closeWindow" type="button">닫기</button>
+					                        </div>
+					                    </div>
+					                </section>
+				                </td>
+	                        </tr>
+                    	</c:forEach>
+<!--                         <tr> -->
+<!--                         	<td>3</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="emergency" type="button">미참여</button> -->
+<!-- 								<button class="finished" type="button">참여완료</button> -->
+<!--                             </td> -->
+<!--                             <td>설문제목1</td> -->
+<!--                             <td>2022-04-11~2022-04-12</td> -->
+<!--                             <td>민봉식 대표이사</td> -->
+<!--                             <td> -->
+<!--                             	<button class="finished" type="button" onclick="openAlert(this);">보기</button> -->
+<!-- 	                            응답자 목록 section -->
+<!-- 	                            <section class="section--alert"> -->
+<!-- 				                    <div class="bg-black"> -->
+<!-- 				                    </div> -->
+<!-- 				                    검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+<!-- 				                    <div class="section--alert__conts"> -->
+<!-- 				                        <button class="btn--close"></button> -->
+<!-- 				                        <table class="table--basic mt-20"> -->
+<!-- 						                    <thead> -->
+<!-- 						                        <tr> -->
+<!-- 						                            <th>소속부서</th> -->
+<!-- 						                            <th>성명</th> -->
+<!-- 						                            <th>참여여부</th> -->
+<!-- 						                        </tr> -->
+<!-- 						                    </thead> -->
+<!-- 						                    <tbody> -->
+<!-- 						                        <tr> -->
+<!-- 						                            <td>개발팀</td> -->
+<!-- 						                            <td>이민선</td> -->
+<!-- 						                            <td>X</td> -->
+<!-- 						                        </tr> -->
+<!-- 						                        <tr> -->
+<!-- 						                            <td>개발팀</td> -->
+<!-- 						                            <td>이융경</td> -->
+<!-- 						                         	<td>O</td> -->
+<!-- 						                        </tr> -->
+<!-- 						                    </tbody> -->
+<!-- 						                </table> -->
 						                
-				                        <div class="btns-wrap mt-20">
-				                            <button class="point" type="button">확인</button>
-				                            <button class="finished closeWindow" type="button">닫기</button>
-				                        </div>
-				                    </div>
-				                </section>
-			                </td>
-                        </tr>
-                        <tr>
-                        	<td>2</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<button class="emergency" type="button">미참여</button>
-								<!-- <button class="finished" type="button">참여완료</button> -->
-                            </td>
-                            <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td>
-                            <td>2022-05-01~2022-05-12</td>
-                            <td>이융경 부장</td>
-                            <td><button class="finished" type="button">보기</button></td>
-                        </tr>
-                        <tr>
-                        	<td>1</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<!-- <button class="emergency" type="button">미참여</button> -->
-								<button class="finished" type="button">참여완료</button>
-                            </td>
-                            <td>설문제목3</td>
-                            <td>2022-04-11~2022-04-12</td>
-                            <td>권진실 과장</td>
-                            <td><button class="finished" type="button">보기</button></td>
-                        </tr>
+<!-- 				                        <div class="btns-wrap mt-20"> -->
+<!-- 				                            <button class="point" type="button">확인</button> -->
+<!-- 				                            <button class="finished closeWindow" type="button">닫기</button> -->
+<!-- 				                        </div> -->
+<!-- 				                    </div> -->
+<!-- 				                </section> -->
+<!-- 			                </td> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                         	<td>2</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="emergency" type="button">미참여</button> -->
+<!-- 								<button class="finished" type="button">참여완료</button> -->
+<!--                             </td> -->
+<!--                             <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td> -->
+<!--                             <td>2022-05-01~2022-05-12</td> -->
+<!--                             <td>이융경 부장</td> -->
+<!--                             <td><button class="finished" type="button">보기</button></td> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                         	<td>1</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="emergency" type="button">미참여</button> -->
+<!-- 								<button class="finished" type="button">참여완료</button> -->
+<!--                             </td> -->
+<!--                             <td>설문제목3</td> -->
+<!--                             <td>2022-04-11~2022-04-12</td> -->
+<!--                             <td>권진실 과장</td> -->
+<!--                             <td><button class="finished" type="button">보기</button></td> -->
+<!--                         </tr> -->
                     </tbody>
                 </table>
 	   		 </div>
