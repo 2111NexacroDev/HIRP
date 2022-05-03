@@ -40,6 +40,17 @@ input {
     font-size: 14px;
 }
 
+input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px 0 0;
+}
+
+input[type="radio"]+label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 input[type="text"] {
     padding: 0 10px;
     height: 30px;
@@ -47,7 +58,12 @@ input[type="text"] {
     border: 1px solid #ccc;
 }
 
+input[type="checkbox"] {
+    margin: 5px 4px 0 0;
+}
+
 input[type="date"],
+input[type="datetime-local"],
 select {
     width: 160px;
     padding: 0 10px;
@@ -55,6 +71,10 @@ select {
     line-height: 28px;
     border: 1px solid #ccc;
     color: #333;
+}
+
+input[type="datetime-local"] {
+    width: 210px;
 }
 
 select {
@@ -228,6 +248,10 @@ img {
 
 .bor-red {
     border: 1px solid red;
+}
+
+.fz-0 {
+    font-size: 0 !important;
 }
 
 @media screen and (min-width: 1201px) {
@@ -562,7 +586,7 @@ img {
 }
 
 #snb>ul.no-icon>li>a:before {
-	display: none;	
+    display: none;
 }
 
 #snb>ul>li:hover>a:before {}
@@ -754,7 +778,7 @@ article {
 .section--modal__conts {
     position: relative;
     max-width: 800px;
-    padding: 60px 20px 30px;
+    padding: 60px 30px 30px;
     background-color: #fff;
     font-size: 14px;
     line-height: 1.6;
@@ -766,9 +790,17 @@ article {
     font-size: 20px;
 }
 
-.section--modal__conts ul label {
+.section--modal__conts ul li>label:first-of-type {
     display: inline-block;
     width: 70px;
+}
+
+.section--modal__conts ul li>div {
+    display: inline-block;
+}
+
+.section--modal__conts ul li>div label {
+    font-size: 14px;
 }
 
 .section--alert .bg-black,
