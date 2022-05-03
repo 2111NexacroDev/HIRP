@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
+import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
@@ -33,13 +34,35 @@ public class SurveyController {
 	//설문조사 메인페이지 (최신 리스트 조회)
 	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
 	public ModelAndView surveyMain(ModelAndView mv) {
-		//내가 대상자인 것 중 진행중이면서 응답하지 않은 설문 리스트
+		try {
+			String emplId = "TESTID";
+			//내가 대상자이면서 응답하지 않은 것 중 진행중인 설문조사 리스트
+			List<Survey> myList = sService.selectSubSurveyById(emplId);
+			if(!myList.isEmpty()) {
+				mv.addObject("myList", myList);
+				System.out.println("myList 출력 : " + myList);
+			} else {
+				mv.addObject("msg1", "내가 응답할 수 있는 리스트 조회 실패");
+			}
+			//최근 생성된 설문 리스트
+			//설문 리스트에 대한 나의 참여 여부
+			//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
+			List<SurveyMyStatus> latestList = sService.selectAllSurvey(emplId);
+			if(!latestList.isEmpty()){
+				mv.addObject("latestList", latestList);
+				System.out.println(latestList);
+				mv.setViewName("survey/mainSurveyPage");
+			} else {
+				mv.addObject("msg2", "최신 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		
-		//최근 생성된 설문 리스트
-		//설문 리스트에 대한 나의 참여 여부
-		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		
-		mv.setViewName("survey/mainSurveyPage");
 		return mv;
 	}
 	
@@ -86,17 +109,17 @@ public class SurveyController {
 
 	//설문 정보 등록 페이지
 	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
-	public ModelAndView writeSurveyPage(ModelAndView mv) {
+	public ModelAndView writeSurveyInfoPage(ModelAndView mv) {
 		mv.setViewName("survey/surveyWriteInfo");
 		return mv;
 	}
 	
-//	//설문 정보 등록 페이지
-//	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
-//	public ModelAndView writeSurveyPage(ModelAndView mv) {
-//		mv.setViewName("survey/surveyWriteInfo");
-//		return mv;
-//	}
+	//설문 문항 페이지
+	@RequestMapping(value="/survey/writeQuest.hirp", method=RequestMethod.GET)
+	public ModelAndView writeSurveyQuestPage(ModelAndView mv) {
+		mv.setViewName("survey/surveyWriteQuest");
+		return mv;
+	}
 	
 	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
 	public ModelAndView writeSurvey(ModelAndView mv

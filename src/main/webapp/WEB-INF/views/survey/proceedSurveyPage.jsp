@@ -46,7 +46,44 @@
                             <td>설문제목1</td>
                             <td>2022-04-11~2022-04-12</td>
                             <td>민봉식 대표이사</td>
-                            <td><button class="finished" type="button">보기</button></td>
+                            <td>
+                            	<button class="finished" type="button" onclick="openAlert(this);">보기</button>
+	                            <!-- 응답자 목록 section -->
+	                            <section class="section--alert">
+				                    <div class="bg-black">
+				                    </div>
+				                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+				                    <div class="section--alert__conts">
+				                        <button class="btn--close"></button>
+				                        <table class="table--basic mt-20">
+						                    <thead>
+						                        <tr>
+						                            <th>소속부서</th>
+						                            <th>성명</th>
+						                            <th>참여여부</th>
+						                        </tr>
+						                    </thead>
+						                    <tbody>
+						                        <tr>
+						                            <td>개발팀</td>
+						                            <td>이민선</td>
+						                            <td>X</td>
+						                        </tr>
+						                        <tr>
+						                            <td>개발팀</td>
+						                            <td>이융경</td>
+						                         	<td>O</td>
+						                        </tr>
+						                    </tbody>
+						                </table>
+						                
+				                        <div class="btns-wrap mt-20">
+				                            <button class="point" type="button">확인</button>
+				                            <button class="finished closeWindow" type="button">닫기</button>
+				                        </div>
+				                    </div>
+				                </section>
+			                </td>
                         </tr>
                         <tr>
                         	<td>2</td>

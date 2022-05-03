@@ -18,7 +18,7 @@
                 <button type="submit"></button>
             </form>
 
-            <h1 class="basic-border-bottom">설문 홈</h1>
+            <h1 class="basic-border-bottom">설문 작성</h1>
             <!-- 메인 상단 끝 -->
             
             <!-- 페이지 내용 -->
@@ -62,8 +62,8 @@
 				                <label for="valueB">직접 선택</label><br>
 				                
 				                <div class="bor-dashed mt-20 padding-20">
-				                    <button class="add"><i class="fa-lg fa-plus"></i> 추가</button>&nbsp;
-				                    <button class="delete"><i class="fa-regular fa-trash-can"></i> 전체 삭제</button>
+				                    <button class="noneBackground"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
+				                    <button class="colorGrey"><i class="fa-regular fa-trash-can"></i> 전체 삭제</button>
 				                </div>
 		                    </div>
 			                
@@ -99,7 +99,10 @@
 	            </div>
 	            <!-- 마지막 선 넣어준 div 끝... -->
 	            <div class="t-c">
-		            <button class="point mt-20" type="button">다음</button>&nbsp;&nbsp;&nbsp;
+		            <button class="point mt-20" type="button" onclick="location.href='/survey/writeQuest.hirp'">다음</button>
+		            <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
+		            	뒤로가기 안되게 -->
+		            &nbsp;&nbsp;&nbsp;
 		            <button class="basic mt-20" type="button">취소</button>
 	            </div>
                 

@@ -4,5 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SurveyMapper">
-
+	<resultMap type="Survey" id="surveyResultMap">
+		<id property="surveyNo" column="SURVEY_NO"/>
+		<result property="surveyTitle" column="SURVEY_TITLE"/>
+		<result property="surveyWriter" column="SURVEY_WRITER"/>
+		<result property="surveyDate" column="SURVEY_DATE"/>
+		<result property="surveyUpdate" column="SURVEY_UPDATE"/>
+		<result property="surveyStatus" column="SURVEY_STATUS"/>
+		<result property="surveyStartdate" column="SURVEY_STARTDATE"/>
+		<result property="surveyEnddate" column="SURVEY_ENDDATE"/>
+		<result property="surveyResult" column="SURVEY_RESULT"/>
+		<result property="surveyEdit" column="SURVEY_EDIT"/>
+		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
+		<result property="surveyStorage" column="SURVEY_STORAGE"/>
+	</resultMap>
+	
+	<resultMap type="SurveyMyStatus" id="surveyMyStatusResultMap">
+		<id property="surveyNo" column="SURVEY_NO"/>
+		<result property="surveyTitle" column="SURVEY_TITLE"/>
+		<result property="surveyWriter" column="SURVEY_WRITER"/>
+		<result property="surveyDate" column="SURVEY_DATE"/>
+		<result property="surveyUpdate" column="SURVEY_UPDATE"/>
+		<result property="surveyStatus" column="SURVEY_STATUS"/>
+		<result property="surveyStartdate" column="SURVEY_STARTDATE"/>
+		<result property="surveyEnddate" column="SURVEY_ENDDATE"/>
+		<result property="surveyResult" column="SURVEY_RESULT"/>
+		<result property="surveyEdit" column="SURVEY_EDIT"/>
+		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
+		<result property="surveyStorage" column="SURVEY_STORAGE"/>
+		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
+	</resultMap>
+	
+	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
+	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
+	<select id="selectAllSurvey" resultMap="surveyMyStatusResultMap">
+		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		SUB_ANSWERSTATUS
+		FROM (SELECT * FROM SURVEY_TBL ) 
+		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId}) USING(SURVEY_NO)
+		<![CDATA[WHERE ROWNUM <=10]]>
+		ORDER BY SURVEY_NO DESC
+	</select>
+	<!-- 내가 대상자이면서 응답하지 않은 것 중 진행중인 설문조사 -->
+	<select id="selectSubSurveyById" resultMap="surveyResultMap">
+		SELECT * FROM SURVEY_TBL
+		JOIN (SELECT SURVEY_NO FROM SURVEY_SUB WHERE SUB_ID = #{emplId} AND SUB_ANSWERSTATUS='N')
+		USING(SURVEY_NO)
+		WHERE SURVEY_STATUS = 'C'
+	</select>
 </mapper>

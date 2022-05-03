@@ -117,13 +117,13 @@ button.emergency {
     color: #fff;
 }
 
-button.add {
+button.noneBackground {
 	background-color: #fff;
     border: 0px none;
     color: #000;
 }
 
-button.delete {
+button.colorGrey {
 	background-color: #fff;
     border: 0px none;
     color: #ccc;
@@ -212,6 +212,10 @@ img {
 
 .padding-0 {
     padding: 0 !important;
+}
+
+.padding-10 {
+    padding: 20px !important;
 }
 
 .padding-20 {

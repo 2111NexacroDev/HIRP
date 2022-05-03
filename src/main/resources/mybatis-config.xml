@@ -27,6 +27,16 @@
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 		<!-- 민선 -->
 		<typeAlias type="com.highfive.hirp.dept.domain.Dept" alias="Dept"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.Survey" alias="Survey"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveySub" alias="SurveySub"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuest" alias="SurveyQuest"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuestCh" alias="SurveyQuestCh"></typeAlias>
+		<!-- survey, 나의 응답여부 -->
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveyMyStatus" alias="SurveyMyStatus"></typeAlias>
+		<!-- search, surveyStatus, emplId -->
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveySearch" alias="SurveySearch"></typeAlias>
+		<!-- emplId, surveyNo -->
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveySearch" alias="SurveyUpdate"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->

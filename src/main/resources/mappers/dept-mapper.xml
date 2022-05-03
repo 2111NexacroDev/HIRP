@@ -13,7 +13,6 @@
 		<result property="deptHiredate" column="DEPT_HIREDATE"/>
 		<result property="deptUppercode" column="DEPT_UPPERCODE"/>
 		<result property="deptLevel" column="DEPT_LEVEL"/>
-	
 	</resultMap>
 	<select id="selectAllDept" resultMap="deptResultMap">
 		SELECT * FROM DEPT_TBL ORDER BY DEPT_CODE ASC

@@ -2,6 +2,7 @@ package com.highfive.hirp.survey.domain;
 
 public class SurveyQuest {
 	private int questNo;
+	private int surveyNo;
 	private String questTitle;
 	private String questType1;
 	private String questType2;
@@ -9,9 +10,11 @@ public class SurveyQuest {
 	
 	public SurveyQuest() {}
 
-	public SurveyQuest(int questNo, String questTitle, String questType1, String questType2, String questRequired) {
+	public SurveyQuest(int questNo, int surveyNo, String questTitle, String questType1, String questType2,
+			String questRequired) {
 		super();
 		this.questNo = questNo;
+		this.surveyNo = surveyNo;
 		this.questTitle = questTitle;
 		this.questType1 = questType1;
 		this.questType2 = questType2;
@@ -24,6 +27,14 @@ public class SurveyQuest {
 
 	public void setQuestNo(int questNo) {
 		this.questNo = questNo;
+	}
+
+	public int getSurveyNo() {
+		return surveyNo;
+	}
+
+	public void setSurveyNo(int surveyNo) {
+		this.surveyNo = surveyNo;
 	}
 
 	public String getQuestTitle() {
@@ -60,9 +71,10 @@ public class SurveyQuest {
 
 	@Override
 	public String toString() {
-		return "SurveyQuest [questNo=" + questNo + ", questTitle=" + questTitle + ", questType1=" + questType1
-				+ ", questType2=" + questType2 + ", questRequired=" + questRequired + "]";
+		return "SurveyQuest [questNo=" + questNo + ", surveyNo=" + surveyNo + ", questTitle=" + questTitle
+				+ ", questType1=" + questType1 + ", questType2=" + questType2 + ", questRequired=" + questRequired
+				+ "]";
 	}
-	
+
 	
 }
