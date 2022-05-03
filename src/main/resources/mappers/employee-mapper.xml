@@ -6,7 +6,7 @@
 <mapper namespace="EmployeeMapper">
 	<resultMap type="com.highfive.hirp.employee.domain.Employee" id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
 		<id property="emplId" column="EMPL_ID" />
-		<result property="divisionCode" column="DIVISION_CODE" />
+		<result property="deptCode" column="DIVISION_CODE" />
 		<result property="positionCode" column="POSITION_CODE" />
 		<result property="emplPw" column="EMPL_PW" />
 		<result property="emplName" column="EMPL_NAME" />
