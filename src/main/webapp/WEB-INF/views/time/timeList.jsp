@@ -7,7 +7,7 @@
 <!-- 하이알피 서브페이지 CSS -->
 <head>
 <meta charset="UTF-8">
-<title>근태관리 - 출/퇴근 내역</title>
+<title>마이페이지1</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>

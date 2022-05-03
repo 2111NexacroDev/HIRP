@@ -2,16 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%@ include file="/WEB-INF/views/include/inc_head.jsp"%>
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기1</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&family=Lexend+Exa:wght@300&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
-        rel="stylesheet"><!-- 노토산스 코리안 서체 CDN -->
-    <link rel="stylesheet" href="../../resources/css/reset.css"><!-- 브라우저 기본 스타일 리셋하는 CSS -->
-    <link rel="stylesheet" href="../../resources/css/common.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
 </head>
 <body>
 	<form action="/employee/findPwd.hirp" method="post" enctype="multipart/form-data"> <!-- 2로 가는게 아니라 비교하는 곳으로 보내줌 -->
