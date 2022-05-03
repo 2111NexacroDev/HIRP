@@ -34,14 +34,11 @@
 						<p class="mt-10 color-grey">2022-04-11~2022-04-12</p>
 						<div class="row mt-10">
 	                        <div class="col-4">
-								<div>
-	                            	<p class="color-grey">작성자</p>
-	                            </div>
+								<p class="color-grey">작성자</p>
+								<!-- display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
 	                        </div>
 	                        <div class="">
-	                            <div>
-	                            	<p class="">민봉식 대표이사</p>
-	                            </div>
+	                            <p class="">민봉식 대표이사</p>
 	                        </div>
 	                    </div>
 	                    <div class="row mt-10">

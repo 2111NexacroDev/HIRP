@@ -117,6 +117,18 @@ button.emergency {
     color: #fff;
 }
 
+button.add {
+	background-color: #fff;
+    border: 0px none;
+    color: #000;
+}
+
+button.delete {
+	background-color: #fff;
+    border: 0px none;
+    color: #ccc;
+}
+
 img {
     max-width: 100%;
 }
@@ -206,6 +218,10 @@ img {
     padding: 20px !important;
 }
 
+.padding-bottom {
+    padding-bottom: 20px !important;
+}
+
 .bg--gray {
     background-color: #EEF1F6;
 }
@@ -228,6 +244,10 @@ img {
 
 .bor-red {
     border: 1px solid red;
+}
+
+.bor-dashed {
+    border: 1px dashed #ccc;
 }
 
 @media screen and (min-width: 1201px) {

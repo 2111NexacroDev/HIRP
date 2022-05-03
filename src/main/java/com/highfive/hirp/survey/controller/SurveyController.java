@@ -84,11 +84,19 @@ public class SurveyController {
 	}
 	
 
-	//설문 등록 페이지 
+	//설문 정보 등록 페이지
+	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyPage(ModelAndView mv) {
-		
+		mv.setViewName("survey/surveyWriteInfo");
 		return mv;
 	}
+	
+//	//설문 정보 등록 페이지
+//	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
+//	public ModelAndView writeSurveyPage(ModelAndView mv) {
+//		mv.setViewName("survey/surveyWriteInfo");
+//		return mv;
+//	}
 	
 	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
 	public ModelAndView writeSurvey(ModelAndView mv
