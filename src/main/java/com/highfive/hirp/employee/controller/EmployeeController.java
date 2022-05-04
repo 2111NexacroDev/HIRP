@@ -24,6 +24,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService eService;
 
+// get - 조회(select)
+// post- 생성(insert),수정(update),삭제(delete)
+	
 	// 회원가입 화면
 	@RequestMapping(value = "/employee/registerView.hirp", method = RequestMethod.GET)
 	public ModelAndView joinView(ModelAndView mv) {
@@ -44,7 +47,20 @@ public class EmployeeController {
 		mv.setViewName("home");
 		return mv;
 	}
-
+	
+	// 로그아웃(세션에 넣어줬던 정보 없애기만 하면 돼서 controller만 쓰면 됨)
+	@RequestMapping(value = "/employee/logout.hirp", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session != null) {
+			session.invalidate();
+			return "redirect:/employee/loginView.hirp";
+		} else {
+			request.setAttribute("msg", "로그아웃에 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
+	
 	// 비밀번호 찾기 화면1
 	@RequestMapping(value = "/employee/findPwdView1.hirp", method = RequestMethod.GET)
 	public ModelAndView findPwdView(ModelAndView mv) {
@@ -59,7 +75,7 @@ public class EmployeeController {
 		return mv;
 	}
 
-	// 마이페이지 화면1
+	// 마이페이지 화면1 -> 따로 입력하는게 없어서 get 1개만
 	@RequestMapping(value = "/employee/mypageView1.hirp", method = RequestMethod.GET)
 	public ModelAndView mypageView(ModelAndView mv) {
 		mv.setViewName("employee/mypage1");
@@ -67,12 +83,52 @@ public class EmployeeController {
 	}
 
 	// 마이페이지 화면2
-	@RequestMapping(value = "/employee/mypageView2.hirp", method = RequestMethod.GET)
-	public ModelAndView mypageView2(ModelAndView mv) {
-		mv.setViewName("employee/mypage2");
+	@RequestMapping(value = "/employee/mypage.hirp", method = RequestMethod.GET)
+	public ModelAndView employeeMypage(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId"); // 로그인을 해야만 세션 생기는것. 로그인 해야만 조회되는 이유
+		try {
+			Employee employee = eService.employeeMyPage(emplId); // db에서 데이터 갖고옴
+			if (employee != null) {
+				// employee에 값이 들어있다. 값은 마이페이지에 출력할 값.
+				mv.addObject("employee", employee);
+				mv.setViewName("employee/mypageInfo");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
+	/*
+	 * // 마이페이지 화면2
+	 * @RequestMapping(value = "/employee/mypageView2.hirp", method =
+	 * RequestMethod.GET) public ModelAndView mypageView2(ModelAndView mv) {
+	 * mv.setViewName("employee/mypage2"); return mv; }
+	 */
 
+	// 마이페지이 비밀번호 일치여부 확인
+	@RequestMapping(value = "/employee/mypageOk.hirp", method = RequestMethod.POST)
+	public String mypageOk(Model model, HttpServletRequest request, @RequestParam("emplPw") String emplPw) {
+		Employee employee = new Employee();
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		employee.setEmplId(emplId);
+		employee.setEmplPw(emplPw);
+		try {
+			Employee empLogin = eService.loginMember(employee);
+			if (empLogin != null) {				
+				return "redirect:/employee/mypage.hirp";
+			} else {
+				model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
+	}
+	
 	// 회원가입
 	@RequestMapping(value = "/employee/register.hirp", method = RequestMethod.POST) // jsp와 post 맞춰줌
 	public String memberRegister(Model model, @ModelAttribute Employee employee, // model 결과 보여줄 때 사용(serlvet-context)
@@ -108,7 +164,7 @@ public class EmployeeController {
 				HttpSession session = request.getSession();
 				session.setAttribute("emplId", empLogin.getEmplId());
 				session.setAttribute("emplPw", empLogin.getEmplPw());
-				return "redirect:/home.hirp";
+				return "redirect:/index.jsp";
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");
 				return "common/errorPage";
@@ -118,7 +174,7 @@ public class EmployeeController {
 			return "common/errorPage";
 		}
 	}
-
+	
 	// 비밀번호 찾기
 	@RequestMapping(value = "/employee/findPwd.hirp", method = RequestMethod.POST)
 	public String findPwd(Model model, HttpServletRequest request, @RequestParam("emplId") String emplId,
@@ -136,7 +192,7 @@ public class EmployeeController {
 				session.setAttribute("birthday", empFindPwd.getBirthday());
 				return "redirect:/findPwdView2.hirp";
 			} else {
-				model.addAttribute("msg", "비밀번호 찾기에 실패했습니다.");
+				model.addAttribute("msg", "입력한 정보가 일치하지 않습니다.");
 				return "common/errorPage";
 			}
 		} catch (Exception e) {
@@ -159,25 +215,6 @@ public class EmployeeController {
 			} else {
 				mv.addObject("msg", "비밀번호 재설정에 실패했습니다.");
 				mv.setViewName("common/errorPage");
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
-
-	// 마이페이지 출력
-	@RequestMapping(value = "/employee/mypage.hirp", method = RequestMethod.POST)
-	public ModelAndView employeeMypage(ModelAndView mv, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String employeeId = (String) session.getAttribute("employeeId");
-		try {
-			Employee employee = eService.employeeMyPage(employeeId);
-			if (employee != null) {
-				// employee에 값이 들어있다. 값은 마이페이지에 출력할 값.
-				mv.addObject("employee", employee);
-				mv.setViewName("employee/mypage");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());

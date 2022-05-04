@@ -4,9 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="EmployeeMapper">
-	<resultMap type="com.highfive.hirp.employee.domain.Employee" id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
+	<resultMap type="com.highfive.hirp.employee.domain.Employee"
+		id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
 		<id property="emplId" column="EMPL_ID" />
-		<result property="divisionCode" column="DIVISION_CODE" />
+		<result property="deptCode" column="DEPT_CODE" />
 		<result property="positionCode" column="POSITION_CODE" />
 		<result property="emplPw" column="EMPL_PW" />
 		<result property="emplName" column="EMPL_NAME" />
@@ -30,28 +31,37 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertEmployee" parameterType="Employee"> <!-- 마이바티스에 줄이려고 써둠. id값 storelogic값과 같아야함 // 위에 타입, 아이디 중 적어줌 -->
-		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER)VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender})
+		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO,
+		GENDER)VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday},
+		#{phoneNo}, #{gender})
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="selectLoginEmployee" parameterType="Employee" resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, _string) 여러개면 resultMap -->
+	<select id="selectLoginEmployee" parameterType="Employee"
+		resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, 
+			_string) 여러개면 resultMap -->
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_PW = #{emplPw}
-	</select>	
-	
-	<!-- 비밀번호 찾기 -->
-	<select id="selectFindPwd" parameterType="Employee" resultMap="employeeResultMap">
-		SELECT *
-		FROM EMPL_TBL
-		WHERE EMPL_ID = #{emplId} AND EMPL_NAME = #{emplName} AND BIRTHDAY = #{birthday} 
 	</select>
-	
+
+	<!-- 비밀번호 찾기 -->
+	<select id="selectFindPwd" parameterType="Employee"
+		resultMap="employeeResultMap">
+		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_NAME = #{emplName} AND BIRTHDAY = #{birthday}
+	</select>
+
 	<!-- 비밀번호 재설정 -->
 	<update id="updatePwd" parameterType="Employee">
 		UPDATE EMPL_TBL SET EMPL_PW = #{emplPw} WHERE EMPL_ID = #{emplId}
 	</update>
-	
+
 	<!-- 마이페이지 -->
-	<!-- <select>
-	</select> -->
-	
+	<select id="selectOneById" resultMap="employeeResultMap">
+		SELECT EMPL_PROFILE, EMPL_NAME, EMPL_ID, EMPL_PW, DEPT_NAME "DEPT_CODE", POSITION_NAME "POSITION_CODE",
+		DIRECT_NO, EMAIL, PHONE_NO, TO_CHAR(BIRTHDAY, 'YYYY-MM-DD') "BIRTHDAY" <!-- string을 날짜형태로 변환하기 위해 적어줌 ""에는 컬럼명 써줌 -->
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE EMPL_ID = #{EMPL_ID}
+	</select>
+
 </mapper>

@@ -33,7 +33,7 @@
 		<input id="check1" class="mt-20" type="checkbox">
 		<label for="check1">아이디 저장</label><br>
 		
-		<button class="finished mt-20" type="submit";>로그인</button><br><br> <!-- 서브밋이면 폼에 url 적어줌 온클릭 팝업열릴때만사용-->
+		<button class="finished mt-20" type="submit";>로그인</button><br><br> <!-- 서브밋이면 폼에 url 적어줌 온클릭 팝업열릴때만사용-->	
 		
 		<a id="myLink1" style="text-decoration:underline" href="/employee/registerView.hirp" onclick="btnRegister2()"; return false;">회원가입</a>&nbsp;&nbsp;
 		<a id="myLink2" style="text-decoration:underline" href="/employee/findPwdView1.hirp" onclick="btnfindPwd()"; return false;">비밀번호 찾기</a> <!-- id는 같은 게 한 페이지 안에 하나만 있어야 함 -->
