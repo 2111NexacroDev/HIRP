@@ -37,6 +37,12 @@
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveySearch" alias="SurveySearch"></typeAlias>
 		<!-- emplId, surveyNo -->
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveySearch" alias="SurveyUpdate"></typeAlias>
+
+
+		<!-- 우정 -->
+		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>
+
+
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->

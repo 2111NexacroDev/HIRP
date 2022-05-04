@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.common.PageInfo;
@@ -14,11 +15,16 @@ public interface NoticeBoardService {
 	//공지사항 리스트 조회
 	public List<NoticeBoard> printAllNotice(PageInfo pi);
 	//공지사항 디테일 조회
-	public  NoticeBoard printOneNotice(int noticeNo);
+	public  NoticeBoard printNoticeDetail(int noticeNo);
 	//공지사항 검색 조회
 	public List<NoticeBoard>printSearchNotice(Search search);
 	//공지글 등록
 	public int registerNotice(NoticeBoard noticeboard);
+	//공지번호 조회
+	public int printNoticeNo();
+	//첨부파일 저장
+	public int registerNoticeFile(BoardAttachedFile boardFile);
+	
 	//공지글 수정
 	public int modifyNotice(NoticeBoard noticeboard);
 	//공지글 삭제

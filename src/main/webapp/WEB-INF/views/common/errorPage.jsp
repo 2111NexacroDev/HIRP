@@ -7,6 +7,8 @@
 <title>에러페이지</title>
 </head>
 <body>
+
 	<h1>${msg}</h1>
+
 </body>
 </html>
