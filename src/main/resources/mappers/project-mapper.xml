@@ -4,5 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="ProjectMapper">
+	<resultMap type="Project" id="projectResultMap">
+		<id property="projectNo" column="PROJECT_NO"/>
+		<result property="projectName" column="PROJECT_NAME"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="projectManager" column="PROJECT_MANAGER"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM PROJECT_TBL
+	</select>
+	
+	<select id="selectAllList" resultMap="projectResultMap">
+		SELECT * FROM PROJECT_TBL ORDER BY PROJECT_NO DESC
+	</select>
+	
+	<select id="selectOneByNo" resultMap="projectResultMap">
+		SELECT * FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+	</select>
+	
+	<insert id="insertProject" parameterType="Project">
+		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
+	</insert>
 
+	<update id="updateProject" parameterType="Project">
+		UPDATE PROJECT_TBL SET PROJECT_NAME=#{projectName}, START_DATE=#{startDate}, END_DATE=#{endDate}, PROJECT_MANAGER=#{projectManager} WHERE PROJECT_NO=#{projectNo}
+	</update>
+	
+	<delete id="deleteProject" parameterType="Project">
+		DELETE FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+	</delete>
 </mapper>

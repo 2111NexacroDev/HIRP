@@ -2,14 +2,16 @@ package com.highfive.hirp.mail.service;
 
 import java.util.List;
 
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 
 public interface MailService {
 
+	public int getListCount();
 	public int sendMail(Mail mail); // 메일 보내기
-	public List<Mail> selectReceivedMail(); // 받은메일함 조회
+	public List<Mail> selectReceivedMail(PageInfo pi); // 받은메일함 조회
 	public int selectOneReceivedMail(int mailNo); // 받은메일함 상세조회
 	public List<Mail> selectSentMail(); // 보낸메일함 조회
 	public int selectOneSentMail(int mailNo); // 보낸메일함 상세조회

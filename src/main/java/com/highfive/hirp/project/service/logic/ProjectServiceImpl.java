@@ -20,15 +20,27 @@ public class ProjectServiceImpl implements ProjectService{
 	private SqlSession sqlSession;
 
 	@Override
+	public int getListCount() {
+		int totalCount = pStore.selectListCount(sqlSession);
+		return totalCount;
+	}
+	
+	@Override
 	public List<Project> printAll(PageInfo pi) {
 		List<Project> pList = pStore.selectAll(sqlSession, pi);
 		return pList;
 	}
+	
+	@Override
+	public int registerProject(Project project) {
+		int result = pStore.insertProject(sqlSession, project);
+		return result;
+	}
 
 	@Override
-	public int printOneByNo(int projectNo) {
-		int result = pStore.selectOneByNo(sqlSession, projectNo);
-		return result;
+	public Project printOneByNo(int projectNo) {
+		Project project = pStore.selectOneByNo(sqlSession, projectNo);
+		return project;
 	}
 
 	@Override
@@ -38,8 +50,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int updateProject(int projectNo) {
-		int result = pStore.updateProject(sqlSession, projectNo);
+	public int updateProject(Project project) {
+		int result = pStore.updateProject(sqlSession, project);
 		return result;
 	}
 
@@ -60,5 +72,6 @@ public class ProjectServiceImpl implements ProjectService{
 		int result = pStore.deleteBoard(sqlSession, boardNo);
 		return result;
 	}
+
 	
 }

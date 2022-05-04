@@ -4,7 +4,7 @@ import com.highfive.hirp.common.Search;
 
 public class SurveySearch {
 	private Search search;
-	private String surveyStatus;
+	private String surveyStatus; //진행중, 마감
 	private String emplId;
 	
 	public SurveySearch() {}

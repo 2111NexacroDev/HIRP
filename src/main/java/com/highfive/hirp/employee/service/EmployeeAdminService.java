@@ -9,9 +9,8 @@ public interface EmployeeAdminService {
 
 	public List<Employee> printAllEmployee();
 	public List<Employee> printAllRetiree();
-	public List<Employee> printSearchEmployee(DataSet search);
 	public List<Employee> printAllTempEmployee();
-	public Employee printEmployeeInfo();	
+	public Employee printEmployeeInfo(String emplId);	
 	public int modifyEmployeeInfo(Employee employee);
 	public int resignEmployee(int empNo);
 	public int modifyLevelEmployee(int empNo);

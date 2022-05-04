@@ -6,7 +6,7 @@
 <mapper namespace="EmployeeAdminMapper">
 	<resultMap type="Employee" id="emplResultMap">
 		<id property="emplId" column="EMPL_ID"/>
-		<result property="divisionCode" column="DIVISION_CODE"/>
+		<result property="deptCode" column="DEPT_CODE"/>
 		<result property="positionCode" column="POSITION_CODE"/>
 		<result property="emplPw" column="EMPL_PW"/>
 		<result property="emplName" column="EMPL_NAME"/>
@@ -28,6 +28,12 @@
 		<result property="profile" column="EMPL_PROFILE"/>
 	</resultMap>
 	<select id="selectAllEmployee" resultMap="emplResultMap">
-		SELECT * FROM EMPL_TBL
+		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
+	</select>
+	<select id="selectOneEmployee" resultMap="emplResultMap">
+		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
+	</select>
+	<select id="selectAllRetiree" resultMap="emplResultMap">
+		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
 </mapper>
