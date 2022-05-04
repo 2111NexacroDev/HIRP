@@ -5,8 +5,8 @@ import java.sql.Date;
 public class NoticeBoard {
 
 	private int noticeNo;
+	private String boardCode;
 	private String emplId;
-	private String boardType;
 	private String noticeTitle;
 	private String noticeContents;
 	private Date writeDate;
@@ -15,12 +15,12 @@ public class NoticeBoard {
 	
 	public NoticeBoard() {}
 
-	public NoticeBoard(int noticeNo, String emplId, String boardType, String noticeTitle, String noticeContents,
+	public NoticeBoard(int noticeNo, String boardCode, String emplId, String noticeTitle, String noticeContents,
 			Date writeDate, int noticeCount, String status) {
 		super();
 		this.noticeNo = noticeNo;
+		this.boardCode = boardCode;
 		this.emplId = emplId;
-		this.boardType = boardType;
 		this.noticeTitle = noticeTitle;
 		this.noticeContents = noticeContents;
 		this.writeDate = writeDate;
@@ -36,20 +36,20 @@ public class NoticeBoard {
 		this.noticeNo = noticeNo;
 	}
 
+	public String getBoardCode() {
+		return boardCode;
+	}
+
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
+	}
+
 	public String getEmplId() {
 		return emplId;
 	}
 
 	public void setEmplId(String emplId) {
 		this.emplId = emplId;
-	}
-
-	public String getBoardType() {
-		return boardType;
-	}
-
-	public void setBoardType(String boardType) {
-		this.boardType = boardType;
 	}
 
 	public String getNoticeTitle() {
@@ -94,11 +94,12 @@ public class NoticeBoard {
 
 	@Override
 	public String toString() {
-		return "NoticeBoard [noticeNo=" + noticeNo + ", emplId=" + emplId + ", boardType=" + boardType
+		return "NoticeBoard [noticeNo=" + noticeNo + ", boardCode=" + boardCode + ", emplId=" + emplId
 				+ ", noticeTitle=" + noticeTitle + ", noticeContents=" + noticeContents + ", writeDate=" + writeDate
 				+ ", noticeCount=" + noticeCount + ", status=" + status + "]";
 	}
 
+	
 	
 
 }

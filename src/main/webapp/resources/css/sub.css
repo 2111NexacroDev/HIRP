@@ -329,6 +329,43 @@ section[class^="todo--"] li {
     opacity: 1;
 }
 
+.modal--shcedule li {
+    display: flex;
+    align-items: center;
+    margin-top: 20px !important;
+}
+
+.modal--shcedule li:last-child {
+    align-items: start;
+}
+
+.modal--shcedule input[type="text"] {
+    width: calc(90% - 90px);
+    max-width: 360px;
+}
+
+.modal--shcedule .colors {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(90% - 90px);
+    max-width: 360px;
+    font-size: 0;
+}
+
+.modal--shcedule .colors span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.modal--shcedule textarea {
+    width: calc(100% - 90px);
+    padding: 10px;
+}
+
 /* 일정 관리 끝 */
 
 /* 공용품 예약/관리 */

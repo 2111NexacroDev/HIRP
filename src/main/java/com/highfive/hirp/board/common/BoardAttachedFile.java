@@ -3,7 +3,7 @@ package com.highfive.hirp.board.common;
 public class BoardAttachedFile {
 
 	private int fileNo;
-	private String boaradType;
+	private String boardCode;
 	private int boardNo;
 	private String fileName;
 	private String fileRename;
@@ -11,11 +11,11 @@ public class BoardAttachedFile {
 	
 	public BoardAttachedFile() {}
 
-	public BoardAttachedFile(int fileNo, String boaradType, int boardNo, String fileName, String fileRename,
+	public BoardAttachedFile(int fileNo, String boardCode, int boardNo, String fileName, String fileRename,
 			String filePath) {
 		super();
 		this.fileNo = fileNo;
-		this.boaradType = boaradType;
+		this.boardCode = boardCode;
 		this.boardNo = boardNo;
 		this.fileName = fileName;
 		this.fileRename = fileRename;
@@ -30,12 +30,12 @@ public class BoardAttachedFile {
 		this.fileNo = fileNo;
 	}
 
-	public String getBoaradType() {
-		return boaradType;
+	public String getBoardCode() {
+		return boardCode;
 	}
 
-	public void setBoaradType(String boaradType) {
-		this.boaradType = boaradType;
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
 	}
 
 	public int getBoardNo() {
@@ -72,9 +72,8 @@ public class BoardAttachedFile {
 
 	@Override
 	public String toString() {
-		return "BoardAttachedFile [fileNo=" + fileNo + ", boaradType=" + boaradType + ", boardNo=" + boardNo
+		return "BoardAttachedFile [fileNo=" + fileNo + ", boardCode=" + boardCode + ", boardNo=" + boardNo
 				+ ", fileName=" + fileName + ", fileRename=" + fileRename + ", filePath=" + filePath + "]";
 	}
-	
 	
 }

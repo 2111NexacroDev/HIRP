@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.Reply;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.common.PageInfo;
@@ -19,6 +20,10 @@ public interface NoticeBoardStore {
 	public List<NoticeBoard> selectSearchNotice(SqlSession sqlSession, Search search);
 	//공지사항 등록
 	public int insertNotice(SqlSession sqlSession, NoticeBoard noticeboard);
+	//공지사항 번호 출력
+	public int selectNoticeNo(SqlSession sqlSession);
+	//첨부파일 저장
+	public int insertNoticeFile(SqlSession sqlSession, BoardAttachedFile boardFile);
 	//공지사항 수정
 	public int updateNotice(SqlSession sqlSession, NoticeBoard noticeboard);
 	//공지사항 삭제

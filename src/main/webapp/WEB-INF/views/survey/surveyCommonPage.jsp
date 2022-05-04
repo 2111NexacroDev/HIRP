@@ -6,6 +6,7 @@
 
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+<script src="https://kit.fontawesome.com/08c05a1f0f.js" crossorigin="anonymous"></script> <!-- fontawesome -->
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	<!-- 설문조사 좌측 서브 메뉴 -->
@@ -14,7 +15,7 @@
             <h1>
                 설문조사
             </h1>
-            <a class="btn--function" href="#">설문 작성</a>
+            <a class="btn--function" href="/survey/writeInfo.hirp">설문 작성</a>
 			
 			<!-- common.css에서 #snb>ul.no-icon>li>a:before -->
             <ul class="no-icon">

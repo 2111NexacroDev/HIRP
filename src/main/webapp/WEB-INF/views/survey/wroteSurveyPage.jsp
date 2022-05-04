@@ -35,39 +35,62 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        	<td>3</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<button class="ongoing" type="button">진행중</button>
-								<!-- <button class="finished" type="button">마감</button> -->
-                            </td>
-                            <td>설문제목1</td>
-                            <td>2022-04-11~2022-04-12</td>
-                            <td>0/77(0.00%)</td>
-                        </tr>
-                        <tr>
-                        	<td>2</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<button class="ongoing" type="button">진행중</button>
-								<!-- <button class="finished" type="button">마감</button> -->
-                            </td>
-                            <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td>
-                            <td>2022-05-01~2022-05-12</td>
-                            <td>3/4(75.00%)</td>
-                        </tr>
-                        <tr>
-                        	<td>1</td>
-                            <td>
-                            	<!-- 버튼은 둘 중 하나만 출력 -->
-								<!-- <button class="ongoing" type="button">진행중</button> -->
-								<button class="finished" type="button">마감</button>
-                            </td>
-                            <td>설문제목3</td>
-                            <td>2022-04-11~2022-04-12</td>
-                            <td>1/26(3.85%)</td>
-                        </tr>
+                    	<!-- 위에서부터 1~로 번호 출력하기 -->
+<%--                   		<c:set var="row_num" value="0"/> --%>
+                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
+                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+                    	<c:forEach items="${sList }" var="survey">
+<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
+							<c:set var="row_num" value="${row_num-1 }"/>
+                    		<tr>
+	                        	<td><c:out value="${row_num }"/> </td>
+	                            <td>
+	                            	<!-- 버튼은 둘 중 하나만 출력 -->
+	                            	<c:if test="${survey.surveyStatus eq 'C'}">
+	                            		<button class="ongoing" type="button">진행중</button>
+	                            	</c:if>
+	                            	<c:if test="${survey.surveyStatus eq 'F'}">
+	                            		<button class="finished" type="button">마감</button>
+	                            	</c:if>
+	                            </td>
+	                            <td>${survey.surveyTitle }</td>
+	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
+	                            <td>0/77(0.00%)</td>
+	                        </tr>
+                    	</c:forEach>
+<!--                         <tr> -->
+<!--                         	<td>3</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="ongoing" type="button">진행중</button> -->
+<!-- 								<button class="finished" type="button">마감</button> -->
+<!--                             </td> -->
+<!--                             <td>설문제목1</td> -->
+<!--                             <td>2022-04-11~2022-04-12</td> -->
+<!--                             <td>0/77(0.00%)</td> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                         	<td>2</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="ongoing" type="button">진행중</button> -->
+<!-- 								<button class="finished" type="button">마감</button> -->
+<!--                             </td> -->
+<!--                             <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td> -->
+<!--                             <td>2022-05-01~2022-05-12</td> -->
+<!--                             <td>3/4(75.00%)</td> -->
+<!--                         </tr> -->
+<!--                         <tr> -->
+<!--                         	<td>1</td> -->
+<!--                             <td> -->
+<!--                             	버튼은 둘 중 하나만 출력 -->
+<!-- 								<button class="ongoing" type="button">진행중</button> -->
+<!-- 								<button class="finished" type="button">마감</button> -->
+<!--                             </td> -->
+<!--                             <td>설문제목3</td> -->
+<!--                             <td>2022-04-11~2022-04-12</td> -->
+<!--                             <td>1/26(3.85%)</td> -->
+<!--                         </tr> -->
                     </tbody>
                 </table>
 	   		 </div>

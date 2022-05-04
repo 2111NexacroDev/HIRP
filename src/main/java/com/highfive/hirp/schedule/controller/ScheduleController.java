@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +24,20 @@ public class ScheduleController {
 	private ScheduleService sService;
 	
 	// 일정 조회
-	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET)
+	@DateTimeFormat(iso=ISO.DATE)
+	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public ModelAndView scheduleListView(ModelAndView mv) {
-		//List<Schedule> sList = sService.printAllSchedule();
-		mv.setViewName("schedule/scheduleList");
+		try {
+			List<Schedule> sList = sService.printAllSchedule();
+			if(!sList.isEmpty()) {
+				mv.addObject("sList", sList);
+				mv.setViewName("schedule/scheduleList");			
+			} else {
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.setViewName("schedule/scheduleList");
+		}
 		return mv;
 	}
 	

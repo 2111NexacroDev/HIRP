@@ -15,7 +15,7 @@
             <section class="section--modal">
                 <div class="bg-black"></div>
                 <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-                <div class="section--modal__conts">
+                <div class="section--modal__conts modal--shcedule">
                     <button class="btn--close"></button>
                     <h3>일정 등록</h3>
 
@@ -23,11 +23,47 @@
                         <li>
                             <label class="mr-20" for="">일정명</label><input type="text" name="">
                         </li>
-                        <li>
+                        <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
+                            <div class="colors">
+                                <span style="background-color: #f3cccc;"></span>
+                                <span style="background-color: #f5c2a9;"></span>
+                                <span style="background-color: #f5f4a9;"></span>
+                                <span style="background-color: #d0de41;"></span>
+                                <span style="background-color: #89c64d;"></span>
+                                <span style="background-color: #cde7c9;"></span>
+                                <span style="background-color: #8fd0cf;"></span>
+                                <span style="background-color: #c6b7cf;"></span>
+
+                            </div>
                         </li>
                         <li>
-                            <label class="mr-20" for="">일시</label><input type="date" name="">
+                            <label class="mr-20" for="">일시</label><input type="datetime-local"
+                                name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="datetime-local"
+                                name="scheduleEndDate">
+                        </li>
+                        <li>
+                            <label class="mr-20" for="">일정구분</label>
+                            <div class="fz-0">
+                                <input id="valueA" name="category" type="radio" value="" checked>
+                                <label class="mr-20" for="valueA">개인일정</label>
+                                <input id="valueB" name="category" type="radio" value="">
+                                <label class="mr-20" for="valueB">부서일정</label>
+                                <input id="valueC" name="category" type="radio" value="">
+                                <label for="valueC">전사일정</label>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="mr-20" for="">장소</label><input type="text" name="schedulePlace">
+                        </li>
+                        <li>
+                            <label class="mr-20" for="">내용</label>
+                            <textarea name="" id="" cols="20" rows="4" placeholder="상세내용을 입력하세요."></textarea>
+                        </li>
+                        <li>
+                            <label class="mr-20" for="">알림여부</label>
+                            <input id="scheduleAlarm" type="checkbox">
+                            <label for="scheduleAlarm">일정 전날 알림</label>
                         </li>
                     </ul>
 
@@ -56,7 +92,7 @@
     </div>
 
     <script>
-        $(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
