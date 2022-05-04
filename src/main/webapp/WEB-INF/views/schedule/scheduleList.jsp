@@ -45,10 +45,12 @@
                         <li>
                             <label class="mr-20" for="">일정구분</label>
                             <div class="fz-0">
-                                <input id="valueA" name="category" type="radio" value="">
-                                <label class="mr-20" for="valueA">부서일정</label>
-                                <input id="valueB" name="category" type="radio" value="" checked>
-                                <label for="valueB">개인일정</label>
+                                <input id="valueA" name="category" type="radio" value="" checked>
+                                <label class="mr-20" for="valueA">개인일정</label>
+                                <input id="valueB" name="category" type="radio" value="">
+                                <label class="mr-20" for="valueB">부서일정</label>
+                                <input id="valueC" name="category" type="radio" value="">
+                                <label for="valueC">전사일정</label>
                             </div>
                         </li>
                         <li>
