@@ -40,8 +40,8 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 	}
 	
 	@Override
-	public int selectNoticeNo(SqlSession sqlSession, NoticeBoard noticeboard) {
-		int noticeNo = sqlSession.selectOne("NoticeBoardMapper.selectNoticeNo", noticeboard);
+	public int selectNoticeNo(SqlSession sqlSession) {
+		int noticeNo = sqlSession.selectOne("NoticeBoardMapper.selectNoticeNo");
 		return noticeNo;
 	}
 

@@ -21,7 +21,7 @@ public interface NoticeBoardStore {
 	//공지사항 등록
 	public int insertNotice(SqlSession sqlSession, NoticeBoard noticeboard);
 	//공지사항 번호 출력
-	public int selectNoticeNo(SqlSession sqlSession, NoticeBoard noticeboard);
+	public int selectNoticeNo(SqlSession sqlSession);
 	//첨부파일 저장
 	public int insertNoticeFile(SqlSession sqlSession, BoardAttachedFile boardFile);
 	//공지사항 수정

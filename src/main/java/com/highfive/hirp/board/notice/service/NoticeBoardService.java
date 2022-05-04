@@ -21,7 +21,7 @@ public interface NoticeBoardService {
 	//공지글 등록
 	public int registerNotice(NoticeBoard noticeboard);
 	//공지번호 조회
-	public int printNoticeNo(NoticeBoard noticeboard);
+	public int printNoticeNo();
 	//첨부파일 저장
 	public int registerNoticeFile(BoardAttachedFile boardFile);
 	

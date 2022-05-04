@@ -50,8 +50,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	}
 
 	@Override
-	public int printNoticeNo(NoticeBoard noticeboard) {
-		int noticeNo = nStore.selectNoticeNo(sqlSession,noticeboard);
+	public int printNoticeNo() {
+		int noticeNo = nStore.selectNoticeNo(sqlSession);
 		return noticeNo;
 	}
 	

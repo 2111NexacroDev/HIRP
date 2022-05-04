@@ -18,8 +18,8 @@
 <insert id="insertNotice">
 	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,#{boardCode},'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
 </insert>
-<select id="selectNoticeNo" resultType="int">
-	SELECT NOTICE_NO FROM BOARD_NOTICE_TBL WHERE BOARD_CODE = #{boardCode} AND EMPL_ID = 'khuser01'AND NOTICE_TITLE = #{noticeTitle} AND NOTICE_CONTENTS = #{noticeContents}
+<select id="selectNoticeNo" resultType="_int">
+	SELECT NOTICE_NO FROM(SELECT NOTICE_NO, RANK()OVER(ORDER BY NOTICE_WRITE_DATE DESC )RANK_NUM FROM BOARD_NOTICE_TBL)WHERE RANK_NUM = 1
 </select>
 <insert id="insertNoticeFile">
 	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
