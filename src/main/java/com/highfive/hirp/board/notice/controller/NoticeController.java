@@ -51,7 +51,7 @@ public class NoticeController {
 	}
 
 	// 공지사항 전체 리스트 조회
-	@RequestMapping(value = "notice/list.hirp", method = RequestMethod.GET)
+	@RequestMapping(value = "/notice/list.hirp", method = RequestMethod.GET)
 	public ModelAndView noticeListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = nService.getListCount();
@@ -60,7 +60,7 @@ public class NoticeController {
 		if (!nList.isEmpty()) {
 			mv.addObject("nList", nList);
 			mv.addObject("pi", pi);
-			mv.setViewName("notice/noticeList");
+			mv.setViewName("board/boardListView");
 		} else {
 			mv.addObject("msg", "공지게시판 조회 실패");
 			mv.setViewName("common/errorPage");
@@ -83,16 +83,21 @@ public class NoticeController {
 	}
 
 	// 공지사항 검색 리스트 조회
-	@RequestMapping(value = "notice/searchList.hirp", method = RequestMethod.GET)
+	@RequestMapping(value = "/notice/searchList.hirp", method = RequestMethod.GET)
 	public ModelAndView noticeSearchList(ModelAndView mv, @ModelAttribute Search search) {
-		List<NoticeBoard> nList = nService.printSearchNotice(search);
-		if (!nList.isEmpty()) {
-			mv.addObject("nList", nList);
-			mv.setViewName("notice/noticeSearchList");
+	try {
+		List<NoticeBoard> searchList = nService.printSearchNotice(search);
+		if (!searchList.isEmpty()) {
+			mv.addObject("nList", searchList);
+			mv.setViewName("board/boardListView");
 		} else {
 			mv.addObject("msg", "검색조회 실패");
 			mv.setViewName("common/errorPage");
 		}
+	}catch(Exception e) {
+		mv.addObject("msg",e.toString());
+		mv.setViewName("common/errorPage");
+	}
 		return mv;
 	}
 
