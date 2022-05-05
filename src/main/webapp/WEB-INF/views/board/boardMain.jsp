@@ -16,7 +16,7 @@
                 <li>
                     <a href="">전사게시판</a>
                     <ul>
-                        <li><a href="#">공지게시판</a></li>
+                        <li><a href="/notice/list.hirp">공지게시판</a></li>
                         <li><a href="#">자유게시판</a></li>
                         <li><a href="#">익명게시판</a></li>
                     </ul>
