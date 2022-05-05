@@ -24,7 +24,7 @@
 		<label>생년월일</label><br>
 		<input name="birthday" class="mt-20" type="date"><br>
 		
-		<button class="finished mt-20" type="button" onclick="location.href='/employee/findPwdView2.hirp'";>다음</button>
+		<button class="finished mt-20" type="submit">다음</button>
 	</form>
 </body>
 </html>
