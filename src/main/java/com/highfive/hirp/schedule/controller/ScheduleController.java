@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.common.Search;
@@ -27,21 +28,23 @@ public class ScheduleController {
 	@DateTimeFormat(iso=ISO.DATE)
 	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public ModelAndView scheduleListView(ModelAndView mv) {
-		try {
-			List<Schedule> sList = sService.printAllSchedule();
-			if(!sList.isEmpty()) {
-				mv.addObject("sList", sList);
-				mv.setViewName("schedule/scheduleList");			
-			} else {
-				mv.setViewName("common/errorPage");
-			}
-		} catch(Exception e) {
-			mv.setViewName("schedule/scheduleList");
-		}
+		mv.setViewName("schedule/scheduleList");
+//		try {
+//			List<Schedule> sList = sService.printAllSchedule();
+//			if(!sList.isEmpty()) {
+//				mv.addObject("sList", sList);
+//				mv.setViewName("schedule/scheduleList");			
+//			} else {
+//				mv.setViewName("common/errorPage");
+//			}
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			mv.setViewName("schedule/scheduleList");
+//		}
 		return mv;
 	}
 	
-	// 일정 검색
+	// 일정 검색(자바스크립트로 대체 고려중)
 	public ModelAndView scheduleSearchList(ModelAndView mv
 			,@ModelAttribute Search search) {
 		List<Schedule> searchList = sService.printSearchSchedule(search);
@@ -49,10 +52,23 @@ public class ScheduleController {
 	}	
 	
 	// 일정 등록
+	@ResponseBody
+	@RequestMapping(value="/schedule/write.hirp", method=RequestMethod.POST)
 	public ModelAndView scheduleRegister(ModelAndView mv
 			,@ModelAttribute Schedule schedule
 			,HttpServletRequest request) {
-		int result = sService.registerSchedule(schedule);
+		try {
+			schedule.setEmplId("tempId");
+			int result = sService.registerSchedule(schedule);
+			if(result > 0) {
+				mv.setViewName("schedule/scheduleList");
+			} else {
+				mv.setViewName("common/errorPage");
+			}			
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
