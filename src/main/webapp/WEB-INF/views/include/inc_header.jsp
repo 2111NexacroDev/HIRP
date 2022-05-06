@@ -11,7 +11,7 @@
     <nav>
         <ul>
             <li><a href="/">홈</a></li>
-            <li><a href="#">메일</a></li>
+            <li><a href="/mail/list.hirp">메일</a></li>
             <li><a href="/board/main.hirp">게시판</a></li>
             <li><a href="/todo/list.hirp">개인업무관리</a></li>
             <li><a href="/project/list.hirp">프로젝트관리</a></li>

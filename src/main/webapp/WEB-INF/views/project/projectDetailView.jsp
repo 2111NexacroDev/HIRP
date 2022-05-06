@@ -328,22 +328,24 @@
 			}
 		}
 		
-		getBoardList();
-		$("#bSubmit").on("click", function() {
-			var refProjectNo = "${project.projectNo}";
-			var pManager = $("#pManager").val();
-			var bContents = $("#bContents").val();
-			var bStatus = $("#bStatus").val();
-			$.ajax({
-				url : "/project/boardAdd.hirp",
-				type : "post",
-				data : {},
-				success : function(data) {
-					getBoardList();
-				},
-				error : function() {
-					alert("ajax 실패!");
-				}
+		$(document).ready(function() {
+			getBoardList();
+			$("#bSubmit").on("click", function() {
+				var pNo = "${project.projectNo}";
+				var pManager = $("#pManager").val();
+				var bContents = $("#bContents").val();
+				var bStatus = $("#bStatus").val();
+				$.ajax({
+					url : "/project/boardAdd.hirp",
+					type : "post",
+					data : {"pNo" : pNo, "pManager" : pManager, "bContents" : bContents, "bStatus" : bStatus},
+					success : function(data) {
+						location.href="/project/detail.hirp";
+					},
+					error : function() {
+						alert("ajax 실패!");
+					}
+				});
 			});
 		});
 

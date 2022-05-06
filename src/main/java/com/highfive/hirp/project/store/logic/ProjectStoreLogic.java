@@ -61,8 +61,8 @@ public class ProjectStoreLogic implements ProjectStore{
 	}
 
 	@Override
-	public int insertBoard(SqlSession sqlSession, Board board) {
-		int result = sqlSession.insert("ProjectMapper.insertBoard", board);
+	public int insertBoard(SqlSession sqlSession, Project project) {
+		int result = sqlSession.insert("ProjectMapper.insertBoard", project);
 		return result;
 	}
 

@@ -6,16 +6,18 @@ public class MailFile {
 	private String fileName;
 	private String fileExtension;
 	private String fileReName;
+	private String filePath;
 	
 	public MailFile() {}
 
-	public MailFile(int fileNo, int mailNo, String fileName, String fileExtension, String fileReName) {
+	public MailFile(int fileNo, int mailNo, String fileName, String fileExtension, String fileReName, String filePath) {
 		super();
 		this.fileNo = fileNo;
 		this.mailNo = mailNo;
 		this.fileName = fileName;
 		this.fileExtension = fileExtension;
 		this.fileReName = fileReName;
+		this.filePath = filePath;
 	}
 
 	public int getFileNo() {
@@ -58,10 +60,18 @@ public class MailFile {
 		this.fileReName = fileReName;
 	}
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	@Override
 	public String toString() {
 		return "MailFile [fileNo=" + fileNo + ", mailNo=" + mailNo + ", fileName=" + fileName + ", fileExtension="
-				+ fileExtension + ", fileReName=" + fileReName + "]";
+				+ fileExtension + ", fileReName=" + fileReName + ", filePath=" + filePath + "]";
 	}
-	
+
 }
