@@ -5,30 +5,37 @@ import java.sql.Date;
 public class Mail {
 	private int mailNo;
 	private String mailSender;
-	private String mailRecpient;
-	private String mailReferrer;
 	private String mailTitle;
 	private String mailContents;
 	private Date mailDate;
 	private String importantMail;
 	private String temporaryStorage;
 	private String mailWasteBasket;
+	private String mailRecipient;
+	private String mailReferrer;
+	private String fileName;
+	private String fileReName;
+	private String filePath;
 	
 	public Mail() {}
 
-	public Mail(int mailNo, String mailSender, String mailRecpient, String mailReferrer, String mailTitle,
-			String mailContents, Date mailDate, String importantMail, String temporaryStorage, String mailWasteBasket) {
+	public Mail(int mailNo, String mailSender, String mailTitle, String mailContents, Date mailDate,
+			String importantMail, String temporaryStorage, String mailWasteBasket, String mailRecipient,
+			String mailReferrer, String fileName, String fileReName, String filePath) {
 		super();
 		this.mailNo = mailNo;
 		this.mailSender = mailSender;
-		this.mailRecpient = mailRecpient;
-		this.mailReferrer = mailReferrer;
 		this.mailTitle = mailTitle;
 		this.mailContents = mailContents;
 		this.mailDate = mailDate;
 		this.importantMail = importantMail;
 		this.temporaryStorage = temporaryStorage;
 		this.mailWasteBasket = mailWasteBasket;
+		this.mailRecipient = mailRecipient;
+		this.mailReferrer = mailReferrer;
+		this.fileName = fileName;
+		this.fileReName = fileReName;
+		this.filePath = filePath;
 	}
 
 	public int getMailNo() {
@@ -45,22 +52,6 @@ public class Mail {
 
 	public void setMailSender(String mailSender) {
 		this.mailSender = mailSender;
-	}
-
-	public String getMailRecpient() {
-		return mailRecpient;
-	}
-
-	public void setMailRecpient(String mailRecpient) {
-		this.mailRecpient = mailRecpient;
-	}
-
-	public String getMailReferrer() {
-		return mailReferrer;
-	}
-
-	public void setMailReferrer(String mailReferrer) {
-		this.mailReferrer = mailReferrer;
 	}
 
 	public String getMailTitle() {
@@ -111,12 +102,53 @@ public class Mail {
 		this.mailWasteBasket = mailWasteBasket;
 	}
 
+	public String getMailRecipient() {
+		return mailRecipient;
+	}
+
+	public void setMailRecipient(String mailRecipient) {
+		this.mailRecipient = mailRecipient;
+	}
+
+	public String getMailReferrer() {
+		return mailReferrer;
+	}
+
+	public void setMailReferrer(String mailReferrer) {
+		this.mailReferrer = mailReferrer;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileReName() {
+		return fileReName;
+	}
+
+	public void setFileReName(String fileReName) {
+		this.fileReName = fileReName;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	@Override
 	public String toString() {
-		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailRecpient=" + mailRecpient
-				+ ", mailReferrer=" + mailReferrer + ", mailTitle=" + mailTitle + ", mailContents=" + mailContents
-				+ ", mailDate=" + mailDate + ", importantMail=" + importantMail + ", temporaryStorage="
-				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + "]";
+		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailTitle=" + mailTitle + ", mailContents="
+				+ mailContents + ", mailDate=" + mailDate + ", importantMail=" + importantMail + ", temporaryStorage="
+				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", mailRecipient=" + mailRecipient
+				+ ", mailReferrer=" + mailReferrer + ", fileName=" + fileName + ", fileReName=" + fileReName
+				+ ", filePath=" + filePath + "]";
 	}
-	
+
 }

@@ -8,16 +8,21 @@ public class Project {
 	private Date startDate;
 	private Date endDate;
 	private String projectManager;
+	private String boardContents;
+	private String boardStatus;
 	
 	public Project() {}
 
-	public Project(int projectNo, String projectName, Date startDate, Date endDate, String projectManager) {
+	public Project(int projectNo, String projectName, Date startDate, Date endDate, String projectManager,
+			String boardContents, String boardStatus) {
 		super();
 		this.projectNo = projectNo;
 		this.projectName = projectName;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.projectManager = projectManager;
+		this.boardContents = boardContents;
+		this.boardStatus = boardStatus;
 	}
 
 	public int getProjectNo() {
@@ -60,10 +65,27 @@ public class Project {
 		this.projectManager = projectManager;
 	}
 
+	public String getBoardContents() {
+		return boardContents;
+	}
+
+	public void setBoardContents(String boardContents) {
+		this.boardContents = boardContents;
+	}
+
+	public String getBoardStatus() {
+		return boardStatus;
+	}
+
+	public void setBoardStatus(String boardStatus) {
+		this.boardStatus = boardStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [projectNo=" + projectNo + ", projectName=" + projectName + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", projectManager=" + projectManager + "]";
+				+ ", endDate=" + endDate + ", projectManager=" + projectManager + ", boardContents=" + boardContents
+				+ ", boardStatus=" + boardStatus + "]";
 	}
-	
+
 }

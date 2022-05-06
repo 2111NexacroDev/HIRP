@@ -62,8 +62,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public int registerBoard(Board board) {
-		int result = pStore.insertBoard(sqlSession, board);
+	public int registerBoard(Project project) {
+		int result = pStore.insertBoard(sqlSession, project);
 		return result;
 	}
 

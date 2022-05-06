@@ -26,6 +26,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
 		<!-- Nexacro lib -->
 		<dependency>
 			<groupId>com.nexacro.uiadapter17.spring</groupId>
