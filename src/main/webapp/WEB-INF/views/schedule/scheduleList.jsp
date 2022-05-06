@@ -15,8 +15,9 @@
             <section class="section--modal">
                 <div class="bg-black"></div>
                 <form class="section--modal__conts modal--shcedule" action="/schedule/write.hirp" method="post"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" style="width:90%; max-width:600px;">
                     <input type="hidden" name="scheduleColor">
+                    <input type="hidden" name="scheduleAlarm" val="N">
                     <button class="btn--close"></button>
                     <h3>일정 등록</h3>
 
@@ -27,7 +28,7 @@
                         <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
                             <div class="colors">
-                                <span style="background-color: #f3cccc;"></span>
+                                <span class="selected" style="background-color: #f3cccc;"></span>
                                 <span style="background-color: #f5c2a9;"></span>
                                 <span style="background-color: #f5f4a9;"></span>
                                 <span style="background-color: #d0de41;"></span>
@@ -39,8 +40,8 @@
                             </div>
                         </li>
                         <li>
-                            <label class="mr-20" for="">일시</label><input type="date"
-                                name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="date"
+                            <label class="mr-20" for="">일시</label><input type="datetime-local"
+                                name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="datetime-local"
                                 name="scheduleEndDate">
                         </li>
                         <li>
@@ -64,8 +65,8 @@
                         </li>
                         <li>
                             <label class="mr-20" for="">알림여부</label>
-                            <input id="scheduleAlarm" type="checkbox">
-                            <label for="scheduleAlarm">일정 전날 알림</label>
+                            <input id="scheduleAlarm" type="checkbox" onclick="getAlarm(this);">
+                            <label for="scheduleAlarm" onclick="getAlarm(this.previousSibling);">일정 전날 알림</label>
                         </li>
                     </ul>
 
@@ -90,6 +91,13 @@
             <div id="scheduleList" class="subConts padding-0">
                 <div id="calendar"></div>
             </div>
+
+            <pre>
+                ※ 일정 추가 관련 필요한 스크립트
+                일시 - 시간 시작일과 마감일이 같거나 시작일이 빨라야함.
+                => 마감일이 빠를 시 경고창 띄우기
+                일정구분 전사일정 선택 시 다른 컨트롤러로 submit.
+            </pre>
         </article>
     </div>
 

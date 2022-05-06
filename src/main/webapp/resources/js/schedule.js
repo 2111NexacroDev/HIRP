@@ -1,9 +1,6 @@
 function getStyle(elem, cssprop, cssprop2) {
-    //IE
     if (elem.currentStyle) {
         return elem.currentStyle[cssprop];
-
-        //다른 브라우저    
     } else if (document.defaultView && document.defaultView.getComputedStyle) {
         return document.defaultView.getComputedStyle(elem, null).getPropertyValue(cssprop2);
 
@@ -12,18 +9,34 @@ function getStyle(elem, cssprop, cssprop2) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    let selectedColor = '#f3cccc';
+function getAlarm(status) {
+    if (status.checked == true) {
+        document.getElementsByName('scheduleAlarm')[0].value = 1;
+    } else {
+        document.getElementsByName('scheduleAlarm')[0].value = 0;
+    };
+}
 
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* 컬러 선택 관련 스크립트 */
+    let selectedColor = '#f3cccc';
     let colors = document.querySelectorAll('.colors > span');
 
     colors.forEach((el, index) => {
         el.onclick = () => {
             selectedColor = getStyle(colors[index], "backgroundColor", "background-color");
+            // 전체 컬러에서 selected 클래스 제거
+            for (let i = 0; i < colors.length; i++) {
+                colors[i].className = '';
+            }
+            // 클릭한 컬러에 selected 클래스 추가
+            colors[index].className = 'selected';
             document.getElementsByName('scheduleColor')[0].value = selectedColor;
         }
     });
 
+    /* 달력 그림 */
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
