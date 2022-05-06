@@ -60,7 +60,8 @@ public class ScheduleController {
 		try {
 			schedule.setEmplId("tempId");
 			int result = sService.registerSchedule(schedule);
-			if(result > 0) {
+			int result2 = sService.registerScheduleToSub(schedule);
+			if(result > 0 && result2 > 0) {
 				mv.setViewName("schedule/scheduleList");
 			} else {
 				mv.setViewName("common/errorPage");

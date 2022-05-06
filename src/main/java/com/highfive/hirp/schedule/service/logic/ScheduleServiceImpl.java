@@ -36,6 +36,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 		int result = sStore.insertSchedule(sqlSession, schedule);
 		return result;
 	}
+	
+	@Override
+	public int registerScheduleToSub(Schedule schedule) {
+		int result = sStore.insertScheduleToSub(sqlSession, schedule);
+		return result;
+	}
 
 	@Override
 	public int modifySchedule(Schedule schedule) {

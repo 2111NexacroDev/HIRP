@@ -5,7 +5,9 @@
 
 <mapper namespace="ScheduleMapper">
 	<insert id="insertSchedule">
-		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory},#{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
+		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory}, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
 	</insert>
-	<!-- INSERT INTO SCHEDULE_EMPL_TBL VALUES(SCHEDULE_SEQ.CURRVAL, #{emplId}, #{scheduleCategory}) -->
+	<insert id="insertScheduleToSub">
+		INSERT INTO SCHEDULE_EMPL_TBL VALUES(SCHEDULE_SEQ.CURRVAL, #{emplId}, #{scheduleCategory})
+	</insert>
 </mapper>
