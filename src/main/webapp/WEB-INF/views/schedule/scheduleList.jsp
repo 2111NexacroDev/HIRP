@@ -14,14 +14,15 @@
             <button class="btn--function" type="button" onclick="openModal(this);">일정등록</button>
             <section class="section--modal">
                 <div class="bg-black"></div>
-                <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-                <div class="section--modal__conts modal--shcedule">
+                <form class="section--modal__conts modal--shcedule" action="/schedule/write.hirp" method="post"
+                    enctype="multipart/form-data">
+                    <input type="hidden" name="scheduleColor">
                     <button class="btn--close"></button>
                     <h3>일정 등록</h3>
 
                     <ul>
                         <li>
-                            <label class="mr-20" for="">일정명</label><input type="text" name="">
+                            <label class="mr-20" for="">일정명</label><input type="text" name="scheduleTitle">
                         </li>
                         <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
@@ -38,18 +39,18 @@
                             </div>
                         </li>
                         <li>
-                            <label class="mr-20" for="">일시</label><input type="datetime-local"
-                                name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="datetime-local"
+                            <label class="mr-20" for="">일시</label><input type="date"
+                                name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="date"
                                 name="scheduleEndDate">
                         </li>
                         <li>
                             <label class="mr-20" for="">일정구분</label>
                             <div class="fz-0">
-                                <input id="valueA" name="category" type="radio" value="" checked>
+                                <input id="valueA" name="scheduleCategory" type="radio" value="개인" checked>
                                 <label class="mr-20" for="valueA">개인일정</label>
-                                <input id="valueB" name="category" type="radio" value="">
+                                <input id="valueB" name="scheduleCategory" type="radio" value="부서">
                                 <label class="mr-20" for="valueB">부서일정</label>
-                                <input id="valueC" name="category" type="radio" value="">
+                                <input id="valueC" name="scheduleCategory" type="radio" value="전사">
                                 <label for="valueC">전사일정</label>
                             </div>
                         </li>
@@ -58,7 +59,8 @@
                         </li>
                         <li>
                             <label class="mr-20" for="">내용</label>
-                            <textarea name="" id="" cols="20" rows="4" placeholder="상세내용을 입력하세요."></textarea>
+                            <textarea name="scheduleConts" id="" cols="20" rows="4"
+                                placeholder="상세내용을 입력하세요."></textarea>
                         </li>
                         <li>
                             <label class="mr-20" for="">알림여부</label>
@@ -68,10 +70,10 @@
                     </ul>
 
                     <div class="btns-wrap mt-20 t-r">
-                        <button class="point" type="button">확인</button>
+                        <button class="point" type="submit">확인</button>
                         <button class="finished closeWindow" type="button">닫기</button>
                     </div>
-                </div>
+                </form>
             </section>
         </aside>
 
@@ -91,29 +93,7 @@
         </article>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                headerToolbar: {
-                    left: 'dayGridMonth,dayGridWeek,timeGrid,listWeek',
-                    center: 'prev,title,next,today',
-                    right: '',
-                },
-                buttonText: {
-                    today: '오늘',
-                    month: '월간',
-                    week: '주간',
-                    timeGrid: '일간',
-                    list: '목록'
-                },
-                initialView: 'dayGridMonth',
-                locale: 'ko',
-                views: {}
-            });
-            calendar.render();
-        });
-    </script>
+    <script src="../../../resources/js/schedule.js"></script>
 </body>
 
 </html>
