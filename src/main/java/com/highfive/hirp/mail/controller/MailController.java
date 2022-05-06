@@ -1,7 +1,21 @@
 package com.highfive.hirp.mail.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +39,113 @@ public class MailController {
 	@Autowired
 	private MailService mService;
 	
-	// 메일 작성 페이지로 이동
+	// 메일 작성 페이지 이동
+	@RequestMapping(value="/mail/writeView.hirp", method=RequestMethod.GET)
 	public ModelAndView showSend(ModelAndView mv) {
+		try {
+			mv.setViewName("mail/mailWriteForm");
+		}catch(Exception e) {
+			
+		}
 		return mv;
 	}
 	
 	// 메일작성 후 메일 전송할 때 실행되는 코드
+	@RequestMapping(value="/mail/send.hirp", method=RequestMethod.POST)
 	public ModelAndView doSend(ModelAndView mv
-			, @ModelAttribute Mail mail) {
+			, @ModelAttribute Mail mail
+			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			, HttpServletRequest request) {
+		String host = "smtp.naver.com";
+		final String user = "smartms95@naver.com";
+		final String password = "minsu0$@0";
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", host);
+		prop.put("mail.smtp.port", 587);
+		prop.put("mail.smtp.auth", "true");
+		
+		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+		
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			
+			// 수신자 메일주소
+			InternetAddress[] addArray = new InternetAddress[2];
+			addArray[0] = new InternetAddress("smartms95@naver.com");
+			addArray[1] = new InternetAddress("jangms124578@hirp.com");
+			
+			message.addRecipients(Message.RecipientType.TO, addArray);
+			
+			// Subject
+			message.setSubject(mail.getMailTitle());
+			
+			// Text
+			message.setText(mail.getMailContents());
+			
+			// Send the message
+			Transport.send(message);
+			
+			String mailRecipient = Arrays.toString(addArray);
+			mail.setMailSender(host);
+			mail.setMailTitle(message.getSubject());
+			mail.setMailRecipient(mailRecipient);
+			
+			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+				HashMap<String, String> fileMap = saveFile(uploadFile, request);
+				String filePath = fileMap.get("filePath");
+				String fileRename = fileMap.get("fileName");
+				if(filePath != null && !filePath.equals("")) {
+					mail.setFileName(uploadFile.getOriginalFilename());
+					mail.setFileReName(fileRename);
+					mail.setFilePath(filePath);
+				}
+			}
+			int result = mService.sendMail(mail);
+			if(result > 0) {
+				mv.setViewName("redirect:/mail/list.hirp");
+			}else {
+				mv.addObject("msg", "메일 보내기 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch(AddressException e) {
+			e.printStackTrace();
+		}catch(MessagingException e) {
+			e.printStackTrace();
+		}
 		return mv;
 	}
 	
-	// 받은메일함 조회
-	@RequestMapping(value="/mail/receivedList.hirp", method=RequestMethod.GET)
+	// 메일 첨부파일 저장
+	public HashMap<String, String> saveFile(MultipartFile file, HttpServletRequest request) {
+		String filePath = "";
+		HashMap<String, String> fileMap = new HashMap<String, String>();
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\nuploadFiles";
+		File folder = new File(savePath);
+		if(!folder.exists()) folder.mkdir();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originalFileName = file.getOriginalFilename();
+		String extensionName = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))+"."+extensionName;
+		filePath = folder + "\\" + renameFileName;
+		fileMap.put("filePath", filePath);
+		fileMap.put("fileName", renameFileName);
+		try {
+			file.transferTo(new File(filePath));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return fileMap;
+		
+	}
+	
+	// 메일함 조회
+	@RequestMapping(value="/mail/list.hirp", method=RequestMethod.GET)
 	public ModelAndView selectReceivedMailList(ModelAndView mv
 			, @RequestParam(value="page", required=false) Integer page) {
 		try {
@@ -45,13 +153,34 @@ public class MailController {
 			int totalCount = mService.getListCount();
 			PageInfo pi = Pagination.getPageInfo(currentPage, totalCount);
 			List<Mail> mList = mService.selectReceivedMail(pi);
+//					   mList = mService.selectSentMail();
+//					   mList = mService.selectTemporaryMail();
+//					   mList = mService.selectMyMail();
+//					   mList = mService.selectImportantMail();
+//					   mList = mService.selectWasteBasketMail();
 			if(!mList.isEmpty()) {
+//				if() { // 받은메일함
+//				}else if() { // 보낸메일함
+//					
+//				}else if() { // 임시보관함
+//					
+//				}else if() { // 내게쓴메일함
+//					
+//				}else if() { // 중요메일함
+//					
+//				}else if() { // 휴지통
+//					
+//				}
 				mv.addObject("mList", mList);
 				mv.addObject("pi", pi);
-				mv.setViewName("mail/mailReceivedList");
+				mv.setViewName("mail/mailList");
+			}else {
+				mv.addObject("msg", "메일 조회 실패");
+				mv.setViewName("common/errorPage");
 			}
 		}catch(Exception e) {
-			
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}

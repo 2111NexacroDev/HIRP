@@ -22,8 +22,8 @@ public class MailServiceImpl implements MailService{
 	
 	@Override
 	public int getListCount() {
-		int result = mStore.selectListCount(sqlSession);
-		return result;
+		int totalCount = mStore.selectListCount(sqlSession);
+		return totalCount;
 	}
 	
 	@Override

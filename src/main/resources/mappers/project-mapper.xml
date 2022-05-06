@@ -28,6 +28,10 @@
 		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
 	</insert>
 
+	<insert id="insertBoard">
+		INSERT INTO 
+	</insert>
+
 	<update id="updateProject" parameterType="Project">
 		UPDATE PROJECT_TBL SET PROJECT_NAME=#{projectName}, START_DATE=#{startDate}, END_DATE=#{endDate}, PROJECT_MANAGER=#{projectManager} WHERE PROJECT_NO=#{projectNo}
 	</update>
