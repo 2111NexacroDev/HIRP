@@ -7,7 +7,7 @@
 <body id="loginPage">
 	<form action="/employee/login.hirp" method="post" enctype="multipart/form-data">
 		<!-- post일 떄 꼭 써줘야함 enctype 인코딩 -->
-		<input name="emplId" type="text" placeholder="아이디를 입력해 주세요.">		
+		<input name="emplId" type="text" placeholder="아이디를 입력해 주세요." autocomplete="off">		
 		<input class="mt-10" name="emplPw" type="password" placeholder="비밀번호를 입력해 주세요.">
 
 		<div class="mt-10">

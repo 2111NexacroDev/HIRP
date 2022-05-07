@@ -361,6 +361,10 @@ section[class^="todo--"] li {
     cursor: pointer;
 }
 
+.modal--shcedule .colors span.selected {
+    border: 2px solid black;
+}
+
 .modal--shcedule textarea {
     width: calc(100% - 90px);
     padding: 10px;

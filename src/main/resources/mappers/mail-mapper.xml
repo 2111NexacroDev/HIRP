@@ -7,14 +7,17 @@
 	<resultMap type="Mail" id="MailResultMap">
 		<id property="mailNo" column="MAIL_NO"/>
 		<result property="mailSender" column="MAIL_SENDER"/>
-		<result property="mailRecpient" column="MAIL_RECPIENT"/>
-		<result property="mailReferrer" column="MAIL_REFERRER"/>
 		<result property="mailTitle" column="MAIL_TITLE"/>
 		<result property="mailContents" column="MAIL_CONTENTS"/>
 		<result property="mailDate" column="MAIL_DATE"/>
 		<result property="importantMail" column="IMPORTANT_MAIL"/>
 		<result property="temporaryStorage" column="TEMPORARY_STORAGE"/>
 		<result property="mailWasteBasket" column="MAIL_WASTEBASKET"/>
+		<result property="mailRecpient" column="MAIL_RECPIENT"/>
+		<result property="mailReferrer" column="MAIL_REFERRER"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileReName" column="FILE_RENAME"/>
+		<result property="filePath" column="FILE_PATH"/>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -25,4 +28,13 @@
 	<select id="selectReceivedMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL ORDER BY MAIL_NO DESC
 	</select>
+	
+	<!-- 메일 보내기 -->
+	<insert id="sendMail" parameterType="Mail">
+		INSERT ALL
+		MAIL_TBL VALUES(MAIL_NO.NEXTVAL, NULL, #{mailTitle}, NULL, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		RECIPIENT_TBL VALUES(RECIPIENT_NO.NEXTVAL, MAIL_NO.CURRVAL, #{mailRecipient})
+		REFERRER_TBL VALUES(REFERRER_NO.NEXTVAL, MAIL_NO.CURRVAL, #{mailReferrer})
+		MAIL_FILE_TBL VALUES(FILE_NO.NEXTVAL, MAIL_NO.CURRVAL, #{fileName}, NULL, #{fileReName}, #{filePath})
+	</insert>
 </mapper>

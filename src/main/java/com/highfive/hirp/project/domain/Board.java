@@ -5,11 +5,11 @@ public class Board {
 	private int projectNo;
 	private String emplName;
 	private String boardContents;
-	private int boardStatus;
+	private String boardStatus;
 	
 	public Board() {}
 
-	public Board(int boardNo, int projectNo, String emplName, String boardContents, int boardStatus) {
+	public Board(int boardNo, int projectNo, String emplName, String boardContents, String boardStatus) {
 		super();
 		this.boardNo = boardNo;
 		this.projectNo = projectNo;
@@ -50,11 +50,11 @@ public class Board {
 		this.boardContents = boardContents;
 	}
 
-	public int getBoardStatus() {
+	public String getBoardStatus() {
 		return boardStatus;
 	}
 
-	public void setBoardStatus(int boardStatus) {
+	public void setBoardStatus(String boardStatus) {
 		this.boardStatus = boardStatus;
 	}
 
@@ -63,5 +63,5 @@ public class Board {
 		return "Board [boardNo=" + boardNo + ", projectNo=" + projectNo + ", emplName=" + emplName + ", boardContents="
 				+ boardContents + ", boardStatus=" + boardStatus + "]";
 	}
-	
+
 }

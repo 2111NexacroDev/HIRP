@@ -25,30 +25,39 @@
                    <ul>
                        <li><a href="#">받은메일함</a></li>
                        <li><a href="#">보낸메일함</a></li>
-                       <li><a href="#">받은메일함</a></li>
-                       <li><a href="#">받은메일함</a></li>
-                       <li><a href="#">받은메일함</a></li>
-                       <li><a href="#">받은메일함</a></li>
+                       <li><a href="#">임시보관함</a></li>
+                       <li><a href="#">내게쓴메일함</a></li>
+                       <li><a href="#">중요메일함</a></li>
+                       <li><a href="#">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
                    </ul>
                </li>
             </ul>
+            
+            <a class="btn--function" href="#">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
+        	<form class="form--srch" action="">
+                <input type="text" name="" placeholder="통합검색">
+                <button type="submit"></button>
+            </form>
+            
         	<h1 class="basic-border-bottom">
 				받은메일함
             </h1>
+            <input id="check1" class="mt-20" type="checkbox">
+            <label for="check1"></label>
+            <button class="basic mt-20" type="button">답장</button>
+            <button class="basic mt-20" type="button">삭제</button>
+            <button class="basic mt-20" type="button">전달</button>
+            
             <div class="subConts">
 	        	<table class="table--basic mt-20" style="margin-top: 40px;">
 	                    <thead>
 	                        <tr>
 	                            <th>#</th>
-	                            <th>프로젝트명</th>
-	                            <th>시작일</th>
-	                            <th>종료일</th>
-	                            <th>담당자(ID)</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
@@ -59,9 +68,9 @@
 										<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 									</c:url>
 		                            <td><a href="${mDetail}">${mail.mailNo }</a></td>
-		                            <td>${ }</td>
-		                            <td>${ }</td>
-		                            <td>${ }</td>
+<%-- 		                            <td>${ }</td> --%>
+<%-- 		                            <td>${ }</td> --%>
+<%-- 		                            <td>${ }</td> --%>
 		                        </tr>
 	                        </c:forEach>
 	                    </tbody>
