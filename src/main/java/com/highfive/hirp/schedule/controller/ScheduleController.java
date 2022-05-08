@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,13 +27,15 @@ public class ScheduleController {
 	private ScheduleService sService;
 	
 	// 일정 조회
-	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET)
+	//, produces="application/json;charset=utf-8"
 	public ModelAndView scheduleListView(ModelAndView mv) {
 		try {
 			List<Schedule> sList = sService.printAllSchedule();
 			if(!sList.isEmpty()) {
-				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-				mv.addObject("sList", gson.toJson(sList));
+				//Gson gson = new Gson();
+				//mv.addObject("sList", gson.toJson(sList));
+				mv.addObject("sList", sList);
 				mv.setViewName("schedule/scheduleList");
 			} else {
 				mv.setViewName("schedule/scheduleList");
@@ -52,7 +55,6 @@ public class ScheduleController {
 	}	
 	
 	// 일정 등록
-	@ResponseBody
 	@RequestMapping(value="/schedule/write.hirp", method=RequestMethod.POST)
 	public ModelAndView scheduleRegister(ModelAndView mv
 			,@ModelAttribute Schedule schedule
@@ -64,7 +66,7 @@ public class ScheduleController {
 			int result = sService.registerSchedule(schedule);
 			int result2 = sService.registerScheduleToSub(schedule);
 			if(result > 0 && result2 > 0) {
-				mv.setViewName("schedule/scheduleList");
+				mv.setViewName("redirect:/schedule/list.hirp");
 			} else {
 				mv.setViewName("common/errorPage");
 			}			
