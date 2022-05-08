@@ -18,9 +18,8 @@
                     enctype="multipart/form-data" style="width:90%; max-width:600px;">
                     <input type="hidden" name="scheduleColor">
                     <input type="hidden" name="scheduleAlarm" val="N">
-                    <button class="btn--close"></button>
+                    <button class="btn--close" type="button"></button>
                     <h3>일정 등록</h3>
-
                     <ul>
                         <li>
                             <label class="mr-20" for="">일정명</label><input type="text" name="scheduleTitle">
@@ -36,7 +35,6 @@
                                 <span style="background-color: #cde7c9;"></span>
                                 <span style="background-color: #8fd0cf;"></span>
                                 <span style="background-color: #c6b7cf;"></span>
-
                             </div>
                         </li>
                         <li>
@@ -69,7 +67,6 @@
                             <label for="scheduleAlarm" onclick="getAlarm(this.previousSibling);">일정 전날 알림</label>
                         </li>
                     </ul>
-
                     <div class="btns-wrap mt-20 t-r">
                         <button class="point" type="submit">확인</button>
                         <button class="finished closeWindow" type="button">닫기</button>

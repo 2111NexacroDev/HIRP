@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="../../resources/css/main.css"><!-- 메인페이지 CSS -->
 <script src="../../resources/js/main.js"></script>
 
+<!-- 로그인 안했을 경우 -->
+<c:if test="${empty sessionScope }">
+	<script>location.href="/";</script>
+</c:if>
+
 <body class="bg--gray">
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 

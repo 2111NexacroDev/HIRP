@@ -5,12 +5,12 @@
 <html>
 <link rel="stylesheet" href="../../resources/css/employee.css">
 <!-- 세션 있을 때(로그인되어 있는 상태일 경우), 홈으로 이동 -->
-<c:if test="${not empty emplId }">
+<c:if test="${not empty sessionScope }">
 	<script>location.href="/home.hirp";</script>
 </c:if>
 <body id="loginPage">
 	<form action="/employee/login.hirp" method="post" enctype="multipart/form-data">
-		<!-- post일 떄 꼭 써줘야함 enctype 인코딩 -->
+		<!-- post일 떄 꼭 써줘야함 enctype -->
 		<input name="emplId" type="text" placeholder="아이디를 입력해 주세요." autocomplete="off">		
 		<input class="mt-10" name="emplPw" type="password" placeholder="비밀번호를 입력해 주세요.">
 
