@@ -3,6 +3,7 @@ package com.highfive.hirp.schedule.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,6 @@ public class ScheduleController {
 	// 일정 조회
 	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public ModelAndView scheduleListView(ModelAndView mv) {
-		mv.setViewName("schedule/scheduleList");
 		try {
 			List<Schedule> sList = sService.printAllSchedule();
 			if(!sList.isEmpty()) {
@@ -35,7 +35,7 @@ public class ScheduleController {
 				mv.addObject("sList", gson.toJson(sList));
 				mv.setViewName("schedule/scheduleList");
 			} else {
-				mv.setViewName("common/errorPage");
+				mv.setViewName("schedule/scheduleList");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,9 @@ public class ScheduleController {
 			,@ModelAttribute Schedule schedule
 			,HttpServletRequest request) {
 		try {
-			schedule.setEmplId("tempId");
+			HttpSession session = request.getSession();
+			String writer = (String) session.getAttribute("emplId");
+			schedule.setEmplId(writer);
 			int result = sService.registerSchedule(schedule);
 			int result2 = sService.registerScheduleToSub(schedule);
 			if(result > 0 && result2 > 0) {
