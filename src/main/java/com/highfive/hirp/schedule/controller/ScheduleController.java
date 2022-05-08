@@ -5,8 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.schedule.domain.Schedule;
 import com.highfive.hirp.schedule.service.ScheduleService;
@@ -25,22 +25,22 @@ public class ScheduleController {
 	private ScheduleService sService;
 	
 	// 일정 조회
-	@DateTimeFormat(iso=ISO.DATE)
 	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
 	public ModelAndView scheduleListView(ModelAndView mv) {
 		mv.setViewName("schedule/scheduleList");
-//		try {
-//			List<Schedule> sList = sService.printAllSchedule();
-//			if(!sList.isEmpty()) {
-//				mv.addObject("sList", sList);
-//				mv.setViewName("schedule/scheduleList");			
-//			} else {
-//				mv.setViewName("common/errorPage");
-//			}
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			mv.setViewName("schedule/scheduleList");
-//		}
+		try {
+			List<Schedule> sList = sService.printAllSchedule();
+			if(!sList.isEmpty()) {
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				mv.addObject("sList", gson.toJson(sList));
+				mv.setViewName("schedule/scheduleList");
+			} else {
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			mv.setViewName("schedule/scheduleList");
+		}
 		return mv;
 	}
 	
