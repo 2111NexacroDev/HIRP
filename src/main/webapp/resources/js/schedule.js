@@ -11,9 +11,9 @@ function getStyle(elem, cssprop, cssprop2) {
 
 function getAlarm(status) {
     if (status.checked == true) {
-        document.getElementsByName('scheduleAlarm')[0].value = 1;
+        document.getElementsByName('scheduleAlarm')[0].value = 'Y';
     } else {
-        document.getElementsByName('scheduleAlarm')[0].value = 0;
+        document.getElementsByName('scheduleAlarm')[0].value = 'N';
     };
 }
 
@@ -35,25 +35,4 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementsByName('scheduleColor')[0].value = selectedColor;
         }
     });
-
-    /* 달력 그림 */
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        headerToolbar: {
-            left: 'dayGridMonth,dayGridWeek,timeGrid,listWeek',
-            center: 'prev,title,next,today',
-            right: '',
-        },
-        buttonText: {
-            today: '오늘',
-            month: '월간',
-            week: '주간',
-            timeGrid: '일간',
-            list: '목록'
-        },
-        initialView: 'dayGridMonth',
-        locale: 'ko',
-        views: {}
-    });
-    calendar.render();
 });
