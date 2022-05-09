@@ -84,7 +84,7 @@ public class EmployeeController {
 				HttpSession session = request.getSession();
 				session.setAttribute("emplId", empLogin.getEmplId());
 				session.setAttribute("emplPw", empLogin.getEmplPw());
-				return "redirect:/index.jsp";
+				return "redirect:/home.hirp";
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");
 				return "common/errorPage";

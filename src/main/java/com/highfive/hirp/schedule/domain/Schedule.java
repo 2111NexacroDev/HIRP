@@ -6,22 +6,25 @@ public class Schedule {
 	private int scheduleNo;
 	private String emplId;
 	private String scheduleCategory;
+	private String scheduleTitle;
 	private String scheduleColor;
 	private String scheduleConts;
-	private Date scheduleStartDate;
-	private Date scheduleEndDate;
+	private String scheduleStartDate;
+	private String scheduleEndDate;
 	private String schedulePlace;
 	private String scheduleAlarm;
 
 	public Schedule() {
 	}
 
-	public Schedule(int scheduleNo, String emplId, String scheduleCategory, String scheduleColor, String scheduleConts,
-			Date scheduleStartDate, Date scheduleEndDate, String schedulePlace, String scheduleAlarm) {
+	public Schedule(int scheduleNo, String emplId, String scheduleCategory, String scheduleTitle, String scheduleColor,
+			String scheduleConts, String scheduleStartDate, String scheduleEndDate, String schedulePlace,
+			String scheduleAlarm) {
 		super();
 		this.scheduleNo = scheduleNo;
 		this.emplId = emplId;
 		this.scheduleCategory = scheduleCategory;
+		this.scheduleTitle = scheduleTitle;
 		this.scheduleColor = scheduleColor;
 		this.scheduleConts = scheduleConts;
 		this.scheduleStartDate = scheduleStartDate;
@@ -54,6 +57,14 @@ public class Schedule {
 		this.scheduleCategory = scheduleCategory;
 	}
 
+	public String getScheduleTitle() {
+		return scheduleTitle;
+	}
+
+	public void setScheduleTitle(String scheduleTitle) {
+		this.scheduleTitle = scheduleTitle;
+	}
+
 	public String getScheduleColor() {
 		return scheduleColor;
 	}
@@ -70,19 +81,19 @@ public class Schedule {
 		this.scheduleConts = scheduleConts;
 	}
 
-	public Date getScheduleStartDate() {
+	public String getScheduleStartDate() {
 		return scheduleStartDate;
 	}
 
-	public void setScheduleStartDate(Date scheduleStartDate) {
+	public void setScheduleStartDate(String scheduleStartDate) {
 		this.scheduleStartDate = scheduleStartDate;
 	}
 
-	public Date getScheduleEndDate() {
+	public String getScheduleEndDate() {
 		return scheduleEndDate;
 	}
 
-	public void setScheduleEndDate(Date scheduleEndDate) {
+	public void setScheduleEndDate(String scheduleEndDate) {
 		this.scheduleEndDate = scheduleEndDate;
 	}
 
@@ -105,8 +116,8 @@ public class Schedule {
 	@Override
 	public String toString() {
 		return "Schedule [scheduleNo=" + scheduleNo + ", emplId=" + emplId + ", scheduleCategory=" + scheduleCategory
-				+ ", scheduleColor=" + scheduleColor + ", scheduleConts=" + scheduleConts + ", scheduleStartDate="
-				+ scheduleStartDate + ", scheduleEndDate=" + scheduleEndDate + ", schedulePlace=" + schedulePlace
-				+ ", scheduleAlarm=" + scheduleAlarm + "]";
+				+ ", scheduleTitle=" + scheduleTitle + ", scheduleColor=" + scheduleColor + ", scheduleConts="
+				+ scheduleConts + ", scheduleStartDate=" + scheduleStartDate + ", scheduleEndDate=" + scheduleEndDate
+				+ ", schedulePlace=" + schedulePlace + ", scheduleAlarm=" + scheduleAlarm + "]";
 	}
 }

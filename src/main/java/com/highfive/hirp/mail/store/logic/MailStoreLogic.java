@@ -16,8 +16,8 @@ public class MailStoreLogic implements MailStore{
 
 	@Override
 	public int selectListCount(SqlSession sqlSession) {
-		int result = sqlSession.selectOne("MailMapper.selectListCount");
-		return result;
+		int totalCount = sqlSession.selectOne("MailMapper.selectListCount");
+		return totalCount;
 	}
 	
 	@Override

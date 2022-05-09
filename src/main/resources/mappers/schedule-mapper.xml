@@ -4,5 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ScheduleMapper">
-
+	<resultMap type="Schedule" id="scheduleResultMap">
+		<id property="scheduleNo" column="SCHEDULE_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="scheduleCategory" column="SCHEDULE_CATEGORY"/>
+		<result property="scheduleTitle" column="SCHEDULE_TITLE"/>
+		<result property="scheduleColor" column="SCHEDULE_COLOR"/>
+		<result property="scheduleConts" column="SCHEDULE_CONTS"/>
+		<result property="scheduleStartDate" column="SCHEDULE_START_DATE"/>
+		<result property="scheduleEndDate" column="SCHEDULE_END_DATE"/>
+		<result property="schedulePlace" column="SCHEDULE_PLACE"/>
+		<result property="scheduleAlarm" column="SCHEDULE_ALARM"/>
+	</resultMap>
+	<select id="selectAllSchedule" resultMap="scheduleResultMap">
+		SELECT * FROM SCHEDULE_TBL ORDER BY SCHEDULE_START_DATE DESC
+	</select>
+	<insert id="insertSchedule">
+		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory}, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
+	</insert>
+	<insert id="insertScheduleToSub">
+		INSERT INTO SCHEDULE_EMPL_TBL VALUES(SCHEDULE_SEQ.CURRVAL, #{emplId}, #{scheduleCategory})
+	</insert>
 </mapper>

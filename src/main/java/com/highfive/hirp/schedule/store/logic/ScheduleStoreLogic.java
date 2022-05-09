@@ -31,6 +31,12 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
+	public int insertScheduleToSub(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.insert("ScheduleMapper.insertScheduleToSub", schedule);
+		return result;
+	}
+	
+	@Override
 	public int updateSchedule(SqlSession sqlSession, Schedule schedule) {
 		int result = sqlSession.update("ScheduleMapper.modifySchedule", schedule);
 		return result;

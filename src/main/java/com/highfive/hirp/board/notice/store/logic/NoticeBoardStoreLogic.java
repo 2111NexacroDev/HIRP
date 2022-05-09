@@ -2,6 +2,7 @@ package com.highfive.hirp.board.notice.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,13 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession, PageInfo pi) {
-		List<NoticeBoard> nList = sqlSession.selectList("noticeboard-mapper.selectAllNotice",pi);
+		// 1 -> 1 ~ 10
+		// 2 -> 11 ~ 20
+		int limit = pi.getListLimit();
+		int currentPage = pi.getCurrentPage();
+		int offset = (currentPage - 1) * limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<NoticeBoard> nList = sqlSession.selectList("NoticeBoardMapper.selectAllNotice",pi,rowBounds);
 		return nList;
 	}
 
@@ -29,7 +36,7 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public List<NoticeBoard> selectSearchNotice(SqlSession sqlSession, Search search) {
-		List<NoticeBoard> nList = sqlSession.selectList("noticeboard-mapper.selectSearchNotice",search);
+		List<NoticeBoard> nList = sqlSession.selectList("NoticeBoardMapper.selectSearchNotice",search);
 		return nList;
 	}
 
@@ -84,7 +91,7 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public int selectListCount(SqlSession sqlSession) {
-		int result = sqlSession.selectOne("noticeboard-mapper.selectListCount");
+		int result = sqlSession.selectOne("NoticeBoardMapper.selectListCount");
 		return result;
 	}
 

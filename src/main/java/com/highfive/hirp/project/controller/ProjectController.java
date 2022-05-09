@@ -171,17 +171,33 @@ public class ProjectController {
 	}
 	
 	// 칸반보드 추가
-	@ResponseBody
-	@RequestMapping(value="/project/boardAdd.hirp", method=RequestMethod.POST)
-	public ModelAndView insertBoard(ModelAndView mv
-			, @ModelAttribute Board board) {
-		
-		return mv;
-	}
+//	@ResponseBody
+//	@RequestMapping(value="/project/boardAdd.hirp", method=RequestMethod.POST, produces="applicationjson;charset=utf-8")
+//	public String insertBoard(ModelAndView mv
+//			, @RequestParam("pNo") int projectNo
+//			, @RequestParam("pManager") String projectManager
+//			, @RequestParam("bContents") String boardContents
+//			, @RequestParam("bStatus") String boardStatus) {
+//		try {
+//			Project project = new Project();
+//			int result = pService.registerBoard(project);
+//			if(result > 0) {
+//				Gson gson = new Gson();
+//				return gson.toJson(result);
+//			}else {
+//				return "";
+//			}
+//		}catch(Exception e) {
+//			return "";
+//		}
+//	}
 	
 	// 칸반보드 삭제
+	@ResponseBody
+	@RequestMapping(value="/project/boardDelete.hirp", method=RequestMethod.GET)
 	public ModelAndView deleteBoard(ModelAndView mv
 			, @RequestParam("boardNo") int boardNo) {
+		
 		return mv;
 	}
 		
