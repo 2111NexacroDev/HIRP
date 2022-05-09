@@ -115,6 +115,11 @@
                 list: '목록'
             },
             initialView: 'dayGridMonth',
+            slotMinTime: '09:00',
+            slotMaxTime: '19:00',
+            navLinks: true, 
+            selectable: true,
+            selectMirror: true,
             locale: 'ko',
             events: [
                 <c:forEach items="${sListCompany }" var="schedule1">
@@ -135,7 +140,30 @@
                     borderColor: '${schedule.scheduleColor }',
                 },
                 </c:forEach>
-            ]
+            ],
+            select: function(arg) {
+                console.log(arg)
+                openModal(arg);	//일자 클릭 시 모달 호출
+            },
+            eventClick: function(arg) {
+                console.log(arg)
+                openModal(arg);	//이벤트 클릭 시 모달 호출
+            },
+            eventChange: function(arg){
+                if(arg.event.end == null){
+                    var end = new Date();
+                    end.setDate(arg.event.start.getDate()+1);
+                    arg.event.setEnd(end);	
+                }
+            },
+            eventDrop: function(arg){
+                openModal(arg);
+            },
+            eventResize: function(arg){
+                openModal(arg);
+            },	
+            editable: true,
+            dayMaxEvents: true,
         });
         calendar.render();
 
