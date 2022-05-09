@@ -47,7 +47,7 @@
 		                </div>
 		                <div class="">
 		                	<!-- 본인 소속 부서 사람들 선택 -->
-		                    <div>
+		                    <div class="mb-20">
 		                    	<input id="valueA" class="" name="surveyObject" type="radio" value="래디오1" checked="checked">
 				                <label for="valueA">본인 소속 팀</label>&nbsp;
 				                (
