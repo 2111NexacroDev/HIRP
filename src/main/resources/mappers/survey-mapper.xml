@@ -106,4 +106,13 @@
 		JOIN POSITION_TBL D USING(POSITION_CODE)
 		WHERE SURVEY_NO = #{surveyNo}
 	</select>
+	
+	<!-- 설문조사 추가 -->
+	<insert id="insertSurvey">
+		INSERT INTO SURVEY_TBL
+		VALUES(SURVEY_SEQ.NEXTVAL, #{surveyTitle}, #{surveyWriter}, 
+		DEFAULT, DEFAULT, 'C', 
+		#{surveyStartdate}, #{surveyEnddate}, 
+		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
+	</insert>
 </mapper>

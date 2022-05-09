@@ -1,6 +1,7 @@
 package com.highfive.hirp.survey.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -178,8 +179,38 @@ public class SurveyController {
 		return mv;
 	}
 	
-	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
+	//설문 등록 (설문정보, 응답자 리스트)
+	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
+			,@ModelAttribute Survey survey
+			//,@ModelAttribute List<String> subList
+			, HttpServletRequest request) {
+		
+		String emplId = "TESTID";
+		survey.setSurveyWriter(emplId);
+		
+		try {
+			//설문 등록
+			int result = sService.insertSurvey(survey);
+			if(result > 0) {
+				mv.setViewName("survey/writeQuest.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 정보 추가 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		//설문 문항 추가 1 (비어있지 않을 때) nextval
+		//설문 보기 추가 1 (비어있지 않을 때) currval
+		//2~4까지 하기
+		//설문 대상자 리스트 추가
+		return mv;
+	}
+
+	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
+	public ModelAndView writeSurvey2(ModelAndView mv
 			,@ModelAttribute Survey survey
 			,@ModelAttribute List<SurveyQuest> surveyQuest
 			,@ModelAttribute List<SurveyQuestCh> qCh

@@ -35,71 +35,96 @@
 	            </div>
 	            <!-- 시작 안내 문구 끝 -->
 	            <!-- 문항 입력 -->
-	            <div class="padding-20 basic-border-bottom">
-	            	<div class="row">
-		                <div class="col-3">
-		                    <div>질문</div>
-		                </div>
-		                <div class="">
-		                    <input type="text" placeholder="질문을 입력해주세요">
-		                </div>
-		            </div>
-		            <div class="row mt-20">
-		                <div class="col-3">
-		                    <div>설문 문항 타입</div>
-		                </div>
-		                <div class="">
-		                   	<select class="" name="questType1" id="questType1" onchange="questTypeChange(this)">
-		                   		<option value="">유형 선택</option>
-			                    <option value="C">선택형</option>
-			                    <option value="D">날짜형</option>
-			                    <option value="T">텍스트형</option>
-			                </select>
-			                <select class="" name="questType2" id="questType2">
-			                	<option value="">선택해주세요</option>
-			                </select>
-		                </div>
-		            </div>
-		            
-		            <div id="choiceList">
-<!-- 			            <div class="row mt-20"> -->
-<!-- 			                <div class="col-3"> -->
-<!-- 			                    <div>보기</div> -->
-<!-- 			                </div> -->
-<!-- 			                <div class=""> -->
-<!-- 			                   	<input type="text" placeholder="보기1 입력"> -->
-<!-- 			                   	<button class="noneBackground"><i class="fa-solid fa-plus"></i></button> -->
-<!-- 			                   	<button class="noneBackground"><i class="fa-solid fa-xmark"></i></button> -->
-<!-- 			                </div> -->
-<!-- 			            </div> -->
-		            </div>
-		            
-		            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-		            <div id="choiceMax">
-<!-- 			            <div class="row mt-20" > -->
-<!-- 			                <div class="col-3"> -->
-<!-- 			                    <div>최대 선택 개수</div> -->
-<!-- 			                </div> -->
-<!-- 			                <div class=""> -->
-<!-- 			                   	<select class="" name="" id="questAnswerCount" onchange=""> -->
-<!-- 			                   		<option value="">제한없음</option> -->
-<!-- 				                </select> -->
-<!-- 			                </div> -->
-<!-- 			            </div> -->
-<!-- 		            </div> -->
-	            </div>
-	            <!-- 문항 입력 끝 -->
-	            <!-- 문항 추가 -->
-	            <div class="t-c">
-		            <button class="basic mt-20" style="width:50%;"type="button">문항 추가</button>
-	            </div>
-		            
-	            <div class="t-c">
-		            <button class="point mt-20" type="button">작성 완료</button>
-		            <!-- 완료 누르면 안내창 띄워서 
-		            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
-	            </div>
-
+	            <div class=" basic-border-bottom">
+	            	<!-- 첫번째 질문 div 시작 -->
+	            	<div class="padding-20">
+	            		<div class="row">
+			                <div class="col-3">
+			                    <div>질문</div>
+			                </div>
+			                <div class="">
+			                    <input type="text" placeholder="질문을 입력해주세요">
+			                </div>
+			            </div>
+			            <div class="row mt-20">
+			                <div class="col-3">
+			                    <div>설문 문항 타입</div>
+			                </div>
+			                <div class="">
+			                   	<select class="" name="questType1" id="questType1" onchange="questTypeChange(this)">
+			                   		<option value="">유형 선택</option>
+				                    <option value="C">선택형</option>
+				                    <option value="D">날짜형</option>
+				                    <option value="T">텍스트형</option>
+				                </select>
+				                <select class="" name="questType2" id="questType2">
+				                	<option value="">선택해주세요</option>
+				                </select>
+			                </div>
+			            </div>
+			            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+			            <div id="choiceList">
+			            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+			            </div>
+			            <div id="choiceMaxAlert">
+			            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+			            </div>
+			            <div id="choiceMax">
+							<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
+		            	</div>
+	            	</div>
+	            	<!-- 첫번째 질문 div 끝 -->
+	            	
+	            	<!-- 질문 추가 div 시작 -->
+	            	<div class="basic-border-top padding-20">
+	            		<div class="row">
+			                <div class="col-3">
+			                    <div>질문</div>
+			                </div>
+			                <div class="">
+			                    <input type="text" placeholder="질문을 입력해주세요">
+			                </div>
+			            </div>
+			            <div class="row mt-20">
+			                <div class="col-3">
+			                    <div>설문 문항 타입</div>
+			                </div>
+			                <div class="">
+			                   	<select class="" name="questType1" id="questType1" onchange="questTypeChange(this)">
+			                   		<option value="">유형 선택</option>
+				                    <option value="C">선택형</option>
+				                    <option value="D">날짜형</option>
+				                    <option value="T">텍스트형</option>
+				                </select>
+				                <select class="" name="questType2" id="questType2">
+				                	<option value="">선택해주세요</option>
+				                </select>
+			                </div>
+			            </div>
+			            
+			            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+			            <div id="choiceList">
+			            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+			            </div>
+			            <div id="choiceMaxAlert">
+			            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+			            </div>
+			            <div id="choiceMax">
+							<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
+		            	</div>
+	            	</div>
+	            	<!-- 질문 추가 div 끝 -->
+            </div>
+            
+            <!-- 문항 추가 -->
+            <div class="t-c">
+	            <button class="basic mt-20" style="width:50%;"type="button">문항 추가</button>
+            </div>
+	            
+            <div class="t-c">
+	            <button class="point mt-20" type="button">작성 완료</button>
+	            <!-- 완료 누르면 안내창 띄워서 
+	            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
             </div>
             <!-- 페이지 내용 끝 -->
         </article>
@@ -150,19 +175,8 @@
 			                +"</div>"
 			                +"<div class='questChoiceList'>"
 			                   	+"<input type='text' placeholder='보기 입력'>"
-			                   	+"<button class='noneBackground'><i class='fa-solid fa-plus'></i></button>"
-			                   	+"<button class='noneBackground'><i class='fa-solid fa-xmark'></i></button>"
-			                +"</div>"
-			            +"</div>");
-        			//보기 추가
-        			var $chListDiv2 = 
-        				$("<div class='row mt-10'>"
-					     	+"<div class='col-3'>"
-		                	+"</div>"
-			                +"<div class='questChoiceList'>"
-			                   	+"<input type='text' placeholder='보기 입력'>"
-			                   	+"<button class='noneBackground' onclick='addChList();'><i class='fa-solid fa-plus'></i></button>"
-			                   	+"<button class='noneBackground'><i class='fa-solid fa-xmark'></i></button>"
+			                   	+"<button class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
+			                   	+"<button class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
 			                +"</div>"
 			            +"</div>");
         			
@@ -173,14 +187,13 @@
 				                    +"<div>최대 선택 개수</div>"
 				                +"</div>"
 				                +"<div class=''>"
-				                   	+"<select class='' name='qChMax' id='questAnswerCount' onchange=''>"
+				                   	+"<select class='' name='' id='questAnswerCount' onchange=''>"
 				                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
 					                +"</select>"
 				                +"</div>"
 				            +"</div>");
         			
         			$chList.append($chListDiv);
-        			$chList.append($chListDiv2);
         			$chMaxCombo.append($chMaxDiv);
         			choiceCount = $('.questChoiceList').length;
         			console.log("선택형이나 날짜형을 눌렀을 때 보기 개수:"+choiceCount);
@@ -207,12 +220,13 @@
         	
         	function addChList() {
         		var $chList = $("#choiceList");	//보기 리스트 출력하는 div
-        		var target = document.getElementById("questAnswerCount");
-        		console.log("딩동:"+target.options.length);
-        		var chCount = $('.questChoiceList').length;
-        		console.log("딩동:"+chCount);
+        		var target = document.getElementById("questAnswerCount"); //최대 선택 개수 콤보
+        		var chCount = $('.questChoiceList').length; //보기 개수
+        		var $chMaxAlert = $("#choiceMaxAlert"); //보기 max일 때 알림 적어줄 div
         		
+        		//보기 4개까지 추가 가능
         		if(chCount < 4) {
+        			$chMaxAlert.html("");
         			//보기 추가
            			var $chListDiv2 = 
            				$("<div class='row mt-10'>"
@@ -220,42 +234,49 @@
     	                	+"</div>"
     		                +"<div class='questChoiceList'>"
     		                   	+"<input type='text' placeholder='보기 입력'>"
-    		                   	+"<button class='noneBackground'><i class='fa-solid fa-plus'></i></button>"
+    		                   	+"<button class='noneBackground' onclick='addChList();'><i class='fa-solid fa-plus'></i></button>"
     		                   	+"<button class='noneBackground'><i class='fa-solid fa-xmark'></i></button>"
     		                +"</div>"
     		            +"</div>");
         			
-           			//최대 선택 개수
-           			var $chMaxDiv =
-           				$("<div class='row mt-20' >"
-            	                +"<div class='col-3'>"
-    			                    +"<div>최대 선택 개수</div>"
-    			                +"</div>"
-    			                +"<div class=''>"
-    			                   	+"<select class='' name='' id='questAnswerCount' onchange=''>"
-    			                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
-    				                +"</select>"
-    			                +"</div>"
-    			            +"</div>");
-           			
            			$chList.append($chListDiv2);
 //            			$chMaxCombo.append($chMaxDiv);
     				chCount++;
     				console.log(chCount);
-    				target.options.length = 0;
+    				
         		} else {
         			console.log("보기가 너무 많습니다.");
+        			$chMaxAlert.html("");
+        			var $chAlert =
+        				$("<div class='row mt-10 padding-left'>"
+        				     	+"<div class='col-3'></div>"
+        	                	+"<h3 style='color:red;'>보기는 최대 4개까지 추가 가능합니다.</h3>"
+        		            +"</div>");
+        			$chMaxAlert.append($chAlert);
         		}
         		
-        		chCount = $('.questChoiceList').length;
+        		//보기에 맞춰서 최대 개수 옵션 변경
+        		target.options.length = 0;
+        		//제한 없음
+        		var opt = document.createElement("option");
+    			opt.value = 0;	//value를 이렇게 가는 게 맞나? 고민 좀 해보기
+    			opt.innerHTML = "제한없음";
+    			target.appendChild(opt);
+    			
         		for(var i = 1; i < chCount+1; i++) {
-        			console.log("for문");
         			var opt = document.createElement("option");
         			opt.value = i;	//value를 이렇게 가는 게 맞나? 고민 좀 해보기
         			opt.innerHTML = i;
         			target.appendChild(opt);
-        			console.log("추가");
         		}
+        	}
+        	
+        	function deleteChList(e){
+        		console.log($(this).parent.parent);
+        		$(this).parents("div");
+        		console.log($(this).parents("div"));
+        		$(this).closest("div");
+        		console.log($(this).closest("div"));
         	}
         </script>
 </body>
