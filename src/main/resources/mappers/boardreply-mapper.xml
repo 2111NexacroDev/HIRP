@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardReplyMapper">
+<resultMap type="Reply" id="boardReplyResultMap">
+<id 	property="replyNo" column="REPLY_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="boardNo" column="BOARD_NO"></result>
+<result property="parentReplyNo" column="PARENT_REPLY_NO"></result>
+<result property="replyOrder" column="REPLY_ORDER"></result>
+<result property="replyDepth" column="REPLY_DEPTH"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="replyContents" column="REPLY_CONTENTS"></result>
+<result property="writeDate" column="WRITE_DATE"></result>
+<result property="updateDate" column="UPDATE_DATE"></result>
+<result property="status" column="STATUS"></result>
+</resultMap>
+<insert id="insertNoticeReply">
+  		INSERT INTO REPLY_TBL(REPLY_NO, BOARD_CODE, BOARD_NO, PARENT_REPLY_NO, REPLY_ORDER,REPLY_DEPTH,EMPL_ID,REPLY_CONTENTS,WRITE_DATE,STATUS) VALUES(BOARD_REPLY_SEQ.NEXTVAL,#{boardCode },#{boardNo},BOARD_REPLY_SEQ.CURRVAL,(SELECT NVL(MAX(REPLY_ORDER),0)+1 FROM REPLY_TBL),0,'khuser01',#{replyContents},DEFAULT,DEFAULT)
+</insert>
+<insert id="insertReReply">
+	INSERT INTO REPLY_TBL(REPLY_NO, BOARD_CODE, BOARD_NO, PARENT_REPLY_NO, REPLY_ORDER,REPLY_DEPTH,EMPL_ID,REPLY_CONTENTS,WRITE_DATE,STATUS) VALUES(BOARD_REPLY_SEQ.NEXTVAL,'N',92,#{parentReplyNo},(SELECT MAX(REPLY_ORDER)+1 FROM REPLY_TBL WHERE PARENT_REPLY_NO = #{parentreplyNo}),1,'khuser01',#{replyContents},DEFAULT,DEFAULT)
+</insert>
+
+<select id="selectAllNoticeReply" resultMap = "boardReplyResultMap">
+  		SELECT * FROM REPLY_TBL WHERE BOARD_NO = #{boardNo } AND BOARD_CODE= #{boardCode} AND STATUS='Y'
+</select>
+<update id="deleteNoticeReply">
+		UPDATE REPLY_TBL SET STATUS='N' WHERE REPLY_NO = #{replyNo}
+</update>
+<update id="updateNoticeReply">
+		UPDATE REPLY_TBL SET REPLY_CONTENTS = #{replyContents} WHERE REPLY_NO = #{replyNo}
+</update>
+
+
+</mapper>
