@@ -31,6 +31,8 @@ import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
+import com.highfive.hirp.mail.domain.Recipient;
+import com.highfive.hirp.mail.domain.Referrer;
 import com.highfive.hirp.mail.service.MailService;
 
 @Controller
@@ -50,73 +52,95 @@ public class MailController {
 		return mv;
 	}
 	
-	// 메일작성 후 메일 전송할 때 실행되는 코드
+	// 메일 전송
 	@RequestMapping(value="/mail/send.hirp", method=RequestMethod.POST)
 	public ModelAndView doSend(ModelAndView mv
 			, @ModelAttribute Mail mail
+			, @ModelAttribute MailFile mailFile
+			, @ModelAttribute Recipient recipient
+			, @ModelAttribute Referrer referrer
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			, HttpServletRequest request) {
-		String host = "smtp.naver.com";
-		final String user = "smartms95@naver.com";
-		final String password = "minsu0$@0";
-		Properties prop = new Properties();
-		prop.put("mail.smtp.host", host);
-		prop.put("mail.smtp.port", 587);
-		prop.put("mail.smtp.auth", "true");
-		
-		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(user, password);
-			}
-		});
-		
 		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(user));
-			
-			// 수신자 메일주소
-			InternetAddress[] addArray = new InternetAddress[2];
-			addArray[0] = new InternetAddress("smartms95@naver.com");
-			addArray[1] = new InternetAddress("jangms124578@hirp.com");
-			
-			message.addRecipients(Message.RecipientType.TO, addArray);
-			
-			// Subject
-			message.setSubject(mail.getMailTitle());
-			
-			// Text
-			message.setText(mail.getMailContents());
-			
-			// Send the message
-			Transport.send(message);
-			
-			String mailRecipient = Arrays.toString(addArray);
-			mail.setMailSender(host);
-			mail.setMailTitle(message.getSubject());
-			mail.setMailRecipient(mailRecipient);
-			
 			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				HashMap<String, String> fileMap = saveFile(uploadFile, request);
 				String filePath = fileMap.get("filePath");
 				String fileRename = fileMap.get("fileName");
+				String fileExtension = fileMap.get("fileExtension");
 				if(filePath != null && !filePath.equals("")) {
-					mail.setFileName(uploadFile.getOriginalFilename());
-					mail.setFileReName(fileRename);
-					mail.setFilePath(filePath);
+					mailFile.setFileName(uploadFile.getOriginalFilename());
+					mailFile.setFileExtension(fileExtension);
+					mailFile.setFileReName(fileRename);
+					mailFile.setFilePath(filePath);
 				}
 			}
 			int result = mService.sendMail(mail);
+			result = mService.sendMailRecipient(recipient);
+			result = mService.sendMailReferrer(referrer);
+			result = mService.saveFile(mailFile);
 			if(result > 0) {
 				mv.setViewName("redirect:/mail/list.hirp");
 			}else {
-				mv.addObject("msg", "메일 보내기 실패");
+				mv.addObject("msg", "메일 전송 실패");
 				mv.setViewName("common/errorPage");
 			}
-		}catch(AddressException e) {
-			e.printStackTrace();
-		}catch(MessagingException e) {
-			e.printStackTrace();
+		}catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
+		
+//		메일 smtp
+//		String host = "smtp.naver.com";
+//		final String user = "smartms95@naver.com";
+//		final String password = "minsu0$@0";
+//		Properties prop = new Properties();
+//		prop.put("mail.smtp.host", host);
+//		prop.put("mail.smtp.port", 587);
+//		prop.put("mail.smtp.auth", "true");
+//		
+//		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+//			protected PasswordAuthentication getPasswordAuthentication() {
+//				return new PasswordAuthentication(user, password);
+//			}
+//		});
+//		
+//		try {
+//			MimeMessage message = new MimeMessage(session);
+//			message.setFrom(new InternetAddress(user));
+//			
+//			// 수신자 메일주소
+//			InternetAddress[] addArray = new InternetAddress[2];
+//			addArray[0] = new InternetAddress("smartms95@naver.com");
+//			addArray[1] = new InternetAddress("jangms124578@hirp.com");
+//			
+//			message.addRecipients(Message.RecipientType.TO, addArray);
+//			
+//			// Subject
+//			message.setSubject(mail.getMailTitle());
+//			
+//			// Text
+//			message.setText(mail.getMailContents());
+//			
+//			// Send the message
+//			Transport.send(message);
+//			
+//			String mailRecipient = Arrays.toString(addArray);
+//			mail.setMailSender(host);
+//			mail.setMailTitle(message.getSubject());
+//			mail.setMailRecipient(mailRecipient);
+//			
+//			int result = mService.sendMail(mail);
+//			if(result > 0) {
+//				mv.setViewName("redirect:/mail/list.hirp");
+//			}else {
+//				mv.addObject("msg", "메일 보내기 실패");
+//				mv.setViewName("common/errorPage");
+//			}
+//		}catch(AddressException e) {
+//			e.printStackTrace();
+//		}catch(MessagingException e) {
+//			e.printStackTrace();
+//		}
 		return mv;
 	}
 	
@@ -133,6 +157,7 @@ public class MailController {
 		String extensionName = originalFileName.substring(originalFileName.lastIndexOf(".")+1);
 		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))+"."+extensionName;
 		filePath = folder + "\\" + renameFileName;
+		fileMap.put("fileExtension", extensionName);
 		fileMap.put("filePath", filePath);
 		fileMap.put("fileName", renameFileName);
 		try {
@@ -185,9 +210,23 @@ public class MailController {
 		return mv;
 	}
 	
-	// 받은메일함 상세조회
-	public ModelAndView receivedMailView(ModelAndView mv
-			, @RequestParam("mailNo") int mailNo) {
+	// 메일함 상세조회
+	@RequestMapping(value="mail/detail.hirp", method=RequestMethod.GET)
+	public ModelAndView mailDetailView(ModelAndView mv
+			, @RequestParam("mailNo") Integer mailNo) {
+		try {
+			Mail mail = mService.printOneByNo(mailNo); // 받은메일함
+			if(mail != null) {
+				mv.addObject("mail", mail);
+				mv.setViewName("mail/mailDetailView");
+			}else {
+				mv.addObject("msg", "메일 상세조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

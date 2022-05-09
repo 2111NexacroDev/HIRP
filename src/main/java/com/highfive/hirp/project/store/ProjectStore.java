@@ -17,8 +17,8 @@ public interface ProjectStore {
 	int deleteProject(SqlSession sqlSession, int projectNo);
 	int updateProject(SqlSession sqlSession, Project project);
 	
-	List<Board> selectAllBoard(SqlSession sqlSession, int projectNo);
-	int insertBoard(SqlSession sqlSession, Project project);
+	List<Board> selectAllBoard(SqlSession sqlSession, int boardNo);
+	int insertBoard(SqlSession sqlSession, Board board);
 	int deleteBoard(SqlSession sqlSession, int boardNo);
 
 }

@@ -45,21 +45,21 @@
 				메일쓰기
             </h1>
             <div class="subConts">
-            	<form action="/mail/send.hirp" method="post">
+            	<form action="/mail/send.hirp" method="post" enctype="multipart/form-data">
 		            <button class="basic mt-20" type="submit">보내기</button>
 		            <button class="basic mt-20" type="button">임시저장</button>
 	            	<h4>받는사람</h4>
 	            	<input id="check1" class="mt-20" type="checkbox">
 	            	<label for="check1">나에게</label>
-	            	<input type="text" name="mailRecipient">
+	            	<input type="text" name="recipientId">
 	            	<button class="basic mt-20" type="button">주소록</button><br>
 	            	<h4>참조</h4>
-	            	<input type="text" name="mailReferrer">
+	            	<input type="text" name="referrerId">
 	            	<button class="basic mt-20" type="button">주소록</button><br>
 	            	<h4>제목</h4>
 	            	<input type="text" name="mailTitle"><br>
 	            	<h4>파일첨부</h4>
-	            	<button class="basic mt-20" type="button">파일선택</button>
+	            	<input type="file" size="50" name="uploadFile" value="파일선택">
 	            	<button class="basic mt-20" type="button">모두 삭제</button>
 	            	<textarea rows="" cols="" name="mailContents"></textarea>
             	</form>
