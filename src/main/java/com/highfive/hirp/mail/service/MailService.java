@@ -6,13 +6,18 @@ import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
+import com.highfive.hirp.mail.domain.Recipient;
+import com.highfive.hirp.mail.domain.Referrer;
 
 public interface MailService {
 
 	public int getListCount();
 	public int sendMail(Mail mail); // 메일 보내기
+	public int sendMailRecipient(Recipient recipient); // 메일 받는사람 저장
+	public int sendMailReferrer(Referrer referrer); // 메일 참조인 저장
+	public int saveFile(MailFile mailFile); // 첨부파일 저장
 	public List<Mail> selectReceivedMail(PageInfo pi); // 받은메일함 조회
-	public int selectOneReceivedMail(int mailNo); // 받은메일함 상세조회
+	public Mail printOneByNo(int mailNo); // 메일함 상세조회
 	public List<Mail> selectSentMail(); // 보낸메일함 조회
 	public int selectOneSentMail(int mailNo); // 보낸메일함 상세조회
 	public List<Mail> selectTemporaryMail(); // 임시보관함 조회

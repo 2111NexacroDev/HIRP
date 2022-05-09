@@ -11,28 +11,51 @@ import com.highfive.hirp.schedule.store.ScheduleStore;
 
 @Repository
 public class ScheduleStoreLogic implements ScheduleStore {
+	@Override
+	public List<Schedule> selectAllCompanySchedule(SqlSession sqlSession) {
+		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllCompanySchedule");
+		return sList;
+	}
 
 	@Override
-	public List<Schedule> selectAllSchedule(SqlSession sqlSession) {
-		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllSchedule");
+	public List<Schedule> selectAllTeamSchedule(SqlSession sqlSession, String loginUser) {
+		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllTeamSchedule", loginUser);
+		return sList;
+	}
+
+	@Override
+	public List<Schedule> selectAllSchedule(SqlSession sqlSession, String loginUser) {
+		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllPersonalSchedule", loginUser);
 		return sList;
 	}
 	
-	@Override
+		@Override
 	public List<Schedule> selectSearchSchedule(SqlSession sqlSession, Search search) {
 		List<Schedule> searchList = sqlSession.selectList("ScheduleMapper.selectSearchSchedule", search);
 		return searchList;
 	}
 
 	@Override
-	public int insertSchedule(SqlSession sqlSession, Schedule schedule) {
-		int result = sqlSession.insert("ScheduleMapper.insertSchedule", schedule);
+	public int insertPersonalSchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.insert("ScheduleMapper.insertPersonalSchedule", schedule);
 		return result;
 	}
 
 	@Override
 	public int insertScheduleToSub(SqlSession sqlSession, Schedule schedule) {
 		int result = sqlSession.insert("ScheduleMapper.insertScheduleToSub", schedule);
+		return result;
+	}
+	
+	@Override
+	public int insertCompanySchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.insert("ScheduleMapper.insertCompanySchedule", schedule);
+		return result;
+	}
+	
+	@Override
+	public int insertTeamSchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.insert("ScheduleMapper.insertTeamSchedule", schedule);
 		return result;
 	}
 	

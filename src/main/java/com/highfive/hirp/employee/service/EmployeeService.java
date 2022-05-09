@@ -18,4 +18,7 @@ public interface EmployeeService {
 	
 	// 마이페이지 출력
 	public Employee employeeMyPage(String employeeId);
+
+	// 마이페이지 수정
+	public int mypageModify(Employee employee);
 }

@@ -48,4 +48,11 @@ public class EmployeeStoreLogic implements EmployeeStore {
 		Employee employeeOne = sqlSession.selectOne("EmployeeMapper.selectOneById", employeeId);
 		return employeeOne;
 	}
+
+	// 마이페이지 수정
+	@Override
+	public int updateMypage(SqlSession sqlSession, Employee employee) {
+		int result = sqlSession.update("EmployeeMapper.updateMypage", employee);
+		return result;
+	}
 }

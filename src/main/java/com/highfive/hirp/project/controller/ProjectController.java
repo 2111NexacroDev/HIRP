@@ -3,9 +3,15 @@ package com.highfive.hirp.project.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -156,49 +162,40 @@ public class ProjectController {
 		return mv;
 	}
 	
-	// 프로젝트 칸반보드 목록
-	public ModelAndView boardList(ModelAndView mv
-			, @RequestParam("projectNo") int projectNo) {
-		try {
-			List<Board> bList = pService.printAllBoard(projectNo);
-			if(!bList.isEmpty()) {
-				
-			}
-		}catch(Exception e) {
-			
+	// 칸반보드 목록
+	@ResponseBody
+	@RequestMapping(value = "/project/selectBoard.hirp", method=RequestMethod.GET)
+	public String boardList(@RequestParam("projectNo") int projectNo) {
+		List<Board> bList = pService.printAllBoard(projectNo);
+		if(!bList.isEmpty()) {
+			Gson gson = new Gson();
+			return gson.toJson(bList);
 		}
-		return mv;
+		return "";
 	}
 	
 	// 칸반보드 추가
-//	@ResponseBody
-//	@RequestMapping(value="/project/boardAdd.hirp", method=RequestMethod.POST, produces="applicationjson;charset=utf-8")
-//	public String insertBoard(ModelAndView mv
-//			, @RequestParam("pNo") int projectNo
-//			, @RequestParam("pManager") String projectManager
-//			, @RequestParam("bContents") String boardContents
-//			, @RequestParam("bStatus") String boardStatus) {
-//		try {
-//			Project project = new Project();
-//			int result = pService.registerBoard(project);
-//			if(result > 0) {
-//				Gson gson = new Gson();
-//				return gson.toJson(result);
-//			}else {
-//				return "";
-//			}
-//		}catch(Exception e) {
-//			return "";
-//		}
-//	}
-	
+	@ResponseBody
+	@RequestMapping(value="/project/boardAdd.hirp", method=RequestMethod.POST)
+	public String insertBoard(@ModelAttribute Board board) {
+		int result = pService.registerBoard(board);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+
 	// 칸반보드 삭제
 	@ResponseBody
-	@RequestMapping(value="/project/boardDelete.hirp", method=RequestMethod.GET)
-	public ModelAndView deleteBoard(ModelAndView mv
-			, @RequestParam("boardNo") int boardNo) {
-		
-		return mv;
+	@RequestMapping(value="/project/deleteBoard.hirp", method=RequestMethod.GET)
+	public String deleteBoard(@RequestParam("boardNo") int boardNo) {
+		int result = pService.removeBoard(boardNo);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 		
 }

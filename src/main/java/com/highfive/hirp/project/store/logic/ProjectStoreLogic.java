@@ -55,14 +55,14 @@ public class ProjectStoreLogic implements ProjectStore{
 	}
 
 	@Override
-	public List<Board> selectAllBoard(SqlSession sqlSession, int projectNo) {
-		List<Board> bList = sqlSession.selectList("ProjectMapper.selectAllBoard", projectNo);
+	public List<Board> selectAllBoard(SqlSession sqlSession, int boardNo) {
+		List<Board> bList = sqlSession.selectList("ProjectMapper.selectAllBoard", boardNo);
 		return bList;
 	}
 
 	@Override
-	public int insertBoard(SqlSession sqlSession, Project project) {
-		int result = sqlSession.insert("ProjectMapper.insertBoard", project);
+	public int insertBoard(SqlSession sqlSession, Board board) {
+		int result = sqlSession.insert("ProjectMapper.insertBoard", board);
 		return result;
 	}
 

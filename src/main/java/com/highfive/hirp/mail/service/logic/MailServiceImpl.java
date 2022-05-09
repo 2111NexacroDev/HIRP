@@ -10,6 +10,8 @@ import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
+import com.highfive.hirp.mail.domain.Recipient;
+import com.highfive.hirp.mail.domain.Referrer;
 import com.highfive.hirp.mail.service.MailService;
 import com.highfive.hirp.mail.store.MailStore;
 @Service
@@ -33,15 +35,33 @@ public class MailServiceImpl implements MailService{
 	}
 	
 	@Override
+	public int sendMailRecipient(Recipient recipient) {
+		int result = mStore.sendMailRecipient(sqlSession, recipient);
+		return result;
+	}
+	
+	@Override
+	public int sendMailReferrer(Referrer referrer) {
+		int result = mStore.sendMailReferrer(sqlSession, referrer);
+		return result;
+	}
+	
+	@Override
+	public int saveFile(MailFile mailFile) {
+		int result = mStore.saveFile(sqlSession, mailFile);
+		return result;
+	}
+	
+	@Override
 	public List<Mail> selectReceivedMail(PageInfo pi) {
 		List<Mail> mList = mStore.selectReceivedMail(sqlSession, pi);
 		return mList;
 	}
 	
 	@Override
-	public int selectOneReceivedMail(int mailNo) {
-		int result = mStore.selectOneReceivedMail(sqlSession, mailNo);
-		return result;
+	public Mail printOneByNo(int mailNo) {
+		Mail mail = mStore.selectOneByNo(sqlSession, mailNo);
+		return mail;
 	}
 	
 	@Override

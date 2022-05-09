@@ -35,6 +35,25 @@
 		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
 	</resultMap>
 	
+	<resultMap type="SurveySub" id="surveySubResultMap">
+		<id property="subNo" column="SUB_NO"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+		<result property="subId" column="SUB_ID"/>
+		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
+	</resultMap>
+	
+	<resultMap type="SurveySubEmpl" id="SurveySubEmplResultMap">
+		<id property="subNo" column="SUB_NO"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+		<result property="subId" column="SUB_ID"/>
+		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionCode" column="POSITION_CODE"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplName" column="EMPL_NAME"/>
+	</resultMap>
+	
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
 	<select id="selectAllSurvey" resultMap="surveyMyStatusResultMap">
@@ -76,5 +95,15 @@
 		JOIN (SELECT SURVEY_NO FROM SURVEY_SUB WHERE SUB_ID = #{emplId} AND SUB_ANSWERSTATUS='N')
 		USING(SURVEY_NO)
 		WHERE SURVEY_STATUS = 'C'
+	</select>
+	<!-- 설문조사 대상자 리스트 가져오기(응답여부 확인 가능) -->
+	<select id="selectSurveySubByNo" resultMap="SurveySubEmplResultMap">
+		SELECT SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS,
+		DEPT_CODE, C.DEPT_NAME, POSITION_CODE, POSITION_NAME, EMPL_NAME
+		FROM SURVEY_SUB A
+		JOIN EMPL_TBL B ON A.SUB_ID = B.EMPL_ID
+		JOIN DEPT_TBL C USING(DEPT_CODE)
+		JOIN POSITION_TBL D USING(POSITION_CODE)
+		WHERE SURVEY_NO = #{surveyNo}
 	</select>
 </mapper>

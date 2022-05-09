@@ -23,4 +23,7 @@ public interface EmployeeStore {
 	// 마이페이지 출력
 	public Employee selectOneById(SqlSession sqlSession, String employeeId);
 
+	// 마이페이지 수정
+	public int updateMypage(SqlSession sqlSession, Employee employee);
+
 }

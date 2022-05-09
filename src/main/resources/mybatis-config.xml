@@ -23,12 +23,16 @@
 		<typeAlias type="com.highfive.hirp.mail.domain.Address" alias="Address"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.Mail" alias="Mail"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.MailFile" alias="MailFile"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Recipient" alias="Recipient"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Referrer" alias="Referrer"></typeAlias>
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
+		<typeAlias type="com.highfive.hirp.project.domain.Board" alias="Board"></typeAlias>
 		<!-- 민선 -->
 		<typeAlias type="com.highfive.hirp.dept.domain.Dept" alias="Dept"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.Survey" alias="Survey"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveySub" alias="SurveySub"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveySubEmpl" alias="SurveySubEmpl"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuest" alias="SurveyQuest"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuestCh" alias="SurveyQuestCh"></typeAlias>
 		<!-- survey, 나의 응답여부 -->

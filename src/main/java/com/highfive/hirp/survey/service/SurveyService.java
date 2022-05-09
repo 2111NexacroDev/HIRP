@@ -12,6 +12,7 @@ import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
+import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 
 public interface SurveyService {
@@ -29,7 +30,7 @@ public interface SurveyService {
 	public List<Survey> selectSubSurveyById(String emplId); 
 	//sql문 작성해놓음.
 	//설문조사 대상자 리스트 가져오기 (응답여부 확인 가능)
-	public List<SurveySub> selectSurveySubByNo(int surveyNo); 
+	public List<SurveySubEmpl> selectSurveySubByNo(int surveyNo); 
 	
 	//설문 등록
 	//설문 추가

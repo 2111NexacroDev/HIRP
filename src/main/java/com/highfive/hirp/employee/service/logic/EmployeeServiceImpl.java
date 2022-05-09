@@ -58,4 +58,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = eStore.selectOneById(sqlSession, employeeId);
 		return employee;
 	}
+
+	// 마이페이지 수정
+	@Override
+	public int mypageModify(Employee employee) {
+		int mypageModify = eStore.updateMypage(sqlSession, employee);
+		return mypageModify;
+	}
 }
