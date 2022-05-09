@@ -246,11 +246,12 @@
         		} else {
         			console.log("보기가 너무 많습니다.");
         		}
+        		
         		chCount = $('.questChoiceList').length;
         		for(var i = 1; i < chCount+1; i++) {
         			console.log("for문");
         			var opt = document.createElement("option");
-        			opt.value = i	//value를 이렇게 가는 게 맞나? 고민 좀 해보기
+        			opt.value = i;	//value를 이렇게 가는 게 맞나? 고민 좀 해보기
         			opt.innerHTML = i;
         			target.appendChild(opt);
         			console.log("추가");
