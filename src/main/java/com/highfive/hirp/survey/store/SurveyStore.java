@@ -14,6 +14,7 @@ import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
+import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 
 public interface SurveyStore {
@@ -30,7 +31,7 @@ public interface SurveyStore {
 	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
 	public List<Survey> selectSubSurveyById(SqlSession sqlSession, String emplId);
 	//설문조사 대상자 가져오기 (응답여부 확인 가능)
-	public List<SurveySub> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
+	public List<SurveySubEmpl> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
 
 	//설문조사 등록
 	//설문 추가

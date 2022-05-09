@@ -58,23 +58,28 @@
 	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
 	                            <td>${survey.surveyWriter }</td>
 	                            <td>
-	                            	<button class="finished" type="button" onclick="openAlert(this);">보기</button>
+	                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>
 		                            <!-- 응답자 목록 section -->
 		                            <section class="section--alert">
 					                    <div class="bg-black">
 					                    </div>
 					                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-					                    <div class="section--alert__conts">
+					                    <div class="section--alert__survey">
+					                    	
 					                        <button class="btn--close"></button>
-					                        <table class="table--basic mt-20">
+					                        <h1 align="left" class="padding-0">
+								                응답 대상자 목록
+								            </h1>
+					                        <table class="table--basic mt-20" id="subListTbl">
 							                    <thead>
 							                        <tr>
 							                            <th>소속부서</th>
 							                            <th>성명</th>
-							                            <th>참여여부</th>
+							                            <th style="text-align: center;">참여여부</th>
 							                        </tr>
 							                    </thead>
 							                    <tbody>
+							                    	<!-- ajax로 출력 -->
 							                        <tr>
 							                            <td>개발팀</td>
 							                            <td>이민선</td>
@@ -89,8 +94,7 @@
 							                </table>
 							                
 					                        <div class="btns-wrap mt-20">
-					                            <button class="point" type="button">확인</button>
-					                            <button class="finished closeWindow" type="button">닫기</button>
+					                            <button class="point closeWindow" type="button">확인</button>
 					                        </div>
 					                    </div>
 					                </section>
@@ -175,5 +179,56 @@
 	   		 </div>
 	   		 <!-- 페이지 내용 끝 -->         
         </article>
+        <script>
+        	//응답자 목록 가져오기
+	        function openSubListAlert(alertWindow, sNo) {
+	        	//ajax로 list 가져오기
+	        	$.ajax({
+	        		url: "/survey/subList.hirp",
+	        		type: "post",
+	        		data: {"surveyNo" : sNo},
+	        		success: function(sList){
+	        			console.log(sList);
+	        			var count = sList.length;
+// 	        			console.log(count);
+	        			var $tableBody = $("#subListTbl tbody");
+	        			$tableBody.html("");//기존 내용 있으면 비우기
+// 	        			<tr>
+// 	                        <td>개발팀</td>
+// 	                        <td>이민선</td>
+// 	                        <td>X</td>
+// 	                    </tr>
+						for(var i=0; i<count; i++){
+		        			var $tr = $("<tr>");
+		        			var $tdTeam = $("<td style='text-align: left;'>").html(sList[i].deptName);
+		        			var $tdName = $("<td style='text-align: left;'>").html(sList[i].emplName+sList[i].positionName);
+		        			if(sList[i].subAnswerstatus == 'Y'){
+			        			var $tdStatus = $("<td style='text-align: center;'>").html('O');
+		        			} else if(sList[i].subAnswerstatus == 'N') {
+			        			var $tdStatus = $("<td style='text-align: center;'>").html('X');
+		        			}
+							$tr.append($tdTeam);
+							$tr.append($tdName);
+							$tr.append($tdStatus);
+// 							console.log("for문" + i);
+							$tableBody.append($tr);
+						}
+	        		},
+	        		error: function(){
+	        			var $tableBody = $("#subListTbl tbody");
+	        			$tableBody.html("");//기존 내용 있으면 비우기
+	        			var $tr = $("<tr>");
+	        			var $text = $("<td colspan='3' style='text-align: center;'>").html("응답 대상자가 없습니다.");
+						$tr.append($text);
+						$tableBody.append($tr);
+	        		}
+	        	});
+// 	        	console.log(sNo);
+	        	//모달창 띄우기
+	            $(alertWindow).siblings('.section--alert').css('display', 'flex');
+	            
+	        }
+        </script>
 </body>
+
 </html>
