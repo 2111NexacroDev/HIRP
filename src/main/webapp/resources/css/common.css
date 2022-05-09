@@ -733,6 +733,24 @@ img {
     font-size: 12px;
 }
 
+.nav--right__info {
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+    width: 126px;
+    padding: 6px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+}
+
+.nav--right__info a {
+    display: block;
+    line-height: 36px;
+}
+
 .form--srch {
     position: absolute;
     top: 15px;
@@ -849,4 +867,8 @@ article {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .4);
+}
+
+.btn--paging {
+    text-align: center;
 }
