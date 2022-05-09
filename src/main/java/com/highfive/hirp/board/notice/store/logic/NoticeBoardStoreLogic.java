@@ -122,7 +122,9 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public int insertReReply(SqlSession sqlSession, Reply reply) {
+
 		int result = sqlSession.insert("BoardReplyMapper.insertReReply",reply);
+
 		return result;
 	}
 
