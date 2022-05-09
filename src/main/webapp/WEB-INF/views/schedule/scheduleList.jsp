@@ -28,14 +28,14 @@
                         <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
                             <div class="colors">
-                                <span class="selected" style="background-color: #f3cccc;"></span>
-                                <span style="background-color: #f5c2a9;"></span>
-                                <span style="background-color: #f5f4a9;"></span>
-                                <span style="background-color: #d0de41;"></span>
+                                <span class="selected" style="background-color: #c36060;"></span>
+                                <span style="background-color: #d48964;"></span>
+                                <span style="background-color: #d3c129;"></span>
                                 <span style="background-color: #89c64d;"></span>
-                                <span style="background-color: #cde7c9;"></span>
-                                <span style="background-color: #8fd0cf;"></span>
-                                <span style="background-color: #c6b7cf;"></span>
+                                <span style="background-color: #557f4f;"></span>
+                                <span style="background-color: #4a8584;"></span>
+                                <span style="background-color: #192c6a;"></span>
+                                <span style="background-color: #52266d;"></span>
                             </div>
                         </li>
                         <li>
@@ -117,7 +117,16 @@
             initialView: 'dayGridMonth',
             locale: 'ko',
             events: [
-                <c:forEach items="${sListCompany }" var="schedule">
+                <c:forEach items="${sListCompany }" var="schedule1">
+                {
+                    title: '${schedule1.scheduleTitle }',
+                    start: '${schedule1.scheduleStartDate }',
+                    end: '${schedule1.scheduleEndDate }',
+                    backgroundColor: '${schedule1.scheduleColor }',
+                    borderColor: '${schedule1.scheduleColor }',
+                },
+                </c:forEach>
+                <c:forEach items="${sListPersonal }" var="schedule">
                 {
                     title: '${schedule.scheduleTitle }',
                     start: '${schedule.scheduleStartDate }',

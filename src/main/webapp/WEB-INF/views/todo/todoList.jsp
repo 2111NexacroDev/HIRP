@@ -23,6 +23,10 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
+        <aside id="snb">
+            <h1>개인업무관리</h1>
+        </aside>
+
         <article id="sub" class="bg--gray">
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
