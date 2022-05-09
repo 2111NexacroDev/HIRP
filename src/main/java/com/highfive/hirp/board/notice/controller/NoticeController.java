@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -130,7 +131,10 @@ public class NoticeController {
 			,HttpServletRequest request
 			){
 
-		
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		noticeboard.setEmplId(emplId);
+
 		//공지 테이블 등록
 		int result = nService.registerNotice(noticeboard);
 		if(uploadFiles.size() > 0 && !uploadFiles.get(0).getOriginalFilename().equals("")) {
@@ -314,7 +318,12 @@ public class NoticeController {
 	// 공지글의 댓글 등록
 	@ResponseBody
 	@RequestMapping(value = "/notice/replyAdd.hirp", method = RequestMethod.POST)
-	public String registerNoticeReply(@ModelAttribute Reply reply) {
+
+	public String registerNoticeReply(@ModelAttribute Reply reply,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		reply.setEmplId(emplId);
+
 		int result = nService.registerNoticeReply(reply);
 		if(result > 0) {
 			return "success";
@@ -337,7 +346,12 @@ public class NoticeController {
 
 	@ResponseBody
 	@RequestMapping(value="/notice/registerReReply.hirp", method = RequestMethod.POST)
-	public String noticeReReply(@ModelAttribute Reply reply) {
+
+	public String noticeReReply(@ModelAttribute Reply reply,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		reply.setEmplId(emplId);
+
 		int result = nService.noticeReReply(reply);
 		if(result > 0) {
 			return "success";

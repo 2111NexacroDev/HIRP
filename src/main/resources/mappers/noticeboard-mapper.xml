@@ -24,7 +24,7 @@
 </resultMap>
 <!-- 게시글 등록  -->
 <insert id="insertNotice">
-	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,#{boardCode},'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
+	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,#{boardCode},#{emplId},#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
 </insert>
 <!-- 공지게시글 번호 조회  -->
 <select id="selectNoticeNo" resultType="_int">
