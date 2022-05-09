@@ -16,6 +16,7 @@ import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
+import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.store.SurveyStore;
 
@@ -55,8 +56,8 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문조사 대상자 가져오기 (응답여부 확인 가능)
 	@Override
-	public List<SurveySub> selectSurveySubByNo(SqlSession sqlSession, int surveyNo) {
-		List<SurveySub> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByNo", surveyNo);
+	public List<SurveySubEmpl> selectSurveySubByNo(SqlSession sqlSession, int surveyNo) {
+		List<SurveySubEmpl> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByNo", surveyNo);
 		return surveySubList;
 	}
 	

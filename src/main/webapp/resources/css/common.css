@@ -786,6 +786,19 @@ article {
     border: 1px solid #ccc;
 }
 
+.section--alert__survey {
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    padding: 60px 40px 46px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid #ccc;
+}
+
+
 .section--alert,
 .section--modal {
     z-index: 20;

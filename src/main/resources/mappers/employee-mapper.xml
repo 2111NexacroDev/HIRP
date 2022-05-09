@@ -30,21 +30,16 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertEmployee" parameterType="Employee"> <!-- 마이바티스에 줄이려고 써둠. id값 storelogic값과 같아야함 // 위에 타입, 아이디 중 적어줌 -->
-		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO,
-		GENDER)VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday},
-		#{phoneNo}, #{gender})
+		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER) VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender})
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="selectLoginEmployee" parameterType="Employee"
-		resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, 
-			_string) 여러개면 resultMap -->
+	<select id="selectLoginEmployee" parameterType="Employee" resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, _string) 여러개면 resultMap -->
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_PW = #{emplPw}
 	</select>
 
 	<!-- 비밀번호 찾기 -->
-	<select id="selectFindPwd" parameterType="Employee"
-		resultMap="employeeResultMap">
+	<select id="selectFindPwd" parameterType="Employee" resultMap="employeeResultMap">
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_NAME = #{emplName} AND BIRTHDAY = #{birthday}
 	</select>
 
@@ -62,5 +57,20 @@
 		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
 		WHERE EMPL_ID = #{EMPL_ID}
 	</select>
-
+	
+	<!-- 마이페이지 수정 -->
+	<update id="updateMypage" parameterType="Employee">
+    	UPDATE EMPL_TBL
+        SET EMPL_ID = #{emplId}
+        <if test='emplProfile != "" and emplProfile != null'> 
+           , EMPL_PROFILE = #{emplProfile}
+        </if>
+        <if test='emplPw != "" and emplPw != null '>
+           , EMPL_PW = #{emplPw}
+        </if>
+        <if test='phoneNo != "" and phoneNo != null '>
+           , PHONE_NO = #{phoneNo}
+        </if>
+       WHERE EMPL_ID = #{emplId}
+   </update>
 </mapper>

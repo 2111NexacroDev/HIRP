@@ -1,9 +1,11 @@
 package com.highfive.hirp.survey.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
@@ -23,6 +29,7 @@ import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
+import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.service.SurveyService;
 
@@ -91,12 +98,18 @@ public class SurveyController {
 		//응답자 리스트 보기는 버튼 누르면 아래 컨트롤러 실행되도록 해야겠다
 		return mv;
 	}
-	//응답자 리스트 보기
-	public ModelAndView proceedSurveySubList(ModelAndView mv
-			, @RequestParam("surveyNo") int surveyNo) {
+	//응답자 리스트 보기 (ajax)
+	@ResponseBody
+	@RequestMapping(value="/survey/subList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String proceedSurveySubList(
+			@RequestParam("surveyNo") int surveyNo){
 		//응답자 리스트 보기 (응답여부까지) -> 팝업창
-		
-		return mv;
+		List<SurveySubEmpl> subjectList = sService.selectSurveySubByNo(surveyNo);
+		if(!subjectList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(subjectList);
+		}
+		return "";
 	}
 	
 	//마감된 설문 페이지 (리스트 조회)
