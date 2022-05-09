@@ -33,16 +33,14 @@ public class TodoController {
 			if(!tList.isEmpty() && !mList.isEmpty()) {
 				mv.addObject("tList", tList);
 				mv.addObject("mList", mList);
-				mv.setViewName("todo/todoList");
 			} else if(!tList.isEmpty() && mList.isEmpty()) {
 				mv.addObject("tList", tList);
-				mv.setViewName("todo/todoList");
 			} else if(tList.isEmpty() && !mList.isEmpty()) {
 				mv.addObject("mList", mList);
-				mv.setViewName("todo/todoList");
 			} else {
-				mv.setViewName("common/errorPage");
+				// 아무 것도 없을 때
 			}
+			mv.setViewName("todo/todoList");
 		} catch(Exception e) {
 			mv.setViewName("common/errorPage");
 		}

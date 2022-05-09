@@ -100,27 +100,6 @@
     </div>
 
     <script>
-        // let sList = {
-        //     'scheduleInfo':${sList}
-        // };
-        // var scheduleLength = Object.keys(sList.scheduleInfo).length;
-
-        /* 달력 그림 */
-        // let temp = '';
-        // temp += '[';
-        // for(let i=0; i<scheduleLength; i++) {
-        //     temp+='{\n'
-        //     + '  title: \'' + sList.scheduleInfo[i]["scheduleTitle"] + '\',\n'
-        //     + '  start: \'' + sList.scheduleInfo[i]['scheduleStartDate'] + '\',\n'
-        //     + '  end: \'' + sList.scheduleInfo[i]['scheduleEndDate'] + '\',\n'
-        //     + '  backgroundColor: \'' + sList.scheduleInfo[i]['scheduleColor'] + '\'\n'
-        //     + '}'
-        //     if(i == scheduleLength-1) {break}
-        //     temp += ',\n'
-        // };
-        // temp += ']';
-        // console.log(temp);
-
         let calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -138,7 +117,7 @@
             initialView: 'dayGridMonth',
             locale: 'ko',
             events: [
-                <c:forEach items="${sList }" var="schedule">
+                <c:forEach items="${sListCompany }" var="schedule">
                 {
                     title: '${schedule.scheduleTitle }',
                     start: '${schedule.scheduleStartDate }',
