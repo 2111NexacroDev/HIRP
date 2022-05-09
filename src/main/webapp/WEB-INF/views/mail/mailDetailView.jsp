@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+<link rel="stylesheet" href="../../../resources/css/project.css?after">
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
@@ -43,50 +45,46 @@
                 <input type="text" name="" placeholder="통합검색">
                 <button type="submit"></button>
             </form>
-            
+        	
         	<h1 class="basic-border-bottom">
 				받은메일함
             </h1>
-            <input id="check1" class="mt-20" type="checkbox">
-            <label for="check1"></label>
             <button class="basic mt-20" type="button">답장</button>
             <button class="basic mt-20" type="button">삭제</button>
             <button class="basic mt-20" type="button">전달</button>
+            <!-- 오른쪽으로 밀어야 함 -->
+            <button class="basic mt-20"><a href="/mail/list.hirp">목록</a></button>
             
             <div class="subConts">
-	        	<table class="table--basic mt-20" style="margin-top: 40px;">
-	                    <thead>
-	                        <tr>
-	                            <th>#</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:forEach items="${mList }" var="mail">
-		                        <tr>
-		                            <td>${project.projectNo }</td>
-		                            <c:url var="mDetail" value="/mail/detail.hirp">
-										<c:param name="mailNo" value="${mail.mailNo }"></c:param>
-									</c:url>
-		                            <td><a href="${mDetail}">${mail.mailNo }</a></td>
-<%-- 		                            <td>${ }</td> --%>
-<%-- 		                            <td>${ }</td> --%>
-<%-- 		                            <td>${ }</td> --%>
-		                        </tr>
-	                        </c:forEach>
-	                    </tbody>
-	                </table>
-	                <div class="btns--paging">
-		                <button class="basic mt-20">이전</button>
-		                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
-		                	<c:url var="pagination" value="/mail/receivedList.hirp">
-		                		<c:param name="page" value="${p }"></c:param>
-		                	</c:url>
-		                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
-		                </c:forEach>
-		                <button class="basic mt-20">다음</button>
-	                </div>
-                </div>
-        </article>
+	            <form action="/mail/detail.hirp" method="get">
+	            	<table class="table--basic mt-20">
+	            		<tr>
+	            			<!-- 즐겨찾기 버튼 넣어야함 -->
+	            			<td></td>
+	            			<td>${mail.mailTitle }</td>
+	            		</tr>
+	            		<tr>
+	            			<td>보낸사람:</td>
+	            			<td>${mail.mailSender }</td>
+	            		</tr>
+	            		<tr>
+	            			<td>받는사람:</td>
+	            			<td>${mail.recipientId }</td>
+	            		</tr>
+	            		<tr>
+	            			<td>보낸날짜:</td>
+	            			<td>${mail.mailDate }</td>
+	            		</tr>
+	            		<tr>
+	            			<td>${mail.fileName }</td>
+	            		</tr>
+	            		<tr>
+	            			<td>${mail.mailContents }</td>
+	            		</tr>
+	            	</table>
+	            </form>
+            </div>
+		</article>
 	</div>
 </body>
 </html>

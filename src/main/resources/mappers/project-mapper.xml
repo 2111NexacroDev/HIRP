@@ -12,6 +12,14 @@
 		<result property="projectManager" column="PROJECT_MANAGER"/>
 	</resultMap>
 	
+	<resultMap type="Board" id="BoardResultMap">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="projectNo" column="PROJECT_NO"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="boardContents" column="BOARD_CONTENTS"/>
+		<result property="boardStatus" column="BOARD_STATUS"/>
+	</resultMap>
+	
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM PROJECT_TBL
 	</select>
@@ -28,10 +36,6 @@
 		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
 	</insert>
 
-	<insert id="insertBoard">
-		INSERT INTO 
-	</insert>
-
 	<update id="updateProject" parameterType="Project">
 		UPDATE PROJECT_TBL SET PROJECT_NAME=#{projectName}, START_DATE=#{startDate}, END_DATE=#{endDate}, PROJECT_MANAGER=#{projectManager} WHERE PROJECT_NO=#{projectNo}
 	</update>
@@ -39,4 +43,20 @@
 	<delete id="deleteProject" parameterType="Project">
 		DELETE FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
 	</delete>
+	
+	<select id="selectAllBoard" resultMap="BoardResultMap">
+		SELECT * 
+		FROM BOARD_TBL 
+		WHERE PROJECT_NO = #{projectNo}
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD_TBL VALUES(BOARD_NO.NEXTVAL, #{projectNo}, #{emplName}, #{boardContents}, #{boardStatus})
+	</insert>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
 </mapper>
