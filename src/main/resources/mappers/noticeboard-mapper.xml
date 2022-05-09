@@ -14,17 +14,40 @@
 <result property="status" column="NOTICE_STATUS"></result>
 </resultMap>
 
-
+<!-- 게시글 등록  -->
 <insert id="insertNotice">
 	INSERT INTO BOARD_NOTICE_TBL VALUES( NOTICE_BOARD_SEQ.NEXTVAL,#{boardCode},'khuser01',#{noticeTitle},#{noticeContents},DEFAULT, DEFAULT,DEFAULT)
 </insert>
+<!-- 공지게시글 번호 조회  -->
 <select id="selectNoticeNo" resultType="_int">
 	SELECT NOTICE_NO FROM(SELECT NOTICE_NO, RANK()OVER(ORDER BY NOTICE_WRITE_DATE DESC )RANK_NUM FROM BOARD_NOTICE_TBL)WHERE RANK_NUM = 1
 </select>
+<!-- 첨부파일 등록  -->
 <insert id="insertNoticeFile">
 	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
 </insert>
-
-
-
+<!-- 공지게시글 리스트 조회  -->
+<select id="selectAllNotice" resultMap="noticeResultMap">
+	SELECT * FROM BOARD_NOTICE_TBL  WHERE NOTICE_STATUS = 'Y' ORDER BY NOTICE_NO DESC
+</select>
+<!-- 공지게시글 리스트 개수 조회 -->
+<select id="selectListCount" resultType="_int">
+	SELECT COUNT(*) FROM BOARD_NOTICE_TBL WHERE NOTICE_STATUS = 'Y'
+</select>
+<select id="selectSearchNotice" resultMap="noticeResultMap">
+  		<if test="searchCondition.toString() =='writer'">
+  		SELECT * FROM BOARD_NOTICE_TBL WHERE EMPL_ID LIKE '%' || #{searchValue} || '%'
+  		</if>
+  		<if test="searchCondition.toString() =='title'">
+  		SELECT * FROM BOARD_NOTICE_TBL WHERE NOTICE_TITLE LIKE '%'|| #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='contents'">
+  		SELECT * FROM BOARD_NOTICE_TBL WHERE NOTICE_CONTENTS LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='all'">
+  		SELECT * FROM BOARD_NOTICE_TBL WHERE NOTICE_CONTENTS LIKE '%' ||  #{searchValue} || '%'
+  		OR NOTICE_TITLE LIKE '%' ||  #{searchValue} || '%'
+  		OR EMPL_ID LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  	</select>
 </mapper>

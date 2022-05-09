@@ -51,7 +51,8 @@ input[type="radio"]+label {
     vertical-align: middle;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
     padding: 0 10px;
     height: 30px;
     line-height: 28px;
@@ -138,13 +139,13 @@ button.emergency {
 }
 
 button.noneBackground {
-	background-color: #fff;
+    background-color: #fff;
     border: 0px none;
     color: #000;
 }
 
 button.colorGrey {
-	background-color: #fff;
+    background-color: #fff;
     border: 0px none;
     color: #ccc;
 }

@@ -1,72 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
-<link rel="stylesheet" href="../../resources/css/main.css"><!-- 메인페이지 CSS -->
-<script src="../../resources/js/main.js"></script>
+<html>
+<link rel="stylesheet" href="../../resources/css/employee.css">
+<!-- 세션 있을 때(로그인되어 있는 상태일 경우), 홈으로 이동 -->
+<c:if test="${not empty sessionScope }">
+	<script>location.href="/home.hirp";</script>
+</c:if>
+<body id="loginPage">
+	<form action="/employee/login.hirp" method="post" enctype="multipart/form-data">
+		<!-- post일 떄 꼭 써줘야함 enctype -->
+		<input name="emplId" type="text" placeholder="아이디를 입력해 주세요." autocomplete="off">		
+		<input class="mt-10" name="emplPw" type="password" placeholder="비밀번호를 입력해 주세요.">
 
-<!-- 
-    id는 한 페이지 내에 동일한 id가 하나여야함
-    양식 가져다 쓸 때 공통되는 내용 아니면 id 꼭 바꿔서 써주기
-    스타일 중복되면 맨 밑에 거(최신 거)가 우선 적용됨
-    class는 여러번 사용 가능, 여러 개 지정 가능 
--->
-
-<body class="bg--gray">
-    <!-- 배경색 회색되는 css넣어놨음. 배경색 필요할 때 클래스 bg--gray 추가하기 -->
-    <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
-
-    <div id="conts">
-        <article id="main">
-            <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
-
-            <!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
-            <form class="form--srch" action="">
-                <input type="text" name="" placeholder="통합검색">
-                <button type="submit"></button>
-            </form>
-
-            <h1 class="basic-border-bottom">
-                일정관리
-            </h1>
-
-            <div class="row">
-                <div>
-                    <!-- 컬럼1 -->
-                    <section>
-                        <figure class="figure--profile">
-                            <img src="../resources/images/profile.jpg" alt="profile">
-                            <!-- 유저마다 다른 사진 출력돼야함 -->
-                        </figure>
-                        <h2 class="t-c">ㅇㅇㅇ</h2>
-                    </section>
-                    <section>
-                        <h2>근태관리</h2>
-                    </section>
-                </div><!-- //컬럼1 -->
-                <div>
-                    <!-- 컬럼2 -->
-                    <section>
-                        <h2>일정</h2>
-                        <div id="calendar"></div>
-                    </section>
-                    <section>
-                        <h2>메일함</h2>
-                    </section>
-                </div><!-- //컬럼2 -->
-                <div>
-                    <!-- 컬럼3 -->
-                    <section>
-                        <h2>생일</h2>
-                    </section>
-                    <section>
-                        <h2>결재 대기 문서</h2>
-                    </section>
-                </div><!-- //컬럼3 -->
-            </div>
-        </article>
-    </div>
+		<div class="mt-10">
+			<!-- 아이디는 기능상/디자인상 필요한 경우가 아니면 추가하지 않아도 됨 -->
+			<input id="check1" class="mt-20" type="checkbox">
+			<label for="check1">자동 로그인</label>&nbsp;&nbsp;&nbsp;
+			<input id="check2" class="mt-20" type="checkbox">
+			<label for="check2">아이디 저장</label>
+		</div>
+		
+		<button class="point mt-20" type="submit">로그인</button>
+		<!-- 서브밋이면 폼 action에 url 적어줌, 온클릭은 submit 버튼 이외의 기능(예/팝업 열릴 때)만 사용 -->	
+		
+		<div class="mt-10 t-c">
+			<a id="myLink1" style="text-decoration:underline" href="/employee/registerView.hirp">회원가입</a>&nbsp;&nbsp;
+			<a id="myLink2" style="text-decoration:underline" href="/employee/findPwdView1.hirp">비밀번호 찾기</a> 
+			<!-- id는 같은 게 한 페이지 안에 하나만 있어야 함 -->
+		</div>
+	</form>
+		
+	<p class="p--foot t-c">
+		통합그룹웨어 문의사항은 운영 담당자에게 연락하여 주시기 바랍니다.<br>
+		☎ 010-XXXX-XXXX,  담당: 하이알피 개발팀<br><br>
+		<small>COPYRIGHT (c) HIRP GROUP. All Rights Reserved.</small>
+	</p>
 </body>
-
 </html>

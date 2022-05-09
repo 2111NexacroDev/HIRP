@@ -27,11 +27,10 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 
 	public Employee() {}
 
-	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName,
-			Date startDate, String email, String directNo, String phoneNo, String recruitCategory,
-			String salaryCategory, String referrer, String isStatus, String birthday, String gender, String isMarriage,
-			String isDisability, String isVeterans, Date endDate, String endReason, String emplProfile) {
-
+	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName, Date startDate,
+			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
+			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
+			String isVeterans, Date endDate, String endReason, String emplProfile) {
 		super();
 		this.emplId = emplId;
 		this.deptCode = deptCode;

@@ -131,7 +131,7 @@
                         <div class="bg-black"></div>
                         <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
                         <div class="section--alert__conts">
-                            <button class="btn--close"></button>
+                            <button class="btn--close" type="button"></button>
                             <p>
                                 확인을 누르시면<br>
                                 ~~이 진행됩니다. 삭제하시겠습니까?
@@ -148,7 +148,7 @@
                         <div class="bg-black"></div>
                         <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
                         <div class="section--modal__conts">
-                            <button class="btn--close"></button>
+                            <button class="btn--close" type="button"></button>
                             <h3>모달창</h3>
                             <p class="mb-20">
                                 필요한 내용 쫘르륵
