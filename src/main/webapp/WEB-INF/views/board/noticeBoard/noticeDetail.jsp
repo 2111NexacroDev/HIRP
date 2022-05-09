@@ -137,13 +137,16 @@
 					$tableBody.append($trCount);
 					for(var i = 0; i < data.length; i++) {
 						var $tr = $("<tr>");
+
 						var $br = $("<br>");
 						var $rWriter 	 = $("<td width='100'>").text(data[i].emplId);
 						var $rContent 	 = $("<td width='250'>").text(data[i].replyContents);
+
 						var $rCreateDate = $("<td width='100'>").text(data[i].writeDate);
 						var $btnArea 	 = $("<td width='80'>")
 											.append("<a href='javascript:void(0)' onclick='modReplyView(this, "+data[i].replyNo+", \""+data[i].replyContents+"\");'>수정</a> ")
 											.append("<a href='javascript:void(0)' onclick='removeReply("+data[i].replyNo+");'>삭제</a>")
+
 							
 						var $btnReReply	 = $("<td width='80'>").append("<a href='javascript:void(0)' onclick='ReReplyWriteView(this, "+data[i].replyNo+", \""+data[i].replyContents+"\");'>답글</a>");
 						
@@ -161,6 +164,7 @@
 							$tr.append($btnArea);
 							$tableBody.append($tr);
 						}
+
 					}
 				},
 				error   : function() { 
@@ -230,6 +234,7 @@
 			})
 		} 
 		
+
 		   function ReReplyWriteView(obj, parentReplyNo, replyContents) {
 			    var $trReReply = $("<tr>");
 				var $tdReReply = $("<td colspan='3'>");
@@ -257,14 +262,17 @@
 							getReplyList();
 						}else{
 							alert("등록 실패");
+
 						}
 					},
 					error : function() {
 						alert("Ajax 통신 실패");
 					}
+
 				})
 			} 
 		   
+
 		   
 	</script>		
 			
