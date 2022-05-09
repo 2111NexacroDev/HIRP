@@ -32,7 +32,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	}
 
 	@Override
-	public NoticeBoard printNoticeDetail(int noticeNo) {
+	public NoticeBoard printOneNotice(int noticeNo) {
 		NoticeBoard noticeboard = nStore.selectOneNotice(sqlSession,noticeNo);
 		return noticeboard;
 	}
@@ -87,8 +87,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	}
 
 	@Override
-	public int removeNoticeReply(Reply reply) {
-		int result = nStore.deleteNoticeReply(sqlSession, reply);
+	public int removeNoticeReply(int replyNo) {
+		int result = nStore.deleteNoticeReply(sqlSession, replyNo);
 		return result;
 	}
 
@@ -97,10 +97,10 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		int listCount = nStore.selectListCount(sqlSession);
 		return listCount;
 	}
-
+	//조회수 증가
 	@Override
 	public int viewCount(int noticeNo) {
-		int viewCount = nStore.selectViewCount(sqlSession,noticeNo);
+		int viewCount = nStore.updateViewCount(sqlSession,noticeNo);
 		return viewCount;
 	}
 
@@ -108,6 +108,25 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	public int registerNoticeFile(BoardAttachedFile boardFile) {
 		int fileResult = nStore.insertNoticeFile(sqlSession, boardFile);
 		return fileResult;
+	}
+
+	//첨부파일 조회
+	@Override
+	public List<BoardAttachedFile> printAllFile() {
+		List<BoardAttachedFile> fList = nStore.selectAllFile(sqlSession);
+		return fList;
+	}
+	//게시글 디테일 첨부파일 조회
+	@Override
+	public List<BoardAttachedFile> printOneFile(int noticeNo) {
+		List<BoardAttachedFile> fList = nStore.selectOneFile(sqlSession,noticeNo);
+		return fList;
+	}
+	//답글
+	@Override
+	public int noticeReReply(Reply reply) {
+		int result = nStore.insertReReply(sqlSession,reply);
+		return result;
 	}
 
 

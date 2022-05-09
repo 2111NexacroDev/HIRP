@@ -14,8 +14,13 @@ public interface NoticeBoardService {
 
 	//공지사항 리스트 조회
 	public List<NoticeBoard> printAllNotice(PageInfo pi);
+	//첨부파일 조회
+	public List<BoardAttachedFile> printAllFile();
+		
 	//공지사항 디테일 조회
-	public  NoticeBoard printNoticeDetail(int noticeNo);
+	public  NoticeBoard printOneNotice(int noticeNo);
+	//공지글 첨부파일 디테일 조회
+	public List<BoardAttachedFile> printOneFile(int noticeNo);
 	//공지사항 검색 조회
 	public List<NoticeBoard>printSearchNotice(Search search);
 	//공지글 등록
@@ -43,6 +48,7 @@ public interface NoticeBoardService {
 	//댓글 수정
 	public int modifyNoticeReply(Reply reply);
 	//댓글 삭제
-	public int removeNoticeReply(Reply reply);
+	public int removeNoticeReply(int replyNo);
+	public int noticeReReply(Reply reply);
 	
 }

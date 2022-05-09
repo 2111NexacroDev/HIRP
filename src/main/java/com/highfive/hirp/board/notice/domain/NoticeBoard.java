@@ -1,6 +1,9 @@
 package com.highfive.hirp.board.notice.domain;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.highfive.hirp.board.common.BoardAttachedFile;
 
 public class NoticeBoard {
 
@@ -12,21 +15,10 @@ public class NoticeBoard {
 	private Date writeDate;
 	private int noticeCount;
 	private String status;
+	List<BoardAttachedFile> bList;
 	
 	public NoticeBoard() {}
 
-	public NoticeBoard(int noticeNo, String boardCode, String emplId, String noticeTitle, String noticeContents,
-			Date writeDate, int noticeCount, String status) {
-		super();
-		this.noticeNo = noticeNo;
-		this.boardCode = boardCode;
-		this.emplId = emplId;
-		this.noticeTitle = noticeTitle;
-		this.noticeContents = noticeContents;
-		this.writeDate = writeDate;
-		this.noticeCount = noticeCount;
-		this.status = status;
-	}
 
 	public int getNoticeNo() {
 		return noticeNo;
@@ -92,12 +84,21 @@ public class NoticeBoard {
 		this.status = status;
 	}
 
+	public List<BoardAttachedFile> getbList() {
+		return bList;
+	}
+
+	public void setbList(List<BoardAttachedFile> bList) {
+		this.bList = bList;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoard [noticeNo=" + noticeNo + ", boardCode=" + boardCode + ", emplId=" + emplId
 				+ ", noticeTitle=" + noticeTitle + ", noticeContents=" + noticeContents + ", writeDate=" + writeDate
-				+ ", noticeCount=" + noticeCount + ", status=" + status + "]";
+				+ ", noticeCount=" + noticeCount + ", status=" + status + ", bList=" + bList + "]";
 	}
+
 
 	
 	

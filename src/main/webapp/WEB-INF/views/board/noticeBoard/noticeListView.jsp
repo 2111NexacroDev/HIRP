@@ -12,35 +12,7 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <aside id="snb">
-            <h1>게시판</h1>
-            <a class="btn--function" href="/board/writeView.hirp">글쓰기</a>
-            <ul>
-                <li>
-                    <a href="">전사게시판</a>
-                    <ul>
-                        <li><a href="#">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                 <li>
-                    <a href="">부서게시판</a>
-                    <ul>       
-                        <li><a href="#">개발팀 게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                <li>
-                    <a href="">나의 활동</a>
-                    <ul>       
-                        <li><a href="#">작성한 글 조회</a></li>
-                        <li><a href="#">작성한 댓글 조회</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </aside>
+        <%@ include file="/WEB-INF/views/include/inc_board.jsp" %>
 
         <article id="sub" class="">
        
@@ -62,10 +34,10 @@
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-						<!--<th>첨부파일</th>-->
+							<th>첨부파일</th>
 						</tr>
                     </thead>
-                    <c:forEach items="${nList }" var="notice">
+                    <c:forEach var="notice" items="${nList }">
                     <tbody>
                         <tr>
                            	<c:url var="nDetail" value="/notice/detail.hirp">
@@ -77,11 +49,15 @@
 							<td>${notice.emplId }</td>
 							<td>${notice.writeDate}</td>
 							<td>${notice.noticeCount }</td>
-						<!--<td>&nbsp;&nbsp;${board.boardFilename}</td>-->
+							<td>
+							<c:if test="${empty notice.bList}">X</c:if>
+							<c:if test="${not empty notice.bList}">O</c:if>
+							</td>
                         </tr>
                         </tbody>
                         </c:forEach>
 				</table>
+				<div class="btns--paging">
                     <button class="basic mt-20">이전</button>
 						<c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
 							<c:url var="pagination" value="/notice/list.hirp">
@@ -90,7 +66,10 @@
 							&nbsp;<a href="${pagination }">${p }</a>&nbsp;
 						</c:forEach>
 					<button class="basic mt-20">다음</button>
+				</div>
 					<form action="/notice/searchList.hirp" method="get">
+					<input type="hidden" name="currentPage" value="1">
+					<input type="hidden" name="listLimit" value="10">
 						<select name="searchCondition">
 							<option value="all">전체</option>
 							<option value="title">제목</option>

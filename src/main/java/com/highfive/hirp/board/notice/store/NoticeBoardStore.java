@@ -14,8 +14,12 @@ public interface NoticeBoardStore {
 //공지사항 게시글
 	//공지사항 리스트 출력
 	public List<NoticeBoard> selectAllNotice(SqlSession sqlSession,PageInfo pi);
+	//첨부파일 리스트 조회
+	public List<BoardAttachedFile> selectAllFile(SqlSession sqlSession);
 	//공지사항 디테일 출력
 	public NoticeBoard selectOneNotice(SqlSession sqlSession, int noticeNo);
+	//공지글 첨부파일 디테일 출력
+	public List<BoardAttachedFile> selectOneFile(SqlSession sqlSession, int noticeNo);
 	//공지사항 검색 리스트 출력
 	public List<NoticeBoard> selectSearchNotice(SqlSession sqlSession, Search search);
 	//공지사항 등록
@@ -31,7 +35,7 @@ public interface NoticeBoardStore {
 	//공지사항 리스트 개수
 	public int selectListCount(SqlSession sqlSession);
 	//조회수
-	public int selectViewCount(SqlSession sqlSession, int noticeNo);
+	public int updateViewCount(SqlSession sqlSession, int noticeNo);
 	
 	
 	
@@ -45,6 +49,8 @@ public interface NoticeBoardStore {
 	//공지사항 댓글 수정
 	public int updateNoticeReply(SqlSession sqlSession, Reply reply);
 	//공지사항 댓글 삭제
-	public int deleteNoticeReply(SqlSession sqlSession, Reply reply);
+	public int deleteNoticeReply(SqlSession sqlSession, int replyNo);
+	public int insertReReply(SqlSession sqlSession, Reply reply);
+	
 
 }
