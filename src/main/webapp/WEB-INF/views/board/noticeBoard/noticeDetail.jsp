@@ -137,18 +137,30 @@
 					$tableBody.append($trCount);
 					for(var i = 0; i < data.length; i++) {
 						var $tr = $("<tr>");
+						var $br = $("<br>");
 						var $rWriter 	 = $("<td width='100'>").text(data[i].emplId);
-						var $rContent 	 = $("<td>").text(data[i].replyContents);
+						var $rContent 	 = $("<td width='250'>").text(data[i].replyContents);
 						var $rCreateDate = $("<td width='100'>").text(data[i].writeDate);
 						var $btnArea 	 = $("<td width='80'>")
 											.append("<a href='javascript:void(0)' onclick='modReplyView(this, "+data[i].replyNo+", \""+data[i].replyContents+"\");'>수정</a> ")
 											.append("<a href='javascript:void(0)' onclick='removeReply("+data[i].replyNo+");'>삭제</a>")
-											.append("<a href='javascript:void(0)' onclick='ReReplyWriteView(this, "+data[i].replyNo+");'>답글</a>");
-						$tr.append($rWriter);
-						$tr.append($rContent);
-						$tr.append($rCreateDate);
-						$tr.append($btnArea);
-						$tableBody.append($tr);
+							
+						var $btnReReply	 = $("<td width='80'>").append("<a href='javascript:void(0)' onclick='ReReplyWriteView(this, "+data[i].replyNo+", \""+data[i].replyContents+"\");'>답글</a>");
+						
+						if(data[i].replyOrder == 0){
+							$tr.append($rWriter);
+							$tr.append($rContent);
+							$tr.append($rCreateDate);
+							$tr.append($btnArea);
+							$tr.append($btnReReply);
+							$tableBody.append($tr);
+						}else{
+							$tr.append($br).append($rWriter);
+							$tr.append($rContent);
+							$tr.append($rCreateDate);
+							$tr.append($btnArea);
+							$tableBody.append($tr);
+						}
 					}
 				},
 				error   : function() { 
@@ -218,45 +230,40 @@
 			})
 		} 
 		
-		  
-		   
-		   function insertReReply(replyNo) {
-				/* var boardNo = "${notice.noticeNo}";
-				var boardCode = "${notice.boardCode}"; */
-				var reReplyData = $("#reReplyData").val();
-				$.ajax({
-					url : "/notice/registerReReply.hirp",
-					type : "post",
-					data : { "parentReplyNo" : replyNo, "replyContents" : reReplyData },
-					success : function(data) {
-						if(data == "success") {
-							alert("등록성공");
-							getReplyList();
-							
-						}else{
-							alert("답글 등록 실패");
-						}
-					},
-					error : function() {
-						alert("Ajax 통신 실패");
-					}
-				}) 
-			} 
-		   
-		   function ReReplyWriteView(obj, replyNo) {
+		   function ReReplyWriteView(obj, parentReplyNo, replyContents) {
 			    var $trReReply = $("<tr>");
 				var $tdReReply = $("<td colspan='3'>");
 				var $tdReReplyBtn = $("<td>");
 				
 				$tdReReply.append("<input type='text' size='50' id='reReplyData'>");
-				$tdReReplyBtn.append("<button onclick='insertReReply("+replyNo+");'>등록</button>");
+				$tdReReplyBtn.append("<button onclick='insertReReply("+parentReplyNo+");'>등록</button>");
 				$trReReply.append($tdReReply);
 				$trReReply.append($tdReReplyBtn);
 				$(obj).parent().parent().after($trReReply);
 			
 			}
 		   
-		   
+		   function insertReReply(parentReplyNo) {
+			   var boardNo = "${notice.noticeNo}";
+			   var boardCode = "${notice.boardCode}"; 
+			   var replyContents = $("#reReplyData").val();
+				$.ajax({
+					url : "/notice/registerReReply.hirp",
+					type : "post",
+					data : { "parentReplyNo" : parentReplyNo, "replyContents" : replyContents,"boardCode" : boardCode, "boardNo" : boardNo, "replyContents" : replyContents },
+					success : function(data) {
+						if(data == "success") {
+							alert("등록 성공");
+							getReplyList();
+						}else{
+							alert("등록 실패");
+						}
+					},
+					error : function() {
+						alert("Ajax 통신 실패");
+					}
+				})
+			} 
 		   
 		   
 	</script>		
