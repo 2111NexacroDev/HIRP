@@ -16,6 +16,7 @@ import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
+import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.service.SurveyService;
 import com.highfive.hirp.survey.store.SurveyStore;
@@ -61,8 +62,8 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문조사 대상자 가져오기(응답여부까지)
 	@Override
-	public List<SurveySub> selectSurveySubByNo(int surveyNo) {
-		List<SurveySub> surveySubList = sStore.selectSurveySubByNo(sqlSession, surveyNo);
+	public List<SurveySubEmpl> selectSurveySubByNo(int surveyNo) {
+		List<SurveySubEmpl> surveySubList = sStore.selectSurveySubByNo(sqlSession, surveyNo);
 		return surveySubList;
 	}
 	//설문조사 등록
