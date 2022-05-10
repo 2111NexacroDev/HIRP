@@ -76,7 +76,7 @@
 	            	<!-- 첫번째 질문 div 끝 -->
 	            	
 	            	<!-- 질문 추가 div 시작 -->
-	            	<div class="basic-border-top padding-20">
+	            	<div class="basic-border-top padding-20" style="display:none;">
 	            		<div class="row">
 			                <div class="col-3">
 			                    <div>질문</div>
@@ -140,7 +140,7 @@
         		var $quest = $(e).parent().prev().children().next(); //질문 div 통째로
         		var $borderDiv = $("<div class='basic-border-top padding-20'>");
         		$borderDiv.append($quest.html());
-        		if(qCount < 4) {
+        		if(qCount < 5) {
 					$questListDiv.append($borderDiv);
         		} else {
         			console.log("문항은 최대 4개까지");
