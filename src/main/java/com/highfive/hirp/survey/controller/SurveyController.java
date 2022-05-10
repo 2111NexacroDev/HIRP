@@ -193,7 +193,7 @@ public class SurveyController {
 			//설문 등록
 			int result = sService.insertSurvey(survey);
 			if(result > 0) {
-				mv.setViewName("survey/writeQuest.hirp");
+				mv.setViewName("survey/surveyWriteQuest");
 			} else {
 				mv.addObject("msg1", "설문조사 정보 추가 실패");
 				mv.setViewName("common/errorPage");
