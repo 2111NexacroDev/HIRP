@@ -872,3 +872,15 @@ article {
 .btn--paging {
     text-align: center;
 }
+
+.btns-wrap {
+    position: relative;
+}
+
+.btns-wrap a.delete {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    color: red;
+    text-decoration: underline;
+}
