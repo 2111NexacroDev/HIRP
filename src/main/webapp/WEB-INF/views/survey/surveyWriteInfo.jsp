@@ -99,23 +99,23 @@
 		            </div>
 		            <!-- 마지막 선 넣어준 div 끝... -->
 		            <div class="t-c">
-			            <button class="point mt-20" type="submit">다음</button>
-			            <section class="section--modal">
-	                        <div class="bg-black"></div>
-	                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-	                        <div class="section--modal__conts" style="width:400px;">
-	                            <button class="btn--close" type="button"></button>
-	                            <h3 align="left">설문조사 작성</h3>
-	                            <p class="mb-20 padding-bottom">
-	                                확인을 누르면 설문조사 등록을 완료할 때까지<br>
-	                                입력한 정보를 수정할 수 없습니다.<br>
-	                                설문조사 정보 등록을 완료하시겠습니까?<br>
-	                            </p>
-	                            <div class="btns-wrap mt-20 t-r">
-	                                <button class="point" type="button">확인</button>
-	                                <button class="finished closeWindow" type="button">취소</button>
-	                            </div>
-	                        </div>
+			            <button class="point mt-20" type="submit" onclick="location.href='/survey/writeQuest.hirp'">다음</button>
+<!-- 			            <section class="section--modal"> -->
+<!-- 	                        <div class="bg-black"></div> -->
+<!-- 	                        검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+<!-- 	                        <div class="section--modal__conts" style="width:400px;"> -->
+<!-- 	                            <button class="btn--close" type="button"></button> -->
+<!-- 	                            <h3 align="left">설문조사 작성</h3> -->
+<!-- 	                            <p class="mb-20 padding-bottom"> -->
+<!-- 	                                확인을 누르면 설문조사 등록을 완료할 때까지<br> -->
+<!-- 	                                입력한 정보를 수정할 수 없습니다.<br> -->
+<!-- 	                                설문조사 정보 등록을 완료하시겠습니까?<br> -->
+<!-- 	                            </p> -->
+<!-- 	                            <div class="btns-wrap mt-20 t-r"> -->
+<!-- 	                                <button class="point" type="button">확인</button> -->
+<!-- 	                                <button class="finished closeWindow" type="button">취소</button> -->
+<!-- 	                            </div> -->
+<!-- 	                        </div> -->
 	                    </section>
 			            <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
 			            	뒤로가기 안되게 -->

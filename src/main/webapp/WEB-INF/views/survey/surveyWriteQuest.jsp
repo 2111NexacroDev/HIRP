@@ -51,13 +51,13 @@
 			                    <div>설문 문항 타입</div>
 			                </div>
 			                <div class="">
-			                   	<select class="" name="questType1" id="questType1" onchange="questTypeChange(this)">
+			                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
 			                   		<option value="">유형 선택</option>
 				                    <option value="C">선택형</option>
 				                    <option value="D">날짜형</option>
 				                    <option value="T">텍스트형</option>
 				                </select>
-				                <select class="" name="questType2" id="questType2">
+				                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
 				                	<option value="">선택해주세요</option>
 				                </select>
 			                </div>
@@ -90,13 +90,13 @@
 			                    <div>설문 문항 타입</div>
 			                </div>
 			                <div class="">
-			                   	<select class="" name="questType1" id="questType1" onchange="questTypeChange(this)">
+			                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
 			                   		<option value="">유형 선택</option>
 				                    <option value="C">선택형</option>
 				                    <option value="D">날짜형</option>
 				                    <option value="T">텍스트형</option>
 				                </select>
-				                <select class="" name="questType2" id="questType2">
+				                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
 				                	<option value="">선택해주세요</option>
 				                </select>
 			                </div>
@@ -118,7 +118,7 @@
             
             <!-- 문항 추가 -->
             <div class="t-c">
-	            <button class="basic mt-20" style="width:50%;"type="button">문항 추가</button>
+	            <button class="basic mt-20" style="width:50%;"type="button" onclick="addQuest(this)">문항 추가</button>
             </div>
 	            
             <div class="t-c">
@@ -130,41 +130,41 @@
         </article>
         
         <script>
-        	//두번째 select 박스 출력
-        	function questTypeChange(e) {
+        	//문항 추가
+        	function addQuest(e){
+        		console.log(e);
+        		var $questListDiv = $(e).parent().prev(); //질문 리스트 감싸는 div
+        		console.log($questListDiv);
+        		var qCount = $questListDiv.children().length; //질문 갯수
+        		
+        		var $quest = $(e).parent().prev().children().next(); //질문 div 통째로
+        		var $borderDiv = $("<div class='basic-border-top padding-20'>");
+        		$borderDiv.append($quest.html());
+        		if(qCount < 4) {
+					$questListDiv.append($borderDiv);
+        		} else {
+        			console.log("문항은 최대 4개까지");
+        		}
+        		
+        	}
+        	
+        	//첫번째 문항 타입 change
+        	function questType1Change(e) {
         		console.log(e.value);
         		var choice = ["하나만 선택", "복수 선택"];
         		var text = ["단문 입력", "장문 입력"];
-        		var target = document.getElementById("questType2");
-        		
-        		var $chList = $("#choiceList");	//보기 리스트 출력하는 div
-        		var $chMaxCombo = $("#choiceMax"); //최대 선택 개수 출력하는 div
+        		var target2 = $(e).next()[0]; //questType1
+//         		console.log(target);
+        		console.log(target2);
+        		var $chList = $(e).parent().parent().next();	//보기 리스트 출력하는 div
+//         		var $chMaxCombo = $("#choiceMax"); 
+        		var $chMaxCombo = $(e).parent().parent().next().next().next(); //최대 선택 개수 출력하는 div
     			$chList.html("");
-    			$chMaxCombo.html("");
-    			var choiceCount = 0; //보기 개수
+        		$chMaxCombo.html("");
+//     			$chMaxCombo.html("");
+//     			var choiceCount = 0; //보기 개수
+    			var choiceCount = 1; //보기 개수
     			
-//     			<div class="row mt-20">
-// 	                <div class="col-3">
-// 	                    <div>보기</div>
-// 	                </div>
-// 	                <div class="">
-// 	                   	<input type="text" placeholder="보기1 입력">
-// 	                   	<button class="noneBackground"><i class="fa-solid fa-plus"></i></button>
-// 	                   	<button class="noneBackground"><i class="fa-solid fa-xmark"></i></button>
-// 	                </div>
-// 	            </div>
-    			
-//     			<div class="row mt-20" >
-// 	                <div class="col-3">
-// 	                    <div>최대 선택 개수</div>
-// 	                </div>
-// 	                <div class="">
-// 	                   	<select class="" name="" id="questAnswerCount" onchange="">
-// 	                   		<option value="">제한없음</option>
-// 		                </select>
-// 	                </div>
-// 	            </div>
-            
         		if(e.value == "C" || e.value == "D") {
         			var type2 = choice;
         			//처음에 보기 1개 출력
@@ -179,50 +179,58 @@
 			                   	+"<button class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
 			                +"</div>"
 			            +"</div>");
-        			
-        			//최대 선택 개수
-        			var $chMaxDiv =
-        				$("<div class='row mt-20' >"
-	        	                +"<div class='col-3'>"
-				                    +"<div>최대 선택 개수</div>"
-				                +"</div>"
-				                +"<div class=''>"
-				                   	+"<select class='' name='' id='questAnswerCount' onchange=''>"
-				                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
-					                +"</select>"
-				                +"</div>"
-				            +"</div>");
-        			
+        		
         			$chList.append($chListDiv);
-        			$chMaxCombo.append($chMaxDiv);
-        			choiceCount = $('.questChoiceList').length;
+        			
+        			choiceCount = $chList.children().length; //보기 개수
+        			console.log(choiceCount);
         			console.log("선택형이나 날짜형을 눌렀을 때 보기 개수:"+choiceCount);
         			
         		}
         		else if(e.value == "T") {
         			var type2 = text;
         			$chList.html("");
-        			$chMaxCombo.html("");
-        			choiceCount = $('.questChoiceList').length;
-        			console.log("텍스트를 눌렀을 때 보기 개수:"+choiceCount);
+//         			$chMaxCombo.html("");
+        			choiceCount = $chList.children().length; //보기 개수
+        			console.log("텍스트를 눌렀을 때 보기 개수:"+choiceCount2);
         		}
         		
         		console.log("보기 개수:"+choiceCount);
         		
-        		target.options.length = 0;
+        		target2.options.length = 0;
         		for(i in type2) {
         			var opt = document.createElement("option");
         			opt.value = type2[i];	//value를 이렇게 가는 게 맞나? 고민 좀 해보기
         			opt.innerHTML = type2[i];
-        			target.appendChild(opt);
+        			target2.appendChild(opt);
         		}
         	}
         	
-        	function addChList() {
-        		var $chList = $("#choiceList");	//보기 리스트 출력하는 div
-        		var target = document.getElementById("questAnswerCount"); //최대 선택 개수 콤보
-        		var chCount = $('.questChoiceList').length; //보기 개수
-        		var $chMaxAlert = $("#choiceMaxAlert"); //보기 max일 때 알림 적어줄 div
+        	//두번째 문항 타입 change
+        	function questType2Change(e){
+        		console.log(e.value);
+        		if(e.value == "복수 선택"){
+        			addChMaxCombo(e);
+        		} else { //복수 선택이 아니면 다시 비워주기
+        			var $chMaxCombo = $(e).parent().parent().next().next().next(); //최대 선택 개수 출력하는 div
+            		$chMaxCombo.html("");
+        		}
+        	}
+        	
+        	
+        	//보기 추가
+        	function addChList(e) {
+        		var $chList = $(e).parent().parent().parent(); //보기 리스트 출력하는 div (choiceList)
+//         		var target = document.getElementById("questAnswerCount"); //최대 선택 개수 콤보
+//         		var target2 = $("#questAnswerCount")[0];
+        		var target = $chList.next().next().children().find("#questAnswerCount")[0];  //최대 선택 개수 combo
+        		console.log(target);
+//         		console.log(target2);
+        		
+        		var chCount = $chList.children().length; //보기 개수
+        		var $chMaxAlert = $chList.next(); //보기 max일 때 알림 적어줄 div
+        		console.log("maxAlert");
+        		console.log($chMaxAlert);
         		
         		//보기 4개까지 추가 가능
         		if(chCount < 4) {
@@ -234,13 +242,12 @@
     	                	+"</div>"
     		                +"<div class='questChoiceList'>"
     		                   	+"<input type='text' placeholder='보기 입력'>"
-    		                   	+"<button class='noneBackground' onclick='addChList();'><i class='fa-solid fa-plus'></i></button>"
-    		                   	+"<button class='noneBackground'><i class='fa-solid fa-xmark'></i></button>"
+    		                   	+"<button class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
+    		                   	+"<button class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
     		                +"</div>"
     		            +"</div>");
         			
            			$chList.append($chListDiv2);
-//            			$chMaxCombo.append($chMaxDiv);
     				chCount++;
     				console.log(chCount);
     				
@@ -255,6 +262,44 @@
         			$chMaxAlert.append($chAlert);
         		}
         		
+        		chMaxList(target, chCount);
+        	}
+        	
+        	//보기 삭제
+        	function deleteChList(e){
+        		$(e).parent().parent().remove();
+        		var $chList = $(e).parent().parent().parent(); //보기 리스트 출력하는 div (choiceList)
+        		var target = $chList.next().next().children().find("#questAnswerCount")[0]; //최대 개수 combo
+        		chMaxList(target, chCount);
+        	}
+        	
+        	//최대 선택 개수 콤보 추가
+        	function addChMaxCombo(e){
+        		var $chMaxCombo = $(e).parent().parent().next().next().next(); //최대 선택 개수 출력하는 div
+        		$chMaxCombo.html("");
+        		
+        		//최대 선택 개수
+    			var $chMaxDiv =
+    				$("<div class='row mt-20' >"
+        	                +"<div class='col-3'>"
+			                    +"<div>최대 선택 개수</div>"
+			                +"</div>"
+			                +"<div class=''>"
+			                   	+"<select class='' name='' id='questAnswerCount' onchange=''>"
+			                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
+				                +"</select>"
+			                +"</div>"
+			            +"</div>");
+    			$chMaxCombo.append($chMaxDiv);
+    			
+        		var target = $chList.next().next().children().find("#questAnswerCount")[0];  //최대 선택 개수 combo
+        		var chCount = $chList.children().length; //보기 개수
+        		
+    			chMaxList(target, chCount);
+        	}
+        	
+        	//최대 선택 개수 옵션 변경
+        	function chMaxList(target, chCount){
         		//보기에 맞춰서 최대 개수 옵션 변경
         		target.options.length = 0;
         		//제한 없음
@@ -270,14 +315,10 @@
         			target.appendChild(opt);
         		}
         	}
+//         		var elements = document.querySelectorAll("#questAnswerCount");
+//         		console.log("elements");
+//         		console.log(elements);
         	
-        	function deleteChList(e){
-        		console.log($(this).parent.parent);
-        		$(this).parents("div");
-        		console.log($(this).parents("div"));
-        		$(this).closest("div");
-        		console.log($(this).closest("div"));
-        	}
         </script>
 </body>
 </html>
