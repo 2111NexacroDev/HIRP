@@ -12,11 +12,13 @@
     <div id="conts">
         <aside id="snb">
             <h1>일정관리</h1>
-            <button class="btn--function" type="button" onclick="openModal(this);">일정등록</button>
+            <button class="btn--function" type="button" onclick="openCleanedScheduleModal();">일정등록</button>
+            <!-- 수정 시 값 세팅되므로 위 버튼 누를 시 초기화되는 코드 추가해야함 -->
             <section class="section--modal">
                 <div class="bg-black"></div>
                 <form class="section--modal__conts modal--shcedule" action="/schedule/write.hirp" method="post"
                     enctype="multipart/form-data" style="width:90%; max-width:600px;">
+                    <input type="hidden" name="scheduleNo">
                     <input type="hidden" name="scheduleColor">
                     <input type="hidden" name="scheduleAlarm" value="N">
                     <button class="btn--close" type="button"></button>
@@ -74,6 +76,17 @@
                     </div>
                 </form>
             </section>
+
+            <ul>
+                <li>
+                    <a href="">내 캘린더</a>
+                    <ul>
+                        <li><input id="all" type="checkbox" checked><label for="all">전사 일정</label></li>
+                        <li><input id="team" type="checkbox" checked><label for="team">부서 일정</label></li>
+                        <li><input id="personal" type="checkbox" checked><label for="personal">개인 일정</label></li>
+                    </ul>
+                </li>
+            </ul>
         </aside>
 
         <article id="sub">
@@ -100,6 +113,109 @@
     </div>
 
     <script>
+        // 입력값 초기화 함수
+        function openCleanedScheduleModal() {
+            // 일정 삭제 버튼 제거
+            if($('.btns-wrap a.delete').length != 0) {
+                $('.btns-wrap a.delete').remove();
+            }
+
+            // 전송 주소 수정
+            $('.modal--shcedule').attr('action', '/schedule/write.hirp');
+
+            // 텍스트 원래대로
+            $('.modal--shcedule h3').text('일정 등록');
+            $('.btns-wrap button[type="submit"]').text('확인');
+
+            // 입력값 리셋
+            $('input[name="scheduleNo"]').val('');
+            $('input[name="scheduleTitle"]').val('');
+            $('input[name="scheduleStartDate"]').val('');
+            $('input[name="scheduleEndDate"]').val('');
+            $('input[name="schedulePlace"]').val('');
+            $('textarea[name="scheduleConts"]').val('');
+
+            // 선택색상 리셋
+
+            // 카테고리 세팅
+            $('input[value="전사"]').prop('checked', false);
+            $('input[value="부서"]').prop('checked', false);
+            $('input[value="개인"]').prop('checked', true);
+
+            // 알림 여부 세팅
+            document.getElementsByName('scheduleAlarm')[0].value = 'N';
+            $('#scheduleAlarm').prop('checked', false);
+
+            // 모달 열기
+            $('.section--modal').css('display', 'flex');
+        }
+
+        // 모달에 입력값 세팅 함수
+        function openScheduleModal(data) {
+            // 부서 일정일 경우 등록한 사람(팀장)만 수정할 수 있도록 조건문 추가, 아닐 경우 일반 텍스트로 표출
+            // 폼 입력 요소에 기존 입력값 세팅
+            // 폼의 submit 주소 업데이트로 변경.
+
+            // 일정 삭제 버튼 추가
+            if($('.btns-wrap a.delete').length == 0) {
+                $('.btns-wrap').prepend('<a class=\"delete\" href="">일정 삭제</a>');
+                // 전사 일정일 경우
+                if(data.event.extendedProps.scheduleCategory == '전사') {
+                    $('.btns-wrap a.delete').attr('href', '/schedule/deleteCompanySchedule.hirp?scheduleNo='+ data.event.extendedProps.scheduleNo);
+                } else {
+                    $('.btns-wrap a.delete').attr('href', '/schedule/delete.hirp?scheduleNo='+ data.event.extendedProps.scheduleNo);
+                }
+            }
+
+            if(data.event.extendedProps.scheduleCategory == '전사') {
+                    $('.btns-wrap a.delete').attr('href', '/schedule/deleteCompanySchedule.hirp?scheduleNo='+ data.event.extendedProps.scheduleNo);
+            } else {
+                $('.btns-wrap a.delete').attr('href', '/schedule/delete.hirp?scheduleNo='+ data.event.extendedProps.scheduleNo);
+            }
+
+            // 전송 주소 수정
+            $('.modal--shcedule').attr('action', '/schedule/modify.hirp');
+
+            // 기존 텍스트 수정
+            $('.modal--shcedule h3').text('일정 상세보기');
+            $('.btns-wrap button[type="submit"]').text('수정');
+
+            // 기존 입력값 세팅
+            let startDate = data.event.startStr.split(':');
+            let endDate = data.event.endStr.split(':');
+            
+            $('input[name="scheduleNo"]').val(data.event.extendedProps.scheduleNo);
+            $('input[name="scheduleTitle"]').val(data.event.title);
+            $('input[name="scheduleStartDate"]').val(startDate[0]+':'+startDate[1]);
+            $('input[name="scheduleEndDate"]').val(endDate[0]+':'+endDate[1]);
+            $('input[name="schedulePlace"]').val(data.event.extendedProps.schedulePlace);
+            $('textarea[name="scheduleConts"]').val(data.event.extendedProps.scheduleConts);            
+
+            // 선택색상 세팅
+
+            // 카테고리 세팅
+            if(data.event.extendedProps.scheduleCategory == '전사') {
+                $('input[value="전사"]').prop('checked', true);
+            } else if(data.event.extendedProps.scheduleCategory == '부서') {
+                $('input[value="부서"]').prop('checked', true);
+            } else {
+                // 개인 일정
+                $('input[value="개인"]').prop('checked', true);
+            }
+
+            // 알림 여부 세팅
+            if(data.event.extendedProps.scheduleAlarm == 'Y') {
+                document.getElementsByName('scheduleAlarm')[0].value = 'Y';
+                $('#scheduleAlarm').prop('checked', true);
+            } else {
+                document.getElementsByName('scheduleAlarm')[0].value = 'N';
+                $('#scheduleAlarm').prop('checked', false);
+            }
+
+            // 모달 열기
+            $('.section--modal').css('display', 'flex');
+        }
+
         let calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -117,9 +233,9 @@
             initialView: 'dayGridMonth',
             slotMinTime: '09:00',
             slotMaxTime: '19:00',
-            navLinks: true, 
-            selectable: true,
-            selectMirror: true,
+            navLinks: false, 
+            //selectable: true,
+            //selectMirror: true,
             locale: 'ko',
             events: [
                 <c:forEach items="${sListCompany }" var="schedule1">
@@ -129,6 +245,13 @@
                     end: '${schedule1.scheduleEndDate }',
                     backgroundColor: '${schedule1.scheduleColor }',
                     borderColor: '${schedule1.scheduleColor }',
+                    extendedProps: {
+                        'scheduleNo': '${schedule1.scheduleNo }',
+                        'scheduleCategory': '전사',
+                        'schedulePlace': '${schedule1.schedulePlace }',
+                        'scheduleConts': '${schedule1.scheduleConts }',
+                        'scheduleAlarm': '${schedule1.scheduleAlarm }'
+                    }
                 },
                 </c:forEach>
                 <c:forEach items="${sListPersonal }" var="schedule">
@@ -138,53 +261,41 @@
                     end: '${schedule.scheduleEndDate }',
                     backgroundColor: '${schedule.scheduleColor }',
                     borderColor: '${schedule.scheduleColor }',
+                    extendedProps: {
+                        'scheduleNo': '${schedule.scheduleNo }',
+                        'scheduleCategory': '개인',
+                        'schedulePlace': '${schedule.schedulePlace }',
+                        'scheduleConts': '${schedule.scheduleConts }',
+                        'scheduleAlarm': '${schedule.scheduleAlarm }'
+                    }
                 },
                 </c:forEach>
             ],
-            select: function(arg) {
-                console.log(arg)
-                openModal(arg);	//일자 클릭 시 모달 호출
+            eventClick: function(data) {
+                openScheduleModal(data); //이벤트 클릭 시 모달 호출
             },
-            eventClick: function(arg) {
-                console.log(arg)
-                openModal(arg);	//이벤트 클릭 시 모달 호출
-            },
-            eventChange: function(arg){
-                if(arg.event.end == null){
-                    var end = new Date();
-                    end.setDate(arg.event.start.getDate()+1);
-                    arg.event.setEnd(end);	
-                }
-            },
-            eventDrop: function(arg){
-                openModal(arg);
-            },
-            eventResize: function(arg){
-                openModal(arg);
-            },	
-            editable: true,
+            // select: function(data) {
+            //     console.log(data);
+            //     console.log(data.event);
+            //     //openScheduleModal(data);	//일자 클릭 시 모달 호출
+            // },
+            // eventChange: function(arg){
+            //     if(arg.event.end == null){
+            //         var end = new Date();
+            //         end.setDate(arg.event.start.getDate()+1);
+            //         arg.event.setEnd(end);	
+            //     }
+            // },
+            // eventDrop: function(arg){
+            //     openScheduleModal(arg);
+            // },
+            // eventResize: function(arg){
+            //     openScheduleModal(arg);
+            // },	
+            editable: false,
             dayMaxEvents: true,
         });
         calendar.render();
-
-        /*events: [
-        이벤트 예시
-        {
-            title: 'Meeting',
-            start: '2022-04-11T09:45:00',
-            extendedProps: { // 외부에서 다른 값 가져오고 싶을 때 custom 키-값
-                'status': 'done',
-                'photoNo': 1,
-                'photoContent': 'flower.png'
-            }
-        },
-        {
-            title: 'Birthday Party',
-            start: '2022-06-08T18:00:00',
-            backgroundColor: 'green',
-            borderColor: 'green'
-        }
-    ],*/
     </script>
     <script src="../../../resources/js/schedule.js"></script>
 </body>

@@ -37,4 +37,10 @@
 	<insert id="insertPersonalSchedule">
 		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory}, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
 	</insert>
+	<delete id="deleteSchedule">
+		DELETE FROM SCHEDULE_TBL WHERE SCHEDULE_NO = #{scheduleNo }
+	</delete>
+	<delete id="deleteCompanySchedule">
+		DELETE FROM ALL_SCHEDULE_TBL WHERE SCHEDULE_NO = #{scheduleNo }
+	</delete>
 </mapper>

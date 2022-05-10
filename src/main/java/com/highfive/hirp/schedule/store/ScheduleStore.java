@@ -20,4 +20,5 @@ public interface ScheduleStore {
 	
 	public int updateSchedule(SqlSession sqlSession, Schedule schedule);
 	public int deleteSchedule(SqlSession sqlSession, int scheduleNo);
+	public int deleteCompanySchedule(SqlSession sqlSession, int scheduleNo);
 }

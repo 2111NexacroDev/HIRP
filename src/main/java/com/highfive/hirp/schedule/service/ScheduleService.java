@@ -18,4 +18,5 @@ public interface ScheduleService {
 	
 	public int modifySchedule(Schedule schedule);
 	public int removeSchedule(int scheduleNo);
+	public int removeCompanySchedule(int scheduleNo);
 }
