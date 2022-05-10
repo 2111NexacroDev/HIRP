@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.service.GroupService;
 import com.highfive.hirp.group.store.GroupStore;
@@ -24,22 +25,22 @@ public class GroupServiceImpl implements GroupService {
 
 	// 조직도 조회
 	@Override
-	public List<Group> printAllGroup() {
-		List<Group> resultList = gStore.selectAllGroup(sqlSession); // sqlSession->필수,디비에가는것넣어주는
-		return resultList;
+	public List<Dept> printAllGroup() {
+		List<Dept> groupView = gStore.selectAllGroup(sqlSession);
+		return groupView;
 	}
 
 	// 회원 검색
 	@Override
-	public List<Group> searchAllGroup(Search search) { 
-		List<Group> resultList = gStore.selectSearchGroup(sqlSession, search);// sqlSession, 아까보내준값적기(search)
-		return resultList;
+	public List<Group> searchAllGroup(Search search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// 상세 회원 정보 열람
 	@Override
 	public Member detailGroupMember(String emplId) {
-		Member member = gStore.selectDetailGroup(sqlSession, emplId);
-		return member;
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
