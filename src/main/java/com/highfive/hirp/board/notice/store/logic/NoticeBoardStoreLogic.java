@@ -30,7 +30,7 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public NoticeBoard selectOneNotice(SqlSession sqlSession, int noticeNo) {
-		NoticeBoard noticeboard = sqlSession.selectOne("noticeboard-mapper.selectOneNotice",noticeNo);
+		NoticeBoard noticeboard = sqlSession.selectOne("NoticeBoardMapper.selectOneNotice",noticeNo);
 		return noticeboard;
 	}
 
@@ -60,32 +60,32 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 
 	@Override
 	public int deleteNotice(SqlSession sqlSession, int noticeNo) {
-		int result = sqlSession.delete("noticeboard-mapper.deleteNotice",noticeNo);
+		int result = sqlSession.update("NoticeBoardMapper.deleteNotice",noticeNo);
 		return result;
 	}
 
-
+	//댓글 조회
 	@Override
 	public List<Reply> selectAllNoticeReply(SqlSession sqlSession, Reply reply) {
-		List<Reply> nReply = sqlSession.selectList("noticeboard-mapper.selectAllNoticeReply", reply);
+		List<Reply> nReply = sqlSession.selectList("BoardReplyMapper.selectAllNoticeReply", reply);
 		return nReply;
 	}
-
+	//댓글 등록
 	@Override
 	public int insertNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.insert("noticeboard-mapper.insertNoticeReply",reply);
+		int result = sqlSession.insert("BoardReplyMapper.insertNoticeReply",reply);
 		return result;
 	}
 
 	@Override
 	public int updateNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.update("noticeboard-mapper.updateNoticeReply",reply);
+		int result = sqlSession.update("BoardReplyMapper.updateNoticeReply",reply);
 		return result;
 	}
-
+	//댓글 삭제
 	@Override
-	public int deleteNoticeReply(SqlSession sqlSession, Reply reply) {
-		int result = sqlSession.delete("noticeboard-mapper.deleteNoticeReply",reply);
+	public int deleteNoticeReply(SqlSession sqlSession, int replyNo) {
+		int result = sqlSession.update("BoardReplyMapper.deleteNoticeReply",replyNo);
 		return result;
 	}
 
@@ -94,17 +94,38 @@ public class NoticeBoardStoreLogic implements NoticeBoardStore {
 		int result = sqlSession.selectOne("NoticeBoardMapper.selectListCount");
 		return result;
 	}
-
+	//조회수 증가
 	@Override
-	public int selectViewCount(SqlSession sqlSession, int noticeNo) {
-		int result = sqlSession.update("noticeboard-mapper.updateViewCount");
-		return result;
+	public int updateViewCount(SqlSession sqlSession, int noticeNo) {
+		int viewCount = sqlSession.update("NoticeBoardMapper.updateCount", noticeNo);
+		return viewCount;
 	}
 
 	@Override
 	public int insertNoticeFile(SqlSession sqlSession, BoardAttachedFile boardFile) {
-		int fileResult = sqlSession.insert("NoticeBoardMapper.insertNoticeFile",boardFile);
+		int fileResult = sqlSession.insert("BoardAttachedFileMapper.insertNoticeFile",boardFile);
 		return fileResult;
+	}
+
+	//첨부파일 리스트 조회
+	@Override
+	public List<BoardAttachedFile> selectAllFile(SqlSession sqlSession) {
+		List <BoardAttachedFile> fList = sqlSession.selectList("BoardAttachedFileMapper.selectAllFile");
+		return fList;
+	}
+	//게시글 디테일 첨부파일 조회
+	@Override
+	public List<BoardAttachedFile> selectOneFile(SqlSession sqlSession, int noticeNo) {
+		List<BoardAttachedFile> fList = sqlSession.selectOne("BoardAttachedFileMapper.selectOneFile");
+		return fList;
+	}
+
+	@Override
+	public int insertReReply(SqlSession sqlSession, Reply reply) {
+
+		int result = sqlSession.insert("BoardReplyMapper.insertReReply",reply);
+
+		return result;
 	}
 
 

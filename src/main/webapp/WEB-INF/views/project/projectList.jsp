@@ -62,14 +62,16 @@
 	                        </c:forEach>
 	                    </tbody>
 	                </table>
-	                <button class="basic mt-20">이전</button>
-	                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
-	                	<c:url var="pagination" value="/project/list.hirp">
-	                		<c:param name="page" value="${p }"></c:param>
-	                	</c:url>
-	                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
-	                </c:forEach>
-	                <button class="basic mt-20">다음</button>
+	                <div class="btns--paging">
+		                <button class="basic mt-20">이전</button>
+		                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
+		                	<c:url var="pagination" value="/project/list.hirp">
+		                		<c:param name="page" value="${p }"></c:param>
+		                	</c:url>
+		                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
+		                </c:forEach>
+		                <button class="basic mt-20">다음</button>
+	                </div>
                	</div>
         </article>
 	</div>

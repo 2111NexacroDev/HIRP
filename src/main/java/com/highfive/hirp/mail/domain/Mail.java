@@ -11,8 +11,8 @@ public class Mail {
 	private String importantMail;
 	private String temporaryStorage;
 	private String mailWasteBasket;
-	private String mailRecipient;
-	private String mailReferrer;
+	private String recipientId;
+	private String referrerId;
 	private String fileName;
 	private String fileReName;
 	private String filePath;
@@ -20,8 +20,8 @@ public class Mail {
 	public Mail() {}
 
 	public Mail(int mailNo, String mailSender, String mailTitle, String mailContents, Date mailDate,
-			String importantMail, String temporaryStorage, String mailWasteBasket, String mailRecipient,
-			String mailReferrer, String fileName, String fileReName, String filePath) {
+			String importantMail, String temporaryStorage, String mailWasteBasket, String recipientId,
+			String referrerId, String fileName, String fileReName, String filePath) {
 		super();
 		this.mailNo = mailNo;
 		this.mailSender = mailSender;
@@ -31,8 +31,8 @@ public class Mail {
 		this.importantMail = importantMail;
 		this.temporaryStorage = temporaryStorage;
 		this.mailWasteBasket = mailWasteBasket;
-		this.mailRecipient = mailRecipient;
-		this.mailReferrer = mailReferrer;
+		this.recipientId = recipientId;
+		this.referrerId = referrerId;
 		this.fileName = fileName;
 		this.fileReName = fileReName;
 		this.filePath = filePath;
@@ -102,20 +102,20 @@ public class Mail {
 		this.mailWasteBasket = mailWasteBasket;
 	}
 
-	public String getMailRecipient() {
-		return mailRecipient;
+	public String getRecipientId() {
+		return recipientId;
 	}
 
-	public void setMailRecipient(String mailRecipient) {
-		this.mailRecipient = mailRecipient;
+	public void setRecipientId(String recipientId) {
+		this.recipientId = recipientId;
 	}
 
-	public String getMailReferrer() {
-		return mailReferrer;
+	public String getReferrerId() {
+		return referrerId;
 	}
 
-	public void setMailReferrer(String mailReferrer) {
-		this.mailReferrer = mailReferrer;
+	public void setReferrerId(String referrerId) {
+		this.referrerId = referrerId;
 	}
 
 	public String getFileName() {
@@ -146,9 +146,9 @@ public class Mail {
 	public String toString() {
 		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailTitle=" + mailTitle + ", mailContents="
 				+ mailContents + ", mailDate=" + mailDate + ", importantMail=" + importantMail + ", temporaryStorage="
-				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", mailRecipient=" + mailRecipient
-				+ ", mailReferrer=" + mailReferrer + ", fileName=" + fileName + ", fileReName=" + fileReName
-				+ ", filePath=" + filePath + "]";
+				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", recipientId=" + recipientId
+				+ ", referrerId=" + referrerId + ", fileName=" + fileName + ", fileReName=" + fileReName + ", filePath="
+				+ filePath + "]";
 	}
 
 }

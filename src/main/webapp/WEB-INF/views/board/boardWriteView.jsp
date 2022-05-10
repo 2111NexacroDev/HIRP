@@ -36,7 +36,7 @@
 			  		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 			  		<div class="data_file_txt" id="data_file_txt" style="margin:40px;">
 					<span>첨부 파일</span>
-					<br />
+					<br>
 					<div id="articlefileChange">
 					</div>
 				</div>
@@ -96,7 +96,7 @@ function fileCheck(e) {
         $('#articlefileChange').append(
        		'<div id="file' + fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'
        		+ '<font style="font-size:12px">' + f.name + '</font>'  
-       		+ '<img src="/img/icon_minus.png" style="width:20px; height:auto; vertical-align: middle; cursor: pointer;"/>' 
+       		+ '<img src="../../../../resources/images/bg_close.png" style="width:20px; height:auto; vertical-align: middle; cursor: pointer;"/>' 
        		+ '<div/>'
 		);
         fileNum ++;
@@ -117,20 +117,7 @@ function fileDelete(fileNum){
     console.log(content_files);
 }
 
-/*
- * 폼 submit 로직
- */
-	function registerAction(){
-		
-	var form = $("form")[0];        
- 	var formData = new FormData(form);
-		for (var x = 0; x < content_files.length; x++) {
-			// 삭제 안한것만 담아 준다. 
-			if(!content_files[x].is_delete){
-				 formData.append("article_file", content_files[x]);
-			}
-		}
-}
+
 </script>
 </body>
 </html>

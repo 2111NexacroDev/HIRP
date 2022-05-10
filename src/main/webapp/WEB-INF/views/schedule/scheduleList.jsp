@@ -28,14 +28,14 @@
                         <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
                             <div class="colors">
-                                <span class="selected" style="background-color: #f3cccc;"></span>
-                                <span style="background-color: #f5c2a9;"></span>
-                                <span style="background-color: #f5f4a9;"></span>
-                                <span style="background-color: #d0de41;"></span>
+                                <span class="selected" style="background-color: #c36060;"></span>
+                                <span style="background-color: #d48964;"></span>
+                                <span style="background-color: #d3c129;"></span>
                                 <span style="background-color: #89c64d;"></span>
-                                <span style="background-color: #cde7c9;"></span>
-                                <span style="background-color: #8fd0cf;"></span>
-                                <span style="background-color: #c6b7cf;"></span>
+                                <span style="background-color: #557f4f;"></span>
+                                <span style="background-color: #4a8584;"></span>
+                                <span style="background-color: #192c6a;"></span>
+                                <span style="background-color: #52266d;"></span>
                             </div>
                         </li>
                         <li>
@@ -100,27 +100,6 @@
     </div>
 
     <script>
-        // let sList = {
-        //     'scheduleInfo':${sList}
-        // };
-        // var scheduleLength = Object.keys(sList.scheduleInfo).length;
-
-        /* 달력 그림 */
-        // let temp = '';
-        // temp += '[';
-        // for(let i=0; i<scheduleLength; i++) {
-        //     temp+='{\n'
-        //     + '  title: \'' + sList.scheduleInfo[i]["scheduleTitle"] + '\',\n'
-        //     + '  start: \'' + sList.scheduleInfo[i]['scheduleStartDate'] + '\',\n'
-        //     + '  end: \'' + sList.scheduleInfo[i]['scheduleEndDate'] + '\',\n'
-        //     + '  backgroundColor: \'' + sList.scheduleInfo[i]['scheduleColor'] + '\'\n'
-        //     + '}'
-        //     if(i == scheduleLength-1) {break}
-        //     temp += ',\n'
-        // };
-        // temp += ']';
-        // console.log(temp);
-
         let calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -138,7 +117,16 @@
             initialView: 'dayGridMonth',
             locale: 'ko',
             events: [
-                <c:forEach items="${sList }" var="schedule">
+                <c:forEach items="${sListCompany }" var="schedule1">
+                {
+                    title: '${schedule1.scheduleTitle }',
+                    start: '${schedule1.scheduleStartDate }',
+                    end: '${schedule1.scheduleEndDate }',
+                    backgroundColor: '${schedule1.scheduleColor }',
+                    borderColor: '${schedule1.scheduleColor }',
+                },
+                </c:forEach>
+                <c:forEach items="${sListPersonal }" var="schedule">
                 {
                     title: '${schedule.scheduleTitle }',
                     start: '${schedule.scheduleStartDate }',

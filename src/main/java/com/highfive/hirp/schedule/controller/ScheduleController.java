@@ -26,20 +26,28 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService sService;
 	
-	// 일정 조회
+	// 전체 일정 조회
 	@RequestMapping(value="/schedule/list.hirp", method=RequestMethod.GET)
-	//, produces="application/json;charset=utf-8"
-	public ModelAndView scheduleListView(ModelAndView mv) {
+	public ModelAndView scheduleListView(ModelAndView mv, HttpServletRequest request) {
 		try {
-			List<Schedule> sList = sService.printAllSchedule();
-			if(!sList.isEmpty()) {
-				//Gson gson = new Gson();
-				//mv.addObject("sList", gson.toJson(sList));
-				mv.addObject("sList", sList);
-				mv.setViewName("schedule/scheduleList");
-			} else {
-				mv.setViewName("schedule/scheduleList");
+			HttpSession session = request.getSession();
+			String loginUser = (String) session.getAttribute("emplId");
+			// 전사일정 조회
+			List<Schedule> sListCompany = sService.printAllCompanySchedule();
+			// 개인일정 조회
+			List<Schedule> sListPersonal = sService.printAllPersonalSchedule(loginUser);
+			// 부서일정 조회
+			List<Schedule> sListTeam = sService.printAllTeamSchedule(loginUser);
+			if(!sListCompany.isEmpty()) {
+				mv.addObject("sListCompany", sListCompany);
 			}
+			if(!sListPersonal.isEmpty()) {
+				mv.addObject("sListPersonal", sListPersonal);
+			}
+			if(!sListTeam.isEmpty()) {
+				mv.addObject("sListTeam", sListTeam);				
+			}
+			mv.setViewName("schedule/scheduleList");
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.setViewName("schedule/scheduleList");
@@ -61,15 +69,32 @@ public class ScheduleController {
 			,HttpServletRequest request) {
 		try {
 			HttpSession session = request.getSession();
-			String writer = (String) session.getAttribute("emplId");
-			schedule.setEmplId(writer);
-			int result = sService.registerSchedule(schedule);
-			int result2 = sService.registerScheduleToSub(schedule);
-			if(result > 0 && result2 > 0) {
-				mv.setViewName("redirect:/schedule/list.hirp");
+			String loginUser = (String) session.getAttribute("emplId");
+			schedule.setEmplId(loginUser);
+			String category = schedule.getScheduleCategory();
+			if(category.equals("전사")) {
+				int result = sService.registerCompanySchedule(schedule);
+				if(result > 0) {
+					mv.setViewName("redirect:/schedule/list.hirp");
+				} else {
+					mv.setViewName("common/errorPage");
+				}
+			} else if(category.equals("부서")) {
+				int result = sService.registerTeamSchedule(schedule);
+				int result2 = sService.registerScheduleToSub(schedule);
+				if(result > 0 && result2 > 0) {
+					mv.setViewName("redirect:/schedule/list.hirp");
+				} else {
+					mv.setViewName("common/errorPage");
+				}
 			} else {
-				mv.setViewName("common/errorPage");
-			}			
+				int result = sService.registerPersonalSchedule(schedule);
+				if(result > 0) {
+					mv.setViewName("redirect:/schedule/list.hirp");
+				} else {
+					mv.setViewName("common/errorPage");
+				}
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 			mv.setViewName("common/errorPage");

@@ -10,6 +10,8 @@ import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
+import com.highfive.hirp.mail.domain.Recipient;
+import com.highfive.hirp.mail.domain.Referrer;
 import com.highfive.hirp.mail.store.MailStore;
 @Repository
 public class MailStoreLogic implements MailStore{
@@ -25,6 +27,24 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.insert("MailMapper.sendMail", mail);
 		return result;
 	}
+	
+	@Override
+	public int sendMailRecipient(SqlSession sqlSession, Recipient recipient) {
+		int result = sqlSession.insert("MailMapper.sendMailRecipient", recipient);
+		return result;
+	}
+	
+	@Override
+	public int sendMailReferrer(SqlSession sqlSession, Referrer referrer) {
+		int result = sqlSession.insert("MailMapper.sendMailReferrer", referrer);
+		return result;
+	}
+	
+	@Override
+	public int saveFile(SqlSession sqlSession, MailFile mailFile) {
+		int result = sqlSession.insert("MailMapper.saveFile", mailFile);
+		return result;
+	}
 
 	@Override
 	public List<Mail> selectReceivedMail(SqlSession sqlSession, PageInfo pi) {
@@ -37,9 +57,9 @@ public class MailStoreLogic implements MailStore{
 	}
 
 	@Override
-	public int selectOneReceivedMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneReceivedMail", mailNo);
-		return result;
+	public Mail selectOneByNo(SqlSession sqlSession, int mailNo) {
+		Mail mail = sqlSession.selectOne("MailMapper.selectOneByNo", mailNo);
+		return mail;
 	}
 
 	@Override

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="BoardAttachedFileMapper">
+<resultMap type="BoardAttachedFile" id="boardFileResultMap">
+<id 	property="fileNo" column="FILE_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="boardNo" column="BOARD_NO"></result>
+<result property="fileName" column="FILE_NAME"></result>
+<result property="fileRename" column="FILE_RENAME"></result>
+<result property="filePath" column="FILE_PATH"></result>
+</resultMap>
+<!-- 첨부파일 등록  -->
+<insert id="insertNoticeFile">
+	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},NOTICE_BOARD_SEQ.CURRVAL,#{fileName},#{fileRename},#{filePath})
+</insert>
+<!-- 첨부파일 리스트 조회 -->
+<select id="selectAllFile" resultMap="boardFileResultMap">
+	SELECT * FROM BOARD_ATTACHED_FILE_TBL 
+</select>
+<!-- 공지게시글 디테일 조회 -->
+  <select id="selectOneFile" resultMap="boardFileResultMap">
+  	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_NO = #{noticeNo}
+  </select>
+</mapper>
