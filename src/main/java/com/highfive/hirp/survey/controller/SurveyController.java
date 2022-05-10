@@ -209,15 +209,30 @@ public class SurveyController {
 		return mv;
 	}
 
-	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
+	//설문 문항 등록 (시작 안내 문구)
+	@RequestMapping(value="/survey/addSurveyQuest.hirp", method=RequestMethod.POST)
 	public ModelAndView writeSurvey2(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@ModelAttribute List<SurveyQuest> surveyQuest
-			,@ModelAttribute List<SurveyQuestCh> qCh
-			,@ModelAttribute List<String> subList
+//			,@ModelAttribute List<SurveyQuest> surveyQuest
+//			,@ModelAttribute List<SurveyQuestCh> qCh
+//			,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
-		//설문 등록
+		try {
+			//설문 수정
+			int result = sService.updateSurvey(survey);
+			if(result > 0) {
+				mv.setViewName("/survey/main.hirp");//다시 해주어야 함.
+				System.out.println("업데이트 성공");
+			} else {
+				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		//설문 문항 추가 1 (비어있지 않을 때) nextval
 		//설문 보기 추가 1 (비어있지 않을 때) currval
 		//2~4까지 하기
@@ -231,9 +246,8 @@ public class SurveyController {
 
 		
 		return mv;
-	}
-	
-	
+	}		
+		
 	//부서코드로 대상자 리스트 가져오기 (선택한 부서 사람들)
 	public ModelAndView chooseEmplByDept(ModelAndView mv
 			, @RequestParam("deptCode") String deptCode
