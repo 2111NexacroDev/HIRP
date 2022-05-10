@@ -35,7 +35,7 @@ public class GroupController {
 	
 	// 상세 회원 정보 열람
 	public ModelAndView groupDetailView (ModelAndView mv, @RequestParam("emplId") String emplId) {
-		Member member = gService.detailGroupMember(emplId);  // 둘쨰줄 설명 String->문자받을때 // int->결과확인 // 한명의그룹이어서<>아님 // 위에있는것가져와야함
+		Member member = gService.detailGroupMember(emplId);  // 둘째줄 설명 String->문자받을때 // int->결과확인 // 한명의그룹이어서<>아님 // 위에있는것가져와야함
 		return mv;		
 	}
 }

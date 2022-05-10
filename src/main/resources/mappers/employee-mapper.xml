@@ -61,7 +61,7 @@
 	<!-- 마이페이지 수정 -->
 	<update id="updateMypage" parameterType="Employee">
     	UPDATE EMPL_TBL
-        SET EMPL_ID = #{emplId}
+        SET EMPL_ID = #{emplId} <!-- 업데이트문 살리기위해 임의로 컬럼하나 update하게 해놓은것 -->
         <if test='emplProfile != "" and emplProfile != null'> 
            , EMPL_PROFILE = #{emplProfile}
         </if>
