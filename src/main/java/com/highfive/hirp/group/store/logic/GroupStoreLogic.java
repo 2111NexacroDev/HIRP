@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.store.GroupStore;
 
@@ -15,8 +16,8 @@ public class GroupStoreLogic implements GroupStore{
 
 	// 조직도 조회
 	@Override
-	public List<Group> selectAllGroup(SqlSession sqlSession) {
-		List<Group> resultList = sqlSession.selectList("GroupMapper.selectAllGroup"); // selectOne->한개. selectList->여러개
+	public List<Dept> selectAllGroup(SqlSession sqlSession) {
+		List<Dept> resultList = sqlSession.selectList("GroupMapper.selectAllGroup"); // selectOne->한개. selectList->여러개
 		return resultList;
 	}
 

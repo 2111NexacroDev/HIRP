@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="GroupMapper">
-	<resultMap type="com.highfive.hirp.group.domain.Group" id="groupResultMap">
+
+<mapper namespace="GroupMapper">
+	<resultMap type="com.highfive.hirp.group.domain.Group"
+		id="groupResultMap">
 		<id property="emplId" column="EMPL_ID" />
 		<result property="emplProfile" column="EMPL_PROFILE" />
 		<result property="emplName" column="EMPL_NAME" />
@@ -15,7 +16,26 @@
 		<result property="phoneNo" column="PHONE_NO" />
 		<result property="birthday" column="BIRTHDAY" />
 	</resultMap>
-	
+	<resultMap type="Dept" id="deptResultMap">
+		<id property="deptCode" column="DEPT_CODE"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="deptSecondname" column="DEPT_SECONDNAME"/>
+		<result property="deptColor" column="DEPT_COLOR"/>
+		<result property="deptMaster" column="DEPT_MASTER"/>
+		<result property="deptHiredate" column="DEPT_HIREDATE"/>
+		<result property="deptUppercode" column="DEPT_UPPERCODE"/>
+		<result property="deptLevel" column="DEPT_LEVEL"/>
+	</resultMap>
+
 	<!-- insert안에 value 값은 db순서와 같게 해주기 -->
+
+	<!-- 조직도 조회 -->
+	<select id="selectAllGroup" 
+		resultMap="deptResultMap">
+		SELECT DEPT_NAME, DEPT_CODE, DEPT_UPPERCODE, DEPT_LEVEL
+		FROM DEPT_TBL
+		START WITH DEPT_UPPERCODE IS NULL
+		CONNECT BY PRIOR DEPT_CODE = DEPT_UPPERCODE
+	</select>
 
 </mapper>
