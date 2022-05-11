@@ -307,6 +307,18 @@ section[class^="todo--"] li {
     margin-left: 10px;
 }
 
+.fc .fc-daygrid-day.fc-day-today {
+    position: relative;
+}
+
+.fc .fc-daygrid-day.fc-day-today:before {
+    content: url(../images/img_star.png);
+    position: absolute;
+    top: -23px;
+    left: -33px;
+    transform: rotate(45deg);
+}
+
 .fc .fc-day-sun {
     color: #FF000A;
 }
