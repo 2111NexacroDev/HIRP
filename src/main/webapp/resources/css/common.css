@@ -160,6 +160,14 @@ img {
     }
 }
 
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
 .table--basic {
     width: 100%;
     border-top: 1px solid #ccc;
@@ -883,4 +891,14 @@ article {
     left: 0;
     color: red;
     text-decoration: underline;
+}
+
+.btn--plus {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
+    font-size: 0;
 }

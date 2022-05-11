@@ -27,13 +27,8 @@
 }
 
 #todo .btn--plus {
-    position: absolute;
     top: 40px;
     right: 40px;
-    width: 24px;
-    height: 24px;
-    background: url("../images/icons/btn_more.png") no-repeat center center;
-    outline: none;
 }
 
 .todo__wrap {
