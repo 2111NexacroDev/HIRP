@@ -18,117 +18,122 @@
                 <button type="submit"></button>
             </form>
 
-            <h1 class="basic-border-bottom">설문 문항 작성</h1>
-            <!-- 메인 상단 끝 -->
-            
-            <!-- 페이지 내용 -->
-            <div id="" class="subConts padding-0">
-            	<!-- basic-border-bottom 넣어주려고 각각 padding 넣어줌 -->
-            	<!-- 시작 안내 문구 -->
-            	<div class="row padding-20 basic-border-bottom">
-	                <div class="col-3">
-	                    <div >시작 안내 문구</div>
-	                </div>
-	                <div class="">
-	                    <textarea name="" id="" class="" cols="70" rows="3" placeholder="시작 안내 문구를 입력해주세요."></textarea>
-	                </div>
-	            </div>
-	            <!-- 시작 안내 문구 끝 -->
-	            <!-- 문항 입력 -->
-	            <div class=" basic-border-bottom">
-	            	<!-- 첫번째 질문 div 시작 -->
-	            	<div class="padding-20">
-	            		<div class="row">
-			                <div class="col-3">
-			                    <div>질문</div>
-			                </div>
-			                <div class="">
-			                    <input type="text" size="50" placeholder="질문을 입력해주세요">
-			                </div>
-			            </div>
-			            <div class="row mt-20">
-			                <div class="col-3">
-			                    <div>설문 문항 타입</div>
-			                </div>
-			                <div class="">
-			                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
-			                   		<option value="">유형 선택</option>
-				                    <option value="C">선택형</option>
-				                    <option value="D">날짜형</option>
-				                    <option value="T">텍스트형</option>
-				                </select>
-				                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
-				                	<option value="">선택해주세요</option>
-				                </select>
-			                </div>
-			            </div>
-			            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-			            <div id="choiceList">
-			            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
-			            </div>
-			            <div id="choiceMaxAlert">
-			            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
-			            </div>
-			            <div id="choiceMax">
-							<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
+			<form action="/survey/addSurveyQuest.hirp" method="post">
+				<input type="hidden" name="surveyNo" value="2"/>
+				<!-- 임시로 넣어준 것. 두 개 화면 합치면, 따로 no value 없이 mapper에서 seq.currval 쓰면 될 듯-->
+				<h1 class="basic-border-bottom">설문 문항 작성</h1>
+	            <!-- 메인 상단 끝 -->
+	            
+	            <!-- 페이지 내용 -->
+	            <div id="" class="subConts padding-0">
+	            	<!-- basic-border-bottom 넣어주려고 각각 padding 넣어줌 -->
+	            	<!-- 시작 안내 문구 -->
+	            	<div class="row padding-20 basic-border-bottom">
+		                <div class="col-3">
+		                    <div >시작 안내 문구</div>
+		                </div>
+		                <div class="">
+		                    <textarea name="surveyStartcomment" id="" class="" cols="70" rows="3" placeholder="시작 안내 문구를 입력해주세요."></textarea>
+		                </div>
+		            </div>
+		            <!-- 시작 안내 문구 끝 -->
+		            <!-- 문항 입력 -->
+		            <div class=" basic-border-bottom">
+		            	<!-- 첫번째 질문 div 시작 -->
+		            	<div class="padding-20">
+		            		<div class="row">
+				                <div class="col-3">
+				                    <div>질문</div>
+				                </div>
+				                <div class="">
+				                    <input type="text" size="50" placeholder="질문을 입력해주세요">
+				                </div>
+				            </div>
+				            <div class="row mt-20">
+				                <div class="col-3">
+				                    <div>설문 문항 타입</div>
+				                </div>
+				                <div class="">
+				                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
+				                   		<option value="">유형 선택</option>
+					                    <option value="C">선택형</option>
+					                    <option value="D">날짜형</option>
+					                    <option value="T">텍스트형</option>
+					                </select>
+					                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
+					                	<option value="">선택해주세요</option>
+					                </select>
+				                </div>
+				            </div>
+				            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+				            <div id="choiceList">
+				            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+				            </div>
+				            <div id="choiceMaxAlert">
+				            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+				            </div>
+				            <div id="choiceMax">
+								<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
+			            	</div>
 		            	</div>
+		            	<!-- 첫번째 질문 div 끝 -->
+		            	
+		            	
+	            </div>
+	            
+	            <!-- 문항 추가 -->
+	            <div class="t-c">
+		            <button class="basic mt-20" style="width:50%;"type="button" onclick="addQuest(this)">문항 추가</button>
+	            </div>
+		            
+	            <div class="t-c">
+		            <button class="point mt-20" type="submit">작성 완료</button>
+		            <!-- 완료 누르면 안내창 띄워서 
+		            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
+	            </div>
+	            <!-- 페이지 내용 끝 -->
+	            
+	            <!-- 질문 추가 div 시작 -->
+	           	<div class="basic-border-top padding-20" style="display:none;">
+	           		<div class="row">
+		                <div class="col-3">
+		                    <div>질문</div>
+		                </div>
+		                <div class="">
+		                    <input type="text" size="50" placeholder="질문을 입력해주세요">
+		                </div>
+		            </div>
+		            <div class="row mt-20">
+		                <div class="col-3">
+		                    <div>설문 문항 타입</div>
+		                </div>
+		                <div class="">
+		                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
+		                   		<option value="">유형 선택</option>
+			                    <option value="C">선택형</option>
+			                    <option value="D">날짜형</option>
+			                    <option value="T">텍스트형</option>
+			                </select>
+			                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
+			                	<option value="">선택해주세요</option>
+			                </select>
+		                </div>
+		            </div>
+		            
+		            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+		            <div id="choiceList">
+		            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+		            </div>
+		            <div id="choiceMaxAlert">
+		            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+		            </div>
+		            <div id="choiceMax">
+						<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
 	            	</div>
-	            	<!-- 첫번째 질문 div 끝 -->
-	            	
-	            	
-            </div>
+	           	</div>
+	           	<!-- 질문 추가 div 끝 -->
+			</form>
             
-            <!-- 문항 추가 -->
-            <div class="t-c">
-	            <button class="basic mt-20" style="width:50%;"type="button" onclick="addQuest(this)">문항 추가</button>
-            </div>
-	            
-            <div class="t-c">
-	            <button class="point mt-20" type="button">작성 완료</button>
-	            <!-- 완료 누르면 안내창 띄워서 
-	            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
-            </div>
-            <!-- 페이지 내용 끝 -->
-            
-            <!-- 질문 추가 div 시작 -->
-           	<div class="basic-border-top padding-20" style="display:none;">
-           		<div class="row">
-	                <div class="col-3">
-	                    <div>질문</div>
-	                </div>
-	                <div class="">
-	                    <input type="text" size="50" placeholder="질문을 입력해주세요">
-	                </div>
-	            </div>
-	            <div class="row mt-20">
-	                <div class="col-3">
-	                    <div>설문 문항 타입</div>
-	                </div>
-	                <div class="">
-	                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
-	                   		<option value="">유형 선택</option>
-		                    <option value="C">선택형</option>
-		                    <option value="D">날짜형</option>
-		                    <option value="T">텍스트형</option>
-		                </select>
-		                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
-		                	<option value="">선택해주세요</option>
-		                </select>
-	                </div>
-	            </div>
-	            
-	            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-	            <div id="choiceList">
-	            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
-	            </div>
-	            <div id="choiceMaxAlert">
-	            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
-	            </div>
-	            <div id="choiceMax">
-					<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
-            	</div>
-           	</div>
-           	<!-- 질문 추가 div 끝 -->
            	
         </article>
         

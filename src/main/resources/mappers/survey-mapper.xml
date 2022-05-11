@@ -115,4 +115,9 @@
 		#{surveyStartdate}, #{surveyEnddate}, 
 		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
 	</insert>
+	<!-- 설문조사 수정 -->
+	<update id="updateSurvey">
+		UPDATE SURVEY_TBL SET SURVEY_STARTCOMMENT = #{surveyStartcomment} 
+		WHERE SURVEY_NO = #{surveyNo}
+	</update>
 </mapper>
