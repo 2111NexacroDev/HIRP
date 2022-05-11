@@ -78,4 +78,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 		int result = sStore.deleteSchedule(sqlSession, scheduleNo);
 		return result;
 	}
+
+	@Override
+	public int removeCompanySchedule(int scheduleNo) {
+		int result = sStore.deleteCompanySchedule(sqlSession, scheduleNo);
+		return result;
+	}
 }

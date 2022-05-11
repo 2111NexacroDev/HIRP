@@ -102,22 +102,45 @@ public class ScheduleController {
 		return mv;
 	}
 	
-	// 일정 수정 화면 로드(이거 나눠야되는지 같이해야되는지 체크)
-	public ModelAndView scheduleUpdateView(ModelAndView mv) {
-		return mv;
-	}	
-	
 	// 일정 수정
+	@RequestMapping(value="/schedule/modify.hirp", method=RequestMethod.POST)
 	public ModelAndView scheduleUpdate(ModelAndView mv
 			,@ModelAttribute Schedule schedule) {
-		int result = sService.modifySchedule(schedule);
+		//int result = sService.modifySchedule(schedule);
 		return mv;
 	}
 	
-	// 일정 삭제
+	// 개인/부서 일정 삭제
+	@RequestMapping(value="/schedule/delete.hirp", method=RequestMethod.GET)
 	public ModelAndView scheduleDelete(ModelAndView mv
 			,@RequestParam("scheduleNo") int scheduleNo) {
-		int result = sService.removeSchedule(scheduleNo);
+		try {
+			int result = sService.removeSchedule(scheduleNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/schedule/list.hirp");
+			} else {
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
+	// 전사 일정 삭제
+	@RequestMapping(value="/schedule/deleteCompanySchedule.hirp", method=RequestMethod.GET)
+	public ModelAndView deleteCompanySchedule(ModelAndView mv
+			,@RequestParam("scheduleNo") int scheduleNo) {
+		try {
+			int result = sService.removeCompanySchedule(scheduleNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/schedule/list.hirp");
+			} else {
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 }
