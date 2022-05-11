@@ -222,7 +222,7 @@ public class SurveyController {
 			//설문 수정
 			int result = sService.updateSurvey(survey);
 			if(result > 0) {
-				mv.setViewName("/survey/main.hirp");//다시 해주어야 함.
+				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
 				System.out.println("업데이트 성공");
 			} else {
 				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
