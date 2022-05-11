@@ -18,7 +18,6 @@
                 <div class="bg-black"></div>
                 <form class="section--modal__conts modal--shcedule" action="/schedule/write.hirp" method="post"
                     enctype="multipart/form-data" style="width:90%; max-width:600px;">
-                    <input type="hidden" name="scheduleNo">
                     <input type="hidden" name="scheduleColor">
                     <input type="hidden" name="scheduleAlarm" value="N">
                     <button class="btn--close" type="button"></button>
@@ -115,6 +114,11 @@
     <script>
         // 입력값 초기화 함수
         function openCleanedScheduleModal() {
+            // 스케쥴 넘버 제거
+            if($('input[name="scheduleNo"]').length != 0) {
+                $('input[name="scheduleNo"]').remove();
+            }
+            
             // 일정 삭제 버튼 제거
             if($('.btns-wrap a.delete').length != 0) {
                 $('.btns-wrap a.delete').remove();
@@ -135,7 +139,20 @@
             $('input[name="schedulePlace"]').val('');
             $('textarea[name="scheduleConts"]').val('');
 
-            // 선택색상 리셋
+            // 시작일 변경 시 마감일을 시작일과 같은 날로 세팅
+            $('input[name="scheduleStartDate"]').on('change', function(){
+                let startDate = $(this).val();
+                if($('input[name="scheduleEndDate"]').val() == '') {
+                    $('input[name="scheduleEndDate"]').val(startDate);
+                }
+            });
+
+            // 선택색상 첫 순서 색으로 리셋
+            $('.colors span').removeClass('selected');
+            $('.colors span:first-of-type').addClass('selected');
+
+            let defaultColor = $('.colors span:first-of-type').css('background-color');
+            $('input[name="scheduleColor"]').val('defaultColor');
 
             // 카테고리 세팅
             $('input[value="전사"]').prop('checked', false);
@@ -155,6 +172,11 @@
             // 부서 일정일 경우 등록한 사람(팀장)만 수정할 수 있도록 조건문 추가, 아닐 경우 일반 텍스트로 표출
             // 폼 입력 요소에 기존 입력값 세팅
             // 폼의 submit 주소 업데이트로 변경.
+
+            // 스케쥴 넘버 전송용 인풋 추가
+            if($('input[name="scheduleNo"]').length == 0) {
+                $('.modal--shcedule').prepend('<input type="hidden" name="scheduleNo">');
+            }
 
             // 일정 삭제 버튼 추가
             if($('.btns-wrap a.delete').length == 0) {
@@ -216,6 +238,21 @@
             $('.section--modal').css('display', 'flex');
         }
 
+        // 셀렉트한 날짜 세팅하여 열기
+        function openSelectedScheduleModal(selectionInfo) {
+            openCleanedScheduleModal();
+            let startDate = selectionInfo.startStr;
+            let endDateFull = selectionInfo.endStr.split('-');
+            let dayOfEndDate = parseInt(endDateFull[2])-1;
+            if(dayOfEndDate<10) {
+                dayOfEndDate = '0' + dayOfEndDate;
+            }
+            let endDate = endDateFull[0]+ '-' +endDateFull[1]+ '-' +dayOfEndDate;
+
+            $('input[name="scheduleStartDate"]').val(startDate+'T09:00');
+            $('input[name="scheduleEndDate"]').val(endDate+'T18:00');
+        }
+
         let calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -231,42 +268,56 @@
                 list: '목록'
             },
             initialView: 'dayGridMonth',
-            slotMinTime: '09:00',
-            slotMaxTime: '19:00',
             navLinks: false, 
-            //selectable: true,
+            selectable: true,
             //selectMirror: true,
             locale: 'ko',
             events: [
-                <c:forEach items="${sListCompany }" var="schedule1">
+                <c:forEach items="${sListCompany }" var="sCompany">
                 {
-                    title: '${schedule1.scheduleTitle }',
-                    start: '${schedule1.scheduleStartDate }',
-                    end: '${schedule1.scheduleEndDate }',
-                    backgroundColor: '${schedule1.scheduleColor }',
-                    borderColor: '${schedule1.scheduleColor }',
+                    title: '${sCompany.scheduleTitle }',
+                    start: '${sCompany.scheduleStartDate }',
+                    end: '${sCompany.scheduleEndDate }',
+                    backgroundColor: '${sCompany.scheduleColor }',
+                    borderColor: '${sCompany.scheduleColor }',
                     extendedProps: {
-                        'scheduleNo': '${schedule1.scheduleNo }',
+                        'scheduleNo': '${sCompany.scheduleNo }',
                         'scheduleCategory': '전사',
-                        'schedulePlace': '${schedule1.schedulePlace }',
-                        'scheduleConts': '${schedule1.scheduleConts }',
-                        'scheduleAlarm': '${schedule1.scheduleAlarm }'
+                        'schedulePlace': '${sCompany.schedulePlace }',
+                        'scheduleConts': '${sCompany.scheduleConts }',
+                        'scheduleAlarm': '${sCompany.scheduleAlarm }'
                     }
                 },
                 </c:forEach>
-                <c:forEach items="${sListPersonal }" var="schedule">
+                <c:forEach items="${sListTeam }" var="sListTeam">
                 {
-                    title: '${schedule.scheduleTitle }',
-                    start: '${schedule.scheduleStartDate }',
-                    end: '${schedule.scheduleEndDate }',
-                    backgroundColor: '${schedule.scheduleColor }',
-                    borderColor: '${schedule.scheduleColor }',
+                    title: '${sListTeam.scheduleTitle }',
+                    start: '${sListTeam.scheduleStartDate }',
+                    end: '${sListTeam.scheduleEndDate }',
+                    backgroundColor: '${sListTeam.scheduleColor }',
+                    borderColor: '${sListTeam.scheduleColor }',
                     extendedProps: {
-                        'scheduleNo': '${schedule.scheduleNo }',
+                        'scheduleNo': '${sListTeam.scheduleNo }',
+                        'scheduleCategory': '부서',
+                        'schedulePlace': '${sListTeam.schedulePlace }',
+                        'scheduleConts': '${sListTeam.scheduleConts }',
+                        'scheduleAlarm': '${sListTeam.scheduleAlarm }'
+                    }
+                },
+                </c:forEach>
+                <c:forEach items="${sListPersonal }" var="sPersonal">
+                {
+                    title: '${sPersonal.scheduleTitle }',
+                    start: '${sPersonal.scheduleStartDate }',
+                    end: '${sPersonal.scheduleEndDate }',
+                    backgroundColor: '${sPersonal.scheduleColor }',
+                    borderColor: '${sPersonal.scheduleColor }',
+                    extendedProps: {
+                        'scheduleNo': '${sPersonal.scheduleNo }',
                         'scheduleCategory': '개인',
-                        'schedulePlace': '${schedule.schedulePlace }',
-                        'scheduleConts': '${schedule.scheduleConts }',
-                        'scheduleAlarm': '${schedule.scheduleAlarm }'
+                        'schedulePlace': '${sPersonal.schedulePlace }',
+                        'scheduleConts': '${sPersonal.scheduleConts }',
+                        'scheduleAlarm': '${sPersonal.scheduleAlarm }'
                     }
                 },
                 </c:forEach>
@@ -274,24 +325,9 @@
             eventClick: function(data) {
                 openScheduleModal(data); //이벤트 클릭 시 모달 호출
             },
-            // select: function(data) {
-            //     console.log(data);
-            //     console.log(data.event);
-            //     //openScheduleModal(data);	//일자 클릭 시 모달 호출
-            // },
-            // eventChange: function(arg){
-            //     if(arg.event.end == null){
-            //         var end = new Date();
-            //         end.setDate(arg.event.start.getDate()+1);
-            //         arg.event.setEnd(end);	
-            //     }
-            // },
-            // eventDrop: function(arg){
-            //     openScheduleModal(arg);
-            // },
-            // eventResize: function(arg){
-            //     openScheduleModal(arg);
-            // },	
+            select: function(selectionInfo) {
+                openSelectedScheduleModal(selectionInfo);	//일자 클릭 시 모달 호출
+            },
             editable: false,
             dayMaxEvents: true,
         });
