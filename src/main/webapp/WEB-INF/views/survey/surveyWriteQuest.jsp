@@ -30,7 +30,7 @@
 	                    <div >시작 안내 문구</div>
 	                </div>
 	                <div class="">
-	                    <textarea name="" id="" class="" cols="50" rows="3" placeholder="시작 안내 문구를 입력해주세요."></textarea>
+	                    <textarea name="" id="" class="" cols="70" rows="3" placeholder="시작 안내 문구를 입력해주세요."></textarea>
 	                </div>
 	            </div>
 	            <!-- 시작 안내 문구 끝 -->
