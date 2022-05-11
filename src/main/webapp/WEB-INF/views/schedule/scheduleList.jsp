@@ -29,14 +29,14 @@
                         <li class="li--colors">
                             <label class="mr-20" for="">색 선택</label>
                             <div class="colors">
-                                <span class="selected" style="background-color: #c36060;"></span>
-                                <span style="background-color: #d48964;"></span>
-                                <span style="background-color: #d3c129;"></span>
-                                <span style="background-color: #89c64d;"></span>
-                                <span style="background-color: #557f4f;"></span>
-                                <span style="background-color: #4a8584;"></span>
-                                <span style="background-color: #192c6a;"></span>
-                                <span style="background-color: #52266d;"></span>
+                                <span class="selected" style="background-color: rgb(195,96,96);"></span>
+                                <span style="background-color: rgb(212,137,100);"></span>
+                                <span style="background-color: rgb(215,195,26);"></span>
+                                <span style="background-color: rgb(137,198,77);"></span>
+                                <span style="background-color: rgb(85,127,79);"></span>
+                                <span style="background-color: rgb(74,133,132);"></span>
+                                <span style="background-color: rgb(25,44,106);"></span>
+                                <span style="background-color: rgb(82,38,109);"></span>
                             </div>
                         </li>
                         <li>
@@ -79,8 +79,8 @@
             <ul>
                 <li>
                     <a href="">내 캘린더</a>
-                    <ul>
-                        <li><input id="all" type="checkbox" checked><label for="all">전사 일정</label></li>
+                    <ul class="ul--category">
+                        <li><input id="company" type="checkbox" checked><label for="company">전사 일정</label></li>
                         <li><input id="team" type="checkbox" checked><label for="team">부서 일정</label></li>
                         <li><input id="personal" type="checkbox" checked><label for="personal">개인 일정</label></li>
                     </ul>
@@ -170,8 +170,6 @@
         // 모달에 입력값 세팅 함수
         function openScheduleModal(data) {
             // 부서 일정일 경우 등록한 사람(팀장)만 수정할 수 있도록 조건문 추가, 아닐 경우 일반 텍스트로 표출
-            // 폼 입력 요소에 기존 입력값 세팅
-            // 폼의 submit 주소 업데이트로 변경.
 
             // 스케쥴 넘버 전송용 인풋 추가
             if($('input[name="scheduleNo"]').length == 0) {
@@ -214,6 +212,13 @@
             $('textarea[name="scheduleConts"]').val(data.event.extendedProps.scheduleConts);            
 
             // 선택색상 세팅
+            $('input[name="scheduleColor"]').val(data.event.backgroundColor);
+            $('.colors span').removeClass('selected');
+            for(let i=1; i <= $('.colors span').length; i++) {
+                if($('.colors span:nth-child('+i+')').css('background-color') == data.event.backgroundColor) {
+                    $('.colors span:nth-child('+i+')').addClass('selected');
+                }
+            }
 
             // 카테고리 세팅
             if(data.event.extendedProps.scheduleCategory == '전사') {
@@ -280,6 +285,7 @@
                     end: '${sCompany.scheduleEndDate }',
                     backgroundColor: '${sCompany.scheduleColor }',
                     borderColor: '${sCompany.scheduleColor }',
+                    className: 'category-all',
                     extendedProps: {
                         'scheduleNo': '${sCompany.scheduleNo }',
                         'scheduleCategory': '전사',
@@ -296,6 +302,7 @@
                     end: '${sListTeam.scheduleEndDate }',
                     backgroundColor: '${sListTeam.scheduleColor }',
                     borderColor: '${sListTeam.scheduleColor }',
+                    className: 'category-team',
                     extendedProps: {
                         'scheduleNo': '${sListTeam.scheduleNo }',
                         'scheduleCategory': '부서',
@@ -312,6 +319,7 @@
                     end: '${sPersonal.scheduleEndDate }',
                     backgroundColor: '${sPersonal.scheduleColor }',
                     borderColor: '${sPersonal.scheduleColor }',
+                    className: 'category-personal',
                     extendedProps: {
                         'scheduleNo': '${sPersonal.scheduleNo }',
                         'scheduleCategory': '개인',
