@@ -43,7 +43,7 @@
 			                    <div>질문</div>
 			                </div>
 			                <div class="">
-			                    <input type="text" placeholder="질문을 입력해주세요">
+			                    <input type="text" size="50" placeholder="질문을 입력해주세요">
 			                </div>
 			            </div>
 			            <div class="row mt-20">
@@ -97,7 +97,7 @@
 	                    <div>질문</div>
 	                </div>
 	                <div class="">
-	                    <input type="text" placeholder="질문을 입력해주세요">
+	                    <input type="text" size="50" placeholder="질문을 입력해주세요">
 	                </div>
 	            </div>
 	            <div class="row mt-20">
