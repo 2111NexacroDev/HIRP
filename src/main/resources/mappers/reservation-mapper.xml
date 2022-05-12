@@ -11,7 +11,7 @@
 		<result property="utilityConts" column="UTILITY_CONTS"/>
 	</resultMap>
 	<select id="selectAllUtility" resultMap="utilityResultMap">
-		SELECT * FROM UTILITY_TBL GROUP BY UTILITY_CATEGORY ORDER BY UTILITY_NO DESC
+		SELECT * FROM UTILITY_TBL ORDER BY UTILITY_NO DESC
 	</select>
 	<insert id="insertUtility">
 		INSERT INTO UTILITY_TBL VALUES(UTILITY_SEQ.NEXTVAL, #{utilityName}, #{utilityCategory}, #{utilityConts})
