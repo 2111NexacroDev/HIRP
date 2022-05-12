@@ -101,13 +101,6 @@
             <div id="scheduleList" class="subConts padding-0">
                 <div id="calendar"></div>
             </div>
-
-            <!-- <pre>
-                ※ 일정 추가 관련 필요한 스크립트
-                일시 - 시간 시작일과 마감일이 같거나 시작일이 빨라야함.
-                => 마감일이 빠를 시 경고창 띄우기
-                일정구분 전사일정 선택 시 다른 컨트롤러로 submit.
-            </pre> -->
         </article>
     </div>
 

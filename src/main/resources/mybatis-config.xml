@@ -12,6 +12,7 @@
 		<!-- 진실 -->
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
 		<typeAlias type="com.highfive.hirp.reservation.domain.Reservation" alias="Reservation"></typeAlias>
+		<typeAlias type="com.highfive.hirp.reservation.domain.Utility" alias="Utility"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
