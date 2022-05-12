@@ -18,8 +18,8 @@
                 <button type="submit"></button>
             </form>
 
-			<form id="questForm" action="/survey/updateQuestInfo.hirp" method="post">
-				<input type="hidden" name="surveyNo" value="2"/>
+			<form id="writeQuestPageForm" action="/survey/updateQuestInfo.hirp" method="post">
+				
 				<!-- 임시로 넣어준 것. 두 개 화면 합치면, 따로 no value 없이 mapper에서 seq.currval 쓰면 될 듯-->
 				<h1 class="basic-border-bottom">설문 문항 작성</h1>
 	            <!-- 메인 상단 끝 -->
@@ -37,56 +37,54 @@
 		                </div>
 		            </div>
 		            <!-- 시작 안내 문구 끝 -->
-		            <!-- 문항 입력 -->
-		            <form action="" method="">
-			            <div class=" basic-border-bottom" name="surveyQuest" id="surveyQuest1">
-			            	<!-- 첫번째 질문 div 시작 -->
-			            	<div class="padding-20">
-			            		<div class="row">
-					                <div class="col-3">
-					                    <div>질문</div>
-					                </div>
-					                <div class="">
-					                    <input type="text" size="50" name="questTitle" placeholder="질문을 입력해주세요">
-					                </div>
-					            </div>
-					            <div class="row mt-20">
-					                <div class="col-3">
-					                    <div>설문 문항 타입</div>
-					                </div>
-					                <div class="">
-					                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
-					                   		<option value="">유형 선택</option>
-						                    <option value="C">선택형</option>
-						                    <option value="D">날짜형</option>
-						                    <option value="T">텍스트형</option>
-						                </select>
-						                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
-						                	<option value="">선택해주세요</option>
-						                </select>
-					                </div>
-					            </div>
-					            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-					            <div id="choiceList">
-					            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
-					            </div>
-					            <div id="choiceMaxAlert">
-					            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
-					            </div>
-					            <div id="choiceMax">
-									<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
-				            	</div>
+		            <!-- 문항 입력 (문항 전체 감싸고 있는 div)-->
+		            <div class=" basic-border-bottom" >
+		            	<!-- 첫번째 질문 div 시작 -->
+		            	<div class="padding-20" name="surveyQuest" id="surveyQuest">
+		            		<div class="row">
+				                <div class="col-3">
+				                    <div>질문</div>
+				                </div>
+				                <div class="">
+				                    <input type="text" size="50" id="questTitle" name="surveyQuestList[0].questTitle" placeholder="질문을 입력해주세요">
+				                </div>
+				            </div>
+				            <div class="row mt-20">
+				                <div class="col-3">
+				                    <div>설문 문항 타입</div>
+				                </div>
+				                <div class="">
+				                   	<select class="" name="surveyQuestList[0].questType1" id="questType1" onchange="questType1Change(this)">
+				                   		<option value="">유형 선택</option>
+					                    <option value="C">선택형</option>
+					                    <option value="D">날짜형</option>
+					                    <option value="T">텍스트형</option>
+					                </select>
+					                <select class="" name="surveyQuestList[0].questType2" id="questType2" onchange="questType2Change(this)">
+					                	<option value="">선택해주세요</option>
+					                </select>
+				                </div>
+				            </div>
+				            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+				            <div id="choiceList">
+				            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+				            </div>
+				            <div id="choiceMaxAlert">
+				            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+				            </div>
+				            <div id="choiceMax">
+								<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
 			            	</div>
-			            	<!-- 첫번째 질문 div 끝 -->
 		            	</div>
-		            </form>
+		            	<!-- 첫번째 질문 div 끝 -->
+	            	</div>
 	            <!-- 문항 추가 -->
 	            <div class="t-c">
 		            <button class="basic mt-20" style="width:50%;"type="button" onclick="addQuest(this)">문항 추가</button>
 	            </div>
 		            
 	            <div class="t-c">
-		            <button class="point mt-20" type="button" onclick="questSubmit();">작성 완료</button>
+		            <button class="point mt-20" type="button" onclick="questSubmit(this);">작성 완료</button>
 		            <!-- 완료 누르면 안내창 띄워서 
 		            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
 	            </div>
@@ -99,7 +97,7 @@
 		                    <div>질문</div>
 		                </div>
 		                <div class="">
-		                    <input type="text" size="50" name="questTitle" placeholder="질문을 입력해주세요">
+		                    <input type="text" size="50" id="questTitle" name="questTitle" placeholder="질문을 입력해주세요">
 		                </div>
 		            </div>
 		            <div class="row mt-20">
@@ -132,6 +130,7 @@
 	           	</div>
             
 	           	<!-- 질문 추가 div 끝 -->
+	           	<input type="hidden" name="surveyNo" value="2"/>
 			</form>
             
            	
@@ -139,12 +138,37 @@
         
         <script>
         	//submit
-        	function questSubmit(){
-        		getQuest();
-//         		document.getElementById('questForm').submit();
+        	function questSubmit(e){
+        		getQuest(e);
+        		document.getElementById('writeQuestPageForm').submit();
         	}
         	
-        	function getQuest(){
+        	function getQuest(e){
+        		
+        		var $questListDiv = $(e).parent().prev().prev(); //질문 리스트 감싸는 div
+        		var qCount = $questListDiv.children().length; //질문 갯수
+        		console.log($questListDiv);
+        		console.log(qCount);
+        		var $quest = $questListDiv.children("#surveyQuest"); //질문 div 밑에 있는 애들 중에서 id surveyQuest인 애 찾기
+        		//$quest[0] = 첫번째 질문
+        		console.log($quest[0]);
+        		console.log("title 나와주세요 제발");
+        		var $questTitle = $quest.find("#questTitle");
+        		console.log($questTitle);
+        		for(var i = 0; i < qCount ; i++) {
+	        		var $questTitle = $quest.eq(i).find("#questTitle"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
+					console.log($questTitle);
+					$questTitle.attr('name', 'surveyQuestList['+(i)+'].questTitle'); //속성값 바꿔주기
+					var $questType1 = $quest.eq(i).find("#questType1");
+					$questType1.attr('name', 'surveyQuestList['+(i)+'].questType1'); //속성값 바꿔주기
+					var $questType2 = $quest.eq(i).find("#questType2");
+					$questType2.attr('name', 'surveyQuestList['+(i)+'].questType2'); //속성값 바꿔주기
+					console.log("for문 "+i+"번째");
+					
+					
+        		}
+				
+        		
 //         		var elements = document.querySelectorAll("#questAnswerCount");
         		console.log("elements");
 //         		console.log(elements);
@@ -181,13 +205,18 @@
 				var $quest = $(e).parent().next().next(); //질문 div 통째로
         		console.log("퀘스트");
         		console.log($quest);
-        		var $form = $("<form action='' method=''>");
-        		var $borderDiv = $("<div class='basic-border-top padding-20' name='surveyQuest'>");
-//         		var $borderDiv = $("<div class='basic-border-top padding-20' name='surveyQuest"+(qCount+1)+"'>");
+        		var $borderDiv = $("<div class='basic-border-top padding-20' id='surveyQuest' name='surveyQuest'>");
+				var $questTitle = $quest.find("#questTitle"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
+				console.log($questTitle);
+// 				$questTitle.attr('name', 'surveyQuestList['+(qCount)+'].questTitle'); //속성값 바꿔주기
+// 				var $questType1 = $quest.find("#questType1");
+// 				$questType1.attr('name', 'surveyQuestList['+(qCount)+'].questType1'); //속성값 바꿔주기
+// 				var $questType2 = $quest.find("#questType2");
+// 				$questType2.attr('name', 'surveyQuestList['+(qCount)+'].questType2'); //속성값 바꿔주기
+				
         		$borderDiv.append($quest.html());
-        		$form.append($borderDiv);
         		if(qCount < 4) {
-					$questListDiv.append($form);
+					$questListDiv.append($borderDiv);
         		} else {
         			console.log("문항은 최대 4개까지");
         		}
@@ -196,6 +225,12 @@
         	
         	//첫번째 문항 타입 change
         	function questType1Change(e) {
+        		//보기에도 name 주려면 몇번째 문항인지 알아야 함.
+//         		console.log("몇번째 문항이냐면");
+//         		console.log(e.name);
+        		var listName = e.name.substr(0, 18);
+        		console.log(listName);
+        		
         		console.log("questType1Change:" + e.value);
         		var choice = ["하나만 선택", "복수 선택"];
         		var text = ["단문 입력", "장문 입력"];
@@ -220,7 +255,7 @@
 			                	+"<div>보기</div>"
 			                +"</div>"
 			                +"<div class='questChoiceList'>"
-			                   	+"<input type='text' placeholder='보기 입력'>"
+			                   	+"<input type='text' id='questCh1' name='surveyCh1' placeholder='보기 입력'>"
 			                   	+"<button type='button' class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
 			                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
 			                +"</div>"
@@ -238,7 +273,7 @@
         			$chList.html("");
 //         			$chMaxCombo.html("");
         			choiceCount = $chList.children().length; //보기 개수
-        			console.log("텍스트를 눌렀을 때 보기 개수:"+choiceCount2);
+        			console.log("텍스트를 눌렀을 때 보기 개수:"+choiceCount);
         		}
         		
         		console.log("보기 개수:"+choiceCount);
@@ -288,7 +323,7 @@
     				     	+"<div class='col-3'>"
     	                	+"</div>"
     		                +"<div class='questChoiceList'>"
-    		                   	+"<input type='text' placeholder='보기 입력'>"
+    		                   	+"<input type='text' id='questCh"+(chCount+1)+"' name='surveyCh"+(chCount+1)+"' placeholder='보기 입력'>"
     		                   	+"<button type='button' class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
     		                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
     		                +"</div>"
@@ -343,7 +378,7 @@
 			                    +"<div>최대 선택 개수</div>"
 			                +"</div>"
 			                +"<div class=''>"
-			                   	+"<select class='' name='' id='questAnswerCount' onchange=''>"
+			                   	+"<select class='' name='surveyChmax' id='questAnswerCount' onchange=''>"
 			                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
 				                +"</select>"
 			                +"</div>"

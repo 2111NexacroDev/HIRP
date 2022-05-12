@@ -206,16 +206,51 @@ public class SurveyController {
 		return mv;
 	}
 
+//	//설문조사 업데이트 (시작 안내 문구)
+//	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
+//	public ModelAndView writeSurvey2(ModelAndView mv
+//			,@ModelAttribute Survey survey
+////			,@ModelAttribute List<SurveyQuest> surveyQuest
+////			,@ModelAttribute List<SurveyQuestCh> qCh
+////			,@ModelAttribute List<String> subList
+//			, HttpServletRequest request) {
+//		
+//		try {
+//			//설문 수정
+//			int result = sService.updateSurvey(survey);
+//			if(result > 0) {
+//				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
+//				System.out.println("업데이트 성공");
+//			} else {
+//				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
+//				mv.setViewName("common/errorPage");
+//			}
+//		} catch(Exception e) {
+//			mv.addObject("msg", e.toString());
+//			mv.setViewName("common/errorPage");
+//		}
+//		
+//		//설문 문항 추가 1 (비어있지 않을 때) nextval
+//		//설문 보기 추가 1 (비어있지 않을 때) currval
+//		return mv;
+//	}
+	
 	//설문조사 업데이트 (시작 안내 문구)
 	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
 	public ModelAndView writeSurvey2(ModelAndView mv
 			,@ModelAttribute Survey survey
-//			,@ModelAttribute List<SurveyQuest> surveyQuest
-//			,@ModelAttribute List<SurveyQuestCh> qCh
-//			,@ModelAttribute List<String> subList
+			,@ModelAttribute SurveyQuest surveyQuest
+			,@ModelAttribute SurveyQuestCh surveyQuestCh
 			, HttpServletRequest request) {
 		
 		try {
+//			System.out.println("questList출력"+surveyQuest.getSurveyQuestList().get(0).getQuestTitle());
+			int qCount = surveyQuest.getSurveyQuestList().size();
+			for(int i = 0; i < qCount; i++) {
+				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
+			}
+			System.out.println("보기를 출력해보자:"+surveyQuestCh);
+			
 			//설문 수정
 			int result = sService.updateSurvey(survey);
 			if(result > 0) {
@@ -239,24 +274,8 @@ public class SurveyController {
 	@RequestMapping(value="/survey/addQuest.hirp", method=RequestMethod.POST)
 	public ModelAndView writeQuest(ModelAndView mv
 				,@ModelAttribute SurveyQuest surveyQuest
-//				,@ModelAttribute List<SurveyQuestCh> qCh
-//				,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
-//		try {
-//			//설문 수정
-//			int result = sService.updateSurvey();
-//			if(result > 0) {
-//				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
-//				System.out.println("업데이트 성공");
-//			} else {
-//				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
-//				mv.setViewName("common/errorPage");
-//			}
-//		} catch(Exception e) {
-//			mv.addObject("msg", e.toString());
-//			mv.setViewName("common/errorPage");
-//		}
 		
 		//설문 문항 추가 1 (비어있지 않을 때) nextval
 		//설문 보기 추가 1 (비어있지 않을 때) currval
@@ -269,20 +288,6 @@ public class SurveyController {
 					,@ModelAttribute List<SurveyQuestCh> qCh
 				, HttpServletRequest request) {
 			
-//			try {
-//				//설문 수정
-//				int result = sService.updateSurvey();
-//				if(result > 0) {
-//					mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
-//					System.out.println("업데이트 성공");
-//				} else {
-//					mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
-//					mv.setViewName("common/errorPage");
-//				}
-//			} catch(Exception e) {
-//				mv.addObject("msg", e.toString());
-//				mv.setViewName("common/errorPage");
-//			}
 			
 			return mv;
 		}
