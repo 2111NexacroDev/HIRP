@@ -4,5 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ReservationMapper">
-
+	<resultMap type="Utility" id="utilityResultMap">
+		<id property="utilityNo" column="UTILITY_NO"/>
+		<result property="utilityName" column="UTILITY_NAME"/>
+		<result property="utilityCategory" column="UTILITY_CATEGORY"/>
+		<result property="utilityConts" column="UTILITY_CONTS"/>
+	</resultMap>
+	<select id="selectAllUtility" resultMap="utilityResultMap">
+		SELECT * FROM UTILITY_TBL GROUP BY UTILITY_CATEGORY ORDER BY UTILITY_NO DESC
+	</select>
+	<insert id="insertUtility">
+		INSERT INTO UTILITY_TBL VALUES(UTILITY_SEQ.NEXTVAL, #{utilityName}, #{utilityCategory}, #{utilityConts})
+	</insert>
 </mapper>

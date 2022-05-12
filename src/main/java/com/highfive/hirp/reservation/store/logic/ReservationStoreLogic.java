@@ -14,50 +14,49 @@ public class ReservationStoreLogic implements ReservationStore {
 
 	@Override
 	public List<Reservation> selectAllReservation(SqlSession sqlSession) {
-		List<Reservation> rList = sqlSession.selectList("utilityMapper.selectAllReservation");
+		List<Reservation> rList = sqlSession.selectList("ReservationMapper.selectAllReservation");
 		return rList;
 	}
 
 	@Override
 	public int insertReservation(SqlSession sqlSession, Reservation reservation) {
-		int result = sqlSession.insert("utilityMapper.insertReservation", reservation);
+		int result = sqlSession.insert("ReservationMapper.insertReservation", reservation);
 		return result;
 	}
 
 	@Override
 	public int updateReservation(SqlSession sqlSession, Reservation reservation) {
-		int result = sqlSession.update("utilityMapper.updateReservation", reservation);
+		int result = sqlSession.update("ReservationMapper.updateReservation", reservation);
 		return result;
 	}
 
 	@Override
 	public int deleteReservation(SqlSession sqlSession, int reservationNo) {
-		int result = sqlSession.delete("utilityMapper.deleteReservation", reservationNo);
+		int result = sqlSession.delete("ReservationMapper.deleteReservation", reservationNo);
 		return result;
 	}
 
 	@Override
 	public List<Utility> selectAllUtility(SqlSession sqlSession) {
-		List<Utility> uList = sqlSession.selectList("utilityMapper.selectAllUtility");
+		List<Utility> uList = sqlSession.selectList("ReservationMapper.selectAllUtility");
 		return uList;
 	}
 
 	@Override
 	public int insertUtility(SqlSession sqlSession, Utility utility) {
-		int result = sqlSession.insert("utilityMapper.insertUtility", utility);
+		int result = sqlSession.insert("ReservationMapper.insertUtility", utility);
 		return result;
 	}
 
 	@Override
 	public int updateUtility(SqlSession sqlSession, Utility utility) {
-		int result = sqlSession.update("utilityMapper.updateUtility", utility);
+		int result = sqlSession.update("ReservationMapper.updateUtility", utility);
 		return result;
 	}
 
 	@Override
 	public int deleteUtility(SqlSession sqlSession, int utilityNo) {
-		int result = sqlSession.delete("utilityMapper.deleteUtility", utilityNo);
+		int result = sqlSession.delete("ReservationMapper.deleteUtility", utilityNo);
 		return result;
 	}
-
 }

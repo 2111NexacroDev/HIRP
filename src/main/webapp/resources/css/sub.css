@@ -396,5 +396,20 @@ section[class^="todo--"] li {
     opacity: .5;
 }
 
+#reservation .section--modal li {
+    display: flex;
+    align-items: center;
+    margin-top: 20px !important;
+    font-size: 0;
+}
+
+.section--modal li * {
+    font-size: 14px;
+}
+
+.section--modal textarea {
+    width: calc(100% - 90px);
+    padding: 10px;
+}
 
 /* 공용품 예약/관리 끝 */
