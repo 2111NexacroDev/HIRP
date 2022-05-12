@@ -16,20 +16,20 @@
 <result property="updateDate" column="UPDATE_DATE"></result>
 <result property="status" column="STATUS"></result>
 </resultMap>
-<insert id="insertNoticeReply">
+<insert id="insertReply">
   		INSERT INTO REPLY_TBL(REPLY_NO, BOARD_CODE, BOARD_NO, PARENT_REPLY_NO, REPLY_ORDER,REPLY_DEPTH,EMPL_ID,REPLY_CONTENTS,WRITE_DATE,STATUS) VALUES(BOARD_REPLY_SEQ.NEXTVAL,#{boardCode },#{boardNo},BOARD_REPLY_SEQ.CURRVAL,0,0,#{emplId},#{replyContents},DEFAULT,DEFAULT)
 </insert>
 <insert id="insertReReply">
 	INSERT INTO REPLY_TBL(REPLY_NO, BOARD_CODE, BOARD_NO, PARENT_REPLY_NO, REPLY_ORDER,REPLY_DEPTH,EMPL_ID,REPLY_CONTENTS,WRITE_DATE,STATUS) VALUES(BOARD_REPLY_SEQ.NEXTVAL,#{boardCode },#{boardNo},#{parentReplyNo},(SELECT MAX(REPLY_ORDER)+1 FROM REPLY_TBL WHERE PARENT_REPLY_NO = #{parentReplyNo}),1,#{emplId},#{replyContents},DEFAULT,DEFAULT)
 </insert>
 
-<select id="selectAllNoticeReply" resultMap = "boardReplyResultMap">
+<select id="selectAllReply" resultMap = "boardReplyResultMap">
   		SELECT * FROM REPLY_TBL WHERE BOARD_NO = #{boardNo } AND BOARD_CODE= #{boardCode} AND STATUS='Y' ORDER BY PARENT_REPLY_NO, REPLY_ORDER 
 </select>
-<update id="deleteNoticeReply">
+<update id="deleteReply">
 		UPDATE REPLY_TBL SET STATUS='N' WHERE REPLY_NO = #{replyNo}
 </update>
-<update id="updateNoticeReply">
+<update id="updateReply">
 		UPDATE REPLY_TBL SET REPLY_CONTENTS = #{replyContents} WHERE REPLY_NO = #{replyNo}
 </update>
 

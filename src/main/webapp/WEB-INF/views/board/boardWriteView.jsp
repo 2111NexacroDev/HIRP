@@ -18,7 +18,7 @@
   <article id="sub" class="">
     <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
     <h1 class="basic-border-bottom">글쓰기</h1>
-     <form  id="multiform" action="/notice/register.hirp" method="post" enctype="multipart/form-data" onsubmit="return registerAction()">
+     <form  id="multiform" action="/notice/register.hirp" method="post" enctype="multipart/form-data">
 	<!--  	<form name="dataForm" id="dataForm" action="/notice/register.hirp" >	-->	
 				게시판 선택
 				<select name="boardCode">

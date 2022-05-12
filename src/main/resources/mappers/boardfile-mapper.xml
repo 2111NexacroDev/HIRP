@@ -12,15 +12,20 @@
 <result property="filePath" column="FILE_PATH"></result>
 </resultMap>
 <!-- 첨부파일 등록  -->
-<insert id="insertNoticeFile">
+<insert id="insertBoardFile">
 	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},NOTICE_BOARD_SEQ.CURRVAL,#{fileName},#{fileRename},#{filePath})
 </insert>
-<!-- 첨부파일 리스트 조회 -->
-<select id="selectAllFile" resultMap="boardFileResultMap">
-	SELECT * FROM BOARD_ATTACHED_FILE_TBL 
-</select>
-<!-- 공지게시글 디테일 조회 -->
-  <select id="selectOneFile" resultMap="boardFileResultMap">
-  	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_NO = #{noticeNo}
-  </select>
+
+<!-- 첨부파일 수정 -->
+<insert id="updateBoardFile">
+	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
+</insert>
+
+<!-- 첨부파일 삭제 -->  
+  <delete id="deleteFile">
+  	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
+  </delete>
+
+  
+  
 </mapper>

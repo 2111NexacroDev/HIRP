@@ -1,33 +1,39 @@
 package com.highfive.hirp.board.anonymous.domain;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.highfive.hirp.board.common.BoardAttachedFile;
 
 public class AnonymousBoard {
 
 	private int anonymousNo;
 	private String emplId;
-	private String boardType;
+	private String boardCode;
 	private String anonymousTitle;
 	private String anonymousContents;
 	private Date writeDate;
 	private int anonymousCount;
 	private int recommendCount;
 	private String status;
+	private List<BoardAttachedFile> bList;
 	
 	public AnonymousBoard() {}
 
-	public AnonymousBoard(int anonymousNo, String emplId, String boardType, String anonymousTitle,
-			String anonymousContents, Date writeDate, int anonymousCount, int recommendCount, String status) {
+	public AnonymousBoard(int anonymousNo, String emplId, String boardCode, String anonymousTitle,
+			String anonymousContents, Date writeDate, int anonymousCount, int recommendCount, String status,
+			List<BoardAttachedFile> bList) {
 		super();
 		this.anonymousNo = anonymousNo;
 		this.emplId = emplId;
-		this.boardType = boardType;
+		this.boardCode = boardCode;
 		this.anonymousTitle = anonymousTitle;
 		this.anonymousContents = anonymousContents;
 		this.writeDate = writeDate;
 		this.anonymousCount = anonymousCount;
 		this.recommendCount = recommendCount;
 		this.status = status;
+		this.bList = bList;
 	}
 
 	public int getAnonymousNo() {
@@ -46,12 +52,12 @@ public class AnonymousBoard {
 		this.emplId = emplId;
 	}
 
-	public String getBoardType() {
-		return boardType;
+	public String getBoardCode() {
+		return boardCode;
 	}
 
-	public void setBoardType(String boardType) {
-		this.boardType = boardType;
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
 	}
 
 	public String getAnonymousTitle() {
@@ -102,16 +108,24 @@ public class AnonymousBoard {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return "AnonymousBoard [anonymousNo=" + anonymousNo + ", emplId=" + emplId + ", boardType=" + boardType
-				+ ", anonymousTitle=" + anonymousTitle + ", anonymousContents=" + anonymousContents + ", writeDate="
-				+ writeDate + ", anonymousCount=" + anonymousCount + ", recommendCount=" + recommendCount + ", status="
-				+ status + "]";
+	public List<BoardAttachedFile> getbList() {
+		return bList;
 	}
 
+	public void setbList(List<BoardAttachedFile> bList) {
+		this.bList = bList;
+	}
+
+	@Override
+	public String toString() {
+		return "AnonymousBoard [anonymousNo=" + anonymousNo + ", emplId=" + emplId + ", boardCode=" + boardCode
+				+ ", anonymousTitle=" + anonymousTitle + ", anonymousContents=" + anonymousContents + ", writeDate="
+				+ writeDate + ", anonymousCount=" + anonymousCount + ", recommendCount=" + recommendCount + ", status="
+				+ status + ", bList=" + bList + "]";
+	}
 
 	
+
 	
 	
 }

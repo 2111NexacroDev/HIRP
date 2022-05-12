@@ -45,8 +45,11 @@
 
 		<!-- 우정 -->
 		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.free.domain.FreeBoard" alias="FreeBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.anonymous.domain.AnonymousBoard" alias="AnonymousBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.department.domain.DepartmentBoard" alias="DepartmentBoard"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.common.BoardAttachedFile" alias="BoardAttachedFile"></typeAlias>
-		<typeAlias type="com.highfive.hirp.board.common.Reply" alias="Reply"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.reply.domain.Reply" alias="Reply"></typeAlias>
 
 	</typeAliases>
 	<mappers>

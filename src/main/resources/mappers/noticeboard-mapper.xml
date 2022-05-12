@@ -65,6 +65,10 @@
   <select id="selectOneNotice" resultMap="noticeResultMap">
   	SELECT * FROM BOARD_NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
   </select>
+  <!-- 공지글 수정 -->
+  <update id="updateNotice">
+  	UPDATE BOARD_NOTICE_TBL SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENTS = #{noticeContents} WHERE NOTICE_NO = #{noticeNo}
+  </update>
   <!-- 공지게시글 삭제 -->
   <update id="deleteNotice">
   	UPDATE BOARD_NOTICE_TBL SET NOTICE_STATUS = 'N'WHERE NOTICE_NO = #{noticeNo}
@@ -73,4 +77,30 @@
   <update id="updateCount">
   	UPDATE BOARD_NOTICE_TBL SET NOTICE_COUNT = NOTICE_COUNT + 1 WHERE NOTICE_NO = #{noticeNo}
   </update>
+  <select id="selectNewestNotice" resultMap="noticeResultMap">
+     SELECT * FROM (SELECT NOTICE_NO,EMPL_ID,NOTICE_TITLE,NOTICE_WRITE_DATE,NOTICE_COUNT,NOTICE_STATUS,RANK()OVER(ORDER BY NOTICE_WRITE_DATE DESC )RANK_NUM FROM BOARD_NOTICE_TBL)WHERE RANK_NUM <![CDATA[ < ]]> 6 AND NOTICE_STATUS='Y'
+  </select>
+  <!-- 공지게시글 디테일 첨부파일 조회 -->
+  <select id="selectOneFile" resultMap="boardFileResultMap">
+  	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_CODE = #{boardCode} AND BOARD_NO = #{noticeNo}
+  </select>
+
+   <!-- 공지게시글 첨부파일 수정 -->
+  <insert id="updateBoardFile">
+  		INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
+  </insert>
+  
+  <!-- 첨부파일 삭제 -->  
+  <delete id="deleteFile">
+  	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
+  </delete>
+  
+  <select id="selectMyNotice">
+  	SELECT FROM BOARD_NOTICE_TBL WHERE EMPL_ID = #{emplId};
+  </select>
+  
+  
+  
+  
+  
   </mapper>
