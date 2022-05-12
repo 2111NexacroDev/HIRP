@@ -248,8 +248,13 @@ public class SurveyController {
 			int qCount = surveyQuest.getSurveyQuestList().size();
 			for(int i = 0; i < qCount; i++) {
 				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
+				if(surveyQuestCh.getSurveyQuestChList().get(i) != null) {
+					System.out.println("보기:");
+					System.out.println("questList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
+				} else {
+					continue;
+				}
 			}
-			System.out.println("보기를 출력해보자:"+surveyQuestCh);
 			
 			//설문 수정
 			int result = sService.updateSurvey(survey);

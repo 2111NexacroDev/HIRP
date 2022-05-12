@@ -38,105 +38,74 @@
 		            </div>
 		            <!-- 시작 안내 문구 끝 -->
 		            <!-- 문항 입력 (문항 전체 감싸고 있는 div)-->
-		            <div class=" basic-border-bottom" >
-		            	<!-- 첫번째 질문 div 시작 -->
-		            	<div class="padding-20" name="surveyQuest" id="surveyQuest">
-		            		<div class="row">
-				                <div class="col-3">
-				                    <div>질문</div>
-				                </div>
-				                <div class="">
-				                    <input type="text" size="50" id="questTitle" name="surveyQuestList[0].questTitle" placeholder="질문을 입력해주세요">
-				                </div>
-				            </div>
-				            <div class="row mt-20">
-				                <div class="col-3">
-				                    <div>설문 문항 타입</div>
-				                </div>
-				                <div class="">
-				                   	<select class="" name="surveyQuestList[0].questType1" id="questType1" onchange="questType1Change(this)">
-				                   		<option value="">유형 선택</option>
-					                    <option value="C">선택형</option>
-					                    <option value="D">날짜형</option>
-					                    <option value="T">텍스트형</option>
-					                </select>
-					                <select class="" name="surveyQuestList[0].questType2" id="questType2" onchange="questType2Change(this)">
-					                	<option value="">선택해주세요</option>
-					                </select>
-				                </div>
-				            </div>
-				            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-				            <div id="choiceList">
-				            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
-				            </div>
-				            <div id="choiceMaxAlert">
-				            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
-				            </div>
-				            <div id="choiceMax">
-								<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
-			            	</div>
+		            <div id="questListDiv" class="" >
+	            	</div>
+		            <!-- 문항 추가 -->
+		            <div class="t-c">
+			            <button class="basic mt-20" style="width:50%;" id="addQuestButton" type="button" onclick="addQuest(this)">문항 추가</button>
+		            </div>
+			            
+		            <div class="t-c">
+			            <button class="point mt-20" type="button" onclick="questSubmit(this);">작성 완료</button>
+			            <!-- 완료 누르면 안내창 띄워서 
+			            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
+		            </div>
+		            <!-- 페이지 내용 끝 -->
+		            
+		            <!-- 질문 추가 div 시작 -->
+		           	<div class="basic-border-top padding-20" style="display:none;">
+		           		<div class="row">
+			                <div class="col-3">
+			                    <div>질문</div>
+			                </div>
+			                <div class="">
+			                    <input type="text" size="50" id="" name="questTitle" placeholder="질문을 입력해주세요">
+			                </div>
+			            </div>
+			            <div class="row mt-20">
+			                <div class="col-3">
+			                    <div>설문 문항 타입</div>
+			                </div>
+			                <div class="">
+			                   	<select class="" name="questType1" id="" onchange="questType1Change(this)">
+			                   		<option value="">유형 선택</option>
+				                    <option value="C">선택형</option>
+				                    <option value="D">날짜형</option>
+				                    <option value="T">텍스트형</option>
+				                </select>
+				                <select class="" name="questType2" id="" onchange="questType2Change(this)">
+				                	<option value="">선택해주세요</option>
+				                </select>
+			                </div>
+			            </div>
+			            
+			            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
+			            <div id="choiceList">
+			            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
+			            </div>
+			            <div id="choiceMaxAlert">
+			            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
+			            </div>
+			            <div id="choiceMax">
+							<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
 		            	</div>
-		            	<!-- 첫번째 질문 div 끝 -->
-	            	</div>
-	            <!-- 문항 추가 -->
-	            <div class="t-c">
-		            <button class="basic mt-20" style="width:50%;"type="button" onclick="addQuest(this)">문항 추가</button>
-	            </div>
-		            
-	            <div class="t-c">
-		            <button class="point mt-20" type="button" onclick="questSubmit(this);">작성 완료</button>
-		            <!-- 완료 누르면 안내창 띄워서 
-		            설문 문항은 수정할 수 없습니다. 문항 작성을 완료하시겠습니까? -->
-	            </div>
-	            <!-- 페이지 내용 끝 -->
+		           	</div>
 	            
-	            <!-- 질문 추가 div 시작 -->
-	           	<div class="basic-border-top padding-20" style="display:none;">
-	           		<div class="row">
-		                <div class="col-3">
-		                    <div>질문</div>
-		                </div>
-		                <div class="">
-		                    <input type="text" size="50" id="questTitle" name="questTitle" placeholder="질문을 입력해주세요">
-		                </div>
-		            </div>
-		            <div class="row mt-20">
-		                <div class="col-3">
-		                    <div>설문 문항 타입</div>
-		                </div>
-		                <div class="">
-		                   	<select class="" name="questType1" id="questType1" onchange="questType1Change(this)">
-		                   		<option value="">유형 선택</option>
-			                    <option value="C">선택형</option>
-			                    <option value="D">날짜형</option>
-			                    <option value="T">텍스트형</option>
-			                </select>
-			                <select class="" name="questType2" id="questType2" onchange="questType2Change(this)">
-			                	<option value="">선택해주세요</option>
-			                </select>
-		                </div>
-		            </div>
-		            
-		            <!-- script로 보였다 안보였다 할 때 마진 안 보이게 하려고 div 한번 더 감싸주었음. -->
-		            <div id="choiceList">
-		            	<!-- 첫번째 유형 선택하면 보기 1개 기본값으로 추가 -->
-		            </div>
-		            <div id="choiceMaxAlert">
-		            	<!-- choice가 4개 이상일 때 안내글 띄워줌. -->
-		            </div>
-		            <div id="choiceMax">
-						<!-- 최대 보기 선택 개수 콤보 박스도 첫번째 유형 선택하면 기본값으로 추가 -->
-	            	</div>
-	           	</div>
-            
-	           	<!-- 질문 추가 div 끝 -->
-	           	<input type="hidden" name="surveyNo" value="2"/>
+		           	<!-- 질문 추가 div 끝 -->
+		           	<input type="hidden" name="surveyNo" value="2"/>
+				</div>
 			</form>
             
            	
         </article>
         
         <script>
+	        $(document).ready(function(){
+	        	//실행될 코드
+	        	var addQuestButton = $("#addQuestButton");
+	        	addQuest(addQuestButton);
+	        });
+        
         	//submit
         	function questSubmit(e){
         		getQuest(e);
@@ -144,54 +113,55 @@
         	}
         	
         	function getQuest(e){
-        		
         		var $questListDiv = $(e).parent().prev().prev(); //질문 리스트 감싸는 div
         		var qCount = $questListDiv.children().length; //질문 갯수
         		console.log($questListDiv);
         		console.log(qCount);
-        		var $quest = $questListDiv.children("#surveyQuest"); //질문 div 밑에 있는 애들 중에서 id surveyQuest인 애 찾기
+        		var $questList = $questListDiv.children("[name=surveyQuest]"); //질문 div 안에 id surveyQuest인 애 찾기(여러개)
         		//$quest[0] = 첫번째 질문
-        		console.log($quest[0]);
+        		console.log($questList.eq(0));
         		console.log("title 나와주세요 제발");
-        		var $questTitle = $quest.find("#questTitle");
-        		console.log($questTitle);
+//         		var $questTitle = $quest.find("#questTitle");
+//         		console.log($questTitle);
         		for(var i = 0; i < qCount ; i++) {
-	        		var $questTitle = $quest.eq(i).find("#questTitle"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
-					console.log($questTitle);
+	        		var $questTitle = $questList.eq(i).find("[name=questTitle]"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
+// 					console.log($questTitle);
 					$questTitle.attr('name', 'surveyQuestList['+(i)+'].questTitle'); //속성값 바꿔주기
-					var $questType1 = $quest.eq(i).find("#questType1");
+					var $questType1 = $questList.eq(i).find("[name=questType1]");
+// 					console.log($questType1);
+// 					console.log($questType1.val()); //선택값 가져오기
+// 					console.log($quest.eq(i).find("#questType1 option:selected").val());
 					$questType1.attr('name', 'surveyQuestList['+(i)+'].questType1'); //속성값 바꿔주기
-					var $questType2 = $quest.eq(i).find("#questType2");
+					var $questType2 = $questList.eq(i).find("[name=questType2]");
 					$questType2.attr('name', 'surveyQuestList['+(i)+'].questType2'); //속성값 바꿔주기
 					console.log("for문 "+i+"번째");
 					
 					
+					var type1Val = $questType1.val(); //첫번째 타입 값
+					var type2Val = $questType2.val(); //두번째 타입 값
+					var $questChList = $questList.eq(i).find("input[name=surveyCh]"); //질문 div 안에 id questCh인 애 찾기(여러개)
+					var $questChMax = $questList.eq(i).find("[name=surveyChmax]"); //최대 갯수 combo
+					var qChCount = $questChList.length; //보기 갯수
+					console.log("$questList eq"+i); //문항 묶음
+					console.log($questList.eq(i));
+					console.log("$questChList 길이"); //문항 내 보기 갯수
+					console.log($questChList.length);
+					console.log("$questChList"); //문항 내 보기 리스트
+					console.log($questChList);
+					console.log("questChMax");
+					console.log($questChMax);
+					if(type1Val=='C' || type1Val=='D'){
+						console.log("객관식 또는 날짜형");
+						for(var j = 0 ; j < qChCount; j++){
+							$questChList.eq(j).attr('name', 'surveyQuestChList['+(i)+'].surveyCh'+(j+1)); //속성값 바꿔주기
+							if(type2Val == "복수 선택"){
+	// 							console.log("복수");
+								$questChMax.attr('name', 'surveyQuestChList['+(i)+'].surveyChmax'); //속성값 바꿔주기
+							}
+						}
+					}
         		}
 				
-        		
-//         		var elements = document.querySelectorAll("#questAnswerCount");
-        		console.log("elements");
-//         		console.log(elements);
-//         		console.log(elements[0].value); //이렇게 하면 COUNT안에 넣은 값이 나옴.
-//         		console.log(elements[1]);
-//         		var quest1 = $("#surveyQuest1");
-//         		console.log(quest1.children());
-
-//         		var questList = document.getElementsByName('surveyQuest');
-//         		var list = $("input[name='surveyQuest']");
-//         		console.log(list.children().find("input[name='questTitle']"));
-//         		console.log(questList);
-//         		console.log(questList[0]);
-//         		console.log(questList[0].find("input[name='questTitle']"));
-        		
-//         		var questTitle = document.getElementsByName('questTitle');
-//         		var questType1 = document.getElementsByName('questType1');
-//         		var questType2 = document.getElementsByName('questType2');
-        		
-//         		console.log(questList[0].html());
-//         		console.log(questTitle[0].value);
-//         		console.log(questTitle[1].value);
-//         		console.log(questTitle[2].value);
         	}
         	
         	//문항 추가
@@ -205,15 +175,7 @@
 				var $quest = $(e).parent().next().next(); //질문 div 통째로
         		console.log("퀘스트");
         		console.log($quest);
-        		var $borderDiv = $("<div class='basic-border-top padding-20' id='surveyQuest' name='surveyQuest'>");
-				var $questTitle = $quest.find("#questTitle"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
-				console.log($questTitle);
-// 				$questTitle.attr('name', 'surveyQuestList['+(qCount)+'].questTitle'); //속성값 바꿔주기
-// 				var $questType1 = $quest.find("#questType1");
-// 				$questType1.attr('name', 'surveyQuestList['+(qCount)+'].questType1'); //속성값 바꿔주기
-// 				var $questType2 = $quest.find("#questType2");
-// 				$questType2.attr('name', 'surveyQuestList['+(qCount)+'].questType2'); //속성값 바꿔주기
-				
+        		var $borderDiv = $("<div class='basic-border-bottom padding-20' name='surveyQuest'>");
         		$borderDiv.append($quest.html());
         		if(qCount < 4) {
 					$questListDiv.append($borderDiv);
@@ -255,7 +217,7 @@
 			                	+"<div>보기</div>"
 			                +"</div>"
 			                +"<div class='questChoiceList'>"
-			                   	+"<input type='text' id='questCh1' name='surveyCh1' placeholder='보기 입력'>"
+			                   	+"<input type='text' name='surveyCh' placeholder='보기 입력'>"
 			                   	+"<button type='button' class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
 			                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
 			                +"</div>"
@@ -305,7 +267,7 @@
         		var $chList = $(e).parent().parent().parent(); //보기 리스트 출력하는 div (choiceList)
 //         		var target = document.getElementById("questAnswerCount"); //최대 선택 개수 콤보
 //         		var target2 = $("#questAnswerCount")[0];
-        		var target = $chList.next().next().children().find("#questAnswerCount")[0];  //최대 선택 개수 combo
+        		var target = $chList.next().next().children().find("[name=surveyChmax]")[0];  //최대 선택 개수 combo
         		console.log($chList.next().next());
 //         		console.log(target);
         		
@@ -323,7 +285,7 @@
     				     	+"<div class='col-3'>"
     	                	+"</div>"
     		                +"<div class='questChoiceList'>"
-    		                   	+"<input type='text' id='questCh"+(chCount+1)+"' name='surveyCh"+(chCount+1)+"' placeholder='보기 입력'>"
+    		                   	+"<input type='text' name='surveyCh' placeholder='보기 입력'>"
     		                   	+"<button type='button' class='noneBackground' onclick='addChList(this);'><i class='fa-solid fa-plus'></i></button>"
     		                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
     		                +"</div>"
@@ -356,7 +318,7 @@
         		$(e).parent().parent().remove(); //보기 div 삭제
         		console.log("deleteChList:chList");
         		console.log($chList);
-        		var target = $chList.next().next().children().find("#questAnswerCount")[0];  //최대 선택 개수 combo
+        		var target = $chList.next().next().children().find("[name=surveyChmax]")[0];  //최대 선택 개수 combo
         		console.log("타겟2");
         		console.log(target);
         		var chCount = $chList.children().length; //보기 개수
@@ -378,14 +340,14 @@
 			                    +"<div>최대 선택 개수</div>"
 			                +"</div>"
 			                +"<div class=''>"
-			                   	+"<select class='' name='surveyChmax' id='questAnswerCount' onchange=''>"
+			                   	+"<select class='' name='surveyChmax' onchange=''>"
 			                   		+"<option value=''>제한없음</option> <option value=''>1</option>"
 				                +"</select>"
 			                +"</div>"
 			            +"</div>");
     			$chMaxCombo.append($chMaxDiv);
     			
-        		var target = $chList.next().next().children().find("#questAnswerCount")[0];  //최대 선택 개수 combo
+        		var target = $chList.next().next().children().find("[name=surveyChmax]")[0];  //최대 선택 개수 combo
         		console.log("addChMaxCombo: target");
         		console.log(target);
         		var chCount = $chList.children().length; //보기 개수
