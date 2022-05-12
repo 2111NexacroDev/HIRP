@@ -202,15 +202,12 @@ public class SurveyController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		//설문 문항 추가 1 (비어있지 않을 때) nextval
-		//설문 보기 추가 1 (비어있지 않을 때) currval
-		//2~4까지 하기
 		//설문 대상자 리스트 추가
 		return mv;
 	}
 
-	//설문 문항 등록 (시작 안내 문구)
-	@RequestMapping(value="/survey/addSurveyQuest.hirp", method=RequestMethod.POST)
+	//설문조사 업데이트 (시작 안내 문구)
+	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
 	public ModelAndView writeSurvey2(ModelAndView mv
 			,@ModelAttribute Survey survey
 //			,@ModelAttribute List<SurveyQuest> surveyQuest
@@ -235,10 +232,60 @@ public class SurveyController {
 		
 		//설문 문항 추가 1 (비어있지 않을 때) nextval
 		//설문 보기 추가 1 (비어있지 않을 때) currval
-		//2~4까지 하기
-		//설문 대상자 리스트 추가
 		return mv;
 	}
+	
+	//설문 문항 등록
+	@RequestMapping(value="/survey/addQuest.hirp", method=RequestMethod.POST)
+	public ModelAndView writeQuest(ModelAndView mv
+				,@ModelAttribute SurveyQuest surveyQuest
+//				,@ModelAttribute List<SurveyQuestCh> qCh
+//				,@ModelAttribute List<String> subList
+			, HttpServletRequest request) {
+		
+//		try {
+//			//설문 수정
+//			int result = sService.updateSurvey();
+//			if(result > 0) {
+//				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
+//				System.out.println("업데이트 성공");
+//			} else {
+//				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
+//				mv.setViewName("common/errorPage");
+//			}
+//		} catch(Exception e) {
+//			mv.addObject("msg", e.toString());
+//			mv.setViewName("common/errorPage");
+//		}
+		
+		//설문 문항 추가 1 (비어있지 않을 때) nextval
+		//설문 보기 추가 1 (비어있지 않을 때) currval
+		return mv;
+	}
+	
+	//설문 문항 보기 등록
+		@RequestMapping(value="/survey/addQuestCh.hirp", method=RequestMethod.POST)
+		public ModelAndView writeQuestCh(ModelAndView mv
+					,@ModelAttribute List<SurveyQuestCh> qCh
+				, HttpServletRequest request) {
+			
+//			try {
+//				//설문 수정
+//				int result = sService.updateSurvey();
+//				if(result > 0) {
+//					mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
+//					System.out.println("업데이트 성공");
+//				} else {
+//					mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
+//					mv.setViewName("common/errorPage");
+//				}
+//			} catch(Exception e) {
+//				mv.addObject("msg", e.toString());
+//				mv.setViewName("common/errorPage");
+//			}
+			
+			return mv;
+		}
 
 	//대상자 전체 리스트 가져오기(설문 등록할 때 조직도 사용)
 	public ModelAndView chooseEmpl(ModelAndView mv) {
