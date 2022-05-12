@@ -36,8 +36,8 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public int insertPersonalSchedule(SqlSession sqlSession, Schedule schedule) {
-		int result = sqlSession.insert("ScheduleMapper.insertPersonalSchedule", schedule);
+	public int insertSchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.insert("ScheduleMapper.insertSchedule", schedule);
 		return result;
 	}
 
@@ -54,20 +54,26 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 	
 	@Override
-	public int insertTeamSchedule(SqlSession sqlSession, Schedule schedule) {
-		int result = sqlSession.insert("ScheduleMapper.insertTeamSchedule", schedule);
+	public int updateSchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.update("ScheduleMapper.modifySchedule", schedule);
 		return result;
 	}
 	
 	@Override
-	public int updateSchedule(SqlSession sqlSession, Schedule schedule) {
-		int result = sqlSession.update("ScheduleMapper.modifySchedule", schedule);
+	public int updateCompanySchedule(SqlSession sqlSession, Schedule schedule) {
+		int result = sqlSession.update("ScheduleMapper.modifyCompanySchedule", schedule);
 		return result;
 	}
 
 	@Override
 	public int deleteSchedule(SqlSession sqlSession, int scheduleNo) {
 		int result = sqlSession.delete("ScheduleMapper.deleteSchedule", scheduleNo);
+		return result;
+	}
+
+	@Override
+	public int deleteCompanySchedule(SqlSession sqlSession, int scheduleNo) {
+		int result = sqlSession.delete("ScheduleMapper.deleteCompanySchedule", scheduleNo);
 		return result;
 	}
 }
