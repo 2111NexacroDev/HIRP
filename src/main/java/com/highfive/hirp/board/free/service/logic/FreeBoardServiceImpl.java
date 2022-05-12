@@ -4,16 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.free.domain.FreeBoard;
 import com.highfive.hirp.board.free.service.FreeBoardService;
 import com.highfive.hirp.board.free.store.FreeBoardStore;
-import com.highfive.hirp.board.notice.domain.NoticeBoard;
-import com.highfive.hirp.board.notice.store.NoticeBoardStore;
+import com.highfive.hirp.board.reply.domain.Reply;
+import com.highfive.hirp.board.free.domain.FreeBoard;
+import com.highfive.hirp.board.free.store.FreeBoardStore;
+import com.highfive.hirp.board.free.domain.FreeBoard;
+import com.highfive.hirp.board.free.store.FreeBoardStore;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
-
+@Service
 public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Autowired
@@ -22,77 +26,84 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Autowired
 	private SqlSession sqlSession;
 
-	
+	//자유게시판 전체 조회
 	@Override
 	public List<FreeBoard> printAllFree(PageInfo pi) {
 		List<FreeBoard> fList = fStore.selectAllFree(sqlSession,pi);
 		return fList;
 	}
-
+	//자유게시판 하나 조회
 	@Override
-	public FreeBoard printOneFree(int freeNo) {
-		FreeBoard freeboard = fStore.selectOneFree(sqlSession,freeNo);
-		return freeboard;
+	public FreeBoard printOneFree(int FreeNo) {
+		FreeBoard FreeBoard = fStore.selectOneFree(sqlSession,FreeNo);
+		return FreeBoard;
 	}
-
+	
+	//게시글 디테일 첨부파일 조회
+	@Override
+	public List<BoardAttachedFile> printOneFile(FreeBoard freeboard) {
+		List<BoardAttachedFile> fList = fStore.selectOneFile(sqlSession,freeboard);
+		return fList;
+	}
+	
+	//자유게시판 검색 조회
 	@Override
 	public List<FreeBoard> printSearchFree(Search search) {
 		List<FreeBoard> fList = fStore.selectSearchFree(sqlSession,search);
 		return fList;
 	}
 
+	//자유게시판 등록
 	@Override
-	public int registerFree(FreeBoard freeboard) {
-		int result = fStore.insertFree(sqlSession, freeboard);
+	public int registerFree(FreeBoard FreeBoard) {
+		int result = fStore.insertFree(sqlSession, FreeBoard);
+		return result;
+	}
+	//첨부파일 등록
+	@Override
+	public int registerFreeFile(BoardAttachedFile boardFile) {
+		int fileResult = fStore.insertFreeFile(sqlSession, boardFile);
+		return fileResult;
+	}
+
+	//자유게시판 수정
+	@Override
+	public int modifyFree(FreeBoard FreeBoard) {
+		int result = fStore.updateFree(sqlSession, FreeBoard);
 		return result;
 	}
 
+	//자유게시판 삭제
 	@Override
-	public int modifyFree(FreeBoard freeboard) {
-		int result = fStore.updateFree(sqlSession, freeboard);
+	public int removeFree(int FreeNo) {
+		int result = fStore.deleteFree(sqlSession, FreeNo);
 		return result;
 	}
 
+	//첨부파일 삭제
 	@Override
-	public int removeFree(int freeNo) {
-		int result = fStore.deleteFree(sqlSession, freeNo);
+	public int removeBoardFile(int fileNo) {
+		int result = fStore.deleteBoardFile(sqlSession,fileNo);
 		return result;
 	}
-
+	
+	//게시글 개수 조회
 	@Override
 	public int getListCount() {
 		int listCount = fStore.selectListCount(sqlSession);
 		return listCount;
 	}
-
+	//조회수 증가
 	@Override
-	public int viewCount(int freeNo) {
-		int viewCount = fStore.selectViewCount(sqlSession,freeNo);
+	public int viewCount(int FreeNo) {
+		int viewCount = fStore.updateViewCount(sqlSession,FreeNo);
 		return viewCount;
 	}
-
 	@Override
-	public List<Reply> printAllFreeReply(Reply reply) {
-		List<Reply> nReply = fStore.selectAllFreeReply(sqlSession,reply);
-		return nReply;
-	}
-
-	@Override
-	public int registerFreeReply(Reply reply) {
-		int result = fStore.insertFreeReply(sqlSession, reply);
+	public int modifyFreeFile(BoardAttachedFile bFile) {
+		int result = fStore.updateBoardFile(sqlSession, bFile);
 		return result;
 	}
 
-	@Override
-	public int modifyFreeReply(Reply reply) {
-		int result = fStore.updateFreeReply(sqlSession, reply);
-		return result;
-	}
-
-	@Override
-	public int removeFreeReply(Reply reply) {
-		int result = fStore.deleteFreeReply(sqlSession, reply);
-		return result;
-	}
 
 }

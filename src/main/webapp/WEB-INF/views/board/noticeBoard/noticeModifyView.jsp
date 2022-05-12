@@ -7,7 +7,19 @@
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+<style>
+#modify-table{
+width : 1000px;
+height : 500px;
 
+}
+
+
+
+
+
+
+</style>
 <body>
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
@@ -19,16 +31,18 @@
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
            
-            <h1 class="basic-border-bottom">게시판 홈</h1>
+            <h1 class="basic-border-bottom">공지게시판</h1>
 
             <div id="guide" class="subConts">
                 
             </div>
 		<form action="/notice/modify.hirp" method="post" enctype="multipart/form-data">
-		<table>
+		<input type="hidden" name="boardCode" value="${notice.boardCode}">
+		<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
+		<table id="modify-table">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="noticeTitle" value="${notice.noticeTitle }"></td>
+				<td><input type="text" id="noticeTitle"name="noticeTitle" value="${notice.noticeTitle }"></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -40,7 +54,10 @@
 			</tr>
 			<tr>
 				<td>첨부파일</td>
-				<td><input type="file" name="reloadFile" multiple >$</td>
+				<td><input type="file" name="reloadFile" multiple ></td>
+				<c:forEach var="fList" items="${notice.bList}">
+						<td >${fList.fileName}&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+				</c:forEach>
 			</tr>
 			<tr>
 				<td>

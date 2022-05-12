@@ -19,7 +19,7 @@
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
            
-            <h1 class="basic-border-bottom">게시판 홈</h1>
+            <h1 class="basic-border-bottom">공지게시판</h1>
 
             <div id="guide" class="subConts">
                 
@@ -57,7 +57,7 @@
                         </tbody>
                         </c:forEach>
 				</table>
-				<div class="btns--paging">
+				<div class="btn--paging">
                     <button class="basic mt-20">이전</button>
 						<c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
 							<c:url var="pagination" value="/notice/list.hirp">
@@ -67,6 +67,7 @@
 						</c:forEach>
 					<button class="basic mt-20">다음</button>
 				</div>
+				<div class="t-c">
 					<form action="/notice/searchList.hirp" method="get">
 					<input type="hidden" name="currentPage" value="1">
 					<input type="hidden" name="listLimit" value="10">
@@ -79,6 +80,7 @@
 						<input type="text" name="searchValue">
 						<input type="submit" value="검색">
 					</form>
+				</div>
         </article>
     </div>
 </body>
