@@ -1,5 +1,7 @@
 package com.highfive.hirp.survey.domain;
 
+import java.util.List;
+
 public class SurveyQuestCh {
 	private int surveyquestNo;
 	private String surveyCh1;
@@ -7,6 +9,8 @@ public class SurveyQuestCh {
 	private String surveyCh3;
 	private String surveyCh4;
 	private String surveyChmax;
+	
+	private List<SurveyQuestCh> surveyQuestChList;
 	
 	public SurveyQuestCh() {}
 
@@ -69,6 +73,14 @@ public class SurveyQuestCh {
 		this.surveyChmax = surveyChmax;
 	}
 
+	public List<SurveyQuestCh> getSurveyQuestChList(){
+		return surveyQuestChList;
+	}
+	
+	public void setSurveyQuestChList(List<SurveyQuestCh> surveyQuestChList) {
+		this.surveyQuestChList = surveyQuestChList;
+	}
+	
 	@Override
 	public String toString() {
 		return "SurveyQuestCh [surveyquestNo=" + surveyquestNo + ", surveyCh1=" + surveyCh1 + ", surveyCh2=" + surveyCh2

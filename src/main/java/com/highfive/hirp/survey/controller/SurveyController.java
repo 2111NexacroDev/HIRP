@@ -1,6 +1,7 @@
 package com.highfive.hirp.survey.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -178,21 +179,115 @@ public class SurveyController {
 		return mv;
 	}
 	
-	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
+	//설문 등록 (설문정보, 응답자 리스트)
+	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@ModelAttribute List<SurveyQuest> surveyQuest
-			,@ModelAttribute List<SurveyQuestCh> qCh
-			,@ModelAttribute List<String> subList
+			//,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
-		//설문 등록
-		//설문 문항 추가 1 (비어있지 않을 때) nextval
-		//설문 보기 추가 1 (비어있지 않을 때) currval
-		//2~4까지 하기
+		
+		try {
+			//세션에서 아이디 가져와서 넣어주기.
+			String emplId = "TESTID";
+			survey.setSurveyWriter(emplId);
+			//설문 등록
+			int result = sService.insertSurvey(survey);
+			
+			if(result > 0) {
+				//설문 등록된 현재 시퀀스 번호 찾기
+				int surveySeqNo = sService.selectSurveySeqNo();
+				mv.addObject("surveyNo", surveySeqNo);
+				mv.setViewName("survey/surveyWriteQuest");
+			} else {
+				mv.addObject("msg1", "설문조사 정보 추가 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		//설문 대상자 리스트 추가
 		return mv;
 	}
+
+	//설문조사 업데이트 (시작 안내 문구)
+	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
+	public ModelAndView writeSurvey2(ModelAndView mv
+			,@ModelAttribute Survey survey
+			,@ModelAttribute SurveyQuest surveyQuest
+			,@ModelAttribute SurveyQuestCh surveyQuestCh
+			, HttpServletRequest request) {
+		
+		try {
+			int qCount = surveyQuest.getSurveyQuestList().size();
+//			System.out.println("questList출력"+surveyQuest.getSurveyQuestList().get(0).getQuestTitle());
+			
+//			for(int i = 0; i < qCount; i++) {
+//				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
+//				if(surveyQuestCh.getSurveyQuestChList().get(i) != null) {
+//					System.out.println("보기:");
+//					System.out.println("questList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
+//				} else {
+//					continue;
+//				}
+//			}
+			
+			//설문 수정
+			int result = sService.updateSurvey(survey);
+			int result2 = 0;
+			int result3 = 0;
+			for(int i = 0; i < qCount; i++) {
+				//설문조사 문항 추가
+				result2 = sService.insertSurveyQuest(surveyQuest.getSurveyQuestList().get(i));
+				String type1 = surveyQuest.getSurveyQuestList().get(i).getQuestType1();
+				if(surveyQuestCh.getSurveyQuestChList().size() < i+1) {
+					//리스트 사이즈가 i보다 작으면 continue
+					continue;
+				} else {
+					//설문조사 문항에 맞게 보기 추가
+					result3 = sService.insertSurveyQuestCh(surveyQuestCh.getSurveyQuestChList().get(i));
+				}
+			}
+			
+			if(result > 0 && result2 > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
+				System.out.println("시작 안내 문구 업데이트 및 문항 추가 성공");
+			} else {
+				mv.addObject("msg1", "시작 안내 문구 및 문항 업데이트 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
+		//설문 문항 추가 1 (비어있지 않을 때) nextval
+		//설문 보기 추가 1 (비어있지 않을 때) currval
+		return mv;
+	}
+	
+	//설문 문항 등록
+	@RequestMapping(value="/survey/addQuest.hirp", method=RequestMethod.POST)
+	public ModelAndView writeQuest(ModelAndView mv
+				,@ModelAttribute SurveyQuest surveyQuest
+			, HttpServletRequest request) {
+		
+		
+		//설문 문항 추가 1 (비어있지 않을 때) nextval
+		//설문 보기 추가 1 (비어있지 않을 때) currval
+		return mv;
+	}
+	
+	//설문 문항 보기 등록
+		@RequestMapping(value="/survey/addQuestCh.hirp", method=RequestMethod.POST)
+		public ModelAndView writeQuestCh(ModelAndView mv
+					,@ModelAttribute List<SurveyQuestCh> qCh
+				, HttpServletRequest request) {
+			
+			
+			return mv;
+		}
 
 	//대상자 전체 리스트 가져오기(설문 등록할 때 조직도 사용)
 	public ModelAndView chooseEmpl(ModelAndView mv) {
@@ -200,9 +295,8 @@ public class SurveyController {
 
 		
 		return mv;
-	}
-	
-	
+	}		
+		
 	//부서코드로 대상자 리스트 가져오기 (선택한 부서 사람들)
 	public ModelAndView chooseEmplByDept(ModelAndView mv
 			, @RequestParam("deptCode") String deptCode
@@ -269,7 +363,7 @@ public class SurveyController {
 //		HttpSession session = request.getSession();
 //		Employee employee = (Employee) session.getAttribute("loginMember");
 //		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
+		String emplId = "TESTID";
 		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
 		
 		//번호로 설문조사 정보 가져오기

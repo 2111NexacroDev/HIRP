@@ -2,15 +2,17 @@ package com.highfive.hirp.survey.domain;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Survey {
 	private int surveyNo;
 	private String surveyTitle;
 	private String surveyWriter;
-	private Date surveyDate;
-	private Date surveyUpdate;
+	private String surveyDate;
+	private String surveyUpdate;
 	private String surveyStatus;
-	private Date surveyStartdate;
-	private Date surveyEnddate;
+	private String surveyStartdate;
+	private String surveyEnddate;
 	private String surveyResult;
 	private String surveyEdit;
 	private String surveyStartcomment;
@@ -18,8 +20,8 @@ public class Survey {
 	
 	public Survey() {}
 
-	public Survey(int surveyNo, String surveyTitle, String surveyWriter, Date surveyDate, Date surveyUpdate,
-			String surveyStatus, Date surveyStartdate, Date surveyEnddate, String surveyResult, String surveyEdit,
+	public Survey(int surveyNo, String surveyTitle, String surveyWriter, String surveyDate, String surveyUpdate,
+			String surveyStatus, String surveyStartdate, String surveyEnddate, String surveyResult, String surveyEdit,
 			String surveyStartcomment, String surveyStorage) {
 		super();
 		this.surveyNo = surveyNo;
@@ -60,19 +62,19 @@ public class Survey {
 		this.surveyWriter = surveyWriter;
 	}
 
-	public Date getSurveyDate() {
+	public String getSurveyDate() {
 		return surveyDate;
 	}
 
-	public void setSurveyDate(Date surveyDate) {
+	public void setSurveyDate(String surveyDate) {
 		this.surveyDate = surveyDate;
 	}
 
-	public Date getSurveyUpdate() {
+	public String getSurveyUpdate() {
 		return surveyUpdate;
 	}
 
-	public void setSurveyUpdate(Date surveyUpdate) {
+	public void setSurveyUpdate(String surveyUpdate) {
 		this.surveyUpdate = surveyUpdate;
 	}
 
@@ -84,19 +86,19 @@ public class Survey {
 		this.surveyStatus = surveyStatus;
 	}
 
-	public Date getSurveyStartdate() {
+	public String getSurveyStartdate() {
 		return surveyStartdate;
 	}
 
-	public void setSurveyStartdate(Date surveyStartdate) {
+	public void setSurveyStartdate(String surveyStartdate) {
 		this.surveyStartdate = surveyStartdate;
 	}
 
-	public Date getSurveyEnddate() {
+	public String getSurveyEnddate() {
 		return surveyEnddate;
 	}
 
-	public void setSurveyEnddate(Date surveyEnddate) {
+	public void setSurveyEnddate(String surveyEnddate) {
 		this.surveyEnddate = surveyEnddate;
 	}
 
@@ -140,7 +142,6 @@ public class Survey {
 				+ surveyResult + ", surveyEdit=" + surveyEdit + ", surveyStartcomment=" + surveyStartcomment
 				+ ", surveyStorage=" + surveyStorage + "]";
 	}
-
 	
 	
 }

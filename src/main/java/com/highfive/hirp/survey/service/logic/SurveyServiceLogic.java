@@ -91,6 +91,11 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.insertSurveySub(sqlSession, subList);
 		return result;
 	}
+	//현재 설문조사 시퀀스 번호 가져오기
+	public int selectSurveySeqNo() {
+		int result = sStore.selectSurveySeqNo(sqlSession);
+		return result;
+	}
 	
 	//전체 직원 가져오기
 	@Override
