@@ -22,7 +22,7 @@ public class Survey {
 	private String emplName;
 	private String deptName;
 	private String positionName;
-//	응답여부
+//	나의 응답여부
 	private String subAnswerstatus;
 	
 	public Survey() {}
