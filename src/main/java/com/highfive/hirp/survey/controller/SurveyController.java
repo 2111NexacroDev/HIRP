@@ -241,7 +241,7 @@ public class SurveyController {
 				//설문조사 문항 추가
 				result2 = sService.insertSurveyQuest(surveyQuest.getSurveyQuestList().get(i));
 				String type1 = surveyQuest.getSurveyQuestList().get(i).getQuestType1();
-				if(surveyQuestCh.getSurveyQuestChList().size() < qCount+1) {
+				if(surveyQuestCh.getSurveyQuestChList().size() < i+1) {
 					//리스트 사이즈가 i보다 작으면 continue
 					continue;
 				} else {
