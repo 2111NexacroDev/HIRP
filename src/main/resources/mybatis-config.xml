@@ -12,6 +12,7 @@
 		<!-- 진실 -->
 		<typeAlias type="com.highfive.hirp.schedule.domain.Schedule" alias="Schedule"></typeAlias>
 		<typeAlias type="com.highfive.hirp.reservation.domain.Reservation" alias="Reservation"></typeAlias>
+		<typeAlias type="com.highfive.hirp.reservation.domain.Utility" alias="Utility"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
@@ -23,8 +24,11 @@
 		<typeAlias type="com.highfive.hirp.mail.domain.Address" alias="Address"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.Mail" alias="Mail"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.MailFile" alias="MailFile"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Recipient" alias="Recipient"></typeAlias>
+		<typeAlias type="com.highfive.hirp.mail.domain.Referrer" alias="Referrer"></typeAlias>
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
+		<typeAlias type="com.highfive.hirp.project.domain.Board" alias="Board"></typeAlias>
 		<!-- 민선 -->
 		<typeAlias type="com.highfive.hirp.dept.domain.Dept" alias="Dept"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.Survey" alias="Survey"></typeAlias>
@@ -42,7 +46,11 @@
 
 		<!-- 우정 -->
 		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>
-
+		<typeAlias type="com.highfive.hirp.board.free.domain.FreeBoard" alias="FreeBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.anonymous.domain.AnonymousBoard" alias="AnonymousBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.department.domain.DepartmentBoard" alias="DepartmentBoard"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.common.BoardAttachedFile" alias="BoardAttachedFile"></typeAlias>
+		<typeAlias type="com.highfive.hirp.board.reply.domain.Reply" alias="Reply"></typeAlias>
 
 	</typeAliases>
 	<mappers>
@@ -60,6 +68,8 @@
 		<mapper resource="mappers/anonymousboard-mapper.xml" />
 		<mapper resource="mappers/freeboard-mapper.xml" />
 		<mapper resource="mappers/departmentboard-mapper.xml" />
+		<mapper resource="mappers/boardfile-mapper.xml"/>
+		<mapper resource="mappers/boardreply-mapper.xml"/>
 		<!-- 민수 -->
 		<mapper resource="mappers/favority-mapper.xml" />
 		<mapper resource="mappers/mail-mapper.xml" />

@@ -160,6 +160,14 @@ img {
     }
 }
 
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
 .table--basic {
     width: 100%;
     border-top: 1px solid #ccc;
@@ -733,6 +741,24 @@ img {
     font-size: 12px;
 }
 
+.nav--right__info {
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+    width: 126px;
+    padding: 6px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+}
+
+.nav--right__info a {
+    display: block;
+    line-height: 36px;
+}
+
 .form--srch {
     position: absolute;
     top: 15px;
@@ -849,4 +875,30 @@ article {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .4);
+}
+
+.btn--paging {
+    text-align: center;
+}
+
+.btns-wrap {
+    position: relative;
+}
+
+.btns-wrap a.delete {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    color: red;
+    text-decoration: underline;
+}
+
+.btn--plus {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 24px;
+    height: 24px;
+    background: url("../images/icons/btn_more.png") no-repeat center center;
+    font-size: 0;
 }

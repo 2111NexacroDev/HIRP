@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
@@ -38,7 +37,6 @@
 				프로젝트 보기
             </h1>
             <div class="subConts">
-	            <form action="/project/detail.hirp" method="get">
 	            <div class="basic-border mt-20 padding-20">
 	            	<h3>프로젝트정보</h3>
 	            	<div class="t-r">
@@ -96,6 +94,7 @@
 			                <td>${project.startDate }&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;${project.endDate }</td>
 			            </tr>
 		            </table>
+		            <input type="hidden" id="projectNo" value="${project.projectNo }">
 	            </div>
 		            
 		            <div class="basic-border mt-20 padding-20">
@@ -111,21 +110,28 @@
 						                            <h3>칸반보드 추가</h3>
 						                            <ul>
 						                                <li>
-						                                    <label for="">담당자</label><input type="text" id="pManager" name="projectManager" value="${project.projectManager }">
+						                                    <label for="">담당자</label><input type="text" id="emplName" name="emplName" value="${project.projectManager }">
 						                                </li>
 						                                <li>
 						                                    <label for="">내용</label><input type="text" id="bContents" name="boardContents">
 						                                </li>
 						                            </ul>
-					                                <input type="hidden" id="bStatus" value="0">
 						                            <div class="btns-wrap mt-20 t-r">
-						                                <button class="point" type="button" id="bSubmit" onclick="updateBtn();">추가</button>
+						                                <button class="point" type="button" onclick="boardBtn();" value="0">추가</button>
 						                                <button class="finished closeWindow" type="button">닫기</button>
 						                            </div>
 						                        </div>
 						                    </section>
 					                   </div>
-					                   <div class="basic-border mt-20 padding-20 KanbanCard">
+					                   <div class="basic-border mt-20 padding-20">
+					                   		<table class="KanbanCard" id="btb">
+						                   		<thead>
+						                   		
+						                   		</thead>
+						                   		<tbody>
+						                   		
+						                   		</tbody>
+					                   </table>
 					                   </div>
 				                    </div>
 								</div>
@@ -139,20 +145,20 @@
 						                            <h3>칸반보드 추가</h3>
 						                            <ul>
 						                                <li>
-						                                    <label for="">담당자</label><input type="text" id="projectManager" name="projectManager" value="${project.projectManager }">
+						                                    <label for="">담당자</label><input type="text" id="emplName" name="emplName" value="${project.projectManager }">
 						                                </li>
 						                                <li>
-						                                    <label for="">내용</label><input type="text" id="boardContent" name="boardContent">
+						                                    <label for="">내용</label><input type="text" id="bContents" name="boardContents">
 						                                </li>
 						                            </ul>
 						                            <div class="btns-wrap mt-20 t-r">
-						                                <button class="point" type="button" id="bSubmit" onclick="updateBtn();">추가</button>
-						                                <button class="finished closeWindow" type="button">닫기</button>
+														<button class="point" type="button" onclick="boardBtn();" value="1">추가</button>				                               
+														<button class="finished closeWindow" type="button">닫기</button>
 						                            </div>
 						                        </div>
 						                    </section>
 					                   </div>
-					                   <div class="basic-border mt-20 padding-20 KanbanCard">
+					                   <div class="basic-border mt-20 padding-20">
 					                   </div>
 				                    </div>
 								</div>
@@ -166,20 +172,20 @@
 						                            <h3>칸반보드 추가</h3>
 						                            <ul>
 						                                <li>
-						                                    <label for="">담당자</label><input type="text" id="projectManager" name="projectManager" value="${project.projectManager }">
+						                                    <label for="">담당자</label><input type="text" id="emplName" name="emplName" value="${project.projectManager }">
 						                                </li>
 						                                <li>
-						                                    <label for="">내용</label><input type="text" id="boardContent" name="boardContent">
+						                                    <label for="">내용</label><input type="text" id="bContents" name="boardContents">
 						                                </li>
 						                            </ul>
 						                            <div class="btns-wrap mt-20 t-r">
-						                                <button class="point" type="button" id="bSubmit" onclick="updateBtn();">추가</button>
+						                                <button class="point" type="button" onclick="boardBtn();" value="2">추가</button>
 						                                <button class="finished closeWindow" type="button">닫기</button>
 						                            </div>
 						                        </div>
 						                    </section>
 					                   </div>
-					                   <div class="basic-border mt-20 padding-20 KanbanCard">
+					                   <div class="basic-border mt-20 padding-20">
 					                   </div>
 				                    </div>
 								</div>
@@ -193,20 +199,20 @@
 						                            <h3>칸반보드 추가</h3>
 						                            <ul>
 						                                <li>
-						                                    <label for="">담당자</label><input type="text" id="projectManager" name="projectManager" value="${project.projectManager }">
+						                                    <label for="">담당자</label><input type="text" id="emplName" name="emplName" value="${project.projectManager }">
 						                                </li>
 						                                <li>
-						                                    <label for="">내용</label><input type="text" id="boardContent" name="boardContent">
+						                                    <label for="">내용</label><input type="text" id="bContents" name="boardContents">
 						                                </li>
 						                            </ul>
 						                            <div class="btns-wrap mt-20 t-r">
-						                                <button class="point" type="button" id="bSubmit" onclick="updateBtn();">추가</button>
+						                                <button class="point" type="button" onclick="boardBtn();" value="3">추가</button>
 						                                <button class="finished closeWindow" type="button">닫기</button>
 						                            </div>
 						                        </div>
 						                    </section>
 					                   </div>
-					                   <div class="basic-border mt-20 padding-20 KanbanCard">
+					                   <div class="basic-border mt-20 padding-20">
 					                   </div>
 				                    </div>
 								</div>
@@ -220,20 +226,20 @@
 						                            <h3>칸반보드 추가</h3>
 						                            <ul>
 						                                <li>
-						                                    <label for="">담당자</label><input type="text" id="projectManager" name="projectManager" value="${project.projectManager }">
+						                                    <label for="">담당자</label><input type="text" id="emplName" name="emplName" value="${project.projectManager }">
 						                                </li>
 						                                <li>
-						                                    <label for="">내용</label><input type="text" id="boardContent" name="boardContent">
+						                                    <label for="">내용</label><input type="text" id="bContents" name="boardContents">
 						                                </li>
 						                            </ul>
 						                            <div class="btns-wrap mt-20 t-r">
-						                                <button class="point" type="button" id="bSubmit" onclick="updateBtn();">추가</button>
+						                                <button class="point" type="button" onclick="boardBtn();" value="4">추가</button>
 						                                <button class="finished closeWindow" type="button">닫기</button>
 						                            </div>
 						                        </div>
 						                    </section>
 					                   </div>
-					                   <div class="basic-border mt-20 padding-20 KanbanCard">
+					                   <div class="basic-border mt-20 padding-20">
 					                   </div>
 				                    </div>
 								</div>
@@ -278,11 +284,179 @@
 				            </tbody>
 			            </table>
 		            </div>
-	            </form>
            	</div>
 		</article>
 	</div>
 	<script>
+		getBoardList();
+		function boardBtn() {
+			var pNo = $("#projectNo").val();
+			var emplName = $("#emplName").val();
+			var boardContents = $("#bContents").val();
+			var boardStatus = $(this).val();
+			$.ajax({
+				url : "/project/boardAdd.hirp",
+				type : "post",
+				data : {
+					"projectNo" : pNo,
+					"emplName" : emplName,
+					"boardContents" : $("#bContents").val(),
+					"boardStatus" : boardStatus
+				},
+				success : function(data) {
+					getBoardList();
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
+		}
+		
+// 		$("#boardBtnOne").on("click", function() {
+// 			var pNo = $("#projectNo").val();
+// 			var emplName = $("#emplName").val();
+// 			var boardContents = $("#bContents").val();
+// 			var boardStatus = $(this).val();
+// 			$.ajax({
+// 				url : "/project/boardAdd.hirp",
+// 				type : "post",
+// 				data : {
+// 					"projectNo" : pNo,
+// 					"emplName" : emplName,
+// 					"boardContents" : $("#bContents").val(),
+// 					"boardStatus" : boardStatus
+// 				},
+// 				success : function(data) {
+// 					getBoardList();
+// 				},
+// 				error : function() {
+// 					alert("ajax 실패!");
+// 				},
+// 				complete : function() {}
+// 			});
+// 		});
+		
+// 		$("#boardBtnTwo").on("click", function() {
+// 			var pNo = $("#projectNo").val();
+// 			var emplName = $("#emplName").val();
+// 			var boardContents = $("#bContents").val();
+// 			var boardStatus = $(this).val();
+// 			console.log(boardStatus);
+// 			$.ajax({
+// 				url : "/project/boardAdd.hirp",
+// 				type : "post",
+// 				data : {
+// 					"projectNo" : pNo,
+// 					"emplName" : emplName,
+// 					"boardContents" : $("#bContents").val(),
+// 					"boardStatus" : boardStatus
+// 				},
+// 				success : function(data) {
+// 					getBoardList();
+// 				},
+// 				error : function() {
+// 					alert("ajax 실패!");
+// 				},
+// 				complete : function() {}
+// 			});
+// 		});
+		
+// 		$("#boardBtnThree").on("click", function() {
+// 			var pNo = $("#projectNo").val();
+// 			var emplName = $("#emplName").val();
+// 			var boardContents = $("#bContents").val();
+// 			var boardStatus = $(this).val();
+// 			$.ajax({
+// 				url : "/project/boardAdd.hirp",
+// 				type : "post",
+// 				data : {
+// 					"projectNo" : pNo,
+// 					"emplName" : emplName,
+// 					"boardContents" : $("#bContents").val(),
+// 					"boardStatus" : boardStatus
+// 				},
+// 				success : function(data) {
+// 					getBoardList();
+// 				},
+// 				error : function() {
+// 					alert("ajax 실패!");
+// 				},
+// 				complete : function() {}
+// 			});
+// 		});
+		
+// 		$("#boardBtnFour").on("click", function() {
+// 			var pNo = $("#projectNo").val();
+// 			var emplName = $("#emplName").val();
+// 			var boardContents = $("#bContents").val();
+// 			var boardStatus = $(this).val();
+// 			$.ajax({
+// 				url : "/project/boardAdd.hirp",
+// 				type : "post",
+// 				data : {
+// 					"projectNo" : pNo,
+// 					"emplName" : emplName,
+// 					"boardContents" : $("#bContents").val(),
+// 					"boardStatus" : boardStatus
+// 				},
+// 				success : function(data) {
+// 					getBoardList();
+// 				},
+// 				error : function() {
+// 					alert("ajax 실패!");
+// 				},
+// 				complete : function() {}
+// 			});
+// 		});
+		
+		function getBoardList() {
+			var pNo = $("#projectNo").val();
+			$.ajax({
+				url : "/project/selectBoard.hirp",
+				type : "get",
+				data : { "projectNo" : pNo },
+				dataType : "json",
+				success : function(data) {
+					var count = data.length;
+					var $tableBody = $("#btb tbody");
+					$tableBody.html("");
+					for(var i = 0; i < data.length; i++) {
+						var $tr = $("<tr>");
+						var $emplName = $("<td width='100'>").text(data[i].emplName);
+						var $boardContents = $("<td>").text(data[i].boardContents);
+						var $btnArea = $("<td width='80'>")
+										.append("<a href='javascript:void(0)' onclick='removeBoard("+data[i].boardNo+");'>삭제</a>");
+						$tr.append($emplName);
+						$tr.append($boardContents);
+						$tr.append($btnArea);
+						$tableBody.append($tr);
+					}
+				},
+				error : function() {
+					alert("ajax 실패!!!!!");
+				}
+			});
+		}
+		
+		function removeBoard(boardNo) {
+			$.ajax({
+				url : "/project/deleteBoard.hirp",
+				type : "get",
+				data : { "boardNo" : boardNo },
+				success : function(data) {
+					if(data == "success") {
+						
+						getBoardList();
+					}else {
+						alert("칸반보드 삭제 실패!");
+					}
+				},
+				error : function() {
+					alert("Ajax 통신 실패!!");
+				}
+			});
+		}
+		
 		function updateBtn() {
 			var projectNo = '${project.projectNo }';
 			var projectName = document.getElementById('projectName').value;
@@ -327,60 +501,6 @@
 				alert(elmnt.style.top + "," + elmnt.style.left)
 			}
 		}
-		
-		$(document).ready(function() {
-			getBoardList();
-			$("#bSubmit").on("click", function() {
-				var pNo = "${project.projectNo}";
-				var pManager = $("#pManager").val();
-				var bContents = $("#bContents").val();
-				var bStatus = $("#bStatus").val();
-				$.ajax({
-					url : "/project/boardAdd.hirp",
-					type : "post",
-					data : {"pNo" : pNo, "pManager" : pManager, "bContents" : bContents, "bStatus" : bStatus},
-					success : function(data) {
-						location.href="/project/detail.hirp";
-					},
-					error : function() {
-						alert("ajax 실패!");
-					}
-				});
-			});
-		});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	</script>
 </body>
 </html>

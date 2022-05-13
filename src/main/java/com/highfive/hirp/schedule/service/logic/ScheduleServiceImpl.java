@@ -20,8 +20,20 @@ public class ScheduleServiceImpl implements ScheduleService {
 	private ScheduleStore sStore;
 
 	@Override
-	public List<Schedule> printAllSchedule() {
-		List<Schedule> sList = sStore.selectAllSchedule(sqlSession);
+	public List<Schedule> printAllCompanySchedule() {
+		List<Schedule> sList = sStore.selectAllCompanySchedule(sqlSession);
+		return sList;
+	}
+
+	@Override
+	public List<Schedule> printAllTeamSchedule(String loginUser) {
+		List<Schedule> sList = sStore.selectAllTeamSchedule(sqlSession, loginUser);
+		return sList;
+	}
+
+	@Override
+	public List<Schedule> printAllPersonalSchedule(String loginUser) {
+		List<Schedule> sList = sStore.selectAllSchedule(sqlSession, loginUser);
 		return sList;
 	}
 	
@@ -30,7 +42,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 		List<Schedule> searchList = sStore.selectSearchSchedule(sqlSession, search);
 		return searchList;
 	}
-
+	
+	@Override
+	public int registerCompanySchedule(Schedule schedule) {
+		int result = sStore.insertCompanySchedule(sqlSession, schedule);
+		return result;
+	}
+	
 	@Override
 	public int registerSchedule(Schedule schedule) {
 		int result = sStore.insertSchedule(sqlSession, schedule);
@@ -48,10 +66,22 @@ public class ScheduleServiceImpl implements ScheduleService {
 		int result = sStore.updateSchedule(sqlSession, schedule);
 		return result;
 	}
+	
+	@Override
+	public int modifyCompanySchedule(Schedule schedule) {
+		int result = sStore.updateCompanySchedule(sqlSession, schedule);
+		return result;
+	}
 
 	@Override
 	public int removeSchedule(int scheduleNo) {
 		int result = sStore.deleteSchedule(sqlSession, scheduleNo);
-		return 0;
+		return result;
+	}
+
+	@Override
+	public int removeCompanySchedule(int scheduleNo) {
+		int result = sStore.deleteCompanySchedule(sqlSession, scheduleNo);
+		return result;
 	}
 }

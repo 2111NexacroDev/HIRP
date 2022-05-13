@@ -2,6 +2,97 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="departmentBoardMapper">
+ <mapper namespace="DepartmentBoardMapper">
+<resultMap type="DepartmentBoard" id="deptResultMap">
+<id 	property="deptNo" column="DEPT_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="deptCode" column="DEPT_CODE"></result>
+<result property="deptTitle" column="DEPT_TITLE"></result>
+<result property="deptContents" column="DEPT_CONTENTS"></result>
+<result property="writeDate" column="DEPT_WRITE_DATE"></result>
+<result property="deptCount" column="DEPT_COUNT"></result>
+<result property="isNotice" column="IS_NOTICE"></result>
+<result property="status" column="DEPT_STATUS"></result>
+<collection property="bList" column="DEPT_NO" javaType="java.util.ArrayList" ofType="BoardAttachedFile" select="selectAllFile"></collection>
+</resultMap>
+<resultMap type="BoardAttachedFile" id="boardFileResultMap">
+<id 	property="fileNo" column="FILE_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="boardNo" column="BOARD_NO"></result>
+<result property="fileName" column="FILE_NAME"></result>
+<result property="fileRename" column="FILE_RENAME"></result>
+<result property="filePath" column="FILE_PATH"></result>
+</resultMap>
+<!-- 게시글 등록  -->
+<insert id="insertDepartment">
+	INSERT INTO BOARD_DEPT_TBL VALUES( DEPT_BOARD_SEQ.NEXTVAL,#{boardCode},#{emplId},#{deptCode},#{deptTitle},#{deptContents},DEFAULT, DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<!-- 첨부파일 등록  -->
+<insert id="insertBoardFile">
+	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},DEPT_BOARD_SEQ.CURRVAL,#{fileName},#{fileRename},#{filePath})
+</insert>
+<!-- 공지게시글 리스트 조회  -->
+<select id="selectAllDepartment" resultMap="deptResultMap">
+	SELECT * FROM BOARD_DEPT_TBL  WHERE DEPT_STATUS = 'Y' ORDER BY DEPT_NO DESC
+</select>
 
+<!-- 첨부파일 리스트 조회 -->
+<select id="selectAllFile" resultMap="boardFileResultMap">
+	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_NO = #{deptNo}
+</select>
+
+<!-- 공지게시글 리스트 개수 조회 -->
+<select id="selectListCount" resultType="_int">
+	SELECT COUNT(*) FROM BOARD_DEPT_TBL WHERE DEPT_STATUS = 'Y'
+</select>
+<select id="selectSearchDepartment" resultMap="deptResultMap">
+  		<if test="searchCondition.toString() =='writer'">
+  		SELECT * FROM BOARD_DEPT_TBL WHERE EMPL_ID LIKE '%' || #{searchValue} || '%'
+  		</if>
+  		<if test="searchCondition.toString() =='title'">
+  		SELECT * FROM BOARD_DEPT_TBL WHERE DEPT_TITLE LIKE '%'|| #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='contents'">
+  		SELECT * FROM BOARD_DEPT_TBL WHERE DEPT_CONTENTS LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='all'">
+  		SELECT * FROM BOARD_DEPT_TBL WHERE DEPT_CONTENTS LIKE '%' ||  #{searchValue} || '%'
+  		OR DEPT_TITLE LIKE '%' ||  #{searchValue} || '%'
+  		OR EMPL_ID LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  	</select>
+  <!-- 공지게시글 디테일 조회 -->
+  <select id="selectOneDepartment" resultMap="deptResultMap">
+  	SELECT * FROM BOARD_DEPT_TBL WHERE DEPT_NO = #{deptNo}
+  </select>
+  <!-- 공지글 수정 -->
+  <update id="updateDepartment">
+  	UPDATE BOARD_DEPT_TBL SET DEPT_TITLE=#{deptTitle}, DEPT_CONTENTS = #{deptContents} WHERE DEPT_NO = #{deptNo}
+  </update>
+  <!-- 공지게시글 삭제 -->
+  <update id="deleteDepartment">
+  	UPDATE BOARD_DEPT_TBL SET DEPT_STATUS = 'N'WHERE DEPT_NO = #{deptNo}
+  </update>
+  <!-- 조회수 증가 -->
+  <update id="updateCount">
+  	UPDATE BOARD_DEPT_TBL SET DEPT_COUNT = DEPT_COUNT + 1 WHERE DEPT_NO = #{deptNo}
+  </update>
+  <select id="selectNewestDepartment" resultMap="deptResultMap">
+     SELECT * FROM (SELECT DEPT_NO,EMPL_ID,DEPT_TITLE,DEPT_WRITE_DATE,DEPT_COUNT,DEPT_STATUS,RANK()OVER(ORDER BY DEPT_WRITE_DATE DESC )RANK_NUM FROM BOARD_DEPT_TBL)WHERE RANK_NUM <![CDATA[ < ]]> 6 AND DEPT_STATUS='Y'
+  </select>
+  <!-- 공지게시글 디테일 첨부파일 조회 -->
+  <select id="selectOneFile" resultMap="deptResultMap">
+  	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_CODE = #{boardCode} AND BOARD_NO = #{deptNo}
+  </select>
+
+   <!-- 공지게시글 첨부파일 수정 -->
+  <insert id="updateBoardFile">
+  		INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
+  </insert>
+  
+  <!-- 첨부파일 삭제 -->  
+  <delete id="deleteFile">
+  	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
+  </delete>
 </mapper>
