@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<!-- 설문조사 시작 안내 문구, 문항, 보기 추가 페이지 (survey update, surveyQuest, surveyQuest_ch) -->
 <body>
 	<!-- survey 공통 -->
 	<%@ include file="/WEB-INF/views/survey/surveyCommonPage.jsp" %>

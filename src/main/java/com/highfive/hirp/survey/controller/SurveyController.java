@@ -363,7 +363,7 @@ public class SurveyController {
 //		HttpSession session = request.getSession();
 //		Employee employee = (Employee) session.getAttribute("loginMember");
 //		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
+		String emplId = "TESTID";
 		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
 		
 		//번호로 설문조사 정보 가져오기
