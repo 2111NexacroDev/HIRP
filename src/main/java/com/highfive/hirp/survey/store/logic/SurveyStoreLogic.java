@@ -88,6 +88,11 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.insert("SurveyMapper.insertSurveySub", subList);
 		return result;
 	}
+	//현재 설문조사 시퀀스 번호 가져오기
+	public int selectSurveySeqNo(SqlSession sqlSession) {
+		int result = sqlSession.selectOne("SurveyMapper.selectSurveySeqNo");
+		return result;
+	}
 	
 	//전체 직원 가져오기
 	@Override

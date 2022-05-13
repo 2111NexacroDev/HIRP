@@ -186,13 +186,18 @@ public class SurveyController {
 			//,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
-		String emplId = "TESTID";
-		survey.setSurveyWriter(emplId);
 		
 		try {
+			//세션에서 아이디 가져와서 넣어주기.
+			String emplId = "TESTID";
+			survey.setSurveyWriter(emplId);
 			//설문 등록
 			int result = sService.insertSurvey(survey);
+			
 			if(result > 0) {
+				//설문 등록된 현재 시퀀스 번호 찾기
+				int surveySeqNo = sService.selectSurveySeqNo();
+				mv.addObject("surveyNo", surveySeqNo);
 				mv.setViewName("survey/surveyWriteQuest");
 			} else {
 				mv.addObject("msg1", "설문조사 정보 추가 실패");
@@ -206,35 +211,6 @@ public class SurveyController {
 		return mv;
 	}
 
-//	//설문조사 업데이트 (시작 안내 문구)
-//	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
-//	public ModelAndView writeSurvey2(ModelAndView mv
-//			,@ModelAttribute Survey survey
-////			,@ModelAttribute List<SurveyQuest> surveyQuest
-////			,@ModelAttribute List<SurveyQuestCh> qCh
-////			,@ModelAttribute List<String> subList
-//			, HttpServletRequest request) {
-//		
-//		try {
-//			//설문 수정
-//			int result = sService.updateSurvey(survey);
-//			if(result > 0) {
-//				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
-//				System.out.println("업데이트 성공");
-//			} else {
-//				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
-//				mv.setViewName("common/errorPage");
-//			}
-//		} catch(Exception e) {
-//			mv.addObject("msg", e.toString());
-//			mv.setViewName("common/errorPage");
-//		}
-//		
-//		//설문 문항 추가 1 (비어있지 않을 때) nextval
-//		//설문 보기 추가 1 (비어있지 않을 때) currval
-//		return mv;
-//	}
-	
 	//설문조사 업데이트 (시작 안내 문구)
 	@RequestMapping(value="/survey/updateQuestInfo.hirp", method=RequestMethod.POST)
 	public ModelAndView writeSurvey2(ModelAndView mv
@@ -244,25 +220,41 @@ public class SurveyController {
 			, HttpServletRequest request) {
 		
 		try {
-//			System.out.println("questList출력"+surveyQuest.getSurveyQuestList().get(0).getQuestTitle());
 			int qCount = surveyQuest.getSurveyQuestList().size();
-			for(int i = 0; i < qCount; i++) {
-				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
-				if(surveyQuestCh.getSurveyQuestChList().get(i) != null) {
-					System.out.println("보기:");
-					System.out.println("questList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
-				} else {
-					continue;
-				}
-			}
+//			System.out.println("questList출력"+surveyQuest.getSurveyQuestList().get(0).getQuestTitle());
+			
+//			for(int i = 0; i < qCount; i++) {
+//				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
+//				if(surveyQuestCh.getSurveyQuestChList().get(i) != null) {
+//					System.out.println("보기:");
+//					System.out.println("questList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
+//				} else {
+//					continue;
+//				}
+//			}
 			
 			//설문 수정
 			int result = sService.updateSurvey(survey);
-			if(result > 0) {
+			int result2 = 0;
+			int result3 = 0;
+			for(int i = 0; i < qCount; i++) {
+				//설문조사 문항 추가
+				result2 = sService.insertSurveyQuest(surveyQuest.getSurveyQuestList().get(i));
+				String type1 = surveyQuest.getSurveyQuestList().get(i).getQuestType1();
+				if(surveyQuestCh.getSurveyQuestChList().size() < qCount+1) {
+					//리스트 사이즈가 i보다 작으면 continue
+					continue;
+				} else {
+					//설문조사 문항에 맞게 보기 추가
+					result3 = sService.insertSurveyQuestCh(surveyQuestCh.getSurveyQuestChList().get(i));
+				}
+			}
+			
+			if(result > 0 && result2 > 0) {
 				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
-				System.out.println("업데이트 성공");
+				System.out.println("시작 안내 문구 업데이트 및 문항 추가 성공");
 			} else {
-				mv.addObject("msg1", "시작 안내 문구 업데이트 실패");
+				mv.addObject("msg1", "시작 안내 문구 및 문항 업데이트 실패");
 				mv.setViewName("common/errorPage");
 			}
 		} catch(Exception e) {

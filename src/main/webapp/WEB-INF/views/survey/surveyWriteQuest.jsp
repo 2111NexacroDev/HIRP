@@ -92,7 +92,7 @@
 		           	</div>
 	            
 		           	<!-- 질문 추가 div 끝 -->
-		           	<input type="hidden" name="surveyNo" value="2"/>
+		           	<input type="text" name="surveyNo" value="${surveyNo }"/>
 				</div>
 			</form>
             
@@ -150,7 +150,7 @@
 					console.log($questChList);
 					console.log("questChMax");
 					console.log($questChMax);
-					if(type1Val=='C' || type1Val=='D'){
+					if(type1Val=="C" || type1Val=="D"){
 						console.log("객관식 또는 날짜형");
 						for(var j = 0 ; j < qChCount; j++){
 							$questChList.eq(j).attr('name', 'surveyQuestChList['+(i)+'].surveyCh'+(j+1)); //속성값 바꿔주기
