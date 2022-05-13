@@ -17,32 +17,13 @@
 		<result property="surveyEdit" column="SURVEY_EDIT"/>
 		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
 		<result property="surveyStorage" column="SURVEY_STORAGE"/>
-	</resultMap>
-	
-	<resultMap type="SurveyMyStatus" id="surveyMyStatusResultMap">
-		<id property="surveyNo" column="SURVEY_NO"/>
-		<result property="surveyTitle" column="SURVEY_TITLE"/>
-		<result property="surveyWriter" column="SURVEY_WRITER"/>
-		<result property="surveyDate" column="SURVEY_DATE"/>
-		<result property="surveyUpdate" column="SURVEY_UPDATE"/>
-		<result property="surveyStatus" column="SURVEY_STATUS"/>
-		<result property="surveyStartdate" column="SURVEY_STARTDATE"/>
-		<result property="surveyEnddate" column="SURVEY_ENDDATE"/>
-		<result property="surveyResult" column="SURVEY_RESULT"/>
-		<result property="surveyEdit" column="SURVEY_EDIT"/>
-		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
-		<result property="surveyStorage" column="SURVEY_STORAGE"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
 	</resultMap>
-	
+		
 	<resultMap type="SurveySub" id="surveySubResultMap">
-		<id property="subNo" column="SUB_NO"/>
-		<result property="surveyNo" column="SURVEY_NO"/>
-		<result property="subId" column="SUB_ID"/>
-		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
-	</resultMap>
-	
-	<resultMap type="SurveySubEmpl" id="SurveySubEmplResultMap">
 		<id property="subNo" column="SUB_NO"/>
 		<result property="surveyNo" column="SURVEY_NO"/>
 		<result property="subId" column="SUB_ID"/>
@@ -74,7 +55,7 @@
 	
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
-	<select id="selectAllSurvey" resultMap="surveyMyStatusResultMap">
+	<select id="selectAllSurvey" resultMap="surveyResultMap">
 		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
 		SUB_ANSWERSTATUS
@@ -84,7 +65,7 @@
 		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 진행중인 리스트 조회 -->
-	<select id="selectProceedSurvey" resultMap="surveyMyStatusResultMap">
+	<select id="selectProceedSurvey" resultMap="surveyResultMap">
 		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
 		SUB_ANSWERSTATUS
@@ -94,7 +75,7 @@
 		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 마감된 리스트 조회 -->
-	<select id="selectClosedSurvey" resultMap="surveyMyStatusResultMap">
+	<select id="selectClosedSurvey" resultMap="surveyResultMap">
 		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
 		SUB_ANSWERSTATUS
@@ -115,7 +96,7 @@
 		WHERE SURVEY_STATUS = 'C'
 	</select>
 	<!-- 설문조사 대상자 리스트 가져오기(응답여부 확인 가능) -->
-	<select id="selectSurveySubByNo" resultMap="SurveySubEmplResultMap">
+	<select id="selectSurveySubByNo" resultMap="surveySubResultMap">
 		SELECT SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS,
 		DEPT_CODE, C.DEPT_NAME, POSITION_CODE, POSITION_NAME, EMPL_NAME
 		FROM SURVEY_SUB A

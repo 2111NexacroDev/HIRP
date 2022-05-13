@@ -25,12 +25,10 @@ import com.google.gson.JsonIOException;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.service.SurveyService;
 
@@ -55,7 +53,7 @@ public class SurveyController {
 			//최근 생성된 설문 리스트
 			//설문 리스트에 대한 나의 참여 여부
 			//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
-			List<SurveyMyStatus> latestList = sService.selectAllSurvey(emplId);
+			List<Survey> latestList = sService.selectAllSurvey(emplId);
 			if(!latestList.isEmpty()){
 				mv.addObject("sList", latestList);
 				System.out.println(latestList);
@@ -82,7 +80,7 @@ public class SurveyController {
 		//진행중인 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
-			List<SurveyMyStatus> proceedList = sService.selectProceedSurvey(emplId);
+			List<Survey> proceedList = sService.selectProceedSurvey(emplId);
 			if(!proceedList.isEmpty()) {
 				mv.addObject("sList", proceedList);
 				System.out.println("proceedList 출력 : " + proceedList);
@@ -105,7 +103,7 @@ public class SurveyController {
 	public String proceedSurveySubList(
 			@RequestParam("surveyNo") int surveyNo){
 		//응답자 리스트 보기 (응답여부까지) -> 팝업창
-		List<SurveySubEmpl> subjectList = sService.selectSurveySubByNo(surveyNo);
+		List<SurveySub> subjectList = sService.selectSurveySubByNo(surveyNo);
 		if(!subjectList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			return gson.toJson(subjectList);
@@ -121,7 +119,7 @@ public class SurveyController {
 		//마감된 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
-			List<SurveyMyStatus> closedList = sService.selectClosedSurvey(emplId);
+			List<Survey> closedList = sService.selectClosedSurvey(emplId);
 			if(!closedList.isEmpty()) {
 				mv.addObject("sList", closedList);
 				System.out.println("closedList 출력 : " + closedList);

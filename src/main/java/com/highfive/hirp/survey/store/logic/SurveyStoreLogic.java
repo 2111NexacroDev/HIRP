@@ -11,12 +11,10 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.store.SurveyStore;
 
@@ -26,20 +24,20 @@ public class SurveyStoreLogic implements SurveyStore{
 	//설문조사 리스트 조회
 	//전체 리스트 조회(최신)
 	@Override
-	public List<SurveyMyStatus> selectAllSurvey(SqlSession sqlSession, String emplId) {
-		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectAllSurvey", emplId);
+	public List<Survey> selectAllSurvey(SqlSession sqlSession, String emplId) {
+		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectAllSurvey", emplId);
 		return surveyList;
 	}
 	//진행중인 리스트 조회
 	@Override
-	public List<SurveyMyStatus> selectProceedSurvey(SqlSession sqlSession, String emplId) {
-		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectProceedSurvey", emplId);
+	public List<Survey> selectProceedSurvey(SqlSession sqlSession, String emplId) {
+		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectProceedSurvey", emplId);
 		return surveyList;
 	}
 	//마감된 설문리스트 조회
 	@Override
-	public List<SurveyMyStatus> selectClosedSurvey(SqlSession sqlSession, String emplId) {
-		List<SurveyMyStatus> surveyList = sqlSession.selectList("SurveyMapper.selectClosedSurvey", emplId);
+	public List<Survey> selectClosedSurvey(SqlSession sqlSession, String emplId) {
+		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectClosedSurvey", emplId);
 		return surveyList;
 	}
 	//내가 작성한 설문 리스트 조회
@@ -56,8 +54,8 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문조사 대상자 가져오기 (응답여부 확인 가능)
 	@Override
-	public List<SurveySubEmpl> selectSurveySubByNo(SqlSession sqlSession, int surveyNo) {
-		List<SurveySubEmpl> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByNo", surveyNo);
+	public List<SurveySub> selectSurveySubByNo(SqlSession sqlSession, int surveyNo) {
+		List<SurveySub> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByNo", surveyNo);
 		return surveySubList;
 	}
 	

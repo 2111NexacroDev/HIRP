@@ -7,22 +7,20 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 
 public interface SurveyService {
 	//리스트 조회
 	//전체 리스트 조회(최신)
-	public List<SurveyMyStatus> selectAllSurvey(String emplId);	
+	public List<Survey> selectAllSurvey(String emplId);	
 	//진행중인 리스트 조회
-	public List<SurveyMyStatus> selectProceedSurvey(String emplId); 
+	public List<Survey> selectProceedSurvey(String emplId); 
 	//마감된 설문 리스트 조회
-	public List<SurveyMyStatus> selectClosedSurvey(String emplId); 
+	public List<Survey> selectClosedSurvey(String emplId); 
 	//마감된 설문 리스트까지 surveyMyStatus 타입으로 변경
 	//내가 작성한 설문 리스트 조회
 	public List<Survey> selectWroteSurvey(String emplId); 
@@ -30,7 +28,7 @@ public interface SurveyService {
 	public List<Survey> selectSubSurveyById(String emplId); 
 	//sql문 작성해놓음.
 	//설문조사 대상자 리스트 가져오기 (응답여부 확인 가능)
-	public List<SurveySubEmpl> selectSurveySubByNo(int surveyNo); 
+	public List<SurveySub> selectSurveySubByNo(int surveyNo); 
 	
 	//설문 등록
 	//설문 추가

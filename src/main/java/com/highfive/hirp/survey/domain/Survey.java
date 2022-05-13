@@ -5,6 +5,7 @@ import java.sql.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Survey {
+	//survey 정보
 	private int surveyNo;
 	private String surveyTitle;
 	private String surveyWriter;
@@ -17,12 +18,19 @@ public class Survey {
 	private String surveyEdit;
 	private String surveyStartcomment;
 	private String surveyStorage;
+	//empl 정보
+	private String emplName;
+	private String deptName;
+	private String positionName;
+//	응답여부
+	private String subAnswerstatus;
 	
 	public Survey() {}
 
 	public Survey(int surveyNo, String surveyTitle, String surveyWriter, String surveyDate, String surveyUpdate,
 			String surveyStatus, String surveyStartdate, String surveyEnddate, String surveyResult, String surveyEdit,
-			String surveyStartcomment, String surveyStorage) {
+			String surveyStartcomment, String surveyStorage, String emplName, String deptName, String positionName,
+			String subAnswerstatus) {
 		super();
 		this.surveyNo = surveyNo;
 		this.surveyTitle = surveyTitle;
@@ -36,6 +44,10 @@ public class Survey {
 		this.surveyEdit = surveyEdit;
 		this.surveyStartcomment = surveyStartcomment;
 		this.surveyStorage = surveyStorage;
+		this.emplName = emplName;
+		this.deptName = deptName;
+		this.positionName = positionName;
+		this.subAnswerstatus = subAnswerstatus;
 	}
 
 	public int getSurveyNo() {
@@ -134,14 +146,46 @@ public class Survey {
 		this.surveyStorage = surveyStorage;
 	}
 
+	public String getEmplName() {
+		return emplName;
+	}
+
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getSubAnswerstatus() {
+		return subAnswerstatus;
+	}
+
+	public void setSubAnswerstatus(String subAnswerstatus) {
+		this.subAnswerstatus = subAnswerstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Survey [surveyNo=" + surveyNo + ", surveyTitle=" + surveyTitle + ", surveyWriter=" + surveyWriter
 				+ ", surveyDate=" + surveyDate + ", surveyUpdate=" + surveyUpdate + ", surveyStatus=" + surveyStatus
 				+ ", surveyStartdate=" + surveyStartdate + ", surveyEnddate=" + surveyEnddate + ", surveyResult="
 				+ surveyResult + ", surveyEdit=" + surveyEdit + ", surveyStartcomment=" + surveyStartcomment
-				+ ", surveyStorage=" + surveyStorage + "]";
+				+ ", surveyStorage=" + surveyStorage + ", emplName=" + emplName + ", deptName=" + deptName
+				+ ", positionName=" + positionName + ", subAnswerstatus=" + subAnswerstatus + "]";
 	}
-	
 	
 }
