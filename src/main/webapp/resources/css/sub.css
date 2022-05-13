@@ -311,7 +311,7 @@ section[class^="todo--"] li {
     position: relative;
 }
 
-.fc .fc-daygrid-day.fc-day-today:before {
+.fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url(../images/img_star.png);
     position: absolute;
     top: -23px;
@@ -403,6 +403,14 @@ section[class^="todo--"] li {
     font-size: 0;
 }
 
+#reservation .section--modal li:last-child {
+    align-items: flex-start;
+}
+
+#reservation .section--modal li:last-child label {
+    padding-top: 10px;
+}
+
 .section--modal li * {
     font-size: 14px;
 }
@@ -412,4 +420,67 @@ section[class^="todo--"] li {
     padding: 10px;
 }
 
+.modal--reservation input[type="date"] {
+    width: 120px;
+}
+
+.modal--reservation select[class^="time-select-"] {
+    margin-left: 4px;
+}
+
+.modal--reservation .time-select-1 {
+    width: 70px;
+}
+
+.modal--reservation .time-select-2 {
+    width: 60px;
+}
+
+.modal--reservation .time-select-3 {
+    width: 60px;
+}
+
+#reservationCalendar {
+    border-bottom: 1px solid #ccc;
+}
+
+#reservationCalendar table[role="grid"] {
+}
+
+.fc .fc-timegrid-now-indicator-container {
+    overflow: visible;
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+    border-right-color: var(--fc-now-indicator-color,#00498c);
+    border-left-color: var(--fc-now-indicator-color,#00498c);
+}
+
+.fc-timegrid-now-indicator-arrow::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    border-bottom: 2px solid #00498c;
+}
+
+.fc .fc-timegrid-now-indicator-line {
+    border-color: #00498c;
+}
+
+.fc .fc-timegrid-now-indicator-line::after {
+    content: "NOW !";
+    color: #00498c;
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding-right: 4px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.fc .fc-daygrid-day.fc-day-today,
+.fc .fc-timegrid-col.fc-day-today {
+    background-color: rgba(239,239,239,.7);
+    background-color: var(--fc-today-bg-color,rgba(239,239,239,.7));
+}
 /* 공용품 예약/관리 끝 */
