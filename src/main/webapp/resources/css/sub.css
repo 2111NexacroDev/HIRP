@@ -396,6 +396,10 @@ section[class^="todo--"] li {
     opacity: .5;
 }
 
+#reservation {
+    padding-bottom: 100px !important;
+}
+
 #reservation .section--modal li {
     display: flex;
     align-items: center;
@@ -441,19 +445,19 @@ section[class^="todo--"] li {
 }
 
 #reservationCalendar {
+    margin-bottom: 60px;
     border-bottom: 1px solid #ccc;
 }
 
-#reservationCalendar table[role="grid"] {
-}
+#reservationCalendar table[role="grid"] {}
 
 .fc .fc-timegrid-now-indicator-container {
     overflow: visible;
 }
 
 .fc .fc-timegrid-now-indicator-arrow {
-    border-right-color: var(--fc-now-indicator-color,#00498c);
-    border-left-color: var(--fc-now-indicator-color,#00498c);
+    border-right-color: var(--fc-now-indicator-color, #00498c);
+    border-left-color: var(--fc-now-indicator-color, #00498c);
 }
 
 .fc-timegrid-now-indicator-arrow::after {
@@ -480,7 +484,8 @@ section[class^="todo--"] li {
 
 .fc .fc-daygrid-day.fc-day-today,
 .fc .fc-timegrid-col.fc-day-today {
-    background-color: rgba(239,239,239,.7);
-    background-color: var(--fc-today-bg-color,rgba(239,239,239,.7));
+    background-color: rgba(239, 239, 239, .7);
+    background-color: var(--fc-today-bg-color, rgba(239, 239, 239, .7));
 }
+
 /* 공용품 예약/관리 끝 */

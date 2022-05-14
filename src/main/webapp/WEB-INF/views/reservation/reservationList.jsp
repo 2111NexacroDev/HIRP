@@ -198,7 +198,8 @@
 
                 <div id="reservationCalendar"></div>
 
-                <table class="table--basic mt-20">
+                <h2 class="padding-20">내 예약/대여 현황</h2>
+                <table class="table--basic">
                     <thead>
                         <th>s</th>
                         <th>s</th>
