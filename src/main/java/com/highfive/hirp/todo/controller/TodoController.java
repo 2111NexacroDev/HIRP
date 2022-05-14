@@ -52,12 +52,10 @@ public class TodoController {
 	@RequestMapping(value="/todo/write.hirp", method=RequestMethod.POST)
 	public String todoRegister(
 			@ModelAttribute Todo todo
-			,@RequestParam("todoConts") String todoConts
 			,HttpServletRequest request) {
 		todo.setEmplId("user1");
 		// 임시 처리, 후에 세션으로 수정해야함.
 		// 날짜를 추가해줘야해서 Todo 객체 이용하는 것으로 코딩함.
-		todo.setTodoConts(todoConts);
 		int result = tService.registerToDo(todo);
 		if(result > 0) {
 			return "success";
