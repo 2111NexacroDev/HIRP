@@ -201,21 +201,24 @@
                 <h2 class="padding-20">내 예약/대여 현황</h2>
                 <table class="table--basic">
                     <thead>
-                        <th>s</th>
-                        <th>s</th>
-                        <th>s</th>
+                        <th>카테고리</th>
+                        <th>공용품명</th>
+                        <th>예약시간</th>
+                        <th>반납처리</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>내용1</td>
                             <td>내용2</td>
                             <td>내용3</td>
+                            <td><button class="basic" type="button">반납</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </article>
     </div>
+
     <script>
         function openUtility() {
             $('.modal--utility').css('display', 'flex');
@@ -227,16 +230,6 @@
             $('input[name="endDate"]').val(today);
             $('.modal--reservation').css('display', 'flex');
         }
-
-        $(function(){
-            setTimeout(function(){
-                let nowTimeOffsetY = $('.fc-timegrid-now-indicator-arrow').attr('style').split(':')[1];
-                let offsetTop = $('.fc-view-harness').offset().top;
-                console.log(offsetTop)
-                nowTimeOffsetY = parseInt(nowTimeOffsetY)+offsetTop;
-                $('body,html').stop().animate({'scrollTop':nowTimeOffsetY+'px'},300);
-            }, 300);
-        });
 
         $('#addReservation').on('click', function(){
             let startDate = $('input[name="startDate"]').val();
@@ -262,6 +255,68 @@
         });
 
         $(function () {
+            // 현재 시간으로 스크롤
+            setTimeout(function(){
+                let nowTimeOffsetY = $('.fc-timegrid-now-indicator-arrow').attr('style').split(':')[1];
+                let offsetTop = $('.fc-view-harness').offset().top;
+                console.log(offsetTop)
+                nowTimeOffsetY = parseInt(nowTimeOffsetY)+offsetTop;
+                $('body,html').stop().animate({'scrollTop':nowTimeOffsetY+'px'},300);
+            }, 300);
+
+            // 날짜 유효성 체크 - 끝나는 날짜 선택할 때
+            $('input[name="endDate"]').on('change', function(){
+                let startDate = $('input[name="startDate"]').val();                
+                let startTime1 = $('input[name="startDate"]').siblings('.time-select-1').val();
+                let startTime2 = $('input[name="startDate"]').siblings('.time-select-2').val();
+                let endDate = $('input[name="endDate"]').val();                
+                let endTime1 = $('input[name="endDate"]').siblings('.time-select-1').val();
+                let endTime2 = $('input[name="endDate"]').siblings('.time-select-2').val();
+                if(endDate < startDate) {
+                    alert('예약 종료일이 예약 시작일보다 빠릅니다. 다시 선택해주세요!');
+                }
+            });
+
+            // 날짜 유효성 체크2 - 끝나는 시간 선택할 때
+            $('input[name="endDate"], input[name="startDate"]').siblings('.time-select-2').on('change', function(){
+                let startDate = $('input[name="startDate"]').val();                
+                let startTime1 = $('input[name="startDate"]').siblings('.time-select-1').val();
+                let startTime2 = $('input[name="startDate"]').siblings('.time-select-2').val();
+                if(startTime1 == 'pm') {
+                    startTime2 = parseInt(startTime2) + 12;
+                }
+                let endDate = $('input[name="endDate"]').val();                
+                let endTime1 = $('input[name="endDate"]').siblings('.time-select-1').val();
+                let endTime2 = $('input[name="endDate"]').siblings('.time-select-2').val();                
+                if(endTime1 == 'pm') {
+                    endTime2 = parseInt(endTime2) + 12;
+                }
+                if(endDate == startDate && endTime2 < startTime2) {
+                    alert('예약 종료 시간이 예약 시작 시간보다 빠릅니다. 다시 선택해주세요!');
+                }
+            });
+
+            // 날짜 유효성 체크3 - 끝나는 분(minutes) 선택할 때
+            $('input[name="endDate"], input[name="startDate"]').siblings('.time-select-3').on('change', function(){
+                let startDate = $('input[name="startDate"]').val();                
+                let startTime1 = $('input[name="startDate"]').siblings('.time-select-1').val();
+                let startTime2 = $('input[name="startDate"]').siblings('.time-select-2').val();
+                if(startTime1 == 'pm') {
+                    startTime2 = parseInt(startTime2) + 12;
+                }
+                let startTime3 = $('input[name="startDate"]').siblings('.time-select-3').val();
+                let endDate = $('input[name="endDate"]').val();                
+                let endTime1 = $('input[name="endDate"]').siblings('.time-select-1').val();
+                let endTime2 = $('input[name="endDate"]').siblings('.time-select-2').val();                
+                if(endTime1 == 'pm') {
+                    endTime2 = parseInt(endTime2) + 12;
+                }
+                let endTime3 = $('input[name="endDate"]').siblings('.time-select-3').val();
+                if(endTime3 < startTime3 && endDate == startDate && endTime2 == startTime2) {
+                    alert('예약 종료 시간이 예약 시작 시간보다 빠릅니다. 다시 선택해주세요!');
+                }
+            });
+
             var calendarEl = document.getElementById('reservationCalendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -276,9 +331,8 @@
                     timeGrid: '일간',
                     list: '목록'
                 },
-                initialView: 'timeGridWeek',
                 locale: 'ko',
-                views: {},
+                initialView: 'timeGridWeek',
                 allDaySlot: false,
                 nowIndicator: true,
                 events: [
@@ -287,7 +341,7 @@
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }'
-                    }
+                    },
                 </c:forEach>   
                 ]
             });
