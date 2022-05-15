@@ -25,14 +25,14 @@
             <!-- 페이지 내용 -->
             <div id="" class="subConts">
                 <!-- 설문 정보 -->
-                <h2 class="mb-20">설문조사 제목</h2>
-                <p class="mb-10">작성자: 작성자 이름</p>
-                <p class="mb-10">작성일 : 작성일 날짜</p>
-                <p class="mb-10">설문 기간 : 시작 날짜 ~ 끝나는 날짜</p>
-                <p class="mb-10">참여 후 수정 : 허용</p>
-                <p class="mb-10">설문 결과 : 공개</p>
+                <h2 class="mb-20">${surveyInfo.surveyTitle}</h2>
+                <p class="mb-10">작성자: ${surveyInfo.surveyWriter}</p>
+                <p class="mb-10">작성일 : ${surveyInfo.surveyDate}</p>
+                <p class="mb-10">설문 기간 : ${surveyInfo.surveyStartdate} ~ ${surveyInfo.surveyEnddate}</p>
+                <p class="mb-10">참여 후 수정 : ${surveyInfo.surveyEdit}</p>
+                <p class="mb-10">설문 결과 : ${surveyInfo.surveyResult}</p>
                 <!-- 응답자 정보 -->
-                <div class="row mt-20" style="">
+                <div class="row mt-20">
                     <div class=" basic-border bor-round ml-10 mr-10 padding-10">
                         <div class="">전체 참여자</div>
                         <div class="contents-strong padding-top-10">30</div>
@@ -49,74 +49,103 @@
                 <br>
                 <!--시작 안내 문구-->
                 <div class="row mt-20 padding-20 bc-grey">
-                    시작 안내 문구입니다. 주저리 주저리....
+                    ${surveyInfo.surveyStartcomment}
                 </div>
                 <br>
                 <!--문항 시작-->
                 <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
-                <div class="mt-20 mb-20">
-                    <!--객관식 하나만 선택-->
-                    <p class="mb-10 contents-strong">1. 1번 문항 내용</p>
-                    <div class="mt-20 ml-20">
-                        <div class="mb-10">
-                            <input id="valueA" class="mt-20" name="samevalue" type="radio" value="래디오1">
-                            <label for="valueA">예시값1</label><br>
+                <c:forEach items="${questList }" var="questInfo">
+                    <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
+                        <div class="mt-20 mb-20">
+                            <!--객관식 하나만 선택-->
+                            <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+                            <div class="mt-20 ml-20">
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
+                                    <div class="mb-10">
+                                        <input id="valueA" class="mt-20" name="samevalue" type="radio" value="${questInfo.surveyQuestCh.surveyCh1}">
+                                        <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
+                                    <div class="mb-10">
+                                        <input id="valueB" class="mt-20" name="samevalue" type="radio" value="${questInfo.surveyQuestCh.surveyCh2}">
+                                        <label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
+                                    <div class="mb-10">
+                                        <input id="valueC" class="mt-20" name="samevalue" type="radio" value="${questInfo.surveyQuestCh.surveyCh3}">
+                                        <label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
+                                    <div class="mb-10">
+                                        <input id="valueD" class="mt-20" name="samevalue" type="radio" value="${questInfo.surveyQuestCh.surveyCh4}">
+                                        <label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                        <div class="mb-10">
-                            <input id="valueB" class="mt-20" name="samevalue" type="radio" value="래디오2">
-                            <label for="valueB">예시값2</label><br>
+                        <br>
+                    </c:if>
+                    <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '복수 선택'|| questInfo.questType1 eq 'D' && questInfo.questType2 eq '복수 선택'}">
+                        <div class="mt-20 mb-20">
+                            <!--객관식 중복 선택 가능-->
+                            <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+                            <div class="mt-20 ml-20">
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
+                                    <div class="mb-10">
+                                        <input id="check1" class="mt-20" type="checkbox">
+                                        <label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
+                                    <div class="mb-10">
+                                        <input id="check2" class="mt-20" type="checkbox">
+                                        <label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
+                                    <div class="mb-10">
+                                        <input id="check3" class="mt-20" type="checkbox">
+                                        <label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+                                    </div>
+                                </c:if>
+                                <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
+                                    <div class="mb-10">
+                                        <input id="check4" class="mt-20" type="checkbox">
+                                        <label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+                                    </div>
+                                </c:if>
+                            </div>
                         </div>
-                        <div class="mb-10">
-                            <input id="valueC" class="mt-20" name="samevalue" type="radio" value="래디오3">
-                            <label for="valueC">예시값3</label><br>
+                        <br>
+                    </c:if>
+                    <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '단문 입력'}">
+                        <div class="mt-20 mb-20">
+                            <!--주관식 단문형 -->
+                            <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+                            <div class="mt-20 ml-20">
+                                <input type="text" class="" style="width:90%" placeholder="답안 입력">
+                            </div>
                         </div>
-                        <div class="mb-10">
-                            <input id="valueD" class="mt-20" name="samevalue" type="radio" value="래디오4">
-                            <label for="valueD">예시값4</label><br>
+                        <br>
+                    </c:if>
+                    <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '장문 입력'}">
+                        <div class="mt-20 mb-20">
+                            <!--주관식 장문형 -->
+                            <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+                            <div class="mt-20 ml-20">
+                                <textarea name="" id="" style="width:90%" cols="20" rows="3">
+            내용1
+                                </textarea>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br>
-                <div class="mt-20 mb-20">
-                    <!--객관식 중복 선택 가능-->
-                    <p class="mb-10 contents-strong">1. 1번 문항 내용</p>
-                    <div class="mt-20 ml-20">
-                        <div class="mb-10">
-                            <input id="check1" class="mt-20" type="checkbox">
-                            <label for="check1">체크박스값</label><br>
-                        </div>
-                        <div class="mb-10">
-                            <input id="check2" class="mt-20" type="checkbox">
-                            <label for="check2">체크박스값</label><br>
-                        </div>
-                        <div class="mb-10">
-                            <input id="check3" class="mt-20" type="checkbox">
-                            <label for="check3">체크박스값</label><br>
-                        </div>
-                        <div class="mb-10">
-                            <input id="check4" class="mt-20" type="checkbox">
-                            <label for="check4">체크박스값</label><br>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="mt-20 mb-20">
-                    <!--주관식 단문형 -->
-                    <p class="mb-10 contents-strong">1. 1번 문항 내용</p>
-                    <div class="mt-20 ml-20">
-                        <input type="text" class="" style="width:90%" placeholder="플레이스 홀더 예시">
-                    </div>
-                </div>
-                <br>
-                <div class="mt-20 mb-20">
-                    <!--주관식 장문형 -->
-                    <p class="mb-10 contents-strong">1. 1번 문항 내용</p>
-                    <div class="mt-20 ml-20">
-                        <textarea name="" id="" style="width:90%" cols="20" rows="3">
-    내용1
-                        </textarea>
-                    </div>
-                </div>
+                    </c:if>
+
+
+                </c:forEach>
+                
                 <!--문항 끝-->
                 <br>
                 <!-- 설문 제출 / 취소 버튼 -->
