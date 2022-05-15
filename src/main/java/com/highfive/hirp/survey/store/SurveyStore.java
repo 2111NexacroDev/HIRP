@@ -9,29 +9,27 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 
 public interface SurveyStore {
 
 	//설문조사 리스트 조회
 	//전체 리스트 조회(최신)
-	public List<SurveyMyStatus> selectAllSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectAllSurvey(SqlSession sqlSession, String emplId);
 	//진행중인 리스트 조회
-	public List<SurveyMyStatus> selectProceedSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectProceedSurvey(SqlSession sqlSession, String emplId);
 	//마감된 설문리스트 조회
-	public List<SurveyMyStatus> selectClosedSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectClosedSurvey(SqlSession sqlSession, String emplId);
 	//내가 작성한 설문 리스트 조회
 	public List<Survey> selectWroteSurvey(SqlSession sqlSession, String emplId);
 	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
 	public List<Survey> selectSubSurveyById(SqlSession sqlSession, String emplId);
 	//설문조사 대상자 가져오기 (응답여부 확인 가능)
-	public List<SurveySubEmpl> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
+	public List<SurveySub> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
 
 	//설문조사 등록
 	//설문 추가

@@ -7,6 +7,8 @@
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
 <script src="https://kit.fontawesome.com/08c05a1f0f.js" crossorigin="anonymous"></script> <!-- fontawesome -->
+<link rel="stylesheet" href="../../resources/css/survey.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
+
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	<!-- 설문조사 좌측 서브 메뉴 -->

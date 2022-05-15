@@ -19,7 +19,7 @@
                 <button type="submit"></button>
             </form>
 
-			<form id="writeQuestPageForm" action="/survey/updateQuestInfo.hirp" method="post">
+			<form id="writeQuestPageForm" action="/survey/addQuestList.hirp" method="post">
 				
 				<!-- 임시로 넣어준 것. 두 개 화면 합치면, 따로 no value 없이 mapper에서 seq.currval 쓰면 될 듯-->
 				<h1 class="basic-border-bottom">설문 문항 작성</h1>
