@@ -21,13 +21,21 @@
 
             <h1 class="basic-border-bottom">설문 상세</h1>
             <!-- 메인 상단 끝 -->
-            
+            <c:if test="${surveyInfo.surveyStatus eq 'C'}">
+            	<!-- 진행 중인 게시글일 때 -->
+            	<c:url var="sList" value="/survey/proceed.hirp"></c:url>
+            </c:if> 
+            <c:if test="${surveyInfo.surveyStatus eq 'F'}">
+            	<!-- 마감된 게시글일 때 --> <!-- 아직 마감된 게시글은 상세 연결 안되어있음. -->
+            	<c:url var="sList" value="/survey/closed.hirp"></c:url>
+            </c:if> 
            	<!-- 내가 작성한 게시글일 때 뜨는 버튼들 -->
            	<div class="padding-10 basic-border-bottom"">
+           		<c:if test=""></c:if> <!-- 내가 작성한 설문조사일 때 다 보이고, 진행중인 것만 마감 버튼 보여주기 -->
            		<button class="noneBackground"><i class="fa-solid fa-pen-to-square"></i> 수정</button>&nbsp;
            		<button class="noneBackground"><i class="fa-regular fa-clock"></i>  마감</button>&nbsp;
            		<button class="noneBackground"><i class="fa-regular fa-trash-can"></i> 삭제</button>&nbsp;
-           		<button style="float:right;" class="noneBackground"><i class="fa-regular fa-square-caret-down"></i> 목록</button>&nbsp;
+           		<button style="float:right;" class="noneBackground" onclick="location.href='${sList}'"><i class="fa-regular fa-square-caret-down"></i> 목록</button>&nbsp;
            	</div>
             
             <!-- 페이지 내용 -->
