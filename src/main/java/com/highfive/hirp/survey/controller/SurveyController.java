@@ -292,7 +292,7 @@ public class SurveyController {
 	//설문 응답 페이지 (설문 상세1)
 	@RequestMapping(value="/survey/questDetail.hirp", method=RequestMethod.GET)
 	public ModelAndView surveySubmitPage(ModelAndView mv
-//			,@RequestParam("surveyNo") int surveyNo
+			,@RequestParam("surveyNo") int surveyNo
 			, HttpServletRequest request) {
 		//내가 응답한 내용이 있는지 조회
 		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
@@ -304,7 +304,18 @@ public class SurveyController {
 //		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
 		
 		try {
-			mv.setViewName("survey/surveyDetailPage");
+			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<SurveyQuest> surveyQuestList = sService.selectAllSurveyQuestByNo(surveyNo);
+			
+			if(survey != null) {
+				mv.addObject("surveyInfo", survey);
+				mv.addObject("questList", surveyQuestList);
+				mv.setViewName("survey/surveyDetailPage");
+				
+			} else {
+				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
 			//설문 등록
 //			int result = sService.insertSurvey(survey);
 //			

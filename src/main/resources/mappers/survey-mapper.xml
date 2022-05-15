@@ -42,6 +42,14 @@
 		<result property="questType1" column="QUEST_TYPE1"/>
 		<result property="questType2" column="QUEST_TYPE2"/>
 		<result property="questRequired" column="QUEST_REQUIRED"/>
+		<association javaType="SurveyQuestCh" property="surveyQuestCh" column="QUEST_NO">
+	        <id property="surveyquestNo" column="SURVEYQUEST_NO"/>
+	        <result property="surveyCh1" column="SURVEY_CH1"/>
+	        <result property="surveyCh2" column="SURVEY_CH2"/>
+	        <result property="surveyCh3" column="SURVEY_CH3"/>
+	        <result property="surveyCh4" column="SURVEY_CH4"/>
+	        <result property="surveyChmax" column="SURVEY_CHMAX"/>
+      	</association>  
 	</resultMap>
 	
 	<resultMap type="SurveyQuestCh" id="SurveyQuestChResultMap">
@@ -136,24 +144,31 @@
 		#{surveyCh1}, #{surveyCh2}, #{surveyCh3}, #{surveyCh4}, #{surveyChmax})
 	</insert>
 	
-<!-- 설문조사 정보 조회 -->
-<!-- 조인해서 작성자 정보(이름) 함께 가져오기 -->
-<!-- SELECT  -->
-<!-- SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, -->
-<!-- SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS, -->
-<!-- SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, -->
-<!-- SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE, -->
-<!-- E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME -->
-<!-- FROM SURVEY_TBL S -->
-<!-- JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID -->
-<!-- JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE -->
-<!-- JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE; -->
+	<!-- 설문조사 정보 조회 -->
+	<!-- 조인해서 작성자 정보(이름) 함께 가져오기 -->
+	<select id="selectSurveyByNo" resultMap="surveyResultMap">
+		<!-- 전에 리스트 뽑은 것도 조인까지 이렇게 다 바꿔야 할 듯 -->
+		SELECT 
+		SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER,
+		SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT,
+		SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME
+		FROM SURVEY_TBL S
+		JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		WHERE SURVEY_NO = #{surveyNo}
+	</select>
 
-<!-- 설문조사 문항+보기 한번에 가져오기 -->
-<!-- SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE, -->
-<!-- QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED, -->
-<!-- SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX -->
-<!-- FROM SURVEY_QUEST Q -->
-<!-- LEFT JOIN SURVEYQUEST_CH C ON Q.QUEST_NO = C.SURVEYQUEST_NO -->
-<!-- ORDER BY QUEST_NO; -->
+	<!-- 설문조사 문항+보기 한번에 가져오기 -->
+	<select id="selectAllSurveyQuestByNo" resultMap="SurveyQuestResultMap">
+		SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE,
+		QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED,
+		SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX
+		FROM SURVEY_QUEST Q
+		LEFT JOIN SURVEYQUEST_CH C ON Q.QUEST_NO = C.SURVEYQUEST_NO
+		WHERE SURVEY_NO = #{surveyNo}
+		ORDER BY QUEST_NO
+	</select>
 </mapper>

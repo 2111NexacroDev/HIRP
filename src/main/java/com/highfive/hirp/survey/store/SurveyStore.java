@@ -53,8 +53,10 @@ public interface SurveyStore {
 	//설문조사 상세
 	//설문조사 정보 가져오기
 	public Survey selectSurveyByNo(SqlSession sqlSession, int surveyNo);
+	//설문조사에 포함된 설문 문항 리스트 가져오기
+	public List<SurveyQuest> selectAllSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사에 포함된 설문 문항 가져오기
-	public SurveyQuest selectSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
+	public SurveyQuest selectOneSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사 보기 가져오기
 	public SurveyQuestCh selectSurveyQuestChByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사 번호로 설문조사 응답 가져오기

@@ -55,7 +55,9 @@ public interface SurveyService {
 	//설문조사 정보 가져오기
 	public Survey selectSurveyByNo(int surveyNo); 
 	//설문조사에 포함된 설문 문항 가져오기
-	public SurveyQuest selectSurveyQuestByNo(int surveyQuestNo);
+	public List<SurveyQuest> selectAllSurveyQuestByNo(int surveyQuestNo);
+	//설문조사에 포함된 설문 문항 가져오기
+	public SurveyQuest selectOneSurveyQuestByNo(int surveyQuestNo);
 	//설문조사 보기 가져오기
 	public SurveyQuestCh selectSurveyQuestChByNo(int surveyQuestNo); 
 	//설문조사 번호로 설문조사 응답 가져오기

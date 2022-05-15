@@ -114,9 +114,16 @@ public class SurveyStoreLogic implements SurveyStore{
 		Survey survey = sqlSession.selectOne("SurveyMapper.selectSurveyByNo", surveyNo);
 		return survey;
 	}
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문조사에 포함된 설문 문항 가져오기 (보기까지 한번에 가져와짐)
 	@Override
-	public SurveyQuest selectSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo) {
+	public List<SurveyQuest> selectAllSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo) {
+		List<SurveyQuest> surveyQuestList = sqlSession.selectList("SurveyMapper.selectAllSurveyQuestByNo", surveyQuestNo);
+		return surveyQuestList;
+	}
+	
+	//설문조사에 포함된 설문 문항 가져오기 (보기까지 한번에 가져와짐)
+	@Override
+	public SurveyQuest selectOneSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo) {
 		SurveyQuest surveyQuest = sqlSession.selectOne("SurveyMapper.selectSurveyQuestByNo", surveyQuestNo);
 		return surveyQuest;
 	}

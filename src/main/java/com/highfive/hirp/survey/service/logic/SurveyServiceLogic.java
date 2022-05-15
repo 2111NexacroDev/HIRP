@@ -119,8 +119,14 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문조사에 포함된 설문 문항 가져오기
 	@Override
-	public SurveyQuest selectSurveyQuestByNo(int surveyQuestNo) {
-		SurveyQuest surveyQuest = sStore.selectSurveyQuestByNo(sqlSession, surveyQuestNo);
+	public List<SurveyQuest> selectAllSurveyQuestByNo(int surveyQuestNo) {
+		List<SurveyQuest> surveyQuestList = sStore.selectAllSurveyQuestByNo(sqlSession, surveyQuestNo);
+		return surveyQuestList;
+	}
+	//설문조사에 포함된 설문 문항 가져오기
+	@Override
+	public SurveyQuest selectOneSurveyQuestByNo(int surveyQuestNo) {
+		SurveyQuest surveyQuest = sStore.selectOneSurveyQuestByNo(sqlSession, surveyQuestNo);
 		return surveyQuest;
 	}
 	//설문조사 보기 가져오기
