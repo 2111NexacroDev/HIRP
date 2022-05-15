@@ -46,7 +46,7 @@
 							<c:url var="sDetail" value="/survey/questDetail.hirp">
 								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 							</c:url>
-							<tr onclick="location.href='${sDetail}'">
+							<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
@@ -57,7 +57,7 @@
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
+	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
 	                            <td>${survey.surveyWriter }</td>
 	                            <td>
