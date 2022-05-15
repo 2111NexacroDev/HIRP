@@ -39,11 +39,14 @@
                     	<!-- 위에서부터 1~로 번호 출력하기 -->
 <!--                     	<c:set var="row_num" value="0"/> -->
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
-                    		<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
                     	<c:forEach items="${sList }" var="survey">
 <%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
-								<c:set var="row_num" value="${row_num-1 }"/>
-                    		<tr>
+							<c:set var="row_num" value="${row_num-1 }"/>
+							<c:url var="sDetail" value="/survey/questDetail.hirp">
+								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+							</c:url>
+							<tr onclick="location.href='${sDetail}'">
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->

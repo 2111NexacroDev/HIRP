@@ -32,7 +32,7 @@
                 <p class="mb-10">참여 후 수정 : 허용</p>
                 <p class="mb-10">설문 결과 : 공개</p>
                 <!-- 응답자 정보 -->
-                <div class="row mt-20" style="width:50%;">
+                <div class="row mt-20" style="">
                     <div class=" basic-border bor-round ml-10 mr-10 padding-10">
                         <div class="">전체 참여자</div>
                         <div class="contents-strong padding-top-10">30</div>
