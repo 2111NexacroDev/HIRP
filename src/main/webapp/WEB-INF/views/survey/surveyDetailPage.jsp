@@ -22,6 +22,14 @@
             <h1 class="basic-border-bottom">설문 상세</h1>
             <!-- 메인 상단 끝 -->
             
+           	<!-- 내가 작성한 게시글일 때 뜨는 버튼들 -->
+           	<div class="padding-10 basic-border-bottom"">
+           		<button class="noneBackground"><i class="fa-solid fa-pen-to-square"></i> 수정</button>&nbsp;
+           		<button class="noneBackground"><i class="fa-regular fa-clock"></i>  마감</button>&nbsp;
+           		<button class="noneBackground"><i class="fa-regular fa-trash-can"></i> 삭제</button>&nbsp;
+           		<button style="float:right;" class="noneBackground"><i class="fa-regular fa-square-caret-down"></i> 목록</button>&nbsp;
+           	</div>
+            
             <!-- 페이지 내용 -->
             <div id="" class="subConts">
                 <!-- 설문 정보 -->
@@ -29,8 +37,22 @@
                 <p class="mb-10">작성자: ${surveyInfo.surveyWriter}</p>
                 <p class="mb-10">작성일 : ${surveyInfo.surveyDate}</p>
                 <p class="mb-10">설문 기간 : ${surveyInfo.surveyStartdate} ~ ${surveyInfo.surveyEnddate}</p>
-                <p class="mb-10">참여 후 수정 : ${surveyInfo.surveyEdit}</p>
-                <p class="mb-10">설문 결과 : ${surveyInfo.surveyResult}</p>
+                <p class="mb-10">참여 후 수정 : 
+                	<c:if test="${surveyInfo.surveyEdit eq 'Y'}">
+                		허용
+                	</c:if>
+                	<c:if test="${surveyInfo.surveyEdit eq 'N'}">
+                		비허용
+                	</c:if>
+                </p>
+                <p class="mb-10">설문 결과 : 
+                	<c:if test="${surveyInfo.surveyResult eq 'Y'}">
+                		공개
+                	</c:if>
+                	<c:if test="${surveyInfo.surveyResult eq 'N'}">
+                		비공개
+                	</c:if>
+                </p>
                 <!-- 응답자 정보 -->
                 <div class="row mt-20">
                     <div class=" basic-border bor-round ml-10 mr-10 padding-10">
