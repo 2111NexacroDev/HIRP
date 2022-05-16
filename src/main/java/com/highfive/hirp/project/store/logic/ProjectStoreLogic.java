@@ -67,6 +67,12 @@ public class ProjectStoreLogic implements ProjectStore{
 	}
 
 	@Override
+	public int updateBoard(SqlSession sqlSession, Board board) {
+		int result = sqlSession.update("ProjectMapper.updateBoard", board);
+		return result;
+	}
+	
+	@Override
 	public int deleteBoard(SqlSession sqlSession, int boardNo) {
 		int result = sqlSession.delete("ProjectMapper.deleteBoard", boardNo);
 		return result;

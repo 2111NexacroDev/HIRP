@@ -50,8 +50,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 	
 	@Override
-	public int registerTeamSchedule(Schedule schedule) {
-		int result = sStore.insertTeamSchedule(sqlSession, schedule);
+	public int registerSchedule(Schedule schedule) {
+		int result = sStore.insertSchedule(sqlSession, schedule);
 		return result;
 	}
 	
@@ -60,22 +60,28 @@ public class ScheduleServiceImpl implements ScheduleService {
 		int result = sStore.insertScheduleToSub(sqlSession, schedule);
 		return result;
 	}
-	
-	@Override
-	public int registerPersonalSchedule(Schedule schedule) {
-		int result = sStore.insertPersonalSchedule(sqlSession, schedule);
-		return result;
-	}
 
 	@Override
 	public int modifySchedule(Schedule schedule) {
 		int result = sStore.updateSchedule(sqlSession, schedule);
 		return result;
 	}
+	
+	@Override
+	public int modifyCompanySchedule(Schedule schedule) {
+		int result = sStore.updateCompanySchedule(sqlSession, schedule);
+		return result;
+	}
 
 	@Override
 	public int removeSchedule(int scheduleNo) {
 		int result = sStore.deleteSchedule(sqlSession, scheduleNo);
+		return result;
+	}
+
+	@Override
+	public int removeCompanySchedule(int scheduleNo) {
+		int result = sStore.deleteCompanySchedule(sqlSession, scheduleNo);
 		return result;
 	}
 }

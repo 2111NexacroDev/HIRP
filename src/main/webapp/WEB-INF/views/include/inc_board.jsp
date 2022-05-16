@@ -14,24 +14,24 @@
                 <li>
                     <a href="">전사게시판</a>
                     <ul>
-                        <li><a href="#">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
+                        <li><a href="/notice/list.hirp">공지게시판</a></li>
+                        <li><a href="/free/list.hirp">자유게시판</a></li>
+                        <li><a href="/anonymous/list.hirp">익명게시판</a></li>
                     </ul>
                     <br><!-- 나중에 수정 -->
                 </li>
                  <li>
                     <a href="">부서게시판</a>
                     <ul>       
-                        <li><a href="#">개발팀 게시판</a></li>
+                        <li><a href="/department/list.hirp">개발팀 게시판</a></li>
                     </ul>
                     <br><!-- 나중에 수정 -->
                 </li>
                 <li>
                     <a href="">나의 활동</a>
                     <ul>       
-                        <li><a href="#">작성한 글 조회</a></li>
-                        <li><a href="#">작성한 댓글 조회</a></li>
+                        <li><a href="/written/board.hirp">작성한 글 조회</a></li>
+                        <!-- <li><a href="#">작성한 댓글 조회</a></li> -->
                     </ul>
                 </li>
             </ul>

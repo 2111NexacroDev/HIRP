@@ -42,6 +42,12 @@
                     	<c:forEach items="${sList }" var="survey">
 <%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
 							<c:set var="row_num" value="${row_num-1 }"/>
+							<c:if test="${survey.surveyStatus eq 'C'}">
+								<c:url var="sDetail" value="/survey/questDetail.hirp">
+									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+								</c:url>
+                           	</c:if>
+	                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
                     		<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
@@ -53,7 +59,7 @@
 	                            		<button class="finished" type="button">마감</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
+	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
 	                            <td>0/77(0.00%)</td>
 	                        </tr>

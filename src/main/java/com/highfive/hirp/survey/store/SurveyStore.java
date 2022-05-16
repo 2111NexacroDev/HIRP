@@ -9,29 +9,27 @@ import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 
 public interface SurveyStore {
 
 	//설문조사 리스트 조회
 	//전체 리스트 조회(최신)
-	public List<SurveyMyStatus> selectAllSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectAllSurvey(SqlSession sqlSession, String emplId);
 	//진행중인 리스트 조회
-	public List<SurveyMyStatus> selectProceedSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectProceedSurvey(SqlSession sqlSession, String emplId);
 	//마감된 설문리스트 조회
-	public List<SurveyMyStatus> selectClosedSurvey(SqlSession sqlSession, String emplId);
+	public List<Survey> selectClosedSurvey(SqlSession sqlSession, String emplId);
 	//내가 작성한 설문 리스트 조회
 	public List<Survey> selectWroteSurvey(SqlSession sqlSession, String emplId);
 	//내가 대상자인 것 중 진행 중이면서 응답하지 않은 설문 리스트 조회
 	public List<Survey> selectSubSurveyById(SqlSession sqlSession, String emplId);
 	//설문조사 대상자 가져오기 (응답여부 확인 가능)
-	public List<SurveySubEmpl> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
+	public List<SurveySub> selectSurveySubByNo(SqlSession sqlSession, int surveyNo);
 
 	//설문조사 등록
 	//설문 추가
@@ -42,6 +40,8 @@ public interface SurveyStore {
 	public int insertSurveyQuestCh(SqlSession sqlSession, SurveyQuestCh qCh);
 	//설문 대상자 리스트 추가
 	public int insertSurveySub(SqlSession sqlSession, List<SurveySub> subList);
+	//현재 설문조사 시퀀스 번호 가져오기
+	public int selectSurveySeqNo(SqlSession sqlSession);
 
 	//전체 직원 가져오기 (이거 조직도에서 가져다가 쓰면 될 듯 아마두..)
 	public List<Employee> selectAllSurveySub(SqlSession sqlSession);
@@ -53,8 +53,10 @@ public interface SurveyStore {
 	//설문조사 상세
 	//설문조사 정보 가져오기
 	public Survey selectSurveyByNo(SqlSession sqlSession, int surveyNo);
+	//설문조사에 포함된 설문 문항 리스트 가져오기
+	public List<SurveyQuest> selectAllSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사에 포함된 설문 문항 가져오기
-	public SurveyQuest selectSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
+	public SurveyQuest selectOneSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사 보기 가져오기
 	public SurveyQuestCh selectSurveyQuestChByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사 번호로 설문조사 응답 가져오기
@@ -66,6 +68,8 @@ public interface SurveyStore {
 	//설문조사 수정
 	//설문조사 정보 수정
 	public int updateSurvey(SqlSession sqlSession, Survey survey);
+	//설문조사 상태 수정
+	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo);
 	//설문조사 대상자 리스트 수정
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList);
 	

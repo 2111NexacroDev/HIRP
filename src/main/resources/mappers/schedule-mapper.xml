@@ -20,21 +20,49 @@
 		SELECT * FROM ALL_SCHEDULE_TBL ORDER BY SCHEDULE_START_DATE DESC
 	</select>
 	<select id="selectAllTeamSchedule" resultMap="scheduleResultMap">
-		SELECT * FROM SCHEDULE_TBL WHERE EMPL_ID = #{emplId } ORDER BY SCHEDULE_START_DATE DESC
+		SELECT * 
+		FROM SCHEDULE_TBL 
+		WHERE SCHEDULE_CATEGORY = '부서' AND EMPL_ID = (SELECT A.DEPT_MASTER FROM DEPT_TBL A JOIN EMPL_TBL B USING(DEPT_CODE) WHERE B.EMPL_ID = #{emplId})
 	</select>
 	<select id="selectAllPersonalSchedule" resultMap="scheduleResultMap">
-		SELECT * FROM SCHEDULE_TBL WHERE EMPL_ID = #{emplId } ORDER BY SCHEDULE_START_DATE DESC
+		SELECT * FROM SCHEDULE_TBL WHERE EMPL_ID = #{emplId} AND SCHEDULE_CATEGORY = '개인' ORDER BY SCHEDULE_START_DATE DESC
 	</select>	
 	<insert id="insertCompanySchedule">
 		INSERT INTO ALL_SCHEDULE_TBL VALUES(ALL_SCHEDULE_SEQ.NEXTVAL, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
 	</insert>
-	<insert id="insertTeamSchedule">
+	<insert id="insertSchedule">
 		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory}, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
 	</insert>
 	<insert id="insertScheduleToSub">
 		INSERT INTO SCHEDULE_EMPL_TBL VALUES(SCHEDULE_SEQ.CURRVAL, #{emplId}, #{scheduleCategory})
 	</insert>
-	<insert id="insertPersonalSchedule">
-		INSERT INTO SCHEDULE_TBL VALUES(SCHEDULE_SEQ.NEXTVAL, #{emplId}, #{scheduleCategory}, #{scheduleTitle}, #{scheduleColor}, #{scheduleConts}, #{scheduleStartDate}, #{scheduleEndDate}, #{schedulePlace}, #{scheduleAlarm})
-	</insert>
+	<update id="modifyCompanySchedule">
+		UPDATE ALL_SCHEDULE_TBL 
+		SET SCHEDULE_TITLE = #{scheduleTitle}, 
+			SCHEDULE_COLOR = #{scheduleColor}, 
+			SCHEDULE_CONTS = #{scheduleConts}, 
+			SCHEDULE_START_DATE = #{scheduleStartDate}, 
+			SCHEDULE_END_DATE = #{scheduleEndDate}, 
+			SCHEDULE_PLACE = #{schedulePlace}, 
+			SCHEDULE_ALARM = #{scheduleAlarm} 
+		WHERE SCHEDULE_NO = #{scheduleNo}
+	</update>
+	<update id="modifySchedule">
+		UPDATE SCHEDULE_TBL 
+		SET SCHEDULE_CATEGORY = #{scheduleCategory}, 
+			SCHEDULE_TITLE = #{scheduleTitle}, 
+			SCHEDULE_COLOR = #{scheduleColor}, 
+			SCHEDULE_CONTS = #{scheduleConts}, 
+			SCHEDULE_START_DATE = #{scheduleStartDate}, 
+			SCHEDULE_END_DATE = #{scheduleEndDate}, 
+			SCHEDULE_PLACE = #{schedulePlace}, 
+			SCHEDULE_ALARM = #{scheduleAlarm} 
+		WHERE SCHEDULE_NO = #{scheduleNo}
+	</update>
+	<delete id="deleteSchedule">
+		DELETE FROM SCHEDULE_TBL WHERE SCHEDULE_NO = #{scheduleNo }
+	</delete>
+	<delete id="deleteCompanySchedule">
+		DELETE FROM ALL_SCHEDULE_TBL WHERE SCHEDULE_NO = #{scheduleNo }
+	</delete>
 </mapper>

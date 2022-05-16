@@ -5,6 +5,12 @@ public class SurveySub {
 	private int surveyNo;
 	private String subId;
 	private String subAnswerstatus;
+	//Employee 정보 (dept, position join했음)
+	private String deptCode;
+	private String deptName;
+	private String positionCode;
+	private String positionName;
+	private String emplName;
 	
 	public SurveySub() {}
 

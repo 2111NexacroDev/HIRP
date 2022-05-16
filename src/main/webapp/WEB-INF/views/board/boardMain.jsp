@@ -11,13 +11,13 @@
     <div id="conts">
         <aside id="snb">
             <h1>게시판</h1>
-            <a class="btn--function" href="/board/writeView.hirp">글쓰기</a>
+            <a class="btn--function" href="/free/writeView.hirp">글쓰기</a>
             <ul>
                 <li>
                     <a href="">전사게시판</a>
                     <ul>
                         <li><a href="/notice/list.hirp">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
+                        <li><a href="/free/list.hirp">자유게시판</a></li>
                         <li><a href="#">익명게시판</a></li>
                     </ul>
                     <br><!-- 나중에 수정 -->
@@ -55,39 +55,34 @@
 				<h3>공지게시판 새글</h3>
                 <table class="table--basic mt-20">
                     <thead>
-                        <tr>
-                            <th>제목1</th>
-                            <th>제목2</th>
-                            <th>제목3</th>
-                        </tr>
+                         <tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+							<th>첨부파일</th>
+						</tr>
                     </thead>
+                     <c:forEach var="notice" items="${nList }">
                     <tbody>
                         <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
+                           	<c:url var="nDetail" value="/notice/detail.hirp">
+								<c:param name="noticeNo" value="${notice.noticeNo }"></c:param>
+							</c:url>
+							<td><a href="${nDetail }">${notice.noticeNo }</a></td>
+							
+							<td><a href="${nDetail }">&nbsp; ${notice.noticeTitle }</a></td>
+							<td>${notice.emplId }</td>
+							<td>${notice.writeDate}</td>
+							<td>${notice.noticeCount }</td>
+							<td>
+							<c:if test="${empty notice.bList}">X</c:if>
+							<c:if test="${not empty notice.bList}">O</c:if>
+							</td>
                         </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                    </tbody>
+                        </tbody>
+                        </c:forEach>
                 </table>
 				<br><br><br><!-- 나중에 수정 -->
 				<h3>부서게시판 새글</h3>

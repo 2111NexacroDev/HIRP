@@ -12,10 +12,12 @@ public interface ScheduleService {
 	public List<Schedule> printAllPersonalSchedule(String loginUser);
 	
 	public int registerCompanySchedule(Schedule schedule);
-	public int registerTeamSchedule(Schedule schedule);
+	public int registerSchedule(Schedule schedule);
 	public int registerScheduleToSub(Schedule schedule);
-	public int registerPersonalSchedule(Schedule schedule);
 	
 	public int modifySchedule(Schedule schedule);
+	public int modifyCompanySchedule(Schedule schedule);
+	
 	public int removeSchedule(int scheduleNo);
+	public int removeCompanySchedule(int scheduleNo);
 }

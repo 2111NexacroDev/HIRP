@@ -4,5 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ReservationMapper">
+	<resultMap type="Utility" id="utilityResultMap">
+		<id property="utilityNo" column="UTILITY_NO"/>
+		<result property="utilityName" column="UTILITY_NAME"/>
+		<result property="utilityCategory" column="UTILITY_CATEGORY"/>
+		<result property="utilityConts" column="UTILITY_CONTS"/>
+	</resultMap>
+	<resultMap type="Reservation" id="reservationResultMap">
+		<id property="reservationNo" column="RESERVATION_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="utilityNo" column="UTILITY_NO"/>
+		<result property="reservationStartDate" column="RESERVATION_START_DATE"/>
+		<result property="reservationEndDate" column="RESERVATION_END_DATE"/>
+		<result property="reservationConts" column="RESERVATION_CONTS"/>
+		<result property="isReturn" column="IS_RETURN"/>
+		<association javaType="Utility" property="utility" column="UTILITY_NO">
+			<id property="utilityNo" column="UTILITY_NO"/>
+			<result property="utilityName" column="UTILITY_NAME"/>
+			<result property="utilityCategory" column="UTILITY_CATEGORY"/>
+			<result property="utilityConts" column="UTILITY_CONTS"/>
+		</association>    
+	</resultMap>
 
+	<select id="selectAllUtility" resultMap="utilityResultMap">
+		SELECT * FROM UTILITY_TBL ORDER BY UTILITY_NO DESC
+	</select>
+	<insert id="insertUtility">
+		INSERT INTO UTILITY_TBL VALUES(UTILITY_SEQ.NEXTVAL, #{utilityName}, #{utilityCategory}, #{utilityConts})
+	</insert>
+	
+	<select id="selectAllReservation" resultMap="reservationResultMap">
+		SELECT RESERVATION_NO, EMPL_ID, UTILITY_NO, RESERVATION_START_DATE, RESERVATION_END_DATE, RESERVATION_CONTS, IS_RETURN, UTILITY_NAME 
+		FROM RESERVATION_TBL 
+		JOIN UTILITY_TBL USING(UTILITY_NO)
+		ORDER BY RESERVATION_NO DESC 
+	</select>
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION_TBL VALUES(RESERVATION_SEQ.NEXTVAL, #{emplId}, #{utilityNo}, #{reservationStartDate}, #{reservationEndDate}, #{reservationConts}, DEFAULT)
+	</insert>
 </mapper>

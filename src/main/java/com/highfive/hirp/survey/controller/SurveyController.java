@@ -1,6 +1,7 @@
 package com.highfive.hirp.survey.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,14 +23,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
+import com.highfive.hirp.employee.service.EmployeeService;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
-import com.highfive.hirp.survey.domain.SurveyMyStatus;
 import com.highfive.hirp.survey.domain.SurveyQuest;
 import com.highfive.hirp.survey.domain.SurveyQuestCh;
 import com.highfive.hirp.survey.domain.SurveySearch;
 import com.highfive.hirp.survey.domain.SurveySub;
-import com.highfive.hirp.survey.domain.SurveySubEmpl;
 import com.highfive.hirp.survey.domain.SurveyUpdate;
 import com.highfive.hirp.survey.service.SurveyService;
 
@@ -37,6 +39,8 @@ import com.highfive.hirp.survey.service.SurveyService;
 public class SurveyController {
 	@Autowired
 	private SurveyService sService;
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
 	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
@@ -54,7 +58,7 @@ public class SurveyController {
 			//최근 생성된 설문 리스트
 			//설문 리스트에 대한 나의 참여 여부
 			//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
-			List<SurveyMyStatus> latestList = sService.selectAllSurvey(emplId);
+			List<Survey> latestList = sService.selectAllSurvey(emplId);
 			if(!latestList.isEmpty()){
 				mv.addObject("sList", latestList);
 				System.out.println(latestList);
@@ -81,7 +85,7 @@ public class SurveyController {
 		//진행중인 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
-			List<SurveyMyStatus> proceedList = sService.selectProceedSurvey(emplId);
+			List<Survey> proceedList = sService.selectProceedSurvey(emplId);
 			if(!proceedList.isEmpty()) {
 				mv.addObject("sList", proceedList);
 				System.out.println("proceedList 출력 : " + proceedList);
@@ -104,7 +108,7 @@ public class SurveyController {
 	public String proceedSurveySubList(
 			@RequestParam("surveyNo") int surveyNo){
 		//응답자 리스트 보기 (응답여부까지) -> 팝업창
-		List<SurveySubEmpl> subjectList = sService.selectSurveySubByNo(surveyNo);
+		List<SurveySub> subjectList = sService.selectSurveySubByNo(surveyNo);
 		if(!subjectList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			return gson.toJson(subjectList);
@@ -120,7 +124,7 @@ public class SurveyController {
 		//마감된 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
-			List<SurveyMyStatus> closedList = sService.selectClosedSurvey(emplId);
+			List<Survey> closedList = sService.selectClosedSurvey(emplId);
 			if(!closedList.isEmpty()) {
 				mv.addObject("sList", closedList);
 				System.out.println("closedList 출력 : " + closedList);
@@ -167,7 +171,16 @@ public class SurveyController {
 	//설문 정보 등록 페이지
 	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyInfoPage(ModelAndView mv) {
-		mv.setViewName("survey/surveyWriteInfo");
+		try {
+			List<Employee> emplList = eaService.printAllEmployee();
+			if(emplList != null) {
+				mv.addObject("emplList", emplList);
+				mv.setViewName("survey/surveyWriteInfo");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -178,31 +191,102 @@ public class SurveyController {
 		return mv;
 	}
 	
-	//설문 등록 (설문정보, 문항까지 저장 임시저장여부도 가져와서 넣어주기)
+	//설문 등록 (설문정보, 응답자 리스트)
+	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@ModelAttribute List<SurveyQuest> surveyQuest
-			,@ModelAttribute List<SurveyQuestCh> qCh
-			,@ModelAttribute List<String> subList
+			//,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
-		//설문 등록
-		//설문 문항 추가 1 (비어있지 않을 때) nextval
-		//설문 보기 추가 1 (비어있지 않을 때) currval
-		//2~4까지 하기
+		//세션에서 아이디 가져와서 넣어주기.
+		String emplId = "TESTID";
+		survey.setSurveyWriter(emplId);
+		
+		try {
+			//설문 등록
+			int result = sService.insertSurvey(survey);
+			
+			if(result > 0) {
+				//설문 등록된 현재 시퀀스 번호 찾기
+				int surveySeqNo = sService.selectSurveySeqNo();
+				mv.addObject("surveyNo", surveySeqNo);
+				mv.setViewName("survey/surveyWriteQuest");
+			} else {
+				mv.addObject("msg1", "설문조사 정보 추가 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		//설문 대상자 리스트 추가
 		return mv;
 	}
-
+	
+	//설문조사 문항 업데이트 (시작 안내 문구, 설문 문항, 설문 보기)
+	@RequestMapping(value="/survey/addQuestList.hirp", method=RequestMethod.POST)
+	public ModelAndView writeSurvey2(ModelAndView mv
+			,@ModelAttribute Survey survey
+			,@ModelAttribute SurveyQuest surveyQuest
+			,@ModelAttribute SurveyQuestCh surveyQuestCh
+			, HttpServletRequest request) {
+		
+		try {
+			int qCount = surveyQuest.getSurveyQuestList().size();
+//			System.out.println("questList출력"+surveyQuest.getSurveyQuestList().get(0).getQuestTitle());
+			
+//			for(int i = 0; i < qCount; i++) {
+//				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
+//				if(surveyQuestCh.getSurveyQuestChList().get(i) != null) {
+//					System.out.println("보기:");
+//					System.out.println("questList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
+//				} else {
+//					continue;
+//				}
+//			}
+			
+			//설문 수정
+			int result = sService.updateSurvey(survey);
+			int result2 = 0;
+			int result3 = 0;
+			for(int i = 0; i < qCount; i++) {
+				//설문조사 문항 추가
+				result2 = sService.insertSurveyQuest(surveyQuest.getSurveyQuestList().get(i));
+				String type1 = surveyQuest.getSurveyQuestList().get(i).getQuestType1();
+				if(surveyQuestCh.getSurveyQuestChList().size() < i+1) {
+					//리스트 사이즈가 i보다 작으면 continue
+					continue;
+				} else {
+					//설문조사 문항에 맞게 보기 추가
+					result3 = sService.insertSurveyQuestCh(surveyQuestCh.getSurveyQuestChList().get(i));
+				}
+			}
+			
+			if(result > 0 && result2 > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");//다시 해주어야 함.
+				System.out.println("시작 안내 문구 업데이트 및 문항 추가 성공");
+			} else {
+				mv.addObject("msg1", "시작 안내 문구 및 문항 업데이트 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
+		//설문 문항 추가 1 (비어있지 않을 때) nextval
+		//설문 보기 추가 1 (비어있지 않을 때) currval
+		return mv;
+	}
+	
 	//대상자 전체 리스트 가져오기(설문 등록할 때 조직도 사용)
 	public ModelAndView chooseEmpl(ModelAndView mv) {
 		//대상자 리스트 가져오기
 
 		
 		return mv;
-	}
-	
-	
+	}		
+		
 	//부서코드로 대상자 리스트 가져오기 (선택한 부서 사람들)
 	public ModelAndView chooseEmplByDept(ModelAndView mv
 			, @RequestParam("deptCode") String deptCode
@@ -218,6 +302,57 @@ public class SurveyController {
 		return mv;
 	}
 	
+	
+	//설문 응답 페이지 (설문 상세1)
+	@RequestMapping(value="/survey/questDetail.hirp", method=RequestMethod.GET)
+	public ModelAndView surveySubmitPage(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo
+			, HttpServletRequest request) {
+		//내가 응답한 내용이 있는지 조회
+		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
+		//없으면 응답 할 수 있도록 띄워주고, 있으먼 내가 작성한 답변 띄워주기(응답 수정)
+//		HttpSession session = request.getSession();
+//		Employee employee = (Employee) session.getAttribute("loginMember");
+//		String emplId = employee.getEmplId();
+		String emplId = "TESTID";
+//		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
+		
+		try {
+			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<SurveyQuest> surveyQuestList = sService.selectAllSurveyQuestByNo(surveyNo);
+			
+			if(survey != null) {
+				mv.addObject("surveyInfo", survey);
+				mv.addObject("questList", surveyQuestList);
+				mv.setViewName("survey/surveyDetailPage");
+				
+			} else {
+				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			//설문 등록
+//			int result = sService.insertSurvey(survey);
+//			
+//			if(result > 0) {
+//				mv.setViewName("survey/surveyWriteQuest");
+//			} else {
+//				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+//				mv.setViewName("common/errorPage");
+//			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		//번호로 설문조사 정보 가져오기
+		//설문조사에 포함된 설문문항 가져오기
+		//설문조사 보기 가져오기
+		//설문조사 번호, 내 아이디로 나의 응답 가져오기
+		
+		//응답 수정 페이지
+		//응답 제출 페이지
+		
+		return mv;
+	}
 	
 	//설문 수정 페이지
 	public ModelAndView surveyModifyPage(ModelAndView mv
@@ -237,49 +372,49 @@ public class SurveyController {
 	}
 	
 	//설문 마감
+	@RequestMapping(value="/survey/updateStatus.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyClose(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {
 		//자신의 게시글일 때만 마감 버튼이 보이도록 jsp에서 처리
 		//survey 상태 마감으로 update
+		try {
+			int result = sService.updateSurveyStatus(surveyNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 상태 업데이트 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
 	//설문 삭제
+	@RequestMapping(value="/survey/deleteSurvey.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyDelete(ModelAndView mv
-			,@ModelAttribute Survey survey) {
+			,@RequestParam("surveyNo") int surveyNo) {
 		//설문조사 삭제
-		
+		try {
+			int result = sService.deleteSurvey(surveyNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 삭제 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		//SURVEY_TBL만 수정하면 아래 연관된 테이블 전부 삭제되도록 TRIGGER 걸어둠
 		//설문조사 대상자 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)
 		//설문조사 응답 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)
 		//설문조사 문항 삭제 (TRIGGER 걸려있음)
 		//survey 에서 q1~q4에 담겨있는 번호 가져와서 담아서 delete 해주기
 		//설문조사 문항 보기 삭제 (SURVEY_QUEST QUEST_NO에 제약조건 걸려있음)
-		return mv;
-	}
-	
-	
-	//설문 응답 페이지 (설문 상세1)
-	public ModelAndView surveySubmitPage(ModelAndView mv
-			,@RequestParam("surveyNo") int surveyNo
-			, HttpServletRequest request) {
-		//내가 응답한 내용이 있는지 조회
-		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
-		//없으면 응답 할 수 있도록 띄워주고, 있으먼 내가 작성한 답변 띄워주기(응답 수정)
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
-		
-		//번호로 설문조사 정보 가져오기
-		//설문조사에 포함된 설문문항 가져오기
-		//설문조사 보기 가져오기
-		//설문조사 번호, 내 아이디로 나의 응답 가져오기
-		
-		//응답 수정 페이지
-		//응답 제출 페이지
-		
 		return mv;
 	}
 	//설문 응답 제출
