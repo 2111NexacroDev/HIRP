@@ -24,13 +24,18 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private Date endDate;
 	private String endReason;
 	private String emplProfile;
+	private Certification certification;
+	private JobRole jobRole;
+	private Language language;
+	private Military military;
 
 	public Employee() {}
 
 	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName, Date startDate,
 			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
 			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
-			String isVeterans, Date endDate, String endReason, String emplProfile) {
+			String isVeterans, Date endDate, String endReason, String emplProfile, Certification certification,
+			JobRole jobRole, Language language, Military military) {
 		super();
 		this.emplId = emplId;
 		this.deptCode = deptCode;
@@ -53,6 +58,10 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.endDate = endDate;
 		this.endReason = endReason;
 		this.emplProfile = emplProfile;
+		this.certification = certification;
+		this.jobRole = jobRole;
+		this.language = language;
+		this.military = military;
 	}
 
 	public String getEmplId() {
@@ -223,6 +232,38 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.emplProfile = emplProfile;
 	}
 
+	public Certification getCertification() {
+		return certification;
+	}
+
+	public void setCertification(Certification certification) {
+		this.certification = certification;
+	}
+
+	public JobRole getJobRole() {
+		return jobRole;
+	}
+
+	public void setJobRole(JobRole jobRole) {
+		this.jobRole = jobRole;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
+	public Military getMilitary() {
+		return military;
+	}
+
+	public void setMilitary(Military military) {
+		this.military = military;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [emplId=" + emplId + ", deptCode=" + deptCode + ", positionCode=" + positionCode + ", emplPw="
@@ -231,6 +272,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 				+ salaryCategory + ", referrer=" + referrer + ", isStatus=" + isStatus + ", birthday=" + birthday
 				+ ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability=" + isDisability
 				+ ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason + ", emplProfile="
-				+ emplProfile + "]";
+				+ emplProfile + ", certification=" + certification + ", jobRole=" + jobRole + ", language=" + language
+				+ ", military=" + military + "]";
 	}
 }
