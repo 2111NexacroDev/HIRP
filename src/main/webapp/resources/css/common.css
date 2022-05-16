@@ -151,18 +151,6 @@ button.colorGrey {
     color: #ccc;
 }
 
-button.prev {
-	content: "\f104";
-	background-color: white;
-	font-family: fontawesome;
-}
-
-button.next {
-	content: "\f105";
-	background-color: white;
-	font-family: fontawesome;
-}
-
 img {
     max-width: 100%;
 }
@@ -1822,4 +1810,16 @@ article {
     height: 24px;
     background: url("../images/icons/btn_more.png") no-repeat center center;
     font-size: 0;
+}
+
+button.prev {
+	content: "\f104";
+	background-color: white;
+	font-family: fontawesome;
+}
+
+button.next {
+	content: "\f105";
+	background-color: white;
+	font-family: fontawesome;
 }
