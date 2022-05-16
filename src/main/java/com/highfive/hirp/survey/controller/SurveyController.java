@@ -208,8 +208,8 @@ public class SurveyController {
 		//설문 대상자 리스트 추가
 		return mv;
 	}
-
-	//설문조사 업데이트 (시작 안내 문구, 설문 문항, 설문 보기)
+	
+	//설문조사 문항 업데이트 (시작 안내 문구, 설문 문항, 설문 보기)
 	@RequestMapping(value="/survey/addQuestList.hirp", method=RequestMethod.POST)
 	public ModelAndView writeSurvey2(ModelAndView mv
 			,@ModelAttribute Survey survey
@@ -367,9 +367,20 @@ public class SurveyController {
 	
 	//설문 삭제
 	public ModelAndView surveyDelete(ModelAndView mv
-			,@ModelAttribute Survey survey) {
+			,@RequestParam("surveyNo") int surveyNo) {
 		//설문조사 삭제
-		
+		try {
+			int result = sService.deleteSurvey(surveyNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		//SURVEY_TBL만 수정하면 아래 연관된 테이블 전부 삭제되도록 TRIGGER 걸어둠
 		//설문조사 대상자 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)
 		//설문조사 응답 삭제 (SURVEY_TBL SURVEY_NO에 제약조건 걸려있음)

@@ -172,4 +172,8 @@
 		WHERE SURVEY_NO = #{surveyNo}
 		ORDER BY QUEST_NO
 	</select>
+	
+	<delete id="deleteSurvey">
+		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
+	</delete>
 </mapper>
