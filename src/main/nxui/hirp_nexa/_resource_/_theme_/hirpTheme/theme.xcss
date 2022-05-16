@@ -1317,15 +1317,12 @@ last-modified : 2021-10-26
 .Tab .tabbuttonitem
 {
 	color : #333333;
-	background : linear-gradient(to top, #fcfcfc, #fafafa);
-	-nexa-border : 1px solid #c7c7c7;
 	-nexa-padding : 6px 10px 6px 10px;
 }
 
 .Tab .tabbuttonitem[status=mouseover]
 {
-	-nexa-border : 1px solid #b1b1b1;
-	background : linear-gradient(to top, #dddcdc, #fefefe);
+	-nexa-border : 0px none, 0px none, 2px solid #000000;
 }
 
 .Tab .tabbuttonitem[status=focused]
@@ -1335,9 +1332,8 @@ last-modified : 2021-10-26
 
 .Tab .tabbuttonitem[userstatus=selected],.Tab .tabbuttonitem[status=focused][userstatus=selected]
 {
-	color : #dee4ef;
-	background : #1055a1;
-	-nexa-border : 1px solid #1055a1;
+	-nexa-border : 0px none, 0px none, 2px solid #000000;
+	font : normal 500 10px/normal "Noto Sans KR";
 }
 
 .Tab .tabbuttonitem[status=disabled]

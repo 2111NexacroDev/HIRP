@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.todo.domain.Todo;
+import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 /**
  * Handles requests for the application home page.
@@ -23,27 +24,17 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
-	}
-	
 	// 프론트 가이드페이지
 	@RequestMapping(value="/guide.hirp", method=RequestMethod.GET)
 	public ModelAndView guideView(ModelAndView mv) {
 		mv.setViewName("guide");
 		return mv;
+	}
+	
+	// 넥사크로 관리자 페이지
+	@RequestMapping(value = "/admin.hirp", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		NexacroResult result = new NexacroResult();
+		return "redirect:/nexaui/index.html";
 	}
 }
