@@ -17,10 +17,12 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
+import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.domain.Recipient;
@@ -88,11 +91,12 @@ public class MailController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
+		return mv;
 		
 //		메일 smtp
 //		String host = "smtp.naver.com";
 //		final String user = "smartms95@naver.com";
-//		final String password = "minsu0$@0";
+//		final String password = "password";
 //		Properties prop = new Properties();
 //		prop.put("mail.smtp.host", host);
 //		prop.put("mail.smtp.port", 587);
@@ -141,7 +145,6 @@ public class MailController {
 //		}catch(MessagingException e) {
 //			e.printStackTrace();
 //		}
-		return mv;
 	}
 	
 	// 메일 첨부파일 저장
@@ -172,37 +175,49 @@ public class MailController {
 	// 메일함 조회
 	@RequestMapping(value="/mail/list.hirp", method=RequestMethod.GET)
 	public ModelAndView selectReceivedMailList(ModelAndView mv
-			, @RequestParam(value="page", required=false) Integer page) {
+			, @ModelAttribute Mail mail
+			, @PathVariable("param") String mailCategory
+			, @RequestParam(value="page", required=false) Integer page
+			, HttpServletRequest request) {
 		try {
+			HttpSession session = request.getSession();
+			Employee employee = (Employee) session.getAttribute("loginUser");
 			int currentPage = (page != null) ? page : 1;
-			int totalCount = mService.getListCount();
-			PageInfo pi = Pagination.getPageInfo(currentPage, totalCount);
-			List<Mail> mList = mService.selectReceivedMail(pi);
-//					   mList = mService.selectSentMail();
-//					   mList = mService.selectTemporaryMail();
-//					   mList = mService.selectMyMail();
-//					   mList = mService.selectImportantMail();
-//					   mList = mService.selectWasteBasketMail();
-			if(!mList.isEmpty()) {
-//				if() { // 받은메일함
-//				}else if() { // 보낸메일함
-//					
-//				}else if() { // 임시보관함
-//					
-//				}else if() { // 내게쓴메일함
-//					
-//				}else if() { // 중요메일함
-//					
-//				}else if() { // 휴지통
-//					
-//				}
-				mv.addObject("mList", mList);
-				mv.addObject("pi", pi);
-				mv.setViewName("mail/mailList");
-			}else {
-				mv.addObject("msg", "메일 조회 실패");
-				mv.setViewName("common/errorPage");
+//			int totalCountR = mService.getMailCountR(mail);
+//			int	totalCountS = mService.getMailCountS(mail);
+//			int	totalCountT = mService.getMailCountT(mail);
+//			int totalCountM = mService.getMailCountM(mail);
+//			int totalCountI = mService.getMailCountI(mail);
+//			int totalCountW = mService.getMailCountW(mail);
+			PageInfo pi = null;
+			
+			List<Mail> mListR = null;
+			List<Mail> mListS = null;
+			List<Mail> mListT = null;
+			List<Mail> mListM = null;
+			List<Mail> mListI = null;
+			List<Mail> mListW = null;
+			
+			// 받은메일함
+			if(mailCategory.equals("R")) {
+				
+			// 보낸메일함
+			}else if(mailCategory.equals("S")) {
+				
+			// 임시보관함
+			}else if(mailCategory.equals("T")) {
+				
+			// 내게쓴메일함
+			}else if(mailCategory.equals("M")) {
+				
+			// 중요메일함
+			}else if(mailCategory.equals("I")) {
+				
+			// 휴지통
+			}else if(mailCategory.equals("W")) {
+				
 			}
+			
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
