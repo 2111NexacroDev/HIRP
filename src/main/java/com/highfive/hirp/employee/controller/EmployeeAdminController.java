@@ -21,12 +21,6 @@ import com.nexacro17.xapi.data.DataSet;
 @Controller
 public class EmployeeAdminController {
 	@Autowired
-	private DeptService dService;
-
-	@Autowired
-	private PositionService pService;
-	
-	@Autowired
 	private EmployeeAdminService eAService;
 	
 	// 재직자 조회
@@ -59,7 +53,8 @@ public class EmployeeAdminController {
 	// 사원 정보 상세 조회
 	@RequestMapping(value="/admin/empDetail.hirp", method=RequestMethod.POST)
 	public NexacroResult empDetailView(
-			@ParamVariable(name="emplId") String 	emplId) {
+			//@ParamDataSet(name="ds_empl") 	DataSet inEmp,
+			@ParamVariable(name="emplId") String emplId) {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
@@ -71,12 +66,14 @@ public class EmployeeAdminController {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
 		}
+		
+		result.addDataSet("out_empl", employee);
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 	
-	// 임시회원 리스트 조회(융경 쪽에서 데이터 받아야함)
+	// 임시회원 리스트 조회
 	public NexacroResult tempEmpListView() {
 		NexacroResult result = new NexacroResult(); 
 		List<Employee> tempEmpList = eAService.printAllTempEmployee();

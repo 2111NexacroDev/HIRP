@@ -4,51 +4,51 @@
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" width="1080" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60"/>
+        <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" width="1040" height="282" binddataset="ds_empl" autofittype="col">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="104"/>
-                <Column size="96"/>
-                <Column size="113"/>
-                <Column size="92"/>
-                <Column size="121"/>
+                <Column size="139"/>
+                <Column size="114"/>
+                <Column size="175"/>
+                <Column size="116"/>
+                <Column size="182"/>
               </Columns>
               <Rows>
-                <Row size="34" band="head"/>
-                <Row size="30"/>
-                <Row size="31"/>
-                <Row size="33"/>
-                <Row size="35"/>
+                <Row size="32" band="head"/>
+                <Row size="39"/>
+                <Row size="39"/>
+                <Row size="38"/>
+                <Row size="39"/>
               </Rows>
               <Band id="head">
-                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="bold 12px/normal &quot;Noto Sans KR&quot;"/>
+                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="normal 14px/normal &quot;Noto Sans KR&quot;"/>
               </Band>
               <Band id="body">
-                <Cell rowspan="4" text="bind:profile"/>
+                <Cell rowspan="4" text="expr:imgURL::profile" displaytype="imagecontrol"/>
                 <Cell col="1" text="이름" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="2" text="bind:emplName"/>
+                <Cell col="2" text="bind:emplName" padding="0px 10px"/>
                 <Cell col="3" text="소속부서" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName"/>
+                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" padding="0px 10px"/>
                 <Cell row="1" col="1" text="직위/직책" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo"/>
+                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo" padding="0px 10px"/>
                 <Cell row="1" col="3" text="직통번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="4" text="bind:directNo"/>
+                <Cell row="1" col="4" text="bind:directNo" padding="0px 10px"/>
                 <Cell row="2" col="1" text="이메일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="2" text="bind:email"/>
+                <Cell row="2" col="2" text="bind:email" padding="0px 10px"/>
                 <Cell row="2" col="3" text="휴대전화번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="4" text="bind:phoneNo"/>
+                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 10px"/>
                 <Cell row="3" col="1" text="입사일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="2" text="bind:startDate"/>
+                <Cell row="3" col="2" text="bind:startDate" padding="0px 10px"/>
                 <Cell row="3" col="3" text="상태" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="4" text="bind:isStatus"/>
+                <Cell row="3" col="4" text="bind:isStatus" padding="0px 10px"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="380" height="320" right="0" onchanged="Tab00_onchanged">
+        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="320" right="0" onchanged="Tab00_onchanged">
           <Tabpages>
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
@@ -81,7 +81,7 @@
       </Layout>
     </Layouts>
     <Objects>
-      <Dataset id="ds_empl">
+      <Dataset id="ds_empl" onload="ds_empl_onload">
         <ColumnInfo>
           <Column id="emplId" type="STRING" size="20"/>
           <Column id="deptCode" type="STRING" size="20"/>
@@ -102,7 +102,7 @@
           <Column id="isVeterans" type="STRING" size="1"/>
           <Column id="endDate" type="DATE" size="256"/>
           <Column id="endReason" type="STRING" size="20"/>
-          <Column id="profile" type="STRING" size="1000"/>
+          <Column id="emplProfile" type="STRING" size="1000"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
@@ -273,18 +273,18 @@
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {
 	this.transaction(
-		"tr_select"// 1.ID
+		"tr_empl_select"// 1.ID
 		,"HirpURL::admin/empDetail.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
 		,"ds_empl=out_empl " // 4.OutDs : S->F jsp(SELECT) ds_retiree=out_retiree ds_dept=out_dept ds_pos=out_pos
-		,"emplId=" // 5.InVar : F->S(var)
+		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-	);
+	);	
 };
 
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {	
-	if(id=="tr_select")
+	if(id=="tr_empl_select")
 	{
 		if(nErrorCode < 0)
 		{
@@ -295,11 +295,6 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	}	
 }
 
-
-this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
-{
-	
-};
 ]]></Script>
   </Form>
 </FDL>

@@ -7,15 +7,16 @@
         <Static id="Static00" taborder="1" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
         <Static id="Static00_00" taborder="2" text="사원 목록 조회" left="200" top="0" width="1080" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60"/>
         <Static id="Static01" taborder="3" text="재직자 목록" left="200" top="60" width="1080" height="50" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px 10px 20px"/>
-        <Grid id="Grid00" taborder="4" top="106" height="269" binddataset="ds_empl" autofittype="col" left="220" right="20">
+        <Grid id="Grid00" taborder="4" top="106" height="269" binddataset="ds_empl" autofittype="col" left="220" right="20" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="80"/>
-                <Column size="92"/>
-                <Column size="88"/>
-                <Column size="160"/>
-                <Column size="65"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="90"/>
+                <Column size="0"/>
               </Columns>
               <Rows>
                 <Row size="32" band="head"/>
@@ -27,6 +28,7 @@
                 <Cell col="2" text="직급" background="#ffffff" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
                 <Cell col="3" text="직통번호" background="#ffffff" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
                 <Cell col="4" text="상세정보" background="#ffffff" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="5" text="사원ID" color="#333333"/>
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
@@ -34,6 +36,7 @@
                 <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="3" text="bind:directNo" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="4" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="buttoncontrol" text="조회/수정" edittype="button" cssclass="basic" padding="6px 20px"/>
+                <Cell col="5" text="bind:emplId"/>
               </Band>
             </Format>
           </Formats>
@@ -71,7 +74,7 @@
           </Formats>
         </Grid>
         <Edit id="edt_search" taborder="7" top="70" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="사원 이름 검색" right="20"/>
-        <Button id="btn_search" taborder="8" top="70" width="30" height="30" cssclass="search" onclick="btn_search_onclick" text="" right="20"/>
+        <Button id="btn_search" taborder="8" top="70" width="28" height="28" cssclass="search" onclick="btn_search_onclick" text="" right="21"/>
         <Static id="static_dept02" taborder="9" text="사원 조회" left="0" top="70" width="200" height="41" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px 24px" onclick="static_dept02_onclick"/>
         <Static id="static_dept02_00" taborder="10" text="사원 추가/승인" left="0" top="111" width="200" height="41" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px 24px" onclick="static_dept02_onclick"/>
       </Layout>
@@ -86,9 +89,7 @@ this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventIn
 		,"ds_empl=out_empl ds_retiree=out_retiree" // 4.OutDs : S->F jsp(SELECT)  ds_dept=out_dept ds_pos=out_pos
 		,"" // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-	);
-	
-	
+	);		
 };
 
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
@@ -104,16 +105,19 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	}	
 }
 
-this.btnEmplDetailView_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
-{
-	alert(obj);
-	trace(obj);
-};
-
 this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	var searchVal = this.edt_search.value;
 	this.ds_empl.filter("emplName.indexOf('" + searchVal + "') > -1 ");
+};
+
+this.selectedEmplId;
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+	if(e.col == 4) {
+		this.go("FrameBase::empDetail.xfdl");
+	}
 };
 ]]></Script>
     <Objects>
@@ -124,6 +128,7 @@ this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
           <Column id="positionCode" type="STRING" size="20"/>
           <Column id="directNo" type="STRING" size="20"/>
           <Column id="detail" type="STRING" size="256"/>
+          <Column id="emplId" type="STRING" size="20"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_retiree">

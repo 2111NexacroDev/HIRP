@@ -25,7 +25,7 @@
 		<result property="isVeterans" column="IS_VETERANS"/>
 		<result property="endDate" column="END_DATE"/>
 		<result property="endReason" column="END_REASON"/>
-		<result property="profile" column="EMPL_PROFILE"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 		<association javaType="Certification" property="certification" column="EMPL_ID">
 			<id property="certNo" column="CERT_NO"/>
 			<result property="emplId" column="EMPL_ID"/>

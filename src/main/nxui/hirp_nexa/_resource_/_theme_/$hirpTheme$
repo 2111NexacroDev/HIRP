@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<XCSS version="1.0"><![CDATA[/*
+﻿/*
 nexacro17 Application Theme
 default.xtheme
 last-modified : 2021-10-26
@@ -2189,4 +2188,3 @@ last-modified : 2021-10-26
 	-nexa-border : 1px solid #0b2a60;
 	color: #ffffff;
 }
-]]></XCSS>
