@@ -1823,3 +1823,20 @@ button.next {
 	background-color: white;
 	font-family: fontawesome;
 }
+
+/* 채팅창 */
+.modal--chat {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 999;
+    width: calc(100% - 100px);
+    max-width: 380px;
+    height: 500px;
+    /* 최솟값 */
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+
+/* 채팅창 끝 */
