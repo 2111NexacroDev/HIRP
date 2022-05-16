@@ -70,8 +70,8 @@
             </Format>
           </Formats>
         </Grid>
-        <Edit id="edt_search" taborder="7" left="1098" top="70" width="162" height="30" onchanged="edt_search_onchanged"/>
-        <Button id="btn_search" taborder="8" left="1230" top="70" width="30" height="30" cssclass="search" onclick="btn_search_onclick"/>
+        <Edit id="edt_search" taborder="7" top="70" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="사원 이름 검색" right="20"/>
+        <Button id="btn_search" taborder="8" top="70" width="30" height="30" cssclass="search" onclick="btn_search_onclick" text="" right="20"/>
         <Static id="static_dept02" taborder="9" text="사원 조회" left="0" top="70" width="200" height="41" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px 24px" onclick="static_dept02_onclick"/>
         <Static id="static_dept02_00" taborder="10" text="사원 추가/승인" left="0" top="111" width="200" height="41" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px 24px" onclick="static_dept02_onclick"/>
       </Layout>
@@ -108,7 +108,14 @@ this.btnEmplDetailView_onclick = function(obj:nexacro.Static,e:nexacro.ClickEven
 {
 	alert(obj);
 	trace(obj);
-};]]></Script>
+};
+
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var searchVal = this.edt_search.value;
+	this.ds_empl.filter("emplName.indexOf('" + searchVal + "') > -1 ");
+};
+]]></Script>
     <Objects>
       <Dataset id="ds_empl" onload="ds_empl_onload">
         <ColumnInfo>
