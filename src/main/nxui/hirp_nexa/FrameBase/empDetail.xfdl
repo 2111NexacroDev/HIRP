@@ -6,7 +6,7 @@
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
         <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable">
           <Formats>
             <Format id="default">
               <Columns>
@@ -29,21 +29,21 @@
               <Band id="body">
                 <Cell rowspan="4" text="expr:imgURL::profile" displaytype="imagecontrol"/>
                 <Cell col="1" text="이름" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="2" text="bind:emplName" padding="0px 10px"/>
+                <Cell col="2" text="bind:emplName" padding="0px 10px" edittype="text"/>
                 <Cell col="3" text="소속부서" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" padding="0px 10px"/>
                 <Cell row="1" col="1" text="직위/직책" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo" padding="0px 10px"/>
                 <Cell row="1" col="3" text="직통번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="4" text="bind:directNo" padding="0px 10px"/>
+                <Cell row="1" col="4" text="bind:directNo" padding="0px 10px" edittype="text"/>
                 <Cell row="2" col="1" text="이메일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="2" text="bind:email" padding="0px 10px"/>
+                <Cell row="2" col="2" text="bind:email" padding="0px 10px" edittype="text"/>
                 <Cell row="2" col="3" text="휴대전화번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 10px"/>
+                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 10px" edittype="text"/>
                 <Cell row="3" col="1" text="입사일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell row="3" col="2" text="bind:startDate" padding="0px 10px"/>
                 <Cell row="3" col="3" text="상태" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="4" text="bind:isStatus" padding="0px 10px"/>
+                <Cell row="3" col="4" text="bind:isStatus" padding="0px 10px" edittype="combo" combodataset="ds_status" combodatacol="statusName" combodisplaynulltext="재직 상태" combocodecol="statusCode" combodisplaynulltype="nulltext"/>
               </Band>
             </Format>
           </Formats>
@@ -52,7 +52,84 @@
           <Tabpages>
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="13" height="260" right="20" binddataset="ds_empl" cssclass="detailTable">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="emplId" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="1" text="deptCode" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="2" text="positionCode" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="3" text="emplName" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="4" text="startDate" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="5" text="email" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="6" text="directNo" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="7" text="phoneNo" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="8" text="recruitCategory" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="9" text="salaryCategory" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="10" text="referrer" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="11" text="isStatus" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="12" text="birthday" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="13" text="gender" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="14" text="isMarriage" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="15" text="isDisability" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="16" text="isVeterans" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="17" text="endDate" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="18" text="endReason" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="19" text="emplProfile" color="#333333" border="1px solid #dbdee2"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:emplId"/>
+                          <Cell col="1" text="bind:deptCode"/>
+                          <Cell col="2" text="bind:positionCode"/>
+                          <Cell col="3" text="bind:emplName"/>
+                          <Cell col="4" text="bind:startDate"/>
+                          <Cell col="5" text="bind:email"/>
+                          <Cell col="6" text="bind:directNo"/>
+                          <Cell col="7" text="bind:phoneNo"/>
+                          <Cell col="8" text="bind:recruitCategory"/>
+                          <Cell col="9" text="bind:salaryCategory"/>
+                          <Cell col="10" text="bind:referrer"/>
+                          <Cell col="11" text="bind:isStatus"/>
+                          <Cell col="12" text="bind:birthday"/>
+                          <Cell col="13" text="bind:gender"/>
+                          <Cell col="14" text="bind:isMarriage"/>
+                          <Cell col="15" text="bind:isDisability"/>
+                          <Cell col="16" text="bind:isVeterans"/>
+                          <Cell col="17" text="bind:endDate"/>
+                          <Cell col="18" text="bind:endReason"/>
+                          <Cell col="19" text="bind:emplProfile"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
             <Tabpage id="Tabpage2" text="직무/담당"/>
@@ -266,6 +343,34 @@
             <Col id="deptMaster">ID15</Col>
             <Col id="deptHiredate">20220426</Col>
             <Col id="deptUppercode">10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_cert"/>
+      <Dataset id="ds_jobRole"/>
+      <Dataset id="ds_lang"/>
+      <Dataset id="ds_military"/>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="statusCode" type="STRING" size="20"/>
+          <Column id="statusName" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="statusCode">임시</Col>
+            <Col id="statusName">임시</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">재직중</Col>
+            <Col id="statusName">재직중</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">휴직중</Col>
+            <Col id="statusName">휴직중</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">퇴사</Col>
+            <Col id="statusName">퇴사</Col>
           </Row>
         </Rows>
       </Dataset>

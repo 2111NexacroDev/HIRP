@@ -330,6 +330,7 @@ last-modified : 2021-10-26
 {
 	background : #f0f0f0;
 }
+
 /* headcellbutton (Same as ButtonControl) */
 /* headcellcalendar (Same as CalendarControl) */
 /* headcellcheckbox (Same as CheckBoxControl) */
@@ -394,6 +395,12 @@ last-modified : 2021-10-26
 .Grid .body .selection
 {
 	-nexa-border : 2px solid #125dae;
+}
+
+.Grid.detailTable .body .row .cell[status=disabled][userstatus=selected],
+.Grid.detailTable .body .row .cell[status=mouseover]
+{
+	background : transparent;
 }
 /* bodycellbutton (Same as ButtonControl) */
 /* bodycellcalendar (Same as CalendarControl) */
