@@ -1,43 +1,57 @@
 package com.highfive.hirp.board.department.domain;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.highfive.hirp.board.common.BoardAttachedFile;
 
 public class DepartmentBoard {
  
-	private int departmentNo;
+	private int deptNo;
+	private String boardCode;
 	private String emplId;
 	private String deptCode;
-	private String boardType;
-	private String departmentTitle;
-	private String departmentContents;
+	private String deptTitle;
+	private String deptContents;
 	private Date writeDate;
-	private int departmentCount;
+	private int deptCount;
 	private String isNotice;
 	private String status;
+	private List<BoardAttachedFile> bList;
 	
 	public DepartmentBoard() {}
 
-	public DepartmentBoard(int departmentNo, String emplId, String deptCode, String boardType, String departmentTitle,
-			String departmentContents, Date writeDate, int departmentCount, String isNotice, String status) {
+	public DepartmentBoard(int deptNo, String boardCode, String emplId, String deptCode, String deptTitle,
+			String deptContents, Date writeDate, int deptCount, String isNotice, String status,
+			List<BoardAttachedFile> bList) {
 		super();
-		this.departmentNo = departmentNo;
+		this.deptNo = deptNo;
+		this.boardCode = boardCode;
 		this.emplId = emplId;
 		this.deptCode = deptCode;
-		this.boardType = boardType;
-		this.departmentTitle = departmentTitle;
-		this.departmentContents = departmentContents;
+		this.deptTitle = deptTitle;
+		this.deptContents = deptContents;
 		this.writeDate = writeDate;
-		this.departmentCount = departmentCount;
+		this.deptCount = deptCount;
 		this.isNotice = isNotice;
 		this.status = status;
+		this.bList = bList;
 	}
 
-	public int getDepartmentNo() {
-		return departmentNo;
+	public int getDeptNo() {
+		return deptNo;
 	}
 
-	public void setDepartmentNo(int departmentNo) {
-		this.departmentNo = departmentNo;
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+
+	public String getBoardCode() {
+		return boardCode;
+	}
+
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
 	}
 
 	public String getEmplId() {
@@ -56,28 +70,20 @@ public class DepartmentBoard {
 		this.deptCode = deptCode;
 	}
 
-	public String getBoardType() {
-		return boardType;
+	public String getDeptTitle() {
+		return deptTitle;
 	}
 
-	public void setBoardType(String boardType) {
-		this.boardType = boardType;
+	public void setDeptTitle(String deptTitle) {
+		this.deptTitle = deptTitle;
 	}
 
-	public String getDepartmentTitle() {
-		return departmentTitle;
+	public String getDeptContents() {
+		return deptContents;
 	}
 
-	public void setDepartmentTitle(String departmentTitle) {
-		this.departmentTitle = departmentTitle;
-	}
-
-	public String getDepartmentContents() {
-		return departmentContents;
-	}
-
-	public void setDepartmentContents(String departmentContents) {
-		this.departmentContents = departmentContents;
+	public void setDeptContents(String deptContents) {
+		this.deptContents = deptContents;
 	}
 
 	public Date getWriteDate() {
@@ -88,12 +94,12 @@ public class DepartmentBoard {
 		this.writeDate = writeDate;
 	}
 
-	public int getDepartmentCount() {
-		return departmentCount;
+	public int getDeptCount() {
+		return deptCount;
 	}
 
-	public void setDepartmentCount(int departmentCount) {
-		this.departmentCount = departmentCount;
+	public void setDeptCount(int deptCount) {
+		this.deptCount = deptCount;
 	}
 
 	public String getIsNotice() {
@@ -112,12 +118,20 @@ public class DepartmentBoard {
 		this.status = status;
 	}
 
+	public List<BoardAttachedFile> getbList() {
+		return bList;
+	}
+
+	public void setbList(List<BoardAttachedFile> bList) {
+		this.bList = bList;
+	}
+
 	@Override
 	public String toString() {
-		return "DepartmentBoard [departmentNo=" + departmentNo + ", emplId=" + emplId + ", deptCode=" + deptCode
-				+ ", boardType=" + boardType + ", departmentTitle=" + departmentTitle + ", departmentContents="
-				+ departmentContents + ", writeDate=" + writeDate + ", departmentCount=" + departmentCount
-				+ ", isNotice=" + isNotice + ", status=" + status + "]";
+		return "DepartmentBoard [deptNo=" + deptNo + ", boardCode=" + boardCode + ", emplId=" + emplId + ", deptCode="
+				+ deptCode + ", deptTitle=" + deptTitle + ", deptContents=" + deptContents + ", writeDate=" + writeDate
+				+ ", deptCount=" + deptCount + ", isNotice=" + isNotice + ", status=" + status + ", bList=" + bList
+				+ "]";
 	}
 
 	

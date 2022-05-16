@@ -3,5 +3,86 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="AnonymousBoardMapper">
+<resultMap type="AnonymousBoard" id="anonymousResultMap">
+<id 	property="anonymousNo" column="ANONYMOUS_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="anonymousTitle" column="ANONYMOUS_TITLE"></result>
+<result property="anonymousContents" column="ANONYMOUS_CONTENTS"></result>
+<result property="writeDate" column="ANONYMOUS_WRITE_DATE"></result>
+<result property="anonymousCount" column="ANONYMOUS_COUNT"></result>
+<result property="recommendCount" column="RECOMMEND_COUNT"></result>
+<result property="status" column="FREE_STATUS"></result>
+<collection property="bList" column="ANONYMOUS_NO" javaType="java.util.ArrayList" ofType="BoardAttachedFile" select="selectAllFile"></collection>
+</resultMap>
+<resultMap type="BoardAttachedFile" id="boardFileResultMap">
+<id 	property="fileNo" column="FILE_NO"></id>
+<result property="boardCode" column="BOARD_CODE"></result>
+<result property="boardNo" column="BOARD_NO"></result>
+<result property="fileName" column="FILE_NAME"></result>
+<result property="fileRename" column="FILE_RENAME"></result>
+<result property="filePath" column="FILE_PATH"></result>
+</resultMap>
+<!-- 자유게시판 리스트 조회  -->
+<select id="selectAllAnonymous" resultMap="anonymousResultMap">
+	SELECT * FROM BOARD_ANONYMOUS_TBL  WHERE ANONYMOUS_STATUS = 'Y' ORDER BY ANONYMOUS_NO DESC
+</select>
 
+<!-- 첨부파일 리스트 조회 -->
+<select id="selectAllFile" resultMap="boardFileResultMap">
+	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_NO = #{anonymousNo}
+</select>
+<insert id="insertAnonymous">
+	INSERT INTO BOARD_ANONYMOUS_TBL VALUES( ANONYMOUS_BOARD_SEQ.NEXTVAL,#{boardCode},#{emplId},#{anonymousTitle},#{anonymousContents},DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<insert id="insertBoardFile">
+	INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},ANONYMOUS_BOARD_SEQ.CURRVAL,#{fileName},#{fileRename},#{filePath})
+</insert>
+<!-- 게시글  개수 조회 -->
+<select id="selectListCount" resultType="_int">
+	SELECT COUNT(*) FROM BOARD_ANONYMOUS_TBL WHERE ANONYMOUS_STATUS = 'Y'
+</select>
+<!-- 게시글 디테일 조회 -->
+<select id="selectOneAnonymous" resultMap="anonymousResultMap">
+	SELECT * FROM BOARD_ANONYMOUS_TBL WHERE ANONYMOUS_NO = #{anonymousNo}
+</select>
+<!-- 조회수 증가 -->
+  <update id="updateCount">
+  	UPDATE BOARD_ANONYMOUS_TBL SET ANONYMOUS_COUNT = ANONYMOUS_COUNT + 1 WHERE ANONYMOUS_NO = #{anonymousNo}
+  </update>
+<!-- 게시글 검색 조회 -->
+<select id="selectSearchAnonymous" resultMap="anonymousResultMap">
+  		<if test="searchCondition.toString() =='title'">
+  		SELECT * FROM BOARD_ANONYMOUS_TBL WHERE ANONYMOUS_TITLE LIKE '%'|| #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='contents'">
+  		SELECT * FROM BOARD_ANONYMOUS_TBL WHERE ANONYMOUS_CONTENTS LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='all'">
+  		SELECT * FROM BOARD_ANONYMOUS_TBL WHERE ANONYMOUS_CONTENTS LIKE '%' ||  #{searchValue} || '%'
+  		OR ANONYMOUS_TITLE LIKE '%' ||  #{searchValue} || '%'
+  		OR EMPL_ID LIKE '%' ||  #{searchValue}||  '%'
+  		</if>
+  	</select>  
+<!-- 공지글 수정 -->
+  <update id="anonymousFree">
+  	UPDATE BOARD_ANONYMOUS_TBL SET ANONYMOUS_TITLE=#{anonymousTitle}, ANONYMOUS_CONTENTS = #{anonymousContents} WHERE ANONYMOUS_NO = #{anonymousNo}
+  </update>
+  <!-- 공지게시글 삭제 -->
+  <update id="deleteAnonymous">
+  	UPDATE BOARD_ANONYMOUS_TBL SET ANONYMOUS_STATUS = 'N'WHERE ANONYMOUS_NO = #{anonymousNo}
+  </update>  
+  <!-- 게시글 디테일 첨부파일 조회 -->
+  <select id="selectOneFile" resultMap="boardFileResultMap">
+  	SELECT * FROM BOARD_ATTACHED_FILE_TBL WHERE BOARD_CODE = #{boardCode} AND BOARD_NO = #{anonymousNo}
+  </select>
+   <!-- 공지게시글 첨부파일 수정 -->
+  <insert id="updateBoardFile">
+  		INSERT INTO BOARD_ATTACHED_FILE_TBL VALUES(BOARD_FILE_SEQ.NEXTVAL, #{boardCode},#{boardNo},#{fileName},#{fileRename},#{filePath})
+  </insert>
+  
+  <!-- 첨부파일 삭제 -->  
+  <delete id="deleteFile">
+  	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
+  </delete>
 </mapper>

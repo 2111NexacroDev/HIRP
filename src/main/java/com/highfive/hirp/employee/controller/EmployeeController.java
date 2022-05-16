@@ -1,5 +1,6 @@
 package com.highfive.hirp.employee.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.employee.domain.Employee;
@@ -84,6 +86,7 @@ public class EmployeeController {
 				HttpSession session = request.getSession();
 				session.setAttribute("emplId", empLogin.getEmplId());
 				session.setAttribute("emplPw", empLogin.getEmplPw());
+				session.setAttribute("deptCode", empLogin.getDeptCode());
 				return "redirect:/home.hirp";
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");
@@ -228,9 +231,18 @@ public class EmployeeController {
 	// 마이페이지 수정(수정은 post 하나면 됨)
 	@ResponseBody
 	@RequestMapping(value = "/employee/mypageModify.hirp", method={RequestMethod.GET, RequestMethod.POST})
-	public String mypageModify(HttpServletRequest request, Model model, @ModelAttribute Employee employee) {
+	public String mypageModify(HttpServletRequest request, Model model, @ModelAttribute Employee employee, @RequestParam(value="profileImg", required=false) MultipartFile uploadFile) { // 파일가져올때
 		// 정보수정 후 정보수정 페이지에서 바로 보여짐. 로그아웃 하지 않아도 됨
 		HttpSession session = request.getSession();
+		if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+		       HashMap<String, String> fileMap = com.highfive.hirp.common.SaveAttachedFile.saveFile(uploadFile, request); // 업로드한 파일 저장하고 경로 리턴
+		       String filePath = fileMap.get("filePath");
+		       String fileRename = fileMap.get("fileName");
+		       if(filePath != null && !filePath.equals("")) {
+		          employee.setEmplProfile(fileRename); // 추가
+		       }
+		    }
+		    // 디비에 해당 데이터 저장
 		int result = eService.mypageModify(employee);
 		if (result > 0) {
 			return "success";

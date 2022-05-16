@@ -3,37 +3,39 @@ package com.highfive.hirp.board.anonymous.service;
 import java.util.List;
 
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
+import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardRecommend;
-import com.highfive.hirp.board.common.Reply;
+import com.highfive.hirp.board.free.domain.FreeBoard;
+import com.highfive.hirp.board.reply.domain.Reply;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 
 public interface AnonymousBoardService {
 
-	//익명글 리스트 등록순 조회
+	//익명게시판 리스트 조회
 	public List<AnonymousBoard> printAllAnonymous(PageInfo pi);
-	//익명글 리스트 추천순 조회
-	public List<AnonymousBoard> printRecommendAnonymous(PageInfo pi);
-	//익명글 리스트 검색 조회
-	public List<AnonymousBoard> printSearchAnonymous(Search search);
+	
+	//익명게시판 디테일 조회
+	public  AnonymousBoard printOneAnonymous(int anonymousNo);
+	//익명글 디테일 해당 첨부파일 전체 조회
+	public List<BoardAttachedFile> printOneFile(AnonymousBoard anonymousboard);
+	//익명게시판 검색 조회
+	public List<AnonymousBoard>printSearchAnonymous(Search search);
 	//익명글 등록
-	public int registerAnonymous(AnonymousBoard anonymousboard);
+	public int registerAnonymous(AnonymousBoard anonymousBoard);
+	//첨부파일 저장
+	public int registerAnonymousFile(BoardAttachedFile boardFile);
+	
 	//익명글 수정
-	public int modifyAnonymous(AnonymousBoard anonymousboard);
+	public int modifyAnonymous(AnonymousBoard anonymousBoard);
 	//익명글 삭제
 	public int removeAnonymous(int anonymousNo);
-	//익명글 추천
-	public int registerRecommend(BoardRecommend recommend);
-	//익명글 추천 여부 변경
-	public int modifyRecommend(BoardRecommend recommend);
+	//첨부파일 삭제
+	public int removeBoardFile(int fileNo);
 	//익명글 개수
 	public int getListCount();
-	//댓글 조회
-	public List<Reply> printAllAnonymousReply(Reply reply);
-	//댓글 등록
-	public  int registerAnonymousReply(Reply reply);
-	//댓글 수정
-	public int modifyAnonymousReply(Reply reply);
-	//댓글 삭제
-	public int removeAnonymousReply(Reply reply);
+	//조회수 증가
+	public int viewCount(int anonymousNo);
+	//첨부파일 수정
+	public int modifyAnonymousFile(BoardAttachedFile bFile);
 }

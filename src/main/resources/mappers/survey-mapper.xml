@@ -54,6 +54,24 @@
 		<result property="emplName" column="EMPL_NAME"/>
 	</resultMap>
 	
+	<resultMap type="SurveyQuest" id="SurveyQuestResultMap">
+		<id property="questNo" column="QUEST_NO"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+		<result property="questTitle" column="QUEST_TITLE"/>
+		<result property="questType1" column="QUEST_TYPE1"/>
+		<result property="questType2" column="QUEST_TYPE2"/>
+		<result property="questRequired" column="QUEST_REQUIRED"/>
+	</resultMap>
+	
+	<resultMap type="SurveyQuestCh" id="SurveyQuestChResultMap">
+		<id property="surveyquestNo" column="SURVEYQUEST_NO"/>
+		<result property="surveyCh1" column="SURVEY_CH1"/>
+		<result property="surveyCh2" column="SURVEY_CH2"/>
+		<result property="surveyCh3" column="SURVEY_CH3"/>
+		<result property="surveyCh4" column="SURVEY_CH4"/>
+		<result property="surveyChmax" column="SURVEY_CHMAX"/>
+	</resultMap>
+	
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
 	<select id="selectAllSurvey" resultMap="surveyMyStatusResultMap">
@@ -106,4 +124,34 @@
 		JOIN POSITION_TBL D USING(POSITION_CODE)
 		WHERE SURVEY_NO = #{surveyNo}
 	</select>
+	<!-- 현재 설문조사 시퀀스 번호 가져오기 -->
+	<select id="selectSurveySeqNo" resultType="_int">
+		SELECT SURVEY_SEQ.CURRVAL FROM DUAL
+	</select>
+	
+	<!-- 설문조사 추가 -->
+	<insert id="insertSurvey">
+		INSERT INTO SURVEY_TBL
+		VALUES(SURVEY_SEQ.NEXTVAL, #{surveyTitle}, #{surveyWriter}, 
+		DEFAULT, DEFAULT, 'C', 
+		#{surveyStartdate}, #{surveyEnddate}, 
+		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
+	</insert>
+	<!-- 설문조사 수정 -->
+	<update id="updateSurvey">
+		UPDATE SURVEY_TBL SET SURVEY_STARTCOMMENT = #{surveyStartcomment} 
+		WHERE SURVEY_NO = #{surveyNo}
+	</update>
+	<!-- 설문 문항 추가 -->
+	<insert id="insertSurveyQuest">
+		INSERT INTO SURVEY_QUEST 
+		VALUES(SURVEYQUEST_SEQ.NEXTVAL, SURVEY_SEQ.CURRVAL,
+		#{questTitle}, #{questType1}, #{questType2}, DEFAULT)
+	</insert>
+	<!-- 설문 보기 추가 -->
+	<insert id="insertSurveyQuestCh">
+		INSERT INTO SURVEYQUEST_CH
+		VALUES(SURVEYQUEST_SEQ.CURRVAL, 
+		#{surveyCh1}, #{surveyCh2}, #{surveyCh3}, #{surveyCh4}, #{surveyChmax})
+	</insert>
 </mapper>

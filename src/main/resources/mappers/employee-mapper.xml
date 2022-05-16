@@ -49,7 +49,7 @@
 	</update>
 
 	<!-- 마이페이지 -->
-	<select id="selectOneById" resultMap="employeeResultMap">
+	<select id="selectOneById" parameterType="Employee" resultMap="employeeResultMap">
 		SELECT EMPL_PROFILE, EMPL_NAME, EMPL_ID, EMPL_PW, DEPT_NAME "DEPT_CODE", POSITION_NAME "POSITION_CODE",
 		DIRECT_NO, EMAIL, PHONE_NO, TO_CHAR(BIRTHDAY, 'YYYY-MM-DD') "BIRTHDAY" <!-- string을 날짜형태로 변환하기 위해 적어줌 ""에는 컬럼명 써줌 -->
 		FROM EMPL_TBL E
@@ -61,7 +61,7 @@
 	<!-- 마이페이지 수정 -->
 	<update id="updateMypage" parameterType="Employee">
     	UPDATE EMPL_TBL
-        SET EMPL_ID = #{emplId}
+        SET EMPL_ID = #{emplId} <!-- 업데이트문 살리기위해 임의로 컬럼하나 update하게 해놓은것 -->
         <if test='emplProfile != "" and emplProfile != null'> 
            , EMPL_PROFILE = #{emplProfile}
         </if>

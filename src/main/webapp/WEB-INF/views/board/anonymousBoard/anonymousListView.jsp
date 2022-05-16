@@ -12,42 +12,14 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <aside id="snb">
-            <h1>게시판</h1>
-            <a class="btn--function" href="/board/writeView.hirp">글쓰기</a>
-            <ul>
-                <li>
-                    <a href="">전사게시판</a>
-                    <ul>
-                        <li><a href="#">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                 <li>
-                    <a href="">부서게시판</a>
-                    <ul>       
-                        <li><a href="#">개발팀 게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                <li>
-                    <a href="">나의 활동</a>
-                    <ul>       
-                        <li><a href="#">작성한 글 조회</a></li>
-                        <li><a href="#">작성한 댓글 조회</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </aside>
+        <%@ include file="/WEB-INF/views/include/inc_board.jsp" %>
 
         <article id="sub" class="">
        
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
            
-            <h1 class="basic-border-bottom">게시판 홈</h1>
+            <h1 class="basic-border-bottom">익명게시판</h1>
 
             <div id="guide" class="subConts">
                 
@@ -59,29 +31,31 @@
                         <tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-						<!--<th>첨부파일</th>-->
+							<th>첨부파일</th>
 						</tr>
                     </thead>
-                    <c:forEach items="${nList }" var="notice">
+                    <c:forEach var="anonymous" items="${aList }">
                     <tbody>
                         <tr>
-                           	<c:url var="nDetail" value="/notice/detail.hirp">
-								<c:param name="noticeNo" value="${notice.noticeNo }"></c:param>
+                           	<c:url var="aDetail" value="/anonymous/detail.hirp">
+								<c:param name="anonymousNo" value="${anonymous.anonymousNo }"></c:param>
 							</c:url>
-							<td><a href="${nDetail }">${notice.noticeNo }</a></td>
+							<td><a href="${aDetail }">${anonymous.anonymousNo }</a></td>
 							
-							<td><a href="${nDetail }">&nbsp; ${notice.noticeTitle }</a></td>
-							<td>${notice.emplId }</td>
-							<td>${notice.writeDate}</td>
-							<td>${notice.noticeCount }</td>
-						<!--<td>&nbsp;&nbsp;${board.boardFilename}</td>-->
+							<td><a href="${aDetail }">&nbsp; ${anonymous.anonymousTitle }</a></td>
+							<td>${anonymous.writeDate}</td>
+							<td>${anonymous.anonymousCount }</td>
+							<td>
+							<c:if test="${empty anonymous.bList}">X</c:if>
+							<c:if test="${not empty anonymous.bList}">O</c:if>
+							</td>
                         </tr>
                         </tbody>
                         </c:forEach>
 				</table>
+				<div class="btn--paging">
                     <button class="basic mt-20">이전</button>
 						<c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
 							<c:url var="pagination" value="/notice/list.hirp">
@@ -90,16 +64,20 @@
 							&nbsp;<a href="${pagination }">${p }</a>&nbsp;
 						</c:forEach>
 					<button class="basic mt-20">다음</button>
-					<form action="/notice/searchList.hirp" method="get">
+				</div>
+				<div class="t-c">
+					<form action="/anonymous/searchList.hirp" method="get">
+					<input type="hidden" name="currentPage" value="1">
+					<input type="hidden" name="listLimit" value="10">
 						<select name="searchCondition">
 							<option value="all">전체</option>
 							<option value="title">제목</option>
 							<option value="contents">내용</option>
-							<option value="writer">작성자</option>
 						</select>
 						<input type="text" name="searchValue">
 						<input type="submit" value="검색">
 					</form>
+					</div>
         </article>
     </div>
 </body>

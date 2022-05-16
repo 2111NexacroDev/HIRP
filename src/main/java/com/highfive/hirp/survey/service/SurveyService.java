@@ -41,6 +41,8 @@ public interface SurveyService {
 	public int insertSurveyQuestCh(SurveyQuestCh qCh); 
 	//설문 대상자 리스트 추가
 	public int insertSurveySub(List<SurveySub> subList);
+	//현재 설문조사 시퀀스 번호 가져오기
+	public int selectSurveySeqNo();
 	
 	//전체 직원 가져오기 (이거 조직도에서 가져다가 쓰면 될 듯 아마두..)
 	public List<Employee> selectAllSurveySub();

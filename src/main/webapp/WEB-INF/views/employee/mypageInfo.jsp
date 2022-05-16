@@ -19,9 +19,10 @@
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
 			<h1 class="basic-border-bottom"></h1>
 			<div id="mypage" class="subConts">
-				사진 <img src="${employee.emplProfile }" alt="프로필사진"> <!-- 사진 폼으로 바꿔줘야함 -->
+				사진 <img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진"> <!-- 사진 폼으로 바꿔줘야함 -->
 				<button class="basic" type="button" onclick="openModal(this)">수정</button><br>
-				<section class="section--modal">
+				<form class="section--modal" id="profileForm" enctype="multipart/form-data">
+					<input type="hidden" name="emplId" value="${employee.emplId }">
 					<div class="bg-black"></div>
 					<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
 					<div class="section--modal__conts">
@@ -29,14 +30,14 @@
 						<h3>프로필 사진 수정</h3>
 						<p class="mb-20">
 							<img src="" alt="프로필사진"><br>
-							<input type="file" name="emplProfile" id="emplProfile">
+							<input type="file" name="profileImg" id="emplProfile">
 						</p>
 						<div class="btns-wrap mt-20 t-r">
 							<button class="point" type="button" id="profileModify">확인</button>
 							<button class="finished closeWindow" type="button">닫기</button>
 						</div>
 					</div>
-				</section>
+				</form>
 			</div>
 			이름 <input type="text" value="${employee.emplName }" readonly><br>
 			아이디 <input type="text" id="emplId" value="${employee.emplId }" readonly><br> <!-- id적어줘야 ajax에서 갖고올 수 있음 -->
@@ -103,18 +104,15 @@
 
 		// 프로필 사진 수정
 		$("#profileModify").on("click", function() {
-			var emplId = $("#emplId").val();
-			var emplProfile = $("#emplProfile").val();
+			var form = $('#profileForm')[0];
+			var formData = new FormData(form);
 			var answer = confirm("프로필 사진을 변경하시겠습니까?");
 			if (answer) {
 				// 수정 작업 진행
 				$.ajax({
 					url : "/employee/mypageModify.hirp",
 					type : "post",
-					data : {
-						"emplId" : emplId,
-						"emplProfile" : emplProfile
-					},
+					data : formData,
 					success : function(data) {
 						if (data == "success") {
 							alert("프로필 사진 수정이 완료되었습니다.");
@@ -124,7 +122,10 @@
 					},
 					error : function() {
 						alert("프로필 사진 수정 중에 실패했습니다.");
-					}
+					},
+					cache: false,
+					contentType: false,
+					processData: false
 				});
 			}
 		});

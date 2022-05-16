@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.reservation.domain.Reservation;
@@ -25,12 +26,23 @@ public class ReservationController {
 	@RequestMapping(value="/reservation/list.hirp", method=RequestMethod.GET)
 	public ModelAndView reservationListView(ModelAndView mv) {
 		//List<Reservation> rList = rService.printAllReservation();
-		//List<Utility> uList = rService.printAllUtility();		
+		List<Utility> uList = rService.printAllUtility();
+//		if(!rList.isEmpty()) {
+//			mv.addObject("rList", rList);	
+//		} else {
+//			mv.addObject("msg", "등록된 예약 없음");
+//		}
+		if(!uList.isEmpty()) {
+			mv.addObject("uList", uList);
+		} else {
+			mv.addObject("msg", "등록된 공용품 없음");
+		}
 		mv.setViewName("reservation/reservationList");
 		return mv;
 	}
 	
 	// 예약 등록
+	@RequestMapping(value="//", method=RequestMethod.POST)
 	public ModelAndView reservationRegister(ModelAndView mv
 			,@ModelAttribute Reservation reservation
 			,HttpServletRequest request) {
@@ -59,10 +71,22 @@ public class ReservationController {
 	}
 	
 	// 공용품 등록
+	@RequestMapping(value="/utility/write.hirp", method=RequestMethod.POST)
 	public ModelAndView utilityRegister(ModelAndView mv
 			,@ModelAttribute Utility utility
 			,HttpServletRequest request) {
-		int result = rService.registerUtility(utility);
+		try {
+			int result = rService.registerUtility(utility);
+			if(result > 0) {
+				mv.setViewName("redirect:/reservation/list.hirp");
+			} else {
+				mv.addObject("msg", "공용품 등록 실패");
+				mv.setViewName("redirect:/reservation/list.hirp");
+			}			
+		} catch(Exception e) {
+			mv.addObject("msg", "등록 오류");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

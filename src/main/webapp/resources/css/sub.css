@@ -27,13 +27,8 @@
 }
 
 #todo .btn--plus {
-    position: absolute;
     top: 40px;
     right: 40px;
-    width: 24px;
-    height: 24px;
-    background: url("../images/icons/btn_more.png") no-repeat center center;
-    outline: none;
 }
 
 .todo__wrap {
@@ -269,9 +264,7 @@ section[class^="todo--"] li {
 
 .fc-theme-standard td,
 .fc-theme-standard th {
-    border-right: none;
     border-bottom: none;
-    border-left: none;
 }
 
 .fc .fc-col-header-cell-cushion,
@@ -314,6 +307,18 @@ section[class^="todo--"] li {
     margin-left: 10px;
 }
 
+.fc .fc-daygrid-day.fc-day-today {
+    position: relative;
+}
+
+.fc .fc-daygrid-day.fc-day-today:before {
+    content: url(../images/img_star.png);
+    position: absolute;
+    top: -23px;
+    left: -33px;
+    transform: rotate(45deg);
+}
+
 .fc .fc-day-sun {
     color: #FF000A;
 }
@@ -327,6 +332,10 @@ section[class^="todo--"] li {
     color: #333;
     border-radius: 0;
     opacity: 1;
+}
+
+.fc-event {
+    cursor: pointer;
 }
 
 .modal--shcedule li {
@@ -387,5 +396,20 @@ section[class^="todo--"] li {
     opacity: .5;
 }
 
+#reservation .section--modal li {
+    display: flex;
+    align-items: center;
+    margin-top: 20px !important;
+    font-size: 0;
+}
+
+.section--modal li * {
+    font-size: 14px;
+}
+
+.section--modal textarea {
+    width: calc(100% - 90px);
+    padding: 10px;
+}
 
 /* 공용품 예약/관리 끝 */
