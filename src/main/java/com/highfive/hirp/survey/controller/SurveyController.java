@@ -252,12 +252,14 @@ public class SurveyController {
 			for(int i = 0; i < qCount; i++) {
 				//설문조사 문항 추가
 				result2 = sService.insertSurveyQuest(surveyQuest.getSurveyQuestList().get(i));
+				System.out.println("questList"+i+"출력"+surveyQuest.getSurveyQuestList().get(i));
 				String type1 = surveyQuest.getSurveyQuestList().get(i).getQuestType1();
-				if(surveyQuestCh.getSurveyQuestChList().size() < i+1) {
+				if(surveyQuestCh.getSurveyQuestChList() == null || surveyQuestCh.getSurveyQuestChList().size() < i+1) {
 					//리스트 사이즈가 i보다 작으면 continue
 					continue;
 				} else {
 					//설문조사 문항에 맞게 보기 추가
+					System.out.println("questChList"+i+"출력"+surveyQuestCh.getSurveyQuestChList().get(i));
 					result3 = sService.insertSurveyQuestCh(surveyQuestCh.getSurveyQuestChList().get(i));
 				}
 			}
@@ -418,10 +420,29 @@ public class SurveyController {
 		return mv;
 	}
 	//설문 응답 제출
+	@RequestMapping(value="/survey/addSurveyAnswer.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySubmit(ModelAndView mv
-			,@RequestParam("surveyNo") int surveyNo
-			,@ModelAttribute List<SurveyAnswer> surveyAnswer) {
+			,@ModelAttribute SurveyAnswer surveyAnswer) {
 		//insert 할 거니까 설문응답번호 자동 생성됨.
+		String emplId = "TESTID";
+		surveyAnswer.setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
+		surveyAnswer.setSurveyanswerContent("콘텐츠");
+		try {
+			System.out.println("surveyAnswer 출력");
+			System.out.println(surveyAnswer);
+			
+			int result = sService.insertSurveySubAnswer(surveyAnswer);
+			
+			if(result > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 삭제 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

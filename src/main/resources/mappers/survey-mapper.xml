@@ -182,4 +182,10 @@
 	<delete id="deleteSurvey">
 		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
 	</delete>
+	
+	
+	<!-- 설문조사 응답 -->
+	<insert id="insertSurveySubAnswer">
+		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, ${surveyNo}, ${surveyquestNo}, ${surveyanswerContent}, ${surveyanswerId}, DEFAULT)
+	</insert>
 </mapper>
