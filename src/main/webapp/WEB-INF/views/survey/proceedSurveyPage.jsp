@@ -46,6 +46,7 @@
 							<c:url var="sDetail" value="/survey/questDetail.hirp">
 								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 							</c:url>
+							
 							<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>

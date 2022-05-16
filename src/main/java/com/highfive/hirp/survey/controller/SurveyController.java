@@ -366,6 +366,7 @@ public class SurveyController {
 	}
 	
 	//설문 삭제
+	@RequestMapping(value="/survey/removeSurvey.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyDelete(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {
 		//설문조사 삭제
