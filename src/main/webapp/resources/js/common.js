@@ -50,7 +50,9 @@ $(function () {
     /* //모달 및 팝업 닫기 */
 
     /* 채팅창 이동 */
-    $('.modal--chat').draggable();
+    $('.modal--chat').draggable({
+        containment: 'window'
+    });
 });
 
 function openAlert(alertWindow) {
