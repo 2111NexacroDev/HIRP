@@ -23,29 +23,29 @@ public class TimeServiceImpl implements TimeService{
 
 	// 사용자 출근 등록
 	@Override
-	public int insertWorkStart(Time time) {
+	public int timeStart(Time time) {
 		int result = tStore.insertWorkStart(sqlSession, time);
 		return result;
 	}
 
 	// 사용자 퇴근 등록
 	@Override
-	public int insertWorkEnd(Time time) {
-		int result = tStore.insertWorkEnd(sqlSession, time);
+	public int timeEnd(Time time) {
+		int result = tStore.updateWorkEnd(sqlSession, time);
 		return result;
 	}
-
-	// 사용자 연차 내역 조회
-	@Override
-	public List<Time> selectTimeView(Vacation vacation) {
-		List<Time> time = tStore.selectTimeView(sqlSession, vacation);
-		return time;
-	}
-
-	// 사용자 근태 조정 신청
-	@Override
-	public int updateTimeModify(TimeModify timeModify) {
-		int result = tStore.updateTimeModify(sqlSession, timeModify);
-		return result;
-	}
+	
+//	// 사용자 연차 내역 조회
+//	@Override
+//	public List<Time> selectTimeView(Vacation vacation) {
+//		List<Time> time = tStore.selectTimeView(sqlSession, vacation);
+//		return time;
+//	}
+//
+//	// 사용자 근태 조정 신청
+//	@Override
+//	public int updateTimeModify(TimeModify timeModify) {
+//		int result = tStore.updateTimeModify(sqlSession, timeModify);
+//		return result;
+//	}
 }
