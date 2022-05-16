@@ -186,6 +186,6 @@
 	
 	<!-- 설문조사 응답 -->
 	<insert id="insertSurveySubAnswer">
-		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, ${surveyNo}, ${surveyquestNo}, ${surveyanswerContent}, ${surveyanswerId}, DEFAULT)
+		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, #{surveyNo}, #{surveyquestNo}, #{surveyanswerContent}, #{surveyanswerId}, DEFAULT)
 	</insert>
 </mapper>

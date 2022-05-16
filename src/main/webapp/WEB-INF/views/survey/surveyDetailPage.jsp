@@ -93,13 +93,12 @@
             </div>
             <br>
             <div id="questListDiv">
-	            <!--문항 시작-->
-	            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
-	            <c:forEach items="${questList }" var="questInfo">
-	            	<form id="addAnswerForm" action="/survey/addSurveyAnswer.hirp" method="POST">
-	            		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
-	            		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
-	            		
+	           	<form id="addAnswerForm" action="/survey/addSurveyAnswer.hirp" method="POST">
+		            <!--문항 시작-->
+		            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
+		            <c:forEach items="${questList }" var="questInfo">
+		           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
+		           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--객관식 하나만 선택-->
@@ -140,25 +139,25 @@
 		                        <div class="mt-20 ml-20">
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
 		                                <div class="mb-10">
-		                                    <input id="check1" class="mt-20" type="checkbox">
+		                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1">
 		                                    <label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
 		                                </div>
 		                            </c:if>
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 		                                <div class="mb-10">
-		                                    <input id="check2" class="mt-20" type="checkbox">
+		                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2">
 		                                    <label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
 		                                </div>
 		                            </c:if>
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 		                                <div class="mb-10">
-		                                    <input id="check3" class="mt-20" type="checkbox">
+		                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3">
 		                                    <label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
 		                                </div>
 		                            </c:if>
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 		                                <div class="mb-10">
-		                                    <input id="check4" class="mt-20" type="checkbox">
+		                                    <input id="check4" name="surveyanswerContent" class="mt-20" type="checkbox" value="4">
 		                                    <label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
 		                                </div>
 		                            </c:if>
@@ -189,8 +188,8 @@
 		                    <br>
 		                </c:if>
 	            	
-	            	</form>
-	            </c:forEach>
+		            </c:forEach>
+	           	</form>
             </div>
             
             <!--문항 끝-->
@@ -225,10 +224,25 @@
 		function questSubmit(e){
 			var buttonDiv = $(e).parent().parent().parent().parent(); //div t-c
 			console.log(buttonDiv);
-			var $formDiv = buttonDiv.prev().prev(); //문항들 감싸고 있는 div
+			var $formDiv = buttonDiv.prev().prev().children(); //문항들 감싸고 있는 div
 			console.log($formDiv);
-			var qCount = $formDiv.children().length; //문항 form 태그 갯수
-			console.log(qCount);
+			var $answerDiv = $formDiv.children("div");
+			console.log($answerDiv);
+			var aCount = $answerDiv.length; //문항 div 태그 갯수
+			console.log(aCount);
+    		for(var i = 0; i < aCount ; i++) {
+    			//no 넘겨주는 input 태그 name값 바꿔주기
+    			var $surveyNoInput = $answerDiv.eq(i).prev().prev();
+    			$surveyNoInput.attr('name', 'surveyAnswerList['+(i)+'].surveyNo');
+    			var $questNoInput = $answerDiv.eq(i).prev();
+    			$questNoInput.attr('name', 'surveyAnswerList['+(i)+'].surveyquestNo');
+//     			console.log($surveyNoInput);
+//     			console.log($questNoInput);
+				//답안 name값 바꿔주기
+        		var $answerContent = $answerDiv.eq(i).find("[name=surveyanswerContent]"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
+				console.log($answerContent);
+				$answerContent.attr('name', 'surveyAnswerList['+(i)+'].surveyanswerContent'); //속성값 바꿔주기
+    		}
 			document.getElementById('addAnswerForm').submit();
 		}
 	</script>

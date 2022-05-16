@@ -422,17 +422,25 @@ public class SurveyController {
 	//설문 응답 제출
 	@RequestMapping(value="/survey/addSurveyAnswer.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySubmit(ModelAndView mv
+//			,@RequestParam("surveyNo") int surveyNo
+//			,@RequestParam("surveyquestNo") int surveyquestNo
 			,@ModelAttribute SurveyAnswer surveyAnswer) {
 		//insert 할 거니까 설문응답번호 자동 생성됨.
 		String emplId = "TESTID";
-		surveyAnswer.setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
-		surveyAnswer.setSurveyanswerContent("콘텐츠");
+		int aCount = surveyAnswer.getSurveyAnswerList().size();
+		System.out.println("surveyanswer 출력");
+//		for(int i = 0; i < aCount; i++) {
+//			surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
+//			System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+//		}
+		
 		try {
-			System.out.println("surveyAnswer 출력");
-			System.out.println(surveyAnswer);
-			
-			int result = sService.insertSurveySubAnswer(surveyAnswer);
-			
+			int result = 0;
+			for(int i = 0; i < aCount; i++) {
+				surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
+				System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+				result = sService.insertSurveySubAnswer(surveyAnswer.getSurveyAnswerList().get(i));
+			}
 			if(result > 0) {
 				mv.setViewName("redirect:/survey/main.hirp");
 			} else {
