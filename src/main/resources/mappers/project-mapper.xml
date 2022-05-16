@@ -55,6 +55,12 @@
 		INSERT INTO BOARD_TBL VALUES(BOARD_NO.NEXTVAL, #{projectNo}, #{emplName}, #{boardContents}, #{boardStatus})
 	</insert>
 	
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARD_TBL SET
+		BOARD_STATUS = #{boardStatus}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
 	<delete id="deleteBoard">
 		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
 	</delete>

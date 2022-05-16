@@ -186,6 +186,22 @@ public class ProjectController {
 		}
 	}
 
+	// 칸반보드 수정(드래그앤드롭 상태값 변경)
+	@ResponseBody
+	@RequestMapping(value="/project/updateBoard.hirp", method=RequestMethod.POST)
+	public String updateBoard(@ModelAttribute Board board
+			, @RequestParam("boardNo") int boardNo
+			, @RequestParam("boardStatus") String boardStatus) {
+		board.setBoardNo(boardNo);
+		board.setBoardStatus(boardStatus);
+		int result = pService.modifyBoard(board);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	// 칸반보드 삭제
 	@ResponseBody
 	@RequestMapping(value="/project/deleteBoard.hirp", method=RequestMethod.GET)

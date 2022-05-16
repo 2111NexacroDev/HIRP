@@ -17,5 +17,6 @@ public interface ProjectService {
 	
 	public List<Board> printAllBoard(int projectNo); // 칸반보드 전체 조회
 	public int registerBoard(Board board); // 칸반보드 추가
+	public int modifyBoard(Board board); // 칸반보드 수정
 	public int removeBoard(int boardNo); // 칸반보드 삭제
 }
