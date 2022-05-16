@@ -172,7 +172,7 @@ public class SurveyController {
 	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyInfoPage(ModelAndView mv) {
 		try {
-			List<Employee> emplList = eaService.printAllEmployee();
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			if(emplList != null) {
 				mv.addObject("emplList", emplList);
 				mv.setViewName("survey/surveyWriteInfo");

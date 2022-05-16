@@ -26,6 +26,9 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="endReason" column="END_REASON"/>
 		<result property="profile" column="EMPL_PROFILE"/>
+		<!-- 회원 정보 이름으로 가져오기 -->
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 		<association javaType="Certification" property="certification" column="EMPL_ID">
 			<id property="certNo" column="CERT_NO"/>
 			<result property="emplId" column="EMPL_ID"/>
@@ -72,6 +75,18 @@
 	<select id="selectAllEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
 	</select>
+	
+	<select id="selectAllEmployeeWithName" resultMap="emplResultMap">
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		DIRECT_NO, PHONE_NO, RECRUIT_CATEGORY, SALARY_CATEGORY, REFERRER, IS_STATUS,
+		BIRTHDAY, GENDER, IS_MARRIAGE, IS_DISABILITY, IS_VETERANS, END_DATE, END_REASON, EMPL_PROFILE,
+		DEPT_NAME, POSITION_NAME
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE NOT IS_STATUS IN ('임시','퇴사')
+	</select>
+	
 	<select id="selectOneEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
 	</select>

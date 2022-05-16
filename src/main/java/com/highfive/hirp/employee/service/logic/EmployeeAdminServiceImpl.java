@@ -24,6 +24,12 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		List<Employee> eList = eAStore.selectAllEmployee(sqlSession);
 		return eList;
 	}
+	
+	@Override
+	public List<Employee> printAllEmployeeWithName() {
+		List<Employee> eList = eAStore.selectAllEmployeeWithName(sqlSession);
+		return eList;
+	}
 
 	@Override
 	public List<Employee> printAllRetiree() {

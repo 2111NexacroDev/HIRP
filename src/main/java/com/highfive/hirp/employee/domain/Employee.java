@@ -28,6 +28,9 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private JobRole jobRole;
 	private Language language;
 	private Military military;
+	//회원 정보 이름으로 가져오기
+	private String deptName;
+	private String positionName;
 
 	public Employee() {}
 
@@ -262,6 +265,22 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 
 	public void setMilitary(Military military) {
 		this.military = military;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
 	}
 
 	@Override

@@ -17,6 +17,12 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployee");
 		return eList;
 	}
+	
+	@Override
+	public List<Employee> selectAllEmployeeWithName(SqlSession sqlSession) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithName");
+		return eList;
+	}
 
 	@Override
 	public List<Employee> selectAllRetiree(SqlSession sqlSession) {
