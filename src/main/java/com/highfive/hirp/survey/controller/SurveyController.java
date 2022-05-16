@@ -23,6 +23,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
+import com.highfive.hirp.employee.service.EmployeeService;
 import com.highfive.hirp.survey.domain.Survey;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 import com.highfive.hirp.survey.domain.SurveyQuest;
@@ -36,6 +39,8 @@ import com.highfive.hirp.survey.service.SurveyService;
 public class SurveyController {
 	@Autowired
 	private SurveyService sService;
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
 	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
@@ -166,7 +171,16 @@ public class SurveyController {
 	//설문 정보 등록 페이지
 	@RequestMapping(value="/survey/writeInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyInfoPage(ModelAndView mv) {
-		mv.setViewName("survey/surveyWriteInfo");
+		try {
+			List<Employee> emplList = eaService.printAllEmployee();
+			if(emplList != null) {
+				mv.addObject("emplList", emplList);
+				mv.setViewName("survey/surveyWriteInfo");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

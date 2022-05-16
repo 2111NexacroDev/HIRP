@@ -68,10 +68,15 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
+	public int modifyBoard(Board board) {
+		int result = pStore.updateBoard(sqlSession, board);
+		return result;
+	}
+	
+	@Override
 	public int removeBoard(int boardNo) {
 		int result = pStore.deleteBoard(sqlSession, boardNo);
 		return result;
 	}
 
-	
 }

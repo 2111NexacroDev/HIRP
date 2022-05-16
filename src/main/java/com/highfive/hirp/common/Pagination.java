@@ -1,7 +1,5 @@
 package com.highfive.hirp.common;
 
-import com.highfive.hirp.common.PageInfo;
-
 public class Pagination {
 	public static PageInfo getPageInfo(int currentPage, int totalCount) {
 		PageInfo pi = null;

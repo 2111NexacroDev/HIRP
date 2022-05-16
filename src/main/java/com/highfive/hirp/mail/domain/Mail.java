@@ -11,6 +11,7 @@ public class Mail {
 	private String importantMail;
 	private String temporaryStorage;
 	private String mailWasteBasket;
+	private String emplId;
 	private String recipientId;
 	private String referrerId;
 	private String fileName;
@@ -20,7 +21,7 @@ public class Mail {
 	public Mail() {}
 
 	public Mail(int mailNo, String mailSender, String mailTitle, String mailContents, Date mailDate,
-			String importantMail, String temporaryStorage, String mailWasteBasket, String recipientId,
+			String importantMail, String temporaryStorage, String mailWasteBasket, String emplId, String recipientId,
 			String referrerId, String fileName, String fileReName, String filePath) {
 		super();
 		this.mailNo = mailNo;
@@ -31,6 +32,7 @@ public class Mail {
 		this.importantMail = importantMail;
 		this.temporaryStorage = temporaryStorage;
 		this.mailWasteBasket = mailWasteBasket;
+		this.emplId = emplId;
 		this.recipientId = recipientId;
 		this.referrerId = referrerId;
 		this.fileName = fileName;
@@ -102,6 +104,14 @@ public class Mail {
 		this.mailWasteBasket = mailWasteBasket;
 	}
 
+	public String getEmplId() {
+		return emplId;
+	}
+
+	public void setEmplId(String emplId) {
+		this.emplId = emplId;
+	}
+
 	public String getRecipientId() {
 		return recipientId;
 	}
@@ -146,9 +156,9 @@ public class Mail {
 	public String toString() {
 		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailTitle=" + mailTitle + ", mailContents="
 				+ mailContents + ", mailDate=" + mailDate + ", importantMail=" + importantMail + ", temporaryStorage="
-				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", recipientId=" + recipientId
-				+ ", referrerId=" + referrerId + ", fileName=" + fileName + ", fileReName=" + fileReName + ", filePath="
-				+ filePath + "]";
+				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", emplId=" + emplId + ", recipientId="
+				+ recipientId + ", referrerId=" + referrerId + ", fileName=" + fileName + ", fileReName=" + fileReName
+				+ ", filePath=" + filePath + "]";
 	}
 
 }

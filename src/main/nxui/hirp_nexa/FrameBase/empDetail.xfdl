@@ -48,26 +48,30 @@
             </Format>
           </Formats>
         </Grid>
-        <Tab id="Tab00" taborder="4" tabindex="0" left="221" top="380" width="1040" height="320">
+        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="380" height="320" right="0" onchanged="Tab00_onchanged">
           <Tabpages>
-            <Tabpage id="Tabpage1" text="Tabpage1"/>
-            <Tabpage id="Tabpage2" text="Tabpage2"/>
-            <Tabpage id="Tabpage3" text="Tabpage3">
+            <Tabpage id="Tabpage1" text="기본">
               <Layouts>
                 <Layout/>
               </Layouts>
             </Tabpage>
-            <Tabpage id="Tabpage4" text="Tabpage4">
+            <Tabpage id="Tabpage2" text="직무/담당"/>
+            <Tabpage id="Tabpage3" text="경력">
               <Layouts>
                 <Layout/>
               </Layouts>
             </Tabpage>
-            <Tabpage id="Tabpage5" text="Tabpage5">
+            <Tabpage id="Tabpage4" text="자격">
               <Layouts>
                 <Layout/>
               </Layouts>
             </Tabpage>
-            <Tabpage id="Tabpage6" text="Tabpage6">
+            <Tabpage id="Tabpage5" text="어학">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage6" text="병역">
               <Layouts>
                 <Layout/>
               </Layouts>
@@ -291,6 +295,11 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	}	
 }
 
+
+this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	
+};
 ]]></Script>
   </Form>
 </FDL>
