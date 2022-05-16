@@ -13,6 +13,7 @@
 		<result property="importantMail" column="IMPORTANT_MAIL"/>
 		<result property="temporaryStorage" column="TEMPORARY_STORAGE"/>
 		<result property="mailWasteBasket" column="MAIL_WASTEBASKET"/>
+		<result property="emplId" column="EMPL_ID"/>
 		<result property="recipientId" column="RECIPIENT_ID"/>
 		<result property="referrerId" column="REFERRER_ID"/>
 		<result property="fileName" column="FILE_NAME"/>
@@ -45,20 +46,31 @@
 		SELECT COUNT(*) FROM MAIL_TBL
 	</select>
 	
-	<!-- 받은 메일함 조회 -->
-	<select id="selectReceivedMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL ORDER BY MAIL_NO DESC
+	<!-- 받은메일함 -->
+	<select id="selectRecMail" resultMap="MailResultMap">
+		SELECT * FROM
+		    (SELECT MAIL_NO, MAIL_SENDER, MAIL_TITLE, MAIL_DATE, EMPL_ID
+		    FROM MAIL_TBL WHERE MAIL_SENDER != #{mailSender})
+		    JOIN RECIPIENT_TBL USING(MAIL_NO)
+		    JOIN EMPL_TBL ON (EMPL_ID = EMPL_ID)
+		    WHERE RECIPIENT_ID = #{recipientId}
+		    AND MAIL_SENDER != #{mailSender}
 	</select>
 	
+	<!-- 보낸메일함 -->
+	<!-- 임시보관함 -->
+	<!-- 내게쓴메일함 -->
+	<!-- 휴지통 -->
+	
 	<!-- 받은메일함 상세조회 (조인문 사용해서 셀렉트 해야함) -->
-	<select id="selectOneByNo" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_NO = #{mailNo}
-	</select>
+<!-- 	<select id="selectOneByNo" resultMap="MailResultMap"> -->
+<!-- 		SELECT * FROM MAIL_TBL WHERE MAIL_NO = #{mailNo} -->
+<!-- 	</select> -->
 	
 	<!-- 메일 보내기 -->
 	<insert id="sendMail" parameterType="Mail">
 		INSERT INTO MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, 'test01', #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 	<!-- 메일 보낼때 수신인 -->

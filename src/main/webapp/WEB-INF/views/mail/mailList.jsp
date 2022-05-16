@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
@@ -55,37 +57,35 @@
             
             <div class="subConts">
 	        	<table class="table--basic mt-20" style="margin-top: 40px;">
-	                    <thead>
+                   	<c:forEach items="${mList }" var="mail">
+                    	<!-- 받은메일함 -->
+                    	<c:if test="${mailCategory == 'S' }">
 	                        <tr>
-	                            <th>#</th>
+	                            <c:url var="mDetail" value="/mail/detail.hirp">
+									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
+								</c:url>
+								<td><input type="checkbox" value="${mail.mailNo }"></td>
+								<td>${mail.mailSender }</td>
+								<td>${mail.mailDate }</td>
 	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:forEach items="${mList }" var="mail">
-		                        <tr>
-		                            <td>${project.projectNo }</td>
-		                            <c:url var="mDetail" value="/mail/detail.hirp">
-										<c:param name="mailNo" value="${mail.mailNo }"></c:param>
-									</c:url>
-		                            <td><a href="${mDetail}">${mail.mailNo }</a></td>
-<%-- 		                            <td>${ }</td> --%>
-<%-- 		                            <td>${ }</td> --%>
-<%-- 		                            <td>${ }</td> --%>
-		                        </tr>
-	                        </c:forEach>
-	                    </tbody>
-	                </table>
-	                <div class="btns--paging">
-		                <button class="basic mt-20">이전</button>
-		                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
-		                	<c:url var="pagination" value="/mail/receivedList.hirp">
-		                		<c:param name="page" value="${p }"></c:param>
-		                	</c:url>
-		                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
-		                </c:forEach>
-		                <button class="basic mt-20">다음</button>
-	                </div>
+	                    </c:if>
+					</c:forEach>
+                </table>
+                <div class="btns--paging">
+	                <c:if test="${pi.currentPage > '1' }">
+	                	<button class="fa-solid fa-angle-left prev" onclick="location.href='/project/list.hirp?page=${pi.currentPage-1 }'"></button>
+	                </c:if>
+	                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
+	                	<c:url var="pagination" value="/mail/receivedList.hirp">
+	                		<c:param name="page" value="${p }"></c:param>
+	                	</c:url>
+	                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
+	                </c:forEach>
+	                <c:if test="${pi.currentPage < pi.endNavi }">
+	                	<button class="fa-solid fa-angle-right next" onclick="location.href='/project/list.hirp?page=${pi.currentPage+1 }'"></button>
+	                </c:if>
                 </div>
+			</div>
         </article>
 	</div>
 </body>

@@ -23,12 +23,6 @@ public class MailServiceImpl implements MailService{
 	private SqlSession sqlSession;
 	
 	@Override
-	public int getListCount() {
-		int totalCount = mStore.selectListCount(sqlSession);
-		return totalCount;
-	}
-	
-	@Override
 	public int sendMail(Mail mail) {
 		int result = mStore.sendMail(sqlSession, mail);
 		return result;
@@ -53,21 +47,9 @@ public class MailServiceImpl implements MailService{
 	}
 	
 	@Override
-	public List<Mail> selectReceivedMail(PageInfo pi) {
-		List<Mail> mList = mStore.selectReceivedMail(sqlSession, pi);
-		return mList;
-	}
-	
-	@Override
 	public Mail printOneByNo(int mailNo) {
 		Mail mail = mStore.selectOneByNo(sqlSession, mailNo);
 		return mail;
-	}
-	
-	@Override
-	public List<Mail> selectSentMail() {
-		List<Mail> mList = mStore.selectSentMail(sqlSession);
-		return mList;
 	}
 	
 	@Override
@@ -77,21 +59,9 @@ public class MailServiceImpl implements MailService{
 	}
 	
 	@Override
-	public List<Mail> selectTemporaryMail() {
-		List<Mail> mList = mStore.selectTemporaryMail(sqlSession);
-		return mList;
-	}
-	
-	@Override
 	public int selectOneTemporaryMail(int mailNo) {
 		int result = mStore.selectOneTemporaryMail(sqlSession, mailNo);
 		return result;
-	}
-	
-	@Override
-	public List<Mail> selectMyMail() {
-		List<Mail> mList = mStore.selectMyMail(sqlSession);
-		return mList;
 	}
 	
 	@Override
@@ -101,21 +71,9 @@ public class MailServiceImpl implements MailService{
 	}
 	
 	@Override
-	public List<Mail> selectImportantMail() {
-		List<Mail> mList = mStore.selectImportantMail(sqlSession);
-		return mList;
-	}
-	
-	@Override
 	public int selectOneImportantMail(int mailNo) {
 		int result = mStore.selectOneImportantMail(sqlSession, mailNo);
 		return result;
-	}
-	
-	@Override
-	public List<Mail> selectWasteBasketMail() {
-		List<Mail> mList = mStore.selectWasteBasketMail(sqlSession);
-		return mList;
 	}
 	
 	@Override
@@ -182,6 +140,78 @@ public class MailServiceImpl implements MailService{
 	public int removeAddress(Address address) {
 		int result = mStore.removeAddress(sqlSession, address);
 		return result;
+	}
+
+	@Override
+	public List<Mail> printMailRec(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectRecMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public List<Mail> printMailSend(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectSendMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public List<Mail> printMailTem(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectTemMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public List<Mail> printMailMy(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectMyMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public List<Mail> printMailImp(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectImpMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public List<Mail> printMailWas(Mail mail, PageInfo pi) {
+		List<Mail> mList = mStore.selectWasMail(sqlSession, mail, pi);
+		return mList;
+	}
+
+	@Override
+	public int getMailCountR(Mail mail) {
+		int totalCount = mStore.selectMailCountR(sqlSession, mail);
+		return totalCount;
+	}
+
+	@Override
+	public int getMailCountS(Mail mail) {
+		int totalCount = mStore.selectMailCountS(sqlSession, mail);
+		return totalCount;
+	}
+
+	@Override
+	public int getMailCountT(Mail mail) {
+		int totalCount = mStore.selectMailCountT(sqlSession, mail);
+		return totalCount;
+	}
+
+	@Override
+	public int getMailCountM(Mail mail) {
+		int totalCount = mStore.selectMailCountM(sqlSession, mail);
+		return totalCount;
+	}
+
+	@Override
+	public int getMailCountI(Mail mail) {
+		int totalCount = mStore.selectMailCountI(sqlSession, mail);
+		return totalCount;
+	}
+
+	@Override
+	public int getMailCountW(Mail mail) {
+		int totalCount = mStore.selectMailCountW(sqlSession, mail);
+		return totalCount;
 	}
 
 }

@@ -65,11 +65,15 @@ public class MailController {
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			, HttpServletRequest request) {
 		try {
+			HttpSession session = request.getSession();
+			Employee employee = (Employee) session.getAttribute("loginUser");
+			mail.setEmplId(employee.getEmplId());
 			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				HashMap<String, String> fileMap = saveFile(uploadFile, request);
 				String filePath = fileMap.get("filePath");
 				String fileRename = fileMap.get("fileName");
 				String fileExtension = fileMap.get("fileExtension");
+				
 				if(filePath != null && !filePath.equals("")) {
 					mailFile.setFileName(uploadFile.getOriginalFilename());
 					mailFile.setFileExtension(fileExtension);
@@ -171,9 +175,19 @@ public class MailController {
 		return fileMap;
 		
 	}
+	// 내게쓰기 페이지
+	@RequestMapping(value="/mail/writeMyView.hirp", method=RequestMethod.GET)
+	public ModelAndView showSendMe(ModelAndView mv) {
+		try {
+			mv.setViewName("mail/mailMyWriteForm");
+		}catch(Exception e) {
+			
+		}
+		return mv;
+	}
 	
 	// 메일함 조회
-	@RequestMapping(value="/mail/list.hirp", method=RequestMethod.GET)
+	@RequestMapping(value="/mail/{param}list.hirp", method=RequestMethod.GET)
 	public ModelAndView selectReceivedMailList(ModelAndView mv
 			, @ModelAttribute Mail mail
 			, @PathVariable("param") String mailCategory
@@ -182,13 +196,15 @@ public class MailController {
 		try {
 			HttpSession session = request.getSession();
 			Employee employee = (Employee) session.getAttribute("loginUser");
+			mail.setEmplId(employee.getEmplId());
 			int currentPage = (page != null) ? page : 1;
-//			int totalCountR = mService.getMailCountR(mail);
-//			int	totalCountS = mService.getMailCountS(mail);
-//			int	totalCountT = mService.getMailCountT(mail);
-//			int totalCountM = mService.getMailCountM(mail);
-//			int totalCountI = mService.getMailCountI(mail);
-//			int totalCountW = mService.getMailCountW(mail);
+			int totalCountR = mService.getMailCountR(mail);
+			int	totalCountS = mService.getMailCountS(mail);
+			int	totalCountT = mService.getMailCountT(mail);
+			int totalCountM = mService.getMailCountM(mail);
+			int totalCountI = mService.getMailCountI(mail);
+			int totalCountW = mService.getMailCountW(mail);
+			
 			PageInfo pi = null;
 			
 			List<Mail> mListR = null;
@@ -200,24 +216,38 @@ public class MailController {
 			
 			// 받은메일함
 			if(mailCategory.equals("R")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountR);
+				mListR = mService.printMailRec(mail, pi);
+				mv.addObject("mList", mListR);
 			// 보낸메일함
 			}else if(mailCategory.equals("S")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountS);
+				mListS = mService.printMailSend(mail, pi);
+				mv.addObject("mList", mListS);
 			// 임시보관함
 			}else if(mailCategory.equals("T")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountT);
+				mListT = mService.printMailTem(mail, pi);
+				mv.addObject("mList", mListT);
 			// 내게쓴메일함
 			}else if(mailCategory.equals("M")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountM);
+				mListM = mService.printMailMy(mail, pi);
+				mv.addObject("mList", mListM);
 			// 중요메일함
 			}else if(mailCategory.equals("I")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountI);
+				mListI = mService.printMailImp(mail, pi);
+				mv.addObject("mList", mListI);
 			// 휴지통
 			}else if(mailCategory.equals("W")) {
-				
+				pi = Pagination.getPageInfo(currentPage, totalCountW);
+				mListW = mService.printMailWas(mail, pi);
+				mv.addObject("mList", mListW);
 			}
-			
+			mv.addObject("pi", pi);
+			mv.addObject("mailCategory", mailCategory);
+			mv.setViewName("mail/mailList");
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
