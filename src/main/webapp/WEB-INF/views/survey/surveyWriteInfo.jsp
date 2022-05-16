@@ -63,11 +63,9 @@
 					                <label for="valueB">직접 선택</label><br>
 					                
 					                <div class="bor-dashed mt-20 padding-20">
-					                    <button class="noneBackground" type="button" onclick="openModal(this);"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
-										<section class="section--modal">
-											<div class="bg-black"></div>
-											<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-											<div class="section--modal__conts">
+					                    <button class="noneBackground" type="button" onclick="onAddEmplButton(this);"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
+										<section class="section--modal modal--chat">
+											<div class="section--modal__conts" style="border: none">
 												<button class="btn--close" type="button"></button>
 												<h3>직원 선택</h3>
 												<div class="mb-20">
@@ -95,11 +93,6 @@
 															</c:forEach>
 														</tbody>
 													</table>
-													<!-- <div style="width:100%; height:200px; overflow:auto"> -->
-													<table class="table--basic mt-20">
-														
-													</table>
-													<!-- </div> -->
 												</div>
 												<div class="btns-wrap mt-20 t-r">
 													<button class="point" type="button">확인</button>
@@ -181,6 +174,7 @@
 			function onAddEmplButton(e){
 				openModal(e);
 			}
+			
         </script>
 </body>
 </html>
