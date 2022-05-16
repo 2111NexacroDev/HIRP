@@ -419,6 +419,7 @@ public class SurveyController {
 		//설문조사 문항 보기 삭제 (SURVEY_QUEST QUEST_NO에 제약조건 걸려있음)
 		return mv;
 	}
+	
 	//설문 응답 제출
 	@RequestMapping(value="/survey/addSurveyAnswer.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySubmit(ModelAndView mv
@@ -444,7 +445,7 @@ public class SurveyController {
 			if(result > 0) {
 				mv.setViewName("redirect:/survey/main.hirp");
 			} else {
-				mv.addObject("msg1", "설문조사 삭제 실패");
+				mv.addObject("msg1", "설문조사 응답 제출 실패");
 				mv.setViewName("common/errorPage");
 			}
 		} catch(Exception e) {
