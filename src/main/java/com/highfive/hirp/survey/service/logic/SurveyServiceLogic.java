@@ -157,6 +157,13 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.updateSurvey(sqlSession, survey);
 		return result;
 	}
+	//설문조사 상태 수정
+	@Override
+	public int updateSurveyStatus(int surveyNo) {
+		int result = sStore.updateSurveyStatus(sqlSession, surveyNo);
+		return result;
+	}
+	
 	//설문조사에 포함된 설문 문항 가져오기
 	@Override
 	public int updateSurveySubList(List<SurveySub> subList) {

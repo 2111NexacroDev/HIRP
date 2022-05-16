@@ -173,6 +173,12 @@
 		ORDER BY QUEST_NO
 	</select>
 	
+	<!-- 설문조사 상태 수정 -->
+	<update id="updateSurveyStatus">
+		UPDATE SURVEY_TBL SET SURVEY_STATUS = 'F'
+		WHERE SURVEY_NO = #{surveyNo}
+	</update>
+	<!-- 설문조사 삭제 -->
 	<delete id="deleteSurvey">
 		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
 	</delete>

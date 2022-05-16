@@ -68,6 +68,8 @@ public interface SurveyStore {
 	//설문조사 수정
 	//설문조사 정보 수정
 	public int updateSurvey(SqlSession sqlSession, Survey survey);
+	//설문조사 상태 수정
+	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo);
 	//설문조사 대상자 리스트 수정
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList);
 	

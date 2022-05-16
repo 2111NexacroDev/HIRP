@@ -358,15 +358,28 @@ public class SurveyController {
 	}
 	
 	//설문 마감
+	@RequestMapping(value="/survey/updateStatus.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyClose(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {
 		//자신의 게시글일 때만 마감 버튼이 보이도록 jsp에서 처리
 		//survey 상태 마감으로 update
+		try {
+			int result = sService.updateSurveyStatus(surveyNo);
+			if(result > 0) {
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 상태 업데이트 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
 	//설문 삭제
-	@RequestMapping(value="/survey/removeSurvey.hirp", method=RequestMethod.POST)
+	@RequestMapping(value="/survey/deleteSurvey.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyDelete(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo) {
 		//설문조사 삭제
@@ -375,7 +388,7 @@ public class SurveyController {
 			if(result > 0) {
 				mv.setViewName("redirect:/survey/main.hirp");
 			} else {
-				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.addObject("msg1", "설문조사 삭제 실패");
 				mv.setViewName("common/errorPage");
 			}
 		} catch(Exception e) {

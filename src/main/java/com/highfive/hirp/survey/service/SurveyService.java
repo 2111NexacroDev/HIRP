@@ -67,9 +67,10 @@ public interface SurveyService {
 	//emplId, surveyNo 담아서 넘겨줌.
 	
 	//설문 수정(문항 수정 불가!)
-	//설문조사 정보 수정
-	//설문조사 마감도 이걸로 처리
+	//설문조사 정보 수정 (시작안내문구)
 	public int updateSurvey(Survey survey); 
+	//설문조사 상태 수정
+	public int updateSurveyStatus(int surveyNo);
 	//설문조사 대상자 리스트 수정
 	public int updateSurveySubList(List<SurveySub> subList);
 	

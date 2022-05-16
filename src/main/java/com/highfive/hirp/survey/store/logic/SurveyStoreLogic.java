@@ -154,6 +154,12 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.update("SurveyMapper.updateSurvey", survey);
 		return result;
 	}
+	//설문조사 상태 수정
+	@Override
+	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo) {
+		int result = sqlSession.update("SurveyMapper.updateSurveyStatus", surveyNo);
+		return result;
+	}
 	//설문조사 대상자 리스트 수정
 	@Override
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList) {
