@@ -59,7 +59,7 @@
 	                            	</c:if>
 	                            </td>
 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.surveyWriter }</td>
 	                            <td>
 	                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>

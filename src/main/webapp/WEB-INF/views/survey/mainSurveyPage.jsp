@@ -39,7 +39,8 @@
 								<button class="emergency" type="button">미참여</button>
 								<!-- <button class="finished" type="button">참여완료</button>	 -->
 								<h2 class="mt-10">${myList.surveyTitle }</h2>
-								<p class="mt-10 color-grey">${myList.surveyStartdate }~${myList.surveyEnddate }</p>
+								<p class="mt-10 color-grey">${fn:substring(myList.surveyStartdate, 0, 10) } ~ ${fn:substring(myList.surveyEnddate, 0, 10) }</p>
+								
 								<div class="row mt-10">
 			                        <div class="col-4">
 										<p class="color-grey">작성자</p>
@@ -175,7 +176,7 @@
 	                            	</c:if>
 	                            </td>
 	                            <td>${survey.surveyTitle }</td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.surveyWriter }</td>
 	                        </tr>
                     	

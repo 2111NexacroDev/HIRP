@@ -60,7 +60,7 @@
 	                            	</c:if>
 	                            </td>
 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>0/77(0.00%)</td>
 	                        </tr>
                     	</c:forEach>

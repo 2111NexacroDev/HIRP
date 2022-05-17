@@ -54,7 +54,7 @@
             <h2 class="mb-20">${surveyInfo.surveyTitle}</h2>
             <p class="mb-10">작성자: ${surveyInfo.surveyWriter}</p>
             <p class="mb-10">작성일 : ${surveyInfo.surveyDate}</p>
-            <p class="mb-10">설문 기간 : ${surveyInfo.surveyStartdate} ~ ${surveyInfo.surveyEnddate}</p>
+            <p class="mb-10">설문 기간 : ${fn:substring(surveyInfo.surveyStartdate, 0, 10) } ~ ${fn:substring(surveyInfo.surveyEnddate, 0, 10) }</p>
             <p class="mb-10">참여 후 수정 : 
             	<c:if test="${surveyInfo.surveyEdit eq 'Y'}">
             		허용
@@ -96,13 +96,13 @@
 	           	<form id="addAnswerForm" action="/survey/addSurveyAnswer.hirp" method="POST">
 		            <!--문항 시작-->
 		            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
-		            <c:forEach items="${questList }" var="questInfo">
+		            <c:forEach items="${questList }" var="questInfo" varStatus="status">
 		           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
 		           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--객관식 하나만 선택-->
-		                        <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
 		                                <div class="mb-10">
@@ -135,7 +135,7 @@
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '복수 선택'|| questInfo.questType1 eq 'D' && questInfo.questType2 eq '복수 선택'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--객관식 중복 선택 가능-->
-		                        <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
 		                                <div class="mb-10">
@@ -168,7 +168,7 @@
 		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '단문 입력'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--주관식 단문형 -->
-		                        <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
 		                            <input type="text" name="surveyanswerContent" class="" style="width:90%" placeholder="답안 입력">
 		                        </div>
@@ -178,7 +178,7 @@
 		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '장문 입력'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--주관식 장문형 -->
-		                        <p class="mb-10 contents-strong">1. ${questInfo.questTitle}</p>
+		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
 		                            <textarea name="surveyanswerContent" id="" style="width:90%" cols="20" rows="3">
 		        내용1
