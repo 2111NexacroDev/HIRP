@@ -49,9 +49,18 @@ $(function () {
     })
     /* //모달 및 팝업 닫기 */
 
-    /* 채팅창 이동 */
+    // 채팅창 이동
     $('.modal--chat').draggable({
         containment: 'window'
+    });
+
+    // 서브메뉴 접힘/펼침
+    $('#snb>ul>li>a').on('click', function () {
+        if ($(this).siblings('ul').length != 0) {
+            $(this).siblings('ul').stop().slideToggle();
+            $(this).toggleClass('on');
+            return false;
+        }
     });
 });
 

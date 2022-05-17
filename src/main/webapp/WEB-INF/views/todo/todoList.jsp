@@ -25,6 +25,18 @@
     <div id="conts">
         <aside id="snb">
             <h1>개인업무관리</h1>
+            <ul>
+                <li>
+                    <a href="">업무 관리</a>
+                    <ul>
+                        <li><a href="/todo/list.hirp">할 일/메모 목록</a></li>
+                        <li><a href="/todo/doneList.hirp">완료 목록</a></li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="/schedule/list.hirp">일정 관리</a>
+                </li>
+            </ul>
         </aside>
 
         <article id="sub" class="bg--gray">
