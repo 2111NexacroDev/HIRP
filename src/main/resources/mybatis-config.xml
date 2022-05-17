@@ -25,6 +25,8 @@
 		<!-- 융경 -->
 		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.Time" alias="Time"></typeAlias>
+		<typeAlias type="com.highfive.hirp.time.user.domain.TimeModify" alias="TimeModify"></typeAlias>
+		<typeAlias type="com.highfive.hirp.time.user.domain.Vacation" alias="Vacation"></typeAlias>
 		
 		<!-- 민수 -->
 		<typeAlias type="com.highfive.hirp.favority.domain.Favority" alias="Favority"></typeAlias>

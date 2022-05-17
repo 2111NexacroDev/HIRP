@@ -1,121 +1,82 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- jstl사용가능. 여러행뽑아내야해서 사용함 -->
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
-    <!-- 하이알피 서브페이지 CSS -->
+<%@ include file="/WEB-INF/views/include/inc_head.jsp"%>
+<script src="../../../resources/js/jquery.treeview.js"></script>
 
-    <style>
-        .tree {
-            margin-top: 5px;
-        }
+<link rel="stylesheet" href="../../../resources/css/sub.css">
+<link rel="stylesheet" href="../../../resources/css/jquery.treeview.css" />
+<link rel="stylesheet" href="../../../resources/css/screen.css" />
+<!-- 하이알피 서브페이지 CSS -->
 
-        .tree,
-        .tree ul {
-            list-style: none;
-            /* 기본 리스트 스타일 제거 */
-            padding-left: 10px;
-        }
+<body>
+	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
+	<div id="conts">
+		<article id="sub" class="">
+			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
+			<h1 class="basic-border-bottom"></h1>
+			<div id="organization" class="subConts">
+				<ul id="orgList">
 
-        .tree *:before {
-            width: 15px;
-            height: 15px;
-            display: inline-block;
-        }
+				</ul>
+			</div>
+		</article>
+	</div>
 
-        .tree label {
-            cursor: pointer;
-            font-family: NotoSansKrMedium, sans-serif !important;
-            font-size: 14px;
-            color: #0055CC;
-        }
 
-        .tree label:hover {
-            color: #00AACC;
-        }
+	<script>
+		// 조직도 조회
+		$(document).ready(function(){
+			$.ajax({
+				url : "/group/groupViewData.hirp",
+				type : "get",
+				dataType : "json",
+				success : function(data) {
+					if (data.length != 0) {
+						data.forEach(function(e, i) {
+							console.log(e);
+							var codeNm = e.deptName;
+							var codeId = e.deptCode;
+							var parentId = e.deptUppercode;
+							var codeLvl = e.deptLevel;
+							var $rootList = $("#orgList");
+							var $li = '<li id="'+ codeId +'" lvl="' + codeLvl + '"><a href="#">'+ codeNm + '</a></li>';
+							//var $li = '<li id="'+ codeId +'"><span>' + codeNm+ '</span></li>';
+							//var $sLi = '<li id="'+ codeId +'"><span>'+ codeNm + '</span></li>';
+							var $ul = '<ul><li id="'+ codeId +'"><a href="#">' + codeNm+ '</a></li></ul>';
+							// 1레벨은 그냥 추가
+							// 다음 레벨부터는 상위 li의 클래스를 폴더로 바꾸고 자기 자신을 추가
+							if (codeLvl == 0) {
+								$rootList.append($li);
+							} else {
+// 								var parentLi = $("li[id='"+parentId+"']");
+// 								var $bUl = parentLi.find("ul");
+// 								if($bUl.length == 0) {
+// 									$li = "<ul>" + $li + "</ul>";
+// 									parentLi.append($li);
+// 								}else{
+// 									$bUl.append($li);
+// 								}
+								$("#" + parentId).append($ul);
+							}
+						});
+					} else {
+						alert("조직도 데이터가 없습니다.");
+					}
+					
+					$("#orgList, #navigation").treeview({
+						collapsed : true
+					});
+				},
+				error : function() {
+					alert("조직도 조회 중에 실패했습니다.");
 
-        .tree label:before {
-            content: '+'
-        }
-
-        .tree label.lastTree:before {
-            content: 'o';
-        }
-
-        .tree label:hover:before {
-            content: '+'
-        }
-
-        .tree label.lastTree:hover:before {
-            content: 'o';
-        }
-
-        .tree input[type="checkbox"] {
-            display: none;
-        }
-
-        .tree input[type="checkbox"]:checked~ul {
-            display: none;
-        }
-
-        .tree input[type="checkbox"]:checked+label:before {
-            content: '-'
-        }
-
-        .tree input[type="checkbox"]:checked+label:hover:before {
-            content: '-'
-        }
-
-        .tree input[type="checkbox"]:checked+label.lastTree:before {
-            content: 'o';
-        }
-
-        .tree input[type="checkbox"]:checked+label.lastTree:hover:before {
-            content: 'o';
-        }
-    </style>
-
-    <body>
-        <form>
-            <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
-                <div id="conts">
-                    <article id="sub" class="">
-                        <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
-                            <h1 class="basic-border-bottom"></h1>
-                            <div id="조직도" class="subConts">
-                                <ul class="depth-0 tree">
-                                <c:forEach var="data" items="${groupList }">
-                                <c:if test="${data.deptLevel eq 0 }">
-                                    <li>
-                                        <input type="checkbox" id="root">
-                                        <label for="root">"${data.deptName}"</label>
-                                    </li>
-                                </c:if>
-                                    <c:if test="${data.deptLevel eq 1 }">
-                                        <li class="dept1">
-                                            <input type="checkbox" id="${data.deptCode }">
-                                            <label for="${data.deptCode }" class="lastTree">"${data.deptName }"</label>
-                                        </li>
-                                    </c:if>
-                                        <c:if test="${data.deptLevel eq 2 }">
-                                            <li class="dept2">
-                                                <input type="checkbox" id="${data.deptCode }">
-                                                <label for="${data.deptCode }" class="lastTree">"${data.deptName }"</label>
-                                            </li>
-                                        </c:if>
-                                            <c:if test="${data.deptLevel eq 3 }">
-                                                <li class="dept3">
-                                                    <input type="checkbox" id="${data.deptCode }">
-                                                    <label for="${data.deptCode }" class="lastTree">"${data.deptName }"</label>
-                                                </li>
-                                            </c:if>
-                                </c:forEach>
-                                </ul>
-
-                <script>
-
-                </script>
-        </form>
-    </body>
+				}
+			});
+		});
+	</script>
+</body>
 </html>
