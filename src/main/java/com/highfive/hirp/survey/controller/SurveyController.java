@@ -590,17 +590,23 @@ public class SurveyController {
 	//설문 응답 제출
 	@RequestMapping(value="/survey/addSurveyAnswer.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySubmit(ModelAndView mv
-//			,@RequestParam("surveyNo") int surveyNo
-//			,@RequestParam("surveyquestNo") int surveyquestNo
-			,@ModelAttribute SurveyAnswer surveyAnswer) {
+			,@ModelAttribute SurveyAnswer surveyAnswer
+			, HttpServletRequest request) {
 		//insert 할 거니까 설문응답번호 자동 생성됨.
-		String emplId = "TESTID";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		int aCount = surveyAnswer.getSurveyAnswerList().size();
+		System.out.println("emplId");
+		System.out.println(emplId);
+		System.out.println(surveyAnswer);
+		System.out.println(aCount);
 		System.out.println("surveyanswer 출력");
 //		for(int i = 0; i < aCount; i++) {
 //			surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
 //			System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
 //		}
+		
+		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyAnswer.getSurveyNo());
 		
 		try {
 			int result = 0;
@@ -610,9 +616,13 @@ public class SurveyController {
 				result = sService.insertSurveySubAnswer(surveyAnswer.getSurveyAnswerList().get(i));
 			}
 			if(result > 0) {
-				mv.setViewName("redirect:/survey/main.hirp");
+				//설문조사 응답자 목록에서 answerstatus 업데이트
+				int result2 = sService.updateSubAnswerStatus(ssUpdate);
+				if(result2 > 0) {
+					mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
+				}
 			} else {
-				mv.addObject("msg1", "설문조사 응답 제출 실패");
+				mv.addObject("msg", "설문조사 응답 제출 실패");
 				mv.setViewName("common/errorPage");
 			}
 		} catch(Exception e) {

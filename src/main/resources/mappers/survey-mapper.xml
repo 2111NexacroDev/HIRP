@@ -35,7 +35,7 @@
 		<result property="emplName" column="EMPL_NAME"/>
 	</resultMap>
 	
-	<resultMap type="SurveyQuest" id="SurveyQuestResultMap">
+	<resultMap type="SurveyQuest" id="surveyQuestResultMap">
 		<id property="questNo" column="QUEST_NO"/>
 		<result property="surveyNo" column="SURVEY_NO"/>
 		<result property="questTitle" column="QUEST_TITLE"/>
@@ -52,7 +52,7 @@
       	</association>  
 	</resultMap>
 	
-	<resultMap type="SurveyQuestCh" id="SurveyQuestChResultMap">
+	<resultMap type="SurveyQuestCh" id="surveyQuestChResultMap">
 		<id property="surveyquestNo" column="SURVEYQUEST_NO"/>
 		<result property="surveyCh1" column="SURVEY_CH1"/>
 		<result property="surveyCh2" column="SURVEY_CH2"/>
@@ -204,7 +204,7 @@
 	</select>
 
 	<!-- 설문조사 문항+보기 한번에 가져오기 -->
-	<select id="selectAllSurveyQuestByNo" resultMap="SurveyQuestResultMap">
+	<select id="selectAllSurveyQuestByNo" resultMap="surveyQuestResultMap">
 		SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE,
 		QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED,
 		SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX
@@ -232,4 +232,9 @@
 	<insert id="insertSurveySubAnswer">
 		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, #{surveyNo}, #{surveyquestNo}, #{surveyanswerContent}, #{surveyanswerId}, DEFAULT)
 	</insert>
+	<!-- 설문조사 응답자 응답 상태 변경 -->
+	<update id="updateSubAnswerStatus">
+		UPDATE SURVEY_SUB SET SUB_ANSWERSTATUS = 'Y'
+		WHERE SURVEY_NO = #{surveyNo} AND SUB_ID = #{emplId}
+	</update>
 </mapper>
