@@ -18,7 +18,7 @@
 			</aside>
 			<article id="sub" class="">
 				<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-				<h1 class="basic-border-bottom"></h1>
+				<h1 class="basic-border-bottom">개인정보 수정</h1>
 				<div id="mypage" class="subConts align--middle">
 					<!-- subConts 여기 하나만. 정렬 안할거면 align--middle 지우기 -->
 					<div>
