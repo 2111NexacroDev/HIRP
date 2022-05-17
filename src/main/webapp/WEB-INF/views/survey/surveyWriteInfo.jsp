@@ -67,22 +67,22 @@
 					                	<div id="emplListDiv"> 
 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
 					                			밍선
-					                			<!-- 삭제 버튼 -->
+					                			삭제 버튼
 					                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button> 
 					                			<input type="hidden" name="surveyObjectIdList" value="id1">
 					                		</div>
-					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
-					                			진실
-					                			<!-- 삭제 버튼 -->
-					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button> 
-					                			<input type="hidden" name="surveyObjectIdList" value="id2">
-					                		</div>
-					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
-					                			민수
-					                			<!-- 삭제 버튼 -->
-					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button> 
-					                			<input type="hidden" name="surveyObjectIdList" value="id3">
-					                		</div>
+<!-- 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
+<!-- 					                			진실 -->
+<!-- 					                			삭제 버튼 -->
+<!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button>  -->
+<!-- 					                			<input type="hidden" name="surveyObjectIdList" value="id2"> -->
+<!-- 					                		</div> -->
+<!-- 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
+<!-- 					                			민수 -->
+<!-- 					                			삭제 버튼 -->
+<!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button>  -->
+<!-- 					                			<input type="hidden" name="surveyObjectIdList" value="id3"> -->
+<!-- 					                		</div> -->
 					                	</div>
 					                    <button class="noneBackground" type="button" onclick="onAddEmplButton(this);"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
 										<section class="section--modal modal--chat">
@@ -212,6 +212,42 @@
 				emplDiv.remove();
 			}
 			
+			//응답자 목록 추가
+			function addEmplDiv(arr){
+				console.log("addEmplDiv");
+				console.log(arr); //부서, 직급, 이름, 부서코드, 직급코드, 아이디 순
+				var $emplListDiv = $("#emplListDiv"); //응답 대상자 목록을 감싸고 있는 div
+				var $surveyObjectListInput = $emplListDiv.find("[name='surveyObjectIdList']"); //이미 추가된 id값 담겨있는 input 태그 (hidden)
+				console.log(emplListDiv);
+				console.log($surveyObjectListInput);
+				console.log($surveyObjectListInput.eq(0)); //input 태그 중에 첫번째
+				
+				var objectCount = $surveyObjectListInput.length; //input 태그 갯수
+				console.log("갯수:"+objectCount);
+				
+				for(var i = 0 ; i < objectCount ; i++){
+					if($surveyObjectListInput.eq(i).val() != arr[5]){ //아이디값이 같은 input이 없을 때
+// 						console.log($surveyObjectListInput.eq(0).val());
+// 						console.log(arr[5]);
+// 						console.log("없다!");
+						if(i == objectCount-1){ //아이디값이 같은 input이 없었고 마지막 인덱스일 때
+							var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
+				    			+arr[2]
+				    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
+				    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
+				    		+ "</div>"
+				    		$emplListDiv.append(emplDivHtml);
+						} else {
+							continue;
+						}
+					} else { //아이디값이 같은 input이 있으먼 추가 안됨.
+// 						console.log("있다!");
+						break;
+					}
+				}
+				
+			}
+			
 			//응답자 목록에서 검색 (ajax)
 			function emplSearch(){
 				var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
@@ -284,10 +320,15 @@
 				var hiddenDeptCode = tr.next();
 				var hiddenPositionCode = tr.next().next();
 				var hiddenEmplId = tr.next().next().next();
-				console.log(hiddenDeptCode);
-				console.log(hiddenPositionCode);
-				console.log(hiddenEmplId);
+				console.log(hiddenDeptCode.val());
+				console.log(hiddenPositionCode.val());
+				console.log(hiddenEmplId.val());
 				
+				tdArr.push(hiddenDeptCode.val());
+				tdArr.push(hiddenPositionCode.val());
+				tdArr.push(hiddenEmplId.val());
+				
+				addEmplDiv(tdArr);
 			}
 			
 			//설문 대상자 라디오버튼
