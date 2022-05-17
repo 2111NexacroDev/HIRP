@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,9 +48,12 @@ public class SurveyController {
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
 	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
-	public ModelAndView surveyMain(ModelAndView mv) {
+	public ModelAndView surveyMain(ModelAndView mv
+			, HttpServletRequest request) {
 		try {
-			String emplId = "TESTID";
+			HttpSession session = request.getSession();
+			String emplId = session.getAttribute("emplId").toString();
+			
 			//내가 대상자이면서 응답하지 않은 것 중 진행중인 설문조사 리스트
 			List<Survey> myList = sService.selectSubSurveyById(emplId);
 			if(!myList.isEmpty()) {
@@ -82,8 +86,10 @@ public class SurveyController {
 	
 	//진행중인 설문 페이지 (리스트 조회)
 	@RequestMapping(value="/survey/proceed.hirp", method=RequestMethod.GET)
-	public ModelAndView proceedSurvey(ModelAndView mv) {
-		String emplId = "TESTID";
+	public ModelAndView proceedSurvey(ModelAndView mv
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		//진행중인 설문 리스트
 		//진행중인 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
@@ -121,8 +127,10 @@ public class SurveyController {
 	
 	//마감된 설문 페이지 (리스트 조회)
 	@RequestMapping(value="/survey/closed.hirp", method=RequestMethod.GET)
-	public ModelAndView closedSurvey(ModelAndView mv) {
-		String emplId = "TESTID";
+	public ModelAndView closedSurvey(ModelAndView mv
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		//마감된 설문 리스트
 		//마감된 설문 리스트에 대한 나의 참여 여부
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
@@ -148,7 +156,8 @@ public class SurveyController {
 	@RequestMapping(value="/survey/mySurvey.hirp", method=RequestMethod.GET)
 	public ModelAndView wroteSurvey(ModelAndView mv
 			, HttpServletRequest request) {
-		String emplId = "ID1";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		//아이디 가져옴 (세션에서)
 		//내가 만든 설문 리스트
 		//설문조사 번호로 설문 대상자 리스트 가져오기
@@ -219,9 +228,10 @@ public class SurveyController {
 			,@RequestParam(value="surveySubjectIdList", required = false) String surveySubjectIdList
 			, HttpServletRequest request) {
 		//세션에서 아이디, depcode 가져와서 넣어주기.
-		String emplId = "TESTID";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		survey.setSurveyWriter(emplId);
-		String deptCode = "10";
+		String deptCode = session.getAttribute("deptCode").toString();
 		
 		//설문 응답자 유형
 		System.out.println(surveySubject);
@@ -377,10 +387,8 @@ public class SurveyController {
 		//내가 응답한 내용이 있는지 조회
 		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
 		//없으면 응답 할 수 있도록 띄워주고, 있으먼 내가 작성한 답변 띄워주기(응답 수정)
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "TESTID";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 //		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
 		
 		try {
@@ -423,9 +431,11 @@ public class SurveyController {
 	//설문 수정 페이지
 	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyModifyPage(ModelAndView mv
-			, @RequestParam("surveyNo") int surveyNo) {
+			, @RequestParam("surveyNo") int surveyNo
+			, HttpServletRequest request) {
 		//세션 아이디 값이 작성자와 같을 때 수정 페이지 이동 가능(jsp에서 처리)
-		String emplId = "TESTID";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		try {
 			Survey survey = sService.selectSurveyByNo(surveyNo);
 			List<Employee> emplList = eaService.printAllEmployeeWithName();
@@ -461,9 +471,10 @@ public class SurveyController {
 		//마감했을 땐 진행 기간, 설문 결과 공개 여부 변경 가능
 		
 		//세션에서 아이디, depcode 가져와서 넣어주기.
-		String emplId = "TESTID";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		survey.setSurveyWriter(emplId);
-		String deptCode = "10";
+		String deptCode = session.getAttribute("deptCode").toString();
 		
 		//설문 응답자 유형
 		System.out.println(surveySubject);
@@ -633,14 +644,13 @@ public class SurveyController {
 	//설문 검색
 	public ModelAndView surveySearch(ModelAndView mv
 			,@ModelAttribute Search search
-			,@RequestParam("surveyStatus") String surveyStatus) {
+			,@RequestParam("surveyStatus") String surveyStatus
+			, HttpServletRequest request) {
 		//surveyStatus 담아서 진행중/마감 설문조사 나누어 검색하기
 		//내가 만든 설문은 surveyStatus 비워진 상태, session에서 아이디값 가져오기
 		
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		
 		SurveySearch surveySearch = new SurveySearch(search);
 		if(surveyStatus == null) {
