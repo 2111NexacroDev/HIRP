@@ -127,6 +127,11 @@
 		#{surveyStartdate}, #{surveyEnddate}, 
 		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
 	</insert>
+	<!-- 설문조사 응답자 추가 -->
+	<insert id="insertSurveySub">
+		INSERT INTO SURVEY_SUB(SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS) VALUES
+		(SURVEYSUB_SEQ.NEXTVAL, #{surveyNo}, #{subId}, DEFAULT)
+	</insert>
 	<!-- 설문조사 수정 -->
 	<update id="updateSurvey">
 		UPDATE SURVEY_TBL SET SURVEY_STARTCOMMENT = #{surveyStartcomment} 

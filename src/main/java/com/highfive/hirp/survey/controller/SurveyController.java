@@ -2,6 +2,7 @@ package com.highfive.hirp.survey.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -219,13 +220,29 @@ public class SurveyController {
 		String emplId = "TESTID";
 		survey.setSurveyWriter(emplId);
 		System.out.println("surveyObjectIdList:"+surveyObjectIdList);
+		String[] objectList = surveyObjectIdList.split(",");
+//		List<SurveySub> subList = new ArrayList<SurveySub>();
+		//원래 리스트에 담아서 넘겨주고 for문 돌리려고 했는데 그럴 필요 없을 듯.
+		//어차피 for문 돌아가는 김에 insert 해주자.
+		
 		try {
 			//설문 등록
 			int result = sService.insertSurvey(survey);
+			int result2 = 0;
 			
 			if(result > 0) {
 				//설문 등록된 현재 시퀀스 번호 찾기
 				int surveySeqNo = sService.selectSurveySeqNo();
+				//설문 응답자 등록
+				for(int i = 0; i < objectList.length; i++) {
+					SurveySub surveySub = new SurveySub();
+					surveySub.setSurveyNo(surveySeqNo);
+					surveySub.setSubId(objectList[i]);
+//					subList.add(surveySub);
+//					System.out.println(subList.get(i));
+					result2 = sService.insertSurveySub(surveySub);
+				}
+				
 				mv.addObject("surveyNo", surveySeqNo);
 				mv.setViewName("survey/surveyWriteQuest");
 			} else {

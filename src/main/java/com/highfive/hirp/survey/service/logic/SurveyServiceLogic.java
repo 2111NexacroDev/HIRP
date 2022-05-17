@@ -91,7 +91,7 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문 대상자 리스트 추가
 	@Override
-	public int insertSurveySub(List<SurveySub> subList) {
+	public int insertSurveySub(SurveySub subList) {
 		int result = sStore.insertSurveySub(sqlSession, subList);
 		return result;
 	}

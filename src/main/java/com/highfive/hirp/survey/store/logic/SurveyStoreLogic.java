@@ -88,7 +88,7 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문 대상자 리스트 추가
 	@Override
-	public int insertSurveySub(SqlSession sqlSession, List<SurveySub> subList) {
+	public int insertSurveySub(SqlSession sqlSession, SurveySub subList) {
 		int result = sqlSession.insert("SurveyMapper.insertSurveySub", subList);
 		return result;
 	}

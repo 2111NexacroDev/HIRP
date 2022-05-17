@@ -41,7 +41,7 @@ public interface SurveyStore {
 	//설문 보기 추가 (날짜/객관식의 경우)
 	public int insertSurveyQuestCh(SqlSession sqlSession, SurveyQuestCh qCh);
 	//설문 대상자 리스트 추가
-	public int insertSurveySub(SqlSession sqlSession, List<SurveySub> subList);
+	public int insertSurveySub(SqlSession sqlSession, SurveySub subList);
 	//현재 설문조사 시퀀스 번호 가져오기
 	public int selectSurveySeqNo(SqlSession sqlSession);
 
