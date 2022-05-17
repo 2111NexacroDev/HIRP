@@ -19,7 +19,7 @@
                 <button type="submit"></button>
             </form>
 			<form id="addSurveyInfoForm" action="/survey/addSurveyInfo.hirp", method="get">
-				<h1 class="basic-border-bottom">설문 작성</h1>
+				<h1 class="basic-border-bottom">설문 수정</h1>
 	            <!-- 메인 상단 끝 -->
 	            
 	            <!-- 페이지 내용 -->
@@ -31,7 +31,7 @@
 			                    <div>설문 제목</div>
 			                </div>
 			                <div class="">
-			                    <input type="text" size="50" name="surveyTitle" placeholder="설문조사 제목 입력">
+			                    <input type="text" size="50" name="surveyTitle" placeholder="설문조사 제목 입력" value="${surveyInfo.surveyTitle }">
 			                </div>
 			            </div>
 			            <div class="row mt-20">
@@ -39,7 +39,7 @@
 			                    <div>설문 기간</div>
 			                </div>
 			                <div class="">
-			                    <input class="" type="date" name="surveyStartdate"> ~ <input class="" type="date" name="surveyEnddate">
+			                    <input class="" type="date" name="surveyStartdate" value="${fn:substring(surveyInfo.surveyStartdate, 0, 10) }"> ~ <input class="" type="date" name="surveyEnddate" value="${fn:substring(surveyInfo.surveyEnddate, 0, 10) }">
 			                </div>
 			            </div>
 			            <div class="row mt-20">
@@ -119,7 +119,7 @@
 													</table>
 												</div>
 												<div class="btns-wrap mt-20 t-r">
-													<button class="point" type="button">확인</button>
+<!-- 													<button class="point" type="button">확인</button> -->
 													<button class="finished closeWindow" type="button">닫기</button>
 												</div>
 											</div>
@@ -136,7 +136,7 @@
 			                </div>
 			                <div class="">
 			                    <!-- 체크박스랑 래디오 쓸 때 라벨 꼭 데리고 다니기, id와 for는 같아야함 -->
-				                <input id="resultRadio1" class="" name="surveyResult" type="radio" value="Y" checked="checked">
+				                <input id="resultRadio1" class="" name="surveyResult" type="radio" value="Y">
 				                <label for="resultRadio1">공개</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				                <input id="resultRadio2" class="" name="surveyResult" type="radio" value="N">
@@ -149,7 +149,7 @@
 			                </div>
 			                <div class="">
 			                	<!-- 체크박스랑 래디오 쓸 때 라벨 꼭 데리고 다니기, id와 for는 같아야함 -->
-				                <input id="editRadio1" class="" name="surveyEdit" type="radio" value="Y" checked="checked">
+				                <input id="editRadio1" class="" name="surveyEdit" type="radio" value="Y">
 				                <label for="editRadio1">허용</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				                <input id="editRadio2" class="" name="surveyEdit" type="radio" value="N">
@@ -166,11 +166,9 @@
 	                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
 	                        <div class="section--modal__conts" style="width:400px;">
 	                            <button class="btn--close" type="button"></button>
-	                            <h3 align="left">설문조사 작성</h3>
+	                            <h3 align="left">설문조사 수정</h3>
 	                            <p class="mb-20 padding-bottom">
-	                                확인을 누르면 설문조사 등록을 완료할 때까지<br>
-	                                입력한 정보를 수정할 수 없습니다.<br>
-	                                설문조사 정보 등록을 완료하시겠습니까?<br>
+	                                설문 정보 수정을 완료 하시겠습니까?<br>
 	                            </p>
 	                            <div class="btns-wrap mt-20 t-r">
 	                                <button class="point" type="submit">확인</button>
@@ -191,6 +189,27 @@
         </article>
         
         <script>
+	    	//화면이 로드 되었을 때  	
+        	$(document).ready(function(){
+        		var surveyResult = "${surveyInfo.surveyResult}";
+	          	var surveyEdit = "${surveyInfo.surveyEdit}";
+	          	console.log("로드 되었습니당");
+	          	console.log(surveyResult);
+	          	console.log(surveyEdit);
+	          	
+	          	if(surveyResult == "Y") {
+	          		$("#resultRadio1").prop("checked", true);
+	          	} else {
+	          		$("#resultRadio2").prop("checked", true);
+	          	}
+	          	
+	          	if(surveyEdit == "Y") {
+	          		$("#editRadio1").prop("checked", true);
+	          	} else {
+	          		$("#editRadio2").prop("checked", true);
+	          	}
+	      	});
+	      	
         	function onNextButton(e){
         		openModal(e);
         	}

@@ -427,11 +427,13 @@ public class SurveyController {
 		String emplId = "TESTID";
 		try {
 			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo);
 			if(survey != null) {
 				mv.addObject("surveyInfo", survey);
-				if(subList != null) {
+				if(emplList != null && subList != null) {
 					mv.addObject("subList", subList);
+					mv.addObject("emplList", emplList);
 					mv.setViewName("survey/surveyUpdateInfo");
 				}
 			} else {
