@@ -88,6 +88,7 @@
 		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
 	</select>
 	
+	<!-- 부서이름, 직급이름까지 가져오기 -->
 	<select id="selectAllEmployeeWithName" resultMap="emplResultMap">
 		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
 		DEPT_NAME, POSITION_NAME
@@ -95,6 +96,18 @@
 		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
 		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
 		WHERE NOT IS_STATUS IN ('임시','퇴사')
+	</select>
+	
+	<!-- 나와 같은 부서+하위 부서 사람들 가져오기 -->
+	<select id="selectAllEmployeeWithDeptCode" resultMap="emplResultMap">
+		SELECT EMPL_ID FROM EMPL_TBL 
+		WHERE NOT IS_STATUS IN ('임시','퇴사') AND DEPT_CODE LIKE #{deptCode} || '%'
+	</select>
+	
+	<!-- 나와 같은 부서 사람들 가져오기 -->
+	<select id="selectEmployeeWithDeptCode" resultMap="emplResultMap">
+		SELECT EMPL_ID FROM EMPL_TBL 
+		WHERE NOT IS_STATUS IN ('임시','퇴사') AND DEPT_CODE = #{deptCode}
 	</select>
 	
 	<select id="selectSearchEmplList" resultMap="emplResultMap">

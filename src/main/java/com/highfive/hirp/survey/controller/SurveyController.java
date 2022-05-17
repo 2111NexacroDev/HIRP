@@ -1,8 +1,10 @@
 package com.highfive.hirp.survey.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -212,18 +214,44 @@ public class SurveyController {
 	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@RequestParam("surveyObjectIdList") String surveyObjectIdList
-			//,@ModelAttribute List<String> subList
+			,@RequestParam("surveyObject") String surveyObject
+			,@RequestParam(value="subDept", required = false) String subDept
+			,@RequestParam(value="surveyObjectIdList", required = false) String surveyObjectIdList
 			, HttpServletRequest request) {
-		
-		//세션에서 아이디 가져와서 넣어주기.
+		//세션에서 아이디, depcode 가져와서 넣어주기.
 		String emplId = "TESTID";
 		survey.setSurveyWriter(emplId);
-		System.out.println("surveyObjectIdList:"+surveyObjectIdList);
-		String[] objectList = surveyObjectIdList.split(",");
-//		List<SurveySub> subList = new ArrayList<SurveySub>();
-		//원래 리스트에 담아서 넘겨주고 for문 돌리려고 했는데 그럴 필요 없을 듯.
-		//어차피 for문 돌아가는 김에 insert 해주자.
+		String deptCode = "10";
+		
+		//설문 응답자 유형
+		System.out.println(surveyObject);
+		System.out.println("subDept:"+subDept); //checked일 때 on, 아닐 때 null
+		
+		//응답자 리스트
+		List<String> objectList = new ArrayList<String>();
+		
+		//설문 응답자 타입에 따라서 다르게 담아줌.
+		if(surveyObject.equals("본인소속")) {
+			List<Employee> myDeptEmpl = new ArrayList<Employee>();
+			if(subDept != null) { //하위부서 선택o
+				myDeptEmpl = eaService.printAllEmployeeWithDeptCode(deptCode);
+			} else { //null일 때 즉 하위부서 선택x
+				myDeptEmpl = eaService.printEmployeeWithDeptCode(deptCode);
+			}
+			for(int i = 0 ; i < myDeptEmpl.size(); i++) {
+				objectList.add(myDeptEmpl.get(i).getEmplId());
+			}
+			System.out.println("myDeptEmpl:"+myDeptEmpl);
+		} else if(surveyObject.equals("직접선택")) {
+			//설문 응답자리스트
+			if(surveyObjectIdList != null) {
+				System.out.println("surveyObjectIdList:"+surveyObjectIdList);
+				objectList = Arrays.asList(surveyObjectIdList.split(","));
+				//List<SurveySub> subList = new ArrayList<SurveySub>();
+			}
+		} else {
+			System.out.println("둘다 아님");
+		}
 		
 		try {
 			//설문 등록
@@ -234,15 +262,17 @@ public class SurveyController {
 				//설문 등록된 현재 시퀀스 번호 찾기
 				int surveySeqNo = sService.selectSurveySeqNo();
 				//설문 응답자 등록
-				for(int i = 0; i < objectList.length; i++) {
-					SurveySub surveySub = new SurveySub();
-					surveySub.setSurveyNo(surveySeqNo);
-					surveySub.setSubId(objectList[i]);
+				if(objectList != null) {
+					for(int i = 0; i < objectList.size(); i++) {
+						SurveySub surveySub = new SurveySub();
+						surveySub.setSurveyNo(surveySeqNo); //surveyNo 지정
+						surveySub.setSubId(objectList.get(i)); //subId 지정
 //					subList.add(surveySub);
 //					System.out.println(subList.get(i));
-					result2 = sService.insertSurveySub(surveySub);
+						result2 = sService.insertSurveySub(surveySub);
+					}
+					
 				}
-				
 				mv.addObject("surveyNo", surveySeqNo);
 				mv.setViewName("survey/surveyWriteQuest");
 			} else {
@@ -253,7 +283,6 @@ public class SurveyController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		//설문 대상자 리스트 추가
 		return mv;
 	}
 	

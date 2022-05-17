@@ -11,6 +11,8 @@ public interface EmployeeAdminStore {
 
 	List<Employee> selectAllEmployee(SqlSession sqlSession);
 	List<Employee> selectAllEmployeeWithName(SqlSession sqlSession);
+	List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode);
+	List<Employee> selectEmployeeWithDeptCode(SqlSession sqlSession, String deptCode);
 	List<Employee> selectAllRetiree(SqlSession sqlSession);
 	List<Employee> selectTempEmployee(SqlSession sqlSession);
 	Employee selectOneEmployee(SqlSession sqlSession, String emplId);

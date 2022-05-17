@@ -8,7 +8,9 @@ import com.nexacro17.xapi.data.DataSet;
 public interface EmployeeAdminService {
 
 	public List<Employee> printAllEmployee();
-	public List<Employee> printAllEmployeeWithName();
+	public List<Employee> printAllEmployeeWithName(); //deptname, positionname까지 select
+	public List<Employee> printAllEmployeeWithDeptCode(String deptCode); //하위부서까지
+	public List<Employee> printEmployeeWithDeptCode(String deptCode); //내 부서 소속만
 	public List<Employee> printAllRetiree();
 	public List<Employee> printAllTempEmployee();
 	public Employee printEmployeeInfo(String emplId);	

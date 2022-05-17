@@ -52,7 +52,7 @@
 			                    	<input id="valueA" class="" name="surveyObject" type="radio" value="본인소속" checked="checked">
 					                <label for="valueA">본인 소속 팀</label>&nbsp;
 					                (
-					                	<input id="check1" class="" type="checkbox" checked="checked">
+					                	<input id="check1" class="" type="checkbox" name="subDept" checked="checked">
 			               	 			<label for="check1">하위 부서</label>
 					                )
 					                <br>
