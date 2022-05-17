@@ -32,13 +32,18 @@
        	<!-- 내가 작성한 게시글일 때 뜨는 버튼들 -->
        	<div class="padding-10 basic-border-bottom"">
        		<c:if test=""></c:if> <!-- 내가 작성한 설문조사일 때 다 보이고, 진행중인 것만 마감 버튼 보여주기 -->
+            <c:url var="sInfoUpdate" value="/survey/updateSurveyPage.hirp">
+                <c:param name="surveyNo" value="${surveyInfo.surveyNo }"></c:param>
+            </c:url>
             <c:url var="sStatusUpdate" value="/survey/updateStatus.hirp">
                 <c:param name="surveyNo" value="${surveyInfo.surveyNo }"></c:param>
             </c:url>
             <c:url var="sDelete" value="/survey/deleteSurvey.hirp">
                 <c:param name="surveyNo" value="${surveyInfo.surveyNo }"></c:param>
             </c:url>
-       		<button class="noneBackground"><i class="fa-solid fa-pen-to-square"></i> 수정</button>&nbsp;
+            <form action='${sInfoUpdate}' method="post">
+       			<button class="noneBackground"><i class="fa-solid fa-pen-to-square"></i> 수정</button>&nbsp;
+            </form>
             <form action='${sStatusUpdate}' method="post">
                 <button class="noneBackground" type="submit"><i class="fa-regular fa-clock"></i>  마감</button>&nbsp;
             </form>

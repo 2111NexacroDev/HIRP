@@ -214,9 +214,9 @@ public class SurveyController {
 	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@RequestParam("surveyObject") String surveyObject
+			,@RequestParam("surveySubject") String surveySubject
 			,@RequestParam(value="subDept", required = false) String subDept
-			,@RequestParam(value="surveyObjectIdList", required = false) String surveyObjectIdList
+			,@RequestParam(value="surveySubjectIdList", required = false) String surveySubjectIdList
 			, HttpServletRequest request) {
 		//세션에서 아이디, depcode 가져와서 넣어주기.
 		String emplId = "TESTID";
@@ -224,14 +224,14 @@ public class SurveyController {
 		String deptCode = "10";
 		
 		//설문 응답자 유형
-		System.out.println(surveyObject);
+		System.out.println(surveySubject);
 		System.out.println("subDept:"+subDept); //checked일 때 on, 아닐 때 null
 		
 		//응답자 리스트
-		List<String> objectList = new ArrayList<String>();
+		List<String> subjectList = new ArrayList<String>();
 		
 		//설문 응답자 타입에 따라서 다르게 담아줌.
-		if(surveyObject.equals("본인소속")) {
+		if(surveySubject.equals("본인소속")) {
 			List<Employee> myDeptEmpl = new ArrayList<Employee>();
 			if(subDept != null) { //하위부서 선택o
 				myDeptEmpl = eaService.printAllEmployeeWithDeptCode(deptCode);
@@ -239,14 +239,14 @@ public class SurveyController {
 				myDeptEmpl = eaService.printEmployeeWithDeptCode(deptCode);
 			}
 			for(int i = 0 ; i < myDeptEmpl.size(); i++) {
-				objectList.add(myDeptEmpl.get(i).getEmplId());
+				subjectList.add(myDeptEmpl.get(i).getEmplId());
 			}
 			System.out.println("myDeptEmpl:"+myDeptEmpl);
-		} else if(surveyObject.equals("직접선택")) {
+		} else if(surveySubject.equals("직접선택")) {
 			//설문 응답자리스트
-			if(surveyObjectIdList != null) {
-				System.out.println("surveyObjectIdList:"+surveyObjectIdList);
-				objectList = Arrays.asList(surveyObjectIdList.split(","));
+			if(surveySubjectIdList != null) {
+				System.out.println("surveyObjectIdList:"+surveySubjectIdList);
+				subjectList = Arrays.asList(surveySubjectIdList.split(","));
 				//List<SurveySub> subList = new ArrayList<SurveySub>();
 			}
 		} else {
@@ -262,11 +262,11 @@ public class SurveyController {
 				//설문 등록된 현재 시퀀스 번호 찾기
 				int surveySeqNo = sService.selectSurveySeqNo();
 				//설문 응답자 등록
-				if(objectList != null) {
-					for(int i = 0; i < objectList.size(); i++) {
+				if(subjectList != null) {
+					for(int i = 0; i < subjectList.size(); i++) {
 						SurveySub surveySub = new SurveySub();
 						surveySub.setSurveyNo(surveySeqNo); //surveyNo 지정
-						surveySub.setSubId(objectList.get(i)); //subId 지정
+						surveySub.setSubId(subjectList.get(i)); //subId 지정
 //					subList.add(surveySub);
 //					System.out.println(subList.get(i));
 						result2 = sService.insertSurveySub(surveySub);
@@ -420,10 +420,28 @@ public class SurveyController {
 	}
 	
 	//설문 수정 페이지
+	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyModifyPage(ModelAndView mv
 			, @RequestParam("surveyNo") int surveyNo) {
 		//세션 아이디 값이 작성자와 같을 때 수정 페이지 이동 가능(jsp에서 처리)
-		
+		String emplId = "TESTID";
+		try {
+			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo);
+			if(survey != null) {
+				mv.addObject("surveyInfo", survey);
+				if(subList != null) {
+					mv.addObject("subList", subList);
+					mv.setViewName("survey/surveyUpdateInfo");
+				}
+			} else {
+				mv.addObject("msg", "설문조사 수정 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
