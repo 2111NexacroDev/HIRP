@@ -55,7 +55,7 @@
 	                            </td>
 	                            <td>${survey.surveyTitle }</td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.surveyWriter }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
                     	</c:forEach>
 <!--                         <tr> -->

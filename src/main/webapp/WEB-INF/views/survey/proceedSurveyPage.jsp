@@ -60,7 +60,7 @@
 	                            </td>
 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.surveyWriter }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                            <td>
 	                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>
 		                            <!-- 응답자 목록 section -->
@@ -205,7 +205,7 @@
 						for(var i=0; i<count; i++){
 		        			var $tr = $("<tr>");
 		        			var $tdTeam = $("<td style='text-align: left;'>").html(sList[i].deptName);
-		        			var $tdName = $("<td style='text-align: left;'>").html(sList[i].emplName+sList[i].positionName);
+		        			var $tdName = $("<td style='text-align: left;'>").html(sList[i].emplName+" "+sList[i].positionName);
 		        			if(sList[i].subAnswerstatus == 'Y'){
 			        			var $tdStatus = $("<td style='text-align: center;'>").html('O');
 		        			} else if(sList[i].subAnswerstatus == 'N') {

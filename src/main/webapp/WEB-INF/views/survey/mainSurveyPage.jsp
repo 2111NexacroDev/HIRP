@@ -47,7 +47,7 @@
 										<!-- display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
 			                        </div>
 			                        <div class="">
-			                            <p class="">${myList.surveyWriter }</p>
+			                            <p class="">${myList.emplName } ${myList.positionName }</p>
 			                        </div>
 			                    </div>
 			                    <div class="row mt-10">
@@ -177,7 +177,7 @@
 	                            </td>
 	                            <td>${survey.surveyTitle }</td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.surveyWriter }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
                     	
                     	</c:forEach>
