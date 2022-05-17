@@ -65,12 +65,12 @@
 					                <div class="bor-dashed mt-20 padding-20" style="width:500px">
 					                	<!-- 응답자 리스트 담기는 div -->
 					                	<div id="emplListDiv"> 
-					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
-					                			밍선
-					                			삭제 버튼
-					                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button> 
-					                			<input type="hidden" name="surveyObjectIdList" value="id1">
-					                		</div>
+<!-- 					                		<div style="display:none;" class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
+<!-- 					                			밍선 -->
+<!-- 					                			삭제 버튼 -->
+<!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button>  -->
+<!-- 					                			<input type="hidden" name="surveyObjectIdList" value=""> -->
+<!-- 					                		</div> -->
 <!-- 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
 <!-- 					                			진실 -->
 <!-- 					                			삭제 버튼 -->
@@ -224,27 +224,38 @@
 				
 				var objectCount = $surveyObjectListInput.length; //input 태그 갯수
 				console.log("갯수:"+objectCount);
-				
-				for(var i = 0 ; i < objectCount ; i++){
-					if($surveyObjectListInput.eq(i).val() != arr[5]){ //아이디값이 같은 input이 없을 때
-// 						console.log($surveyObjectListInput.eq(0).val());
-// 						console.log(arr[5]);
-// 						console.log("없다!");
-						if(i == objectCount-1){ //아이디값이 같은 input이 없었고 마지막 인덱스일 때
-							var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
-				    			+arr[2]
-				    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
-				    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
-				    		+ "</div>"
-				    		$emplListDiv.append(emplDivHtml);
-						} else {
-							continue;
+				if(objectCount == 0){
+					console.log("인풋이 없다");
+					var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
+		    			+arr[2]
+		    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
+		    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
+		    		+ "</div>"
+		    		$emplListDiv.append(emplDivHtml);
+				} else {
+					for(var i = 0 ; i < objectCount ; i++){
+						if($surveyObjectListInput.eq(i).val() != arr[5]){ //아이디값이 같은 input이 없을 때
+	// 						console.log($surveyObjectListInput.eq(0).val());
+	// 						console.log(arr[5]);
+	// 						console.log("없다!");
+							if(i == objectCount-1){ //아이디값이 같은 input이 없었고 마지막 인덱스일 때
+								var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
+					    			+arr[2]
+					    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
+					    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
+					    		+ "</div>"
+					    		$emplListDiv.append(emplDivHtml);
+							} else {
+								continue;
+							}
+						} else { //아이디값이 같은 input이 있으먼 추가 안됨.
+	// 						console.log("있다!");
+							break;
 						}
-					} else { //아이디값이 같은 input이 있으먼 추가 안됨.
-// 						console.log("있다!");
-						break;
 					}
+					
 				}
+				
 				
 			}
 			
