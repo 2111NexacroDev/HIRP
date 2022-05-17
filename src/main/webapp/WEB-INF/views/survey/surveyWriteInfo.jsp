@@ -119,7 +119,7 @@
 													</table>
 												</div>
 												<div class="btns-wrap mt-20 t-r">
-													<button class="point" type="button">확인</button>
+<!-- 													<button class="point" type="button">확인</button> -->
 													<button class="finished closeWindow" type="button">닫기</button>
 												</div>
 											</div>
