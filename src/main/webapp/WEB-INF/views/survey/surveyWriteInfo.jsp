@@ -49,18 +49,18 @@
 			                <div class="">
 			                	<!-- 본인 소속 부서 사람들 선택 -->
 			                    <div class="mb-20">
-			                    	<input id="valueA" class="" name="surveyObject" type="radio" value="본인소속" checked="checked">
-					                <label for="valueA">본인 소속 팀</label>&nbsp;
+			                    	<input id="objectRadio1" class="" name="surveyObject" type="radio" value="본인소속" checked="checked">
+					                <label for="objectRadio1">본인 소속 팀</label>&nbsp;
 					                (
-					                	<input id="check1" class="" type="checkbox" name="subDept" checked="checked">
-			               	 			<label for="check1">하위 부서</label>
+					                	<input id="subDeptCheck" class="" type="checkbox" name="subDept" checked="checked">
+			               	 			<label for="subDeptCheck">하위 부서</label>
 					                )
 					                <br>
 			                    </div>
 			                    <!-- 직접 선택 -->
 			                    <div class="">
-				                    <input id="valueB" class="mt-20" name="surveyObject" type="radio" value="직접선택">
-					                <label for="valueB">직접 선택</label><br>
+				                    <input id="objectRadio2" class="mt-20" name="surveyObject" type="radio" value="직접선택">
+					                <label for="objectRadio2">직접 선택</label><br>
 					                
 					                <div class="bor-dashed mt-20 padding-20" style="width:500px">
 					                	<!-- 응답자 리스트 담기는 div -->
@@ -136,11 +136,11 @@
 			                </div>
 			                <div class="">
 			                    <!-- 체크박스랑 래디오 쓸 때 라벨 꼭 데리고 다니기, id와 for는 같아야함 -->
-				                <input id="valueA" class="" name="surveyResult" type="radio" value="Y" checked="checked">
-				                <label for="valueA">공개</label>
+				                <input id="resultRadio1" class="" name="surveyResult" type="radio" value="Y" checked="checked">
+				                <label for="resultRadio1">공개</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				                <input id="valueB" class="" name="surveyResult" type="radio" value="N">
-				                <label for="valueB">비공개</label><br>
+				                <input id="resultRadio2" class="" name="surveyResult" type="radio" value="N">
+				                <label for="resultRadio2">비공개</label><br>
 			                </div>
 			            </div>
 			            <div class="row mt-20 mb-20">
@@ -149,11 +149,11 @@
 			                </div>
 			                <div class="">
 			                	<!-- 체크박스랑 래디오 쓸 때 라벨 꼭 데리고 다니기, id와 for는 같아야함 -->
-				                <input id="valueA" class="" name="surveyEdit" type="radio" value="Y" checked="checked">
-				                <label for="valueA">허용</label>
+				                <input id="editRadio1" class="" name="surveyEdit" type="radio" value="Y" checked="checked">
+				                <label for="editRadio1">허용</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				                <input id="valueB" class="" name="surveyEdit" type="radio" value="N">
-				                <label for="valueB">비허용</label><br>
+				                <input id="editRadio2" class="" name="surveyEdit" type="radio" value="N">
+				                <label for="editRadio2">비허용</label><br>
 			                </div>
 			            </div>
 			            
@@ -197,6 +197,9 @@
 
 			function onAddEmplButton(e){
 				openModal(e);
+				//본인 소속팀과 하위 부서 check 해제
+				$("#objectRadio2").prop("checked", true);
+				$("#subDeptCheck").prop("checked", false);
 			}
 			
 			//검색 input창 초기화
@@ -346,7 +349,7 @@
 			//본인소속, 직접선택
 			$("input[name=surveyObject]").change(function(){
 				if($(this).val() == "직접선택"){
-					$("#check1").prop("checked", false);
+					$("#subDeptCheck").prop("checked", false);
 				}
 			});
 			
