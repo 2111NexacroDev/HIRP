@@ -71,8 +71,8 @@
 			                    </div>
 		            		</div>
 		                	
-		                	<div class="t-c padding-20 basic-border-top">
-		                		<a href="#">설문 참여</a>
+		                	<div class="t-c padding-0 basic-border-top" onclick="location.href='#'">
+		                		<button class="noneBackground padding-20" style="width:95%" onclick="location.href='/survey/questDetail.hirp?surveyNo=${myList.surveyNo}'">설문 참여</button>
 		                	</div>
 		                </div>
 		                <!-- 박스 끝 -->
