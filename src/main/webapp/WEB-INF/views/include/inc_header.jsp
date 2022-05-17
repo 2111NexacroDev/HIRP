@@ -18,9 +18,10 @@
             <li><a href="/schedule/list.hirp">일정관리</a></li>
             <li><a href="/approval/main.hirp">전자결재</a></li>
             <li><a href="/survey/main.hirp">설문조사</a></li>
-            <li><a href="/time/list.hirp">근태관리</a></li>
+            <li><a href="/time/timeListView.hirp">근태관리</a></li>
             <li><a href="/reservation/list.hirp">공용품 예약/관리</a></li>
         </ul>
-        <button type="button" id="gnb__btn--org">조직도</button>
+        <button type="button" id="gnb__btn--org" onclick="location.href='/group/groupView.hirp'">조직도</button>
     </nav>
 </header>
+

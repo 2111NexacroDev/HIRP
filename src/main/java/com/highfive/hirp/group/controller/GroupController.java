@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.group.domain.Group;
@@ -25,16 +26,27 @@ import com.highfive.hirp.group.service.GroupService;
 public class GroupController {
 	
 	@Autowired
-	private GroupService gService;
-
-	// 조직도 조회
-	@RequestMapping(value="/group/groupView.hirp", method=RequestMethod.GET) // jsp -> 서버
-	public ModelAndView groupView (ModelAndView mv, HttpServletRequest request) { // 서버 -> db
-		List<Dept> groupList = gService.printAllGroup(); // grouptList, <Group>받아오는것 // ()불러오는것.불러올땐 괄호 비워둬도 됨
-		mv.addObject("groupList", groupList); // 그룹리스트 jsp로 보내줌 ("쓸값", 보내주는값)
-		mv.setViewName("group/groupView");
-		return mv;
+	private GroupService gService;	
+	
+	// 조직도 조회1
+	@ResponseBody // ajax사용 위해서 필요함
+	@RequestMapping(value ="/group/groupViewData.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String groupView() {
+		List<Dept> dList = gService.printAllGroup();
+		if(!dList.isEmpty()) {
+			Gson gson = new Gson();
+			return gson.toJson(dList);
+		}
+		return "";
 	}
+	// 조직도 조회2
+	 @RequestMapping(value="/group/groupView.hirp", method=RequestMethod.GET) // jsp -> 서버
+	 public ModelAndView groupView (ModelAndView mv, HttpServletRequest request) { // 서버 -> db
+	 List<Dept> groupList = gService.printAllGroup(); // grouptList, <Group>받아오는것 // ()불러오는것.불러올땐 괄호 비워둬도 됨
+	 mv.addObject("groupList", groupList); // 그룹리스트 jsp로 보내줌 ("쓸값", 보내주는값)
+	 mv.setViewName("group/groupView");
+	 return mv;
+	 }
 	
 	// 회원 검색
 	@RequestMapping(value="/group/groupSerchView", method=RequestMethod.GET)

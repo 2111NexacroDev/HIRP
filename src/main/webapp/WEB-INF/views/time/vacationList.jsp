@@ -40,6 +40,26 @@
 		<article id="sub" class="">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
 			<h1 class="basic-border-bottom">연차 내역</h1>
+			
+			<div class="row mt-20 no-space">
+                        <!-- <h4 class="col-12 mb-20">여백 필요 없을 경우</h4> -->
+                        <div class="col basic-border">
+                            <div>발생 연차</div>
+                        </div>
+                        <div class="col basic-border">
+                            <div>발생 월차</div>
+                        </div>
+                        <div class="col basic-border">
+                            <div>총 연차</div>
+                        </div>
+                        <div class="col basic-border">
+                            <div>사용 연차</div>
+                        </div>
+                        <div class="col basic-border">
+                            <div>잔여 연차</div>
+                        </div>
+                    </div>
+                    
 		</article>
 	</div>
 </body>
