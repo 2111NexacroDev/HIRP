@@ -124,7 +124,7 @@
 												</div>
 											</div>
 										</section>
-					                    <button class="colorGrey" type="button"><i class="fa-regular fa-trash-can"></i> 전체 삭제</button>
+					                    <button class="colorGrey" type="button" onclick="removeAllEmpl(this);"><i class="fa-regular fa-trash-can"></i> 전체 삭제</button>
 					                </div>
 			                    </div>
 				                
@@ -194,7 +194,8 @@
         	function onNextButton(e){
         		openModal(e);
         	}
-
+			
+        	//응답자 추가 버튼
 			function onAddEmplButton(e){
 				openModal(e);
 				//본인 소속팀과 하위 부서 check 해제
@@ -213,6 +214,15 @@
 				var emplDiv = $(obj).parent();
 				console.log(emplDiv);
 				emplDiv.remove();
+			}
+			
+			//응답자 목록 전체 삭제
+			function removeAllEmpl(obj){
+				//emplListDiv 비워주기
+				$("#emplListDiv").html("");
+				//본인 소속팀과 하위부서 check
+				$("#objectRadio1").prop("checked", true);
+				$("#subDeptCheck").prop("checked", true);
 			}
 			
 			//응답자 목록 추가
