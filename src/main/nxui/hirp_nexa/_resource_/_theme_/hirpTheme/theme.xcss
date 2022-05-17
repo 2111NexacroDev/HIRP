@@ -8,8 +8,8 @@ last-modified : 2021-10-26
 /* Frame/Form */
 .Form
 {
-	font : 12px "Gulim";
-	color : #555555;
+	font : 12px "Noto Sans KR";
+	color : #333333;
 	background : #ffffff;
 	-nexa-border : 0px none;
 }
@@ -255,7 +255,7 @@ last-modified : 2021-10-26
 
 .Combo .combolist,.ComboControl .combolist
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 	background : #ffffff;
 	-nexa-border : 1px solid #b1b1b1;
@@ -330,6 +330,7 @@ last-modified : 2021-10-26
 {
 	background : #f0f0f0;
 }
+
 /* headcellbutton (Same as ButtonControl) */
 /* headcellcalendar (Same as CalendarControl) */
 /* headcellcheckbox (Same as CheckBoxControl) */
@@ -394,6 +395,12 @@ last-modified : 2021-10-26
 .Grid .body .selection
 {
 	-nexa-border : 2px solid #125dae;
+}
+
+.Grid.detailTable .body .row .cell[status=disabled][userstatus=selected],
+.Grid.detailTable .body .row .cell[status=mouseover]
+{
+	background : transparent;
 }
 /* bodycellbutton (Same as ButtonControl) */
 /* bodycellcalendar (Same as CalendarControl) */
@@ -506,7 +513,7 @@ last-modified : 2021-10-26
 
 .Grid .summary .row .cell
 {
-	font : bold 12px "Gulim";
+	font : bold 12px "Noto Sans KR";
 	color : #333333;
 	background : #fdfbe5;
 	-nexa-border : 1px solid #c8c1c2;
@@ -541,7 +548,7 @@ last-modified : 2021-10-26
 /* cellbutton (Same as ButtonControl) */
 .GridCellControl .cellbutton
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 	background : linear-gradient(to top,#eaeaea,#ffffff);
 	-nexa-border : 1px solid #c2c2c2;
@@ -568,24 +575,24 @@ last-modified : 2021-10-26
 /* cellcalendar (Same as CalendarControl) */
 .GridCellControl .cellcalendar
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* cellcheckbox (Same as CheckBoxControl) */
 .GridCellControl .cellcheckbox
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* cellcombo (Same as ComboControl) */
 .GridCellControl .cellcombo
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 .GridCellControl .cellcombo .combolist
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 }
 
@@ -597,7 +604,7 @@ last-modified : 2021-10-26
 /* celledit (Same as EditControl) */
 .GridCellControl .celledit
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	background : #ffffff;
 	-nexa-border : 1px solid #d5d5d5;
 	-nexa-padding : 1px 9px 0px 9px;
@@ -625,7 +632,7 @@ last-modified : 2021-10-26
 /* cellmaskedit(Same as MaskEditControl) */
 .GridCellControl .cellmaskedit
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	background : #ffffff;
 	-nexa-border : 1px solid #d5d5d5;
 	-nexa-padding : 1px 9px 0px 9px;
@@ -645,19 +652,19 @@ last-modified : 2021-10-26
 /* cellprogressbar (Same as ProgressBarControl) */
 .GridCellControl .cellprogressbar
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* celltextarea (Same as TextAreaControl) */
 .GridCellControl .celltextarea
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* celltreeitem: */
 .GridCellControl .celltreeitem .treeitemtext
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #666666;
 }
 
@@ -875,7 +882,7 @@ last-modified : 2021-10-26
 
 .Menu .menuitem
 {
-	font : bold 13px "Gulim";
+	font : bold 13px "Noto Sans KR";
 	color : #ffffff;
 	-nexa-padding : 0px 30px 0px 30px;
 	cursor : pointer;
@@ -896,7 +903,7 @@ last-modified : 2021-10-26
 }
 .Menu .menupopupmenu
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 	background : #0753a5;
 	-nexa-border : 1px solid #034389;
@@ -1006,7 +1013,7 @@ last-modified : 2021-10-26
 /* PopupMenu */
 .PopupMenu,.PopupMenuControl
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 	background : #ffffff;
 	-nexa-border : 1px solid #b5b5b5;
@@ -1252,7 +1259,7 @@ last-modified : 2021-10-26
 /* Static */
 .Static,.StaticControl
 {
-	font : normal 10pt/normal "Noto Sans KR";
+	font : normal 14px/normal "Noto Sans KR";
 	opacity : 1;
 }
 .Static[status=disabled],.StaticControl[status=disabled]
@@ -1317,7 +1324,9 @@ last-modified : 2021-10-26
 .Tab .tabbuttonitem
 {
 	color : #333333;
+	background: none;
 	-nexa-padding : 6px 10px 6px 10px;
+	font : normal 14px/normal "Noto Sans KR";
 }
 
 .Tab .tabbuttonitem[status=mouseover]
@@ -1327,16 +1336,18 @@ last-modified : 2021-10-26
 
 .Tab .tabbuttonitem[status=focused]
 {
-	color : #dee4ef;
+	-nexa-border : 1px solid #c7d4e2;
+	color : #000000;
+	font : 700 10px/normal "Noto Sans KR";
 }
 
 .Tab .tabbuttonitem[userstatus=selected],.Tab .tabbuttonitem[status=focused][userstatus=selected]
 {
+	-nexa-border : 1px solid #c7d4e2;
 	-nexa-border : 0px none, 0px none, 2px solid #000000;
-	font : normal 500 10px/normal "Noto Sans KR";
-}
-
-.Tab .tabbuttonitem[status=disabled]
+	color : #000000;
+	font : 700 14px/normal "Noto Sans KR";
+}.Tab .tabbuttonitem[status=disabled]
 {
 	color : #ababab;
 	background : #e7e7e7;
@@ -1346,11 +1357,6 @@ last-modified : 2021-10-26
 {
 	-nexa-border : 1px solid #c7d4e2;
 	background : #94a9bf;
-}
-
-.Tab .tabbuttonitem .tabbuttonitemtext[status=disabled]
-{
-	color : #c8c8c8;
 }
 
 .Tab .tabbuttonitem .extrabutton
@@ -1785,7 +1791,7 @@ last-modified : 2021-10-26
 /* TitleBar */
 .TitleBarControl
 {
-	font : bold 12px "Gulim";
+	font : bold 12px "Noto Sans KR";
 	color : #ffffff;
 	background : #003284;
 	-nexa-padding : 0px 0px 0px 10px;
@@ -1898,13 +1904,13 @@ last-modified : 2021-10-26
 {
 	-nexa-border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #ffffff;
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 .ListView .detail
 {
 	-nexa-border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #f9f9f9;
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 .ListView .body[userstatus=selected]
 {
@@ -1935,7 +1941,7 @@ last-modified : 2021-10-26
 /* cellbutton (Same as ButtonControl) */
 .ListViewCellControl .cellbutton
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 	background : linear-gradient(to top,#eaeaea,#ffffff);
 	-nexa-border : 1px solid #c2c2c2;
@@ -1962,24 +1968,24 @@ last-modified : 2021-10-26
 /* cellcalendar (Same as CalendarControl) */
 .ListViewCellControl .cellcalendar
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* cellcheckbox (Same as CheckBoxControl) */
 .ListViewCellControl .cellcheckbox
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* cellcombo (Same as ComboControl) */
 .ListViewCellControl .cellcombo
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 .ListViewCellControl .cellcombo .combolist
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	color : #555555;
 }
 
@@ -1991,7 +1997,7 @@ last-modified : 2021-10-26
 /* celledit (Same as EditControl) */
 .ListViewCellControl .celledit
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	background : #ffffff;
 	-nexa-border : 1px solid #d5d5d5;
 	-nexa-padding : 1px 9px 0px 9px;
@@ -2019,7 +2025,7 @@ last-modified : 2021-10-26
 /* cellmaskedit (Same as MaskEditControl) */
 .ListViewCellControl .cellmaskedit
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 	background : #ffffff;
 	-nexa-border : 1px solid #d5d5d5;
 	-nexa-padding : 1px 9px 0px 9px;
@@ -2039,13 +2045,13 @@ last-modified : 2021-10-26
 /* cellprogressbar (Same as ProgressBarControl) */
 .ListViewCellControl .cellprogressbar
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 /* celltextarea (Same as TextAreaControl) */
 .ListViewCellControl .celltextarea
 {
-	font : 12px "Gulim";
+	font : 12px "Noto Sans KR";
 }
 
 .ListView .body .expandbar
@@ -2115,16 +2121,14 @@ last-modified : 2021-10-26
 	font : normal 10pt/normal "Noto Sans KR";
 	-nexa-border : 1px solid #b2b2b2;
 }
+
 .Button.delete
 {
-
 	background : #ad0000;
 	color : #ffffff;
 	font : normal 10pt/normal "Noto Sans KR";
 	-nexa-border : 0px solid #000000;
-
 }
-
 .Button.point {
     background: #0b2a60;
     -nexa-border: 1px solid #0b2a60;
@@ -2151,8 +2155,9 @@ last-modified : 2021-10-26
 
 .Button[status=focused],.FileDownload[status=mouseover],.FileDownload[status=focused],.FileUpload .fileuploaditem .fileuploaditembutton[status=mouseover],.FileUpload .fileuploaditem .fileuploaditembutton[status=focused]
 {
-	background : linear-gradient(to top,#e7e7e7,#fefefe);
-	-nexa-border : 1px solid #a0a0a0;
+	background : #ffffff;
+	/*-nexa-border : 1px solid #000000;*/
+	color: #000000;
 }
 
 .Button.delete[status=focused]
@@ -2180,10 +2185,18 @@ last-modified : 2021-10-26
 	background : #ffffff;
 	color : #333333;
 }
-.Grid .body .row .cell .cellbutton[status=mouseover]
+
+.Grid .body .row .cell .cellbutton[status=mouseover],
+.Grid .body .row .cell .cellbutton[userstatus=selected],
+.Grid .body .row .cell .cellbutton[status=focused],
+.Grid .body .row .cell .cellbutton[status=focused][userstatus=selected],
+.Grid .body .row .cell .cellbutton[status=focused][userstatus=pushed]
 {
-	-nexa-border : 1px solid #333333;
-	background : #ffffff;
-	color : #333333;
+	background : #0b2a60;
+	-nexa-border : 1px solid #0b2a60;
+	color: #ffffff;
+}
+.GridCellControl .cellcombo .comboedit
+{
 }
 ]]></XCSS>

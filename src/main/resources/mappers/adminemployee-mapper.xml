@@ -25,10 +25,22 @@
 		<result property="isVeterans" column="IS_VETERANS"/>
 		<result property="endDate" column="END_DATE"/>
 		<result property="endReason" column="END_REASON"/>
-		<result property="profile" column="EMPL_PROFILE"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 		<!-- 회원 정보 이름으로 가져오기 -->
 		<result property="deptName" column="DEPT_NAME"/>
 		<result property="positionName" column="POSITION_NAME"/>
+		<association javaType="Career" property="career" column="EMPL_ID">
+			<id property="careerNo" column="CAREER_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="careerStartDate" column="CAREER_START_DATE"/>
+			<result property="careerEndDate" column="CAREER_END_DATE"/>
+			<result property="careerPlace" column="CAREER_PLACE"/>
+			<result property="careerRank" column="CAREER_RANK"/>
+			<result property="careerJobRole" column="CAREER_JOB_ROLE"/>
+			<result property="careerPeriod" column="CAREER_PERIOD"/>
+			<result property="careerEndReason" column="CAREER_END_REASON"/>
+			<result property="careerEtc" column="CAREER_ETC"/>
+		</association>
 		<association javaType="Certification" property="certification" column="EMPL_ID">
 			<id property="certNo" column="CERT_NO"/>
 			<result property="emplId" column="EMPL_ID"/>

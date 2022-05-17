@@ -4,84 +4,350 @@
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" width="1080" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60"/>
+        <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" width="1040" height="282" binddataset="ds_empl" autofittype="col">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="104"/>
-                <Column size="96"/>
-                <Column size="113"/>
-                <Column size="92"/>
-                <Column size="121"/>
+                <Column size="139"/>
+                <Column size="114"/>
+                <Column size="175"/>
+                <Column size="116"/>
+                <Column size="182"/>
               </Columns>
               <Rows>
-                <Row size="34" band="head"/>
-                <Row size="30"/>
-                <Row size="31"/>
-                <Row size="33"/>
-                <Row size="35"/>
+                <Row size="32" band="head"/>
+                <Row size="39"/>
+                <Row size="39"/>
+                <Row size="38"/>
+                <Row size="39"/>
               </Rows>
               <Band id="head">
-                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="bold 12px/normal &quot;Noto Sans KR&quot;"/>
+                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="500 14px/normal &quot;Noto Sans KR&quot;" background="#f9f9f9"/>
               </Band>
               <Band id="body">
-                <Cell rowspan="4" text="bind:profile"/>
+                <Cell rowspan="4" text="expr:imgURL::profile" displaytype="imagecontrol"/>
                 <Cell col="1" text="이름" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="2" text="bind:emplName"/>
+                <Cell col="2" text="bind:emplName" padding="0px 20px" edittype="text"/>
                 <Cell col="3" text="소속부서" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName"/>
+                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" padding="0px 20px"/>
                 <Cell row="1" col="1" text="직위/직책" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo"/>
+                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo" padding="0px 20px" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
                 <Cell row="1" col="3" text="직통번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="4" text="bind:directNo"/>
+                <Cell row="1" col="4" text="bind:directNo" padding="0px 20px" edittype="text"/>
                 <Cell row="2" col="1" text="이메일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="2" text="bind:email"/>
+                <Cell row="2" col="2" text="bind:email" padding="0px 20px" edittype="text"/>
                 <Cell row="2" col="3" text="휴대전화번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="4" text="bind:phoneNo"/>
+                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 20px" edittype="text"/>
                 <Cell row="3" col="1" text="입사일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="2" text="bind:startDate"/>
+                <Cell row="3" col="2" text="bind:startDate" padding="0px 20px"/>
                 <Cell row="3" col="3" text="상태" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="4" text="bind:isStatus"/>
+                <Cell row="3" col="4" text="bind:isStatus" padding="0px 20px" edittype="combo" combodataset="ds_status" combodatacol="statusName" combodisplaynulltext="재직 상태" combocodecol="statusCode" combodisplaynulltype="nulltext"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="380" height="320" right="0" onchanged="Tab00_onchanged">
+        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="240" right="0" onchanged="Tab00_onchanged">
           <Tabpages>
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="128" right="20" binddataset="ds_empl" cssclass="detailTable" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="0" band="head"/>
+                          <Row size="42"/>
+                          <Row size="42"/>
+                          <Row size="42"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell colspan="4" text="기본정보" color="#333333" border="1px solid #dbdee2"/>
+                          <Cell col="4"/>
+                          <Cell col="5"/>
+                          <Cell col="6"/>
+                          <Cell col="7"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="사원아이디" textAlign="center" background="#f9f9f9"/>
+                          <Cell col="1" text="bind:emplId" padding="0px 10px"/>
+                          <Cell col="2" text="채용구분" textAlign="center" background="#f9f9f9"/>
+                          <Cell col="3" text="bind:recruitCategory" padding="0px 10px"/>
+                          <Cell col="4" textAlign="center" background="#f9f9f9" text="급여구분"/>
+                          <Cell col="5" text="bind:salaryCategory" padding="0px 10px"/>
+                          <Cell col="6" textAlign="center" background="#f9f9f9" text="추천자"/>
+                          <Cell col="7" text="bind:referrer" padding="0px 10px"/>
+                          <Cell row="1" textAlign="center" background="#f9f9f9" text="생년월일"/>
+                          <Cell row="1" col="1" text="bind:birthday" padding="0px 10px"/>
+                          <Cell row="1" col="2" textAlign="center" background="#f9f9f9" text="성별"/>
+                          <Cell row="1" col="3" text="bind:gender" padding="0px 10px"/>
+                          <Cell row="1" col="4" textAlign="center" background="#f9f9f9" text="결혼여부"/>
+                          <Cell row="1" col="5" text="bind:isMarriage" padding="0px 10px"/>
+                          <Cell row="1" col="6" textAlign="center" background="#f9f9f9" text="장애여부"/>
+                          <Cell row="1" col="7" text="bind:isDisability" padding="0px 10px"/>
+                          <Cell row="2" textAlign="center" background="#f9f9f9" text="보훈여부"/>
+                          <Cell row="2" col="1" text="bind:isVeterans" padding="0px 10px"/>
+                          <Cell row="2" col="2" textAlign="center" background="#f9f9f9" text="퇴사일"/>
+                          <Cell row="2" col="3" text="bind:endDate" padding="0px 10px"/>
+                          <Cell row="2" col="4" textAlign="center" background="#f9f9f9" text="퇴직사유"/>
+                          <Cell row="2" col="5" text="bind:endReason" padding="0px 10px"/>
+                          <Cell row="2" col="6" textAlign="center" background="#f9f9f9"/>
+                          <Cell row="2" col="7" padding="0px 10px"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
-            <Tabpage id="Tabpage2" text="직무/담당"/>
+            <Tabpage id="Tabpage2" text="직무/담당">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="170" right="20" binddataset="ds_jobRole" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="1" text="직군" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="직무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="직무시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="직무종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" text="bind:jobRoleDivision"/>
+                          <Cell col="2" text="bind:jobRoleTitle"/>
+                          <Cell col="3" text="bind:jobRoleStartDate"/>
+                          <Cell col="4" text="bind:jobRoleEndDate"/>
+                          <Cell col="5" text="bind:jobRoleConts"/>
+                          <Cell col="6" text="bind:jobRoleEtc"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
             <Tabpage id="Tabpage3" text="경력">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="170" right="20" binddataset="ds_career" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell color="#333333" text="NO" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="1" text="경력시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="경력종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="근무처" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="직위" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="근속기간" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="퇴사사유" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="8" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" text="bind:careerStartDate" edittype="date"/>
+                          <Cell col="2" text="bind:careerEndDate" edittype="date"/>
+                          <Cell col="3" text="bind:careerPlace"/>
+                          <Cell col="4" text="bind:careerRank"/>
+                          <Cell col="5" text="bind:careerJobRole"/>
+                          <Cell col="6" text="bind:careerPeriod"/>
+                          <Cell col="7" text="bind:careerEndReason"/>
+                          <Cell col="8" text="bind:careerEtc"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
             <Tabpage id="Tabpage4" text="자격">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="170" right="20" binddataset="ds_cert" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="1" text="구분" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="자격명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="자격증번호" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="자격등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="기관명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="취득일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="만료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" text="bind:certCategory"/>
+                          <Cell col="2" text="bind:certName"/>
+                          <Cell col="3" text="bind:certEnrollNo"/>
+                          <Cell col="4" text="bind:certLevel"/>
+                          <Cell col="5" text="bind:certInst"/>
+                          <Cell col="6" text="bind:certStartDate" edittype="date"/>
+                          <Cell col="7" text="bind:certEndDate" edittype="date"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
             <Tabpage id="Tabpage5" text="어학">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="170" right="20" binddataset="ds_lang" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="1" color="#333333" border="1px solid #dbdee2" background="#f9f9f9" text="구분"/>
+                          <Cell col="2" text="어학명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="평가일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="평가기관" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="점수" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" text="bind:langCategory"/>
+                          <Cell col="2" text="bind:langName"/>
+                          <Cell col="3" text="bind:langTestDate" displaytype="date"/>
+                          <Cell col="4" text="bind:langInst"/>
+                          <Cell col="5" text="bind:langScore"/>
+                          <Cell col="6" text="bind:langGrade"/>
+                          <Cell col="7" text="bind:langEtc"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
             <Tabpage id="Tabpage6" text="병역">
               <Layouts>
-                <Layout/>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="170" right="20" binddataset="ds_military" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="1" text="계급" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="2" text="군번" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="3" text="전역구분" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="4" text="입대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="5" text="제대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="6" text="비고" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="expr:currow+1"/>
+                          <Cell col="1" text="bind:militaryGrade"/>
+                          <Cell col="2" text="bind:militaryCode"/>
+                          <Cell col="3" text="bind:isMilitaryEnd"/>
+                          <Cell col="4" text="bind:militaryStartDate" displaytype="date"/>
+                          <Cell col="5" text="bind:militaryEndDate" displaytype="date"/>
+                          <Cell col="6" text="bind:militaryEtc"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
               </Layouts>
             </Tabpage>
           </Tabpages>
         </Tab>
+        <Button id="btn_save" taborder="5" text="저장" left="600" width="120" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
+        <Button id="btn_cancel" taborder="6" text="취소" left="730" width="120" cssclass="basic" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
+        <Static id="link_emplLsit" taborder="7" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_addEmpl" taborder="8" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
-      <Dataset id="ds_empl">
+      <Dataset id="ds_empl" onload="ds_empl_onload">
         <ColumnInfo>
           <Column id="emplId" type="STRING" size="20"/>
           <Column id="deptCode" type="STRING" size="20"/>
@@ -102,7 +368,7 @@
           <Column id="isVeterans" type="STRING" size="1"/>
           <Column id="endDate" type="DATE" size="256"/>
           <Column id="endReason" type="STRING" size="20"/>
-          <Column id="profile" type="STRING" size="1000"/>
+          <Column id="emplProfile" type="STRING" size="1000"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
@@ -269,22 +535,109 @@
           </Row>
         </Rows>
       </Dataset>
+      <Dataset id="ds_cert">
+        <ColumnInfo>
+          <Column id="certCategory" type="STRING" size="100"/>
+          <Column id="certName" type="STRING" size="100"/>
+          <Column id="certEnrollNo" type="STRING" size="100"/>
+          <Column id="certLevel" type="STRING" size="100"/>
+          <Column id="certInst" type="STRING" size="100"/>
+          <Column id="certStartDate" type="DATE" size="256"/>
+          <Column id="certEndDate" type="DATE" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_jobRole">
+        <ColumnInfo>
+          <Column id="jobRoleDivision" type="STRING" size="100"/>
+          <Column id="jobRoleTitle" type="STRING" size="100"/>
+          <Column id="jobRoleStartDate" type="DATE" size="256"/>
+          <Column id="jobRoleEndDate" type="DATE" size="256"/>
+          <Column id="jobRoleConts" type="STRING" size="100"/>
+          <Column id="jobRoleEtc" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_lang">
+        <ColumnInfo>
+          <Column id="langCategory" type="STRING" size="100"/>
+          <Column id="langName" type="STRING" size="300"/>
+          <Column id="langTestDate" type="DATE" size="256"/>
+          <Column id="langInst" type="STRING" size="100"/>
+          <Column id="langScore" type="INT" size="256"/>
+          <Column id="langGrade" type="STRING" size="100"/>
+          <Column id="langEtc" type="STRING" size="300"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_military">
+        <ColumnInfo>
+          <Column id="militaryGrade" type="STRING" size="100"/>
+          <Column id="militaryCode" type="STRING" size="100"/>
+          <Column id="isMilitaryEnd" type="STRING" size="1"/>
+          <Column id="militaryStartDate" type="DATE" size="256"/>
+          <Column id="militaryEndDate" type="DATE" size="256"/>
+          <Column id="militaryEtc" type="STRING" size="1000"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="statusCode" type="STRING" size="20"/>
+          <Column id="statusName" type="STRING" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="statusCode">임시</Col>
+            <Col id="statusName">임시</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">재직중</Col>
+            <Col id="statusName">재직중</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">휴직중</Col>
+            <Col id="statusName">휴직중</Col>
+          </Row>
+          <Row>
+            <Col id="statusCode">퇴사</Col>
+            <Col id="statusName">퇴사</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_career">
+        <ColumnInfo>
+          <Column id="careerStartDate" type="DATE" size="256"/>
+          <Column id="careerEndDate" type="DATE" size="256"/>
+          <Column id="careerPlace" type="STRING" size="100"/>
+          <Column id="careerRank" type="STRING" size="100"/>
+          <Column id="careerJobRole" type="STRING" size="100"/>
+          <Column id="careerPeriod" type="DATE" size="256"/>
+          <Column id="careerEndReason" type="STRING" size="100"/>
+          <Column id="careerEtc" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_pos">
+        <ColumnInfo>
+          <Column id="positionCode" type="STRING" size="20"/>
+          <Column id="positionName" type="STRING" size="30"/>
+          <Column id="positionUseMember" type="INT" size="256"/>
+          <Column id="positionSequence" type="INT" size="256"/>
+          <Column id="positionLevel" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {
 	this.transaction(
-		"tr_select"// 1.ID
+		"tr_empl_select"// 1.ID
 		,"HirpURL::admin/empDetail.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_empl=out_empl " // 4.OutDs : S->F jsp(SELECT) ds_retiree=out_retiree ds_dept=out_dept ds_pos=out_pos
-		,"emplId=" // 5.InVar : F->S(var)
+		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_lang=out_lang ds_cert=out_cert ds_military=out_military" // 4.OutDs : S->F jsp(SELECT)
+		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-	);
+	);	
 };
 
 this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 {	
-	if(id=="tr_select")
+	if(id=="tr_empl_select")
 	{
 		if(nErrorCode < 0)
 		{
@@ -295,11 +648,14 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	}	
 }
 
-
-this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
-	
+	this.go("FrameBase::emplList.xfdl");
 };
-]]></Script>
+
+this.link_addEmpl_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::emplApproval.xfdl");
+};]]></Script>
   </Form>
 </FDL>

@@ -4,5 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="PositionMapper">
-
+	<resultMap type="Position" id="positionResultMap">
+		<id property="positionCode" column="POSITION_CODE"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="positionUseMember" column="POSITION_USE_MANAGER"/>
+		<result property="positionSequence" column="POSITION_SEQUENCE"/>
+		<result property="positionLevel" column="POSITION_LEVEL"/>
+	</resultMap>
+	
+	<select id="selectAllPosition" resultMap="positionResultMap">
+		SELECT * FROM POSITION_TBL ORDER BY POSITION_SEQUENCE DESC
+	</select>
 </mapper>
