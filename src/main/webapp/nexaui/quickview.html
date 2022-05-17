@@ -10,7 +10,9 @@
 	<!-- FAVICON_ICON : favion setting (value of icon property in Environment. add to value of icon property in Environment) -->
 
 	<!-- USERFONT_STYLE : userfont style setting (value of userfontid property in Environment. crate contents contained in xfont file specified userfontid property in Environment) -->
-
+    <style id="userfont" type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        </style>
 	
 	<!-- FRAMEWORK_LIBRARY : framework lodaing path (list of scripts files in the Framework.json file) -->
     <script type="text/javascript" src="./nexacro17lib/framework/SystemBase.js"></script>
@@ -120,7 +122,7 @@
 		nexacro._quickview_formurl = urlParams.formname;
 		<!-- SCREEN_INFORMATION : create screen information defined in Environment > ScreenDefinition -->
 		var screeninfo = [
-        {"id":"Desktop_screen","type":"desktop","themeid":"theme::default","xadl":"Application_Desktop.xadl.quickview.js"}
+        {"id":"Desktop_screen","type":"desktop","themeid":"theme::hirpTheme","xadl":"Application_Desktop.xadl.quickview.js"}
 		];
 		nexacro._initHTMLSysEvent(window, document);
 		nexacro._initEnvironment(screeninfo);

@@ -84,7 +84,16 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("사원 조회 성공");
 	}	
-}]]></Script>
+}
+
+// 회원 상세 정보 페이지 로드
+this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+	if(e.col == 4) {
+		this.go("FrameBase::empDetail.xfdl");
+	}
+};]]></Script>
     <Objects>
       <Dataset id="ds_temp" onload="ds_empl_onload">
         <ColumnInfo>
