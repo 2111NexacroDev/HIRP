@@ -54,6 +54,47 @@ public class SurveySub {
 		this.subAnswerstatus = subAnswerstatus;
 	}
 
+	
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionCode() {
+		return positionCode;
+	}
+
+	public void setPositionCode(String positionCode) {
+		this.positionCode = positionCode;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getEmplName() {
+		return emplName;
+	}
+
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+
 	@Override
 	public String toString() {
 		return "SurveySub [subNo=" + subNo + ", surveyNo=" + surveyNo + ", subId=" + subId + ", subAnswerstatus="

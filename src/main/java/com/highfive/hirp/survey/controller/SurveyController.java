@@ -433,6 +433,7 @@ public class SurveyController {
 				mv.addObject("surveyInfo", survey);
 				if(emplList != null && subList != null) {
 					mv.addObject("subList", subList);
+					System.out.println(subList);
 					mv.addObject("emplList", emplList);
 					mv.setViewName("survey/surveyUpdateInfo");
 				}

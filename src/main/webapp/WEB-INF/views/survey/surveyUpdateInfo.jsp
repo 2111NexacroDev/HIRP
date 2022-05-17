@@ -49,22 +49,29 @@
 			                <div class="">
 			                	<!-- 본인 소속 부서 사람들 선택 -->
 			                    <div class="mb-20">
-			                    	<input id="objectRadio1" class="" name="surveyObject" type="radio" value="본인소속" checked="checked">
+			                    	<input id="objectRadio1" class="" name="surveyObject" type="radio" value="본인소속" >
 					                <label for="objectRadio1">본인 소속 팀</label>&nbsp;
 					                (
-					                	<input id="subDeptCheck" class="" type="checkbox" name="subDept" checked="checked">
+					                	<input id="subDeptCheck" class="" type="checkbox" name="subDept">
 			               	 			<label for="subDeptCheck">하위 부서</label>
 					                )
 					                <br>
 			                    </div>
 			                    <!-- 직접 선택 -->
 			                    <div class="">
-				                    <input id="objectRadio2" class="mt-20" name="surveyObject" type="radio" value="직접선택">
+				                    <input id="objectRadio2" class="mt-20" name="surveyObject" type="radio" value="직접선택" checked="checked">
 					                <label for="objectRadio2">직접 선택</label><br>
 					                
 					                <div class="bor-dashed mt-20 padding-20" style="width:500px">
 					                	<!-- 응답자 리스트 담기는 div -->
 					                	<div id="emplListDiv"> 
+					                		<c:forEach items="${subList }" var="sub">
+						                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
+						                			${sub.emplName }
+						                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button> 
+						                			<input type="hidden" name="surveyObjectIdList" value="${sub.subId }">
+						                		</div>
+					                		</c:forEach>
 <!-- 					                		<div style="display:none;" class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
 <!-- 					                			밍선 -->
 <!-- 					                			삭제 버튼 -->
@@ -379,6 +386,8 @@
 			$("input[name=surveyObject]").change(function(){
 				if($(this).val() == "직접선택"){
 					$("#subDeptCheck").prop("checked", false);
+				} else { //본인 소속팀 check 하면 checkbox도 checked 해주기
+					$("#subDeptCheck").prop("checked", true);
 				}
 			});
 			
