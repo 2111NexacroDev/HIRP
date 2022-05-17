@@ -26,6 +26,18 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="endReason" column="END_REASON"/>
 		<result property="emplProfile" column="EMPL_PROFILE"/>
+		<association javaType="Career" property="career" column="EMPL_ID">
+			<id property="careerNo" column="CAREER_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="careerStartDate" column="CAREER_START_DATE"/>
+			<result property="careerEndDate" column="CAREER_END_DATE"/>
+			<result property="careerPlace" column="CAREER_PLACE"/>
+			<result property="careerRank" column="CAREER_RANK"/>
+			<result property="careerJobRole" column="CAREER_JOB_ROLE"/>
+			<result property="careerPeriod" column="CAREER_PERIOD"/>
+			<result property="careerEndReason" column="CAREER_END_REASON"/>
+			<result property="careerEtc" column="CAREER_ETC"/>
+		</association>
 		<association javaType="Certification" property="certification" column="EMPL_ID">
 			<id property="certNo" column="CERT_NO"/>
 			<result property="emplId" column="EMPL_ID"/>
@@ -77,5 +89,8 @@
 	</select>
 	<select id="selectAllRetiree" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
+	</select>
+	<select id="selectTempEmployee" resultMap="emplResultMap">
+		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '임시'
 	</select>
 </mapper>

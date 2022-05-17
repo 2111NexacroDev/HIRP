@@ -2196,4 +2196,7 @@ last-modified : 2021-10-26
 	-nexa-border : 1px solid #0b2a60;
 	color: #ffffff;
 }
+.GridCellControl .cellcombo .comboedit
+{
+}
 ]]></XCSS>

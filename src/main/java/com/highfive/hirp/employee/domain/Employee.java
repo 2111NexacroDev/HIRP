@@ -28,14 +28,16 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private JobRole jobRole;
 	private Language language;
 	private Military military;
+	private Career career;
 
-	public Employee() {}
+	public Employee() {
+	}
 
 	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName, Date startDate,
 			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
 			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
 			String isVeterans, Date endDate, String endReason, String emplProfile, Certification certification,
-			JobRole jobRole, Language language, Military military) {
+			JobRole jobRole, Language language, Military military, Career career) {
 		super();
 		this.emplId = emplId;
 		this.deptCode = deptCode;
@@ -62,6 +64,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.jobRole = jobRole;
 		this.language = language;
 		this.military = military;
+		this.career = career;
 	}
 
 	public String getEmplId() {
@@ -264,6 +267,14 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.military = military;
 	}
 
+	public Career getCareer() {
+		return career;
+	}
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [emplId=" + emplId + ", deptCode=" + deptCode + ", positionCode=" + positionCode + ", emplPw="
@@ -273,6 +284,6 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 				+ ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability=" + isDisability
 				+ ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason + ", emplProfile="
 				+ emplProfile + ", certification=" + certification + ", jobRole=" + jobRole + ", language=" + language
-				+ ", military=" + military + "]";
+				+ ", military=" + military + ", career=" + career + "]";
 	}
 }
