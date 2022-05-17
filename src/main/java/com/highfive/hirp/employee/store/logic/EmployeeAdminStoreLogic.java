@@ -23,7 +23,7 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithName");
 		return eList;
 	}
-
+	
 	@Override
 	public List<Employee> selectAllRetiree(SqlSession sqlSession) {
 		List<Employee> rList = sqlSession.selectList("EmployeeAdminMapper.selectAllRetiree");
@@ -59,5 +59,7 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee");
 		return result;
 	}
+
+
 
 }

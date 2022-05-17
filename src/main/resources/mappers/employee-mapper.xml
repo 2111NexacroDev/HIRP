@@ -73,4 +73,14 @@
         </if>
        WHERE EMPL_ID = #{emplId}
    </update>
+   
+   <!-- 설문조사에서 사용 -->
+   <select id="selectAllEmployeeWithName" resultMap="employeeResultMap">
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		DEPT_NAME, POSITION_NAME
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE NOT IS_STATUS IN ('임시','퇴사')
+	</select>
 </mapper>

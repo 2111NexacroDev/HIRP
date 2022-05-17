@@ -34,6 +34,8 @@ public interface SurveyStore {
 	//설문조사 등록
 	//설문 추가
 	public int insertSurvey(SqlSession sqlSession, Survey survey);
+	//응답자 검색
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword);
 	//설문 문항 추가
 	public int insertSurveyQuest(SqlSession sqlSession, SurveyQuest surveyQuest);
 	//설문 보기 추가 (날짜/객관식의 경우)

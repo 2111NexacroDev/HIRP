@@ -71,6 +71,12 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.insertSurvey(sqlSession, survey);
 		return result;
 	}
+	//응답자 검색
+	@Override
+	public List<Employee> selectSearchEmplList(String emplSearchKeyword) {
+		List<Employee> emplList = sStore.selectSearchEmplList(sqlSession, emplSearchKeyword);
+		return emplList;
+	}
 	//설문 문항 추가
 	@Override
 	public int insertSurveyQuest(SurveyQuest surveyQuest) {
@@ -205,6 +211,7 @@ public class SurveyServiceLogic implements SurveyService{
 		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, surveySearch);
 		return searchSurvey;
 	}
+
 
 
 

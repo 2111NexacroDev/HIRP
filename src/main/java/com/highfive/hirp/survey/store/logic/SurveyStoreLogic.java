@@ -68,6 +68,12 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.insert("SurveyMapper.insertSurvey", survey);
 		return result;
 	}
+	//응답자 검색
+	@Override
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword) {
+		List<Employee> emplList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmplList", emplSearchKeyword);
+		return emplList;
+	}
 	//설문 문항 추가
 	@Override
 	public int insertSurveyQuest(SqlSession sqlSession, SurveyQuest surveyQuest) {

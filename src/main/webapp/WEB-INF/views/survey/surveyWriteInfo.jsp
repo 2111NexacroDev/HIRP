@@ -71,8 +71,8 @@
 												<div class="mb-20">
 													<ul>
 														<li>
-															<input type="text" name="" size="25" placeholder="부서명 또는 사원명 검색">
-															<button class="point" type="button">검색</button>
+															<input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
+															<button class="point" type="button" onclick="emplSearch();">검색</button>
 														</li>
 													</ul>
 													<table class="table--basic mt-20" id="emplTable">
@@ -85,11 +85,14 @@
 														</thead>
 														<tbody>
 															<c:forEach items="${emplList }" var="empl">
-																<tr >
+																<tr onclick="emplTrClick(this);">
 																	<td>${empl.deptName}</td>
 																	<td>${empl.positionName}</td>
 																	<td>${empl.emplName}</td>
 																</tr>
+																<input type="hidden" name="deptCode" value="${empl.deptCode }">
+																<input type="hidden" name="positionCode" value="${empl.positionCode }">
+																<input type="hidden" name="emplId" value="${empl.emplId }">
 															</c:forEach>
 														</tbody>
 													</table>
@@ -175,14 +178,54 @@
 				openModal(e);
 			}
 			
-			//테이블 tr 클릭해서 직원 데이터 가져오기
-			$("#emplTable tr").click(function(){ 	
+			function emplSearch(){
+				var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
+				console.log(emplSearchKeyword);
+				
+				$.ajax({
+					url:"/survey/searchEmplList.hirp",
+					type:"post",
+					data:{"emplSearchKeyword" : emplSearchKeyword},
+					success: function(eList){
+						console.log("성공");
+	        			console.log(eList);
+	        			var count = eList.length;
+	        			
+	        			var $tableBody = $("#emplTable tbody");
+	        			$tableBody.html("");//기존 내용 있으면 비우기
+	        			
+	        			for(var i=0; i<count; i++){
+		        			var $tr = $("<tr onclick='emplTrClick(this);'>");
+		        			var $tdDept = $("<td>").html(eList[i].deptName);
+		        			var $tdPosition = $("<td>").html(eList[i].positionName);
+		        			var $tdName = $("<td>").html(eList[i].emplName);
+							$tr.append($tdDept);
+							$tr.append($tdPosition);
+							$tr.append($tdName);
+							$tableBody.append($tr);
+							
+							var hiddenDeptCode = "<input type='hidden' name='deptCode' value="+eList[i].deptCode+">"
+							var hiddenPositionCode = "<input type='hidden' name='positionCode' value="+eList[i].positionCode+">"
+							var hiddenEmplId = "<input type='hidden' name='emplId' value="+eList[i].emplId+">"
+							$tableBody.append(hiddenDeptCode);
+							$tableBody.append(hiddenPositionCode);
+							$tableBody.append(hiddenEmplId);
+						}
+	        			
+	        		},
+	        		error: function(){
+	        			console.log("실패");
+	        		}
+				});
+			}
+			
+			function emplTrClick(e){
 
 				var str = ""
 				var tdArr = new Array();	// 배열 선언
 				
 				// 현재 클릭된 Row(<tr>)
-				var tr = $(this);
+				var tr = $(e);
 				var td = tr.children();
 				
 				// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
@@ -195,21 +238,47 @@
 				
 				console.log("배열에 담긴 값 : "+tdArr);
 				
-				// td.eq(index)를 통해 값을 가져올 수도 있다.
-				var no = td.eq(0).text();
-				var userid = td.eq(1).text();
-				var name = td.eq(2).text();
-				var email = td.eq(3).text();
+
+				var hiddenDeptCode = tr.next();
+				var hiddenPositionCode = tr.next().next();
+				var hiddenEmplId = tr.next().next().next();
+				console.log(hiddenDeptCode);
+				console.log(hiddenPositionCode);
+				console.log(hiddenEmplId);
+			}
+			
+			
+// 			//테이블 tr 클릭해서 직원 데이터 가져오기
+// 			$("#emplTable tr").click(function(){ 	
+
+// 				var str = ""
+// 				var tdArr = new Array();	// 배열 선언
 				
+// 				// 현재 클릭된 Row(<tr>)
+// 				var tr = $(this);
+// 				var td = tr.children();
 				
-// 				str +=	" * 클릭된 Row의 td값 = No. : <font color='red'>" + no + "</font>" +
-// 						", 아이디 : <font color='red'>" + userid + "</font>" +
-// 						", 이름 : <font color='red'>" + name + "</font>" +
-// 						", 이메일 : <font color='red'>" + email + "</font>";		
+// 				// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+// 				console.log("클릭한 Row의 모든 데이터 : "+tr.text());
 				
-// 				$("#ex1_Result1").html(" * 클릭한 Row의 모든 데이터 = " + tr.text());		
-// 				$("#ex1_Result2").html(str);
-			});
+// 				// 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+// 				td.each(function(i){
+// 					tdArr.push(td.eq(i).text());
+// 				});
+				
+// 				console.log("배열에 담긴 값 : "+tdArr);
+				
+
+// 				var hiddenDeptCode = tr.next();
+// 				var hiddenPositionCode = tr.next().next();
+// 				var hiddenEmplId = tr.next().next().next();
+// 				console.log(hiddenDeptCode);
+// 				console.log(hiddenPositionCode);
+// 				console.log(hiddenEmplId);
+// 			});
+			
+			
+			
 			
 			//설문 대상자 라디오버튼
 			//본인소속, 직접선택

@@ -33,6 +33,8 @@ public interface SurveyService {
 	//설문 등록
 	//설문 추가
 	public int insertSurvey(Survey survey);	
+	//응답자 검색
+	public List<Employee> selectSearchEmplList(String emplSearchKeyword);
 	//설문 문항 추가
 	public int insertSurveyQuest(SurveyQuest surveyQuest); 
 	//설문 보기 추가 (날짜/객관식의 경우)

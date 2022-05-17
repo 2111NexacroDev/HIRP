@@ -184,6 +184,22 @@ public class SurveyController {
 		return mv;
 	}
 	
+	//응답자 검색
+	@ResponseBody
+	@RequestMapping(value="/survey/searchEmplList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String searchEmplList(
+			@RequestParam("emplSearchKeyword") String emplSearchKeyword){
+		System.out.println("응답자 검색" + emplSearchKeyword); //값 잘 넘어옴
+		//응답자 리스트 보기 (응답여부까지) -> 팝업창
+		List<Employee> emplList = sService.selectSearchEmplList(emplSearchKeyword);
+//		System.out.println(emplList);
+		if(!emplList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(emplList);
+		}
+		return "";
+	}
+	
 	//설문 문항 페이지
 	@RequestMapping(value="/survey/writeQuest.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyQuestPage(ModelAndView mv) {
