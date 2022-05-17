@@ -211,13 +211,14 @@ public class SurveyController {
 	@RequestMapping(value="/survey/addSurveyInfo.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurvey(ModelAndView mv
 			,@ModelAttribute Survey survey
+			,@RequestParam("surveyObjectIdList") String surveyObjectIdList
 			//,@ModelAttribute List<String> subList
 			, HttpServletRequest request) {
 		
 		//세션에서 아이디 가져와서 넣어주기.
 		String emplId = "TESTID";
 		survey.setSurveyWriter(emplId);
-		
+		System.out.println("surveyObjectIdList:"+surveyObjectIdList);
 		try {
 			//설문 등록
 			int result = sService.insertSurvey(survey);

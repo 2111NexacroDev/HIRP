@@ -11,12 +11,12 @@ form {
 	display: inline;
 }
 
+/* 응답자 테이블 스크롤 */
 #emplTable{
     /* table-layout: fixed; */
     border-collapse: collapse;
 }
 
-/* 행 장식 */
 #emplTable th, #emplTable td {
   padding: 10px;
   text-align: left;
@@ -43,4 +43,17 @@ form {
 /* 	opacity: 0.5; */
 	background-image: url(../images/icons/ic_toolbar.png);
 	background-position: -295px -146px;
+}
+
+
+.inline-block-div {
+	display: inline-block;
+}
+
+.none-padding {
+	padding: 0;
+}
+
+.align-center {
+	align:center;
 }

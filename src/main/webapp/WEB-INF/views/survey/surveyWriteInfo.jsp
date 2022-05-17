@@ -18,7 +18,7 @@
                 <input type="text" name="" placeholder="통합검색">
                 <button type="submit"></button>
             </form>
-			<form action="/survey/addSurveyInfo.hirp", method="get">
+			<form id="addSurveyInfoForm" action="/survey/addSurveyInfo.hirp", method="get">
 				<h1 class="basic-border-bottom">설문 작성</h1>
 	            <!-- 메인 상단 끝 -->
 	            
@@ -58,11 +58,32 @@
 					                <br>
 			                    </div>
 			                    <!-- 직접 선택 -->
-			                    <div>
+			                    <div class="">
 				                    <input id="valueB" class="mt-20" name="surveyObject" type="radio" value="직접선택">
 					                <label for="valueB">직접 선택</label><br>
 					                
-					                <div class="bor-dashed mt-20 padding-20">
+					                <div class="bor-dashed mt-20 padding-20" style="width:500px">
+					                	<!-- 응답자 리스트 담기는 div -->
+					                	<div id="emplListDiv"> 
+					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
+					                			밍선
+					                			<!-- 삭제 버튼 -->
+					                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button> 
+					                			<input type="hidden" name="surveyObjectIdList" value="id1">
+					                		</div>
+					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
+					                			진실
+					                			<!-- 삭제 버튼 -->
+					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button> 
+					                			<input type="hidden" name="surveyObjectIdList" value="id2">
+					                		</div>
+					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
+					                			민수
+					                			<!-- 삭제 버튼 -->
+					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button> 
+					                			<input type="hidden" name="surveyObjectIdList" value="id3">
+					                		</div>
+					                	</div>
 					                    <button class="noneBackground" type="button" onclick="onAddEmplButton(this);"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
 										<section class="section--modal modal--chat">
 											<div class="section--modal__conts" style="border: none">
@@ -153,7 +174,7 @@
 	                            </p>
 	                            <div class="btns-wrap mt-20 t-r">
 	                                <button class="point" type="submit">확인</button>
-	                                <button class="finished closeWindow" type="button">취소</button>
+	                                <button class="finished closeWindow" type="button" onclick="cleanEmplSearchKeyword();">취소</button>
 	                            </div>
 	                        </div>
 	                    </section>
@@ -178,6 +199,20 @@
 				openModal(e);
 			}
 			
+			//검색 input창 초기화
+			function cleanEmplSearchKeyword(){
+				var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
+				emplSearchKeyword = ""; //값 비워지지가 않는다...!
+			}
+			
+			//응답자 목록 삭제
+			function removeEmplDiv(obj){
+				var emplDiv = $(obj).parent();
+				console.log(emplDiv);
+				emplDiv.remove();
+			}
+			
+			//응답자 목록에서 검색 (ajax)
 			function emplSearch(){
 				var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
 				console.log(emplSearchKeyword);
@@ -213,14 +248,21 @@
 						}
 	        			
 	        		},
-	        		error: function(){
+	        		error: function(){ //왜 정렬이 가운데로 안되는지 모르겠군
 	        			console.log("실패");
+						var $tableBody = $("#emplTable tbody");
+	        			$tableBody.html("");//기존 내용 있으면 비우기
+	        			var $tr = $("<tr>");
+	        			var $text = $("<div class='t-c' style='align:center;'>").html("검색 결과가 없습니다."); //이거 td 안 합쳐짐.
+						$tr.append($text);
+						$tableBody.append($tr);
 	        		}
 				});
 			}
 			
+			
+			//tr이 클릭될 때
 			function emplTrClick(e){
-
 				var str = ""
 				var tdArr = new Array();	// 배열 선언
 				
