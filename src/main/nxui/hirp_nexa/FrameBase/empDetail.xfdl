@@ -24,7 +24,7 @@
                 <Row size="39"/>
               </Rows>
               <Band id="head">
-                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="normal 14px/normal &quot;Noto Sans KR&quot;"/>
+                <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="500 14px/normal &quot;Noto Sans KR&quot;" background="#f9f9f9"/>
               </Band>
               <Band id="body">
                 <Cell rowspan="4" text="expr:imgURL::profile" displaytype="imagecontrol"/>
@@ -342,7 +342,7 @@
         </Tab>
         <Button id="btn_save" taborder="5" text="저장" left="600" width="120" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
         <Button id="btn_cancel" taborder="6" text="취소" left="730" width="120" cssclass="basic" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
-        <Static id="link_emplLsit" taborder="7" text="사원 조회" left="24" top="85" width="200" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_emplLsit" taborder="7" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
         <Static id="link_addEmpl" taborder="8" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
       </Layout>
     </Layouts>
