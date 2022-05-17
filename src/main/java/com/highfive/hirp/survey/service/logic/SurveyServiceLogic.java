@@ -101,6 +101,7 @@ public class SurveyServiceLogic implements SurveyService{
 		return result;
 	}
 	
+	
 	//전체 직원 가져오기
 	@Override
 	public List<Employee> selectAllSurveySub() {
@@ -129,7 +130,7 @@ public class SurveyServiceLogic implements SurveyService{
 		List<SurveyQuest> surveyQuestList = sStore.selectAllSurveyQuestByNo(sqlSession, surveyQuestNo);
 		return surveyQuestList;
 	}
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문 문항 가져오기
 	@Override
 	public SurveyQuest selectOneSurveyQuestByNo(int surveyQuestNo) {
 		SurveyQuest surveyQuest = sStore.selectOneSurveyQuestByNo(sqlSession, surveyQuestNo);
@@ -170,14 +171,20 @@ public class SurveyServiceLogic implements SurveyService{
 		return result;
 	}
 	
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문조사 대상자 리스트 수정
 	@Override
 	public int updateSurveySubList(List<SurveySub> subList) {
 		int result = sStore.updateSurveySubList(sqlSession, subList);
 		return result;
 	}
 	
-	//설문조사 삭제
+	//설문조사 대상자 리스트 삭제
+	@Override
+	public int deleteSurveySubList(int surveyNo) {
+		int result = sStore.deleteSurveySubList(sqlSession, surveyNo);
+		return result;
+	}
+
 	//설문조사 정보 삭제
 	@Override
 	public int deleteSurvey(int surveyNo) {
@@ -211,6 +218,7 @@ public class SurveyServiceLogic implements SurveyService{
 		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, surveySearch);
 		return searchSurvey;
 	}
+
 
 
 

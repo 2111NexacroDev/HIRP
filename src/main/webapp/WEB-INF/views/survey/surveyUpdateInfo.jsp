@@ -18,7 +18,8 @@
                 <input type="text" name="" placeholder="통합검색">
                 <button type="submit"></button>
             </form>
-			<form id="addSurveyInfoForm" action="/survey/addSurveyInfo.hirp", method="get">
+			<form id="updateSurveyInfoForm" action="/survey/updateSurvey.hirp" method="post">
+				<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
 				<h1 class="basic-border-bottom">설문 수정</h1>
 	            <!-- 메인 상단 끝 -->
 	            
@@ -49,8 +50,8 @@
 			                <div class="">
 			                	<!-- 본인 소속 부서 사람들 선택 -->
 			                    <div class="mb-20">
-			                    	<input id="objectRadio1" class="" name="surveyObject" type="radio" value="본인소속" >
-					                <label for="objectRadio1">본인 소속 팀</label>&nbsp;
+			                    	<input id="subjectRadio1" class="" name="surveySubject" type="radio" value="본인소속" >
+					                <label for="subjectRadio1">본인 소속 팀</label>&nbsp;
 					                (
 					                	<input id="subDeptCheck" class="" type="checkbox" name="subDept">
 			               	 			<label for="subDeptCheck">하위 부서</label>
@@ -59,8 +60,8 @@
 			                    </div>
 			                    <!-- 직접 선택 -->
 			                    <div class="">
-				                    <input id="objectRadio2" class="mt-20" name="surveyObject" type="radio" value="직접선택" checked="checked">
-					                <label for="objectRadio2">직접 선택</label><br>
+				                    <input id="subjectRadio2" class="mt-20" name="surveySubject" type="radio" value="직접선택" checked="checked">
+					                <label for="subjectRadio2">직접 선택</label><br>
 					                
 					                <div class="bor-dashed mt-20 padding-20" style="width:500px">
 					                	<!-- 응답자 리스트 담기는 div -->
@@ -69,26 +70,26 @@
 						                		<div class="basic-border bor-round padding-10 inline-block-div mb-10">
 						                			${sub.emplName }
 						                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button> 
-						                			<input type="hidden" name="surveyObjectIdList" value="${sub.subId }">
+						                			<input type="hidden" name="surveySubjectIdList" value="${sub.subId }">
 						                		</div>
 					                		</c:forEach>
 <!-- 					                		<div style="display:none;" class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
 <!-- 					                			밍선 -->
 <!-- 					                			삭제 버튼 -->
 <!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick="removeEmplDiv(this);"><i class="fa-solid fa-xmark"></i></button>  -->
-<!-- 					                			<input type="hidden" name="surveyObjectIdList" value=""> -->
+<!-- 					                			<input type="hidden" name="surveySubjectIdList" value=""> -->
 <!-- 					                		</div> -->
 <!-- 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
 <!-- 					                			진실 -->
 <!-- 					                			삭제 버튼 -->
 <!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button>  -->
-<!-- 					                			<input type="hidden" name="surveyObjectIdList" value="id2"> -->
+<!-- 					                			<input type="hidden" name="surveySubjectIdList" value="id2"> -->
 <!-- 					                		</div> -->
 <!-- 					                		<div class="basic-border bor-round padding-10 inline-block-div mb-10"> -->
 <!-- 					                			민수 -->
 <!-- 					                			삭제 버튼 -->
 <!-- 					                			<button type="button" class="noneBackground none-padding ml-10" onclick=""><i class="fa-solid fa-xmark"></i></button>  -->
-<!-- 					                			<input type="hidden" name="surveyObjectIdList" value="id3"> -->
+<!-- 					                			<input type="hidden" name="surveySubjectIdList" value="id3"> -->
 <!-- 					                		</div> -->
 					                	</div>
 					                    <button class="noneBackground" type="button" onclick="onAddEmplButton(this);"><i class="fa-solid fa-plus"></i> 추가</button>&nbsp;
@@ -167,7 +168,7 @@
 		            </div>
 		            <!-- 마지막 선 넣어준 div 끝... -->
 		            <div class="t-c">
-			            <button class="point mt-20" type="button" onclick="onNextButton(this);">다음</button>
+			            <button class="point mt-20" type="button" onclick="onNextButton(this);">완료</button>
 			            <section class="section--modal">
 	                        <div class="bg-black"></div>
 	                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
@@ -186,7 +187,8 @@
 			            <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
 			            	뒤로가기 안되게 -->
 			            &nbsp;&nbsp;&nbsp;
-			            <button class="basic mt-20" type="button">취소</button>
+			            <button class="basic mt-20" type="button" onclick="location.href='/survey/questDetail.hirp?surveyNo=${surveyInfo.surveyNo }'">취소</button>
+			            <!-- 취소 누르면 상세 페이지로 이동 -->
 		            </div>
 	            </div>
 	            <!-- 페이지 내용 끝 -->
@@ -225,7 +227,7 @@
 			function onAddEmplButton(e){
 				openModal(e);
 				//본인 소속팀과 하위 부서 check 해제
-				$("#objectRadio2").prop("checked", true);
+				$("#subjectRadio2").prop("checked", true);
 				$("#subDeptCheck").prop("checked", false);
 			}
 			
@@ -247,7 +249,7 @@
 				//emplListDiv 비워주기
 				$("#emplListDiv").html("");
 				//본인 소속팀과 하위부서 check
-				$("#objectRadio1").prop("checked", true);
+				$("#subjectRadio1").prop("checked", true);
 				$("#subDeptCheck").prop("checked", true);
 			}
 			
@@ -256,32 +258,32 @@
 				console.log("addEmplDiv");
 				console.log(arr); //부서, 직급, 이름, 부서코드, 직급코드, 아이디 순
 				var $emplListDiv = $("#emplListDiv"); //응답 대상자 목록을 감싸고 있는 div
-				var $surveyObjectListInput = $emplListDiv.find("[name='surveyObjectIdList']"); //이미 추가된 id값 담겨있는 input 태그 (hidden)
+				var $surveySubjectListInput = $emplListDiv.find("[name='surveySubjectIdList']"); //이미 추가된 id값 담겨있는 input 태그 (hidden)
 				console.log(emplListDiv);
-				console.log($surveyObjectListInput);
-				console.log($surveyObjectListInput.eq(0)); //input 태그 중에 첫번째
+				console.log($surveySubjectListInput);
+				console.log($surveySubjectListInput.eq(0)); //input 태그 중에 첫번째
 				
-				var objectCount = $surveyObjectListInput.length; //input 태그 갯수
-				console.log("갯수:"+objectCount);
-				if(objectCount == 0){
+				var subjectCount = $surveySubjectListInput.length; //input 태그 갯수
+				console.log("갯수:"+subjectCount);
+				if(subjectCount == 0){
 					console.log("인풋이 없다");
 					var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
 		    			+arr[2]
 		    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
-		    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
+		    			+"<input type='hidden' name='surveySubjectIdList' value='"+arr[5]+"'>"
 		    		+ "</div>"
 		    		$emplListDiv.append(emplDivHtml);
 				} else {
-					for(var i = 0 ; i < objectCount ; i++){
-						if($surveyObjectListInput.eq(i).val() != arr[5]){ //아이디값이 같은 input이 없을 때
-	// 						console.log($surveyObjectListInput.eq(0).val());
+					for(var i = 0 ; i < subjectCount ; i++){
+						if($surveySubjectListInput.eq(i).val() != arr[5]){ //아이디값이 같은 input이 없을 때
+	// 						console.log($surveySubjectListInput.eq(0).val());
 	// 						console.log(arr[5]);
 	// 						console.log("없다!");
-							if(i == objectCount-1){ //아이디값이 같은 input이 없었고 마지막 인덱스일 때
+							if(i == subjectCount-1){ //아이디값이 같은 input이 없었고 마지막 인덱스일 때
 								var emplDivHtml = "<div class='basic-border bor-round padding-10 inline-block-div mr-5 mb-5'>"
 					    			+arr[2]
 					    			+"<button type='button' class='noneBackground none-padding ml-10' onclick='removeEmplDiv(this);'><i class='fa-solid fa-xmark'></i></button>"
-					    			+"<input type='hidden' name='surveyObjectIdList' value='"+arr[5]+"'>"
+					    			+"<input type='hidden' name='surveySubjectIdList' value='"+arr[5]+"'>"
 					    		+ "</div>"
 					    		$emplListDiv.append(emplDivHtml);
 							} else {
@@ -383,11 +385,12 @@
 			
 			//설문 대상자 라디오버튼
 			//본인소속, 직접선택
-			$("input[name=surveyObject]").change(function(){
+			$("input[name=surveySubject]").change(function(){
 				if($(this).val() == "직접선택"){
 					$("#subDeptCheck").prop("checked", false);
 				} else { //본인 소속팀 check 하면 checkbox도 checked 해주기
 					$("#subDeptCheck").prop("checked", true);
+					$("#emplListDiv").html("");
 				}
 			});
 			

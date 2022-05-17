@@ -230,30 +230,31 @@ public class SurveyController {
 		//응답자 리스트
 		List<String> subjectList = new ArrayList<String>();
 		
-		//설문 응답자 타입에 따라서 다르게 담아줌.
-		if(surveySubject.equals("본인소속")) {
-			List<Employee> myDeptEmpl = new ArrayList<Employee>();
-			if(subDept != null) { //하위부서 선택o
-				myDeptEmpl = eaService.printAllEmployeeWithDeptCode(deptCode);
-			} else { //null일 때 즉 하위부서 선택x
-				myDeptEmpl = eaService.printEmployeeWithDeptCode(deptCode);
-			}
-			for(int i = 0 ; i < myDeptEmpl.size(); i++) {
-				subjectList.add(myDeptEmpl.get(i).getEmplId());
-			}
-			System.out.println("myDeptEmpl:"+myDeptEmpl);
-		} else if(surveySubject.equals("직접선택")) {
-			//설문 응답자리스트
-			if(surveySubjectIdList != null) {
-				System.out.println("surveyObjectIdList:"+surveySubjectIdList);
-				subjectList = Arrays.asList(surveySubjectIdList.split(","));
-				//List<SurveySub> subList = new ArrayList<SurveySub>();
-			}
-		} else {
-			System.out.println("둘다 아님");
-		}
 		
 		try {
+			//설문 응답자 타입에 따라서 다르게 담아줌.
+			if(surveySubject.equals("본인소속")) {
+				List<Employee> myDeptEmpl = new ArrayList<Employee>();
+				if(subDept != null) { //하위부서 선택o
+					myDeptEmpl = eaService.printAllEmployeeWithDeptCode(deptCode);
+				} else { //null일 때 즉 하위부서 선택x
+					myDeptEmpl = eaService.printEmployeeWithDeptCode(deptCode);
+				}
+				for(int i = 0 ; i < myDeptEmpl.size(); i++) {
+					subjectList.add(myDeptEmpl.get(i).getEmplId());
+				}
+				System.out.println("myDeptEmpl:"+myDeptEmpl);
+			} else if(surveySubject.equals("직접선택")) {
+				//설문 응답자리스트
+				if(surveySubjectIdList != null) {
+					System.out.println("surveyObjectIdList:"+surveySubjectIdList);
+					subjectList = Arrays.asList(surveySubjectIdList.split(","));
+					//List<SurveySub> subList = new ArrayList<SurveySub>();
+				}
+			} else {
+				System.out.println("둘다 아님");
+			}
+			
 			//설문 등록
 			int result = sService.insertSurvey(survey);
 			int result2 = 0;
@@ -449,14 +450,85 @@ public class SurveyController {
 	}
 	
 	//설문 수정
+	@RequestMapping(value="/survey/updateSurvey.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyModify(ModelAndView mv
 			,@ModelAttribute Survey survey
-			,@ModelAttribute List<SurveySub> subList) {
+			,@RequestParam("surveySubject") String surveySubject
+			,@RequestParam(value="subDept", required = false) String subDept
+			,@RequestParam(value="surveySubjectIdList", required = false) String surveySubjectIdList
+			, HttpServletRequest request) {
 		//진행중일 때는 진행 기간, 대상, 응답 수정 허용 여부, 설문 결과 공개 여부 변경 가능
 		//마감했을 땐 진행 기간, 설문 결과 공개 여부 변경 가능
+		
+		//세션에서 아이디, depcode 가져와서 넣어주기.
+		String emplId = "TESTID";
+		survey.setSurveyWriter(emplId);
+		String deptCode = "10";
+		
+		//설문 응답자 유형
+		System.out.println(surveySubject);
+		System.out.println("subDept:"+subDept); //checked일 때 on, 아닐 때 null
+		
+		//응답자 리스트
+		List<String> subjectList = new ArrayList<String>();
+
+		try {
+			//설문 응답자 타입에 따라서 다르게 담아줌.
+			if(surveySubject.equals("본인소속")) {
+				List<Employee> myDeptEmpl = new ArrayList<Employee>();
+				if(subDept != null) { //하위부서 선택o
+					myDeptEmpl = eaService.printAllEmployeeWithDeptCode(deptCode);
+				} else { //null일 때 즉 하위부서 선택x
+					myDeptEmpl = eaService.printEmployeeWithDeptCode(deptCode);
+				}
+				for(int i = 0 ; i < myDeptEmpl.size(); i++) {
+					subjectList.add(myDeptEmpl.get(i).getEmplId());
+				}
+				System.out.println("myDeptEmpl:"+myDeptEmpl);
+				
+			} else if(surveySubject.equals("직접선택")) {
+				//설문 응답자리스트
+				if(surveySubjectIdList != null) {
+					System.out.println("surveyObjectIdList:"+surveySubjectIdList);
+					subjectList = Arrays.asList(surveySubjectIdList.split(","));
+					//List<SurveySub> subList = new ArrayList<SurveySub>();
+				}
+			} else {
+				System.out.println("둘다 아님");
+			}
+			
+			//설문 수정
+			int result = sService.updateSurvey(survey);
+			int result2 = 0;
+			
+			if(result > 0) {
+				//설문조사 번호로 응답자 삭제
+				int result3 = sService.deleteSurveySubList(survey.getSurveyNo());
+				//설문 응답자 재등록
+				if(subjectList != null) {
+					for(int i = 0; i < subjectList.size(); i++) {
+						SurveySub surveySub = new SurveySub();
+						surveySub.setSurveyNo(survey.getSurveyNo()); //surveyNo 지정
+						surveySub.setSubId(subjectList.get(i)); //subId 지정
+//					subList.add(surveySub);
+//					System.out.println(subList.get(i));
+						result2 = sService.insertSurveySub(surveySub);
+					}
+					
+				}
+				mv.setViewName("redirect:/survey/main.hirp");
+			} else {
+				mv.addObject("msg1", "설문조사 정보 추가 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
-	
+
 	//설문 마감
 	@RequestMapping(value="/survey/updateStatus.hirp", method=RequestMethod.POST)
 	public ModelAndView surveyClose(ModelAndView mv

@@ -74,6 +74,8 @@ public interface SurveyStore {
 	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo);
 	//설문조사 대상자 리스트 수정
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList);
+	//설문조사 대상자 리스트 삭제
+	public int deleteSurveySubList(SqlSession sqlSession, int surveyNo);
 	
 	//설문조사 삭제
 	//설문조사 정보 삭제

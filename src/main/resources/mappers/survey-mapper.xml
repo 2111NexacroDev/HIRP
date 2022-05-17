@@ -134,7 +134,28 @@
 	</insert>
 	<!-- 설문조사 수정 -->
 	<update id="updateSurvey">
-		UPDATE SURVEY_TBL SET SURVEY_STARTCOMMENT = #{surveyStartcomment} 
+		UPDATE SURVEY_TBL
+		<set>
+			<if test="surveyTitle != null">
+				SURVEY_TITLE = #{surveyTitle},
+			</if>
+			<if test="surveyStartdate != null">
+				SURVEY_STARTDATE = #{surveyStartdate},
+			</if>
+			<if test="surveyEnddate != null">
+				SURVEY_ENDDATE = #{surveyEnddate},
+			</if>
+			<if test="surveyResult != null">
+				SURVEY_RESULT = #{surveyResult},
+			</if>
+			<if test="surveyEdit != null">
+				SURVEY_EDIT = #{surveyEdit},
+			</if>
+			<if test="surveyStartcomment != null">
+				SURVEY_STARTCOMMENT = #{surveyStartcomment},
+			</if>
+			SURVEY_UPDATE = SYSDATE
+		</set>
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
 	<!-- 설문 문항 추가 -->
@@ -178,17 +199,20 @@
 		ORDER BY QUEST_NO
 	</select>
 	
-	<!-- 설문조사 상태 수정 -->
+	<!-- 설문조사 상태 수정 (마감) -->
 	<update id="updateSurveyStatus">
 		UPDATE SURVEY_TBL SET SURVEY_STATUS = 'F'
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
+
 	<!-- 설문조사 삭제 -->
 	<delete id="deleteSurvey">
 		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
 	</delete>
-	
-	
+	<!-- 설문조사 번호로 설문조사 응답자 삭제 -->
+	<delete id="deleteSurveySubByNo">
+		DELETE FROM SURVEY_SUB WHERE SURVEY_NO = #{surveyNo}
+	</delete>
 	<!-- 설문조사 응답 -->
 	<insert id="insertSurveySubAnswer">
 		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, #{surveyNo}, #{surveyquestNo}, #{surveyanswerContent}, #{surveyanswerId}, DEFAULT)

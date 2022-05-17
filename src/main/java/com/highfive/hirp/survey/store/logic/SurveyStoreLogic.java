@@ -172,6 +172,12 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.update("SurveyMapper.updateSurveySubList", subList);
 		return result;
 	}
+	//설문조사 대상자 리스트 삭제
+	@Override
+	public int deleteSurveySubList(SqlSession sqlSession, int surveyNo) {
+		int result = sqlSession.delete("SurveyMapper.deleteSurveySubByNo", surveyNo);
+		return result;
+	}
 	
 	//설문조사 삭제
 	//설문조사 정보 삭제
@@ -208,6 +214,7 @@ public class SurveyStoreLogic implements SurveyStore{
 		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectSearchSurvey", surveySearch);
 		return surveyList;
 	}
+
 
 	
 }

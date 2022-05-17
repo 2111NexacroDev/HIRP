@@ -181,7 +181,8 @@
 			            <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
 			            	뒤로가기 안되게 -->
 			            &nbsp;&nbsp;&nbsp;
-			            <button class="basic mt-20" type="button">취소</button>
+			            <button class="basic mt-20" type="button" onclick="location.href='/survey/main.hirp'">취소</button>
+		            	<!-- 메인 페이지로 이동 -->
 		            </div>
 	            </div>
 	            <!-- 페이지 내용 끝 -->
