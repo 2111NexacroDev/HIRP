@@ -45,7 +45,7 @@
             <form action='${sDelete}' method="post">
                 <button class="noneBackground" type="submit"><i class="fa-regular fa-trash-can"></i> 삭제</button>&nbsp;
             </form>
-       		<button style="float:right;" class="noneBackground" onclick="location.href='${sList}'"><i class="fa-regular fa-square-caret-down"></i> 목록</button>&nbsp;
+       		<button style="float:right;" class="h2--list" onclick="location.href='${sList}'"> 목록 </button>&nbsp;
        	</div>
         
         <!-- 페이지 내용 -->

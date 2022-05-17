@@ -33,3 +33,14 @@ form {
     overflow:auto;
     height:200px;
 }
+
+/* 목록 아이콘 */
+.h2--list{
+	width:80px;
+	height: 20px;
+	background: url(../images/icons/ic_toolbar.png) no-repeat center center;
+	outline: none;
+/* 	opacity: 0.5; */
+	background-image: url(../images/icons/ic_toolbar.png);
+	background-position: -295px -146px;
+}
