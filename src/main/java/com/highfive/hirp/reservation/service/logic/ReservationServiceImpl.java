@@ -32,6 +32,12 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
+	public Reservation printOneReservationByNo(int reservationNo) {
+		Reservation reservation = rStore.selectOneReservationByNo(sqlSession, reservationNo);
+		return reservation;
+	}
+	
+	@Override
 	public int registerReservation(Reservation reservation) {
 		int result = rStore.insertReservation(sqlSession, reservation);
 		return result;
@@ -49,6 +55,12 @@ public class ReservationServiceImpl implements ReservationService {
 		return result;
 	}
 
+	@Override
+	public int returnUtility(int reservationNo) {
+		int result = rStore.returnUtility(sqlSession, reservationNo);
+		return result;
+	}
+	
 	@Override
 	public List<Utility> printAllUtility() {
 		List<Utility> uList = rStore.selectAllUtility(sqlSession);

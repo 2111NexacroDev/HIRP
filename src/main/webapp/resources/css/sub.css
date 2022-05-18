@@ -528,7 +528,7 @@ section[class^="todo--"] li {
     background-image: url("../images/icons/ic_toolbar.png");
     background-position: 100px 50px;
     transform: translateY(-50%);
-    transition: all .3s;
+    transition: transform .3s;
 }
 
 @media screen and (min-width: 1201px) {

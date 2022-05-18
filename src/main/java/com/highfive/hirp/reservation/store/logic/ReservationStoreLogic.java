@@ -11,7 +11,6 @@ import com.highfive.hirp.reservation.store.ReservationStore;
 
 @Repository
 public class ReservationStoreLogic implements ReservationStore {
-
 	@Override
 	public List<Reservation> selectAllReservation(SqlSession sqlSession) {
 		List<Reservation> rList = sqlSession.selectList("ReservationMapper.selectAllReservation");
@@ -22,6 +21,12 @@ public class ReservationStoreLogic implements ReservationStore {
 	public List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId) {
 		List<Reservation> myList = sqlSession.selectList("ReservationMapper.selectAllMyReservation", emplId);
 		return myList;
+	}
+
+	@Override
+	public Reservation selectOneReservationByNo(SqlSession sqlSession, int reservationNo) {
+		Reservation reservation = sqlSession.selectOne("ReservationMapper.selectOneReservationByNo", reservationNo);
+		return reservation;
 	}
 	
 	@Override
@@ -42,6 +47,12 @@ public class ReservationStoreLogic implements ReservationStore {
 		return result;
 	}
 
+	@Override
+	public int returnUtility(SqlSession sqlSession, int reservationNo) {
+		int result = sqlSession.update("ReservationMapper.returnUtility", reservationNo);
+		return result;
+	}
+	
 	@Override
 	public List<Utility> selectAllUtility(SqlSession sqlSession) {
 		List<Utility> uList = sqlSession.selectList("ReservationMapper.selectAllUtility");

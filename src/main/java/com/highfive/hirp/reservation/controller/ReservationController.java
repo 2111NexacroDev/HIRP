@@ -86,6 +86,21 @@ public class ReservationController {
 		return mv;
 	}
 	
+	// 예약 정보 조회
+	@ResponseBody
+	@RequestMapping(value="/reservation/reservationInfo.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
+	public String reservationViewByNo(Model model, 
+			@ModelAttribute Reservation reservation,
+			@RequestParam("reservationNo") int reservationNo) {
+		reservation = rService.printOneReservationByNo(reservationNo);
+		if (reservation != null) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(reservation);
+		} else {
+			return null;
+		}
+	}
+	
 	// 예약 수정
 	@RequestMapping(value="/reservation/edit.hirp", method=RequestMethod.POST)
 	public ModelAndView reservationUpdate(ModelAndView mv
@@ -105,16 +120,38 @@ public class ReservationController {
 	}
 	
 	// 예약 삭제
+	@RequestMapping(value="/reservation/delete.hirp", method=RequestMethod.POST)
 	public ModelAndView reservationDelete(ModelAndView mv
 			,@RequestParam("reservationNo") int reservationNo) {
 		try {
 			int result = rService.removeReservation(reservationNo);
-			
+			if(result > 0) {
+				mv.setViewName("redirect:/reservation/list.hirp");
+			} else {
+				mv.addObject("msg", "예약 삭제 실패");
+			}
 		} catch(Exception e) {
 			mv.addObject("msg", "예약 삭제 오류");
 			mv.setViewName("common/errorPage");			
 		}
 		return mv;
+	}
+	
+	// 자산 반납
+	@ResponseBody
+	@RequestMapping(value="/reservation/returnUtility.hirp", method=RequestMethod.POST)
+	public String returnUtility(ModelAndView mv
+			,@RequestParam("reservationNo") int reservationNo) {
+		try {
+			int result = rService.returnUtility(reservationNo);
+			if(result > 0) {
+				return "success";
+			} else {
+				return "fail";
+			}
+		} catch(Exception e) {
+			return "fail";		
+		}
 	}
 	
 	// 공용품 등록

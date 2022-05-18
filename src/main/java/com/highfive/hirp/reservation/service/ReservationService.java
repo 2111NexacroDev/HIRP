@@ -9,9 +9,11 @@ public interface ReservationService {
 	// reservation
 	public List<Reservation> printAllReservation();
 	public List<Reservation> printAllMyReservation(String emplId);
+	public Reservation printOneReservationByNo(int reservationNo);
 	public int registerReservation(Reservation reservation);
 	public int modifyReservation(Reservation reservation);
 	public int removeReservation(int reservationNo);
+	public int returnUtility(int reservationNo);
 	
 	// utility
 	public List<Utility> printAllUtility();

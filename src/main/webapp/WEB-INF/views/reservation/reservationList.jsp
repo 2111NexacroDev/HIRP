@@ -243,11 +243,16 @@
                     <div class="bg-black"></div>
                     <form class="section--modal__conts" action="/reservation/edit.hirp" method="post"
                         enctype="multipart/form-data" style="width:90%; max-width:600px;">
+                        <input type="hidden" name="reservationNo">
                         <input type="hidden" name="reservationStartDate">
                         <input type="hidden" name="reservationEndDate">
                         <button class="btn--close" type="button"></button>
-                        <h3>공용품 예약</h3>
-                        <ul>
+                        <h3>공용품 예약 상세정보</h3>
+                        <ul>                            
+                            <li>
+                                <label class="mr-20" for="emplId">예약자</label>
+                                <span class="emplId"></span>
+                            </li>
                             <li>
                                 <label class="mr-20" for="utilityNo">예약대상</label>
                                 <select name="utilityNo" id="utilityNo">
@@ -275,7 +280,7 @@
                                 </select>
                             </li>
                             <li>
-                                <label class="mr-20" for="">예약시작일</label>
+                                <label class="mr-20" for="startDate">예약시작일</label>
                                 <input type="date" name="startDate">
                                 <select class="time-select-1">
                                     <option value="am">오전</option>
@@ -302,7 +307,7 @@
                                 </select>
                             </li>
                             <li>
-                                <label class="mr-20" for="">예약종료일</label>
+                                <label class="mr-20" for="endDate">예약종료일</label>
                                 <input type="date" name="endDate">
                                 <select class="time-select-1">
                                     <option value="am">오전</option>
@@ -335,7 +340,8 @@
                             </li>
                         </ul>
                         <div class="btns-wrap mt-20 t-r">
-                            <button id="addReservation" class="point" type="button">예약</button>
+                            <a class="delete" href="/reservation/delete.hirp">예약 취소</a>
+                            <button id="editReservation" class="point" type="button">수정</button>
                             <button class="finished closeWindow" type="button">닫기</button>
                         </div>
                     </form>
@@ -346,7 +352,7 @@
                 <h2>내 예약/대여 현황</h2>
                 <table class="table--basic mt-20">
                     <thead>
-                        <th>카테고리</th>
+                        <th>공용품 카테고리</th>
                         <th>공용품명</th>
                         <th>예약시간</th>
                         <th>반납처리</th>
@@ -354,10 +360,27 @@
                     <tbody>
                     <c:forEach items="${myList }" var="myList">
                         <tr>
-                            <td>${myList.utility.utilityCategory}</td>
+                            <c:choose>
+                                <c:when test="${myList.utility.utilityCategory eq 'room'}">
+                                    <td>회의실</td>
+                                </c:when>
+                                <c:when test="${myList.utility.utilityCategory eq 'car'}">
+                                    <td>차량</td>
+                                </c:when>
+                                <c:when test="${myList.utility.utilityCategory eq 'etc'}">
+                                    <td>기타</td>
+                                </c:when>
+                            </c:choose>
                             <td>${myList.utility.utilityName}</td>
                             <td>${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
-                            <td><button class="basic" type="button">반납</button></td>
+                            <c:choose>
+                                <c:when test="${myList.isReturn eq 'N'}">
+                                    <td><button class="basic" type="button" onclick="returnUtility(${myList.reservationNo})">반납하기</button></td>
+                                </c:when>
+                                <c:when test="${myList.isReturn eq 'Y'}">
+                                    <td>반납/사용완료</td>
+                                </c:when>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -367,6 +390,24 @@
     </div>
 
     <script>
+        // 자산 반납
+        function returnUtility(reservationNo) {
+            $.ajax({
+                url: '/reservation/returnUtility.hirp',
+                type: 'post',
+                data: {
+                    'reservationNo': reservationNo
+                },
+                success: function(data) {
+                    location.reload();
+                },
+                error: function() {
+                    alert('ajax 에러!');
+                }
+            });
+        }
+
+        // 공용품 등록
         function openUtility() {
             $('.modal--utility').css('display', 'flex');
         }
@@ -379,7 +420,6 @@
                     'utilityNo': utilityNo
                 },
                 success: function(data) {
-                    console.log(data);
                     $('.modal--utilityEdit input[name="utilityNo"]').val(data["utilityNo"]);
                     $('.modal--utilityEdit input[name="utilityName"]').val(data["utilityName"]);
                     $('.modal--utilityEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
@@ -393,19 +433,76 @@
         }
 
         function openReservation() {
+            // 오늘 날짜 세팅
             let today = new Date().toISOString().split('T')[0];
             $('input[name="startDate"]').val(today);
             $('input[name="endDate"]').val(today);
             $('.modal--reservation').css('display', 'flex');
         }
 
-        function editReservation() {
-            $('.modal--reservationEdit').css('display', 'flex');
+        function editReservation(reservationNo) {
+            $.ajax({
+                url: '/reservation/reservationInfo.hirp',
+                type: 'get',
+                data: {
+                    'reservationNo': reservationNo
+                },
+                success: function(data) {
+                    let startDate = data["reservationStartDate"].split('T')[0];
+                    let startTime = parseInt(data["reservationStartDate"].split('T')[1].split(':')[0]);
+                    let startMinutes = data["reservationStartDate"].split('T')[1].split(':')[1];
+                    let endDate = data["reservationEndDate"].split('T')[0];
+                    let endTime = parseInt(data["reservationEndDate"].split('T')[1].split(':')[0]);
+                    let endMinutes = data["reservationEndDate"].split('T')[1].split(':')[1];
+
+                    // 오전 오후 나눔
+                    if(startTime > 12) {
+                        startTime = startTime-12;
+                        $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-1').val('pm');
+                    } else {
+                        $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-1').val('am');
+                    }
+                    if(endTime > 12) {
+                        endTime = endTime-12;
+                        $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-1').val('pm');
+                    } else {
+                        $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-1').val('am');
+                    }
+
+                    // value 세팅
+                    startTime = '0'+startTime;
+                    endTime = '0'+endTime;
+
+                    $('.modal--reservationEdit input[name="startDate"]').val(startDate);
+                    $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-2').val(startTime);
+                    $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-3').val(startMinutes);
+                    
+                    $('.modal--reservationEdit input[name="endDate"]').val(endDate);
+                    $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val(endTime);
+                    $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val(endMinutes);
+                    
+                    $('.modal--reservationEdit .emplId').text(data["emplId"]);
+                    $('.modal--reservationEdit select[name="utilityNo"]').val(data["utilityNo"]);
+                    $('.modal--reservationEdit input[name="reservationNo"]').val(data["reservationNo"]);
+                    $('.modal--reservationEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
+                    $('.modal--reservationEdit textarea[name="reservationConts"]').val(data["reservationConts"]);
+                    $('.modal--reservationEdit').css('display', 'flex');
+                }, 
+                error: function() {
+                    alert('ajax 오류!');
+                }
+            });           
         }
 
         $('.modal--utilityEdit a.delete').on('click', function(){
             $('.modal--utilityEdit form').attr('action','/utility/delete.hirp');
             $('.modal--utilityEdit form').submit();
+            return false;
+        });
+
+        $('.modal--reservationEdit a.delete').on('click', function(){
+            $('.modal--reservationEdit form').attr('action','/reservation/delete.hirp');
+            $('.modal--reservationEdit form').submit();
             return false;
         });
 
@@ -430,6 +527,29 @@
             $('input[name="reservationStartDate"]').val(startDateTime);
             $('input[name="reservationEndDate"]').val(endDateTime);
             $(this).parents('.modal--reservation').children('form').submit();
+        });
+
+        $('#editReservation').on('click', function(){
+            let startDate = $('.modal--reservationEdit input[name="startDate"]').val();
+            let startTime1 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-1').val();
+            let startTime2 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-2').val();
+            if(startTime1 == 'pm') {
+                startTime2 = parseInt(startTime2) + 12;
+            }
+            let startTime3 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-3').val();
+            let startDateTime = startDate+'T'+startTime2+':'+startTime3;
+
+            let endDate = $('.modal--reservationEdit input[name="endDate"]').val();
+            let endTime1 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-1').val();
+            let endTime2 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val();
+            if(endTime1 == 'pm') {
+                endTime2 = parseInt(endTime2) + 12;
+            }
+            let endTime3 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val();
+            let endDateTime = endDate+'T'+endTime2+':'+endTime3;
+            $('.modal--reservationEdit input[name="reservationStartDate"]').val(startDateTime);
+            $('.modal--reservationEdit input[name="reservationEndDate"]').val(endDateTime);
+            $(this).parents('.modal--reservationEdit').children('form').submit();
         });
 
         $(function () {
@@ -512,7 +632,10 @@
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
                         backgroundColor: 'purple',
-                        borderColor: 'purple'
+                        borderColor: 'purple',
+                        extendedProps: {
+                            'reservationNo': '${rList.reservationNo }',
+                        }
                     },
                     </c:if>
                     <c:if test="${rList.utility.utilityCategory eq 'car'}">
@@ -521,7 +644,10 @@
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
                         backgroundColor: 'black',
-                        borderColor: 'black'
+                        borderColor: 'black',
+                        extendedProps: {
+                            'reservationNo': '${rList.reservationNo }',
+                        }
                     },
                     </c:if>
                     <c:if test="${rList.utility.utilityCategory eq 'etc'}">
@@ -530,13 +656,16 @@
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
                         backgroundColor: '#ffdc3c',
-                        borderColor: '#ffdc3c'
+                        borderColor: '#ffdc3c',
+                        extendedProps: {
+                            'reservationNo': '${rList.reservationNo }',
+                        }
                     },
                     </c:if>
                 </c:forEach>   
                 ],
                 eventClick: function(data) {
-                    editReservation(data); //이벤트 클릭 시 모달 호출
+                    editReservation(data.event.extendedProps.reservationNo); //이벤트 클릭 시 모달 호출
                 },
             });
             calendar.render();

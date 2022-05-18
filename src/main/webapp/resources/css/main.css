@@ -89,7 +89,8 @@
 
 .ul--birthday {
     padding: 10px 20px;
-    background-color: #efefef;
+    background-color: aliceblue;
+    border-radius: 10px;
 }
 
 .ul--birthday li {

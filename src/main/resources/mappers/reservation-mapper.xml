@@ -36,7 +36,11 @@
 		INSERT INTO UTILITY_TBL VALUES(UTILITY_SEQ.NEXTVAL, #{utilityName}, #{utilityCategory}, #{utilityConts})
 	</insert>
 	<update id="updateUtility">
-		UPDATE UTILITY_TBL SET UTILITY_NAME = #{utilityName}, UTILITY_CATEGORY = #{utilityCategory}, UTILITY_CONTS = #{utilityConts} WHERE UTILITY_NO = #{utilityNo}
+		UPDATE UTILITY_TBL 
+		SET UTILITY_NAME = #{utilityName}, 
+			UTILITY_CATEGORY = #{utilityCategory}, 
+			UTILITY_CONTS = #{utilityConts} 
+		WHERE UTILITY_NO = #{utilityNo}
 	</update>
 	<delete id="deleteUtility">
 		DELETE FROM UTILITY_TBL WHERE UTILITY_NO = #{utilityNo}
@@ -55,8 +59,27 @@
 		WHERE EMPL_ID = #{emplId}
 		ORDER BY RESERVATION_NO DESC
 	</select>
+	<select id="selectOneReservationByNo" resultMap="reservationResultMap">
+		SELECT *
+		FROM RESERVATION_TBL
+		WHERE RESERVATION_NO = #{reservationNo}
+	</select>
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION_TBL VALUES(RESERVATION_SEQ.NEXTVAL, #{emplId}, #{utilityNo}, #{reservationStartDate}, #{reservationEndDate}, #{reservationConts}, DEFAULT)
 	</insert>
-	<update id="updateReservation"></update>
+	<update id="updateReservation">
+		UPDATE RESERVATION_TBL 
+		SET RESERVATION_START_DATE = #{reservationStartDate}, 
+			RESERVATION_END_DATE = #{reservationEndDate},
+			RESERVATION_CONTS = #{reservationConts}
+		WHERE RESERVATION_NO = #{reservationNo}
+	</update>
+	<update id="returnUtility">
+		UPDATE RESERVATION_TBL
+		SET IS_RETURN = 'Y'
+		WHERE RESERVATION_NO = #{reservationNo}
+	</update>
+	<delete id="deleteReservation">
+		DELETE FROM RESERVATION_TBL WHERE RESERVATION_NO = #{reservationNo}
+	</delete>
 </mapper>
