@@ -87,6 +87,7 @@ public class EmployeeController {
 				session.setAttribute("emplId", empLogin.getEmplId());
 				session.setAttribute("emplPw", empLogin.getEmplPw());
 				session.setAttribute("deptCode", empLogin.getDeptCode());
+				session.setAttribute("emplName", empLogin.getEmplName());
 				return "redirect:/home.hirp";
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");

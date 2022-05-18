@@ -12,6 +12,7 @@ import com.highfive.hirp.common.Search;
 
 public interface ApprovalStore {
 
+	//폼 전체 조회
 	List<ApprForm> selectAllApprForm(SqlSession sqlSession);
 
 	List<ApprForm> selectSearchApprForm(SqlSession sqlSession, Search search);
@@ -53,5 +54,8 @@ public interface ApprovalStore {
 	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept);
 
 	Approval selectOneAppr(SqlSession sqlSession,int docNo);
+
+	//양식등록
+	int insertApprForm(SqlSession sqlSession, ApprForm apprForm);
 
 }

@@ -74,5 +74,9 @@ public interface ApprovalService {
 		public List<Approval> printAllCompletedAppr(ApprAccept apprAccept);
 		//문서조회(select)
 		public Approval printOneAppr(int docNo);
+		
+		
+		//양식등록
+		public int registerApprForm(ApprForm apprForm);
 	
 }
