@@ -460,6 +460,7 @@ public class SurveyController {
 			Survey survey = sService.selectSurveyByNo(surveyNo);
 			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo);
+
 			if(survey != null) {
 				mv.addObject("surveyInfo", survey);
 				if(emplList != null && subList != null) {
@@ -672,11 +673,14 @@ public class SurveyController {
 					answerSubCount++;
 				}
 			}
+			SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
+			List<SurveyAnswer> myAnswerList = sService.selectSurveyMyAnswerByNo(ssUpdate);
 			if(survey != null) {
 				mv.addObject("surveyInfo", survey);
 				mv.addObject("questList", surveyQuestList);
 				mv.addObject("subAllCount", subAllCount); //전체 응답 대상자 수
 				mv.addObject("answerSubCount", answerSubCount); //응답한 사람 수
+				mv.addObject("myAnswerList", myAnswerList);
 				mv.setViewName("survey/surveyAnswerEditPage");
 				
 			} else {

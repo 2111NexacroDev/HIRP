@@ -147,9 +147,9 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
 	@Override
-	public SurveyAnswer selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate) {
-		SurveyAnswer surveyAnswer = sqlSession.selectOne("SurveyMapper.selectSurveyMyAnswerByNo", ssUpdate);
-		return surveyAnswer;
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate) {
+		List<SurveyAnswer> surveyAnswerList = sqlSession.selectList("SurveyMapper.selectSurveyMyAnswerByNo", ssUpdate);
+		return surveyAnswerList;
 	}
 	//emplId, surveyNo 담아서 넘겨줌.
 

@@ -150,8 +150,8 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
 	@Override
-	public SurveyAnswer selectSurveyMyAnswerByNo(SurveyUpdate ssUpdate) {
-		SurveyAnswer surveyAnswer = sStore.selectSurveyMyAnswerByNo(sqlSession, ssUpdate);
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SurveyUpdate ssUpdate) {
+		List<SurveyAnswer> surveyAnswer = sStore.selectSurveyMyAnswerByNo(sqlSession, ssUpdate);
 		return surveyAnswer;
 	}
 	//emplId, surveyNo 담아서 넘겨줌.

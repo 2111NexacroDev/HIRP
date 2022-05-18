@@ -270,4 +270,10 @@
 	<select id="selectSurveyAnswerByNo" resultMap="surveyAnswerResultMap">
 		SELECT * FROM SURVEY_ANSWER WHERE SURVEY_NO = #{surveyNo}
 	</select>
+	
+	<!-- 설문조사 번호, 내 아이디로 내 응답 리스트 가져오기 -->
+	<select id="selectSurveyMyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER 
+		WHERE SURVEY_NO = #{surveyNo} AND SURVEYANSWER_ID = #{emplId}
+	</select>
 </mapper>
