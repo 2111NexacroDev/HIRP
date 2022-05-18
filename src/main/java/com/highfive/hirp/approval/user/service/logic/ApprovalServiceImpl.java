@@ -148,4 +148,11 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return approval;
 	}
 
+	//양식등록
+	@Override
+	public int registerApprForm(ApprForm apprForm) {
+		int result = aStore.insertApprForm(sqlSession,apprForm);
+		return result;
+	}
+
 }

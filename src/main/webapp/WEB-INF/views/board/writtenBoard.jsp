@@ -32,6 +32,7 @@
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성일</th>
+							<th>조회수</th>
 							<th>첨부파일</th>
 						</tr>
                     </thead>
