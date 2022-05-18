@@ -99,6 +99,7 @@ public class SurveyController {
 				mv.addObject("sList", proceedList);
 				System.out.println("proceedList 출력 : " + proceedList);
 				mv.setViewName("survey/proceedSurveyPage");
+				
 			} else {
 				mv.addObject("msg1", "진행중인 리스트 조회 실패");
 				mv.setViewName("common/errorPage");
@@ -163,8 +164,27 @@ public class SurveyController {
 		//설문조사 번호로 설문 대상자 리스트 가져오기
 		try {
 			List<Survey> wroteList = sService.selectWroteSurvey(emplId);
+			List<SurveySub> subAllList = new ArrayList<SurveySub>();
+			List<Integer> subAllCountList = new ArrayList<Integer>();
+			List<Integer> answerSubCountList = new ArrayList<Integer>();
+			for(int j = 0; j < wroteList.size(); j++) {
+				List<SurveySub> subList = sService.selectSurveySubByNo(wroteList.get(j).getSurveyNo());
+				subAllList.addAll(subList); //응답자 목록 가져오기
+				subAllCountList.add(j, subList.size());
+				int answerSubCount = 0;
+				for(int i = 0 ; i < subList.size() ; i++) {
+					if(subList.get(i).getSubAnswerstatus().equals("Y")) {
+						answerSubCount++;
+					}
+				}
+				answerSubCountList.add(j, answerSubCount);
+			}
+			
 			//화면에서 nullcheck 해줄 거임.
 			mv.addObject("sList", wroteList);
+			mv.addObject("subAllList", subAllList);
+			mv.addObject("subAllCountList", subAllCountList); //전체 응답 대상자 수
+			mv.addObject("answerSubCountList", answerSubCountList); //응답한 사람 수
 			System.out.println("wroteList 출력 : " + wroteList);
 			mv.setViewName("survey/wroteSurveyPage");
 		} catch(Exception e) {
@@ -423,16 +443,10 @@ public class SurveyController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		//번호로 설문조사 정보 가져오기
-		//설문조사에 포함된 설문문항 가져오기
-		//설문조사 보기 가져오기
-		//설문조사 번호, 내 아이디로 나의 응답 가져오기
-		
-		//응답 수정 페이지
-		//응답 제출 페이지
 		
 		return mv;
 	}
+	
 	
 	//설문 수정 페이지
 	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.POST)
@@ -446,6 +460,7 @@ public class SurveyController {
 			Survey survey = sService.selectSurveyByNo(surveyNo);
 			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo);
+
 			if(survey != null) {
 				mv.addObject("surveyInfo", survey);
 				if(emplList != null && subList != null) {
@@ -621,7 +636,7 @@ public class SurveyController {
 				SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyAnswer.getSurveyAnswerList().get(i).getSurveyNo());
 				result2 = sService.updateSubAnswerStatus(ssUpdate); //안돼!!안~돼!! 안돼요!!! 업데이트 왜 안됨
 			}
-			if(result > 0 && result > 0) {
+			if(result > 0 && result2 > 0) {
 				//설문조사 응답자 목록에서 answerstatus 업데이트
 				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
 			} else {
@@ -635,13 +650,89 @@ public class SurveyController {
 		return mv;
 	}
 	
-	//설문 응답 수정
-	public ModelAndView surveySubmitModify(ModelAndView mv
+	//설문 응답 수정 페이지
+	@RequestMapping(value="/survey/updateAnswerPage.hirp", method=RequestMethod.GET)
+	public ModelAndView surveySubmitModifyPage(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo
-			,@ModelAttribute List<SurveyAnswer> surveyAnswer) {
-		//만약에 설문응답번호가 없으면 surveyNo으로 가져와서 set 해주기
+			, HttpServletRequest request) {
+		//내가 응답한 내용이 있는지 조회
+		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
+		//없으면 응답 할 수 있도록 띄워주고, 있으먼 내가 작성한 답변 띄워주기(응답 수정)
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+//		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
+		
+		try {
+			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<SurveyQuest> surveyQuestList = sService.selectAllSurveyQuestByNo(surveyNo);
+			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo); //응답자 목록 가져오기
+			int subAllCount = subList.size();
+			int answerSubCount = 0;
+			for(int i = 0 ; i < subList.size() ; i++) {
+				if(subList.get(i).getSubAnswerstatus().equals("Y")) {
+					answerSubCount++;
+				}
+			}
+			SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
+			List<SurveyAnswer> myAnswerList = sService.selectSurveyMyAnswerByNo(ssUpdate);
+			if(survey != null) {
+				mv.addObject("surveyInfo", survey);
+				mv.addObject("questList", surveyQuestList);
+				mv.addObject("subAllCount", subAllCount); //전체 응답 대상자 수
+				mv.addObject("answerSubCount", answerSubCount); //응답한 사람 수
+				mv.addObject("myAnswerList", myAnswerList);
+				mv.setViewName("survey/surveyAnswerEditPage");
+				
+			} else {
+				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
+	
+	//설문 응답 수정
+	@RequestMapping(value="/survey/updateAnswer.hirp", method=RequestMethod.POST)
+	public ModelAndView surveySubmitModify(ModelAndView mv
+//			,@RequestParam("surveyNo") int surveyNo
+			,@ModelAttribute SurveyAnswer surveyAnswer
+			, HttpServletRequest request) {
+		//insert 할 거니까 설문응답번호 자동 생성됨.
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		int aCount = surveyAnswer.getSurveyAnswerList().size();
+		System.out.println("emplId");
+		System.out.println(emplId);
+		System.out.println(aCount);
+		System.out.println("surveyanswer 출력");
+//		for(int i = 0; i < aCount; i++) {
+//			surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
+//			System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+//		}
+		try {
+			int result = 0;
+			for(int i = 0; i < aCount; i++) {
+				System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+				result = sService.updateSurveySubAnswer(surveyAnswer.getSurveyAnswerList().get(i));
+			}
+			if(result > 0) {
+				//설문조사 응답자 목록에서 answerstatus 업데이트
+				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
+			} else {
+				mv.addObject("msg", "설문조사 응답 수정 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	
 	//설문 결과 페이지 (설문 상세2)
 	@RequestMapping(value="/survey/surveyResult.hirp", method=RequestMethod.GET)

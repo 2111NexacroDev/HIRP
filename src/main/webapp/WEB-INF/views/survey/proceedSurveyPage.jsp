@@ -43,18 +43,20 @@
                     	<c:forEach items="${sList }" var="survey">
 <%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
 							<c:set var="row_num" value="${row_num-1 }"/>
-							<c:url var="sDetail" value="/survey/questDetail.hirp">
-								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-							</c:url>
-							
 							<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
 	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
+										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp">
+											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+										</c:url>
 	                            		<button class="finished" type="button">참여완료</button>
 	                            	</c:if>
 	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
+	                            		<c:url var="sDetail" value="/survey/questDetail.hirp">
+											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+										</c:url>
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>

@@ -64,7 +64,7 @@ public interface SurveyStore {
 	//설문조사 번호로 설문조사 응답 가져오기
 	public List<SurveyAnswer> selectSurveyAnswerByNo(SqlSession sqlSession, int surveyNo);
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
-	public SurveyAnswer selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate);
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate);
 	//emplId, surveyNo 담아서 넘겨줌.
 
 	//설문조사 수정
