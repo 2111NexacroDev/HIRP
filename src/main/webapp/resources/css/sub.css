@@ -11,6 +11,13 @@
     justify-content: center;
 }
 
+.subConts>h2 {
+    margin-top: 20px;
+    padding: 0 20px;
+    font-weight: 400;
+    font-size: 20px !important;
+}
+
 /* 개인업무관리 */
 #todo section {
     position: relative;
@@ -486,6 +493,33 @@ section[class^="todo--"] li {
 .fc .fc-timegrid-col.fc-day-today {
     background-color: rgba(239, 239, 239, .7);
     background-color: var(--fc-today-bg-color, rgba(239, 239, 239, .7));
+}
+
+.ul--utility button {
+    padding: 0;
+    background-color: transparent;
+}
+
+.ul--utility>li>ul>li {
+    position: relative;
+}
+
+.btn--utility-setting {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/icons/ic_toolbar.png");
+    background-position: 100px 50px;
+    transform: translateY(-50%);
+    transition: all .3s;
+}
+
+@media screen and (min-width: 1201px) {
+    .btn--utility-setting:hover {
+        transform: translateY(-50%) rotate(180deg);
+    }
 }
 
 /* 공용품 예약/관리 끝 */

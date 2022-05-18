@@ -22,12 +22,17 @@
                 <button type="button" onclick="openUtility();"></button>
             </h2>
 
-            <ul>
+            <ul class="ul--utility">
                 <li>
                     <button type="button">회의실</button>
                     <ul>
                     <c:forEach items="${uList }" var="utility">
-                        <c:if test="${utility.utilityCategory eq 'room'}"><li><a href="#">${utility.utilityName}</a></li></c:if>
+                    <c:if test="${utility.utilityCategory eq 'room'}">
+                        <li>
+                            <button type="button">${utility.utilityName}</button>
+                            <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
+                        </li>
+                    </c:if>
                     </c:forEach>
                     </ul>
                 </li>
@@ -36,7 +41,10 @@
                     <ul>
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'car'}">
-                                <li><a href="#">${utility.utilityName}</a></li>
+                                <li>
+                                    <button type="button">${utility.utilityName}</button>
+                                    <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
+                                </li>
                             </c:if>
                         </c:forEach>
                     </ul>
@@ -46,7 +54,10 @@
                     <ul>
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'etc'}">
-                                <li><a href="#">${utility.utilityName}</a></li>
+                                <li>
+                                    <button type="button">${utility.utilityName}</button>
+                                    <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
+                                </li>
                             </c:if>
                         </c:forEach>
                     </ul>
@@ -64,8 +75,6 @@
                     <div class="bg-black"></div>
                     <form class="section--modal__conts" action="/utility/write.hirp" method="post"
                         enctype="multipart/form-data" style="width:90%; max-width:600px;">
-                        <input type="hidden" name="scheduleColor">
-                        <input type="hidden" name="scheduleAlarm" value="N">
                         <button class="btn--close" type="button"></button>
                         <h3>공용품 추가</h3>
                         <ul>
@@ -89,6 +98,40 @@
                         </ul>
                         <div class="btns-wrap mt-20 t-r">
                             <button class="point" type="submit">추가</button>
+                            <button class="finished closeWindow" type="button">닫기</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="section--modal modal--utilityEdit">
+                    <div class="bg-black"></div>
+                    <form class="section--modal__conts" action="/utility/edit.hirp" method="post"
+                        enctype="multipart/form-data" style="width:90%; max-width:600px;">
+                        <input type="hidden" name="utilityNo">
+                        <button class="btn--close" type="button"></button>
+                        <h3>공용품 정보 수정</h3>
+                        <ul>
+                            <li>
+                                <label class="mr-20" for="utilityName">공용품명</label>
+                                <input type="text" name="utilityName">
+                            </li>
+                            <li>
+                                <label class="mr-20" for="utilityCategory">카테고리</label>
+                                <select name="utilityCategory" id="utilityCategory">
+                                    <option value="room">회의실</option>
+                                    <option value="car">차량</option>
+                                    <option value="etc">기타</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label class="mr-20" for="utilityConts">상세정보</label>
+                                <textarea name="utilityConts" id="utilityConts" cols="20" rows="4"
+                                    placeholder="상세정보를 입력해주세요."></textarea>
+                            </li>
+                        </ul>
+                        <div class="btns-wrap mt-20 t-r">
+                            <a class="delete" href="/utility/delete.hirp">자산 삭제</a>
+                            <button class="point" type="submit">수정</button>
                             <button class="finished closeWindow" type="button">닫기</button>
                         </div>
                     </form>
@@ -196,6 +239,8 @@
                     </form>
                 </section>
 
+                <h2>공용품 예약현황</h2>
+
                 <div id="reservationCalendar"></div>
 
                 <h2 class="padding-20">내 예약/대여 현황</h2>
@@ -207,12 +252,14 @@
                         <th>반납처리</th>
                     </thead>
                     <tbody>
+                    <c:forEach items="${myList }" var="myList">
                         <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
+                            <td>${myList.utility.utilityCategory}</td>
+                            <td>${myList.utility.utilityName}</td>
+                            <td>${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
                             <td><button class="basic" type="button">반납</button></td>
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -224,12 +271,42 @@
             $('.modal--utility').css('display', 'flex');
         }
 
+        function editUtility(utilityNo) {      
+            $.ajax({
+                url: '/utility/utilityInfo.hirp',
+                type: 'get',
+                data: {
+                    'utilityNo': utilityNo
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('.modal--utilityEdit input[name="utilityNo"]').val(data["utilityNo"]);
+                    $('.modal--utilityEdit input[name="utilityName"]').val(data["utilityName"]);
+                    $('.modal--utilityEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
+                    $('.modal--utilityEdit textarea[name="utilityConts"]').val(data["utilityConts"]);
+                    $('.modal--utilityEdit').css('display', 'flex');
+                }, 
+                error: function() {
+                    alert('ajax 오류!');
+                }
+            });
+        }
+
         function openReservation() {
             let today = new Date().toISOString().split('T')[0];
             $('input[name="startDate"]').val(today);
             $('input[name="endDate"]').val(today);
             $('.modal--reservation').css('display', 'flex');
         }
+
+        function editReservation() {
+        }
+
+        $('.modal--utilityEdit a.delete').on('click', function(){
+            $('.modal--utilityEdit form').attr('action','/utility/delete.hirp');
+            $('.modal--utilityEdit form').submit();
+            return false;
+        });
 
         $('#addReservation').on('click', function(){
             let startDate = $('input[name="startDate"]').val();
@@ -256,13 +333,13 @@
 
         $(function () {
             // 현재 시간으로 스크롤
-            setTimeout(function(){
+            /*setTimeout(function(){
                 let nowTimeOffsetY = $('.fc-timegrid-now-indicator-arrow').attr('style').split(':')[1];
                 let offsetTop = $('.fc-view-harness').offset().top;
                 console.log(offsetTop)
                 nowTimeOffsetY = parseInt(nowTimeOffsetY)+offsetTop;
                 $('body,html').stop().animate({'scrollTop':nowTimeOffsetY+'px'},300);
-            }, 300);
+            }, 300);*/
 
             // 날짜 유효성 체크 - 끝나는 날짜 선택할 때
             $('input[name="endDate"]').on('change', function(){
@@ -337,11 +414,33 @@
                 nowIndicator: true,
                 events: [
                 <c:forEach items="${rList }" var="rList">
+                    <c:if test="${rList.utility.utilityCategory eq 'room'}">
                     {
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
-                        end: '${rList.reservationEndDate }'
+                        end: '${rList.reservationEndDate }',
+                        backgroundColor: 'powderblue',
+                        borderColor: 'powderblue'
                     },
+                    </c:if>
+                    <c:if test="${rList.utility.utilityCategory eq 'car'}">
+                    {
+                        title: '${rList.utility.utilityName }',
+                        start: '${rList.reservationStartDate }',
+                        end: '${rList.reservationEndDate }',
+                        backgroundColor: 'black',
+                        borderColor: 'black'
+                    },
+                    </c:if>
+                    <c:if test="${rList.utility.utilityCategory eq 'etc'}">
+                    {
+                        title: '${rList.utility.utilityName }',
+                        start: '${rList.reservationStartDate }',
+                        end: '${rList.reservationEndDate }',
+                        backgroundColor: '#ffdc3c',
+                        borderColor: '#ffdc3c'
+                    },
+                    </c:if>
                 </c:forEach>   
                 ]
             });

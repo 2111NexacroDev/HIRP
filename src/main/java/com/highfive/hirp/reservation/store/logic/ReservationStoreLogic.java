@@ -19,6 +19,12 @@ public class ReservationStoreLogic implements ReservationStore {
 	}
 
 	@Override
+	public List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId) {
+		List<Reservation> myList = sqlSession.selectList("ReservationMapper.selectAllMyReservation", emplId);
+		return myList;
+	}
+	
+	@Override
 	public int insertReservation(SqlSession sqlSession, Reservation reservation) {
 		int result = sqlSession.insert("ReservationMapper.insertReservation", reservation);
 		return result;
@@ -40,6 +46,12 @@ public class ReservationStoreLogic implements ReservationStore {
 	public List<Utility> selectAllUtility(SqlSession sqlSession) {
 		List<Utility> uList = sqlSession.selectList("ReservationMapper.selectAllUtility");
 		return uList;
+	}
+	
+	@Override
+	public Utility selectOneUtilityByNo(SqlSession sqlSession, int utilityNo) {
+		Utility utility = sqlSession.selectOne("ReservationMapper.selectOneUtilityByNo", utilityNo);
+		return utility;
 	}
 
 	@Override

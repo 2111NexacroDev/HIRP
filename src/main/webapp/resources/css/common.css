@@ -278,6 +278,7 @@ img {
 .padding-top-10 {
     padding-top: 10px !important;
 }
+
 .padding-bottom-10 {
     padding-bottom: 10px !important;
 }
@@ -642,26 +643,30 @@ img {
     padding-left: 20px;
 }
 
-#snb>ul>li>a {
+#snb>ul>li>a,
+#snb>ul>li>button {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
     font-size: 14px;
     font-weight: 500;
 }
 
-#snb>ul>li>a:before {
+#snb>ul>li>a:before,
+#snb>ul>li>button:before {
     content: "\f107";
     font-family: "Fontawesome";
     margin-right: 10px;
     transition: all .3s;
 }
 
+#snb>ul>li>a.on:before,
+#snb>ul>li>button.on:before {
+    transform: rotate(-90deg);
+}
+
 #snb>ul.no-icon>li>a:before {
     display: none;
 }
-
-#snb>ul>li:hover>a:before {}
 
 #snb>ul {
     margin-top: 20px;
@@ -669,6 +674,10 @@ img {
 
 #snb>ul>li {
     margin-top: 24px;
+}
+
+#snb>ul>li>ul>li:first-child {
+    margin-top: 16px;
 }
 
 .btn--function {

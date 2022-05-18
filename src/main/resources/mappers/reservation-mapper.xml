@@ -29,17 +29,34 @@
 	<select id="selectAllUtility" resultMap="utilityResultMap">
 		SELECT * FROM UTILITY_TBL ORDER BY UTILITY_NO DESC
 	</select>
+	<select id="selectOneUtilityByNo" resultMap="utilityResultMap">
+		SELECT * FROM UTILITY_TBL WHERE UTILITY_NO = #{utilityNo}
+	</select>
 	<insert id="insertUtility">
 		INSERT INTO UTILITY_TBL VALUES(UTILITY_SEQ.NEXTVAL, #{utilityName}, #{utilityCategory}, #{utilityConts})
 	</insert>
+	<update id="updateUtility">
+		UPDATE UTILITY_TBL SET UTILITY_NAME = #{utilityName}, UTILITY_CATEGORY = #{utilityCategory}, UTILITY_CONTS = #{utilityConts} WHERE UTILITY_NO = #{utilityNo}
+	</update>
+	<delete id="deleteUtility">
+		DELETE FROM UTILITY_TBL WHERE UTILITY_NO = #{utilityNo}
+	</delete>
 	
 	<select id="selectAllReservation" resultMap="reservationResultMap">
-		SELECT RESERVATION_NO, EMPL_ID, UTILITY_NO, RESERVATION_START_DATE, RESERVATION_END_DATE, RESERVATION_CONTS, IS_RETURN, UTILITY_NAME 
+		SELECT RESERVATION_NO, EMPL_ID, UTILITY_NO, RESERVATION_START_DATE, RESERVATION_END_DATE, RESERVATION_CONTS, IS_RETURN, UTILITY_NAME, UTILITY_CATEGORY 
 		FROM RESERVATION_TBL 
 		JOIN UTILITY_TBL USING(UTILITY_NO)
 		ORDER BY RESERVATION_NO DESC 
 	</select>
+	<select id="selectAllMyReservation" resultMap="reservationResultMap">
+		SELECT RESERVATION_NO, EMPL_ID, UTILITY_NO, RESERVATION_START_DATE, RESERVATION_END_DATE, RESERVATION_CONTS, IS_RETURN, UTILITY_NAME, UTILITY_CATEGORY 
+		FROM RESERVATION_TBL 
+		JOIN UTILITY_TBL USING(UTILITY_NO)
+		WHERE EMPL_ID = #{emplId}
+		ORDER BY RESERVATION_NO DESC
+	</select>
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION_TBL VALUES(RESERVATION_SEQ.NEXTVAL, #{emplId}, #{utilityNo}, #{reservationStartDate}, #{reservationEndDate}, #{reservationConts}, DEFAULT)
 	</insert>
+	<update id="updateReservation"></update>
 </mapper>

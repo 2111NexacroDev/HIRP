@@ -1,6 +1,10 @@
 package com.highfive.hirp;
 
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +28,14 @@ public class HomeController {
 	
 	// 넥사크로 관리자 페이지
 	@RequestMapping(value = "/admin.hirp", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		return "redirect:/nexaui/index.html";
+	public String adminView(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		if(emplId.equals("admin")) {
+			return "redirect:/nexaui/index.html";
+		} else {
+			// 아직 관리자 아닐 시 수행할 동작 추가 안함
+			return "common/errorPage";
+		}
 	}
 }
