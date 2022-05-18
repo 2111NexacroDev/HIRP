@@ -108,17 +108,40 @@
 		            <c:forEach items="${questList }" var="questInfo" varStatus="status">
 		           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
 		           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
-		           		
-		           		<c:set var="questAnswerCount" value="0"/>
+		           		<!-- 변수 선언 -->
+		           		<c:set var="questAnswerCount" value="0"/> <!-- 해당 문항에 응답한 사람 수 -->
+		           		<c:set var="surveyCh1Count" value="0"/> <!-- 1번에 답한 사람 수 (객관식) -->
+		           		<c:set var="surveyCh2Count" value="0"/>
+		           		<c:set var="surveyCh3Count" value="0"/>
+		           		<c:set var="surveyCh4Count" value="0"/>
+		           		<!-- 해당 문항에 응답한 사람 수 세기 -->
 		           		<c:forEach items="${answerList }" var="answer">
 		           			<c:if test="${answer.surveyquestNo eq questInfo.questNo && answer.surveyanswerContent ne null}">
-			           			<c:set var="questAnswerCount" value="${questAnswerCount+1 }"/>
+				           			<c:set var="questAnswerCount" value="${questAnswerCount+1 }"/>
 		           			</c:if>
 		           		</c:forEach>
 		           		
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
+		                    <!-- 답변한 사람, 보기별 답변 갯수 카운트 -->
+		                    <c:forEach items="${answerList }" var="answer">
+			           			<c:if test="${answer.surveyquestNo eq questInfo.questNo && answer.surveyanswerContent ne null}">
+					           			<c:if test="${answer.surveyanswerContent eq '1' }">
+					           				<c:set var="surveyCh1Count" value="${surveyCh1Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${answer.surveyanswerContent eq '2' }">
+					           				<c:set var="surveyCh2Count" value="${surveyCh2Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${answer.surveyanswerContent eq '3' }">
+					           				<c:set var="surveyCh3Count" value="${surveyCh3Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${answer.surveyanswerContent eq '4' }">
+					           				<c:set var="surveyCh4Count" value="${surveyCh4Count+1 }"/>
+					           			</c:if>
+			           			</c:if>
+			           		</c:forEach>
+		           		
 		                    <div class="mt-20 mb-20">
-		                        <p>${questInfo.questNo }</p>
+<%-- 		                        <p>${questInfo.questNo }</p> --%>
 		                        <!--객관식 하나만 선택-->
 		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
@@ -136,31 +159,32 @@
 					                    </thead>
 					                    <tbody>
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
+					                    		
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh1}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh1Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh2}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh2Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh3}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh3Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh4}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh4Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 					                    </tbody>
@@ -170,9 +194,26 @@
 		                    <br>
 		                </c:if>
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '복수 선택'|| questInfo.questType1 eq 'D' && questInfo.questType2 eq '복수 선택'}">
+		                    <c:forEach items="${answerList }" var="answer">
+			           			<c:if test="${answer.surveyquestNo eq questInfo.questNo && answer.surveyanswerContent ne null}">
+					           			<c:if test="${fn:contains(answer.surveyanswerContent, '1')}">
+					           				<c:set var="surveyCh1Count" value="${surveyCh1Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${fn:contains(answer.surveyanswerContent, '2')}">
+					           				<c:set var="surveyCh2Count" value="${surveyCh2Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${fn:contains(answer.surveyanswerContent, '3')}">
+					           				<c:set var="surveyCh3Count" value="${surveyCh3Count+1 }"/>
+					           			</c:if>
+					           			<c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
+					           				<c:set var="surveyCh4Count" value="${surveyCh4Count+1 }"/>
+					           			</c:if>
+			           			</c:if>
+			           		</c:forEach>
+		                    
 		                    <div class="mt-20 mb-20">
 		                        <!--객관식 중복 선택 가능-->
-		                    	<p>${questInfo.questNo }</p>
+<%-- 		                    	<p>${questInfo.questNo }</p> --%>
 		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
 		                        	<div class="basic-border bor-round padding-20 mb-20 row" style="width: 60%;">
@@ -192,29 +233,29 @@
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh1}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh1Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh2}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh2Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh3}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh3Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh4}</td>
-						                            <td>2</td>
-						                            <td>20.00%</td>
+						                            <td>${surveyCh4Count }</td>
+						                            <td><fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" /></td>
 						                        </tr>
 				                            </c:if>
 					                    </tbody>
@@ -224,8 +265,9 @@
 		                    <br>
 		                </c:if>
 		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '단문 입력'}">
+		                	
 		                    <div class="mt-20 mb-20">
-		                   		<p>${questInfo.questNo }</p>
+<%-- 		                   		<p>${questInfo.questNo }</p> --%>
 		                        <!--주관식 단문형 -->
 		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
@@ -233,15 +275,19 @@
 		                            	<div class="inline-block-div col-6">전체 대상자 : ${subAllCount}명</div>
 		                            	<div class="inline-block-div col-6">참여율 : ${questAnswerCount}명 (<fmt:formatNumber type="percent" value="${questAnswerCount/subAllCount }" pattern="0.00%" />)</div>
 		                            </div>
-		                        	<p class="mt-10 mb-10">단문형 답변이에요 답변이 리스트로 나오면 될 거 같아요</p>
-		                        	<p class="mt-10 mb-10">단문형 답변이에요 답변이 리스트로 나오면 될 거 같아요</p>
+		                            <!-- 답변 출력 -->
+		                            <c:forEach items="${answerList }" var="answer">
+					           			<c:if test="${answer.surveyquestNo eq questInfo.questNo && answer.surveyanswerContent ne null}">
+				                        	<p class="mt-10 mb-10">${answer.surveyanswerContent }</p>
+					           			</c:if>
+					           		</c:forEach>
 		                        </div>
 		                    </div>
 		                    <br>
 		                </c:if>
 		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '장문 입력'}">
 		                    <div class="mt-20 mb-20">
-		                    <p>${questInfo.questNo }</p>
+<%-- 		                    <p>${questInfo.questNo }</p> --%>
 		                        <!--주관식 장문형 -->
 		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
@@ -249,8 +295,12 @@
 		                            	<div class="inline-block-div col-6">전체 대상자 : ${subAllCount}명</div>
 		                            	<div class="inline-block-div col-6">참여율 : ${questAnswerCount}명 (<fmt:formatNumber type="percent" value="${questAnswerCount/subAllCount }" pattern="0.00%" />)</div>
 		                            </div>
-		                        	<p class="mt-10 mb-10">장문형 답변이에요 답변이 리스트로 나오면 될 거 같아요</p>
-		                        	<p class="mt-10 mb-10">장문형 답변이에요 답변이 리스트로 나오면 될 거 같아요</p>
+		                            <!-- 답변 출력 -->
+		                            <c:forEach items="${answerList }" var="answer">
+					           			<c:if test="${answer.surveyquestNo eq questInfo.questNo && answer.surveyanswerContent ne null}">
+				                        	<p class="mt-10 mb-10">${answer.surveyanswerContent }</p>
+					           			</c:if>
+					           		</c:forEach>
 		                        </div>
 		                    </div>
 		                    <br>
@@ -261,29 +311,8 @@
             </div>
             
             <!--문항 끝-->
-            <br>
-            <!-- 설문 제출 / 취소 버튼 -->
-            <div class="t-c">
-                <button class="point mt-20" type="button" onclick="openAlert(this);">설문 제출</button>
-                <section class="section--alert">
-                    <div class="bg-black"></div>
-                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-                    <div class="section--alert__conts">
-                        <button class="btn--close" type="button"></button>
-                        <p>
-                            설문 응답을 제출하시겠습니까?
-                        </p>
-                        <div class="btns-wrap mt-20">
-                            <button class="point" type="button" onclick="questSubmit(this)">확인</button>
-                            <button class="finished closeWindow" type="button">닫기</button>
-                        </div>
-                    </div>
-                </section>
-                <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
-                    뒤로가기 안되게 -->
-                &nbsp;&nbsp;&nbsp;
-                <button class="basic mt-20" type="button"  onclick="location.href='${sList}'">취소</button>
-            </div>
+            <br><br><br><br>
+            
         </div>
         <!-- 페이지 내용 끝 -->
         
