@@ -47,7 +47,7 @@
 	<%--                   		<c:set var="row_num" value="0"/> --%>
 	                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
 	                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-	                    	<c:forEach items="${sList }" var="survey">
+	                    	<c:forEach items="${sList }" var="survey" varStatus="status">
 	<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
 								<c:set var="row_num" value="${row_num-1 }"/>
 								<c:if test="${survey.surveyStatus eq 'C'}">
@@ -69,7 +69,7 @@
 		                            </td>
 		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-		                            <td>${answerSubCount }/${subAllCount}(<fmt:formatNumber type="percent" value="${answerSubCount/subAllCount }" pattern="0.00%" />)</td>
+		                            <td>${answerSubCountList[status.count-1] }/${subAllCountList[status.count-1]}(<fmt:formatNumber type="percent" value="${answerSubCountList[status.count-1]/subAllCountList[status.count-1] }" pattern="0.00%" />)</td>
 		                        </tr>
 	                    	</c:forEach>
 	                    	
