@@ -163,8 +163,22 @@ public class SurveyController {
 		//설문조사 번호로 설문 대상자 리스트 가져오기
 		try {
 			List<Survey> wroteList = sService.selectWroteSurvey(emplId);
+			List<SurveySub> subList = new ArrayList<SurveySub>();
+			for(int j = 0; j < wroteList.size(); j++) {
+				subList = sService.selectSurveySubByNo(wroteList.get(j).getSurveyNo()); //응답자 목록 가져오기
+			}
+			int subAllCount = subList.size();
+			int answerSubCount = 0;
+			for(int i = 0 ; i < subList.size() ; i++) {
+				if(subList.get(i).getSubAnswerstatus().equals("Y")) {
+					answerSubCount++;
+				}
+			}
 			//화면에서 nullcheck 해줄 거임.
 			mv.addObject("sList", wroteList);
+			mv.addObject("subList", subList);
+			mv.addObject("subAllCount", subAllCount); //전체 응답 대상자 수
+			mv.addObject("answerSubCount", answerSubCount); //응답한 사람 수
 			System.out.println("wroteList 출력 : " + wroteList);
 			mv.setViewName("survey/wroteSurveyPage");
 		} catch(Exception e) {
