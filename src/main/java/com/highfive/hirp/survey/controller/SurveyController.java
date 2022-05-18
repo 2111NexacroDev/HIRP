@@ -636,7 +636,7 @@ public class SurveyController {
 				SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyAnswer.getSurveyAnswerList().get(i).getSurveyNo());
 				result2 = sService.updateSubAnswerStatus(ssUpdate); //안돼!!안~돼!! 안돼요!!! 업데이트 왜 안됨
 			}
-			if(result > 0 && result > 0) {
+			if(result > 0 && result2 > 0) {
 				//설문조사 응답자 목록에서 answerstatus 업데이트
 				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
 			} else {
@@ -651,7 +651,7 @@ public class SurveyController {
 	}
 	
 	//설문 응답 수정 페이지
-	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.GET)
+	@RequestMapping(value="/survey/updateAnswerPage.hirp", method=RequestMethod.GET)
 	public ModelAndView surveySubmitModifyPage(ModelAndView mv
 			,@RequestParam("surveyNo") int surveyNo
 			, HttpServletRequest request) {
@@ -696,12 +696,43 @@ public class SurveyController {
 	}
 	
 	//설문 응답 수정
+	@RequestMapping(value="/survey/updateAnswer.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySubmitModify(ModelAndView mv
-			,@RequestParam("surveyNo") int surveyNo
-			,@ModelAttribute List<SurveyAnswer> surveyAnswer) {
-		//만약에 설문응답번호가 없으면 surveyNo으로 가져와서 set 해주기
+//			,@RequestParam("surveyNo") int surveyNo
+			,@ModelAttribute SurveyAnswer surveyAnswer
+			, HttpServletRequest request) {
+		//insert 할 거니까 설문응답번호 자동 생성됨.
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		int aCount = surveyAnswer.getSurveyAnswerList().size();
+		System.out.println("emplId");
+		System.out.println(emplId);
+		System.out.println(aCount);
+		System.out.println("surveyanswer 출력");
+//		for(int i = 0; i < aCount; i++) {
+//			surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
+//			System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+//		}
+		try {
+			int result = 0;
+			for(int i = 0; i < aCount; i++) {
+				System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
+				result = sService.updateSurveySubAnswer(surveyAnswer.getSurveyAnswerList().get(i));
+			}
+			if(result > 0) {
+				//설문조사 응답자 목록에서 answerstatus 업데이트
+				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
+			} else {
+				mv.addObject("msg", "설문조사 응답 수정 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
+	
 	
 	//설문 결과 페이지 (설문 상세2)
 	@RequestMapping(value="/survey/surveyResult.hirp", method=RequestMethod.GET)

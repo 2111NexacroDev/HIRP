@@ -276,4 +276,11 @@
 		SELECT * FROM SURVEY_ANSWER 
 		WHERE SURVEY_NO = #{surveyNo} AND SURVEYANSWER_ID = #{emplId}
 	</select>
+	
+	<!-- 설문조사 응답 수정 -->
+	<update id="updateSurveySubAnswer">
+		UPDATE SURVEY_ANSWER
+		SET SURVEYANSWER_CONTENT = #{surveyanswerContent}
+		WHERE SURVEYANSWER_NO = #{surveyanswerNo}
+	</update>
 </mapper>

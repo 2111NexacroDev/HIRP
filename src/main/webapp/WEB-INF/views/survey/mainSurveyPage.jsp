@@ -99,7 +99,7 @@
 							</c:if>
 							<!-- 진행 중이고, 참여했을 때 -->
 							<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'Y'}">
-	                    		<c:url var="sDetail" value="/survey/updateSurveyPage.hirp">
+	                    		<c:url var="sDetail" value="/survey/updateAnswerPage.hirp">
 									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 								</c:url>
 							</c:if>

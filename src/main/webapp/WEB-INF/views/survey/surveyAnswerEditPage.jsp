@@ -104,12 +104,17 @@
             </div>
             <br>
             <div id="questListDiv">
-	           	<form id="addAnswerForm" action="/survey/addSurveyAnswer.hirp" method="POST">
+	           	<form id="updateAnswerForm" action="/survey/updateAnswer.hirp" method="POST">
 		            <!--문항 시작-->
 		            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
 		            <c:forEach items="${questList }" var="questInfo" varStatus="status">
 		           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
 		           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
+		           		<c:forEach items="${myAnswerList }" var="answer">
+                       		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+                            	<input type="hidden" name="surveyanswerNo" value="${answer.surveyanswerNo }">
+                       		</c:if>
+                        </c:forEach>
 		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
 		                    <div class="mt-20 mb-20">
 		                        <!--객관식 하나만 선택-->
@@ -337,10 +342,12 @@
 			console.log(aCount);
     		for(var i = 0; i < aCount ; i++) {
     			//no 넘겨주는 input 태그 name값 바꿔주기
-    			var $surveyNoInput = $answerDiv.eq(i).prev().prev();
+    			var $surveyNoInput = $answerDiv.eq(i).prev().prev().prev();
     			$surveyNoInput.attr('name', 'surveyAnswerList['+(i)+'].surveyNo');
-    			var $questNoInput = $answerDiv.eq(i).prev();
+    			var $questNoInput = $answerDiv.eq(i).prev().prev();
     			$questNoInput.attr('name', 'surveyAnswerList['+(i)+'].surveyquestNo');
+    			var $surveyanswerNoInput = $answerDiv.eq(i).prev();
+    			$surveyanswerNoInput.attr('name', 'surveyAnswerList['+(i)+'].surveyanswerNo');
 //     			console.log($surveyNoInput);
 //     			console.log($questNoInput);
 				//답안 name값 바꿔주기
@@ -348,7 +355,7 @@
 				console.log($answerContent);
 				$answerContent.attr('name', 'surveyAnswerList['+(i)+'].surveyanswerContent'); //속성값 바꿔주기
     		}
-			document.getElementById('addAnswerForm').submit();
+			document.getElementById('updateAnswerForm').submit();
 		}
 	</script>
 </body>

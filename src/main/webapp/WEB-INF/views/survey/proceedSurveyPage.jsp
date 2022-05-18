@@ -48,7 +48,7 @@
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
 	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-										<c:url var="sDetail" value="/survey/updateSurveyPage.hirp">
+										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp">
 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 										</c:url>
 	                            		<button class="finished" type="button">참여완료</button>
