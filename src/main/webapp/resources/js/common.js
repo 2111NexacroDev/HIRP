@@ -55,7 +55,7 @@ $(function () {
     });
 
     // 서브메뉴 접힘/펼침
-    $('#snb>ul>li>a').on('click', function () {
+    $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {
         if ($(this).siblings('ul').length != 0) {
             $(this).siblings('ul').stop().slideToggle();
             $(this).toggleClass('on');
