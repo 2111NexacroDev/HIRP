@@ -165,6 +165,11 @@
                     </thead>
                     <tbody>
                     	<c:forEach items="${sList }" var="survey">
+                    		<c:if test="${survey.surveyStatus eq 'C'}">
+	                    		<c:url var="sDetail" value="/survey/questDetail.hirp">
+									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+								</c:url>
+							</c:if>
                     		<tr>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
@@ -175,7 +180,7 @@
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
+	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>

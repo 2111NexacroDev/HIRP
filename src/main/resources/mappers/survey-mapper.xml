@@ -61,6 +61,15 @@
 		<result property="surveyChmax" column="SURVEY_CHMAX"/>
 	</resultMap>
 	
+	<resultMap type="SurveyAnswer" id="surveyAnswerResultMap">
+		<id property="surveyanswerNo" column="SURVEYANSWER_NO"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+		<result property="surveyquestNo" column="SURVEYQUEST_NO"/>
+		<result property="surveyanswerContent" column="SURVEYANSWER_CONTENT"/>
+		<result property="surveyanswerId" column="SURVEYANSWER_ID"/>
+		<result property="surveyanswerStorage" column="SURVEYANSWER_STORAGE"/>
+	</resultMap>
+	
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
 	<select id="selectAllSurvey" resultMap="surveyResultMap">
@@ -237,4 +246,19 @@
 		UPDATE SURVEY_SUB SET SUB_ANSWERSTATUS = 'Y'
 		WHERE SURVEY_NO = #{surveyNo} AND SUB_ID = #{emplId}
 	</update>
+	<!-- 설문조사 응답자 수 -->
+	<select id="selectCountAnswerSubByNo">
+		SELECT COUNT(*) FROM SURVEY_SUB
+		WHERE SURVEY_NO = #{surveyNo} AND SUB_ANSWERSTATUS = 'Y';
+	</select>
+	<!-- 설문조사 응답 대상자 수 -->
+	<select id="selectCountAllSub">
+		SELECT COUNT(*) FROM SURVEY_SUB
+		WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	
+	<!-- 설문조사 번호로 응답 리스트 가져오기 -->
+	<select id="selectSurveyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER WHERE SURVEY_NO = #{surveyNo}
+	</select>
 </mapper>

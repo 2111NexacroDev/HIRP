@@ -83,16 +83,16 @@
             <!-- 응답자 정보 -->
             <div class="row mt-20">
                 <div class=" basic-border bor-round ml-10 mr-10 padding-10">
-                    <div class="">전체 참여자</div>
-                    <div class="contents-strong padding-top-10">30</div>
+                    <div class="">전체 대상자</div>
+                    <div class="contents-strong padding-top-10">${subAllCount}</div>
                 </div>
                 <div class="basic-border bor-round mr-10 padding-10">
                     <div>참여완료</div>
-                    <div class="contents-strong padding-top-10">20</div>
+                    <div class="contents-strong padding-top-10">${answerSubCount}</div>
                 </div>
                 <div class="basic-border bor-round mr-10 padding-10">
                     <div>미참여</div>
-                    <div class="contents-strong padding-top-10">10</div>
+                    <div class="contents-strong padding-top-10">${subAllCount - answerSubCount}</div>
                 </div>
             </div>
             <br>
@@ -189,9 +189,7 @@
 		                        <!--주관식 장문형 -->
 		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
 		                        <div class="mt-20 ml-20">
-		                            <textarea name="surveyanswerContent" id="" style="width:90%" cols="20" rows="3">
-		        내용1
-		                            </textarea>
+		                            <textarea name="surveyanswerContent" id="" style="width:90%" cols="20" rows="3" placeholder="답안 입력"></textarea>
 		                        </div>
 		                    </div>
 		                    <br>

@@ -42,6 +42,9 @@
                     	<c:forEach items="${sList }" var="survey" varStatus="status">
 <%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
 							<c:set var="row_num" value="${row_num-1 }"/>
+							<c:url var="sDetail" value="/survey/surveyResult.hirp">
+								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+							</c:url>
                     		<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
@@ -53,7 +56,7 @@
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
+	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
