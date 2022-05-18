@@ -678,6 +678,7 @@ public class SurveyController {
 			if(survey != null) {
 				mv.addObject("surveyInfo", survey);
 				mv.addObject("questList", surveyQuestList);
+				mv.addObject("subList", subList); //응답자 목록
 				mv.addObject("subAllCount", subAllCount); //전체 응답 대상자 수
 				mv.addObject("answerSubCount", answerSubCount); //응답한 사람 수
 				mv.addObject("myAnswerList", myAnswerList);

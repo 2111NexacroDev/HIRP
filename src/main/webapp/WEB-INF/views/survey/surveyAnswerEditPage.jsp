@@ -125,13 +125,13 @@
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
 				                                <c:if test="${answer.surveyanswerContent eq '1'}">
 					                                <div class="mb-10">
-					                                    <input id="valueA" class="mt-20" name="surveyanswerContent" type="radio" value="1" checked="checked">
+					                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1" checked="checked">
 					                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
 					                                </div>
 		                            			</c:if>
 		                            			<c:if test="${answer.surveyanswerContent ne '1'}">
 					                                <div class="mb-10">
-					                                    <input id="valueA" class="mt-20" name="surveyanswerContent" type="radio" value="1">
+					                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1">
 					                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
 					                                </div>
 		                            			</c:if>
@@ -143,13 +143,13 @@
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
 				                                <c:if test="${answer.surveyanswerContent eq '2'}">
 					                                <div class="mb-10">
-					                                    <input id="valueB" class="mt-20" name="surveyanswerContent" type="radio" value="2" checked="checked">
+					                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2" checked="checked">
 		                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
 					                                </div>
 		                            			</c:if>
 		                            			<c:if test="${answer.surveyanswerContent ne '2'}">
 					                                <div class="mb-10">
-					                                    <input id="valueB" class="mt-20" name="surveyanswerContent" type="radio" value="2">
+					                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2">
 		                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
 					                                </div>
 		                            			</c:if>
@@ -159,15 +159,15 @@
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 		                            	<c:forEach items="${myAnswerList }" var="answer">
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '2'}">
+				                                <c:if test="${answer.surveyanswerContent eq '3'}">
 					                                <div class="mb-10">
-					                                    <input id="valueC" class="mt-20" name="surveyanswerContent" type="radio" value="3" checked="checked">
+					                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3" checked="checked">
 		                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
 					                                </div>
 		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '2'}">
+		                            			<c:if test="${answer.surveyanswerContent ne '3'}">
 					                                <div class="mb-10">
-					                                    <input id="valueC" class="mt-20" name="surveyanswerContent" type="radio" value="3">
+					                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3">
 		                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
 					                                </div>
 		                            			</c:if>
@@ -177,15 +177,15 @@
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 		                                <c:forEach items="${myAnswerList }" var="answer">
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '2'}">
+				                                <c:if test="${answer.surveyanswerContent eq '4'}">
 					                                <div class="mb-10">
-					                                    <input id="valueD" class="mt-20" name="surveyanswerContent" type="radio" value="4" checked="checked">
+					                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4" checked="checked">
 		                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
 					                                </div>
 		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '2'}">
+		                            			<c:if test="${answer.surveyanswerContent ne '4'}">
 					                                <div class="mb-10">
-					                                    <input id="valueD" class="mt-20" name="surveyanswerContent" type="radio" value="4">
+					                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4">
 		                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
 					                                </div>
 		                            			</c:if>
@@ -204,13 +204,13 @@
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
 		                                <c:forEach items="${myAnswerList }" var="answer">
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
+				                                <c:if test="${fn:contains(answer.surveyanswerContent, '1')}">
 					                                <div class="mb-10">
 					                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1" checked="checked">
 		                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
 					                                </div>
 		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '4')}">
+		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '1')}">
 					                                <div class="mb-10">
 					                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1">
 		                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
@@ -222,13 +222,13 @@
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 		                                <c:forEach items="${myAnswerList }" var="answer">
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
+				                                <c:if test="${fn:contains(answer.surveyanswerContent, '2')}">
 					                                <div class="mb-10">
 					                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2" checked="checked">
 		                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
 					                                </div>
 		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '4')}">
+		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '2')}">
 					                                <div class="mb-10">
 					                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2">
 		                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
@@ -240,13 +240,13 @@
 		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 		                            	<c:forEach items="${myAnswerList }" var="answer">
 		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
+				                                <c:if test="${fn:contains(answer.surveyanswerContent, '3')}">
 					                                <div class="mb-10">
 					                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3" checked="checked">
 		                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
 					                                </div>
 		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '4')}">
+		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '3')}">
 					                                <div class="mb-10">
 					                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3">
 		                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
@@ -351,7 +351,8 @@
 //     			console.log($surveyNoInput);
 //     			console.log($questNoInput);
 				//답안 name값 바꿔주기
-        		var $answerContent = $answerDiv.eq(i).find("[name=surveyanswerContent]"); //질문 div 밑에 있는 애들 중에서 id questTitle인 애 찾기
+//         		var $answerContent = $answerDiv.eq(i).find("[name=surveyanswerContent]"); //name값 같으면 radio 한가지로 인식되어서
+				var $answerContent = $answerDiv.eq(i).find("input"); //input 태그 조회 (radio로 조회하면 텍스트형 조회 안됨.)
 				console.log($answerContent);
 				$answerContent.attr('name', 'surveyAnswerList['+(i)+'].surveyanswerContent'); //속성값 바꿔주기
     		}
