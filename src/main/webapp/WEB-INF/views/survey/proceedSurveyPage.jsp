@@ -61,25 +61,6 @@
 	                            	</c:if>
 	                            </td>
 	                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
-	                            <section class="section--alert">
-				                    <div class="bg-black">
-				                    </div>
-				                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-				                    <div class="section--alert__survey">
-				                    	
-				                        <button class="btn--close"></button>
-				                        <h1 align="left" class="padding-0">
-							                응답 대상자 안내
-							            </h1>
-				                        <p>
-				                        	응답 대상자가 아닙니다.
-				                        </p>
-						                
-				                        <div class="btns-wrap mt-20">
-				                            <button class="point closeWindow" type="button">확인</button>
-				                        </div>
-				                    </div>
-				                </section>
 <%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
@@ -206,8 +187,7 @@
 	   		 <!-- 페이지 내용 끝 -->         
         </article>
         <script>
-        	//응답 대상자 아닐 때
-        	//응답자 목록 가져오기
+        	//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
 	        function openDetail(alertWindow, sNo, sMyAnswerStatus) {
 	        	//ajax로 list 가져오기
 	        	$.ajax({
@@ -241,8 +221,6 @@
 	        		}
 	        	});
 // 	        	console.log(sNo);
-	        	//모달창 띄우기
-	            $(alertWindow).siblings('.section--alert').css('display', 'flex');
 	            
 	        }
         	

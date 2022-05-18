@@ -91,24 +91,6 @@
                     </thead>
                     <tbody>
                     	<c:forEach items="${sList }" var="survey">
-                    		<!-- 진행 중이고, 참여하지 않았을 때 -->
-                    		<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'N'}">
-	                    		<c:url var="sDetail" value="/survey/questDetail.hirp">
-									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-								</c:url>
-							</c:if>
-							<!-- 진행 중이고, 참여했을 때 -->
-							<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'Y'}">
-	                    		<c:url var="sDetail" value="/survey/updateAnswerPage.hirp">
-									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-								</c:url>
-							</c:if>
-							<!-- 마감된 설문일 때 -->
-							<c:if test="${survey.surveyStatus eq 'F'}">
-	                    		<c:url var="sDetail" value="/survey/surveyResult.hirp">
-									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-								</c:url>
-							</c:if>
                     		<tr>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
@@ -119,7 +101,8 @@
 										<button class="emergency" type="button">미참여</button>
 		                            </c:if>
 	                            </td>
-	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
+<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+	                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
@@ -153,5 +136,47 @@
             
             
         </article>
+	<script>
+		//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
+	    function openDetail(alertWindow, sNo, sMyAnswerStatus, surveyStatus) {
+	    	//ajax로 list 가져오기
+	    	$.ajax({
+	    		url: "/survey/subList.hirp",
+	    		type: "post",
+	    		data: {"surveyNo" : sNo},
+	    		success: function(sList){
+	    			console.log(sList);
+	    			var count = sList.length;
+					for(var i = 0 ; i < count; i++){
+						if(surveyStatus == "F"){
+							location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+							break;
+						} else {
+							if(sList[i].subId == "${sessionScope.emplId}"){
+								if(sMyAnswerStatus == "Y"){
+									//응답했을 때
+									location.href="/survey/updateAnswerPage.hirp?surveyNo="+sNo;
+									break;
+								} else {
+									//응답하지 않았을 때
+									location.href="/survey/questDetail.hirp?surveyNo="+sNo;
+									break;
+								}
+							} else {
+								if(i == count-1){
+									//응답 대상자가 아닐 때 (마지막 인덱스까지 검사)
+									location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+								}
+							}
+						}
+					}
+	    		},
+	    		error: function(){
+	    			
+	    		}
+	    	});
+	        
+	    }
+	</script>
 </body>
 </html>
