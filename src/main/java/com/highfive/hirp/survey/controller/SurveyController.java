@@ -598,7 +598,6 @@ public class SurveyController {
 		int aCount = surveyAnswer.getSurveyAnswerList().size();
 		System.out.println("emplId");
 		System.out.println(emplId);
-		System.out.println(surveyAnswer);
 		System.out.println(aCount);
 		System.out.println("surveyanswer 출력");
 //		for(int i = 0; i < aCount; i++) {
@@ -606,21 +605,20 @@ public class SurveyController {
 //			System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
 //		}
 		
-		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyAnswer.getSurveyNo());
 		
 		try {
 			int result = 0;
+			int result2 = 0;
 			for(int i = 0; i < aCount; i++) {
 				surveyAnswer.getSurveyAnswerList().get(i).setSurveyanswerId(emplId); //세션에 있는 아이디 넘겨주기
 				System.out.println((i+1) + "번째 : " + surveyAnswer.getSurveyAnswerList().get(i));
 				result = sService.insertSurveySubAnswer(surveyAnswer.getSurveyAnswerList().get(i));
+				SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyAnswer.getSurveyAnswerList().get(i).getSurveyNo());
+				result2 = sService.updateSubAnswerStatus(ssUpdate); //안돼!!안~돼!! 안돼요!!! 업데이트 왜 안됨
 			}
-			if(result > 0) {
+			if(result > 0 && result > 0) {
 				//설문조사 응답자 목록에서 answerstatus 업데이트
-				int result2 = sService.updateSubAnswerStatus(ssUpdate);
-				if(result2 > 0) {
-					mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
-				}
+				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
 			} else {
 				mv.addObject("msg", "설문조사 응답 제출 실패");
 				mv.setViewName("common/errorPage");
