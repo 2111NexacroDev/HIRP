@@ -11,7 +11,12 @@ import com.nexacro17.xapi.data.DataSet;
 
 @Repository
 public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
-
+	@Override
+	public List<Employee> selectBirthdayList(SqlSession sqlSession) {
+		List<Employee> birthdayList = sqlSession.selectList("EmployeeAdminMapper.selectBirthdayList");
+		return birthdayList;
+	}
+	
 	@Override
 	public List<Employee> selectAllEmployee(SqlSession sqlSession) {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployee");
@@ -23,12 +28,14 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithName");
 		return eList;
 	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithDeptCode", deptCode);
 		return eList;
 	}
+	
 	//내 소속 부서만
 	@Override
 	public List<Employee> selectEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
@@ -71,9 +78,4 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee");
 		return result;
 	}
-
-
-
-
-
 }

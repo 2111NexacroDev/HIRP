@@ -12,10 +12,22 @@
 }
 
 .subConts>h2 {
+    position: relative;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0 20px 0 44px;
     font-weight: 400;
-    font-size: 20px !important;
+    font-size: 18px;
+}
+
+.subConts>h2:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 20px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: powderblue;
 }
 
 /* 개인업무관리 */
@@ -431,23 +443,28 @@ section[class^="todo--"] li {
     padding: 10px;
 }
 
-.modal--reservation input[type="date"] {
+.modal--reservation input[type="date"],
+.modal--reservationEdit input[type="date"] {
     width: 120px;
 }
 
-.modal--reservation select[class^="time-select-"] {
+.modal--reservation select[class^="time-select-"],
+.modal--reservationEdit select[class^="time-select-"] {
     margin-left: 4px;
 }
 
-.modal--reservation .time-select-1 {
+.modal--reservation .time-select-1,
+.modal--reservationEdit .time-select-1 {
     width: 70px;
 }
 
-.modal--reservation .time-select-2 {
+.modal--reservation .time-select-2,
+.modal--reservationEdit .time-select-2 {
     width: 60px;
 }
 
-.modal--reservation .time-select-3 {
+.modal--reservation .time-select-3,
+.modal--reservationEdit .time-select-3 {
     width: 60px;
 }
 
@@ -455,8 +472,6 @@ section[class^="todo--"] li {
     margin-bottom: 60px;
     border-bottom: 1px solid #ccc;
 }
-
-#reservationCalendar table[role="grid"] {}
 
 .fc .fc-timegrid-now-indicator-container {
     overflow: visible;

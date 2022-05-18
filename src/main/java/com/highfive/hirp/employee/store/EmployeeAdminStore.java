@@ -9,6 +9,7 @@ import com.nexacro17.xapi.data.DataSet;
 
 public interface EmployeeAdminStore {
 
+	List<Employee> selectBirthdayList(SqlSession sqlSession);
 	List<Employee> selectAllEmployee(SqlSession sqlSession);
 	List<Employee> selectAllEmployeeWithName(SqlSession sqlSession);
 	List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode);

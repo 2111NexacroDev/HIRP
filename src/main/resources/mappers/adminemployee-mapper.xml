@@ -84,6 +84,15 @@
 			<result property="militaryEtc" column="MILITARY_ETC"/>
 		</association>
 	</resultMap>
+	
+	<select id="selectBirthdayList" resultMap="emplResultMap">
+		SELECT EMPL_NAME, DEPT_NAME, TO_CHAR(BIRTHDAY,'DD') "birthday" 
+		FROM EMPL_TBL 
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		WHERE IS_STATUS = '재직' AND TO_CHAR(BIRTHDAY,'MM') = TO_CHAR(SYSDATE,'MM') 
+		ORDER BY TO_CHAR(BIRTHDAY,'DD') ASC
+	</select>
+	
 	<select id="selectAllEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
 	</select>
@@ -125,6 +134,7 @@
 	<select id="selectOneEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
 	</select>
+	
 	<select id="selectAllRetiree" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>

@@ -239,12 +239,112 @@
                     </form>
                 </section>
 
-                <h2>공용품 예약현황</h2>
+                <section class="section--modal modal--reservationEdit">
+                    <div class="bg-black"></div>
+                    <form class="section--modal__conts" action="/reservation/edit.hirp" method="post"
+                        enctype="multipart/form-data" style="width:90%; max-width:600px;">
+                        <input type="hidden" name="reservationStartDate">
+                        <input type="hidden" name="reservationEndDate">
+                        <button class="btn--close" type="button"></button>
+                        <h3>공용품 예약</h3>
+                        <ul>
+                            <li>
+                                <label class="mr-20" for="utilityNo">예약대상</label>
+                                <select name="utilityNo" id="utilityNo">
+                                    <optgroup label="회의실">
+                                        <c:forEach items="${uList }" var="utility">
+                                            <c:if test="${utility.utilityCategory eq 'room'}">
+                                                <option value="${utility.utilityNo}">${utility.utilityName}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </optgroup>
+                                    <optgroup label="차량">
+                                        <c:forEach items="${uList }" var="utility">
+                                            <c:if test="${utility.utilityCategory eq 'car'}">
+                                                <option value="${utility.utilityNo}">${utility.utilityName}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </optgroup>
+                                    <optgroup label="기타">
+                                        <c:forEach items="${uList }" var="utility">
+                                            <c:if test="${utility.utilityCategory eq 'etc'}">
+                                                <option value="${utility.utilityNo}">${utility.utilityName}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </optgroup>
+                                </select>
+                            </li>
+                            <li>
+                                <label class="mr-20" for="">예약시작일</label>
+                                <input type="date" name="startDate">
+                                <select class="time-select-1">
+                                    <option value="am">오전</option>
+                                    <option value="pm">오후</option>
+                                </select>
+                                <select class="time-select-2">
+                                    <option value="01">1</option>
+                                    <option value="02">2</option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="00">12</option>
+                                </select>
+                                <span>&nbsp;:&nbsp;</span>
+                                <select class="time-select-3">
+                                    <option value="00">00</option>
+                                    <option value="30">30</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label class="mr-20" for="">예약종료일</label>
+                                <input type="date" name="endDate">
+                                <select class="time-select-1">
+                                    <option value="am">오전</option>
+                                    <option value="pm">오후</option>
+                                </select>
+                                <select class="time-select-2">
+                                    <option value="01">1</option>
+                                    <option value="02">2</option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="00">12</option>
+                                </select>
+                                <span>&nbsp;:&nbsp;</span>
+                                <select class="time-select-3">
+                                    <option value="00">00</option>
+                                    <option value="30">30</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label class="mr-20" for="reservationConts">예약 내용</label>
+                                <textarea name="reservationConts" id="reservationConts" cols="20" rows="4"
+                                    placeholder="예약 상세정보를 입력해주세요."></textarea>
+                            </li>
+                        </ul>
+                        <div class="btns-wrap mt-20 t-r">
+                            <button id="addReservation" class="point" type="button">예약</button>
+                            <button class="finished closeWindow" type="button">닫기</button>
+                        </div>
+                    </form>
+                </section>
 
                 <div id="reservationCalendar"></div>
 
-                <h2 class="padding-20">내 예약/대여 현황</h2>
-                <table class="table--basic">
+                <h2>내 예약/대여 현황</h2>
+                <table class="table--basic mt-20">
                     <thead>
                         <th>카테고리</th>
                         <th>공용품명</th>
@@ -300,6 +400,7 @@
         }
 
         function editReservation() {
+            $('.modal--reservationEdit').css('display', 'flex');
         }
 
         $('.modal--utilityEdit a.delete').on('click', function(){
@@ -332,15 +433,6 @@
         });
 
         $(function () {
-            // 현재 시간으로 스크롤
-            /*setTimeout(function(){
-                let nowTimeOffsetY = $('.fc-timegrid-now-indicator-arrow').attr('style').split(':')[1];
-                let offsetTop = $('.fc-view-harness').offset().top;
-                console.log(offsetTop)
-                nowTimeOffsetY = parseInt(nowTimeOffsetY)+offsetTop;
-                $('body,html').stop().animate({'scrollTop':nowTimeOffsetY+'px'},300);
-            }, 300);*/
-
             // 날짜 유효성 체크 - 끝나는 날짜 선택할 때
             $('input[name="endDate"]').on('change', function(){
                 let startDate = $('input[name="startDate"]').val();                
@@ -419,8 +511,8 @@
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
-                        backgroundColor: 'powderblue',
-                        borderColor: 'powderblue'
+                        backgroundColor: 'purple',
+                        borderColor: 'purple'
                     },
                     </c:if>
                     <c:if test="${rList.utility.utilityCategory eq 'car'}">
@@ -442,7 +534,10 @@
                     },
                     </c:if>
                 </c:forEach>   
-                ]
+                ],
+                eventClick: function(data) {
+                    editReservation(data); //이벤트 클릭 시 모달 호출
+                },
             });
             calendar.render();
         });

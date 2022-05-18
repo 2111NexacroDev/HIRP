@@ -19,6 +19,12 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	private EmployeeAdminStore eAStore;
 
 	@Override
+	public List<Employee> printBirthdayList() {
+		List<Employee> birthdayList = eAStore.selectBirthdayList(sqlSession);
+		return birthdayList;
+	}
+	
+	@Override
 	public List<Employee> printAllEmployee() {
 		List<Employee> eList = eAStore.selectAllEmployee(sqlSession);
 		return eList;
