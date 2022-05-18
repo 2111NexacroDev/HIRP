@@ -50,17 +50,24 @@
 	                    	<c:forEach items="${sList }" var="survey" varStatus="status">
 	<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
 								<c:set var="row_num" value="${row_num-1 }"/>
-								<c:if test="${survey.surveyStatus eq 'C'}">
+								<!-- 진행 중이고, 참여하지 않았을 때 -->
+								<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'N'}">
 									<c:url var="sDetail" value="/survey/questDetail.hirp">
 										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 									</c:url>
 	                           	</c:if>
+	                           	<!-- 진행 중이고, 참여했을 때 -->
+								<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'Y'}">
+		                    		<c:url var="sDetail" value="/survey/updateSurveyPage.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+								</c:if>
+								<!-- 마감 되었을 때 -->
 	                           	<c:if test="${survey.surveyStatus eq 'F'}">
 		                           	<c:url var="sDetail" value="/survey/surveyResult.hirp">
 										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 									</c:url>
 	                           	</c:if>
-		                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
 	                    		<tr>
 		                        	<td><c:out value="${row_num }"/> </td>
 		                            <td>

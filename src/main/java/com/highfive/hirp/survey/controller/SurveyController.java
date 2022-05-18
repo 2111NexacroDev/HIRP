@@ -99,6 +99,7 @@ public class SurveyController {
 				mv.addObject("sList", proceedList);
 				System.out.println("proceedList 출력 : " + proceedList);
 				mv.setViewName("survey/proceedSurveyPage");
+				
 			} else {
 				mv.addObject("msg1", "진행중인 리스트 조회 실패");
 				mv.setViewName("common/errorPage");
@@ -442,16 +443,10 @@ public class SurveyController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		//번호로 설문조사 정보 가져오기
-		//설문조사에 포함된 설문문항 가져오기
-		//설문조사 보기 가져오기
-		//설문조사 번호, 내 아이디로 나의 응답 가져오기
-		
-		//응답 수정 페이지
-		//응답 제출 페이지
 		
 		return mv;
 	}
+	
 	
 	//설문 수정 페이지
 	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.POST)
@@ -651,6 +646,48 @@ public class SurveyController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
+		return mv;
+	}
+	
+	//설문 응답 수정 페이지
+	@RequestMapping(value="/survey/updateSurveyPage.hirp", method=RequestMethod.GET)
+	public ModelAndView surveySubmitModifyPage(ModelAndView mv
+			,@RequestParam("surveyNo") int surveyNo
+			, HttpServletRequest request) {
+		//내가 응답한 내용이 있는지 조회
+		//세션에서 자기 아이디 가져오고, surveyNo 같이 넘겨서 응답 가져오기
+		//없으면 응답 할 수 있도록 띄워주고, 있으먼 내가 작성한 답변 띄워주기(응답 수정)
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+//		SurveyUpdate ssUpdate = new SurveyUpdate(emplId, surveyNo);
+		
+		try {
+			Survey survey = sService.selectSurveyByNo(surveyNo);
+			List<SurveyQuest> surveyQuestList = sService.selectAllSurveyQuestByNo(surveyNo);
+			List<SurveySub> subList = sService.selectSurveySubByNo(surveyNo); //응답자 목록 가져오기
+			int subAllCount = subList.size();
+			int answerSubCount = 0;
+			for(int i = 0 ; i < subList.size() ; i++) {
+				if(subList.get(i).getSubAnswerstatus().equals("Y")) {
+					answerSubCount++;
+				}
+			}
+			if(survey != null) {
+				mv.addObject("surveyInfo", survey);
+				mv.addObject("questList", surveyQuestList);
+				mv.addObject("subAllCount", subAllCount); //전체 응답 대상자 수
+				mv.addObject("answerSubCount", answerSubCount); //응답한 사람 수
+				mv.setViewName("survey/surveyAnswerEditPage");
+				
+			} else {
+				mv.addObject("msg1", "설문조사 응답 페이지 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 	
