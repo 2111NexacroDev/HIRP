@@ -88,7 +88,11 @@ public class EmployeeController {
 				session.setAttribute("emplPw", empLogin.getEmplPw());
 				session.setAttribute("deptCode", empLogin.getDeptCode());
 				session.setAttribute("emplName", empLogin.getEmplName());
-				return "redirect:/home.hirp";
+				if(emplId.equals("admin")) {
+					return "redirect:/admin.hirp";					
+				} else {
+					return "redirect:/home.hirp";				
+				}
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");
 				return "common/errorPage";

@@ -19,6 +19,12 @@ public class ReservationStoreLogic implements ReservationStore {
 	}
 
 	@Override
+	public List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId) {
+		List<Reservation> myList = sqlSession.selectList("ReservationMapper.selectAllMyReservation", emplId);
+		return myList;
+	}
+	
+	@Override
 	public int insertReservation(SqlSession sqlSession, Reservation reservation) {
 		int result = sqlSession.insert("ReservationMapper.insertReservation", reservation);
 		return result;

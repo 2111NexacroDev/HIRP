@@ -24,6 +24,12 @@ public class ReservationServiceImpl implements ReservationService {
 		List<Reservation> rList = rStore.selectAllReservation(sqlSession);
 		return rList;
 	}
+	
+	@Override
+	public List<Reservation> printAllMyReservation(String emplId) {
+		List<Reservation> myList = rStore.selectAllMyReservation(sqlSession, emplId);
+		return myList;
+	}
 
 	@Override
 	public int registerReservation(Reservation reservation) {

@@ -10,6 +10,7 @@ import com.highfive.hirp.reservation.domain.Utility;
 public interface ReservationStore {
 
 	List<Reservation> selectAllReservation(SqlSession sqlSession);
+	List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId);
 	int insertReservation(SqlSession sqlSession, Reservation reservation);
 	int updateReservation(SqlSession sqlSession, Reservation reservation);
 	int deleteReservation(SqlSession sqlSession, int reservationNo);

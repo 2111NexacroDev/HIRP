@@ -239,6 +239,8 @@
                     </form>
                 </section>
 
+                <h2>공용품 예약현황</h2>
+
                 <div id="reservationCalendar"></div>
 
                 <h2 class="padding-20">내 예약/대여 현황</h2>
@@ -250,12 +252,14 @@
                         <th>반납처리</th>
                     </thead>
                     <tbody>
+                    <c:forEach items="${myList }" var="myList">
                         <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
+                            <td>${myList.utility.utilityCategory}</td>
+                            <td>${myList.utility.utilityName}</td>
+                            <td>${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
                             <td><button class="basic" type="button">반납</button></td>
                         </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -410,6 +414,16 @@
                 nowIndicator: true,
                 events: [
                 <c:forEach items="${rList }" var="rList">
+                    <c:if test="${rList.utility.utilityCategory eq 'room'}">
+                    {
+                        title: '${rList.utility.utilityName }',
+                        start: '${rList.reservationStartDate }',
+                        end: '${rList.reservationEndDate }',
+                        backgroundColor: 'powderblue',
+                        borderColor: 'powderblue'
+                    },
+                    </c:if>
+                    <c:if test="${rList.utility.utilityCategory eq 'car'}">
                     {
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
@@ -417,6 +431,16 @@
                         backgroundColor: 'black',
                         borderColor: 'black'
                     },
+                    </c:if>
+                    <c:if test="${rList.utility.utilityCategory eq 'etc'}">
+                    {
+                        title: '${rList.utility.utilityName }',
+                        start: '${rList.reservationStartDate }',
+                        end: '${rList.reservationEndDate }',
+                        backgroundColor: '#ffdc3c',
+                        borderColor: '#ffdc3c'
+                    },
+                    </c:if>
                 </c:forEach>   
                 ]
             });

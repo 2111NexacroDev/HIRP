@@ -11,6 +11,13 @@
     justify-content: center;
 }
 
+.subConts>h2 {
+    margin-top: 20px;
+    padding: 0 20px;
+    font-weight: 400;
+    font-size: 20px !important;
+}
+
 /* 개인업무관리 */
 #todo section {
     position: relative;

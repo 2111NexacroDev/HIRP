@@ -28,25 +28,32 @@ public class ReservationController {
 	
 	// 예약, 공용품 조회
 	@RequestMapping(value="/reservation/list.hirp", method=RequestMethod.GET)
-	public ModelAndView reservationListView(ModelAndView mv) {
+	public ModelAndView reservationListView(ModelAndView mv
+			,HttpServletRequest request) {
 		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			
 			List<Reservation> rList = rService.printAllReservation();
 			List<Utility> uList = rService.printAllUtility();
+			List<Reservation> myList = rService.printAllMyReservation(emplId);
 			
 			// 예약 목록 존재 여부
 			if(!rList.isEmpty()) {
 				mv.addObject("rList", rList);	
 			} else {
 				mv.addObject("msg", "등록된 예약 없음");
-			}
-			
+			}			
 			// 공용품 존재 여부
 			if(!uList.isEmpty()) {
 				mv.addObject("uList", uList);
 			} else {
 				mv.addObject("msg", "등록된 공용품 없음");
 			}
-			
+			// 내 예약 존재 여부
+			if(!myList.isEmpty()) {
+				mv.addObject("myList", myList);
+			}
 			// 없어도 아래 페이지로 이동
 			mv.setViewName("reservation/reservationList");			
 		} catch(Exception e) {
@@ -54,7 +61,7 @@ public class ReservationController {
 			mv.setViewName("common/errorPage");		
 		}
 		return mv;
-	}
+	}	
 	
 	// 예약 등록
 	@RequestMapping(value="/reservation/write.hirp", method=RequestMethod.POST)
