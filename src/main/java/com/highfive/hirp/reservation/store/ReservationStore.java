@@ -15,6 +15,7 @@ public interface ReservationStore {
 	int deleteReservation(SqlSession sqlSession, int reservationNo);
 	
 	List<Utility> selectAllUtility(SqlSession sqlSession);
+	Utility selectOneUtilityByNo(SqlSession sqlSession, int utilityNo);
 	int insertUtility(SqlSession sqlSession, Utility utility);
 	int updateUtility(SqlSession sqlSession, Utility utility);
 	int deleteUtility(SqlSession sqlSession, int utilityNo);

@@ -13,6 +13,7 @@ public interface ReservationService {
 	public int removeReservation(int reservationNo);
 	
 	public List<Utility> printAllUtility();
+	public Utility printOneUtilityByNo(int utilityNo);
 	public int registerUtility(Utility utility);
 	public int modifyUtility(Utility utility);
 	public int removeUtility(int utilityNo);

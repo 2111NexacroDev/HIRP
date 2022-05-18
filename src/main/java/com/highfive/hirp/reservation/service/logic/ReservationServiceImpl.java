@@ -48,6 +48,12 @@ public class ReservationServiceImpl implements ReservationService {
 		List<Utility> uList = rStore.selectAllUtility(sqlSession);
 		return uList;
 	}
+	
+	@Override
+	public Utility printOneUtilityByNo(int utilityNo) {
+		Utility utility = rStore.selectOneUtilityByNo(sqlSession, utilityNo);
+		return utility;
+	}
 
 	@Override
 	public int registerUtility(Utility utility) {

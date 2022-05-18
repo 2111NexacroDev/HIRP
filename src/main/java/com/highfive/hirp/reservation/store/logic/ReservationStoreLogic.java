@@ -41,6 +41,12 @@ public class ReservationStoreLogic implements ReservationStore {
 		List<Utility> uList = sqlSession.selectList("ReservationMapper.selectAllUtility");
 		return uList;
 	}
+	
+	@Override
+	public Utility selectOneUtilityByNo(SqlSession sqlSession, int utilityNo) {
+		Utility utility = sqlSession.selectOne("ReservationMapper.selectOneUtilityByNo", utilityNo);
+		return utility;
+	}
 
 	@Override
 	public int insertUtility(SqlSession sqlSession, Utility utility) {
