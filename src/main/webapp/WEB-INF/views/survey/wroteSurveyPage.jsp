@@ -55,6 +55,11 @@
 										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
 									</c:url>
 	                           	</c:if>
+	                           	<c:if test="${survey.surveyStatus eq 'F'}">
+		                           	<c:url var="sDetail" value="/survey/surveyResult.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+	                           	</c:if>
 		                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
 	                    		<tr>
 		                        	<td><c:out value="${row_num }"/> </td>

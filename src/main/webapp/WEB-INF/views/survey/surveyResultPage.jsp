@@ -163,28 +163,56 @@
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh1}</td>
 						                            <td>${surveyCh1Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh2}</td>
 						                            <td>${surveyCh2Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh3}</td>
 						                            <td>${surveyCh3Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh4}</td>
 						                            <td>${surveyCh4Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 					                    </tbody>
@@ -234,28 +262,56 @@
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh1}</td>
 						                            <td>${surveyCh1Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh1Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh2}</td>
 						                            <td>${surveyCh2Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh2Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 				                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh3}</td>
 						                            <td>${surveyCh3Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh3Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 					                    	<c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
 				                                <tr>
 						                            <td>${questInfo.surveyQuestCh.surveyCh4}</td>
 						                            <td>${surveyCh4Count }</td>
-						                            <td><fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" /></td>
+						                            <td>
+						                            	<c:if test="${questAnswerCount ne '0'}">
+							                            	<fmt:formatNumber type="percent" value="${surveyCh4Count/questAnswerCount }" pattern="0.00%" />
+						                            	</c:if>
+						                            	<c:if test="${questAnswerCount eq '0'}">
+						                            		0.00%
+						                            	</c:if>
+						                            </td>
 						                        </tr>
 				                            </c:if>
 					                    </tbody>
