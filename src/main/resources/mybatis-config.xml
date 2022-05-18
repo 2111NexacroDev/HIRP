@@ -59,6 +59,7 @@
 		<typeAlias type="com.highfive.hirp.board.department.domain.DepartmentBoard" alias="DepartmentBoard"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.common.BoardAttachedFile" alias="BoardAttachedFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.reply.domain.Reply" alias="Reply"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.admin.domain.ApprForm" alias="ApprForm"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->
@@ -77,6 +78,7 @@
 		<mapper resource="mappers/departmentboard-mapper.xml" />
 		<mapper resource="mappers/boardfile-mapper.xml"/>
 		<mapper resource="mappers/boardreply-mapper.xml"/>
+		<mapper resource="mappers/approval-mapper.xml"/>
 		<!-- 민수 -->
 		<mapper resource="mappers/favority-mapper.xml" />
 		<mapper resource="mappers/mail-mapper.xml" />

@@ -4,7 +4,22 @@
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+<style>
+.approvalLine-btn{
+float : right;
+background-color : white;
+border : solid 1px lightgray;
+border-radius: 10px;
+margin-top : 10px;
+margin-left : 10px;
+width : 100px;
+height : 35px;
 
+}
+
+
+
+</style>
 <body>
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
@@ -17,15 +32,19 @@
                         <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
                         <div class="section--modal__conts">
                             <button class="btn--close"></button>
-                            <h3>모달창</h3>
+                            <h3>결재양식 선택</h3>
                             <p class="mb-20">
-                              <div>
                                <div>
-		                            <div class="bor-round shadow" style="width: 180px; height:180px;">조직도</div>
-                      		  </div>
-                      		  <div>
-		                            <div class="bor-round shadow" style="width: 180px; height:180px;">조직도</div>
-                      		  </div>
+		                            <div class="bor-round shadow" id="formListDiv" style="width: 250px; height:180px;">
+		                            <ul>
+		                            <c:forEach var="form" items="${formList }" >
+		                            	<c:url var="fDetail" value="/approvalForm/detail.hirp">
+		                            		<c:param name="formNo" value="${form.formNo }"></c:param>
+		                            	</c:url>
+									<li><a href="${fDetail }">${form.formTitle }</a></li>
+		                            </c:forEach>
+		                            </ul>
+		                            </div>
                       		  </div>
                             </p>
                            <div >
@@ -145,6 +164,7 @@
               
         </article>
     </div>
+
 </body>
 
 </html>
