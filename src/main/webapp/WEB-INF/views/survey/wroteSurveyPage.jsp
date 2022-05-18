@@ -35,68 +35,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<!-- 위에서부터 1~로 번호 출력하기 -->
-<%--                   		<c:set var="row_num" value="0"/> --%>
-                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
-                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-                    	<c:forEach items="${sList }" var="survey">
-<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
-							<c:set var="row_num" value="${row_num-1 }"/>
-							<c:if test="${survey.surveyStatus eq 'C'}">
-								<c:url var="sDetail" value="/survey/questDetail.hirp">
-									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-								</c:url>
-                           	</c:if>
-	                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
+                    	<c:if test="${fn:length(sList) == 0}">
                     		<tr>
-	                        	<td><c:out value="${row_num }"/> </td>
-	                            <td>
-	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.surveyStatus eq 'C'}">
-	                            		<button class="ongoing" type="button">진행중</button>
-	                            	</c:if>
-	                            	<c:if test="${survey.surveyStatus eq 'F'}">
-	                            		<button class="finished" type="button">마감</button>
-	                            	</c:if>
-	                            </td>
-	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
-	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>0/77(0.00%)</td>
-	                        </tr>
-                    	</c:forEach>
-<!--                         <tr> -->
-<!--                         	<td>3</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>설문제목1</td> -->
-<!--                             <td>2022-04-11~2022-04-12</td> -->
-<!--                             <td>0/77(0.00%)</td> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                         	<td>2</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td> -->
-<!--                             <td>2022-05-01~2022-05-12</td> -->
-<!--                             <td>3/4(75.00%)</td> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                         	<td>1</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>설문제목3</td> -->
-<!--                             <td>2022-04-11~2022-04-12</td> -->
-<!--                             <td>1/26(3.85%)</td> -->
-<!--                         </tr> -->
+                    			<td colspan="5" align="center">
+                    				내가 작성한 설문조사가 없습니다.
+                    			</td>
+                    		</tr>
+                    	</c:if>
+                    	<c:if test="${fn:length(sList) > 0}">
+	                    	<!-- 위에서부터 1~로 번호 출력하기 -->
+	<%--                   		<c:set var="row_num" value="0"/> --%>
+	                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
+	                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+	                    	<c:forEach items="${sList }" var="survey">
+	<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
+								<c:set var="row_num" value="${row_num-1 }"/>
+								<c:if test="${survey.surveyStatus eq 'C'}">
+									<c:url var="sDetail" value="/survey/questDetail.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+	                           	</c:if>
+		                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
+	                    		<tr>
+		                        	<td><c:out value="${row_num }"/> </td>
+		                            <td>
+		                            	<!-- 버튼은 둘 중 하나만 출력 -->
+		                            	<c:if test="${survey.surveyStatus eq 'C'}">
+		                            		<button class="ongoing" type="button">진행중</button>
+		                            	</c:if>
+		                            	<c:if test="${survey.surveyStatus eq 'F'}">
+		                            		<button class="finished" type="button">마감</button>
+		                            	</c:if>
+		                            </td>
+		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
+		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+		                            <td>0/77(0.00%)</td>
+		                        </tr>
+	                    	</c:forEach>
+	                    	
+                    	</c:if>
                     </tbody>
                 </table>
 	   		 </div>

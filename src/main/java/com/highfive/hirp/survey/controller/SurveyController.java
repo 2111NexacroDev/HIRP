@@ -163,14 +163,10 @@ public class SurveyController {
 		//설문조사 번호로 설문 대상자 리스트 가져오기
 		try {
 			List<Survey> wroteList = sService.selectWroteSurvey(emplId);
-			if(!wroteList.isEmpty()) {
-				mv.addObject("sList", wroteList);
-				System.out.println("wroteList 출력 : " + wroteList);
-				mv.setViewName("survey/wroteSurveyPage");
-			} else {
-				mv.addObject("msg1", "내가 작성한 리스트 조회 실패");
-				mv.setViewName("common/errorPage");
-			}
+			//화면에서 nullcheck 해줄 거임.
+			mv.addObject("sList", wroteList);
+			System.out.println("wroteList 출력 : " + wroteList);
+			mv.setViewName("survey/wroteSurveyPage");
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
