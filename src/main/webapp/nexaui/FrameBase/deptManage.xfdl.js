@@ -317,7 +317,7 @@
 
         	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
         	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
-        	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
+        	var masterName = this.ds_empl.lookup("emplId", masterId, "emplName" );
         	trace("mastername:" + masterName);
         	this.st_deptmaster2.set_text(masterName);
 
@@ -673,7 +673,7 @@
             var nTop  = system.clientToScreenY(this, 10);
 
         	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
-        	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
+        	var objChild = new ChildFrame("popEmplListPopup", "absolute", nLeft, nTop, 300, 400);
         	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
         	objChild.set_openalign("center middle");
         	objChild.set_dragmovetype("all");

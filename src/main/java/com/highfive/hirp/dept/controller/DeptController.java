@@ -42,7 +42,7 @@ public class DeptController {
 		NexacroResult result = new NexacroResult();
 		// out_dept, out_pos
 		List<Dept> dList = dService.selectAllDept();
-		List<Employee> eList = eAService.printAllEmployee();
+		List<Employee> eList = eAService.printAllEmployeeWithName();
 		if(!dList.isEmpty() && !eList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
