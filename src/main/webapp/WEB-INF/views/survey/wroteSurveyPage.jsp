@@ -79,7 +79,8 @@
 		                            		<button class="finished" type="button">마감</button>
 		                            	</c:if>
 		                            </td>
-		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
+		                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }')">${survey.surveyTitle }</td>
+<%-- 		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
 		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 		                            <td>${answerSubCountList[status.count-1] }/${subAllCountList[status.count-1]}(<fmt:formatNumber type="percent" value="${answerSubCountList[status.count-1]/subAllCountList[status.count-1] }" pattern="0.00%" />)</td>
 		                        </tr>
@@ -91,5 +92,47 @@
 	   		 </div>
 	   		 <!-- 페이지 내용 끝 -->         
         </article>
+	<script>
+		//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
+	    function openDetail(alertWindow, sNo, sMyAnswerStatus, surveyStatus) {
+	    	//ajax로 list 가져오기
+	    	$.ajax({
+	    		url: "/survey/subList.hirp",
+	    		type: "post",
+	    		data: {"surveyNo" : sNo},
+	    		success: function(sList){
+	    			console.log(sList);
+	    			var count = sList.length;
+					for(var i = 0 ; i < count; i++){
+						if(surveyStatus == "F"){
+							location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+							break;
+						} else {
+							if(sList[i].subId == "${sessionScope.emplId}"){
+								if(sMyAnswerStatus == "Y"){
+									//응답했을 때
+									location.href="/survey/updateAnswerPage.hirp?surveyNo="+sNo;
+									break;
+								} else {
+									//응답하지 않았을 때
+									location.href="/survey/questDetail.hirp?surveyNo="+sNo;
+									break;
+								}
+							} else {
+								if(i == count-1){
+									//응답 대상자가 아닐 때 (마지막 인덱스까지 검사)
+									location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+								}
+							}
+						}
+					}
+	    		},
+	    		error: function(){
+	    			
+	    		}
+	    	});
+	        
+	    }
+	</script>
 </body>
 </html>
