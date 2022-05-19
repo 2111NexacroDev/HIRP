@@ -11,6 +11,7 @@
         {
             this.set_name("emplList");
             this.set_titletext("New Form");
+            this.set_scrolltype("none");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1280,720);
@@ -37,7 +38,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("Div00","0","0","200","100%",null,null,null,null,null,null,this);
+            obj = new Div("Div00","0","0","200",null,null,"0",null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_background("#ffffff");
             obj.set_border("0px none, 1px solid #dddddd, 0px none, 0px none");
@@ -52,7 +53,7 @@
             obj.set_letterSpacing("-1px");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static00_00","200","0","1080","60",null,null,null,null,null,null,this);
+            obj = new Static("Static00_00","200","0",null,"60","0",null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("사원 목록 조회");
             obj.set_padding("16px 20px");

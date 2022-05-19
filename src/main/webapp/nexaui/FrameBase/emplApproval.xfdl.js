@@ -11,6 +11,7 @@
         {
             this.set_name("emplApproval");
             this.set_titletext("New Form");
+            this.set_scrolltype("none");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1280,720);
@@ -32,7 +33,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("Div00","0","0","200","100.00%",null,null,null,null,null,null,this);
+            obj = new Div("Div00","0","0","200",null,null,"0",null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_background("#ffffff");
             obj.set_border("0px none, 1px solid #dddddd, 0px none, 0px none");
@@ -47,7 +48,7 @@
             obj.set_letterSpacing("-1px");
             this.addChild(obj.name, obj);
 
-            obj = new Static("Static00_00","200","0","1080","60",null,null,null,null,null,null,this);
+            obj = new Static("Static00_00","200","0",null,"60","0",null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("사원 추가");
             obj.set_padding("16px 20px");
@@ -139,6 +140,15 @@
         		}
         		this.alert("사원 조회 성공");
         	}
+        	else if(id=="tr_update")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("가입 승인 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("가입 승인 성공");
+        	}
         }
 
         // 회원 상세 정보 페이지 로드
@@ -147,6 +157,16 @@
         	selectedEmplId = this.Grid00.getCellText(e.row, 5);
         	if(e.col == 4) {
         		this.go("FrameBase::empDetail.xfdl");
+        	}
+        	else if(e.col == 6) {
+        		this.transaction(
+        			"tr_update"// 1.ID
+        			,"HirpURL::admin/emplLevelUp.hirp"// 2.URL
+        			,"" // 3.InDs : F->S jsp(I,U,D)
+        			,"" // 4.OutDs : S->F jsp(SELECT)
+        			,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+        			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        		);
         	}
         };
         });

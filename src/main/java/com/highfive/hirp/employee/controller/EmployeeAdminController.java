@@ -151,8 +151,9 @@ public class EmployeeAdminController {
 			@ParamVariable(name="emplId") String emplId) {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
+		String tempId = emplId;
 		NexacroResult result = new NexacroResult(); 
-		int modifyLevelResult = eAService.modifyLevelEmployee(emplId);		
+		int modifyLevelResult = eAService.modifyLevelEmployee(tempId);		
 		
 		if(modifyLevelResult > 0) {
 			nErrorCode = 0;
