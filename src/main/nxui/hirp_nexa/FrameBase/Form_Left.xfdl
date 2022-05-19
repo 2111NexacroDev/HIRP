@@ -69,6 +69,8 @@ this.fn_openForm = function(obj, e) {
 			arrObj[i].setFocus();
 			trace("form-left : focus "+arrObj[i].name );
 			return;
+// 			arrObj[i].form.close();
+// 			trace("form-left : close "+arrObj[i].name );
 		}
 	}
 	
