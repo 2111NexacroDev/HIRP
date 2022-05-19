@@ -18,7 +18,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_empl", this);
-            obj._setContents("<ColumnInfo><Column id=\"emplId\" type=\"STRING\" size=\"256\"/><Column id=\"divisionCode\" type=\"STRING\" size=\"256\"/><Column id=\"positionCode\" type=\"STRING\" size=\"256\"/><Column id=\"emplName\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"emplId\">id1</Col><Col id=\"divisionCode\">10</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">아무개</Col></Row><Row><Col id=\"emplId\">id4</Col><Col id=\"divisionCode\">1030</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">일용자</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"emplId\" type=\"STRING\" size=\"256\"/><Column id=\"deptCode\" type=\"STRING\" size=\"256\"/><Column id=\"positionCode\" type=\"STRING\" size=\"256\"/><Column id=\"emplName\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/><Column id=\"deptName\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"emplId\">id1</Col><Col id=\"deptCode\">10</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">아무개</Col></Row><Row><Col id=\"emplId\">id4</Col><Col id=\"deptCode\">1030</Col><Col id=\"positionCode\">10</Col><Col id=\"emplName\">일용자</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -26,7 +26,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_empl");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"96\"/><Column size=\"100\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"부서코드\"/><Cell col=\"1\" text=\"사원이름\"/></Band><Band id=\"body\"><Cell text=\"bind:divisionCode\"/><Cell col=\"1\" text=\"bind:emplName\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"96\"/><Column size=\"100\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"부서코드\" color=\"#666666\" border=\"1px solid #dbdee2\"/><Cell col=\"1\" text=\"사원이름\" color=\"#666666\" border=\"1px solid #dbdee2\"/></Band><Band id=\"body\"><Cell text=\"bind:deptName\"/><Cell col=\"1\" text=\"bind:emplName\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("static_dept01","30","19","166","41",null,null,null,null,null,null,this);
@@ -101,7 +101,7 @@
         	this.ds_empl.copyData(paramEmpl);	//받아온 ds_empl 데이터를 popup ds_empl로 복사
             this.Grid00.set_binddataset("ds_empl");	//받아온 ds_empl 바인딩
         	//부서가 같은 사원만 필터링
-        	this.ds_empl.filter("divisionCode == '"+ paramDeptCode + "'");
+        	this.ds_empl.filter("deptCode == '"+ paramDeptCode + "'");
         };
 
         //검색 버튼
