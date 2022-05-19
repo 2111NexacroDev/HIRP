@@ -546,7 +546,6 @@ public class SurveyController {
 //					System.out.println(subList.get(i));
 						result2 = sService.insertSurveySub(surveySub);
 					}
-					
 				}
 				mv.setViewName("redirect:/survey/main.hirp");
 			} else {
