@@ -11,6 +11,7 @@
         {
             this.set_name("empDetail");
             this.set_titletext("New Form");
+            this.set_scrolltype("none");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1280,720);

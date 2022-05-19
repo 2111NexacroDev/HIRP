@@ -20,7 +20,10 @@
 
             
             // UI Components Initialize
-
+            obj = new Div("div_work","10","10","500",null,null,"10",null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_text("Div00");
+            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","",1280,720,this,function(p){});

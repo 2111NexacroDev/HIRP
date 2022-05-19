@@ -58,11 +58,8 @@
             frame1.set_formurl("FrameBase::Form_Left.xfdl");
 
 
-            var frame2 = new ChildFrame("WorkFrame",null,null,null,null,null,null,"FrameBase::Form_Work.xfdl",frame0);
-            frame2.set_showtitlebar("false");
-            frame2.set_showtitleicon("false");
+            var frame2 = new FrameSet("WorkFrame",null,null,null,null,null,null,frame0);
             frame0.addChild(frame2.name, frame2);
-            frame2.set_formurl("FrameBase::Form_Work.xfdl");
         };
         
         this.on_initEvent = function()
