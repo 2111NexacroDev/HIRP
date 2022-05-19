@@ -128,7 +128,6 @@
         	var arrObj = sWorkFramePath.all; //열려있는 모든 화면 리스트
 
         	//화면 이름이랑 메뉴아이디랑 같으면 메뉴 focus 바꿔주는 것.
-        	//화면이랑 상관x
         	for(var i = 0 ; i < arrObj.length; i++) {
         		trace("form-left : arrObj["+i+"].name  :"+arrObj[i].name );
         		if(arrObj[i].name == sMenuId) {	//화면 이름이랑 메뉴 아이디랑 같으면
