@@ -31,8 +31,8 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("Div00_00","0","0","230",null,null,"0",null,null,null,null,this);
-            obj.set_taborder("35");
+            obj = new Div("Div00_00","0","0","230","100.00%",null,null,null,null,null,null,this);
+            obj.set_taborder("36");
             obj.set_background("#ffffff");
             obj.set_border("0px none, 1px solid #dddddd, 0px none, 0px none");
             obj.set_font("12px/normal \"Noto Sans KR\"");
@@ -51,19 +51,19 @@
             obj = new Static("static_dept01","20","15","166","41",null,null,null,null,null,null,this);
             obj.set_taborder("1");
             obj.set_text("부서 관리");
-            obj.set_font("bold 22px/normal \"Noto Sans KR\"");
+            obj.set_font("normal 500 15pt/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("static_dept02","20","56","166","41",null,null,null,null,null,null,this);
             obj.set_taborder("2");
             obj.set_text("조직도");
-            obj.set_font("bold 16px/normal \"Noto Sans KR\"");
+            obj.set_font("normal 500 12pt/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("static_dept03","27","121","50","30",null,null,null,null,null,null,this);
             obj.set_taborder("3");
             obj.set_text("부서");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
+            obj.set_font("normal 10pt/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_deptAdd","160","127","15","15",null,null,null,null,null,null,this);
@@ -76,7 +76,7 @@
             obj.set_cssclass("delete_icon");
             this.addChild(obj.name, obj);
 
-            obj = new Edit("edt_search","15","155","170","30",null,null,null,null,null,null,this);
+            obj = new Edit("edt_search","23","155","162","30",null,null,null,null,null,null,this);
             obj.set_taborder("6");
             this.addChild(obj.name, obj);
 
@@ -85,173 +85,157 @@
             obj.set_cssclass("search");
             this.addChild(obj.name, obj);
 
-            obj = new Static("static_deptInfo","280","100","157","30",null,null,null,null,null,null,this);
+            obj = new Static("static_deptName","280","40","157","37",null,null,null,null,null,null,this);
             obj.set_taborder("8");
+            obj.set_text("부서이름");
+            obj.set_font("normal 500 15pt/normal \"Noto Sans KR\"");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("static_deptInfo","280","100","157","30",null,null,null,null,null,null,this);
+            obj.set_taborder("9");
             obj.set_text("부서 정보");
             obj.set_border("0px none,0px none,1px black");
-            obj.set_font("bold 16px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptcolor","280","275","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("9");
+            obj.set_taborder("10");
             obj.set_text("부서 색상");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptmaster","280","320","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("10");
+            obj.set_taborder("11");
             obj.set_text("부서장");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_depthiredate","280","365","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("11");
+            obj.set_taborder("12");
             obj.set_text("생성일");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_upperdept","280","410","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("12");
+            obj.set_taborder("13");
             obj.set_text("상위 부서");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_lowerdept","280","455","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("13");
+            obj.set_taborder("14");
             obj.set_text("하위 부서");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptname","280","185","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("14");
+            obj.set_taborder("15");
             obj.set_text("부서명");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptcode","280","140","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("15");
+            obj.set_taborder("16");
             obj.set_text("부서코드");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptsecond","280","230","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("16");
+            obj.set_taborder("17");
             obj.set_text("부서약어");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_edit_deptname","560","185","30","30",null,null,null,null,null,null,this);
-            obj.set_taborder("17");
+            obj.set_taborder("18");
             obj.set_cssclass("edit_icon");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptcolor2","403","275","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("18");
+            obj.set_taborder("19");
             obj.set_text("부서 색상");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptmaster2","403","320","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("19");
+            obj.set_taborder("20");
             obj.set_text("부서장");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptname2","403","185","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("20");
+            obj.set_taborder("21");
             obj.set_text("부서명");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptcode2","404","140","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("21");
+            obj.set_taborder("22");
             obj.set_text("부서코드");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
             this.addChild(obj.name, obj);
 
             obj = new Static("st_deptsecond2","403","230","157","30",null,null,null,null,null,null,this);
-            obj.set_taborder("22");
+            obj.set_taborder("23");
             obj.set_text("부서약어");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_edit_deptsecond","560","230","30","30",null,null,null,null,null,null,this);
-            obj.set_taborder("23");
-            obj.set_cssclass("edit_icon");
-            this.addChild(obj.name, obj);
-
-            obj = new Button("btn_edit_deptcolor","560","275","30","30",null,null,null,null,null,null,this);
             obj.set_taborder("24");
             obj.set_cssclass("edit_icon");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_edit_deptmaster","560","320","30","30",null,null,null,null,null,null,this);
+            obj = new Button("btn_edit_deptcolor","560","275","30","30",null,null,null,null,null,null,this);
             obj.set_taborder("25");
             obj.set_cssclass("edit_icon");
             this.addChild(obj.name, obj);
 
-            obj = new Div("Div00","278","130","70","2",null,null,null,null,null,null,this);
+            obj = new Button("btn_edit_deptmaster","560","320","30","30",null,null,null,null,null,null,this);
             obj.set_taborder("26");
-            obj.set_background("#b7b7b7");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
+            obj.set_cssclass("edit_icon");
             this.addChild(obj.name, obj);
 
-            obj = new Div("Div02","15","190","200","2",null,null,null,null,null,null,this);
+            obj = new Div("Div00","278","130","60","2",null,null,null,null,null,null,this);
             obj.set_taborder("27");
             obj.set_background("#b7b7b7");
             this.addChild(obj.name, obj);
 
-            obj = new Button("btn_upper","403","415","70","20",null,null,null,null,null,null,this);
+            obj = new Div("Div02","20","190","190","2",null,null,null,null,null,null,this);
             obj.set_taborder("28");
+            obj.set_background("#b7b7b7");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_upper","403","415","70","20",null,null,null,null,null,null,this);
+            obj.set_taborder("29");
             obj.set_text("상위 부서명");
             obj.set_font("normal 8pt/normal \"Noto Sans KR\"");
             obj.set_cssclass("deptButton");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_submit","560","575","80","30",null,null,null,null,null,null,this);
-            obj.set_taborder("29");
+            obj.set_taborder("30");
             obj.set_text("저장");
             obj.set_letterSpacing("0px");
             obj.set_cssclass("save");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_cancel","650","575","80","30",null,null,null,null,null,null,this);
-            obj.set_taborder("30");
+            obj.set_taborder("31");
             obj.set_text("취소");
             obj.set_letterSpacing("0px");
             obj.set_cssclass("cancel");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_deptname","394","185","133","30",null,null,null,null,null,null,this);
-            obj.set_taborder("31");
+            obj.set_taborder("32");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
             obj = new Button("btn_colorchartfromds","470","283","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("32");
+            obj.set_taborder("33");
             obj.set_background("");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_deptsecond","394","230","133","30",null,null,null,null,null,null,this);
-            obj.set_taborder("33");
+            obj.set_taborder("34");
             obj.set_visible("false");
             this.addChild(obj.name, obj);
 
             obj = new MaskEdit("MaskEdit00","393","365","158","30",null,null,null,null,null,null,this);
-            obj.set_taborder("34");
+            obj.set_taborder("35");
             obj.set_readonly("true");
             obj.set_background("transparent");
             obj.set_border("0px none");
             obj.set_type("string");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
+            obj.set_font("normal 10pt/normal \"Noto Sans KR\"");
             obj.set_format("@@@@@@@@");
-            this.addChild(obj.name, obj);
-
-            obj = new Static("Static00_00","230","0",null,"60","0",null,null,null,null,null,this);
-            obj.set_taborder("36");
-            obj.set_text("부서 이름");
-            obj.set_padding("16px 20px");
-            obj.set_font("bold 22px/normal \"Noto Sans KR\"");
-            obj.set_letterSpacing("-1px");
-            obj.set_border("0px none, 0px none, 1px solid #dddddd");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -276,15 +260,15 @@
             this.addChild(obj.name, obj);
             obj.bind();
 
+            obj = new BindItem("item7","static_deptName","text","ds_dept","deptName");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
             obj = new BindItem("item9","btn_colorchartfromds","background","ds_dept","deptColor");
             this.addChild(obj.name, obj);
             obj.bind();
 
             obj = new BindItem("item6","MaskEdit00","value","ds_dept","deptHiredate");
-            this.addChild(obj.name, obj);
-            obj.bind();
-
-            obj = new BindItem("item4","Static00_00","text","ds_dept","deptName");
             this.addChild(obj.name, obj);
             obj.bind();
             
@@ -792,7 +776,6 @@
             this.btn_submit.addEventHandler("onclick",this.btn_submit_onclick,this);
             this.btn_cancel.addEventHandler("onclick",this.btn_cancel_onclick,this);
             this.MaskEdit00.addEventHandler("onchanged",this.MaskEdit00_onchanged,this);
-            this.Static00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.ds_dept.addEventHandler("canrowposchange",this.ds_dept_canrowposchange,this);
         };
         this.loadIncludeScript("deptManage.xfdl");
