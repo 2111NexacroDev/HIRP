@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="emplApproval" width="1280" height="720" titletext="New Form" scrolltype="none">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="Static00" taborder="1" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
+        <Static id="Static00_00" taborder="2" text="사원 추가" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
+        <Static id="Static01" taborder="3" text="가입승인 대기열" left="200" top="60" width="1080" height="50" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px 10px 20px"/>
+        <Grid id="Grid00" taborder="4" top="106" height="344" binddataset="ds_temp" autofittype="col" left="220" right="20" oncellclick="empl_detail_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="0"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="36" band="head"/>
+                <Row size="36"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원명" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="1" text="소속부서" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="2" text="직급" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="3" text="휴대전화번호" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="4" text="상세보기" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="5" text="emplId" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+                <Cell col="6" text="가입승인" color="#333333" border="0px none,0px none,1px solid #cccccc"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:emplName" border="0px none,0px none,1px solid #cccccc" textAlign="center"/>
+                <Cell col="1" text="bind:deptCode" border="0px none,0px none,1px solid #cccccc" textAlign="center" displaytype="combotext" edittype="combo" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode"/>
+                <Cell col="2" text="bind:positionCode" border="0px none,0px none,1px solid #cccccc" textAlign="center" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode" displaytype="combotext" edittype="combo"/>
+                <Cell col="3" text="bind:phoneNo" border="0px none,0px none,1px solid #cccccc" textAlign="center"/>
+                <Cell col="4" text="보기/수정" border="0px none,0px none,1px solid #cccccc" displaytype="buttoncontrol" padding="6px 26px" textAlign="center"/>
+                <Cell col="5" text="bind:emplId" border="0px none,0px none,1px solid #cccccc" textAlign="center"/>
+                <Cell col="6" text="승인" border="0px none,0px none,1px solid #cccccc" displaytype="buttoncontrol" padding="6px 26px" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="link_emplLsit" taborder="5" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_addEmpl" taborder="6" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// 메뉴이동 함수
+this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::emplList.xfdl");
+};
+
+this.link_addEmpl_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::emplApproval.xfdl");
+};
+
+// 임시회원 조회
+this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
+{
+	this.transaction(
+		"tr_select"// 1.ID
+		,"HirpURL::admin/tempEmplList.hirp"// 2.URL		
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"ds_temp=out_temp ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);		
+};
+
+// 결과 체크 콜백 함수
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{	
+	if(id=="tr_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("사원 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("사원 조회 성공");
+	}	
+}
+
+// 회원 상세 정보 페이지 로드
+this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+	if(e.col == 4) {
+		this.go("FrameBase::empDetail.xfdl");
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_temp" onload="ds_empl_onload">
+        <ColumnInfo>
+          <Column id="emplName" type="STRING" size="20"/>
+          <Column id="deptCode" type="STRING" size="20"/>
+          <Column id="positionCode" type="STRING" size="20"/>
+          <Column id="phoneNo" type="STRING" size="20"/>
+          <Column id="detail" type="STRING" size="256"/>
+          <Column id="emplId" type="STRING" size="20"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_dept" canrowposchange="ds_dept_canrowposchange">
+        <ColumnInfo>
+          <Column id="deptCode" type="STRING" size="20"/>
+          <Column id="deptName" type="STRING" size="30"/>
+          <Column id="deptSecondname" type="STRING" size="50"/>
+          <Column id="deptColor" type="STRING" size="50"/>
+          <Column id="deptMaster" type="STRING" size="20"/>
+          <Column id="deptHiredate" type="DATE" size="20"/>
+          <Column id="deptUppercode" type="STRING" size="20"/>
+          <Column id="deptLevel" type="INT" size="20"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="deptCode">10</Col>
+            <Col id="deptName">하이그룹</Col>
+            <Col id="deptSecondname">HIGRP</Col>
+            <Col id="deptColor">#FFD8D8</Col>
+            <Col id="deptMaster">id1</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">NULL</Col>
+            <Col id="deptLevel">0</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1010</Col>
+            <Col id="deptName">경영관리팀</Col>
+            <Col id="deptSecondname">BM</Col>
+            <Col id="deptColor">#FAE0D4</Col>
+            <Col id="deptMaster">id2</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+            <Col id="deptLevel">1</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1020</Col>
+            <Col id="deptName">영업팀</Col>
+            <Col id="deptSecondname">SALES</Col>
+            <Col id="deptColor">#FAECC5</Col>
+            <Col id="deptMaster">id3</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+            <Col id="deptLevel">1</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">102010</Col>
+            <Col id="deptName">국내영업팀</Col>
+            <Col id="deptSecondname">DS</Col>
+            <Col id="deptColor">#FFFED7</Col>
+            <Col id="deptMaster">ID4</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1020</Col>
+            <Col id="deptLevel">2</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">102020</Col>
+            <Col id="deptName">해외영업팀</Col>
+            <Col id="deptSecondname">OS</Col>
+            <Col id="deptColor">#FFFED7</Col>
+            <Col id="deptMaster">ID5</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1020</Col>
+            <Col id="deptLevel">2</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">102030</Col>
+            <Col id="deptName">영업관리팀</Col>
+            <Col id="deptSecondname">SM</Col>
+            <Col id="deptColor">#FFFED7</Col>
+            <Col id="deptMaster">ID6</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1020</Col>
+            <Col id="deptLevel">2</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1030</Col>
+            <Col id="deptName">상품기획팀</Col>
+            <Col id="deptSecondname">SOP</Col>
+            <Col id="deptColor">#FAF4C0</Col>
+            <Col id="deptMaster">ID7</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+            <Col id="deptLevel">1</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1040</Col>
+            <Col id="deptLevel">1</Col>
+            <Col id="deptName">구매팀</Col>
+            <Col id="deptSecondname">PCD</Col>
+            <Col id="deptColor">#E4F7BA</Col>
+            <Col id="deptMaster">ID8</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1050</Col>
+            <Col id="deptLevel">1</Col>
+            <Col id="deptName">물류팀</Col>
+            <Col id="deptSecondname">DTB</Col>
+            <Col id="deptColor">#CEFBC9</Col>
+            <Col id="deptMaster">ID9</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1060</Col>
+            <Col id="deptLevel">1</Col>
+            <Col id="deptName">품질팀</Col>
+            <Col id="deptSecondname">QA</Col>
+            <Col id="deptColor">#D4F4FA</Col>
+            <Col id="deptMaster">ID10</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1070</Col>
+            <Col id="deptLevel">1</Col>
+            <Col id="deptName">생산팀</Col>
+            <Col id="deptSecondname">PROD</Col>
+            <Col id="deptColor">#D9E5FF</Col>
+            <Col id="deptMaster">ID11</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">107010</Col>
+            <Col id="deptLevel">2</Col>
+            <Col id="deptName">생산공정팀</Col>
+            <Col id="deptSecondname">PRODP</Col>
+            <Col id="deptColor">#EBF7FF</Col>
+            <Col id="deptMaster">ID12</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1070</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">107020</Col>
+            <Col id="deptLevel">2</Col>
+            <Col id="deptName">생산관리팀</Col>
+            <Col id="deptSecondname">PRODM</Col>
+            <Col id="deptColor">#EBF7FF</Col>
+            <Col id="deptMaster">ID13</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1070</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">107030</Col>
+            <Col id="deptLevel">2</Col>
+            <Col id="deptName">생산외주팀</Col>
+            <Col id="deptSecondname">PRODOS</Col>
+            <Col id="deptColor">#EBF7FF</Col>
+            <Col id="deptMaster">ID14</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">1070</Col>
+          </Row>
+          <Row>
+            <Col id="deptCode">1080</Col>
+            <Col id="deptLevel">1</Col>
+            <Col id="deptName">제조팀</Col>
+            <Col id="deptSecondname">MFT</Col>
+            <Col id="deptColor">#DAD9FF</Col>
+            <Col id="deptMaster">ID15</Col>
+            <Col id="deptHiredate">20220426</Col>
+            <Col id="deptUppercode">10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_pos">
+        <ColumnInfo>
+          <Column id="positionCode" type="STRING" size="20"/>
+          <Column id="positionName" type="STRING" size="30"/>
+          <Column id="positionUseMember" type="INT" size="256"/>
+          <Column id="positionSequence" type="INT" size="256"/>
+          <Column id="positionLevel" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="deptEmplListPopup" width="290" height="500" titletext="New Form" onload="deptEmplListPopup_onload">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="290">
+        <Grid id="Grid00" taborder="0" left="35" top="100" width="205" height="320" binddataset="ds_empl" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="96"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="부서코드" color="#666666" border="1px solid #dbdee2"/>
+                <Cell col="1" text="사원이름" color="#666666" border="1px solid #dbdee2"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:deptName"/>
+                <Cell col="1" text="bind:emplName"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="static_dept01" taborder="1" text="부서장 지정" left="30" top="19" width="166" height="41" font="normal 500 12pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
+        <Button id="btn_submit" taborder="2" text="저장" left="50" top="440" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="3" text="취소" left="140" top="440" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Edit id="edt_search" taborder="4" left="35" top="65" width="170" height="30" onchanged="edt_search_onchanged"/>
+        <Button id="btn_search" taborder="5" left="211" top="65" width="30" height="30" cssclass="search" onclick="btn_search_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//취소 버튼
+this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("cancel");
+};
+
+//저장 버튼
+this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var emplRtn = "";
+	emplRtn += this.ds_empl.getColumn(this.ds_empl.rowposition, "emplId");
+	//저장 누르면 선택한 사원의 id값 넘겨줌
+	this.close(emplRtn);
+};
+
+//onload
+this.deptEmplListPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	trace("팝업:" + this.parent.deptcode);
+	var paramDeptCode = this.parent.deptcode; //파라미터로 받은 deptCode
+	var paramEmpl = this.parent.ds_empl;	//파라미터로 받은 ds_empl
+	this.ds_empl.copyData(paramEmpl);	//받아온 ds_empl 데이터를 popup ds_empl로 복사
+    this.Grid00.set_binddataset("ds_empl");	//받아온 ds_empl 바인딩
+	//부서가 같은 사원만 필터링
+	this.ds_empl.filter("deptCode == '"+ paramDeptCode + "'");
+};
+
+//검색 버튼
+//일단은 이름 검색하면 나오는데,
+//우리 부서 + 이름 이렇게 할지 말지 고민중
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var searchVal = this.edt_search.text;
+	trace(searchVal);
+	this.ds_empl.filter("emplName.indexOf('" + searchVal + "') > -1 ");
+};
+
+//부모 페이지에서 보낸 파라미터 가져오는 코드
+// this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+// {
+//     var strParam1 = this.parent.param1;
+//     var strParam2 = this.parent.param2;
+//     var objParam  = this.parent.param3;
+// 
+//     this.Edit00.set_value(strParam1);
+//     this.Edit01.set_value(strParam2);    
+//     
+//     this.ds_child.copyData(objParam);
+//     this.Grid00.set_binddataset("ds_child");
+//     this.Grid00.createFormat();
+// };
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_empl">
+        <ColumnInfo>
+          <Column id="emplId" type="STRING" size="256"/>
+          <Column id="deptCode" type="STRING" size="256"/>
+          <Column id="positionCode" type="STRING" size="256"/>
+          <Column id="emplName" type="STRING" size="256"/>
+          <Column id="startDate" type="DATE" size="256"/>
+          <Column id="deptName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="emplId">id1</Col>
+            <Col id="deptCode">10</Col>
+            <Col id="positionCode">10</Col>
+            <Col id="emplName">아무개</Col>
+          </Row>
+          <Row>
+            <Col id="emplId">id4</Col>
+            <Col id="deptCode">1030</Col>
+            <Col id="positionCode">10</Col>
+            <Col id="emplName">일용자</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>
