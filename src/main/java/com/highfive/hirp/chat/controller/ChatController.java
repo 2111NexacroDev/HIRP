@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +28,15 @@ public class ChatController {
 	@Autowired
 	private ChatService cService;
 	
+	// 채팅방 입장 테스트
+	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
+	public String view_chat(Model model
+			, HttpServletRequest request
+			, HttpServletResponse response) throws Exception {
+
+		return "chat/chatTestPage";
+	}
+		
 	//채팅 메인페이지 (직원 목록)
 	public ModelAndView chatEmplList(ModelAndView mv) {
 		return mv;
