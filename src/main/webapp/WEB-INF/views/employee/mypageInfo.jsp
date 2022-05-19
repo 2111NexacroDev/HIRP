@@ -3,92 +3,126 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp"%>
-<!-- 하이알피 서브페이지 CSS -->
-<head>
-<meta charset="UTF-8">
-<title>마이페이지2</title>
-<!-- body 안에 header. conts 안에 form -->
-</head>
+<link rel="stylesheet" href="../../../resources/css/sub.css">
+<link rel="stylesheet" href="../../../resources/css/employee.css">
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
 	<div id="conts">
 		<aside id="snb">
-			<h1>기본정보</h1>
+			<h1>마이페이지</h1>
+
+			<ul class="no-icon">
+				<li><a href="/employee/mypageView1.hirp">내 정보 수정</a></li>
+				<li><a href="#">알림 설정</a></li>
+			</ul>
 		</aside>
-		<article id="sub" class="">
+		<article id="sub">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom"></h1>
-			<div id="mypage" class="subConts">
-				사진 <img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진"> <!-- 사진 폼으로 바꿔줘야함 -->
-				<button class="basic" type="button" onclick="openModal(this)">수정</button><br>
-				<form class="section--modal" id="profileForm" enctype="multipart/form-data">
-					<input type="hidden" name="emplId" value="${employee.emplId }">
-					<div class="bg-black"></div>
-					<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-					<div class="section--modal__conts">
-						<button class="btn--close"></button>
-						<h3>프로필 사진 수정</h3>
-						<p class="mb-20">
-							<img src="" alt="프로필사진"><br>
-							<input type="file" name="profileImg" id="emplProfile">
-						</p>
-						<div class="btns-wrap mt-20 t-r">
-							<button class="point" type="button" id="profileModify">확인</button>
-							<button class="finished closeWindow" type="button">닫기</button>
+			<h1 class="basic-border-bottom">내 정보 수정</h1>
+			<div id="mypage" class="subConts mypage-update">
+				<ul>
+					<li>
+						<label for="">사진</label>
+						<div class="profile-wrap">
+							<c:if test="${employee.emplProfile ne null}">
+								<img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진"> 
+							</c:if>
+							<!-- 사진 폼으로 바꿔줘야함 -->
+							<button class="basic" type="button" onclick="openModal(this)">이미지 수정</button>
+							<form class="section--modal" id="profileForm" enctype="multipart/form-data">
+								<input type="hidden" name="emplId" value="${employee.emplId }">
+								<div class="bg-black"></div>
+								<div class="section--modal__conts">
+									<button class="btn--close"></button>
+									<h3>프로필 사진 수정</h3>
+									<p class="mb-20">
+										<img src="" alt="프로필사진"><br>
+										<input type="file" name="profileImg" id="emplProfile">
+									</p>
+									<div class="btns-wrap mt-20 t-r">
+										<button class="point" type="button" id="profileModify">확인</button>
+										<button class="finished closeWindow" type="button">닫기</button>
+									</div>
+								</div>
+							</form>
 						</div>
-					</div>
-				</form>
+					</li>
+					<li>
+						<label for="">이름</label> 
+						<input type="text" value="${employee.emplName }" readonly>
+					</li>
+					<li>
+						<label for="emplId">아이디</label>
+						<input type="text" id="emplId" value="${employee.emplId }" readonly>
+						<!-- id적어줘야 ajax에서 갖고올 수 있음 -->
+					</li>
+					<li>
+						<label for="">비밀번호</label>
+						<input type="password" value="${employee.emplPw }">
+						<button class="basic" type="button" onclick="openModal(this)">재설정</button>
+						<section class="section--modal">
+							<div class="bg-black"></div>
+							<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+							<div class="section--modal__conts" style="width:90%; max-width:400px;">
+								<button class="btn--close"></button>
+								<h3>비밀번호 재설정</h3>
+								<p>
+									비밀번호 재설정을 위하여 <br>
+									재설정할 비밀번호를 정확하게 입력해 주세요. 
+								</p> 
+								<input id="emplPw1" name="emplPw1" type="password" placeholder="재설정할 비밀번호를 입력해 주세요.">
+								<input id="emplPw2" name="emplPw2" type="password" placeholder="재설정할 비밀번호를 한 번 더 입력해 주세요."><!-- input태그 안에 name 적어줘야 수정 가능(model, modelandview는 input의 name값을 domain과 같게 적어주면 저절로 담아서 가져올 수 있음) -->
+								<div class="btns-wrap mt-20 t-r">
+									<button class="point" type="button" id="pwdModify">확인</button>
+									<button class="finished closeWindow" type="button">닫기</button>
+								</div>
+							</div>
+						</section>
+					</li>
+					<li>
+						<label for="">부서</label>
+						<input type="text" value="${employee.deptCode }" readonly>
+					</li>
+					<li>
+						<label for="">직위</label>
+						<input type="text" value="${employee.positionCode }" readonly>
+					</li>
+					<li>
+						<label for="">직통번호</label>
+						<input type="text" value="${employee.directNo }" readonly>
+					</li>
+					<li>
+						<label for="">이메일</label>
+						<input type="text" value="${employee.email }" readonly>
+					</li>
+					<li>
+						<label for="">연락처</label>
+						<input type="text" value="${employee.phoneNo }">
+						<button  class="basic" type="button"  onclick="openModal(this)">수정</button>
+						<section class="section--modal">
+							<div class="bg-black"></div>
+							<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+							<div class="section--modal__conts" style="width:90%; max-width:400px;">
+								<button class="btn--close"></button>
+								<h3>연락처 수정</h3>
+								<p>변경할 연락처를 입력해주세요.</p>
+								<input type="text" name="phoneNo" id="phoneNo" placeholder="연락처 입력">
+								<div class="btns-wrap mt-20 t-r">
+									<button class="point" type="button" id="phoneModify">확인</button>
+									<button class="finished closeWindow" type="button">닫기</button>
+								</div>
+							</div>
+						</section>
+					</li>
+					<li>
+						<label for="">생년월일</label>
+						<input type="text" value="${employee.birthday }" readonly>
+					</li>
+				</ul>
 			</div>
-			이름 <input type="text" value="${employee.emplName }" readonly><br>
-			아이디 <input type="text" id="emplId" value="${employee.emplId }" readonly><br> <!-- id적어줘야 ajax에서 갖고올 수 있음 -->
-			<div>
-				비밀번호 <input type="password" value="${employee.emplPw }">
-				<button class="basic" type="button" onclick="openModal(this)">재설정</button><br>
-				<section class="section--modal">
-					<div class="bg-black"></div>
-					<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-					<div class="section--modal__conts">
-						<button class="btn--close"></button>
-						<h3>비밀번호 재설정</h3>
-						<p class="mb-20">
-							비밀번호 재설정을 위하여 재설정할 비밀번호를 정확하게 입력해 주세요.<br> <input
-								id="emplPw1" name="emplPw1" type="password" placeholder="재설정할 비밀번호를 입력해 주세요."><br> <input
-								id="emplPw2" name="emplPw2" type="password" placeholder="재설정할 비밀번호를 한 번 더 입력해 주세요.">
-						</p> <!-- input태그 안에 name 적어줘야 수정 가능(model, modelandview는 input의 name값을 domain과 같게 적어주면 저절로 담아서 가져올 수 있음) -->
-						<div class="btns-wrap mt-20 t-r">
-							<button class="point" type="button" id="pwdModify">확인</button>
-							<button class="finished closeWindow" type="button">닫기</button>
-						</div>
-					</div>
-				</section>
-			</div>
-			부서 <input type="text" value="${employee.deptCode }" readonly><br>
-			직위 <input type="text" value="${employee.positionCode }" readonly><br>
-			직통번호 <input type="text" value="${employee.directNo }" readonly><br>
-			이메일 <input type="text" value="${employee.email }" readonly><br>
-			<div>
-				연락처 <input type="text" value="${employee.phoneNo }">
-				<button  class="basic" type="button"  onclick="openModal(this)">수정</button><br>
-				<section class="section--modal">
-					<div class="bg-black"></div>
-					<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-					<div class="section--modal__conts">
-						<button class="btn--close"></button>
-						<h3>연락처 수정</h3>
-						<p class="mb-20">변경할 연락처를 입력해주세요.</p>
-						<input type="text" name="phoneNo" id="phoneNo">
-						<div class="btns-wrap mt-20 t-r">
-							<button class="point" type="button" id="phoneModify">확인</button>
-							<button class="finished closeWindow" type="button">닫기</button>
-						</div>
-					</div>
-				</section>
-			</div>
-			생년월일 <input type="text" value="${employee.birthday }" readonly><br>
 		</article>
 	</div>
-	<script>
-	
+	<script>	
 		// 비밀번호 일치 여부 확인
 		function btn() {
 			var p1 = document.getElementById('emplPw1').value;
@@ -116,6 +150,7 @@
 					success : function(data) {
 						if (data == "success") {
 							alert("프로필 사진 수정이 완료되었습니다.");
+							location.reload();
 						} else {
 							alert("프로필 사진 수정에 실패했습니다.");
 						}
@@ -147,6 +182,7 @@
 					success : function(data) {
 						if (data == "success") {
 							alert("비밀번호 재설정이 완료되었습니다.");
+							location.reload();
 						} else {
 							alert("비밀번호 재설정에 실패했습니다.");
 						}
