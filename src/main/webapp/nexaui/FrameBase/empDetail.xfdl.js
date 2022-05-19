@@ -111,7 +111,15 @@
             obj.set_binddataset("ds_empl");
             obj.set_cssclass("detailTable");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"0\" band=\"head\"/><Row size=\"42\"/><Row size=\"42\"/><Row size=\"42\"/></Rows><Band id=\"head\"><Cell colspan=\"4\" text=\"기본정보\" color=\"#333333\" border=\"1px solid #dbdee2\"/><Cell col=\"4\"/><Cell col=\"5\"/><Cell col=\"6\"/><Cell col=\"7\"/></Band><Band id=\"body\"><Cell text=\"사원아이디\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"1\" text=\"bind:emplId\" padding=\"0px 10px\"/><Cell col=\"2\" text=\"채용구분\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"bind:recruitCategory\" padding=\"0px 10px\"/><Cell col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"급여구분\"/><Cell col=\"5\" text=\"bind:salaryCategory\" padding=\"0px 10px\"/><Cell col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"추천자\"/><Cell col=\"7\" text=\"bind:referrer\" padding=\"0px 10px\"/><Cell row=\"1\" textAlign=\"center\" background=\"#f9f9f9\" text=\"생년월일\"/><Cell row=\"1\" col=\"1\" text=\"bind:birthday\" padding=\"0px 10px\"/><Cell row=\"1\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"성별\"/><Cell row=\"1\" col=\"3\" text=\"bind:gender\" padding=\"0px 10px\"/><Cell row=\"1\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"결혼여부\"/><Cell row=\"1\" col=\"5\" text=\"bind:isMarriage\" padding=\"0px 10px\"/><Cell row=\"1\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"장애여부\"/><Cell row=\"1\" col=\"7\" text=\"bind:isDisability\" padding=\"0px 10px\"/><Cell row=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"보훈여부\"/><Cell row=\"2\" col=\"1\" text=\"bind:isVeterans\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴사일\"/><Cell row=\"2\" col=\"3\" text=\"bind:endDate\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴직사유\"/><Cell row=\"2\" col=\"5\" text=\"bind:endReason\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell row=\"2\" col=\"7\" padding=\"0px 10px\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"0\" band=\"head\"/><Row size=\"42\"/><Row size=\"42\"/><Row size=\"42\"/></Rows><Band id=\"head\"><Cell colspan=\"4\" text=\"기본정보\" color=\"#333333\" border=\"1px solid #dbdee2\"/><Cell col=\"4\"/><Cell col=\"5\"/><Cell col=\"6\"/><Cell col=\"7\"/></Band><Band id=\"body\"><Cell text=\"사원아이디\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"1\" text=\"bind:emplId\" padding=\"0px 10px\"/><Cell col=\"2\" text=\"채용구분\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"bind:recruitCategory\" padding=\"0px 10px\"/><Cell col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"급여구분\"/><Cell col=\"5\" text=\"bind:salaryCategory\" padding=\"0px 10px\"/><Cell col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"추천자\"/><Cell col=\"7\" text=\"bind:referrer\" padding=\"0px 10px\"/><Cell row=\"1\" textAlign=\"center\" background=\"#f9f9f9\" text=\"생년월일\"/><Cell row=\"1\" col=\"1\" text=\"bind:birthday\" padding=\"0px 10px\" displaytype=\"normal\"/><Cell row=\"1\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"성별\"/><Cell row=\"1\" col=\"3\" text=\"bind:gender\" padding=\"0px 10px\"/><Cell row=\"1\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"결혼여부\"/><Cell row=\"1\" col=\"5\" text=\"bind:isMarriage\" padding=\"0px 10px\"/><Cell row=\"1\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"장애여부\"/><Cell row=\"1\" col=\"7\" text=\"bind:isDisability\" padding=\"0px 10px\"/><Cell row=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"보훈여부\"/><Cell row=\"2\" col=\"1\" text=\"bind:isVeterans\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴사일\"/><Cell row=\"2\" col=\"3\" text=\"bind:endDate\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴직사유\"/><Cell row=\"2\" col=\"5\" text=\"bind:endReason\" padding=\"0px 10px\"/><Cell row=\"2\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell row=\"2\" col=\"7\" padding=\"0px 10px\"/></Band></Format></Formats>");
+            this.Tab00.Tabpage1.addChild(obj.name, obj);
+
+            obj = new Button("btnResign","20","155","56","20",null,null,null,null,null,null,this.Tab00.Tabpage1.form);
+            obj.set_taborder("1");
+            obj.set_text("퇴직처리");
+            obj.set_border("0px none, 0px none, 1px solid #c10000");
+            obj.set_color("#c10000");
+            obj.set_font("12px/normal \"Noto Sans KR\"");
             this.Tab00.Tabpage1.addChild(obj.name, obj);
 
             obj = new Tabpage("Tabpage2",this.Tab00);
@@ -239,6 +247,16 @@
         		}
         		this.alert("사원 상세 조회 성공");
         	}
+        	else if(id=="tr_resign")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("퇴직 처리 실패 : " + sErrorMsg);
+        			return;
+        		}
+        		this.alert("퇴직 처리되었습니다.");
+        		this.go("FrameBase::emplList.xfdl");
+        	}
         }
 
         this.link_emplLsit_onclick = function(obj,e)
@@ -250,6 +268,19 @@
         {
         	this.go("FrameBase::emplApproval.xfdl");
         };
+
+        this.btnResign_onclick = function(obj,e)
+        {
+        	this.transaction(
+        		"tr_resign"// 1.ID
+        		,"HirpURL::admin/resignEmpl.hirp"// 2.URL
+        		,"" // 3.InDs : F->S jsp(I,U,D)
+        		,"" // 4.OutDs : S->F jsp(SELECT)
+        		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+        		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+        	);
+        };
+
         });
         
         // Regist UI Components Event
@@ -258,6 +289,7 @@
             this.Static00_00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Static00.addEventHandler("onclick",this.Static00_onclick,this);
             this.Tab00.addEventHandler("onchanged",this.Tab00_onchanged,this);
+            this.Tab00.Tabpage1.form.btnResign.addEventHandler("onclick",this.btnResign_onclick,this);
             this.link_emplLsit.addEventHandler("onclick",this.link_emplLsit_onclick,this);
             this.link_addEmpl.addEventHandler("onclick",this.link_addEmpl_onclick,this);
             this.ds_empl.addEventHandler("onload",this.ds_empl_onload,this);
