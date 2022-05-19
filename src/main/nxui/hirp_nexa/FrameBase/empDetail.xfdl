@@ -89,7 +89,7 @@
                           <Cell col="6" textAlign="center" background="#f9f9f9" text="추천자"/>
                           <Cell col="7" text="bind:referrer" padding="0px 10px"/>
                           <Cell row="1" textAlign="center" background="#f9f9f9" text="생년월일"/>
-                          <Cell row="1" col="1" text="bind:birthday" padding="0px 10px"/>
+                          <Cell row="1" col="1" text="bind:birthday" padding="0px 10px" displaytype="normal"/>
                           <Cell row="1" col="2" textAlign="center" background="#f9f9f9" text="성별"/>
                           <Cell row="1" col="3" text="bind:gender" padding="0px 10px"/>
                           <Cell row="1" col="4" textAlign="center" background="#f9f9f9" text="결혼여부"/>
@@ -108,6 +108,7 @@
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btnResign" taborder="1" text="퇴직처리" left="20" top="155" width="56" height="20" border="0px none, 0px none, 1px solid #c10000" color="#c10000" font="12px/normal &quot;Noto Sans KR&quot;" onclick="btnResign_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -645,7 +646,17 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			return;
 		}
 		this.alert("사원 상세 조회 성공");
-	}	
+	}
+	else if(id=="tr_resign")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("퇴직 처리 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("퇴직 처리되었습니다.");
+		this.go("FrameBase::emplList.xfdl");
+	}
 }
 
 this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
@@ -656,6 +667,19 @@ this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInf
 this.link_addEmpl_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
 	this.go("FrameBase::emplApproval.xfdl");
-};]]></Script>
+};
+
+this.btnResign_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"tr_resign"// 1.ID
+		,"HirpURL::admin/resignEmpl.hirp"// 2.URL		
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);	
+};
+]]></Script>
   </Form>
 </FDL>
