@@ -132,11 +132,11 @@
         	for(var i = 0 ; i < arrObj.length; i++) {
         		trace("form-left : arrObj["+i+"].name  :"+arrObj[i].name );
         		if(arrObj[i].name == sMenuId) {	//화면 이름이랑 메뉴 아이디랑 같으면
-        // 			arrObj[i].setFocus();
-        // 			trace("form-left : focus "+arrObj[i].name );
-        // 			return;
-        			arrObj[i].form.close();
-        			trace("form-left : close "+arrObj[i].name );
+        			arrObj[i].setFocus();
+        			trace("form-left : focus "+arrObj[i].name );
+        			return;
+        // 			arrObj[i].form.close();
+        // 			trace("form-left : close "+arrObj[i].name );
         		}
         	}
 

@@ -639,11 +639,11 @@ textarea::-webkit-scrollbar { display: none; }
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenu .popupmenuitem .popupmenuitemhotkeytext
 {
@@ -1286,11 +1286,11 @@ textarea::-webkit-scrollbar { display: none; }
 }
 #nexacontainer .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 #nexacontainer .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 #nexacontainer .Spin[status=mouseover]
 {
@@ -1760,7 +1760,7 @@ textarea::-webkit-scrollbar { display: none; }
 }
 #nexacontainer .Menu .menuitem[userstatus=selected]
 {
-	background : #00438b URL('./images/img_WF_Menu_O.png') no-repeat center top;
+	background : #00438b URL('./images/img_WF_Menu_O.png?nexaversion=0') no-repeat center top;
 }
 #nexacontainer .PopupMenuControl.popupMenumenupopupmenu.dummy .popupmenuitem[userstatus=selected]
 {
@@ -2067,11 +2067,11 @@ textarea::-webkit-scrollbar { display: none; }
 }
 #nexacontainer .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
 }
 #nexacontainer .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
 }
 #nexacontainer .PopupMenu .popupmenuitem .popupmenuitemhotkeytext[status=disabled]
 {
