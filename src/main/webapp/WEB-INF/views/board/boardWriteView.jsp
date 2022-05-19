@@ -75,14 +75,14 @@ var fileNum = 0;
 var content_files = new Array();
 
 function fileCheck(e) {
-    var files = e.target.files;
+    var files = e.target.files;//파일객체, 파일 목록에 접근 가능
     
     // 파일 배열 담기
-    var filesArr = Array.prototype.slice.call(files);
+    var filesArr = Array.prototype.slice.call(files);//객체를 배열로 변환
     
     // 파일 개수 확인 및 제한
     if (fileCount + filesArr.length > totalCount) {
-      $.alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+      alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
       return;
     } else {
     	 fileCount = fileCount + filesArr.length;
