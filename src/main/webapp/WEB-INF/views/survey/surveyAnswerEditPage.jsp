@@ -19,7 +19,7 @@
             <button type="submit"></button>
         </form>
 
-        <h1 class="basic-border-bottom">설문 상세</h1>
+        <h1 class="basic-border-bottom">설문 수정</h1>
         <!-- 메인 상단 끝 -->
         <c:if test="${surveyInfo.surveyStatus eq 'C'}">
         	<!-- 진행 중인 게시글일 때 -->
@@ -103,229 +103,238 @@
                 ${surveyInfo.surveyStartcomment}
             </div>
             <br>
-            <div id="questListDiv">
-	           	<form id="updateAnswerForm" action="/survey/updateAnswer.hirp" method="POST">
-		            <!--문항 시작-->
-		            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
-		            <c:forEach items="${questList }" var="questInfo" varStatus="status">
-		           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
-		           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
-		           		<c:forEach items="${myAnswerList }" var="answer">
-                       		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-                            	<input type="hidden" name="surveyanswerNo" value="${answer.surveyanswerNo }">
-                       		</c:if>
-                        </c:forEach>
-		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
-		                    <div class="mt-20 mb-20">
-		                        <!--객관식 하나만 선택-->
-		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
-		                        <div class="mt-20 ml-20">
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
-		                            	<c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '1'}">
-					                                <div class="mb-10">
-					                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1" checked="checked">
-					                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '1'}">
-					                                <div class="mb-10">
-					                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1">
-					                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
-		                            	<c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '2'}">
-					                                <div class="mb-10">
-					                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2" checked="checked">
-		                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '2'}">
-					                                <div class="mb-10">
-					                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2">
-		                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
-		                            	<c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '3'}">
-					                                <div class="mb-10">
-					                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3" checked="checked">
-		                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '3'}">
-					                                <div class="mb-10">
-					                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3">
-		                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
-		                                <c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${answer.surveyanswerContent eq '4'}">
-					                                <div class="mb-10">
-					                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4" checked="checked">
-		                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${answer.surveyanswerContent ne '4'}">
-					                                <div class="mb-10">
-					                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4">
-		                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                        </div>
-		                    </div>
-		                    <br>
-		                </c:if>
-		                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '복수 선택'|| questInfo.questType1 eq 'D' && questInfo.questType2 eq '복수 선택'}">
-		                    <div class="mt-20 mb-20">
-		                        <!--객관식 중복 선택 가능-->
-		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
-		                        <div class="mt-20 ml-20">
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
-		                                <c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '1')}">
-					                                <div class="mb-10">
-					                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1" checked="checked">
-		                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '1')}">
-					                                <div class="mb-10">
-					                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1">
-		                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
-		                                <c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '2')}">
-					                                <div class="mb-10">
-					                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2" checked="checked">
-		                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '2')}">
-					                                <div class="mb-10">
-					                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2">
-		                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
-		                            	<c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '3')}">
-					                                <div class="mb-10">
-					                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3" checked="checked">
-		                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '3')}">
-					                                <div class="mb-10">
-					                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3">
-		                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
-		                                <c:forEach items="${myAnswerList }" var="answer">
-		                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
-				                                <c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
-					                                <div class="mb-10">
-					                                    <input id="check4" name="surveyanswerContent" class="mt-20" type="checkbox" value="4" checked="checked">
-		                                    			<label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '4')}">
-					                                <div class="mb-10">
-					                                    <input id="check4" name="surveyanswerContent" class="mt-20" type="checkbox" value="4">
-		                                    			<label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
-					                                </div>
-		                            			</c:if>
-		                            		</c:if>
-		                            	</c:forEach>
-		                            </c:if>
-		                        </div>
-		                    </div>
-		                    <br>
-		                </c:if>
-		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '단문 입력'}">
-		                    <div class="mt-20 mb-20">
-		                        <!--주관식 단문형 -->
-		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
-		                        <div class="mt-20 ml-20">
-		                            <input type="text" name="surveyanswerContent" class="" style="width:90%" placeholder="답안 입력" value="${myAnswerList[status.count-1].surveyanswerContent }">
-		                        </div>
-		                    </div>
-		                    <br>
-		                </c:if>
-		                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '장문 입력'}">
-		                    <div class="mt-20 mb-20">
-		                        <!--주관식 장문형 -->
-		                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
-		                        <div class="mt-20 ml-20">
-		                            <textarea name="surveyanswerContent" id="" style="width:90%" cols="20" rows="3" placeholder="답안 입력">${myAnswerList[status.count-1].surveyanswerContent }</textarea>
-		                        </div>
-		                    </div>
-		                    <br>
-		                </c:if>
-	            	
-		            </c:forEach>
-	           	</form>
-            </div>
-            
-            <!--문항 끝-->
-            <br>
-            <!-- 설문 제출 / 취소 버튼 -->
-            <div class="t-c">
-                <button class="point mt-20" type="button" onclick="openAlert(this);">응답 수정 제출</button>
-                <section class="section--alert">
-                    <div class="bg-black"></div>
-                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-                    <div class="section--alert__conts">
-                        <button class="btn--close" type="button"></button>
-                        <p>
-                            설문 응답을 제출하시겠습니까?
-                        </p>
-                        <div class="btns-wrap mt-20">
-                            <button class="point" type="button" onclick="questSubmit(this)">확인</button>
-                            <button class="finished closeWindow" type="button">닫기</button>
-                        </div>
-                    </div>
-                </section>
-                <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
-                    뒤로가기 안되게 -->
-                &nbsp;&nbsp;&nbsp;
-                <button class="basic mt-20" type="button"  onclick="location.href='${sList}'">취소</button>
-            </div>
+            <c:if test="${surveyInfo.surveyEdit eq 'N' }">
+            	<div id="">
+            		<h2 class="mt-20">이미 참여한 설문조사 입니다.</h2>
+            		<h2 class="mt-20">설문조사에 응해주셔서 감사합니다.</h2>
+            	</div>
+            </c:if>
+            <c:if test="${surveyInfo.surveyEdit eq 'Y' }">
+	            <div id="questListDiv">
+		           	<form id="updateAnswerForm" action="/survey/updateAnswer.hirp" method="POST">
+			            <!--문항 시작-->
+			            <!--문항 div -> 문항 제목 p태그 + 내용 담는 div -> 내용 담는 div 안에 유형에 맞게 다른 내용 들어감.-->
+			            <c:forEach items="${questList }" var="questInfo" varStatus="status">
+			           		<input type="hidden" name="surveyNo" value="${surveyInfo.surveyNo }">
+			           		<input type="hidden" name="surveyquestNo" value="${questInfo.questNo }">
+			           		<c:forEach items="${myAnswerList }" var="answer">
+	                       		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+	                            	<input type="hidden" name="surveyanswerNo" value="${answer.surveyanswerNo }">
+	                       		</c:if>
+	                        </c:forEach>
+			                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '하나만 선택' || questInfo.questType1 eq 'D' && questInfo.questType2 eq '하나만 선택'}">
+			                    <div class="mt-20 mb-20">
+			                        <!--객관식 하나만 선택-->
+			                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
+			                        <div class="mt-20 ml-20">
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
+			                            	<c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${answer.surveyanswerContent eq '1'}">
+						                                <div class="mb-10">
+						                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1" checked="checked">
+						                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${answer.surveyanswerContent ne '1'}">
+						                                <div class="mb-10">
+						                                    <input id="valueA" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="1">
+						                                    <label for="valueA">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
+			                            	<c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${answer.surveyanswerContent eq '2'}">
+						                                <div class="mb-10">
+						                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2" checked="checked">
+			                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${answer.surveyanswerContent ne '2'}">
+						                                <div class="mb-10">
+						                                    <input id="valueB" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="2">
+			                                    			<label for="valueB">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
+			                            	<c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${answer.surveyanswerContent eq '3'}">
+						                                <div class="mb-10">
+						                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3" checked="checked">
+			                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${answer.surveyanswerContent ne '3'}">
+						                                <div class="mb-10">
+						                                    <input id="valueC" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="3">
+			                                    			<label for="valueC">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
+			                                <c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${answer.surveyanswerContent eq '4'}">
+						                                <div class="mb-10">
+						                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4" checked="checked">
+			                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${answer.surveyanswerContent ne '4'}">
+						                                <div class="mb-10">
+						                                    <input id="valueD" class="mt-20" name="surveyanswerContent${status.count }" type="radio" value="4">
+			                                    			<label for="valueD">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                        </div>
+			                    </div>
+			                    <br>
+			                </c:if>
+			                <c:if test="${questInfo.questType1 eq 'C' && questInfo.questType2 eq '복수 선택'|| questInfo.questType1 eq 'D' && questInfo.questType2 eq '복수 선택'}">
+			                    <div class="mt-20 mb-20">
+			                        <!--객관식 중복 선택 가능-->
+			                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
+			                        <div class="mt-20 ml-20">
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh1}">
+			                                <c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${fn:contains(answer.surveyanswerContent, '1')}">
+						                                <div class="mb-10">
+						                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1" checked="checked">
+			                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '1')}">
+						                                <div class="mb-10">
+						                                    <input id="check1" name="surveyanswerContent" class="mt-20" type="checkbox" value="1">
+			                                    			<label for="check1">${questInfo.surveyQuestCh.surveyCh1}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh2}">
+			                                <c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${fn:contains(answer.surveyanswerContent, '2')}">
+						                                <div class="mb-10">
+						                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2" checked="checked">
+			                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '2')}">
+						                                <div class="mb-10">
+						                                    <input id="check2" name="surveyanswerContent" class="mt-20" type="checkbox" value="2">
+			                                    			<label for="check2">${questInfo.surveyQuestCh.surveyCh2}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh3}">
+			                            	<c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${fn:contains(answer.surveyanswerContent, '3')}">
+						                                <div class="mb-10">
+						                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3" checked="checked">
+			                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '3')}">
+						                                <div class="mb-10">
+						                                    <input id="check3" name="surveyanswerContent" class="mt-20" type="checkbox" value="3">
+			                                    			<label for="check3">${questInfo.surveyQuestCh.surveyCh3}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                            <c:if test="${not empty questInfo.surveyQuestCh.surveyCh4}">
+			                                <c:forEach items="${myAnswerList }" var="answer">
+			                            		<c:if test="${answer.surveyquestNo eq questInfo.questNo}">
+					                                <c:if test="${fn:contains(answer.surveyanswerContent, '4')}">
+						                                <div class="mb-10">
+						                                    <input id="check4" name="surveyanswerContent" class="mt-20" type="checkbox" value="4" checked="checked">
+			                                    			<label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            			<c:if test="${not fn:contains(answer.surveyanswerContent, '4')}">
+						                                <div class="mb-10">
+						                                    <input id="check4" name="surveyanswerContent" class="mt-20" type="checkbox" value="4">
+			                                    			<label for="check4">${questInfo.surveyQuestCh.surveyCh4}</label><br>
+						                                </div>
+			                            			</c:if>
+			                            		</c:if>
+			                            	</c:forEach>
+			                            </c:if>
+			                        </div>
+			                    </div>
+			                    <br>
+			                </c:if>
+			                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '단문 입력'}">
+			                    <div class="mt-20 mb-20">
+			                        <!--주관식 단문형 -->
+			                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
+			                        <div class="mt-20 ml-20">
+			                            <input type="text" name="surveyanswerContent" class="" style="width:90%" placeholder="답안 입력" value="${myAnswerList[status.count-1].surveyanswerContent }">
+			                        </div>
+			                    </div>
+			                    <br>
+			                </c:if>
+			                <c:if test="${questInfo.questType1 eq 'T' && questInfo.questType2 eq '장문 입력'}">
+			                    <div class="mt-20 mb-20">
+			                        <!--주관식 장문형 -->
+			                        <p class="mb-10 contents-strong">${status.count}. ${questInfo.questTitle}</p>
+			                        <div class="mt-20 ml-20">
+			                            <textarea name="surveyanswerContent" id="" style="width:90%" cols="20" rows="3" placeholder="답안 입력">${myAnswerList[status.count-1].surveyanswerContent }</textarea>
+			                        </div>
+			                    </div>
+			                    <br>
+			                </c:if>
+		            	
+			            </c:forEach>
+		           	</form>
+	            </div>
+	            
+	            <!--문항 끝-->
+	            <br>
+	            <!-- 설문 제출 / 취소 버튼 -->
+	            <div class="t-c">
+	                <button class="point mt-20" type="button" onclick="openAlert(this);">응답 수정 제출</button>
+	                <section class="section--alert">
+	                    <div class="bg-black"></div>
+	                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+	                    <div class="section--alert__conts">
+	                        <button class="btn--close" type="button"></button>
+	                        <p>
+	                            설문 응답을 제출하시겠습니까?
+	                        </p>
+	                        <div class="btns-wrap mt-20">
+	                            <button class="point" type="button" onclick="questSubmit(this)">확인</button>
+	                            <button class="finished closeWindow" type="button">닫기</button>
+	                        </div>
+	                    </div>
+	                </section>
+	                <!-- 다음 버튼 눌렀을 때 설문조사 작성할 건지 한번 더 물어보는 창 띄우기
+	                    뒤로가기 안되게 -->
+	                &nbsp;&nbsp;&nbsp;
+	                <button class="basic mt-20" type="button"  onclick="location.href='${sList}'">취소</button>
+	            </div>
+            	
+            </c:if>
         </div>
         <!-- 페이지 내용 끝 -->
         
