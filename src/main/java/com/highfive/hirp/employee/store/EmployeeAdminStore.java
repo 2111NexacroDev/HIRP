@@ -18,7 +18,7 @@ public interface EmployeeAdminStore {
 	List<Employee> selectTempEmployee(SqlSession sqlSession);
 	Employee selectOneEmployee(SqlSession sqlSession, String emplId);
 	int modifyEmployeeInfo(SqlSession sqlSession, Employee employee);
-	int resignEmployee(SqlSession sqlSession, int empNo);
-	int updateLevelEmployee(SqlSession sqlSession, int empNo);
+	int resignEmployee(SqlSession sqlSession, String emplId);
+	int updateLevelEmployee(SqlSession sqlSession, String emplId);
 
 }

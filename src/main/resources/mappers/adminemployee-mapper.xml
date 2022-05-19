@@ -142,4 +142,8 @@
 	<select id="selectAllRetiree" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
+	
+	<update id="updateLevelEmployee">
+		UPDATE EMPL_TBL SET IS_STATUS='재직' WHERE EMPL_ID = #{emplId}
+	</update>
 </mapper>

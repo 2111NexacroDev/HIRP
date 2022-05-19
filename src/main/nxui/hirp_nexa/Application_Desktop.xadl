@@ -6,7 +6,7 @@
         <HFrameSet id="HFrameSet00" separatesize="200,*">
           <Frames>
             <ChildFrame id="LeftFrame" showtitlebar="false" showstatusbar="false" formurl="FrameBase::Form_Left.xfdl" showtitleicon="false"/>
-            <FrameSet id="WorkFrame"/>
+            <ChildFrame id="WorkFrame" formurl="FrameBase::Form_Work.xfdl" showtitlebar="false" showtitleicon="false"/>
           </Frames>
         </HFrameSet>
       </MainFrame>

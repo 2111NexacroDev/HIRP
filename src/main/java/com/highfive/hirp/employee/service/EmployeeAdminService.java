@@ -16,7 +16,7 @@ public interface EmployeeAdminService {
 	public List<Employee> printAllTempEmployee();
 	public Employee printEmployeeInfo(String emplId);	
 	public int modifyEmployeeInfo(Employee employee);
-	public int resignEmployee(int empNo);
-	public int modifyLevelEmployee(int empNo);
+	public int resignEmployee(String emplId);
+	public int modifyLevelEmployee(String emplId);
 
 }

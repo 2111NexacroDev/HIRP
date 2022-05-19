@@ -3,7 +3,7 @@
   <Form id="emplApproval" width="1280" height="720" titletext="New Form" scrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
-        <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
+        <Div id="Div00" taborder="0" left="0" top="0" width="200" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;" bottom="0"/>
         <Static id="Static00" taborder="1" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
         <Static id="Static00_00" taborder="2" text="사원 추가" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static01" taborder="3" text="가입승인 대기열" left="200" top="60" width="1080" height="50" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px 10px 20px"/>
@@ -79,11 +79,21 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 	{
 		if(nErrorCode < 0)
 		{
-			this.alert("사원 조회 실패 : " + sErrorMsg);
+			this.alert("가입 대기중인 사원이 없습니다.");
 			return;
 		}
 		this.alert("사원 조회 성공");
-	}	
+	}
+	else if(id=="tr_update")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("가입 승인 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("가입 승인 성공");
+		location.reload();
+	}
 }
 
 // 회원 상세 정보 페이지 로드
@@ -92,6 +102,16 @@ this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEven
 	selectedEmplId = this.Grid00.getCellText(e.row, 5);
 	if(e.col == 4) {
 		this.go("FrameBase::empDetail.xfdl");
+	}
+	else if(e.col == 6) {
+		this.transaction(
+			"tr_update"// 1.ID
+			,"HirpURL::admin/emplLevelUp.hirp"// 2.URL		
+			,"" // 3.InDs : F->S jsp(I,U,D)
+			,"" // 4.OutDs : S->F jsp(SELECT)
+			,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+		);
 	}
 };]]></Script>
     <Objects>

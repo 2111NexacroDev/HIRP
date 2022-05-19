@@ -63,19 +63,19 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 
 	@Override
 	public int modifyEmployeeInfo(SqlSession sqlSession, Employee employee) {
-		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo");
+		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo", employee);
 		return result;
 	}
 
 	@Override
-	public int resignEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee");
+	public int resignEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee", emplId);
 		return result;
 	}
 
 	@Override
-	public int updateLevelEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee");
+	public int updateLevelEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee", emplId);
 		return result;
 	}
 }

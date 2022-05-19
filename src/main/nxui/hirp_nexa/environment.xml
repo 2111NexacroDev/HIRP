@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ENV version="2.1">
-  <Environment themeid="theme::default" datatyperule="2.0" userfontid="font::noto_sans_kr.xfont" checkversion="true">
+  <Environment themeid="theme::default" datatyperule="2.0" userfontid="font::noto_sans_kr.xfont">
     <ScreenDefinition>
       <Screen id="Desktop_screen" type="desktop" themeid="theme::hirpTheme"/>
     </ScreenDefinition>
