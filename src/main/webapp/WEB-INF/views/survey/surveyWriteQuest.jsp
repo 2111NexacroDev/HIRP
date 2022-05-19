@@ -273,7 +273,7 @@
         	function questType2Change(e){
         		console.log("questType2Change:"+e.value);
         		if(e.value == "복수 선택"){
-        			addChMaxCombo(e);
+//         			addChMaxCombo(e);
         		} else { //복수 선택이 아니면 다시 비워주기
         			var $chMaxCombo = $(e).parent().parent().next().next().next(); //최대 선택 개수 출력하는 div
             		$chMaxCombo.html("");
