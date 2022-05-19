@@ -349,7 +349,7 @@
 
                 <div id="reservationCalendar"></div>
 
-                <h2>내 예약/대여 현황</h2>
+                <h2 class="square-tit">내 예약/대여 현황</h2>
                 <table class="table--basic mt-20">
                     <thead>
                         <th>공용품 카테고리</th>

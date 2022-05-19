@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.subConts>h2 {
+.subConts>h2.square-tit {
     position: relative;
     margin-top: 20px;
     padding: 0 20px 0 44px;
@@ -19,7 +19,7 @@
     font-size: 18px;
 }
 
-.subConts>h2:before {
+.subConts>h2.square-tit:before {
     content: "";
     position: absolute;
     top: 4px;
