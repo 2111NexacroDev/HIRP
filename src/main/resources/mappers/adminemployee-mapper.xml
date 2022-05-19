@@ -131,6 +131,10 @@
 		ORDER BY DEPT_CODE, POSITION_CODE, EMPL_NAME
 	</select>
 	
+	<select id="selectTempEmployee" resultMap="emplResultMap">
+		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '임시'
+	</select>
+	
 	<select id="selectOneEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
 	</select>

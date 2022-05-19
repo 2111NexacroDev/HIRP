@@ -20,7 +20,7 @@
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <h1 class="basic-border-bottom">
-                <strong>${sessionScope.emplId }</strong>님, 환영합니다!&#128521;
+                <strong>${sessionScope.emplName }</strong>님, 환영합니다!&#128521;
             </h1>
 
             <div class="row">
