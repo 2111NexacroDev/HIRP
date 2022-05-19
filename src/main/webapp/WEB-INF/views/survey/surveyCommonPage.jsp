@@ -14,7 +14,7 @@
 	<!-- 설문조사 좌측 서브 메뉴 -->
     <div id="conts">
         <aside id="snb">
-            <h1>
+            <h1 onclick="location.href='/survey/main.hirp'">
                 설문조사
             </h1>
             <a class="btn--function" href="/survey/writeInfo.hirp">설문 작성</a>

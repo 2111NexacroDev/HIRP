@@ -234,7 +234,8 @@
 	
 	<!-- 설문조사 상태 수정 (마감) -->
 	<update id="updateSurveyStatus">
-		UPDATE SURVEY_TBL SET SURVEY_STATUS = 'F'
+		UPDATE SURVEY_TBL 
+		SET SURVEY_STATUS = 'F', SURVEY_ENDDATE = SYSDATE
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
 
