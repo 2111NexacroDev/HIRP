@@ -27,6 +27,7 @@ import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.service.ApprovalService;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.employee.service.EmployeeService;
 import com.highfive.hirp.group.domain.Group;
 
@@ -38,6 +39,10 @@ public class ApprovalController {
 	
 	@Autowired
 	private EmployeeService eService;
+	
+	@Autowired
+	private EmployeeAdminService eaService;
+	
 	
 	//전자결재 메인
 	@RequestMapping(value="/approval/main.hirp", method=RequestMethod.GET)
@@ -95,10 +100,12 @@ public class ApprovalController {
 			String emplId = (String) session.getAttribute("emplId"); 
 			Employee employee = eService.employeeMyPage(emplId); 
 			ApprForm apprform = aService.printApprForm(formNo);
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			
 			if (apprform != null) {
 				mv.addObject("apprform", apprform);
 				mv.addObject("employee", employee);
+				mv.addObject("emplList", emplList);
 				mv.setViewName("approval/writeApproval");
 			} else {
 				mv.addObject("msg", "양식 조회 실패");
