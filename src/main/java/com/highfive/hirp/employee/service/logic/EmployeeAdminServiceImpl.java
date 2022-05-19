@@ -73,14 +73,14 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	}
 
 	@Override
-	public int resignEmployee(int empNo) {
-		int result = eAStore.resignEmployee(sqlSession, empNo);
+	public int resignEmployee(String emplId) {
+		int result = eAStore.resignEmployee(sqlSession, emplId);
 		return result;
 	}
 
 	@Override
-	public int modifyLevelEmployee(int empNo) {
-		int result = eAStore.updateLevelEmployee(sqlSession, empNo);
+	public int modifyLevelEmployee(String emplId) {
+		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
 		return result;
 	}
 }
