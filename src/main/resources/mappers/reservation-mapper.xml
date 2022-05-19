@@ -57,7 +57,7 @@
 		FROM RESERVATION_TBL 
 		JOIN UTILITY_TBL USING(UTILITY_NO)
 		WHERE EMPL_ID = #{emplId}
-		ORDER BY RESERVATION_NO DESC
+		ORDER BY RESERVATION_START_DATE DESC
 	</select>
 	<select id="selectOneReservationByNo" resultMap="reservationResultMap">
 		SELECT *
