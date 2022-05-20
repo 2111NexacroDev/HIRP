@@ -153,8 +153,16 @@
 			<![CDATA[WHERE SURVEY_STATUS = 'C']]>
 			AND SUB_ANSWERSTATUS IS NOT NULL
 			AND (SURVEY_TITLE LIKE '%'|| #{search.searchValue} ||'%' OR EMPL_NAME LIKE '%'|| #{search.searchValue} ||'%' )
-			ORDER BY SURVEY_NO DESC
 		</if>
+		<if test='surveyStatus == "F" '> <!-- 마감일 때 -->
+			<![CDATA[WHERE SURVEY_STATUS = 'F']]>
+			AND (SURVEY_TITLE LIKE '%'|| #{search.searchValue} ||'%' OR EMPL_NAME LIKE '%'|| #{search.searchValue} ||'%' )
+		</if>
+		<if test='surveyStatus == "W" '> <!-- 내일 때 -->
+			WHERE SURVEY_WRITER = #{emplId}
+			AND (SURVEY_TITLE LIKE '%'|| #{search.searchValue} ||'%' OR EMPL_NAME LIKE '%'|| #{search.searchValue} ||'%' )
+		</if>
+		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 설문조사 대상자 리스트 가져오기(응답여부 확인 가능) -->
 	<select id="selectSurveySubByNo" resultMap="surveySubResultMap">
