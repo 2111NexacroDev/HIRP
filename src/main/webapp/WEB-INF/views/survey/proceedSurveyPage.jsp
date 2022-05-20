@@ -14,8 +14,9 @@
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
         	<!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
-            <form class="form--srch" action="">
-                <input type="text" name="" placeholder="통합검색">
+            <form class="form--srch" action="/survey/search.hirp">
+                <input type="text" style="width:200px;" name="searchValue" placeholder="설문 제목 또는 작성자 검색">
+                <input type="hidden" name="surveyStatus" value="C"/>
                 <button type="submit"></button>
             </form>
 

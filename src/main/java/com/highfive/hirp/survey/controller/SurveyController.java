@@ -799,23 +799,35 @@ public class SurveyController {
 	}
 	
 	//설문 검색
+	@RequestMapping(value="/survey/search.hirp", method=RequestMethod.GET)
 	public ModelAndView surveySearch(ModelAndView mv
 			,@ModelAttribute Search search
 			,@RequestParam("surveyStatus") String surveyStatus
 			, HttpServletRequest request) {
 		//surveyStatus 담아서 진행중/마감 설문조사 나누어 검색하기
 		//내가 만든 설문은 surveyStatus 비워진 상태, session에서 아이디값 가져오기
-		
-		HttpSession session = request.getSession();
-		String emplId = session.getAttribute("emplId").toString();
-		
-		SurveySearch surveySearch = new SurveySearch(search);
-		if(surveyStatus == null) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = session.getAttribute("emplId").toString();
+			System.out.println("설문 검색");
+			System.out.println(search);
+			SurveySearch surveySearch = new SurveySearch(search);
 			surveySearch.setEmplId(emplId);
-		} else {
 			surveySearch.setSurveyStatus(surveyStatus);
+			
+			List<Survey> searchList = sService.printSeartchSurvey(surveySearch);
+			if(searchList != null) {
+				System.out.println(searchList);
+				mv.addObject("sList", searchList);
+				mv.setViewName("survey/proceedSurveyPage");
+			} else {
+				mv.addObject("msg", "설문 검색 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
-		List<Survey> searchList = sService.printSeartchSurvey(surveySearch);
 		return mv;
 	}
 
