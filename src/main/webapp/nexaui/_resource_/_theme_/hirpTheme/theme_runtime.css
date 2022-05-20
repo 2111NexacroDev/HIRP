@@ -413,11 +413,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
 }
 .PopupMenu .popupmenuitem .popupmenuitemhotkeytext
 {
@@ -1005,11 +1005,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
 }
 .Spin[status=mouseover]
 {
@@ -1419,7 +1419,7 @@
 }
 .Menu .menuitem[userstatus=selected]
 {
-	background : #00438b URL('./images/img_WF_Menu_O.png?nexaversion=0') no-repeat center top;
+	background : #00438b URL('./images/img_WF_Menu_O.png') no-repeat center top;
 }
 .PopupMenuControl.popupMenumenupopupmenu.dummy .popupmenuitem[userstatus=selected]
 {
@@ -1717,11 +1717,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
 }
 .PopupMenu .popupmenuitem .popupmenuitemhotkeytext[status=disabled]
 {
