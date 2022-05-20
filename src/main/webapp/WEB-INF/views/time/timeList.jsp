@@ -13,9 +13,9 @@
 <title>현재 시간</title>
 <span id="result"></span>
 <ul>
-	<li>출근시간</li>
-	<li>퇴근시간</li>
-	<li>주간 누적 근무시간</li>
+	출근시간 <p id="timeStart">${time.timeStart }</p>
+	퇴근시간 <p id="timeEnd">${time.timeEnd }</p>
+	주간 누적 근무시간<p></p>
 	<button class="finished mt-20" type="button" onclick="startBtn();">출근하기</button>
 	<button class="finished mt-20" type="button" onclick="endBtn();">퇴근하기</button>
 	<select class="mt-20" name="" id="">
@@ -69,6 +69,7 @@
 
 	<script>
 		// 지금 시간
+		function printClock() {
 			var date = new Date();
 			var year = date.getFullYear();
 			var month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -79,11 +80,10 @@
 			var seconds = ('0' + date.getSeconds()).slice(-2);
 			var dateString = year + '-' + month + '-' + day + '('+ week[date.getDay()] + ')';
 			var timeString = hours + ':' + minutes + ':' + seconds;
-		function printClock() {
 			document.getElementById("result").innerHTML = dateString + '<br/>'+ timeString;
 			setInterval(printClock, 1000); // 1초마다 바뀌게 해주는 것
 		}
-		
+
 		// 켜지자마자 실행할것들
         $(function(){
         	printClock();

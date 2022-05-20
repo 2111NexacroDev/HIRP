@@ -15,4 +15,10 @@ public interface TimeStore {
 
 	// 사용자 퇴근 등록
 	int updateWorkEnd(SqlSession sqlSession, Time time);
+
+	// 사용자 출,퇴근 내역 화면
+	Time selectTime(SqlSession sqlSession, String emplId);
+
+	// 사용자 연차 내역 조회
+	List<Vacation> selectTimeView(SqlSession sqlSession, String emplId);
 }
