@@ -11,13 +11,38 @@ import com.nexacro17.xapi.data.DataSet;
 
 @Repository
 public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
-
+	@Override
+	public List<Employee> selectBirthdayList(SqlSession sqlSession) {
+		List<Employee> birthdayList = sqlSession.selectList("EmployeeAdminMapper.selectBirthdayList");
+		return birthdayList;
+	}
+	
 	@Override
 	public List<Employee> selectAllEmployee(SqlSession sqlSession) {
 		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployee");
 		return eList;
 	}
-
+	
+	@Override
+	public List<Employee> selectAllEmployeeWithName(SqlSession sqlSession) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithName");
+		return eList;
+	}
+	
+	//하위부서까지
+	@Override
+	public List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectAllEmployeeWithDeptCode", deptCode);
+		return eList;
+	}
+	
+	//내 소속 부서만
+	@Override
+	public List<Employee> selectEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectEmployeeWithDeptCode", deptCode);
+		return eList;
+	}
+	
 	@Override
 	public List<Employee> selectAllRetiree(SqlSession sqlSession) {
 		List<Employee> rList = sqlSession.selectList("EmployeeAdminMapper.selectAllRetiree");
@@ -38,20 +63,19 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 
 	@Override
 	public int modifyEmployeeInfo(SqlSession sqlSession, Employee employee) {
-		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo");
+		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo", employee);
 		return result;
 	}
 
 	@Override
-	public int resignEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee");
+	public int resignEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee", emplId);
 		return result;
 	}
 
 	@Override
-	public int updateLevelEmployee(SqlSession sqlSession, int empNo) {
-		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee");
+	public int updateLevelEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee", emplId);
 		return result;
 	}
-
 }

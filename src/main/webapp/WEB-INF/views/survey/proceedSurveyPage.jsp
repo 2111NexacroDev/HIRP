@@ -39,24 +39,31 @@
                     	<!-- 위에서부터 1~로 번호 출력하기 -->
 <!--                     	<c:set var="row_num" value="0"/> -->
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
-                    		<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
                     	<c:forEach items="${sList }" var="survey">
 <%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
-								<c:set var="row_num" value="${row_num-1 }"/>
-                    		<tr>
+							<c:set var="row_num" value="${row_num-1 }"/>
+							<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
 	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
+<%-- 										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp"> --%>
+<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
+<%-- 										</c:url> --%>
 	                            		<button class="finished" type="button">참여완료</button>
 	                            	</c:if>
 	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
+<%-- 	                            		<c:url var="sDetail" value="/survey/questDetail.hirp"> --%>
+<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
+<%-- 										</c:url> --%>
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
-	                            <td>${survey.surveyWriter }</td>
+	                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
+<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                            <td>
 	                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>
 		                            <!-- 응답자 목록 section -->
@@ -180,6 +187,43 @@
 	   		 <!-- 페이지 내용 끝 -->         
         </article>
         <script>
+        	//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
+	        function openDetail(alertWindow, sNo, sMyAnswerStatus) {
+	        	//ajax로 list 가져오기
+	        	$.ajax({
+	        		url: "/survey/subList.hirp",
+	        		type: "post",
+	        		data: {"surveyNo" : sNo},
+	        		success: function(sList){
+	        			console.log(sList);
+	        			var count = sList.length;
+						for(var i = 0 ; i < count; i++){
+							if(sList[i].subId == "${sessionScope.emplId}"){
+								if(sMyAnswerStatus == "Y"){
+									//응답했을 때
+									location.href="/survey/updateAnswerPage.hirp?surveyNo="+sNo;
+									break;
+								} else {
+									//응답하지 않았을 때
+									location.href="/survey/questDetail.hirp?surveyNo="+sNo;
+									break;
+								}
+							} else {
+								if(i == count-1){
+									//응답 대상자가 아닐 때 (마지막 인덱스까지 검사)
+									location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+								}
+							}
+						}
+	        		},
+	        		error: function(){
+	        			
+	        		}
+	        	});
+// 	        	console.log(sNo);
+	            
+	        }
+        	
         	//응답자 목록 가져오기
 	        function openSubListAlert(alertWindow, sNo) {
 	        	//ajax로 list 가져오기
@@ -201,7 +245,7 @@
 						for(var i=0; i<count; i++){
 		        			var $tr = $("<tr>");
 		        			var $tdTeam = $("<td style='text-align: left;'>").html(sList[i].deptName);
-		        			var $tdName = $("<td style='text-align: left;'>").html(sList[i].emplName+sList[i].positionName);
+		        			var $tdName = $("<td style='text-align: left;'>").html(sList[i].emplName+" "+sList[i].positionName);
 		        			if(sList[i].subAnswerstatus == 'Y'){
 			        			var $tdStatus = $("<td style='text-align: center;'>").html('O');
 		        			} else if(sList[i].subAnswerstatus == 'N') {

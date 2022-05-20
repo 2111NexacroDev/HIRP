@@ -39,9 +39,12 @@
 <%--                   		<c:set var="row_num" value="0"/> --%>
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
                     	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-                    	<c:forEach items="${sList }" var="survey">
+                    	<c:forEach items="${sList }" var="survey" varStatus="status">
 <%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
 							<c:set var="row_num" value="${row_num-1 }"/>
+							<c:url var="sDetail" value="/survey/surveyResult.hirp">
+								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+							</c:url>
                     		<tr>
 	                        	<td><c:out value="${row_num }"/> </td>
 	                            <td>
@@ -53,9 +56,9 @@
 	                            		<button class="emergency" type="button">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
-	                            <td>${survey.surveyWriter }</td>
+	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
                     	</c:forEach>
 <!--                         <tr> -->

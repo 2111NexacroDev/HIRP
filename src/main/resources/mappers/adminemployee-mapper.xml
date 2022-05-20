@@ -25,15 +25,132 @@
 		<result property="isVeterans" column="IS_VETERANS"/>
 		<result property="endDate" column="END_DATE"/>
 		<result property="endReason" column="END_REASON"/>
-		<result property="profile" column="EMPL_PROFILE"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
+		<!-- 회원 정보 이름으로 가져오기 -->
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<association javaType="Career" property="career" column="EMPL_ID">
+			<id property="careerNo" column="CAREER_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="careerStartDate" column="CAREER_START_DATE"/>
+			<result property="careerEndDate" column="CAREER_END_DATE"/>
+			<result property="careerPlace" column="CAREER_PLACE"/>
+			<result property="careerRank" column="CAREER_RANK"/>
+			<result property="careerJobRole" column="CAREER_JOB_ROLE"/>
+			<result property="careerPeriod" column="CAREER_PERIOD"/>
+			<result property="careerEndReason" column="CAREER_END_REASON"/>
+			<result property="careerEtc" column="CAREER_ETC"/>
+		</association>
+		<association javaType="Certification" property="certification" column="EMPL_ID">
+			<id property="certNo" column="CERT_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="certCategory" column="CERT_CATEGORY"/>
+			<result property="certName" column="CERT_NAME"/>
+			<result property="certEnrollNo" column="CERT_ENROLL_NO"/>
+			<result property="certLevel" column="CERT_LEVEL"/>
+			<result property="certInst" column="CERT_INST"/>
+			<result property="certStartDate" column="CERT_INST"/>
+			<result property="certEndDate" column="CERT_END_DATE"/>	
+		</association>
+		<association javaType="JobRole" property="jobRole" column="EMPL_ID">
+			<id property="jobRoleNo" column="JOB_ROLL_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="jobRoleDivision" column="JOB_ROLE_DIVISION"/>
+			<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
+			<result property="jobRoleStartDate" column="JOB_ROLE_START_DATE"/>
+			<result property="jobRoleEndDate" column="JOB_ROLE_END_DATE"/>
+			<result property="jobRoleConts" column="ROB_ROLE_CONTS"/>
+			<result property="jobRoleEtc" column="JOB_ROLE_ETC"/>
+		</association>
+		<association javaType="Language" property="language" column="EMPL_ID">
+			<id property="langNo" column="LANG_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="langCategory" column="LANG_CATEGORY"/>
+			<result property="langName" column="LANG_NAME"/>
+			<result property="langTestDate" column="LANG_TEST_DATE"/>
+			<result property="langInst" column="LANG_INST"/>
+			<result property="langScore" column="LANG_SCORE"/>
+			<result property="langGrade" column="LANG_GRADE"/>
+			<result property="langEtc" column="LANG_ETC"/>
+		</association>
+		<association javaType="Military" property="military" column="EMPL_ID">
+			<id property="militaryNo" column="MILITARY_NO"/>
+			<result property="emplId" column="EMPL_ID"/>
+			<result property="militaryGrade" column="MILITARY_GRADE"/>
+			<result property="militaryCode" column="MILITARY_CODE"/>
+			<result property="isMilitaryEnd" column="IS_MILITARY_END"/>
+			<result property="militaryStartDate" column="MILITARY_START_DATE"/>
+			<result property="militaryEndDate" column="MILITARY_END_DATE"/>
+			<result property="militaryEtc" column="MILITARY_ETC"/>
+		</association>
 	</resultMap>
+	
+	<select id="selectBirthdayList" resultMap="emplResultMap">
+		SELECT EMPL_NAME, DEPT_NAME, TO_CHAR(BIRTHDAY,'DD') "birthday" 
+		FROM EMPL_TBL 
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		WHERE IS_STATUS = '재직' AND TO_CHAR(BIRTHDAY,'MM') = TO_CHAR(SYSDATE,'MM') 
+		ORDER BY TO_CHAR(BIRTHDAY,'DD') ASC
+	</select>
+	
 	<select id="selectAllEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
 	</select>
+	
+	<!-- 부서이름, 직급이름까지 가져오기 -->
+	<select id="selectAllEmployeeWithName" resultMap="emplResultMap">
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		DEPT_NAME, POSITION_NAME
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE NOT IS_STATUS IN ('임시','퇴사')
+	</select>
+	
+	<!-- 나와 같은 부서+하위 부서 사람들 가져오기 -->
+	<select id="selectAllEmployeeWithDeptCode" resultMap="emplResultMap">
+		SELECT EMPL_ID FROM EMPL_TBL 
+		WHERE NOT IS_STATUS IN ('임시','퇴사') AND DEPT_CODE LIKE #{deptCode} || '%'
+	</select>
+	
+	<!-- 나와 같은 부서 사람들 가져오기 -->
+	<select id="selectEmployeeWithDeptCode" resultMap="emplResultMap">
+		SELECT EMPL_ID FROM EMPL_TBL 
+		WHERE NOT IS_STATUS IN ('임시','퇴사') AND DEPT_CODE = #{deptCode}
+	</select>
+	
+	<select id="selectSearchEmplList" resultMap="emplResultMap">
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		DEPT_NAME, POSITION_NAME
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE NOT IS_STATUS IN ('임시','퇴사')
+		AND DEPT_NAME LIKE '%' || #{emplSearchKeyword } || '%'
+		OR EMPL_NAME LIKE '%' || #{emplSearchKeyword } || '%'
+		ORDER BY DEPT_CODE, POSITION_CODE, EMPL_NAME
+	</select>
+	
+	<select id="selectTempEmployee" resultMap="emplResultMap">
+		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '임시'
+	</select>
+	
 	<select id="selectOneEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
 	</select>
+	
 	<select id="selectAllRetiree" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
+	
+	<update id="resignEmployee">
+		UPDATE EMPL_TBL 
+		SET IS_STATUS = '퇴사',
+			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<update id="updateLevelEmployee">
+		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
+	</update>
 </mapper>

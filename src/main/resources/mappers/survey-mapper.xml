@@ -17,32 +17,13 @@
 		<result property="surveyEdit" column="SURVEY_EDIT"/>
 		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
 		<result property="surveyStorage" column="SURVEY_STORAGE"/>
-	</resultMap>
-	
-	<resultMap type="SurveyMyStatus" id="surveyMyStatusResultMap">
-		<id property="surveyNo" column="SURVEY_NO"/>
-		<result property="surveyTitle" column="SURVEY_TITLE"/>
-		<result property="surveyWriter" column="SURVEY_WRITER"/>
-		<result property="surveyDate" column="SURVEY_DATE"/>
-		<result property="surveyUpdate" column="SURVEY_UPDATE"/>
-		<result property="surveyStatus" column="SURVEY_STATUS"/>
-		<result property="surveyStartdate" column="SURVEY_STARTDATE"/>
-		<result property="surveyEnddate" column="SURVEY_ENDDATE"/>
-		<result property="surveyResult" column="SURVEY_RESULT"/>
-		<result property="surveyEdit" column="SURVEY_EDIT"/>
-		<result property="surveyStartcomment" column="SURVEY_STARTCOMMENT"/>
-		<result property="surveyStorage" column="SURVEY_STORAGE"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
 	</resultMap>
-	
+		
 	<resultMap type="SurveySub" id="surveySubResultMap">
-		<id property="subNo" column="SUB_NO"/>
-		<result property="surveyNo" column="SURVEY_NO"/>
-		<result property="subId" column="SUB_ID"/>
-		<result property="subAnswerstatus" column="SUB_ANSWERSTATUS"/>
-	</resultMap>
-	
-	<resultMap type="SurveySubEmpl" id="SurveySubEmplResultMap">
 		<id property="subNo" column="SUB_NO"/>
 		<result property="surveyNo" column="SURVEY_NO"/>
 		<result property="subId" column="SUB_ID"/>
@@ -54,16 +35,24 @@
 		<result property="emplName" column="EMPL_NAME"/>
 	</resultMap>
 	
-	<resultMap type="SurveyQuest" id="SurveyQuestResultMap">
+	<resultMap type="SurveyQuest" id="surveyQuestResultMap">
 		<id property="questNo" column="QUEST_NO"/>
 		<result property="surveyNo" column="SURVEY_NO"/>
 		<result property="questTitle" column="QUEST_TITLE"/>
 		<result property="questType1" column="QUEST_TYPE1"/>
 		<result property="questType2" column="QUEST_TYPE2"/>
 		<result property="questRequired" column="QUEST_REQUIRED"/>
+		<association javaType="SurveyQuestCh" property="surveyQuestCh" column="QUEST_NO">
+	        <id property="surveyquestNo" column="SURVEYQUEST_NO"/>
+	        <result property="surveyCh1" column="SURVEY_CH1"/>
+	        <result property="surveyCh2" column="SURVEY_CH2"/>
+	        <result property="surveyCh3" column="SURVEY_CH3"/>
+	        <result property="surveyCh4" column="SURVEY_CH4"/>
+	        <result property="surveyChmax" column="SURVEY_CHMAX"/>
+      	</association>  
 	</resultMap>
 	
-	<resultMap type="SurveyQuestCh" id="SurveyQuestChResultMap">
+	<resultMap type="SurveyQuestCh" id="surveyQuestChResultMap">
 		<id property="surveyquestNo" column="SURVEYQUEST_NO"/>
 		<result property="surveyCh1" column="SURVEY_CH1"/>
 		<result property="surveyCh2" column="SURVEY_CH2"/>
@@ -72,50 +61,84 @@
 		<result property="surveyChmax" column="SURVEY_CHMAX"/>
 	</resultMap>
 	
+	<resultMap type="SurveyAnswer" id="surveyAnswerResultMap">
+		<id property="surveyanswerNo" column="SURVEYANSWER_NO"/>
+		<result property="surveyNo" column="SURVEY_NO"/>
+		<result property="surveyquestNo" column="SURVEYQUEST_NO"/>
+		<result property="surveyanswerContent" column="SURVEYANSWER_CONTENT"/>
+		<result property="surveyanswerId" column="SURVEYANSWER_ID"/>
+		<result property="surveyanswerStorage" column="SURVEYANSWER_STORAGE"/>
+	</resultMap>
+	
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
-	<select id="selectAllSurvey" resultMap="surveyMyStatusResultMap">
-		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+	<select id="selectAllSurvey" resultMap="surveyResultMap">
+		SELECT * FROM( 
+        SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
-		SUB_ANSWERSTATUS
-		FROM SURVEY_TBL
-		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId}) USING(SURVEY_NO)
-		<![CDATA[WHERE ROWNUM <=10]]>
-		ORDER BY SURVEY_NO DESC
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME, SUB_ANSWERSTATUS
+		FROM SURVEY_TBL S
+		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId} ) USING(SURVEY_NO)
+        JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		ORDER BY SURVEY_NO DESC)
+       	<![CDATA[WHERE ROWNUM <= 10]]>
 	</select>
 	<!-- 진행중인 리스트 조회 -->
-	<select id="selectProceedSurvey" resultMap="surveyMyStatusResultMap">
+	<select id="selectProceedSurvey" resultMap="surveyResultMap">
 		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
-		SUB_ANSWERSTATUS
-		FROM SURVEY_TBL
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME, SUB_ANSWERSTATUS
+		FROM SURVEY_TBL S
 		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId}) USING(SURVEY_NO)
-		<![CDATA[WHERE SURVEY_STATUS = 'C' AND ROWNUM <=10]]>
+		JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		<![CDATA[WHERE SURVEY_STATUS = 'C']]>
 		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 마감된 리스트 조회 -->
-	<select id="selectClosedSurvey" resultMap="surveyMyStatusResultMap">
+	<select id="selectClosedSurvey" resultMap="surveyResultMap">
 		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
 		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
-		SUB_ANSWERSTATUS
-		FROM SURVEY_TBL
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME, SUB_ANSWERSTATUS
+		FROM SURVEY_TBL S
 		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId}) USING(SURVEY_NO)
-		<![CDATA[WHERE SURVEY_STATUS = 'F' AND ROWNUM <=10]]>
+        JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		<![CDATA[WHERE SURVEY_STATUS = 'F']]>
 		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 내가 작성한 설문 리스트 조회 -->
 	<select id="selectWroteSurvey" resultMap="surveyResultMap">
-		SELECT * FROM SURVEY_TBL WHERE SURVEY_WRITER = #{emplId} ORDER BY SURVEY_NO DESC
+		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME, SUB_ANSWERSTATUS
+		FROM SURVEY_TBL S
+		LEFT JOIN (SELECT * FROM SURVEY_SUB WHERE SUB_ID = #{emplId}) USING(SURVEY_NO)
+        JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		WHERE SURVEY_WRITER = #{emplId}
+		ORDER BY SURVEY_NO DESC
 	</select>
 	<!-- 내가 대상자이면서 응답하지 않은 것 중 진행중인 설문 리스트 조회 -->
 	<select id="selectSubSurveyById" resultMap="surveyResultMap">
-		SELECT * FROM SURVEY_TBL
+		SELECT SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER, SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT, SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME
+        FROM SURVEY_TBL S
 		JOIN (SELECT SURVEY_NO FROM SURVEY_SUB WHERE SUB_ID = #{emplId} AND SUB_ANSWERSTATUS='N')
-		USING(SURVEY_NO)
+		USING(SURVEY_NO) 
+        JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
 		WHERE SURVEY_STATUS = 'C'
 	</select>
 	<!-- 설문조사 대상자 리스트 가져오기(응답여부 확인 가능) -->
-	<select id="selectSurveySubByNo" resultMap="SurveySubEmplResultMap">
+	<select id="selectSurveySubByNo" resultMap="surveySubResultMap">
 		SELECT SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS,
 		DEPT_CODE, C.DEPT_NAME, POSITION_CODE, POSITION_NAME, EMPL_NAME
 		FROM SURVEY_SUB A
@@ -137,9 +160,35 @@
 		#{surveyStartdate}, #{surveyEnddate}, 
 		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
 	</insert>
+	<!-- 설문조사 응답자 추가 -->
+	<insert id="insertSurveySub">
+		INSERT INTO SURVEY_SUB(SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS) VALUES
+		(SURVEYSUB_SEQ.NEXTVAL, #{surveyNo}, #{subId}, DEFAULT)
+	</insert>
 	<!-- 설문조사 수정 -->
 	<update id="updateSurvey">
-		UPDATE SURVEY_TBL SET SURVEY_STARTCOMMENT = #{surveyStartcomment} 
+		UPDATE SURVEY_TBL
+		<set>
+			<if test="surveyTitle != null">
+				SURVEY_TITLE = #{surveyTitle},
+			</if>
+			<if test="surveyStartdate != null">
+				SURVEY_STARTDATE = #{surveyStartdate},
+			</if>
+			<if test="surveyEnddate != null">
+				SURVEY_ENDDATE = #{surveyEnddate},
+			</if>
+			<if test="surveyResult != null">
+				SURVEY_RESULT = #{surveyResult},
+			</if>
+			<if test="surveyEdit != null">
+				SURVEY_EDIT = #{surveyEdit},
+			</if>
+			<if test="surveyStartcomment != null">
+				SURVEY_STARTCOMMENT = #{surveyStartcomment},
+			</if>
+			SURVEY_UPDATE = SYSDATE
+		</set>
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
 	<!-- 설문 문항 추가 -->
@@ -154,4 +203,85 @@
 		VALUES(SURVEYQUEST_SEQ.CURRVAL, 
 		#{surveyCh1}, #{surveyCh2}, #{surveyCh3}, #{surveyCh4}, #{surveyChmax})
 	</insert>
+	
+	<!-- 설문조사 정보 조회 -->
+	<!-- 조인해서 작성자 정보(이름) 함께 가져오기 -->
+	<select id="selectSurveyByNo" resultMap="surveyResultMap">
+		<!-- 전에 리스트 뽑은 것도 조인까지 이렇게 다 바꿔야 할 듯 -->
+		SELECT 
+		SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER,
+		SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT,
+		SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME
+		FROM SURVEY_TBL S
+		JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		WHERE SURVEY_NO = #{surveyNo}
+	</select>
+
+	<!-- 설문조사 문항+보기 한번에 가져오기 -->
+	<select id="selectAllSurveyQuestByNo" resultMap="surveyQuestResultMap">
+		SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE,
+		QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED,
+		SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX
+		FROM SURVEY_QUEST Q
+		LEFT JOIN SURVEYQUEST_CH C ON Q.QUEST_NO = C.SURVEYQUEST_NO
+		WHERE SURVEY_NO = #{surveyNo}
+		ORDER BY QUEST_NO
+	</select>
+	
+	<!-- 설문조사 상태 수정 (마감) -->
+	<update id="updateSurveyStatus">
+		UPDATE SURVEY_TBL 
+		SET SURVEY_STATUS = 'F', SURVEY_ENDDATE = SYSDATE
+		WHERE SURVEY_NO = #{surveyNo}
+	</update>
+
+	<!-- 설문조사 삭제 -->
+	<delete id="deleteSurvey">
+		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
+	</delete>
+	<!-- 설문조사 번호로 설문조사 응답자 삭제 -->
+	<delete id="deleteSurveySubByNo">
+		DELETE FROM SURVEY_SUB WHERE SURVEY_NO = #{surveyNo}
+	</delete>
+	<!-- 설문조사 응답 -->
+	<insert id="insertSurveySubAnswer">
+		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, #{surveyNo}, #{surveyquestNo}, #{surveyanswerContent}, #{surveyanswerId}, DEFAULT)
+	</insert>
+	<!-- 설문조사 응답자 응답 상태 변경 -->
+	<update id="updateSubAnswerStatus">
+		UPDATE SURVEY_SUB SET SUB_ANSWERSTATUS = 'Y'
+		WHERE SURVEY_NO = #{surveyNo} AND SUB_ID = #{emplId}
+	</update>
+	<!-- 설문조사 응답자 수 -->
+	<select id="selectCountAnswerSubByNo">
+		SELECT COUNT(*) FROM SURVEY_SUB
+		WHERE SURVEY_NO = #{surveyNo} AND SUB_ANSWERSTATUS = 'Y';
+	</select>
+	<!-- 설문조사 응답 대상자 수 -->
+	<select id="selectCountAllSub">
+		SELECT COUNT(*) FROM SURVEY_SUB
+		WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	
+	<!-- 설문조사 번호로 응답 리스트 가져오기 -->
+	<select id="selectSurveyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	
+	<!-- 설문조사 번호, 내 아이디로 내 응답 리스트 가져오기 -->
+	<select id="selectSurveyMyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER 
+		WHERE SURVEY_NO = #{surveyNo} AND SURVEYANSWER_ID = #{emplId}
+	</select>
+	
+	<!-- 설문조사 응답 수정 -->
+	<update id="updateSurveySubAnswer">
+		UPDATE SURVEY_ANSWER
+		SET SURVEYANSWER_CONTENT = #{surveyanswerContent}
+		WHERE SURVEYANSWER_NO = #{surveyanswerNo}
+	</update>
 </mapper>

@@ -22,7 +22,7 @@ import com.nexacro17.xapi.data.DataSet;
 public class EmployeeAdminController {
 	@Autowired
 	private DeptService dService;
-
+	
 	@Autowired
 	private PositionService pService;
 	
@@ -36,15 +36,23 @@ public class EmployeeAdminController {
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
 		
+		// 부서 조회
+		List<Dept> dList = dService.selectAllDept();
+		
+		// 직급 조회
+		List<Position> pList = pService.selectAllPosition();
+		
 		// 재직자 조회
 		List<Employee> empList = eAService.printAllEmployee();
 		
 		// 퇴사자 조회
 		List<Employee> retireeList = eAService.printAllRetiree();
 		
-		if(!empList.isEmpty() && !retireeList.isEmpty()) {
+		if(!empList.isEmpty() && !retireeList.isEmpty() && !dList.isEmpty() && !pList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
+			result.addDataSet("out_dept", dList);
+			result.addDataSet("out_pos", pList);
 			result.addDataSet("out_empl", empList);
 			result.addDataSet("out_retiree", retireeList);
 		}else {
@@ -59,14 +67,26 @@ public class EmployeeAdminController {
 	// 사원 정보 상세 조회
 	@RequestMapping(value="/admin/empDetail.hirp", method=RequestMethod.POST)
 	public NexacroResult empDetailView(
-			@ParamVariable(name="emplId") String 	emplId) {
+			@ParamVariable(name="emplId") String emplId) {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
+		
+		// 부서 조회
+		List<Dept> dList = dService.selectAllDept();
+		
+		// 직급 조회
+		List<Position> pList = pService.selectAllPosition();
+		
+		// 직원 정보 조회
 		Employee employee = eAService.printEmployeeInfo(emplId);
-		if(employee != null) {
+		
+		if(employee != null && !dList.isEmpty() && !pList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
+			result.addDataSet("out_dept", dList);
+			result.addDataSet("out_pos", pList);
+			result.addDataSet("out_empl", employee);
 		}else {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
@@ -76,11 +96,35 @@ public class EmployeeAdminController {
 		return result;
 	}
 	
-	// 임시회원 리스트 조회(융경 쪽에서 데이터 받아야함)
+	// 임시회원 리스트 조회
+	@RequestMapping(value="/admin/tempEmplList.hirp", method=RequestMethod.GET)
 	public NexacroResult tempEmpListView() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult(); 
+		
+		// 부서 조회
+		List<Dept> dList = dService.selectAllDept();
+		
+		// 직급 조회
+		List<Position> pList = pService.selectAllPosition();
+		
+		// 임시회원 조회
 		List<Employee> tempEmpList = eAService.printAllTempEmployee();
-		return result;
+		
+		if(!tempEmpList.isEmpty() && !dList.isEmpty() && !pList.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+			result.addDataSet("out_dept", dList);
+			result.addDataSet("out_pos", pList);
+			result.addDataSet("out_temp", tempEmpList);
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;		
 	}
 	
 	// 사원 정보 수정
@@ -94,18 +138,46 @@ public class EmployeeAdminController {
 	}
 	
 	// 사원 퇴직 처리
+	@RequestMapping(value="/admin/resignEmpl.hirp", method=RequestMethod.POST)
 	public NexacroResult empResign(
-			@ParamVariable(name="empNo") int empNo) {
+			@ParamVariable(name="emplId") String emplId) {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		String tempId = emplId;
 		NexacroResult result = new NexacroResult(); 
-		int resignResult = eAService.resignEmployee(empNo);
-		return result;
+		int resignResult = eAService.resignEmployee(tempId);
+		
+		if(resignResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		} else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;	
 	}
 	
 	// 사원 가입 승인
+	@RequestMapping(value="/admin/emplLevelUp.hirp", method=RequestMethod.POST)
 	public NexacroResult signUpTempEmp(
-			@ParamVariable(name="empNo") int empNo) {
+			@ParamVariable(name="emplId") String emplId) {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		String tempId = emplId;
 		NexacroResult result = new NexacroResult(); 
-		int modifyLevelResult = eAService.modifyLevelEmployee(empNo);
-		return result;
+		int modifyLevelResult = eAService.modifyLevelEmployee(tempId);		
+		
+		if(modifyLevelResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		} else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;	
 	}
 }

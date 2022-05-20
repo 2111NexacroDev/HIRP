@@ -9,6 +9,8 @@ public class SurveyQuest {
 	private String questType1;
 	private String questType2;
 	private String questRequired;
+	//보기
+	private SurveyQuestCh surveyQuestCh;
 	
 	private List<SurveyQuest> surveyQuestList;
 	
@@ -73,6 +75,16 @@ public class SurveyQuest {
 		this.questRequired = questRequired;
 	}
 	
+	//보기
+	public SurveyQuestCh getSurveyQuestCh() {
+		return surveyQuestCh;
+	}
+	
+	public void setSurveyQuestCh(SurveyQuestCh surveyQuestCh) {
+		this.surveyQuestCh = surveyQuestCh;
+	}
+
+	//questList
 	public List<SurveyQuest> getSurveyQuestList(){
 		return surveyQuestList;
 	}
@@ -87,6 +99,7 @@ public class SurveyQuest {
 				+ ", questType1=" + questType1 + ", questType2=" + questType2 + ", questRequired=" + questRequired
 				+ "]";
 	}
+
 
 	
 }

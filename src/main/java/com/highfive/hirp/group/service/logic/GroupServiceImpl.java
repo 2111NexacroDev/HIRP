@@ -26,8 +26,8 @@ public class GroupServiceImpl implements GroupService {
 	// 조직도 조회
 	@Override
 	public List<Dept> printAllGroup() {
-		List<Dept> groupView = gStore.selectAllGroup(sqlSession);
-		return groupView;
+		List<Dept> dList = gStore.selectAllGroup(sqlSession);
+		return dList;
 	}
 
 	// 회원 검색

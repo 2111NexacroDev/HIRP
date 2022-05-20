@@ -3,6 +3,7 @@
   <Form id="deptManage" width="1080" height="720" onload="deptManage_onload">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1080">
+        <Div id="Div00_00" taborder="35" left="0" top="0" width="230" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;" text="" bottom="0"/>
         <Grid id="grid_deptList" taborder="0" left="15" top="200" width="200" bottom="100" binddataset="ds_dept" autofittype="col" treeinitstatus="expand,all" treeusecheckbox="false" oncellclick="grid_deptList_oncellclick">
           <Formats>
             <Format id="default">
@@ -18,42 +19,41 @@
             </Format>
           </Formats>
         </Grid>
-        <Static id="static_dept01" taborder="1" text="부서 관리" left="20" top="15" width="166" height="41" font="normal 500 15pt/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="static_dept02" taborder="2" text="조직도" left="20" top="56" width="166" height="41" font="normal 500 12pt/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="static_dept03" taborder="3" text="부서" left="27" top="121" width="50" height="30" font="normal 10pt/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="static_dept01" taborder="1" text="부서 관리" left="20" top="15" width="166" height="41" font="bold 22px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="static_dept02" taborder="2" text="조직도" left="20" top="56" width="166" height="41" font="bold 16px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="static_dept03" taborder="3" text="부서" left="27" top="121" width="50" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
         <Button id="btn_deptAdd" taborder="4" left="160" top="127" width="15" height="15" cssclass="add_icon" onclick="btn_deptAdd_onclick"/>
         <Button id="btn_delete" taborder="5" left="190" top="127" width="15" height="15" cssclass="delete_icon" onclick="btn_delete_onclick"/>
-        <Edit id="edt_search" taborder="6" left="23" top="155" width="162" height="30" onchanged="edt_search_onchanged"/>
+        <Edit id="edt_search" taborder="6" left="15" top="155" width="170" height="30" onchanged="edt_search_onchanged"/>
         <Button id="btn_search" taborder="7" left="185" top="155" width="30" height="30" cssclass="search" onclick="btn_search_onclick"/>
-        <Static id="static_deptName" taborder="8" text="부서이름" left="280" top="40" width="157" height="37" font="normal 500 15pt/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="static_deptInfo" taborder="9" text="부서 정보" left="280" top="100" width="157" height="30" border="0px none,0px none,1px black"/>
-        <Static id="st_deptcolor" taborder="10" text="부서 색상" left="280" top="275" width="157" height="30"/>
-        <Static id="st_deptmaster" taborder="11" text="부서장" left="280" top="320" width="157" height="30"/>
-        <Static id="st_depthiredate" taborder="12" text="생성일" left="280" top="365" width="157" height="30"/>
-        <Static id="st_upperdept" taborder="13" text="상위 부서" left="280" top="410" width="157" height="30"/>
-        <Static id="st_lowerdept" taborder="14" text="하위 부서" left="280" top="455" width="157" height="30"/>
-        <Static id="st_deptname" taborder="15" text="부서명" left="280" top="185" width="157" height="30"/>
-        <Static id="st_deptcode" taborder="16" text="부서코드" left="280" top="140" width="157" height="30"/>
-        <Static id="st_deptsecond" taborder="17" text="부서약어" left="280" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptname" taborder="18" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptname_onclick"/>
-        <Static id="st_deptcolor2" taborder="19" text="부서 색상" left="403" top="275" width="157" height="30"/>
-        <Static id="st_deptmaster2" taborder="20" text="부서장" left="403" top="320" width="157" height="30"/>
-        <Static id="st_deptname2" taborder="21" left="403" top="185" width="157" height="30" text="부서명"/>
-        <Static id="st_deptcode2" taborder="22" text="부서코드" left="404" top="140" width="157" height="30"/>
-        <Static id="st_deptsecond2" taborder="23" text="부서약어" left="403" top="230" width="157" height="30"/>
-        <Button id="btn_edit_deptsecond" taborder="24" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
-        <Button id="btn_edit_deptcolor" taborder="25" left="560" top="275" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcolor_onclick"/>
-        <Button id="btn_edit_deptmaster" taborder="26" left="560" top="320" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptmaster_onclick"/>
-        <Div id="Div00" taborder="27" left="278" top="130" width="60" height="2" background="#b7b7b7"/>
-        <Div id="Div01" taborder="28" left="232" top="5" width="2" background="#b7b7b7" bottom="5"/>
-        <Div id="Div02" taborder="29" left="20" top="190" width="190" height="2" background="#b7b7b7"/>
-        <Button id="btn_upper" taborder="30" text="상위 부서명" left="403" top="415" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;" onclick="btn_upper_onclick" cssclass="deptButton"/>
-        <Button id="btn_submit" taborder="31" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
-        <Button id="btn_cancel" taborder="32" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
-        <Edit id="edt_deptname" taborder="33" left="394" top="185" width="133" height="30" visible="false"/>
-        <Button id="btn_colorchartfromds" taborder="34" left="470" top="283" width="15" height="15" background=""/>
-        <Edit id="edt_deptsecond" taborder="35" left="394" top="230" width="133" height="30" visible="false"/>
-        <MaskEdit id="MaskEdit00" taborder="36" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" type="string" font="normal 10pt/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged" format="@@@@@@@@"/>
+        <Static id="static_deptInfo" taborder="8" text="부서 정보" left="280" top="100" width="157" height="30" border="0px none,0px none,1px black" font="bold 16px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptcolor" taborder="9" text="부서 색상" left="280" top="275" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptmaster" taborder="10" text="부서장" left="280" top="320" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_depthiredate" taborder="11" text="생성일" left="280" top="365" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_upperdept" taborder="12" text="상위 부서" left="280" top="410" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_lowerdept" taborder="13" text="하위 부서" left="280" top="455" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptname" taborder="14" text="부서명" left="280" top="185" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptcode" taborder="15" text="부서코드" left="280" top="140" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptsecond" taborder="16" text="부서약어" left="280" top="230" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Button id="btn_edit_deptname" taborder="17" left="560" top="185" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptname_onclick"/>
+        <Static id="st_deptcolor2" taborder="18" text="부서 색상" left="403" top="275" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptmaster2" taborder="19" text="부서장" left="403" top="320" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptname2" taborder="20" left="403" top="185" width="157" height="30" text="부서명"/>
+        <Static id="st_deptcode2" taborder="21" text="부서코드" left="404" top="140" width="157" height="30" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Static id="st_deptsecond2" taborder="22" text="부서약어" left="403" top="230" width="157" height="30"/>
+        <Button id="btn_edit_deptsecond" taborder="23" left="560" top="230" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptsecond_onclick"/>
+        <Button id="btn_edit_deptcolor" taborder="24" left="560" top="275" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptcolor_onclick"/>
+        <Button id="btn_edit_deptmaster" taborder="25" left="560" top="320" width="30" height="30" cssclass="edit_icon" onclick="btn_edit_deptmaster_onclick"/>
+        <Div id="Div00" taborder="26" left="278" top="130" width="70" height="2" background="#b7b7b7" font="14px/normal &quot;Noto Sans KR&quot;"/>
+        <Div id="Div02" taborder="27" left="15" top="190" width="200" height="2" background="#b7b7b7"/>
+        <Button id="btn_upper" taborder="28" text="상위 부서명" left="403" top="415" width="70" height="20" font="normal 8pt/normal &quot;Noto Sans KR&quot;" onclick="btn_upper_onclick" cssclass="deptButton"/>
+        <Button id="btn_submit" taborder="29" text="저장" left="560" top="575" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="30" text="취소" left="650" top="575" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Edit id="edt_deptname" taborder="31" left="394" top="185" width="133" height="30" visible="false"/>
+        <Button id="btn_colorchartfromds" taborder="32" left="470" top="283" width="15" height="15" background=""/>
+        <Edit id="edt_deptsecond" taborder="33" left="394" top="230" width="133" height="30" visible="false"/>
+        <MaskEdit id="MaskEdit00" taborder="34" left="393" top="365" width="158" height="30" readonly="true" background="transparent" border="0px none" type="string" font="14px/normal &quot;Noto Sans KR&quot;" onchanged="MaskEdit00_onchanged" format="@@@@@@@@"/>
+        <Static id="Static00_00" taborder="36" text="부서 이름" left="230" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[//오늘 날짜
@@ -90,7 +90,7 @@ this.deptManage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	//load 되었을 때 master 아이디값과 같은 이름 set 해주기
 	var masterId = this.ds_dept.getColumn(this.ds_dept.rowposition, "deptMaster");
-	var masterName = this.ds_empl.lookup( "emplId", masterId, "emplName" );
+	var masterName = this.ds_empl.lookup("emplId", masterId, "emplName" );
 	trace("mastername:" + masterName);
 	this.st_deptmaster2.set_text(masterName);
 
@@ -446,7 +446,7 @@ this.btn_edit_deptmaster_onclick = function(obj:nexacro.Button,e:nexacro.ClickEv
     var nTop  = system.clientToScreenY(this, 10);
 	
 	//ChildFrame.init(strName, nLeft, nTop, nWidth, nHeight [, nRight, nBottom [,strUrl]] )
-	var objChild = new ChildFrame("popDeptDelete", "absolute", nLeft, nTop, 300, 400);
+	var objChild = new ChildFrame("popEmplListPopup", "absolute", nLeft, nTop, 300, 400);
 	objChild.set_formurl("FrameBase::deptEmplListPopup.xfdl");
 	objChild.set_openalign("center middle");
 	objChild.set_dragmovetype("all");
@@ -826,9 +826,9 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
       <BindItem id="item1" compid="st_deptcode2" propid="text" datasetid="ds_dept" columnid="deptCode"/>
       <BindItem id="item2" compid="st_deptsecond2" propid="text" datasetid="ds_dept" columnid="deptSecondname"/>
       <BindItem id="item3" compid="st_deptcolor2" propid="text" datasetid="ds_dept" columnid="deptColor"/>
-      <BindItem id="item7" compid="static_deptName" propid="text" datasetid="ds_dept" columnid="deptName"/>
       <BindItem id="item9" compid="btn_colorchartfromds" propid="background" datasetid="ds_dept" columnid="deptColor"/>
       <BindItem id="item6" compid="MaskEdit00" propid="value" datasetid="ds_dept" columnid="deptHiredate"/>
+      <BindItem id="item4" compid="Static00_00" propid="text" datasetid="ds_dept" columnid="deptName"/>
     </Bind>
   </Form>
 </FDL>

@@ -16,7 +16,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	@Override
 	public List<ApprForm> selectAllApprForm(SqlSession sqlSession) {
-		List<ApprForm> aList = sqlSession.selectList("");
+		List<ApprForm> aList = sqlSession.selectList("ApprFormMapper.selectAllApprForm");
 		return aList;
 	}
 
@@ -28,7 +28,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	@Override
 	public ApprForm selectApprForm(SqlSession sqlSession, int formNo) {
-		ApprForm apprForm = sqlSession.selectOne("",formNo);
+		ApprForm apprForm = sqlSession.selectOne("ApprFormMapper.selectApprForm",formNo);
 		return apprForm;
 	}
 
@@ -138,6 +138,13 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	public Approval selectOneAppr(SqlSession sqlSession,int docNo) {
 		Approval approval = sqlSession.selectOne("",docNo);
 		return approval;
+	}
+
+	//양식등록
+	@Override
+	public int insertApprForm(SqlSession sqlSession, ApprForm apprForm) {
+		int result = sqlSession.insert("ApprFormMapper.insertApprForm",apprForm);
+		return result;
 	}
 
 }

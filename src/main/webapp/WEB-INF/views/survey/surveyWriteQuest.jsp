@@ -19,7 +19,7 @@
                 <button type="submit"></button>
             </form>
 
-			<form id="writeQuestPageForm" action="/survey/updateQuestInfo.hirp" method="post">
+			<form id="writeQuestPageForm" action="/survey/addQuestList.hirp" method="post">
 				
 				<!-- 임시로 넣어준 것. 두 개 화면 합치면, 따로 no value 없이 mapper에서 seq.currval 쓰면 될 듯-->
 				<h1 class="basic-border-bottom">설문 문항 작성</h1>
@@ -209,7 +209,7 @@
 //     			var choiceCount = 0; //보기 개수
     			var choiceCount = 1; //보기 개수
     			
-        		if(e.value == "C" || e.value == "D") {
+        		if(e.value == "C") {
         			var type2 = choice;
         			//처음에 보기 1개 출력
         			var $chListDiv = 
@@ -228,8 +228,26 @@
         			
         			choiceCount = $chList.children().length; //보기 개수
         			console.log(choiceCount);
-        			console.log("선택형이나 날짜형을 눌렀을 때 보기 개수:"+choiceCount);
+        			console.log("선택형을 눌렀을 때 보기 개수:"+choiceCount);
         			
+        		} else if (e.value == "D") {
+        			var type2 = choice;
+        			var $chListDateDiv = 
+        				$("<div class='row mt-20'>"
+						    +"<div class='col-3'>"
+			                	+"<div>보기</div>"
+			                +"</div>"
+			                +"<div class='questChoiceList'>"
+			                   	+"<input type='date' name='surveyCh'>"
+			                   	+"<button type='button' class='noneBackground' onclick='addChDateList(this);'><i class='fa-solid fa-plus'></i></button>"
+			                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
+			                +"</div>"
+			            +"</div>");
+					$chList.append($chListDateDiv);
+        			
+        			choiceCount = $chList.children().length; //보기 개수
+        			console.log(choiceCount);
+        			console.log("날짜형을 눌렀을 때 보기 개수:"+choiceCount);
         		}
         		else if(e.value == "T") {
         			var type2 = text;
@@ -255,7 +273,7 @@
         	function questType2Change(e){
         		console.log("questType2Change:"+e.value);
         		if(e.value == "복수 선택"){
-        			addChMaxCombo(e);
+//         			addChMaxCombo(e);
         		} else { //복수 선택이 아니면 다시 비워주기
         			var $chMaxCombo = $(e).parent().parent().next().next().next(); //최대 선택 개수 출력하는 div
             		$chMaxCombo.html("");
@@ -293,6 +311,56 @@
     		            +"</div>");
         			
            			$chList.append($chListDiv2);
+    				chCount++;
+    				console.log(chCount);
+    				
+        		} else {
+        			console.log("보기가 너무 많습니다.");
+        			$chMaxAlert.html("");
+        			var $chAlert =
+        				$("<div class='row mt-10 padding-left'>"
+        				     	+"<div class='col-3'></div>"
+        	                	+"<h3 style='color:red;'>보기는 최대 4개까지 추가 가능합니다.</h3>"
+        		            +"</div>");
+        			$chMaxAlert.append($chAlert);
+        		}
+        		console.log("addChList:chList");
+        		console.log($chList);
+        		console.log("타겟");
+        		console.log(target);
+        		chMaxList(target, chCount);
+        	}
+        	
+        	//날짜형 보기 추가
+        	function addChDateList(e) {
+        		var $chList = $(e).parent().parent().parent(); //보기 리스트 출력하는 div (choiceList)
+//         		var target = document.getElementById("questAnswerCount"); //최대 선택 개수 콤보
+//         		var target2 = $("#questAnswerCount")[0];
+        		var target = $chList.next().next().children().find("[name=surveyChmax]")[0];  //최대 선택 개수 combo
+        		console.log($chList.next().next());
+//         		console.log(target);
+        		
+        		var chCount = $chList.children().length; //보기 개수
+        		var $chMaxAlert = $chList.next(); //보기 max일 때 알림 적어줄 div
+        		console.log("addChList:maxAlert");
+        		console.log($chMaxAlert);
+        		
+        		//보기 4개까지 추가 가능
+        		if(chCount < 4) {
+        			$chMaxAlert.html("");
+        			//보기 추가
+           			var $chListDateDiv2 = 
+           				$("<div class='row mt-10'>"
+    				     	+"<div class='col-3'>"
+    	                	+"</div>"
+    		                +"<div class='questChoiceList'>"
+    		                   	+"<input type='date' name='surveyCh'>"
+    		                   	+"<button type='button' class='noneBackground' onclick='addChDateList(this);'><i class='fa-solid fa-plus'></i></button>"
+    		                   	+"<button type='button' class='noneBackground' onclick='deleteChList(this);'><i class='fa-solid fa-xmark'></i></button>"
+    		                +"</div>"
+    		            +"</div>");
+        			
+           			$chList.append($chListDateDiv2);
     				chCount++;
     				console.log(chCount);
     				

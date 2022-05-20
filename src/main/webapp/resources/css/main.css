@@ -65,7 +65,7 @@
 }
 
 #main .row>div>section>h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 16px;
     line-height: 27px;
     font-weight: 500;
@@ -85,4 +85,32 @@
 .figure--profile+h2 {
     font-size: 20px !important;
     letter-spacing: -1px;
+}
+
+.ul--birthday {
+    padding: 10px 20px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+
+.ul--birthday li {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.ul--birthday li strong {
+    font-weight: 400;
+}
+
+@media screen and (min-width: 1201px) {
+    .ul--birthday {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 40px;
+    }
+
+    .ul--birthday li {
+        width: 50%;
+    }
 }

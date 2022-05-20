@@ -65,13 +65,6 @@ public class EmployeeController {
 		return mv;
 	}
 
-	// 로그인 후 홈으로 이동하는 화면
-	@RequestMapping(value = "/home.hirp", method = RequestMethod.GET)
-	public ModelAndView homeView(ModelAndView mv) {
-		mv.setViewName("home");
-		return mv;
-	}
-
 	// 로그인
 	@RequestMapping(value = "/employee/login.hirp", method = RequestMethod.POST)
 	public String employeeLogin(Model model, HttpServletRequest request, @RequestParam("emplId") String emplId, // HttpServletRequest -> 경로, 파일저장, 로그인 세션때 사용(web.xml)
@@ -87,7 +80,12 @@ public class EmployeeController {
 				session.setAttribute("emplId", empLogin.getEmplId());
 				session.setAttribute("emplPw", empLogin.getEmplPw());
 				session.setAttribute("deptCode", empLogin.getDeptCode());
-				return "redirect:/home.hirp";
+				session.setAttribute("emplName", empLogin.getEmplName());
+				if(emplId.equals("admin")) {
+					return "redirect:/admin.hirp";					
+				} else {
+					return "redirect:/home.hirp";				
+				}
 			} else {
 				model.addAttribute("msg", "로그인에 실패했습니다.");
 				return "common/errorPage";

@@ -1,5 +1,7 @@
 package com.highfive.hirp.employee.service;
 
+import java.util.List;
+
 import com.highfive.hirp.employee.domain.Employee;
 
 public interface EmployeeService {
@@ -21,4 +23,5 @@ public interface EmployeeService {
 
 	// 마이페이지 수정
 	public int mypageModify(Employee employee);
+	
 }

@@ -95,8 +95,8 @@
   	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
   </delete>
   
-  <select id="selectMyNotice">
-  	SELECT FROM BOARD_NOTICE_TBL WHERE EMPL_ID = #{emplId};
+  <select id="selectMyNotice" resultMap="noticeResultMap">
+  	SELECT  * FROM BOARD_NOTICE_TBL WHERE EMPL_ID = #{emplId}
   </select>
   
   

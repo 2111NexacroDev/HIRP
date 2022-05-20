@@ -288,7 +288,15 @@
                             <p class="padding-20">그림자 연함</p>
                         </div>
                     </div>
-                </div>
+                </div>                
+                
+                <section class="modal--chat">
+                    <p>
+                        암거나
+                        이 p태그 안써두 됨
+                        테스트용
+                    </p>
+                </section>
             </div>
         </article>
     </div>

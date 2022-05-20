@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
@@ -19,7 +20,7 @@
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <h1 class="basic-border-bottom">
-                <strong>${sessionScope.emplId }</strong>님, 환영합니다!&#128521;
+                <strong>${sessionScope.emplName }</strong>님, 환영합니다!&#128521;
             </h1>
 
             <div class="row">
@@ -49,7 +50,12 @@
                 <div>
                     <!-- 컬럼3 -->
                     <section>
-                        <h2>생일</h2>
+                        <h2>이번 달 생일 🎉🎉</h2>
+                        <ul class="ul--birthday">
+                        <c:forEach items="${birthdayList }" var="birthdayList">
+                            <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
+                        </c:forEach>
+                        </ul>
                     </section>
                     <section>
                         <h2>결재 대기 문서</h2>

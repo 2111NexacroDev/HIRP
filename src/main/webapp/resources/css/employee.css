@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+p {
+    line-height: 1.6;
+}
+
 #loginPage {
     background: url("../images/bg_login.png") no-repeat center 0/100% auto;
 }
@@ -48,4 +52,162 @@
 
 #loginPage .p--foot small {
     font-size: 12px;
+}
+
+.page--employee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #eef1f6;
+}
+
+.page--employee h1 {
+    margin-bottom: 30px;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.page--employee h1+p {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.page--employee form {
+    width: 90%;
+    max-width: 420px;
+    padding: 40px 26px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background: #fff;
+}
+
+.page--employee form>div {
+    margin-bottom: 20px;
+}
+
+.page--employee form>div>label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.page--employee form>div>input[type="radio"]+label {
+    display: inline;
+    margin-right: 10px;
+}
+
+.page--employee form input[type="text"],
+.page--employee form input[type="password"],
+.page--employee form input[type="date"] {
+    width: 100%;
+    height: 40px;
+    background-color: #f9f9f9;
+}
+
+.page--employee button[type="submit"] {
+    width: 100%;
+    padding: 14px 10px;
+    font-size: 16px;
+}
+
+.mypage-prev #mypage {
+    padding-bottom: 100px;
+}
+
+.mypage-prev form {
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.mypage-prev p {
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.mypage-prev p strong {
+    font-weight: 500;
+}
+
+.mypage-prev input[type="password"] {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.mypage-prev button[type="submit"] {
+    width: 50%;
+    max-width: 100px;
+    margin-top: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.mypage-update li {
+    margin-bottom: 20px;
+}
+
+.mypage-update li label {
+    display: inline-block;
+    width: 140px;
+}
+
+.mypage-update li input:read-only {
+    border: none;
+}
+
+.mypage-update li input:not(:read-only) {
+    background: aliceblue;
+    border-color: aliceblue;
+}
+
+.mypage-update .profile-wrap {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    background: url("../images/img_no_profile.png") no-repeat center center/cover;
+    border: 1px solid #efefef;
+}
+
+.mypage-update .profile-wrap>button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    transition: background .3s;
+}
+
+.mypage-update .profile-wrap>button:hover {
+    background: rgba(0, 0, 0, .5);
+}
+
+.mypage-update .profile-wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.mypage-update .section--modal p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.mypage-update .section--modal input[type="text"],
+.mypage-update .section--modal input[type="password"] {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto 0;
+    background: #fff;
+    border: 1px solid #ddd;
 }

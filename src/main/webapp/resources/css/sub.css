@@ -11,6 +11,25 @@
     justify-content: center;
 }
 
+.subConts>h2.square-tit {
+    position: relative;
+    margin-top: 20px;
+    padding: 0 20px 0 44px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.subConts>h2.square-tit:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 20px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background: powderblue;
+}
+
 /* 개인업무관리 */
 #todo section {
     position: relative;
@@ -311,7 +330,7 @@ section[class^="todo--"] li {
     position: relative;
 }
 
-.fc .fc-daygrid-day.fc-day-today:before {
+.fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url(../images/img_star.png);
     position: absolute;
     top: -23px;
@@ -396,11 +415,23 @@ section[class^="todo--"] li {
     opacity: .5;
 }
 
+#reservation {
+    padding-bottom: 100px !important;
+}
+
 #reservation .section--modal li {
     display: flex;
     align-items: center;
     margin-top: 20px !important;
     font-size: 0;
+}
+
+#reservation .section--modal li:last-child {
+    align-items: flex-start;
+}
+
+#reservation .section--modal li:last-child label {
+    padding-top: 10px;
 }
 
 .section--modal li * {
@@ -410,6 +441,100 @@ section[class^="todo--"] li {
 .section--modal textarea {
     width: calc(100% - 90px);
     padding: 10px;
+}
+
+.modal--reservation input[type="date"],
+.modal--reservationEdit input[type="date"] {
+    width: 120px;
+}
+
+.modal--reservation select[class^="time-select-"],
+.modal--reservationEdit select[class^="time-select-"] {
+    margin-left: 4px;
+}
+
+.modal--reservation .time-select-1,
+.modal--reservationEdit .time-select-1 {
+    width: 70px;
+}
+
+.modal--reservation .time-select-2,
+.modal--reservationEdit .time-select-2 {
+    width: 60px;
+}
+
+.modal--reservation .time-select-3,
+.modal--reservationEdit .time-select-3 {
+    width: 60px;
+}
+
+#reservationCalendar {
+    margin-bottom: 60px;
+    border-bottom: 1px solid #ccc;
+}
+
+.fc .fc-timegrid-now-indicator-container {
+    overflow: visible;
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+    border-right-color: var(--fc-now-indicator-color, #00498c);
+    border-left-color: var(--fc-now-indicator-color, #00498c);
+}
+
+.fc-timegrid-now-indicator-arrow::after {
+    content: "";
+    display: block;
+    width: 100vw;
+    border-bottom: 2px solid #00498c;
+}
+
+.fc .fc-timegrid-now-indicator-line {
+    border-color: #00498c;
+}
+
+.fc .fc-timegrid-now-indicator-line::after {
+    content: "NOW !";
+    color: #00498c;
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+    padding-right: 4px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.fc .fc-daygrid-day.fc-day-today,
+.fc .fc-timegrid-col.fc-day-today {
+    background-color: rgba(239, 239, 239, .7);
+    background-color: var(--fc-today-bg-color, rgba(239, 239, 239, .7));
+}
+
+.ul--utility button {
+    padding: 0;
+    background-color: transparent;
+}
+
+.ul--utility>li>ul>li {
+    position: relative;
+}
+
+.btn--utility-setting {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/icons/ic_toolbar.png");
+    background-position: 100px 50px;
+    transform: translateY(-50%);
+    transition: transform .3s;
+}
+
+@media screen and (min-width: 1201px) {
+    .btn--utility-setting:hover {
+        transform: translateY(-50%) rotate(180deg);
+    }
 }
 
 /* 공용품 예약/관리 끝 */

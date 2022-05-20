@@ -37,17 +37,31 @@ $(function () {
         $(this).parent().stop().fadeOut(100);
     });
 
-    $('body,html').keydown(function(e){
+    $('body,html').keydown(function (e) {
         if (e.keyCode == 27 || e.which == 27) {
-            if($('.section--modal').css('display') == 'flex') {
+            if ($('.section--modal').css('display') == 'flex') {
                 $('.section--modal').fadeOut(200);
-            } else if($('.section--alert').css('display') == 'flex') {
+            } else if ($('.section--alert').css('display') == 'flex') {
                 $('.section--alert').fadeOut(200);
             }
-            
+
         }
     })
     /* //모달 및 팝업 닫기 */
+
+    // 채팅창 이동
+    $('.modal--chat').draggable({
+        containment: 'window'
+    });
+
+    // 서브메뉴 접힘/펼침
+    $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {
+        if ($(this).siblings('ul').length != 0) {
+            $(this).siblings('ul').stop().slideToggle();
+            $(this).toggleClass('on');
+            return false;
+        }
+    });
 });
 
 function openAlert(alertWindow) {
