@@ -94,7 +94,7 @@
 	</select>
 	
 	<select id="selectAllEmployee" resultMap="emplResultMap">
-		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
+		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사') GROUP BY DEPT_CODE
 	</select>
 	
 	<!-- 부서이름, 직급이름까지 가져오기 -->

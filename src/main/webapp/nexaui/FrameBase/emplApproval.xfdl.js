@@ -33,7 +33,7 @@
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
-            obj = new Div("Div00","0","0","200",null,null,"0",null,null,null,null,this);
+            obj = new Div("Div00","0","0","200","100.00%",null,null,null,null,null,null,this);
             obj.set_taborder("0");
             obj.set_background("#ffffff");
             obj.set_border("0px none, 1px solid #dddddd, 0px none, 0px none");
@@ -135,20 +135,10 @@
         	{
         		if(nErrorCode < 0)
         		{
-        			this.alert("가입 대기중인 사원이 없습니다.");
+        			this.alert("사원 조회 실패 : " + sErrorMsg);
         			return;
         		}
         		this.alert("사원 조회 성공");
-        	}
-        	else if(id=="tr_update")
-        	{
-        		if(nErrorCode < 0)
-        		{
-        			this.alert("가입 승인 실패 : " + sErrorMsg);
-        			return;
-        		}
-        		this.alert("가입 승인 성공");
-        		location.reload();
         	}
         }
 
