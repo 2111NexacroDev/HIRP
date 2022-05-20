@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="deptAddPopup" width="500" height="350" titletext="New Form" onload="deptAddPopup_onload">
+    <Layouts>
+      <Layout height="350" mobileorientation="landscape" width="500">
+        <Static id="static_dept01" taborder="0" text="부서 추가" left="59" top="19" width="166" height="41" font="normal 500 14pt/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick"/>
+        <Static id="static_deptInfo" taborder="1" text="부서명" left="100" top="70" width="53" height="30" border="0px none,0px none,1px black"/>
+        <Static id="static_deptInfo00" taborder="2" text="부서코드" left="93" top="120" width="67" height="30" border="0px none,0px none,1px black"/>
+        <Static id="static_deptInfo01" taborder="3" text="부서약어" left="93" top="170" width="67" height="30" border="0px none,0px none,1px black"/>
+        <Static id="static_deptInfo01_00" taborder="4" text="부서색상" left="93" top="220" width="67" height="30" border="0px none,0px none,1px black"/>
+        <Static id="static_deptInfo02" taborder="5" text="*" left="93" top="70" width="10" height="30" border="0px none,0px none,1px black" color="#ff2323"/>
+        <Edit id="edt_deptname" taborder="6" left="174" top="70" width="216" height="30" oninput="edt_deptname_oninput"/>
+        <Edit id="edt_deptsecond" taborder="7" left="174" top="170" width="216" height="30"/>
+        <Button id="btn_submit" taborder="8" text="저장" left="165" top="280" width="80" height="30" letterSpacing="0px" cssclass="save" onclick="btn_submit_onclick"/>
+        <Button id="btn_cancel" taborder="9" text="취소" left="255" top="280" width="80" height="30" letterSpacing="0px" cssclass="cancel" onclick="btn_cancel_onclick"/>
+        <Static id="static_msg" taborder="10" left="174" top="95" width="216" height="30" border="0px none,0px none,1px black" font="normal 7pt/normal &quot;KR&quot;" color="#ff1414"/>
+        <MaskEdit id="medt_deptcode" taborder="11" left="174" top="120" width="216" height="30" textAlign="left"/>
+        <Button id="btn_colorchart01" taborder="12" left="174" top="221" width="15" height="15" background="#FFD8D8"/>
+        <Button id="btn_colorchart02" taborder="13" left="188" top="221" width="15" height="15" background="#FAE0D4"/>
+        <Button id="btn_colorchart03" taborder="14" left="202" top="221" width="15" height="15" background="#FAECC5"/>
+        <Button id="btn_colorchart04" taborder="15" left="216" top="221" width="15" height="15" background="#FAF4C0"/>
+        <Button id="btn_colorchart05" taborder="16" left="230" top="221" width="15" height="15" background="#E4F7BA"/>
+        <Button id="btn_colorchart06" taborder="17" left="244" top="221" width="15" height="15" background="#CEFBC9"/>
+        <Button id="btn_colorchart07" taborder="18" left="258" top="221" width="15" height="15" background="#D4F4FA"/>
+        <Button id="btn_colorchart08" taborder="19" left="272" top="221" width="15" height="15" background="#D9E5FF"/>
+        <Button id="btn_colorchart09" taborder="20" left="286" top="221" width="15" height="15" background="#DAD9FF"/>
+        <Button id="btn_colorchart10" taborder="21" left="300" top="221" width="15" height="15" background="#E8D9FF"/>
+        <Button id="btn_colorchart11" taborder="22" left="314" top="221" width="15" height="15" background="#FFD9FA"/>
+        <Button id="btn_colorchart12" taborder="23" left="328" top="221" width="15" height="15" background="#FFD9EC"/>
+        <Button id="btn_colorchart13" taborder="24" left="174" top="235" width="15" height="15" background="#FFA7A7"/>
+        <Button id="btn_colorchart14" taborder="25" left="188" top="235" width="15" height="15" background="#FFC19E"/>
+        <Button id="btn_colorchart15" taborder="26" left="202" top="235" width="15" height="15" background="#FFE08C"/>
+        <Button id="btn_colorchart16" taborder="27" left="216" top="235" width="15" height="15" background="#FAED7D"/>
+        <Button id="btn_colorchart17" taborder="28" left="230" top="235" width="15" height="15" background="#CEF279"/>
+        <Button id="btn_colorchart18" taborder="29" left="244" top="235" width="15" height="15" background="#B7F0B1"/>
+        <Button id="btn_colorchart19" taborder="30" left="258" top="235" width="15" height="15" background="#B2EBF4"/>
+        <Button id="btn_colorchart20" taborder="31" left="272" top="235" width="15" height="15" background="#B2CCFF"/>
+        <Button id="btn_colorchart21" taborder="32" left="286" top="235" width="15" height="15" background="#B5B2FF"/>
+        <Button id="btn_colorchart22" taborder="33" left="300" top="235" width="15" height="15" background="#D1B2FF"/>
+        <Button id="btn_colorchart23" taborder="34" left="314" top="235" width="15" height="15" background="#FFB2F5"/>
+        <Button id="btn_colorchart24" taborder="35" left="328" top="235" width="15" height="15" background="#FFB2D9"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//부서코드는 숫자로만 입력되도록 maskedit으로 작성하였음.
+//type number, textalign left
+
+
+//취소 버튼
+this.btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("cancel");
+};
+
+
+//저장 버튼
+this.btn_submit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var deptRtn = "";
+	var deptname = this.edt_deptname.value;
+	var deptcolor = "";
+	
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		var bStatus = objBtn.getSelectStatus();
+		
+		if(bStatus){ //status가 true일 때
+			trace("저장된 컬러:" + objBtn.background);
+			deptcolor = objBtn.background;
+		}
+	}
+
+	
+	//deptname이 비어있을 때
+	if(deptname == null ||  deptname.length == 0) {
+		this.static_msg.set_text("부서 이름을 입력하세요");
+		this.edt_deptname.setFocus();
+		return;
+	} else {
+// 		trace(this.edt_deptname.value);
+// 		trace(this.medt_deptcode.value);
+// 		trace(this.edt_deptsecond.value);
+		deptRtn += this.edt_deptname.value;
+		deptRtn += ":" + this.medt_deptcode.value;
+		deptRtn += ":" + this.edt_deptsecond.value;
+		deptRtn += ":" + deptcolor;
+	}
+	
+	//저장 버튼 누르면 정보 넘겨주기
+	//반환값 배열로 넘겨주려고 했더니 잘 안돼서 string으로 바꿈.
+	this.close(deptRtn);
+};
+
+//deptname 칸에 텍스트 입력 시 msg ""로 지정
+this.edt_deptname_oninput = function(obj:nexacro.Edit,e:nexacro.InputEventInfo)
+{
+	this.static_msg.set_text("");
+};
+
+
+//load 됐을 때 color chart 생성
+this.deptAddPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+	var paramColor = this.parent.ds_color;	//파라미터로 받은 ds_color
+	this.ds_color.copyData(paramColor);	//받아온 ds_color 데이터를 popup ds_color로 복사
+	
+	var nX = 174;
+	var nY = 221;
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = new Button("btn_color" + i, nX, nY, 15, 15);
+		this.addChild("btn_color" + i, objBtn);
+		objBtn.set_background(this.ds_color.getColumn(i, "COLOR_VAL"));
+		objBtn.setEventHandler("onclick", this.btn_color_onclick, this);
+		objBtn.show();
+		nX += 14;
+		if(i ==  11){
+			nX = 174;
+			nY += 14;
+		}
+	}
+};
+
+this.btn_color_onclick = function(obj, e)
+{
+	for(var i=0; i<this.ds_color.rowcount; i++)
+	{
+		var objBtn = this.components["btn_color" + i];
+		var bStatus = objBtn.getSelectStatus();
+		
+		if(bStatus){ //status가 true 인 친구를 false로 바꿔줌.
+			objBtn.setSelectStatus(false);
+			objBtn.set_border("");
+			break;
+		}
+	}
+	obj.setSelectStatus(true);
+	obj.set_border("2px solid red");
+
+	trace("컬러: " + obj.background);
+}
+]]></Script>
+    <Objects>
+      <Dataset id="ds_color">
+        <ColumnInfo>
+          <Column id="COLOR_ID" type="STRING" size="256"/>
+          <Column id="COLOR_VAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>
