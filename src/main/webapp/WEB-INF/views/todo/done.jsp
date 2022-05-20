@@ -20,9 +20,6 @@
                         <li><a href="/todo/doneList.hirp">완료 목록</a></li>
                     </ul>
                 </li>
-                 <li>
-                    <a href="/schedule/list.hirp">일정 관리</a>
-                </li>
             </ul>
         </aside>
 
