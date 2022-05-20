@@ -82,7 +82,8 @@ public class ProjectController {
 		try {
 			mv.setViewName("project/projectWriteForm");
 		}catch(Exception e) {
-			
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}

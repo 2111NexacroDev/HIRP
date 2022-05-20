@@ -39,47 +39,35 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.insert("MailMapper.saveFile", mailFile);
 		return result;
 	}
+	
+	@Override
+	public int sendBugReportRecipient(SqlSession sqlSession, Recipient recipient) {
+		int result = sqlSession.insert("MailMapper.sendBugReportRecipient", recipient);
+		return result;
+	}
 
 	@Override
 	public Mail selectOneByNo(SqlSession sqlSession, int mailNo) {
 		Mail mail = sqlSession.selectOne("MailMapper.selectOneByNo", mailNo);
 		return mail;
 	}
-
+	
 	@Override
-	public int selectOneSentMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneSentMail", mailNo);
-		return result;
+	public Recipient selectOneByNoMailRec(SqlSession sqlSession, int mailNo) {
+		Recipient recipient = sqlSession.selectOne("MailMapper.selectOneByNoMailRec", mailNo);
+		return recipient;
 	}
-
+	
 	@Override
-	public int selectOneTemporaryMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneTemporaryMail", mailNo);
-		return result;
+	public Referrer selectOneByNoMailRef(SqlSession sqlSession, int mailNo) {
+		Referrer referrer = sqlSession.selectOne("MailMapper.selectOneByNoMailRef", mailNo);
+		return referrer;
 	}
-
+	
 	@Override
-	public int selectOneMyMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneMyMail", mailNo);
-		return result;
-	}
-
-	@Override
-	public int selectOneImportantMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneImportantMail", mailNo);
-		return result;
-	}
-
-	@Override
-	public int selectOneWasteBasketMail(SqlSession sqlSession, int mailNo) {
-		int result = sqlSession.selectOne("MailMapper.selectOneWasteBasketMail", mailNo);
-		return result;
-	}
-
-	@Override
-	public int doSendBugReport(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.insert("MailMapper.doSendBugReport", mail);
-		return result;
+	public MailFile selectOneByNoMailFile(SqlSession sqlSession, int mailNo) {
+		MailFile mailFile = sqlSession.selectOne("MailMapper.selectOneByNoMailFile", mailNo);
+		return mailFile;
 	}
 
 	@Override

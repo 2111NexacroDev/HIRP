@@ -42,18 +42,14 @@
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
         	<h1 class="basic-border-bottom">
-				메일쓰기
+				버그리포트 작성
             </h1>
             <div class="subConts">
-            	<form action="/mail/send.hirp" method="post" enctype="multipart/form-data">
+            	<form action="/bugReport/send.hirp" method="post" enctype="multipart/form-data">
 		            <button class="basic mt-20" type="submit">보내기</button>
 		            <button class="basic mt-20" type="button">임시저장</button>
 	            	<h4>받는사람</h4>
-	            	<!-- 체크박스 선택하면 로그인 유저 아이디 나와야 함 -->
-	            	<input id="check1" class="mt-20" type="checkbox">
-	            	<label for="check1">나에게</label>
-	            	<input type="text" name="recipientId">
-	            	<button class="basic mt-20" type="button">주소록</button><br>
+	            	<h4>hirpDevelopment@hirp.com</h4>
 	            	<h4>참조</h4>
 	            	<input type="text" name="referrerId">
 	            	<button class="basic mt-20" type="button">주소록</button><br>

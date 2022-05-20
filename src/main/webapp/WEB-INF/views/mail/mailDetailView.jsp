@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -25,17 +25,17 @@
                <li>
                    <a href="">메일함</a>
                    <ul>
-                       <li><a href="#">받은메일함</a></li>
-                       <li><a href="#">보낸메일함</a></li>
-                       <li><a href="#">임시보관함</a></li>
-                       <li><a href="#">내게쓴메일함</a></li>
-                       <li><a href="#">중요메일함</a></li>
-                       <li><a href="#">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
+                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
+                       <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
+                       <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
+                       <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
+                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
                    </ul>
                </li>
             </ul>
             
-            <a class="btn--function" href="#">버그리포트 작성</a>
+            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
@@ -69,14 +69,14 @@
 	            		</tr>
 	            		<tr>
 	            			<td>받는사람:</td>
-	            			<td>${mail.recipientId }</td>
+	            			<td>${recipient.recipientId }</td>
 	            		</tr>
 	            		<tr>
 	            			<td>보낸날짜:</td>
 	            			<td>${mail.mailDate }</td>
 	            		</tr>
 	            		<tr>
-	            			<td>${mail.fileName }</td>
+	            			<td>${mailFile.fileName }</td>
 	            		</tr>
 	            		<tr>
 	            			<td>${mail.mailContents }</td>

@@ -18,6 +18,7 @@ public interface MailStore {
 	int sendMailReferrer(SqlSession sqlSession, Referrer referrer);
 	int saveFile(SqlSession sqlSession, MailFile mailFile);
 	int modifyMailFile(SqlSession sqlSession, MailFile mailFile);
+	int sendBugReportRecipient(SqlSession sqlSession, Recipient recipient);
 	
 	List<Mail> selectRecMail(SqlSession sqlSession, Mail mail, PageInfo pi);
 	List<Mail> selectSendMail(SqlSession sqlSession, Mail mail, PageInfo pi);
@@ -27,13 +28,9 @@ public interface MailStore {
 	List<Mail> selectWasMail(SqlSession sqlSession, Mail mail, PageInfo pi);
 	
 	Mail selectOneByNo(SqlSession sqlSession, int mailNo);
-	int selectOneSentMail(SqlSession sqlSession, int mailNo);
-	int selectOneTemporaryMail(SqlSession sqlSession, int mailNo);
-	int selectOneMyMail(SqlSession sqlSession, int mailNo);
-	int selectOneImportantMail(SqlSession sqlSession, int mailNo);
-	int selectOneWasteBasketMail(SqlSession sqlSession, int mailNo);
-	
-	int doSendBugReport(SqlSession sqlSession, Mail mail);
+	Recipient selectOneByNoMailRec(SqlSession sqlSession, int mailNo);
+	Referrer selectOneByNoMailRef(SqlSession sqlSession, int mailNo);
+	MailFile selectOneByNoMailFile(SqlSession sqlSession, int mailNo);
 	
 	List<Mail> searchMail(SqlSession sqlSession, Mail mail);
 	int modifyMail(SqlSession sqlSession, int mailNo, Mail mail);

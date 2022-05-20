@@ -16,6 +16,7 @@ public interface MailService {
 	public int sendMailReferrer(Referrer referrer); // 메일 참조 저장
 	public int saveFile(MailFile mailFile); // 첨부파일 저장
 	public int modifyMailFile(MailFile mailFile); // 첨부파일 저장
+	public int sendBugReportRecipient(Recipient recipient); // 버그리포트 받는사람 저장
 	
 	public List<Mail> printMailRec(Mail mail, PageInfo pi); // 받은메일함 목록
 	public List<Mail> printMailSend(Mail mail, PageInfo pi); // 보낸메일함 목록
@@ -25,13 +26,9 @@ public interface MailService {
 	public List<Mail> printMailWas(Mail mail, PageInfo pi); // 휴지통 목록
 	
 	public Mail printOneByNo(int mailNo); // 메일함 상세조회
-	public int selectOneSentMail(int mailNo); // 보낸메일함 상세조회
-	public int selectOneTemporaryMail(int mailNo); // 임시보관함 상세조회
-	public int selectOneMyMail(int mailNo); // 내게쓴메일함 상세조회
-	public int selectOneImportantMail(int mailNo); // 중요메일함 상세조회
-	public int selectOneWasteBasketMail(int mailNo); // 휴지통 상세조회
-	
-	public int doSendBugReport(Mail mail); // 버그리포트 전송
+	public Recipient printOneByNoMailRec(int mailNo); // 수신인 조회
+	public Referrer printOneByNoMailRef(int mailNo); // 참조인 조회
+	public MailFile printOneByNoMailFile(int mailNo); // 첨부파일 조회
 	
 	public List<Mail> searchMail(Mail mail); // 메일 검색
 	

@@ -12,7 +12,7 @@
 		<result property="mailDate" column="MAIL_DATE"/>
 		<result property="importantMail" column="IMPORTANT_MAIL"/>
 		<result property="temporaryStorage" column="TEMPORARY_STORAGE"/>
-		<result property="mailWasteBasket" column="MAIL_WASTEBASKET"/>
+		<result property="mailWasteBasket" column="MAIL_WASTE_BASKET"/>
 		<result property="emplId" column="EMPL_ID"/>
 		<result property="recipientId" column="RECIPIENT_ID"/>
 		<result property="referrerId" column="REFERRER_ID"/>
@@ -28,66 +28,175 @@
 		<result property="fileExtension" column="FILE_EXTENSION"/>
 		<result property="fileReName" column="FILE_RENAME"/>
 		<result property="filePath" column="FILE_PATH"/>
+		<result property="emplId" column="EMPL_ID"/>
 	</resultMap>
 	
 	<resultMap type="Recipient" id="RecipientResultMap">
 		<id property="recipientNo" column="RECIPIENT_NO"/>
 		<result property="mailNo" column="MAIL_NO"/>
 		<result property="recipientId" column="RECIPIENT_ID"/>
+		<result property="emplId" column="EMPL_ID"/>
 	</resultMap>
 	
 	<resultMap type="Referrer" id="ReferrerResultMap">
 		<id property="referrerNo" column="REFERRER_NO"/>
 		<result property="mailNo" column="MAIL_NO"/>
 		<result property="referrerId" column="REFERRER_ID"/>
+		<result property="emplId" column="EMPL_ID"/>
 	</resultMap>
-	
-	<select id="selectListCount" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL
-	</select>
 	
 	<!-- 받은메일함 -->
 	<select id="selectRecMail" resultMap="MailResultMap">
 		SELECT * FROM
-		    (SELECT MAIL_NO, MAIL_SENDER, MAIL_TITLE, MAIL_DATE, EMPL_ID
-		    FROM MAIL_TBL WHERE MAIL_SENDER != #{mailSender})
-		    JOIN RECIPIENT_TBL USING(MAIL_NO)
-		    JOIN EMPL_TBL ON (EMPL_ID = EMPL_ID)
-		    WHERE RECIPIENT_ID = #{recipientId}
-		    AND MAIL_SENDER != #{mailSender}
+		(SELECT MAIL_NO, MAIL_SENDER, MAIL_TITLE, MAIL_CONTENTS, MAIL_DATE FROM MAIL_TBL
+		WHERE MAIL_SENDER != #{mailSender} AND TEMPORARY_STORAGE = 'N' AND MAIL_WASTE_BASKET = 'N' AND EMPL_ID = #{emplId})
+		JOIN RECIPIENT_TBL USING(MAIL_NO)
+        ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 보낸메일함 -->
+	<select id="selectSendMail" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE MAIL_SENDER = #{mailSender} AND TEMPORARY_STORAGE = 'N' AND MAIL_WASTE_BASKET = 'N' AND EMPL_ID = #{emplId}
+		ORDER BY MAIL_NO DESC
+	</select>
+	
 	<!-- 임시보관함 -->
+	<select id="selectTemMail" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE TEMPORARY_STORAGE = 'Y'
+		ORDER BY MAIL_NO DESC
+	</select>
+	
 	<!-- 내게쓴메일함 -->
+	<select id="selectMyMail" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE MAIL_SENDER = #{mailSender}
+		ORDER BY MAIL_NO DESC
+	</select>
+	
+	<!-- 중요메일함 -->
+	<select id="selectImpMail" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE IMPORTANT_MAIL = 'Y'
+		ORDER BY MAIL_NO DESC
+	</select>
+	
 	<!-- 휴지통 -->
+	<select id="selectWasMail" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE MAIL_WASTE_BASKET = 'Y'
+		ORDER BY MAIL_NO DESC
+	</select>
 	
-	<!-- 받은메일함 상세조회 (조인문 사용해서 셀렉트 해야함) -->
-<!-- 	<select id="selectOneByNo" resultMap="MailResultMap"> -->
-<!-- 		SELECT * FROM MAIL_TBL WHERE MAIL_NO = #{mailNo} -->
-<!-- 	</select> -->
+	<!-- 받은메일함 갯수 -->
+	<select id="selectMailCountR" resultType="_int">
+		SELECT COUNT(*)
+		FROM MAIL_TBL
+		WHERE MAIL_SENDER != #{mailSender} AND TEMPORARY_STORAGE = 'N' AND MAIL_WASTE_BASKET = 'N' AND EMPL_ID = #{emplId}
+	</select>
 	
-	<!-- 메일 보내기 -->
+	<!-- 보낸메일함 갯수 -->
+	<select id="selectMailCountS" resultType="_int">
+		SELECT COUNT(*) FROM
+		MAIL_TBL
+		WHERE MAIL_SENDER = #{mailSender} AND TEMPORARY_STORAGE = 'N' AND MAIL_WASTE_BASKET = 'N' AND EMPL_ID = #{emplId}
+	</select>
+	
+	<!-- 임시보관함 갯수 -->
+	<select id="selectMailCountT" resultType="_int">
+		SELECT COUNT(*) FROM
+		MAIL_TBL
+		WHERE TEMPORARY_STORAGE = 'Y'
+	</select>
+	
+	<!-- 내게쓴메일함 갯수 -->
+	<select id="selectMailCountM" resultType="_int">
+		SELECT COUNT(*) FROM
+		MAIL_TBL
+		WHERE MAIL_SENDER = #{mailSender}
+	</select>
+	
+	<!-- 중요메일함 갯수 -->
+	<select id="selectMailCountI" resultType="_int">
+		SELECT COUNT(*) FROM
+		MAIL_TBL
+		WHERE IMPORTANT_MAIL = 'Y'
+	</select>
+	
+	<!-- 휴지통 갯수 -->
+	<select id="selectMailCountW" resultType="_int">
+		SELECT COUNT(*) FROM
+		MAIL_TBL
+		WHERE MAIL_WASTE_BASKET = 'Y'
+	</select>
+	
+	<!-- 메일함 상세조회 -->
+	<select id="selectOneByNo" resultMap="MailResultMap">
+		SELECT * FROM
+		MAIL_TBL
+		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<!-- 수신인 조회 -->
+	<select id="selectOneByNoMailRec" resultMap="RecipientResultMap">
+		SELECT * FROM
+		RECIPIENT_TBL
+		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<!-- 참조인 조회 -->
+	<select id="selectOneByNoMailRef" resultMap="ReferrerResultMap">
+		SELECT * FROM
+		REFERRER_TBL
+		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectOneByNoMailFile" resultMap="MailFileResultMap">
+		SELECT * FROM
+		MAIL_FILE_TBL
+		WHERE MAIL_NO = #{mailNo}
+	</select>
+	
+	<!-- 메일 및 버그리포트 전송 -->
 	<insert id="sendMail" parameterType="Mail">
-		INSERT INTO MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO
+		MAIL_TBL
+		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{emplId})
 	</insert>
 	
-	<!-- 메일 보낼때 수신인 -->
+	<!-- 메일 전송 시 수신인 -->
 	<insert id="sendMailRecipient" parameterType="Recipient">
-		INSERT INTO RECIPIENT_TBL
-		VALUES(RECIPIENT_NO.NEXTVAL, MAIL_NO.CURRVAL, #{recipientId})
+		INSERT INTO
+		RECIPIENT_TBL
+		VALUES(RECIPIENT_NO.NEXTVAL, MAIL_NO.CURRVAL, #{recipientId}, #{emplId})
 	</insert>
 	
-	<!-- 메일 보낼때 참조인 -->
+	<!-- 메일 및 버그리포트 전송 시 참조인 -->
 	<insert id="sendMailReferrer" parameterType="Referrer">
-		INSERT INTO REFERRER_TBL
-		VALUES(REFERRER_NO.NEXTVAL, MAIL_NO.CURRVAL, #{referrerId})
+		INSERT INTO
+		REFERRER_TBL
+		VALUES(REFERRER_NO.NEXTVAL, MAIL_NO.CURRVAL, #{referrerId}, #{emplId})
 	</insert>
 	
-	<!-- 첨부파일 저장 -->
+	<!-- 메일 및 버그리포트 전송 시 첨부파일 저장 -->
 	<insert id="saveFile" parameterType="MailFile">
-		INSERT INTO MAIL_FILE_TBL
-		VALUES(FILE_NO.NEXTVAL, MAIL_NO.CURRVAL, #{fileName}, #{fileExtension}, #{fileReName}, #{filePath})
+		INSERT INTO
+		MAIL_FILE_TBL
+		VALUES(FILE_NO.NEXTVAL, MAIL_NO.CURRVAL, #{fileName}, #{fileExtension}, #{fileReName}, #{filePath}, #{emplId})
 	</insert>
+	
+	<!-- 버그리포트 전송 시 수신인 -->
+	<insert id="sendBugReportRecipient" parameterType="Recipient">
+		INSERT INTO
+		RECIPIENT_TBL
+		VALUES(RECIPIENT_NO.NEXTVAL, MAIL_NO.CURRVAL, 'hirpDevelopment', #{emplId})
+	</insert>
+	
 </mapper>

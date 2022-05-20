@@ -47,45 +47,33 @@ public class MailServiceImpl implements MailService{
 	}
 	
 	@Override
+	public int sendBugReportRecipient(Recipient recipient) {
+		int result = mStore.sendBugReportRecipient(sqlSession, recipient);
+		return result;
+	}
+	
+	@Override
 	public Mail printOneByNo(int mailNo) {
 		Mail mail = mStore.selectOneByNo(sqlSession, mailNo);
 		return mail;
 	}
 	
 	@Override
-	public int selectOneSentMail(int mailNo) {
-		int result = mStore.selectOneSentMail(sqlSession, mailNo);
-		return result;
+	public Recipient printOneByNoMailRec(int mailNo) {
+		Recipient recipient = mStore.selectOneByNoMailRec(sqlSession, mailNo);
+		return recipient;
 	}
 	
 	@Override
-	public int selectOneTemporaryMail(int mailNo) {
-		int result = mStore.selectOneTemporaryMail(sqlSession, mailNo);
-		return result;
+	public Referrer printOneByNoMailRef(int mailNo) {
+		Referrer referrer = mStore.selectOneByNoMailRef(sqlSession, mailNo);
+		return referrer;
 	}
 	
 	@Override
-	public int selectOneMyMail(int mailNo) {
-		int result = mStore.selectOneMyMail(sqlSession, mailNo);
-		return result;
-	}
-	
-	@Override
-	public int selectOneImportantMail(int mailNo) {
-		int result = mStore.selectOneImportantMail(sqlSession, mailNo);
-		return result;
-	}
-	
-	@Override
-	public int selectOneWasteBasketMail(int mailNo) {
-		int result = mStore.selectOneWasteBasketMail(sqlSession, mailNo);
-		return result;
-	}
-	
-	@Override
-	public int doSendBugReport(Mail mail) {
-		int result = mStore.doSendBugReport(sqlSession, mail);
-		return result;
+	public MailFile printOneByNoMailFile(int mailNo) {
+		MailFile mailFile = mStore.selectOneByNoMailFile(sqlSession, mailNo);
+		return mailFile;
 	}
 	
 	@Override
