@@ -73,13 +73,13 @@
 		                            <td>
 		                            	<!-- 버튼은 둘 중 하나만 출력 -->
 		                            	<c:if test="${survey.surveyStatus eq 'C'}">
-		                            		<button class="ongoing" type="button">진행중</button>
+		                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
 		                            	</c:if>
 		                            	<c:if test="${survey.surveyStatus eq 'F'}">
-		                            		<button class="finished" type="button">마감</button>
+		                            		<button class="finished" type="button" style="cursor:default;">마감</button>
 		                            	</c:if>
 		                            </td>
-		                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }')">${survey.surveyTitle }</td>
+		                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }')">${survey.surveyTitle }</td>
 <%-- 		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
 		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 		                            <td>${answerSubCountList[status.count-1] }/${subAllCountList[status.count-1]}(<fmt:formatNumber type="percent" value="${answerSubCountList[status.count-1]/subAllCountList[status.count-1] }" pattern="0.00%" />)</td>

@@ -51,16 +51,16 @@
 <%-- 										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp"> --%>
 <%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
 <%-- 										</c:url> --%>
-	                            		<button class="finished" type="button">참여완료</button>
+	                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
 	                            	</c:if>
 	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
 <%-- 	                            		<c:url var="sDetail" value="/survey/questDetail.hirp"> --%>
 <%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
 <%-- 										</c:url> --%>
-	                            		<button class="emergency" type="button">미참여</button>
+	                            		<button class="emergency" type="button" style="cursor:default;">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
+	                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
 <%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
