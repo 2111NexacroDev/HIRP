@@ -12,9 +12,15 @@ import com.highfive.hirp.todo.store.TodoStore;
 @Repository
 public class TodoStoreLogic implements TodoStore {
 	@Override
-	public List<Todo> selectAllToDo(SqlSession sqlSession) {
-		List<Todo> tList = sqlSession.selectList("TodoMapper.selectAllToDo");
+	public List<Todo> selectAllToDo(SqlSession sqlSession, String emplId) {
+		List<Todo> tList = sqlSession.selectList("TodoMapper.selectAllToDo", emplId);
 		return tList;
+	}
+	
+	@Override
+	public List<Todo> selectFinishedToDo(SqlSession sqlSession, String emplId) {
+		List<Todo> fList = sqlSession.selectList("TodoMapper.selectFinishedToDo", emplId);
+		return fList;
 	}
 
 	@Override
@@ -42,8 +48,8 @@ public class TodoStoreLogic implements TodoStore {
 	}
 
 	@Override
-	public List<Memo> selectAllMemo(SqlSession sqlSession) {
-		List<Memo> mList = sqlSession.selectList("TodoMapper.selectAllMemo");
+	public List<Memo> selectAllMemo(SqlSession sqlSession, String emplId) {
+		List<Memo> mList = sqlSession.selectList("TodoMapper.selectAllMemo", emplId);
 		return mList;
 	}
 

@@ -6,7 +6,7 @@ $('.todo--today .btn--plus').on('click', function () {
         '<li>' +
         '<input id="todoNew" type="checkbox">' +
         '<label for="todoNew"></label>' +
-        '<input name="todoConts" type="text">' +
+        '<input name="todoConts" type="text" placeholder="진행하실 업무를 입력하시고 등록을 눌러주세요!">' +
         '<div class="btns-wrap">' +
         '<button class="point" onclick="addTodo(this)">등록</button>' +
         '<button class="finished" onclick="removeLine(this)">취소</button>' +
@@ -19,15 +19,23 @@ $('.memo--list .btn--plus').on('click', function () {
     if ($('.memo--list .no-data').length != 0) {
         $('.memo--list .no-data').hide();
     }
-    $('.memo--list ul').append(
-        '<li>' +
-        '<textarea name="memoConts"></textarea>' +
-        '<div class="btns-wrap">' +
-        '<button class="point" onclick="addMemo(this)">등록</button>' +
-        '<button class="finished" onclick="removeLine(this)">취소</button>' +
-        '</div>' +
-        '</li>'
-    );
+    if($('.notStored').length < 1) {
+        $('.memo--list ul').append(
+            '<li>' +
+            '<textarea class="notStored" name="memoConts"></textarea>' +
+            '<div class="btns-wrap">' +
+            '<button class="point" onclick="addMemo(this)">등록</button>' +
+            '<button class="finished" onclick="removeLine(this)">취소</button>' +
+            '</div>' +
+            '</li>'
+        );
+        $('.p--memo-guide').fadeIn();
+        setTimeout(function(){$('.p--memo-guide').fadeOut(500)}, 2000);
+    } else {
+        $('.p--memo-guide').text('작성하신 메모를 저장하신 후 추가해주세요!');
+        $('.p--memo-guide').fadeIn();
+        setTimeout(function(){$('.p--memo-guide').fadeOut(500)}, 2000);
+    }
 });
 
 $('.todo--today label').on('click', function () {
@@ -97,6 +105,7 @@ function editTodo(todoNo, obj) {
         success: function (data) {
             if (data == 'success') {
                 console.log('수정 성공!');
+                window.location.reload();
             } else {
                 console.log('수정 실패');
             }
@@ -121,6 +130,7 @@ function removeTodo(todoNo) {
         success: function (data) {
             if (data == 'success') {
                 console.log('삭제 성공!');
+                window.location.reload();
             } else {
                 console.log('삭제 실패');
             }
@@ -167,6 +177,7 @@ function editMemo(memoNo, obj) {
         success: function (data) {
             if (data == 'success') {
                 console.log('수정 성공!');
+                window.location.reload();
             } else {
                 console.log('수정 실패');
             }
@@ -198,29 +209,3 @@ function removeMemo(memoNo) {
     });
 }
 
-let calendarEl = document.getElementById('todoCalendar');
-let calendar = new FullCalendar.Calendar(calendarEl, {
-    headerToolbar: {
-        left: '',
-        center: 'prev,title,next,today',
-        right: '',
-    },
-    buttonText: {
-        today: '오늘',
-    },
-    initialView: 'dayGridMonth',
-    navLinks: false, 
-    selectable: false,
-    locale: 'en',
-    events: [
-    ],
-    eventClick: function(data) {
-        //openScheduleModal(data); //이벤트 클릭 시 모달 호출
-    },
-    select: function(selectionInfo) {
-        //openSelectedScheduleModal(selectionInfo);	//일자 클릭 시 모달 호출
-    },
-    editable: false,
-    dayMaxEvents: true,
-});
-calendar.render();

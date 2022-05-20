@@ -20,9 +20,15 @@ public class TodoServiceImpl implements TodoService {
 	private TodoStore tStore;
 
 	@Override
-	public List<Todo> printAllToDo() {
-		List<Todo> tList = tStore.selectAllToDo(sqlSession);
+	public List<Todo> printAllToDo(String emplId) {
+		List<Todo> tList = tStore.selectAllToDo(sqlSession, emplId);
 		return tList;
+	}
+	
+	@Override
+	public List<Todo> printFinishedToDo(String emplId) {
+		List<Todo> fList = tStore.selectFinishedToDo(sqlSession, emplId);
+		return fList;
 	}
 
 	@Override
@@ -50,8 +56,8 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	@Override
-	public List<Memo> printAllMemo() {
-		List<Memo> mList = tStore.selectAllMemo(sqlSession);
+	public List<Memo> printAllMemo(String emplId) {
+		List<Memo> mList = tStore.selectAllMemo(sqlSession, emplId);
 		return mList;
 	}
 

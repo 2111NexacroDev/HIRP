@@ -122,6 +122,14 @@
     width: 38.5%;
 }
 
+.span--todo-guide {
+    display: block;
+    margin-top: 10px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
 #todoCalendar .fc .fc-toolbar.fc-header-toolbar {
     margin-bottom: 0;
 }
@@ -146,6 +154,25 @@ section[class^="todo--"] {
     font-size: 15px;
     outline: none;
     border: none;
+}
+
+.p--memo-guide {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    left: 50%;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px 10px;
+    background: rgba(0,0,0,.5);
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 2;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .memo--list {
@@ -186,6 +213,10 @@ section[class^="todo--"] {
     outline: none;
     font-size: 15px;
     line-height: 1.8;
+}
+
+.memo--list textarea.notStored {
+    background: #fcc;
 }
 
 .memo--list li .btns-wrap {
@@ -239,6 +270,26 @@ section[class^="todo--"] {
     line-height: 1.8;
 }
 
+#todoCalendar {
+    border-bottom: 1px solid #ddd;
+}
+
+#todoCalendar .fc-header-toolbar>div:nth-child(2)>div {
+    padding-bottom: 0;
+}
+
+#todoCalendar .fc-toolbar.fc-header-toolbar {
+    margin: 0 0 10px;
+}
+
+#todoCalendar .fc-scrollgrid-liquid {
+    border-left: 1px solid #ddd;
+}
+
+#todoCalendar .fc-scrollgrid-liquid tbody {
+    background: linear-gradient(to bottom, #ddd 1px, #fff 1px);
+}
+
 /* 개인업무관리 끝 */
 
 /* 일정 관리 */
@@ -246,7 +297,7 @@ section[class^="todo--"] {
     text-align: left;
 }
 
-#scheduleList .fc .fc-toolbar.fc-header-toolbar {
+.fc .fc-toolbar.fc-header-toolbar {
     margin: 1.5em 0 0;
     padding: 0 20px;
     align-items: flex-end;
@@ -256,9 +307,6 @@ section[class^="todo--"] {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#scheduleList .fc-header-toolbar>div:nth-child(2)>div {
     padding-bottom: 20px;
 }
 
@@ -277,12 +325,12 @@ section[class^="todo--"] {
     background: none !important;
 }
 
-#scheduleList .fc .fc-scrollgrid-liquid {
+.fc .fc-scrollgrid-liquid {
     border-left: none;
 }
 
-#scheduleList .fc-theme-standard td,
-#scheduleList .fc-theme-standard th {
+.fc-theme-standard td,
+.fc-theme-standard th {
     border-bottom: none;
 }
 

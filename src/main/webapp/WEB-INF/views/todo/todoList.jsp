@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
-<link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+<link rel="stylesheet" href="../../../resources/css/sub.css">
 
 <body>
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
@@ -65,7 +65,10 @@
                         <button class="btn--plus" type="button"></button>
                     </section>
                     <section class="todo--month">
-                        <h2>MONTH</h2>
+                        <h2>
+                            <span>MONTH</span>
+                            <span class="span--todo-guide">하단 달력의 날짜를 클릭하시면 그 날의 할 일을 편집하실 수 있습니다!</span>
+                        </h2>
                         <div id="todoCalendar"></div>
                     </section>
                 </div>
@@ -90,11 +93,42 @@
                         </c:choose>
                     </ul>
                     <button class="btn--plus" type="button"></button>
+                    <p class="p--memo-guide">
+                        저장된 메모는 노란색으로 표시됩니다.<br>
+                        작성 후 반드시 체크표시를 눌러 저장해주세요!
+                    </p>
                 </section>
             </div>
         </article>
     </div>
 
+    <script>
+        let calendarEl = document.getElementById('todoCalendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: '',
+                center: 'prev,title,next,today',
+                right: '',
+            },
+            buttonText: {
+                today: '오늘',
+            },
+            initialView: 'dayGridMonth',
+            locale: 'en',
+            events: [
+            ],
+            navLinks: true, 
+            navLinkDayClick: function(date, jsEvent){
+                let offset = date.getTimezoneOffset() * 60000; 
+                let dateOffset = new Date(date.getTime() - offset);                
+                let selectedDate = dateOffset.toISOString().split('T')[0];
+                $('.todo--today h2').text(selectedDate);
+            },
+            dayMaxEvents: true,
+            eventLimit: true,
+        });
+        calendar.render();
+    </script>
     <script src="../../../resources/js/todo.js"></script>
 </body>
 
