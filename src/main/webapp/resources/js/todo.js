@@ -197,3 +197,30 @@ function removeMemo(memoNo) {
         }
     });
 }
+
+let calendarEl = document.getElementById('todoCalendar');
+let calendar = new FullCalendar.Calendar(calendarEl, {
+    headerToolbar: {
+        left: '',
+        center: 'prev,title,next,today',
+        right: '',
+    },
+    buttonText: {
+        today: '오늘',
+    },
+    initialView: 'dayGridMonth',
+    navLinks: false, 
+    selectable: false,
+    locale: 'en',
+    events: [
+    ],
+    eventClick: function(data) {
+        //openScheduleModal(data); //이벤트 클릭 시 모달 호출
+    },
+    select: function(selectionInfo) {
+        //openSelectedScheduleModal(selectionInfo);	//일자 클릭 시 모달 호출
+    },
+    editable: false,
+    dayMaxEvents: true,
+});
+calendar.render();

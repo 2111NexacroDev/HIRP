@@ -64,8 +64,8 @@
                         </ul>
                         <button class="btn--plus" type="button"></button>
                     </section>
-                    <section class="todo--week">
-                        <h2>MONTHLY</h2>
+                    <section class="todo--month">
+                        <h2>MONTH</h2>
                         <div id="todoCalendar"></div>
                     </section>
                 </div>
