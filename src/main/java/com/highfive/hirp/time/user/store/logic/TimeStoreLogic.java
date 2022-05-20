@@ -26,12 +26,20 @@ public class TimeStoreLogic implements TimeStore{
 		return result;
 	}
 
-//	// 사용자 연차 내역 조회
-//	@Override
-//	public List<Time> selectTimeView(SqlSession sqlSession, Vacation vacation) {
-//		List<Time> time = sqlSession.selectOne("TimeMapper.selectTimeView", vacation);
-//		return time;
-//	}
+	// 사용자 출,퇴근 내역 화면
+	@Override
+	public Time selectTime(SqlSession sqlSession, String emplId) {
+		Time selectTime = sqlSession.selectOne("TimeMapper.selectTime", emplId);
+		return selectTime;
+	}
+
+	// 사용자 연차 내역 조회
+	@Override
+	public List<Vacation> selectTimeView(SqlSession sqlSession, String emplId) {
+		List<Vacation> vacation = sqlSession.selectList("TimeMapper.selectTimeView", emplId);
+		return vacation;
+	}
+
 //
 //	// 사용자 근태 조정 신청
 //	@Override
