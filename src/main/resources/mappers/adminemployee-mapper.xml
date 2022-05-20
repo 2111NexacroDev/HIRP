@@ -143,7 +143,14 @@
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
 	
+	<update id="resignEmployee">
+		UPDATE EMPL_TBL 
+		SET IS_STATUS = '퇴사',
+			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
 	<update id="updateLevelEmployee">
-		UPDATE EMPL_TBL SET IS_STATUS='재직' WHERE EMPL_ID = #{emplId}
+		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
 	</update>
 </mapper>

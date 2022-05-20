@@ -135,7 +135,7 @@
         	{
         		if(nErrorCode < 0)
         		{
-        			this.alert("사원 조회 실패 : " + sErrorMsg);
+        			this.alert("가입 대기중인 사원이 없습니다.");
         			return;
         		}
         		this.alert("사원 조회 성공");
@@ -148,6 +148,7 @@
         			return;
         		}
         		this.alert("가입 승인 성공");
+        		location.reload();
         	}
         }
 

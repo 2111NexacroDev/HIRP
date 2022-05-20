@@ -138,11 +138,25 @@ public class EmployeeAdminController {
 	}
 	
 	// 사원 퇴직 처리
+	@RequestMapping(value="/admin/resignEmpl.hirp", method=RequestMethod.POST)
 	public NexacroResult empResign(
 			@ParamVariable(name="emplId") String emplId) {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		String tempId = emplId;
 		NexacroResult result = new NexacroResult(); 
-		int resignResult = eAService.resignEmployee(emplId);
-		return result;
+		int resignResult = eAService.resignEmployee(tempId);
+		
+		if(resignResult > 0) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCC";
+		} else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;	
 	}
 	
 	// 사원 가입 승인
