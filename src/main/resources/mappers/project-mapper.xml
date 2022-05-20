@@ -20,10 +20,12 @@
 		<result property="boardStatus" column="BOARD_STATUS"/>
 	</resultMap>
 	
+	<!-- 전체 프로젝트 갯수 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM PROJECT_TBL
 	</select>
 	
+	<!-- 프로젝트 목록 -->
 	<select id="selectAllList" resultMap="projectResultMap">
 		SELECT * FROM PROJECT_TBL ORDER BY PROJECT_NO DESC
 	</select>
