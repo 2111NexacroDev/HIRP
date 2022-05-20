@@ -63,14 +63,18 @@
 	                    </tbody>
 	                </table>
 	                <div class="btns--paging">
-		                <button class="basic mt-20">이전</button>
+	                	<c:if test="${pi.currentPage > '1' }">
+		                	<button class="fa-solid fa-angle-left prev" onclick="location.href='/project/list.hirp?page=${pi.currentPage-1 }'"></button>
+		                </c:if>
 		                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
 		                	<c:url var="pagination" value="/project/list.hirp">
 		                		<c:param name="page" value="${p }"></c:param>
 		                	</c:url>
 		                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
 		                </c:forEach>
-		                <button class="basic mt-20">다음</button>
+		                <c:if test="${pi.currentPage < pi.endNavi }">
+		                	<button class="fa-solid fa-angle-right next" onclick="location.href='/project/list.hirp?page=${pi.currentPage+1 }'"></button>
+		                </c:if>
 	                </div>
                	</div>
         </article>

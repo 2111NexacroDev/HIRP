@@ -1,19 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%
-	Date today = new Date();
-    Date tomorrow = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 ) );
-    Date after2days = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 * 2 ) );
-    Date after3days = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 * 3 ) );
-    Date after4days = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 * 4 ) );
-    Date after5days = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 * 5 ) );
-    Date after6days = new Date ( today.getTime ( ) + (long) ( 1000 * 60 * 60 * 24 * 6 ) );
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
-    SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
-%>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
@@ -78,27 +65,8 @@
                         <button class="btn--plus" type="button"></button>
                     </section>
                     <section class="todo--week">
-                        <h2>WEEK</h2>
-                        <ul>
-                            <li><a href="/todo/list.hirp?date=<%=sf2.format(today)%>"><%=sf.format(today)%></a></li>
-                            <li><a href="/todo/list.hirp?date=<%=sf2.format(tomorrow)%>"><%=sf.format(tomorrow)%></a>
-                            </li>
-                            <li><a
-                                    href="/todo/list.hirp?date=<%=sf2.format(after2days)%>"><%=sf.format(after2days)%></a>
-                            </li>
-                            <li><a
-                                    href="/todo/list.hirp?date=<%=sf2.format(after3days)%>"><%=sf.format(after3days)%></a>
-                            </li>
-                            <li><a
-                                    href="/todo/list.hirp?date=<%=sf2.format(after4days)%>"><%=sf.format(after4days)%></a>
-                            </li>
-                            <li><a
-                                    href="/todo/list.hirp?date=<%=sf2.format(after5days)%>"><%=sf.format(after5days)%></a>
-                            </li>
-                            <li><a
-                                    href="/todo/list.hirp?date=<%=sf2.format(after6days)%>"><%=sf.format(after6days)%></a>
-                            </li>
-                        </ul>
+                        <h2>MONTHLY</h2>
+                        <div id="todoCalendar"></div>
                     </section>
                 </div>
                 <section class="memo--list">

@@ -52,4 +52,20 @@
 		WHERE TO_CHAR(TIME_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND EMPL_ID = #{emplId}
 		<!-- TO_CHAR(TIME_DATE, 'YYYY-MM-DD') 디비에 저장되어있는 데이터가 시분초가 들어가있는데 년월일까지만 비교하려고 넣음 -->
 	</update>
+	
+	<!-- 사용자 출,퇴근 내역 화면 -->
+	<select id="selectTime" parameterType="Time" resultMap="timeResultMap">
+		SELECT *
+		FROM TIME_TBL
+		WHERE EMPL_ID = #{emplId }
+	</select>
+	
+	<!-- 사용자 연차 내역 조회 -->
+	<select id="selectTimeView" parameterType="String" resultMap="vacationResultMap">
+		SELECT *
+		FROM VACATION_TBL
+		WHERE EMPL_ID = #{emplId}
+	</select>
+	
+	
 </mapper>

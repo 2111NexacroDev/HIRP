@@ -21,6 +21,18 @@
 	float: right;
 }
 
+#submit-btn {
+	background-color: white;
+	border: solid 1px #888;
+	border-radius: 4px;
+	width: 80px;
+	height: 35px;
+	float: right;
+	margin :30px 0px;
+}
+
+
+
 #apprTable {
 	border: solid 1px lightgray;
 	width: 230px;
@@ -203,7 +215,9 @@
 						</div>
 				</section>
 				<br> <br>
-				<form action="/register/appr" method="post">
+				<form action="/register/appr.hirp" method="post">
+					<input type="hidden" name="formNo" value="${apprform.formNo}">
+					<input type="hidden" name="emplId" value="${emplId}">
 					<div style="border: solid 1px lightgray; margin-top: 20px; position: relative;">
 						<table id="apprTable">
 							<tr
@@ -238,7 +252,7 @@
 							</div>
 
 							<div>
-								<input type="text" size="125">
+								<input type="text" size="125" name="apprTitle">
 							</div>
 						</div>
 						<div class="row mt-20">
@@ -260,10 +274,11 @@
 					
 					<br>
 					<div>
-						<textarea id="summernote" name="formContents">${apprform.formContents}</textarea>
+						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
 					</div>
-			</div>
+			<button type="submit" id="submit-btn">상신하기</button>
 			</form>
+			</div>
 		</article>
 	</div>
 
@@ -420,9 +435,10 @@
 						arr[i].push($('select[name="apprOpt[]"] option:checked')[i].text);
 						//결재라인 div 출력
 						var apprLineHtml = /*"<div class='singleApprType'>"+arr[i][0]+"</div>"+*/"<div class='singleApprLine'>"+"<div class='singleApprLineTop'>"+ arr[i][1]+"</div>"+"<div class='singleApprLineMiddle'>"+ arr[i][2]+"</div>"+"<div class='singleApprLineBottom'>"+ arr[i][5]+"</div>"+ "</div>"
-								+ "<input type='hidden' value='arr[i][3]' name='emplId'>"
-								+ "<input type='hidden' value='arr[i][4]' name='apprType'>"
+								+ "<input type='hidden' value='arr[i][3]' name='aList[i].emplId'>"
+								+ "<input type='hidden' value='arr[i][4]' name='aList[i].apprType'>"
 						$approvalLine.append(apprLineHtml)
+						
 					}
 					arr = [];//배열값 비움
 					$(".section--modal").stop().fadeOut(100);

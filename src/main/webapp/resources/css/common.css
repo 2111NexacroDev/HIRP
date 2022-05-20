@@ -158,6 +158,18 @@ button.colorGrey {
     color: #ccc;
 }
 
+button.prev {
+	content: "\f104";
+	background-color: white;
+	font-family: fontawesome;
+}
+
+button.next {
+	content: "\f105";
+	background-color: white;
+	font-family: fontawesome;
+}
+
 img {
     max-width: 100%;
 }
