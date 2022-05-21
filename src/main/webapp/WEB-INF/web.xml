@@ -32,7 +32,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.hirp</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<filter>
