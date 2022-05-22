@@ -26,6 +26,12 @@ public class TodoServiceImpl implements TodoService {
 	}
 	
 	@Override
+	public List<Todo> printToDoByDate(Todo todo) {
+		List<Todo> tList = tStore.selectToDoByDate(sqlSession, todo);
+		return tList;
+	}
+	
+	@Override
 	public List<Todo> printFinishedToDo(String emplId) {
 		List<Todo> fList = tStore.selectFinishedToDo(sqlSession, emplId);
 		return fList;

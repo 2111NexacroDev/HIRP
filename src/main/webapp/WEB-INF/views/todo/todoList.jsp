@@ -120,6 +120,28 @@
                 let dateOffset = new Date(date.getTime() - offset);                
                 let selectedDate = dateOffset.toISOString().split('T')[0];
                 $('.todo--today h2').text(selectedDate);
+                $.ajax({
+                    url: '/todo/listByDate.hirp',
+                    type: 'get',
+                    data: {
+                        'selectedDate': selectedDate
+                    },
+                    success: function(data){
+                        $('.todo--today ul').html('');
+                        for(let i=0; i < data.length; i++) {
+                            $('.todo--today ul').append('<li></li>');
+                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox">');
+                            $('.todo--today ul li:last-child').append('<label for="'+ data[i]["todoNo"] +'"></label>');
+                            $('.todo--today ul li:last-child').append('<input name="todoConts" type="text" value="'+ data[i]["todoConts"] +'">');
+                            $('.todo--today ul li:last-child').append('<div class="btns-wrap"></div>');
+                            $('.todo--today ul li:last-child .btns-wrap').append('<button class="point" onclick="editTodo('+ data[i]["todoNo"] +', this)">수정</button>');
+                            $('.todo--today ul li:last-child .btns-wrap').append('<button class="finished" onclick="removeTodo('+ data[i]["todoNo"] +')">삭제</button>');
+                        }
+                    },
+                    error: function(){
+                        $('.todo--today ul').html('<li class="no-data"><p>등록된 내용이 없습니다.</p></li>');
+                    }
+                });
             },
             dayMaxEvents: true,
             eventLimit: true,

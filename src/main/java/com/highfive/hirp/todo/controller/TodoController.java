@@ -1,5 +1,6 @@
 package com.highfive.hirp.todo.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.todo.domain.Memo;
 import com.highfive.hirp.todo.domain.Todo;
 import com.highfive.hirp.todo.service.TodoService;
@@ -48,6 +51,28 @@ public class TodoController {
 		}
 		return mv;
 	}
+	
+	// 일자별 할 일 조회
+	@ResponseBody
+	@RequestMapping(value="/todo/listByDate.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
+	public String todoListByDate(@ModelAttribute Todo todo
+			,@RequestParam("selectedDate") String selectedDate
+			,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		todo.setEmplId(emplId);
+
+		// String -> Date 형변환
+		Date day = Date.valueOf(selectedDate);
+		todo.setTodoDate(day);
+		List<Todo> tList = tService.printToDoByDate(todo);
+		if(!tList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(tList);
+		} else {
+			return "fail";
+		}
+	}
 
 	// 완료 목록 조회
 	@RequestMapping(value="/todo/doneList.hirp", method=RequestMethod.GET)
@@ -57,7 +82,7 @@ public class TodoController {
 			String emplId = (String) session.getAttribute("emplId");
 			List<Todo> fList = tService.printFinishedToDo(emplId);
 			if(!fList.isEmpty()) {
-				mv.addObject("finishedList", fList);
+				mv.addObject("fList", fList);
 			} else {
 				mv.addObject("msg", "완료 내역 없음");
 			}
@@ -77,8 +102,6 @@ public class TodoController {
 		HttpSession session = request.getSession();
 		String emplId = (String) session.getAttribute("emplId");
 		todo.setEmplId(emplId);
-		// 임시 처리, 후에 세션으로 수정해야함.
-		// 날짜를 추가해줘야해서 Todo 객체 이용하는 것으로 코딩함.
 		int result = tService.registerToDo(todo);
 		if(result > 0) {
 			return "success";

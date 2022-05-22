@@ -24,6 +24,12 @@
 		WHERE TO_CHAR(TODO_DATE, 'YYMMDD') = TO_CHAR(SYSDATE, 'YYMMDD') AND EMPL_ID = #{emplId} 
 		ORDER BY TODO_DATE ASC
 	</select>	
+	<select id="selectToDoByDate" resultMap="todoResultMap">
+		SELECT * 
+		FROM TODO_TBL 
+		WHERE EMPL_ID = #{emplId} AND TO_CHAR(TODO_DATE, 'YY-MM-DD') = #{todoDate}
+		ORDER BY TODO_DATE ASC
+	</select>
 	<select id="selectFinishedToDo" resultMap="todoResultMap">
 		SELECT * 
 		FROM TODO_TBL 

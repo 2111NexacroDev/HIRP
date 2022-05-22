@@ -8,6 +8,7 @@ import com.highfive.hirp.todo.domain.Todo;
 public interface TodoService {
 
 	public List<Todo> printAllToDo(String emplId);
+	public List<Todo> printToDoByDate(Todo todo);
 	public List<Todo> printFinishedToDo(String emplId);
 	public int registerToDo(Todo todo);
 	public int modifyToDo(Todo todo);

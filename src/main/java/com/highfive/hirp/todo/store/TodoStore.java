@@ -10,6 +10,7 @@ import com.highfive.hirp.todo.domain.Todo;
 public interface TodoStore {
 
 	List<Todo> selectAllToDo(SqlSession sqlSession, String emplId);
+	List<Todo> selectToDoByDate(SqlSession sqlSession, Todo todo);
 	List<Todo> selectFinishedToDo(SqlSession sqlSession, String emplId);
 	int insertToDo(SqlSession sqlSession, Todo todo);
 	int updateToDo(SqlSession sqlSession, Todo todo);

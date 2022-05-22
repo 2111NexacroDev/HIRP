@@ -38,7 +38,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, .05);
 }
 
-#todo section > h2 {
+#todo section>h2 {
     margin-bottom: 20px;
     font-weight: 700;
     font-size: 24px;
@@ -165,7 +165,7 @@ section[class^="todo--"] {
     width: 90%;
     max-width: 400px;
     padding: 20px 10px;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     transform: translateX(-50%);
     color: #fff;
     font-weight: 300;
@@ -556,11 +556,6 @@ section[class^="todo--"] {
 .fc .fc-timegrid-col.fc-day-today {
     background-color: rgba(239, 239, 239, .7);
     background-color: var(--fc-today-bg-color, rgba(239, 239, 239, .7));
-}
-
-.ul--utility button {
-    padding: 0;
-    background-color: transparent;
 }
 
 .ul--utility>li>ul>li {

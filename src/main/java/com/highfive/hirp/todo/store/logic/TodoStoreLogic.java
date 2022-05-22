@@ -18,6 +18,12 @@ public class TodoStoreLogic implements TodoStore {
 	}
 	
 	@Override
+	public List<Todo> selectToDoByDate(SqlSession sqlSession, Todo todo) {
+		List<Todo> tList = sqlSession.selectList("TodoMapper.selectToDoByDate", todo);
+		return tList;
+	}
+	
+	@Override
 	public List<Todo> selectFinishedToDo(SqlSession sqlSession, String emplId) {
 		List<Todo> fList = sqlSession.selectList("TodoMapper.selectFinishedToDo", emplId);
 		return fList;

@@ -14,7 +14,7 @@
             <h1>개인업무관리</h1>
             <ul>
                 <li>
-                    <a href="">업무 관리</a>
+                    <button type="button">업무 관리</button>
                     <ul>
                         <li><a href="/todo/list.hirp">할 일/메모 목록</a></li>
                         <li><a href="/todo/doneList.hirp">완료 목록</a></li>
@@ -49,11 +49,18 @@
             buttonText: {
                 today: '오늘',
             },
-            initialView: 'listWeek',
+            initialView: 'listMonth',
             navLinks: false, 
             selectable: false,
-            locale: 'en',
-            events: [
+            locale: 'ko',
+            events: [                
+            <c:forEach items="${fList }" var="fList">
+                {
+                    title: '${fList.todoConts }',
+                    start: '${fList.todoDate }',
+                    className: 'done-list',
+                },
+            </c:forEach>
             ],
             eventClick: function(data) {
                 //openScheduleModal(data); //이벤트 클릭 시 모달 호출
