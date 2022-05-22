@@ -580,4 +580,11 @@ section[class^="todo--"] {
     }
 }
 
+/* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
+    content: url("../images/icons/icon_success.png");
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+} */
+
 /* 공용품 예약/관리 끝 */
