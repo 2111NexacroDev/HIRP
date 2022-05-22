@@ -39,8 +39,6 @@
 				this._socket.send(str);
 			}
 		};
-	</script>	
-	<script type="text/javascript">
 		$(document).ready(function() {
 			webSocket.init({ url: '<c:url value="/chat" />' });			
 		});
