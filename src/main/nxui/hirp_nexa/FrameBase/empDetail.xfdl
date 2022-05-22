@@ -3,7 +3,7 @@
   <Form id="empDetail" width="1280" height="720" titletext="New Form" scrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
-        <Div id="Div00" taborder="1" left="0" top="0" width="200" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;" bottom="0"/>
+        <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
         <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
         <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable">

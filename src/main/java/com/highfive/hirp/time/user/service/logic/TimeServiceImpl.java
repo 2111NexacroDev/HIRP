@@ -34,13 +34,21 @@ public class TimeServiceImpl implements TimeService{
 		int result = tStore.updateWorkEnd(sqlSession, time);
 		return result;
 	}
+
+	// 사용자 출,퇴근 내역 화면
+	@Override
+	public Time selectTime(String emplId) {
+		Time selectTime = tStore.selectTime(sqlSession, emplId);
+		return selectTime;
+	}
+
+	// 사용자 연차 내역 조회
+	@Override
+	public List<Vacation> selectTimeView(String emplId) {
+		List<Vacation> vacation = tStore.selectTimeView(sqlSession, emplId);
+		return vacation;
+	}
 	
-//	// 사용자 연차 내역 조회
-//	@Override
-//	public List<Time> selectTimeView(Vacation vacation) {
-//		List<Time> time = tStore.selectTimeView(sqlSession, vacation);
-//		return time;
-//	}
 //
 //	// 사용자 근태 조정 신청
 //	@Override
