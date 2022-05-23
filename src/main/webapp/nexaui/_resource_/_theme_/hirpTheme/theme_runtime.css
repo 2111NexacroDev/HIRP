@@ -170,6 +170,10 @@
 	color : #666666;
 	border : 1px solid #dbdee2;
 }
+.Grid .body .row .cell .nexacontentsbox
+{
+	text-align : left;
+}
 .Grid .body .row .cell .subcell
 {
 	color : #666666;
@@ -413,11 +417,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenu .popupmenuitem .popupmenuitemhotkeytext
 {
@@ -808,6 +812,12 @@
 	background : #ffffff;
 	color : #333333;
 }
+.Button[status=focused]
+{
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
+}
 .Calendar[status=mouseover]
 {
 	border : 1px solid #5a86cd;
@@ -879,6 +889,16 @@
 .Grid .body .row .cell[status=mouseover]
 {
 	background : #f4f4f4;
+	opacity : 1;
+}
+.Grid.no_bg .body .row .cell[status=mouseover]
+{
+	background : #ffffff;
+	opacity : 1;
+}
+.Grid.no_bg .body .row .cell[status=focused]
+{
+	background : #ffffff;
 	opacity : 1;
 }
 .Grid .body .row .cell .subcell[status=mouseover]
@@ -1005,11 +1025,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=mouseover]
 {
-	background : URL('./images/chk_WF_Popupmenu_O.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu_O.png?nexaversion=0') no-repeat left center;
 }
 .Spin[status=mouseover]
 {
@@ -1241,30 +1261,35 @@
 	background : linear-gradient(to top,#e7e7e7,#fefefe);
 	border : 1px solid #a0a0a0;
 }
-.Button[status=focused]
+.Button.point[status=focused]
 {
-	background : #ffffff;
-	color : #000000;
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .FileDownload[status=mouseover]
 {
-	background : #ffffff;
-	color : #000000;
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .FileDownload[status=focused]
 {
-	background : #ffffff;
-	color : #000000;
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .FileUpload .fileuploaditem .fileuploaditembutton[status=mouseover]
 {
-	background : #ffffff;
-	color : #000000;
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .FileUpload .fileuploaditem .fileuploaditembutton[status=focused]
 {
-	background : #ffffff;
-	color : #000000;
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .Button.delete[status=focused]
 {
@@ -1300,23 +1325,33 @@
 }
 .Button[userstatus=pushed]
 {
-	background : linear-gradient(to top,#fefefe,#e9e9e9);
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }
 .Button[userstatus=selected]
 {
-	background : linear-gradient(to top,#fefefe,#e9e9e9);
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }
 .FileDownload[userstatus=pushed]
 {
-	background : linear-gradient(to top,#fefefe,#e9e9e9);
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }
 .FileUpload .fileuploaditem .fileuploaditembutton[userstatus=pushed]
 {
-	background : linear-gradient(to top,#fefefe,#e9e9e9);
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }
 .FileUpload .fileuploaditem .fileuploaditembutton[userstatus=selected]
 {
-	background : linear-gradient(to top,#fefefe,#e9e9e9);
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }
 .Edit[userstatus=nulltext]
 {
@@ -1368,6 +1403,12 @@
 }
 .Grid .body .row .cell[userstatus=selected]
 {
+	background : #f4f4f4;
+	opacity : 1;
+}
+.Grid.no_bg .body .row .cell[userstatus=selected]
+{
+	background : #ffffff;
 	opacity : 1;
 }
 .Grid .body .row .cell .subcell[userstatus=selected]
@@ -1419,7 +1460,7 @@
 }
 .Menu .menuitem[userstatus=selected]
 {
-	background : #00438b URL('./images/img_WF_Menu_O.png') no-repeat center top;
+	background : #00438b URL('./images/img_WF_Menu_O.png?nexaversion=0') no-repeat center top;
 }
 .PopupMenuControl.popupMenumenupopupmenu.dummy .popupmenuitem[userstatus=selected]
 {
@@ -1516,6 +1557,18 @@
 .ListViewCellControl .cellbutton[userstatus=pushed]
 {
 	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+.Button.point[userstatus=pushed]
+{
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
+}
+.Button.point[userstatus=selected]
+{
+	background : #00498c;
+	color : #fff;
+	border : 1px solid #0b2a60;
 }
 .Button.sa[userstatus=pushed]
 {
@@ -1717,11 +1770,11 @@
 }
 .PopupMenu .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenuControl .popupmenuitem .popupmenuitemcheckbox[status=disabled]
 {
-	background : URL('./images/chk_WF_Popupmenu.png') no-repeat left center;
+	background : URL('./images/chk_WF_Popupmenu.png?nexaversion=0') no-repeat left center;
 }
 .PopupMenu .popupmenuitem .popupmenuitemhotkeytext[status=disabled]
 {
@@ -1925,4 +1978,22 @@
 	background : #0b2a60;
 	border : 1px solid #0b2a60;
 	color : #ffffff;
+}
+.Button[userstatus=pushed][status=focused]
+{
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
+}
+.Button[userstatus=pushed][status=mouseover]
+{
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
+}
+.Button[userstatus=selected][status=mouseover]
+{
+	background : #00498c;
+	color : #ffffff;
+	border : 1px solid #0b2a60;
 }

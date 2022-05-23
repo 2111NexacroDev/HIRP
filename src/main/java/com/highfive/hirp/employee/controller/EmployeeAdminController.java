@@ -91,8 +91,6 @@ public class EmployeeAdminController {
 		List<Certification> cList = eAService.selectAllCertById(emplId);
 		List<Military> mList = eAService.selectAllMilitaryById(emplId);
 		
-		System.out.println("뭐임"+caList);
-		
 		if(employee != null && !dList.isEmpty() && !pList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";

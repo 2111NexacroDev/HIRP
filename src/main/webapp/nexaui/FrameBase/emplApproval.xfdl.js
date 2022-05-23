@@ -135,7 +135,7 @@
         	{
         		if(nErrorCode < 0)
         		{
-        			this.alert("사원 조회 실패 : " + sErrorMsg);
+        			this.alert("승인 대기 중인 사원이 없습니다.");
         			return;
         		}
         		this.alert("사원 조회 성공");

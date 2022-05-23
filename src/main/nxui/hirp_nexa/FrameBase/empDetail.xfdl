@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="empDetail" width="1280" height="720" titletext="New Form" scrolltype="none">
+  <Form id="empDetail" width="1280" height="720" titletext="New Form" scrolltype="none" onload="empDetail_onload">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
-        <Static id="Static00_00" taborder="1" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
+        <Static id="Static00_00" taborder="0" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable no_bg">
           <Formats>
             <Format id="default">
               <Columns>
@@ -41,19 +41,19 @@
                 <Cell row="2" col="3" text="휴대전화번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell row="2" col="4" text="bind:phoneNo" padding="0px 20px" edittype="text"/>
                 <Cell row="3" col="1" text="입사일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="3" col="2" text="bind:startDate" padding="0px 20px"/>
+                <Cell row="3" col="2" text="bind:startDate" padding="0px 20px" displaytype="date" calendardateformat="yyyy-MM-dd"/>
                 <Cell row="3" col="3" text="상태" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell row="3" col="4" text="bind:isStatus" padding="0px 20px" edittype="combo" combodataset="ds_status" combodatacol="statusName" combodisplaynulltext="재직 상태" combocodecol="statusCode" combodisplaynulltype="nulltext"/>
               </Band>
             </Format>
           </Formats>
         </Grid>
-        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="240" right="0" onchanged="Tab00_onchanged">
+        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="280" right="0" onchanged="Tab00_onchanged">
           <Tabpages>
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
                 <Layout>
-                  <Grid id="Grid00" taborder="0" left="20" top="12" height="128" right="20" binddataset="ds_empl" cssclass="detailTable" autofittype="col">
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="128" right="20" binddataset="ds_empl" cssclass="detailTable no_bg" autofittype="col">
                     <Formats>
                       <Format id="default">
                         <Columns>
@@ -87,28 +87,29 @@
                           <Cell col="4" textAlign="center" background="#f9f9f9" text="급여구분"/>
                           <Cell col="5" text="bind:salaryCategory" padding="0px 10px"/>
                           <Cell col="6" textAlign="center" background="#f9f9f9" text="추천자"/>
-                          <Cell col="7" text="bind:referrer" padding="0px 10px"/>
+                          <Cell col="7" text="bind:referrer" padding="0px 10px" displaytype="normal" edittype="text"/>
                           <Cell row="1" textAlign="center" background="#f9f9f9" text="생년월일"/>
-                          <Cell row="1" col="1" text="bind:birthday" padding="0px 10px" displaytype="normal"/>
+                          <Cell row="1" col="1" text="bind:birthday" padding="0px 10px" displaytype="date" edittype="date" calendardateformat="yyyy-MM-dd"/>
                           <Cell row="1" col="2" textAlign="center" background="#f9f9f9" text="성별"/>
-                          <Cell row="1" col="3" text="bind:gender" padding="0px 10px"/>
+                          <Cell row="1" col="3" text="bind:gender" padding="0px 10px" edittype="combo" combodataset="ds_gender" combocodecol="code" combodatacol="value"/>
                           <Cell row="1" col="4" textAlign="center" background="#f9f9f9" text="결혼여부"/>
-                          <Cell row="1" col="5" text="bind:isMarriage" padding="0px 10px"/>
+                          <Cell row="1" col="5" text="bind:isMarriage" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
                           <Cell row="1" col="6" textAlign="center" background="#f9f9f9" text="장애여부"/>
-                          <Cell row="1" col="7" text="bind:isDisability" padding="0px 10px"/>
+                          <Cell row="1" col="7" text="bind:isDisability" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
                           <Cell row="2" textAlign="center" background="#f9f9f9" text="보훈여부"/>
-                          <Cell row="2" col="1" text="bind:isVeterans" padding="0px 10px"/>
+                          <Cell row="2" col="1" text="bind:isVeterans" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
                           <Cell row="2" col="2" textAlign="center" background="#f9f9f9" text="퇴사일"/>
-                          <Cell row="2" col="3" text="bind:endDate" padding="0px 10px"/>
+                          <Cell row="2" col="3" text="bind:endDate" padding="0px 10px" displaytype="date" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltext="일자 선택" maskeditformat="####-##-##" calendardisplaynulltype="nulltext"/>
                           <Cell row="2" col="4" textAlign="center" background="#f9f9f9" text="퇴직사유"/>
-                          <Cell row="2" col="5" text="bind:endReason" padding="0px 10px"/>
+                          <Cell row="2" col="5" text="bind:endReason" padding="0px 10px" displaytype="normal" edittype="text"/>
                           <Cell row="2" col="6" textAlign="center" background="#f9f9f9"/>
                           <Cell row="2" col="7" padding="0px 10px"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
-                  <Button id="btnResign" taborder="1" text="퇴직처리" left="20" top="155" width="56" height="20" border="0px none, 0px none, 1px solid #c10000" color="#c10000" font="12px/normal &quot;Noto Sans KR&quot;" onclick="btnResign_onclick"/>
+                  <Button id="btnResign" taborder="1" text="퇴직처리" left="20" top="155" width="50" height="20" border="0px none, 0px none, 1px solid #c10000" color="#c10000" font="12px/normal &quot;Noto Sans KR&quot;" onclick="btnResign_onclick"/>
+                  <Static id="Static00" taborder="2" text="※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 저장 버튼을 눌러주세요!" top="149" width="620" height="32" onclick="Tab00_Tabpage1_Static00_onclick" right="20" textAlign="right" font="normal 12px/normal Noto Sans KR"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -119,6 +120,7 @@
                     <Formats>
                       <Format id="default">
                         <Columns>
+                          <Column size="0"/>
                           <Column size="80"/>
                           <Column size="80"/>
                           <Column size="80"/>
@@ -132,26 +134,30 @@
                           <Row size="30"/>
                         </Rows>
                         <Band id="head">
-                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="1" text="직군" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="2" text="직무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="3" text="직무시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="4" text="직무종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="5" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="6" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell text="직무번호"/>
+                          <Cell col="1" text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="직군" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="직무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="직무시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="직무종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1" textAlign="center"/>
-                          <Cell col="1" text="bind:jobRoleDivision" textAlign="center"/>
-                          <Cell col="2" text="bind:jobRoleTitle" textAlign="center"/>
-                          <Cell col="3" text="bind:jobRoleStartDate" textAlign="center"/>
-                          <Cell col="4" text="bind:jobRoleEndDate" textAlign="center"/>
-                          <Cell col="5" text="bind:jobRoleConts" textAlign="center"/>
-                          <Cell col="6" text="bind:jobRoleEtc" textAlign="center"/>
+                          <Cell text="bind:jobRoleNo"/>
+                          <Cell col="1" text="expr:currow+1" textAlign="center"/>
+                          <Cell col="2" text="bind:jobRoleDivision" textAlign="center" edittype="text"/>
+                          <Cell col="3" text="bind:jobRoleTitle" textAlign="center" edittype="text"/>
+                          <Cell col="4" text="bind:jobRoleStartDate" textAlign="center" displaytype="date" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="5" text="bind:jobRoleEndDate" textAlign="center" displaytype="date" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="6" text="bind:jobRoleConts" textAlign="center" edittype="text"/>
+                          <Cell col="7" text="bind:jobRoleEtc" textAlign="center" edittype="text"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btn_minus" taborder="1" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage2_btn_minus_onclick"/>
+                  <Button id="btn_plus" taborder="2" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage2_btn_plus_onclick" border="1px solid #999999"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -162,6 +168,7 @@
                     <Formats>
                       <Format id="default">
                         <Columns>
+                          <Column size="0"/>
                           <Column size="80"/>
                           <Column size="80"/>
                           <Column size="80"/>
@@ -177,30 +184,34 @@
                           <Row size="30"/>
                         </Rows>
                         <Band id="head">
-                          <Cell color="#333333" text="NO" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="1" text="경력시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="2" text="경력종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="3" text="근무처" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="4" text="직위" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="5" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="6" text="근속기간" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="7" text="퇴사사유" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="8" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell text="경력번호"/>
+                          <Cell col="1" color="#333333" text="NO" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="경력시작일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="경력종료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="근무처" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="직위" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="담당업무" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="근속기간" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="8" text="퇴사사유" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="9" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1" textAlign="center"/>
-                          <Cell col="1" text="bind:careerStartDate" edittype="date" textAlign="center"/>
-                          <Cell col="2" text="bind:careerEndDate" edittype="date" textAlign="center"/>
-                          <Cell col="3" text="bind:careerPlace" textAlign="center"/>
-                          <Cell col="4" text="bind:careerRank" textAlign="center"/>
-                          <Cell col="5" text="bind:careerJobRole" textAlign="center"/>
-                          <Cell col="6" text="bind:careerPeriod" textAlign="center"/>
-                          <Cell col="7" text="bind:careerEndReason" textAlign="center"/>
-                          <Cell col="8" text="bind:careerEtc" textAlign="center"/>
+                          <Cell text="bind:careerNo"/>
+                          <Cell col="1" text="expr:currow+1" textAlign="center"/>
+                          <Cell col="2" text="bind:careerStartDate" edittype="date" textAlign="center" calendardateformat="yyyy-MM-dd" displaytype="date" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="3" text="bind:careerEndDate" edittype="date" textAlign="center" calendardateformat="yyyy-MM-dd" displaytype="date" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="4" text="bind:careerPlace" textAlign="center" edittype="text"/>
+                          <Cell col="5" text="bind:careerRank" textAlign="center" edittype="text"/>
+                          <Cell col="6" text="bind:careerJobRole" textAlign="center" edittype="text"/>
+                          <Cell col="7" text="bind:careerPeriod" textAlign="center" edittype="text"/>
+                          <Cell col="8" text="bind:careerEndReason" textAlign="center" edittype="text"/>
+                          <Cell col="9" text="bind:careerEtc" textAlign="center" edittype="text"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage3_btn_plus_onclick" border="1px solid #999999"/>
+                  <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage3_btn_minus_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -211,6 +222,7 @@
                     <Formats>
                       <Format id="default">
                         <Columns>
+                          <Column size="0"/>
                           <Column size="80"/>
                           <Column size="80"/>
                           <Column size="80"/>
@@ -225,28 +237,32 @@
                           <Row size="30"/>
                         </Rows>
                         <Band id="head">
-                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="1" text="구분" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="2" text="자격명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="3" text="자격증번호" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="4" text="자격등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="5" text="기관명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="6" text="취득일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="7" text="만료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell text="자격번호"/>
+                          <Cell col="1" text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="구분" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="3" text="자격명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="자격증번호" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="자격등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="기관명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="취득일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="8" text="만료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1" textAlign="center"/>
-                          <Cell col="1" text="bind:certCategory" textAlign="center"/>
-                          <Cell col="2" text="bind:certName" textAlign="center"/>
-                          <Cell col="3" text="bind:certEnrollNo" textAlign="center"/>
-                          <Cell col="4" text="bind:certLevel" textAlign="center"/>
-                          <Cell col="5" text="bind:certInst" textAlign="center"/>
-                          <Cell col="6" text="bind:certStartDate" edittype="date" textAlign="center"/>
-                          <Cell col="7" text="bind:certEndDate" edittype="date" textAlign="center"/>
+                          <Cell text="bind:certNo"/>
+                          <Cell col="1" text="expr:currow+1" textAlign="center"/>
+                          <Cell col="2" text="bind:certCategory" textAlign="center" edittype="text"/>
+                          <Cell col="3" text="bind:certName" textAlign="center" edittype="text"/>
+                          <Cell col="4" text="bind:certEnrollNo" textAlign="center" edittype="text"/>
+                          <Cell col="5" text="bind:certLevel" textAlign="center" edittype="text"/>
+                          <Cell col="6" text="bind:certInst" textAlign="center" edittype="text"/>
+                          <Cell col="7" text="bind:certStartDate" edittype="date" textAlign="center" displaytype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="8" text="bind:certEndDate" edittype="date" textAlign="center" displaytype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage4_btn_plus_onclick" border="1px solid #999999"/>
+                  <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage4_btn_minus_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -257,6 +273,7 @@
                     <Formats>
                       <Format id="default">
                         <Columns>
+                          <Column size="0"/>
                           <Column size="80"/>
                           <Column size="80"/>
                           <Column size="80"/>
@@ -271,28 +288,32 @@
                           <Row size="30"/>
                         </Rows>
                         <Band id="head">
-                          <Cell text="NO" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="1" color="#333333" border="1px solid #dbdee2" background="#f9f9f9" text="구분"/>
-                          <Cell col="2" text="어학명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="3" text="평가일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="4" text="평가기관" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="5" text="점수" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="6" text="등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="7" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell text="어학번호"/>
+                          <Cell col="1" text="NO" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="2" color="#333333" border="1px solid #dbdee2" background="#f9f9f9" text="구분"/>
+                          <Cell col="3" text="어학명" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="4" text="평가일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="5" text="평가기관" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="6" text="점수" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="7" text="등급" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="8" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1" textAlign="center"/>
-                          <Cell col="1" text="bind:langCategory" textAlign="center"/>
-                          <Cell col="2" text="bind:langName" textAlign="center"/>
-                          <Cell col="3" text="bind:langTestDate" displaytype="date" textAlign="center"/>
-                          <Cell col="4" text="bind:langInst" textAlign="center"/>
-                          <Cell col="5" text="bind:langScore" textAlign="center"/>
-                          <Cell col="6" text="bind:langGrade" textAlign="center"/>
-                          <Cell col="7" text="bind:langEtc" textAlign="center"/>
+                          <Cell text="bind:langNo"/>
+                          <Cell col="1" text="expr:currow+1" textAlign="center"/>
+                          <Cell col="2" text="bind:langCategory" textAlign="center" edittype="text"/>
+                          <Cell col="3" text="bind:langName" textAlign="center" edittype="text"/>
+                          <Cell col="4" text="bind:langTestDate" displaytype="date" textAlign="center" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="5" text="bind:langInst" textAlign="center" edittype="text"/>
+                          <Cell col="6" text="bind:langScore" textAlign="center" edittype="text"/>
+                          <Cell col="7" text="bind:langGrade" textAlign="center" edittype="text"/>
+                          <Cell col="8" text="bind:langEtc" textAlign="center" edittype="text"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage5_btn_plus_onclick" border="1px solid #999999"/>
+                  <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage5_btn_minus_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -303,6 +324,7 @@
                     <Formats>
                       <Format id="default">
                         <Columns>
+                          <Column size="0"/>
                           <Column size="80"/>
                           <Column size="80"/>
                           <Column size="80"/>
@@ -316,35 +338,38 @@
                           <Row size="30"/>
                         </Rows>
                         <Band id="head">
-                          <Cell text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
-                          <Cell col="1" text="계급" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="2" text="군번" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="3" text="전역구분" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="4" text="입대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="5" text="제대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
-                          <Cell col="6" text="비고" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell text="병역번호"/>
+                          <Cell col="1" text="NO" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
+                          <Cell col="2" text="계급" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="3" text="군번" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="4" text="전역구분" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="5" text="입대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="6" text="제대일" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
+                          <Cell col="7" text="비고" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1" textAlign="center"/>
-                          <Cell col="1" text="bind:militaryGrade" textAlign="center"/>
-                          <Cell col="2" text="bind:militaryCode" textAlign="center"/>
-                          <Cell col="3" text="bind:isMilitaryEnd" textAlign="center"/>
-                          <Cell col="4" text="bind:militaryStartDate" displaytype="date" textAlign="center"/>
-                          <Cell col="5" text="bind:militaryEndDate" displaytype="date" textAlign="center"/>
-                          <Cell col="6" text="bind:militaryEtc" textAlign="center"/>
+                          <Cell text="bind:militaryNo"/>
+                          <Cell col="1" text="expr:currow+1" textAlign="center"/>
+                          <Cell col="2" text="bind:militaryGrade" textAlign="center" edittype="text"/>
+                          <Cell col="3" text="bind:militaryCode" textAlign="center" edittype="text"/>
+                          <Cell col="4" text="bind:isMilitaryEnd" textAlign="center" edittype="text"/>
+                          <Cell col="5" text="bind:militaryStartDate" displaytype="date" textAlign="center" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="6" text="bind:militaryEndDate" displaytype="date" textAlign="center" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltype="nulltext" calendardisplaynulltext="일자 선택"/>
+                          <Cell col="7" text="bind:militaryEtc" textAlign="center" edittype="text"/>
                         </Band>
                       </Format>
                     </Formats>
                   </Grid>
+                  <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage6_btn_plus_onclick" border="1px solid #999999"/>
+                  <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage6_btn_minus_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
           </Tabpages>
         </Tab>
-        <Button id="btn_save" taborder="5" text="저장" left="600" width="120" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
-        <Button id="btn_cancel" taborder="6" text="취소" left="730" width="120" cssclass="basic" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="560"/>
-        <Static id="link_emplLsit" taborder="7" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Static id="link_addEmpl" taborder="8" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Button id="btn_save" taborder="5" text="저장" left="560" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="580" right="360"/>
+        <Static id="link_emplLsit" taborder="6" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_addEmpl" taborder="7" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -545,6 +570,7 @@
           <Column id="certInst" type="STRING" size="100"/>
           <Column id="certStartDate" type="DATE" size="256"/>
           <Column id="certEndDate" type="DATE" size="256"/>
+          <Column id="certNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_jobRole">
@@ -555,6 +581,7 @@
           <Column id="jobRoleEndDate" type="DATE" size="256"/>
           <Column id="jobRoleConts" type="STRING" size="100"/>
           <Column id="jobRoleEtc" type="STRING" size="100"/>
+          <Column id="jobRoleNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_lang">
@@ -566,6 +593,7 @@
           <Column id="langScore" type="INT" size="256"/>
           <Column id="langGrade" type="STRING" size="100"/>
           <Column id="langEtc" type="STRING" size="300"/>
+          <Column id="langNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_military">
@@ -576,6 +604,7 @@
           <Column id="militaryStartDate" type="DATE" size="256"/>
           <Column id="militaryEndDate" type="DATE" size="256"/>
           <Column id="militaryEtc" type="STRING" size="1000"/>
+          <Column id="militaryNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_status">
@@ -612,6 +641,7 @@
           <Column id="careerPeriod" type="DATE" size="256"/>
           <Column id="careerEndReason" type="STRING" size="100"/>
           <Column id="careerEtc" type="STRING" size="100"/>
+          <Column id="careerNo" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
       <Dataset id="ds_pos">
@@ -623,14 +653,50 @@
           <Column id="positionLevel" type="INT" size="256"/>
         </ColumnInfo>
       </Dataset>
+      <Dataset id="ds_ny">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="value">N</Col>
+          </Row>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="value">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_gender">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">남성</Col>
+            <Col id="value">남성</Col>
+          </Row>
+          <Row>
+            <Col id="code">여성</Col>
+            <Col id="value">여성</Col>
+          </Row>
+          <Row>
+            <Col id="code">기타</Col>
+            <Col id="value">기타</Col>
+          </Row>
+        </Rows>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
-{
+{	
 	this.transaction(
 		"tr_empl_select"// 1.ID
 		,"HirpURL::admin/empDetail.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military" // 4.OutDs : S->F jsp(SELECT)
+		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
@@ -680,6 +746,52 @@ this.btnResign_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
 };
-]]></Script>
+
+// 데이터 추가, 제거 코드
+// 리팩토링 필요
+this.Tab00_Tabpage2_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_jobRole.addRow();
+};
+this.Tab00_Tabpage2_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var selectedRow = this.ds_jobRole.rowposition;
+};
+
+this.Tab00_Tabpage3_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_career.addRow();
+};
+this.Tab00_Tabpage3_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var selectedRow = this.ds_career.rowposition;
+};
+
+this.Tab00_Tabpage4_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_cert.addRow();
+};
+this.Tab00_Tabpage4_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var selectedRow = this.ds_cert.rowposition;
+};
+
+this.Tab00_Tabpage5_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_lang.addRow();
+};
+this.Tab00_Tabpage5_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var selectedRow = this.ds_lang.rowposition;
+};
+
+this.Tab00_Tabpage6_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_military.addRow();
+};
+this.Tab00_Tabpage6_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var selectedRow = this.ds_military.rowposition;
+};]]></Script>
   </Form>
 </FDL>

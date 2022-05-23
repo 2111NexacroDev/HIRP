@@ -65,20 +65,40 @@
             						"border" : nexacro.BorderObject("1px solid #333333"),
             						"color" : nexacro.ColorObject("#333333")
             					},
+            					"focused" :
+            					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
+            					},
             					"pushed" :
             					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					},
             					"selected" :
             					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					},
             					"disabled" :
             					{
             						"border" : nexacro.BorderObject("1px solid #333333"),
             						"color" : nexacro.ColorObject("#333333")
             					},
-            					"focused" :
+            					"focused_pushed" :
             					{
-            						"color" : nexacro.ColorObject("#000000")
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
+            					},
+            					"mouseover_pushed" :
+            					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
+            					},
+            					"mouseover_selected" :
+            					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					}
             				},
             				"class" :
@@ -200,6 +220,21 @@
             								{
             									"border" : nexacro.BorderObject("1px solid #0b2a60"),
             									"color" : nexacro.ColorObject("#fff")
+            								},
+            								"focused" :
+            								{
+            									"color" : nexacro.ColorObject("#fff"),
+            									"border" : nexacro.BorderObject("1px solid #0b2a60")
+            								},
+            								"pushed" :
+            								{
+            									"color" : nexacro.ColorObject("#fff"),
+            									"border" : nexacro.BorderObject("1px solid #0b2a60")
+            								},
+            								"selected" :
+            								{
+            									"color" : nexacro.ColorObject("#fff"),
+            									"border" : nexacro.BorderObject("1px solid #0b2a60")
             								}
             							}
             						}
@@ -279,6 +314,8 @@
             					},
             					"pushed" :
             					{
+            						"color" : nexacro.ColorObject("#ffffff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					},
             					"disabled" :
             					{
@@ -287,11 +324,13 @@
             					},
             					"mouseover" :
             					{
-            						"color" : nexacro.ColorObject("#000000")
+            						"color" : nexacro.ColorObject("#fff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					},
             					"focused" :
             					{
-            						"color" : nexacro.ColorObject("#000000")
+            						"color" : nexacro.ColorObject("#fff"),
+            						"border" : nexacro.BorderObject("1px solid #0b2a60")
             					}
             				}
             			},
@@ -340,9 +379,13 @@
             									},
             									"pushed" :
             									{
+            										"color" : nexacro.ColorObject("#ffffff"),
+            										"border" : nexacro.BorderObject("1px solid #0b2a60")
             									},
             									"selected" :
             									{
+            										"color" : nexacro.ColorObject("#ffffff"),
+            										"border" : nexacro.BorderObject("1px solid #0b2a60")
             									},
             									"disabled" :
             									{
@@ -351,11 +394,13 @@
             									},
             									"mouseover" :
             									{
-            										"color" : nexacro.ColorObject("#000000")
+            										"color" : nexacro.ColorObject("#fff"),
+            										"border" : nexacro.BorderObject("1px solid #0b2a60")
             									},
             									"focused" :
             									{
-            										"color" : nexacro.ColorObject("#000000")
+            										"color" : nexacro.ColorObject("#fff"),
+            										"border" : nexacro.BorderObject("1px solid #0b2a60")
             									}
             								}
             							}
@@ -1120,6 +1165,23 @@
             										},
             										"class" :
             										[
+            											{
+            												"no_bg" :
+            												{
+            													"self" :
+            													{
+            														"mouseover" :
+            														{
+            														},
+            														"focused" :
+            														{
+            														},
+            														"selected" :
+            														{
+            														}
+            													}
+            												}
+            											},
             											{
             												"detailTable" :
             												{
