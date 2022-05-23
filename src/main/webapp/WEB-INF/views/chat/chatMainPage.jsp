@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>채팅</title>
 </head>
 <body>
-
+	<div style="width:30%; height:99%; background-color:black;">
+		<button></button>
+	</div>
 </body>
 </html>

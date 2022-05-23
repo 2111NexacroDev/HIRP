@@ -38,7 +38,10 @@ public class ChatController {
 	}
 		
 	//채팅 메인페이지 (직원 목록)
+	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv) {
+		
+		mv.setViewName("chat/chatMainPage");
 		return mv;
 	}
 	//직원 이름으로 검색
