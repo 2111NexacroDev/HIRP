@@ -141,13 +141,13 @@
                           <Cell col="6" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1"/>
-                          <Cell col="1" text="bind:jobRoleDivision"/>
-                          <Cell col="2" text="bind:jobRoleTitle"/>
-                          <Cell col="3" text="bind:jobRoleStartDate"/>
-                          <Cell col="4" text="bind:jobRoleEndDate"/>
-                          <Cell col="5" text="bind:jobRoleConts"/>
-                          <Cell col="6" text="bind:jobRoleEtc"/>
+                          <Cell text="expr:currow+1" textAlign="center"/>
+                          <Cell col="1" text="bind:jobRoleDivision" textAlign="center"/>
+                          <Cell col="2" text="bind:jobRoleTitle" textAlign="center"/>
+                          <Cell col="3" text="bind:jobRoleStartDate" textAlign="center"/>
+                          <Cell col="4" text="bind:jobRoleEndDate" textAlign="center"/>
+                          <Cell col="5" text="bind:jobRoleConts" textAlign="center"/>
+                          <Cell col="6" text="bind:jobRoleEtc" textAlign="center"/>
                         </Band>
                       </Format>
                     </Formats>
@@ -188,15 +188,15 @@
                           <Cell col="8" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1"/>
-                          <Cell col="1" text="bind:careerStartDate" edittype="date"/>
-                          <Cell col="2" text="bind:careerEndDate" edittype="date"/>
-                          <Cell col="3" text="bind:careerPlace"/>
-                          <Cell col="4" text="bind:careerRank"/>
-                          <Cell col="5" text="bind:careerJobRole"/>
-                          <Cell col="6" text="bind:careerPeriod"/>
-                          <Cell col="7" text="bind:careerEndReason"/>
-                          <Cell col="8" text="bind:careerEtc"/>
+                          <Cell text="expr:currow+1" textAlign="center"/>
+                          <Cell col="1" text="bind:careerStartDate" edittype="date" textAlign="center"/>
+                          <Cell col="2" text="bind:careerEndDate" edittype="date" textAlign="center"/>
+                          <Cell col="3" text="bind:careerPlace" textAlign="center"/>
+                          <Cell col="4" text="bind:careerRank" textAlign="center"/>
+                          <Cell col="5" text="bind:careerJobRole" textAlign="center"/>
+                          <Cell col="6" text="bind:careerPeriod" textAlign="center"/>
+                          <Cell col="7" text="bind:careerEndReason" textAlign="center"/>
+                          <Cell col="8" text="bind:careerEtc" textAlign="center"/>
                         </Band>
                       </Format>
                     </Formats>
@@ -235,14 +235,14 @@
                           <Cell col="7" text="만료일" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1"/>
-                          <Cell col="1" text="bind:certCategory"/>
-                          <Cell col="2" text="bind:certName"/>
-                          <Cell col="3" text="bind:certEnrollNo"/>
-                          <Cell col="4" text="bind:certLevel"/>
-                          <Cell col="5" text="bind:certInst"/>
-                          <Cell col="6" text="bind:certStartDate" edittype="date"/>
-                          <Cell col="7" text="bind:certEndDate" edittype="date"/>
+                          <Cell text="expr:currow+1" textAlign="center"/>
+                          <Cell col="1" text="bind:certCategory" textAlign="center"/>
+                          <Cell col="2" text="bind:certName" textAlign="center"/>
+                          <Cell col="3" text="bind:certEnrollNo" textAlign="center"/>
+                          <Cell col="4" text="bind:certLevel" textAlign="center"/>
+                          <Cell col="5" text="bind:certInst" textAlign="center"/>
+                          <Cell col="6" text="bind:certStartDate" edittype="date" textAlign="center"/>
+                          <Cell col="7" text="bind:certEndDate" edittype="date" textAlign="center"/>
                         </Band>
                       </Format>
                     </Formats>
@@ -281,14 +281,14 @@
                           <Cell col="7" text="비고" color="#333333" border="1px solid #dbdee2" background="#f9f9f9"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1"/>
-                          <Cell col="1" text="bind:langCategory"/>
-                          <Cell col="2" text="bind:langName"/>
-                          <Cell col="3" text="bind:langTestDate" displaytype="date"/>
-                          <Cell col="4" text="bind:langInst"/>
-                          <Cell col="5" text="bind:langScore"/>
-                          <Cell col="6" text="bind:langGrade"/>
-                          <Cell col="7" text="bind:langEtc"/>
+                          <Cell text="expr:currow+1" textAlign="center"/>
+                          <Cell col="1" text="bind:langCategory" textAlign="center"/>
+                          <Cell col="2" text="bind:langName" textAlign="center"/>
+                          <Cell col="3" text="bind:langTestDate" displaytype="date" textAlign="center"/>
+                          <Cell col="4" text="bind:langInst" textAlign="center"/>
+                          <Cell col="5" text="bind:langScore" textAlign="center"/>
+                          <Cell col="6" text="bind:langGrade" textAlign="center"/>
+                          <Cell col="7" text="bind:langEtc" textAlign="center"/>
                         </Band>
                       </Format>
                     </Formats>
@@ -325,13 +325,13 @@
                           <Cell col="6" text="비고" color="#333333" background="#f9f9f9" border="1px solid #dbdee2"/>
                         </Band>
                         <Band id="body">
-                          <Cell text="expr:currow+1"/>
-                          <Cell col="1" text="bind:militaryGrade"/>
-                          <Cell col="2" text="bind:militaryCode"/>
-                          <Cell col="3" text="bind:isMilitaryEnd"/>
-                          <Cell col="4" text="bind:militaryStartDate" displaytype="date"/>
-                          <Cell col="5" text="bind:militaryEndDate" displaytype="date"/>
-                          <Cell col="6" text="bind:militaryEtc"/>
+                          <Cell text="expr:currow+1" textAlign="center"/>
+                          <Cell col="1" text="bind:militaryGrade" textAlign="center"/>
+                          <Cell col="2" text="bind:militaryCode" textAlign="center"/>
+                          <Cell col="3" text="bind:isMilitaryEnd" textAlign="center"/>
+                          <Cell col="4" text="bind:militaryStartDate" displaytype="date" textAlign="center"/>
+                          <Cell col="5" text="bind:militaryEndDate" displaytype="date" textAlign="center"/>
+                          <Cell col="6" text="bind:militaryEtc" textAlign="center"/>
                         </Band>
                       </Format>
                     </Formats>
@@ -630,7 +630,7 @@
 		"tr_empl_select"// 1.ID
 		,"HirpURL::admin/empDetail.hirp"// 2.URL		
 		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_lang=out_lang ds_cert=out_cert ds_military=out_military" // 4.OutDs : S->F jsp(SELECT)
+		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military" // 4.OutDs : S->F jsp(SELECT)
 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
@@ -645,7 +645,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			this.alert("사원 상세 조회 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("사원 상세 조회 성공");
+		//this.alert("사원 상세 조회 성공");
 	}
 	else if(id=="tr_resign")
 	{

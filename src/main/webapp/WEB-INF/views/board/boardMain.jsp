@@ -42,18 +42,20 @@
         <article id="sub" class="">
        
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
-
            
             <h1 class="basic-border-bottom">게시판 홈</h1>
 
-            <div id="guide" class="subConts">
-                
-               
-            </div>
-               
-               
-				<h3>공지게시판 새글</h3>
+            <div id="guide" class="subConts padding-0">                
+                <h2 class="square-tit mt-40">공지게시판 새글</h2>
                 <table class="table--basic mt-20">
+                    <colgroup>
+                        <col style="width:10%;">
+                        <col style="width:40%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                        <col style="width:10%;">
+                        <col style="width:10%;">
+                    </colgroup>
                     <thead>
                          <tr>
 							<th>번호</th>
@@ -72,7 +74,7 @@
 							</c:url>
 							<td><a href="${nDetail }">${notice.noticeNo }</a></td>
 							
-							<td><a href="${nDetail }">&nbsp; ${notice.noticeTitle }</a></td>
+							<td><a href="${nDetail }">${notice.noticeTitle }</a></td>
 							<td>${notice.emplId }</td>
 							<td>${notice.writeDate}</td>
 							<td>${notice.noticeCount }</td>
@@ -84,8 +86,8 @@
                         </tbody>
                         </c:forEach>
                 </table>
-				<br><br><br><!-- 나중에 수정 -->
-				<h3>부서게시판 새글</h3>
+
+				<h2 class="square-tit mt-50">부서게시판 새글</h2>
 				<table class="table--basic mt-20">
                     <thead>
                         <tr>
@@ -122,8 +124,7 @@
                         </tr>
                     </tbody>
                 </table>
-               
-              
+            </div>
         </article>
     </div>
 </body>

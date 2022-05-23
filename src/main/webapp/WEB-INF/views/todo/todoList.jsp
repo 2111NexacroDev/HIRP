@@ -35,7 +35,7 @@
                     <section class="todo--today">
                         <h2>TODAY</h2>
                         <ul>
-                            <c:forEach items="${tList }" var="todo">
+                            <c:forEach items="${todayList }" var="todo">
                                 <li>
                                     <c:if test="${todo.isFinished eq 'Y' }">
                                         <input id="${todo.todoNo }" type="checkbox" checked>
@@ -100,6 +100,40 @@
     </div>
 
     <script>
+        function printToDoByDate(date) {
+            let offset = date.getTimezoneOffset() * 60000; 
+            let dateOffset = new Date(date.getTime() - offset);                
+            let selectedDate = dateOffset.toISOString().split('T')[0];
+            $('.todo--today h2').text(selectedDate);
+            $.ajax({
+                url: '/todo/listByDate.hirp',
+                type: 'get',
+                data: {
+                    'selectedDate': selectedDate
+                },
+                success: function(data){
+                    $('.todo--today ul').html('');
+                    for(let i=0; i < data.length; i++) {
+                        $('.todo--today ul').append('<li></li>');
+                        console.log(data[i]["isFinished"]);
+                        if(data[i]["isFinished"] == 'N') {
+                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox">');
+                        }
+                        else if(data[i]["isFinished"] == 'Y') {
+                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox" checked>');
+                        }
+                        $('.todo--today ul li:last-child').append('<label for="'+ data[i]["todoNo"] +'"></label>');
+                        $('.todo--today ul li:last-child').append('<input name="todoConts" type="text" value="'+ data[i]["todoConts"] +'">');
+                        $('.todo--today ul li:last-child').append('<div class="btns-wrap"></div>');
+                        $('.todo--today ul li:last-child .btns-wrap').append('<button class="point" onclick="editTodo('+ data[i]["todoNo"] +', this)">수정</button>');
+                        $('.todo--today ul li:last-child .btns-wrap').append('<button class="finished" onclick="removeTodo('+ data[i]["todoNo"] +')">삭제</button>');
+                    }
+                },
+                error: function(){
+                    $('.todo--today ul').html('<li class="no-data"><p>등록된 내용이 없습니다.</p></li>');
+                }
+            });
+        }
         let calendarEl = document.getElementById('todoCalendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -113,35 +147,20 @@
             initialView: 'dayGridMonth',
             locale: 'en',
             events: [
+            <c:forEach items="${tList }" var="tList">
+                {
+                    title: '${tList.todoConts }',
+                    start: '${tList.todoDate }',
+                    className: 'tlist',
+                },
+            </c:forEach>
             ],
             navLinks: true, 
             navLinkDayClick: function(date, jsEvent){
-                let offset = date.getTimezoneOffset() * 60000; 
-                let dateOffset = new Date(date.getTime() - offset);                
-                let selectedDate = dateOffset.toISOString().split('T')[0];
-                $('.todo--today h2').text(selectedDate);
-                $.ajax({
-                    url: '/todo/listByDate.hirp',
-                    type: 'get',
-                    data: {
-                        'selectedDate': selectedDate
-                    },
-                    success: function(data){
-                        $('.todo--today ul').html('');
-                        for(let i=0; i < data.length; i++) {
-                            $('.todo--today ul').append('<li></li>');
-                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox">');
-                            $('.todo--today ul li:last-child').append('<label for="'+ data[i]["todoNo"] +'"></label>');
-                            $('.todo--today ul li:last-child').append('<input name="todoConts" type="text" value="'+ data[i]["todoConts"] +'">');
-                            $('.todo--today ul li:last-child').append('<div class="btns-wrap"></div>');
-                            $('.todo--today ul li:last-child .btns-wrap').append('<button class="point" onclick="editTodo('+ data[i]["todoNo"] +', this)">수정</button>');
-                            $('.todo--today ul li:last-child .btns-wrap').append('<button class="finished" onclick="removeTodo('+ data[i]["todoNo"] +')">삭제</button>');
-                        }
-                    },
-                    error: function(){
-                        $('.todo--today ul').html('<li class="no-data"><p>등록된 내용이 없습니다.</p></li>');
-                    }
-                });
+                printToDoByDate(date);
+            },
+            eventClick: function(data) {
+                printToDoByDate(data.event.start);
             },
             dayMaxEvents: true,
             eventLimit: true,
