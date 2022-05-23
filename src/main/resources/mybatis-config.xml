@@ -60,6 +60,9 @@
 		<typeAlias type="com.highfive.hirp.board.common.BoardAttachedFile" alias="BoardAttachedFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.reply.domain.Reply" alias="Reply"></typeAlias>
 		<typeAlias type="com.highfive.hirp.approval.admin.domain.ApprForm" alias="ApprForm"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.Approval" alias="Approval"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.ApprAccept" alias="ApprAccept"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.ApprAttachedFile" alias="ApprAttachedFile"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->
