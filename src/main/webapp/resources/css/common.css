@@ -141,6 +141,9 @@ button.emergency {
 button.emergency-opacity {
     background-color: #fa573c;
     border: 1px solid #fa573c;
+    color: #fff;
+    opacity: 0.5;
+    cursor: default;
 }
 
 button.noneBackground {
@@ -238,51 +241,6 @@ button.next {
     font-family: fontawesome;
 }
 
-img {
-    max-width: 100%;
-}
-
-@media screen and (min-width: 1201px) {
-    a:hover {
-        color: #00498c;
-    }
-}
-
-.pos-rel {
-    position: relative;
-}
-
-.pos-abs {
-    position: absolute;
-}
-
-.table--basic {
-    width: 100%;
-    border-top: 1px solid #ccc;
-}
-
-.table--basic th,
-.table--basic td {
-    vertical-align: middle;
-    border-collapse: collapse;
-    border-bottom: 1px solid #ccc;
-}
-
-.table--basic th {
-    padding: 10px 20px;
-    text-align: left;
-}
-
-.table--basic td {
-    padding: 16px 20px;
-}
-
-@media screen and (min-width: 1201px) {
-    .table--basic tbody tr:hover>* {
-        background-color: #f4f4f4;
-    }
-}
-
 .bg-point {
     background-color: #0b2a60;
 }
@@ -311,48 +269,60 @@ img {
     margin-top: 5px;
 }
 
-.mr-5 {
-    margin-right: 5px;
-}
-
-.mb-5 {
-    margin-bottom: 5px;
-}
-
-.ml-5 {
-    margin-left: 5px;
-}
-
 .mt-10 {
     margin-top: 10px;
-}
-
-.mr-10 {
-    margin-right: 10px;
-}
-
-.mb-10 {
-    margin-bottom: 10px;
-}
-
-.ml-10 {
-    margin-left: 10px;
 }
 
 .mt-20 {
     margin-top: 20px;
 }
 
+.mt-30 {
+    margin-top: 30px !important;
+}
+
+.mt-40 {
+    margin-top: 40px !important;
+}
+
+.mt-50 {
+    margin-top: 50px !important;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
 .mr-20 {
     margin-right: 20px;
 }
 
-.mb-20 {
-    margin-bottom: 20px;
+.ml-5 {
+    margin-left: 5px;
+}
+
+.ml-10 {
+    margin-left: 10px;
 }
 
 .ml-20 {
     margin-left: 20px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
 }
 
 .padding-0 {

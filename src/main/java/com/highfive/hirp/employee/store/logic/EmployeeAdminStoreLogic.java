@@ -5,7 +5,12 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.highfive.hirp.employee.domain.Career;
+import com.highfive.hirp.employee.domain.Certification;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.domain.JobRole;
+import com.highfive.hirp.employee.domain.Language;
+import com.highfive.hirp.employee.domain.Military;
 import com.highfive.hirp.employee.store.EmployeeAdminStore;
 import com.nexacro17.xapi.data.DataSet;
 
@@ -77,5 +82,35 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 	public int updateLevelEmployee(SqlSession sqlSession, String emplId) {
 		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee", emplId);
 		return result;
+	}
+
+	@Override
+	public List<JobRole> selectAllJobById(SqlSession sqlSession, String emplId) {
+		List<JobRole> jList = sqlSession.selectList("EmployeeAdminMapper.selectAllJobById", emplId);
+		return jList;
+	}
+
+	@Override
+	public List<Career> selectAllCareerById(SqlSession sqlSession, String emplId) {
+		List<Career> caList = sqlSession.selectList("EmployeeAdminMapper.selectAllCareerById", emplId);
+		return caList;
+	}
+
+	@Override
+	public List<Language> selectAllLanguageById(SqlSession sqlSession, String emplId) {
+		List<Language> lList = sqlSession.selectList("EmployeeAdminMapper.selectAllLanguageById", emplId);
+		return lList;
+	}
+
+	@Override
+	public List<Certification> selectAllCertById(SqlSession sqlSession, String emplId) {
+		List<Certification> cList = sqlSession.selectList("EmployeeAdminMapper.selectAllCertById", emplId);
+		return cList;
+	}
+
+	@Override
+	public List<Military> selectAllMilitaryById(SqlSession sqlSession, String emplId) {
+		List<Military> mList = sqlSession.selectList("EmployeeAdminMapper.selectAllMilitaryById", emplId);
+		return mList;
 	}
 }
