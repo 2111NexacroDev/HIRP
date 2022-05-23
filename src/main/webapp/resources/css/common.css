@@ -159,15 +159,86 @@ button.colorGrey {
 }
 
 button.prev {
-	content: "\f104";
-	background-color: white;
-	font-family: fontawesome;
+    content: "\f104";
+    background-color: white;
+    font-family: fontawesome;
 }
 
 button.next {
-	content: "\f105";
-	background-color: white;
-	font-family: fontawesome;
+    content: "\f105";
+    background-color: white;
+    font-family: fontawesome;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media screen and (min-width: 1201px) {
+    a:hover {
+        color: #00498c;
+    }
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.pos-abs {
+    position: absolute;
+}
+
+.table--basic {
+    width: 100%;
+    border-top: 1px solid #ccc;
+}
+
+.table--basic th,
+.table--basic td {
+    vertical-align: middle;
+    border-collapse: collapse;
+    border-bottom: 1px solid #ccc;
+}
+
+.table--basic th {
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.table--basic td {
+    padding: 16px 20px;
+}
+
+@media screen and (min-width: 1201px) {
+    .table--basic tbody tr:hover>* {
+        background-color: #f4f4f4;
+    }
+}
+
+.bg-point {
+    background-color: #0b2a60;
+}
+
+.color-point {
+    color: #00498c;
+}
+
+.color-white {
+    color: #fff;
+    opacity: 0.5;
+    cursor: default;
+}
+
+button.prev {
+    content: "\f104";
+    background-color: white;
+    font-family: fontawesome;
+}
+
+button.next {
+    content: "\f105";
+    background-color: white;
+    font-family: fontawesome;
 }
 
 img {
@@ -482,7 +553,6 @@ img {
     opacity: 1;
 }
 
-
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
@@ -671,6 +741,11 @@ img {
     font-weight: 500;
 }
 
+#snb>ul>li button {
+    padding: 0;
+    background-color: transparent;
+}
+
 #snb>ul>li>a:before,
 #snb>ul>li>button:before {
     content: "\f107";
@@ -730,6 +805,13 @@ img {
     letter-spacing: -1px;
 }
 
+#conts .chat-h1 {
+    padding: 0px 20px 16px;
+    font-size: 22px;
+    letter-spacing: -1px;
+}
+
+
 #conts h1 strong {
     font-weight: 700;
 }
@@ -743,6 +825,8 @@ img {
     height: 32px;
     border-radius: 32px;
     overflow: hidden;
+    padding: 0;
+    outline: none;
 }
 
 .btn--alarm {
@@ -760,7 +844,6 @@ img {
     background-position: center center;
     mragin-left: 8px;
 }
-
 
 @media screen and (min-width: 1201px) {
 
@@ -844,7 +927,6 @@ img {
 }
 
 @media screen and (min-width: 1201px) {
-
     .form--srch:hover input {
         border-color: #00a1b9;
     }
@@ -891,7 +973,6 @@ article {
     line-height: 1.6;
     border: 1px solid #ccc;
 }
-
 
 .section--alert,
 .section--modal {
@@ -984,6 +1065,5 @@ article {
     background-color: #fff;
     border: 1px solid #ccc;
 }
-
 
 /* 채팅창 끝 */
