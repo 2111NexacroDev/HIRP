@@ -14,7 +14,7 @@ public class SurveySearch {
 		this.search = search;
 	}
 	
-	public SurveySearch(Search search, String surveyStatus, String empl) {
+	public SurveySearch(Search search, String surveyStatus, String emplId) {
 		super();
 		this.search = search;
 		this.surveyStatus = surveyStatus;
@@ -49,7 +49,4 @@ public class SurveySearch {
 	public String toString() {
 		return "SurveySearch [search=" + search + ", surveyStatus=" + surveyStatus + ", emplId=" + emplId + "]";
 	}
-	
-	
-	
 }

@@ -331,7 +331,6 @@
             },
             editable: false,
             dayMaxEvents: true,
-            eventLimit: true,
         });
         calendar.render();
     </script>

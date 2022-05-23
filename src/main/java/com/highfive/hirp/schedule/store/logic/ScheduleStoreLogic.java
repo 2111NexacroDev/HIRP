@@ -40,11 +40,6 @@ public class ScheduleStoreLogic implements ScheduleStore {
 		int result = sqlSession.insert("ScheduleMapper.insertSchedule", schedule);
 		return result;
 	}
-	@Override
-	public int insertTeamSchedule(SqlSession sqlSession, Schedule schedule) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int insertScheduleToSub(SqlSession sqlSession, Schedule schedule) {
@@ -56,12 +51,6 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	public int insertCompanySchedule(SqlSession sqlSession, Schedule schedule) {
 		int result = sqlSession.insert("ScheduleMapper.insertCompanySchedule", schedule);
 		return result;
-	}
-	
-	@Override
-	public int insertPersonalSchedule(SqlSession sqlSession, Schedule schedule) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	
 	@Override
@@ -87,5 +76,4 @@ public class ScheduleStoreLogic implements ScheduleStore {
 		int result = sqlSession.delete("ScheduleMapper.deleteCompanySchedule", scheduleNo);
 		return result;
 	}
-
 }

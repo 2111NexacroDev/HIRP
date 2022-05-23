@@ -14,8 +14,9 @@
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
         	<!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
-            <form class="form--srch" action="">
-                <input type="text" name="" placeholder="통합검색">
+            <form class="form--srch" action="/survey/search.hirp" method="post">
+                <input type="text" style="width:200px;" name="searchValue" placeholder="설문 제목 또는 작성자 검색">
+                <input type="hidden" name="surveyStatus" value="F"/>
                 <button type="submit"></button>
             </form>
 
@@ -50,13 +51,13 @@
 	                            <td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
 	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-	                            		<button class="finished" type="button">참여완료</button>
+	                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
 	                            	</c:if>
 	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
-	                            		<button class="emergency" type="button">미참여</button>
+	                            		<button class="emergency-opacity" type="button" style="cursor:default;">미참여</button>
 	                            	</c:if>
 	                            </td>
-	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
+	                            <td style="cursor:pointer;"><a href="${sDetail}">${survey.surveyTitle }</a></td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>

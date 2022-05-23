@@ -9,15 +9,13 @@ import com.highfive.hirp.todo.domain.Todo;
 
 public interface TodoStore {
 
-	List<Todo> selectAllToDo(SqlSession sqlSession, String emplId);
-	List<Todo> selectToDoByDate(SqlSession sqlSession, Todo todo);
-	List<Todo> selectFinishedToDo(SqlSession sqlSession, String emplId);
+	List<Todo> selectAllToDo(SqlSession sqlSession);
 	int insertToDo(SqlSession sqlSession, Todo todo);
 	int updateToDo(SqlSession sqlSession, Todo todo);
 	int checkedToDo(SqlSession sqlSession, Todo todo);
 	int deleteToDo(SqlSession sqlSession, int todoNo);
 	
-	List<Memo> selectAllMemo(SqlSession sqlSession, String emplId);
+	List<Memo> selectAllMemo(SqlSession sqlSession);
 	int insertMemo(SqlSession sqlSession, Memo memo);
 	int updateMemo(SqlSession sqlSession, Memo memo);
 	int deleteMemo(SqlSession sqlSession, int memoNo);

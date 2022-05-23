@@ -28,7 +28,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private JobRole jobRole;
 	private Language language;
 	private Military military;
-//	private Career career;
+	private Career career;
 	//회원 정보 이름으로 가져오기
 	private String deptName;
 	private String positionName;
