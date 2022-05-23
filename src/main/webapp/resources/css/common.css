@@ -143,11 +143,7 @@ button.emergency-opacity {
     border: 1px solid #fa573c;
     color: #fff;
     opacity: 0.5;
-<<<<<<< HEAD
     cursor: default;
-=======
-    cursor:default;
->>>>>>> refs/remotes/origin/main
 }
 
 button.noneBackground {
