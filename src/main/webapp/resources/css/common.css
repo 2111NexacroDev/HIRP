@@ -805,6 +805,13 @@ img {
     letter-spacing: -1px;
 }
 
+#conts .chat-h1 {
+    padding: 0px 20px 16px;
+    font-size: 22px;
+    letter-spacing: -1px;
+}
+
+
 #conts h1 strong {
     font-weight: 700;
 }
@@ -818,6 +825,8 @@ img {
     height: 32px;
     border-radius: 32px;
     overflow: hidden;
+    padding: 0;
+    outline: none;
 }
 
 .btn--alarm {

@@ -44,6 +44,7 @@ public class ChatController {
 		mv.setViewName("chat/chatMainPage");
 		return mv;
 	}
+	
 	//직원 이름으로 검색
 	public ModelAndView chatEmplSearch(ModelAndView mv) {
 		return mv;
@@ -74,15 +75,17 @@ public class ChatController {
 	}
 	
 	//채팅방 목록 페이지
+	@RequestMapping(value = "chatroomList.hirp", method = RequestMethod.GET)
 	public ModelAndView chattingRoomList(ModelAndView mv) {
 		//내가 참여한 채팅방 목록 가져오기
 		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
 		
 		//마지막 채팅 내용 표시????
 		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
-		
+		mv.setViewName("chat/chatRoomPage");
 		return mv;
 	}
+	
 	//채팅방 내부 페이지
 	public ModelAndView chattingRoomPage(ModelAndView mv
 			,@RequestParam("chatRoom") ChatRoom chatRoom) {
