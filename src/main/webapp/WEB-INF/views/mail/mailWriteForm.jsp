@@ -25,17 +25,17 @@
                <li>
                    <a href="">메일함</a>
                    <ul>
-                       <li><a href="#">받은메일함</a></li>
-                       <li><a href="#">보낸메일함</a></li>
-                       <li><a href="#">임시보관함</a></li>
-                       <li><a href="#">내게쓴메일함</a></li>
-                       <li><a href="#">중요메일함</a></li>
-                       <li><a href="#">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
+                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
+                       <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
+                       <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
+                       <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
+                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
                    </ul>
                </li>
             </ul>
             
-            <a class="btn--function" href="#">버그리포트 작성</a>
+            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
@@ -49,6 +49,7 @@
 		            <button class="basic mt-20" type="submit">보내기</button>
 		            <button class="basic mt-20" type="button">임시저장</button>
 	            	<h4>받는사람</h4>
+	            	<!-- 체크박스 선택하면 로그인 유저 아이디 나와야 함 -->
 	            	<input id="check1" class="mt-20" type="checkbox">
 	            	<label for="check1">나에게</label>
 	            	<input type="text" name="recipientId">

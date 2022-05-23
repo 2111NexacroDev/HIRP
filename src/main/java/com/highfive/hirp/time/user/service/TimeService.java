@@ -14,5 +14,10 @@ public interface TimeService {
 	// 사용자 퇴근 등록
 	public int timeEnd(Time time);
 
+	// 사용자 출,퇴근 내역 화면
+	public Time selectTime(String emplId);
+
+	// 사용자 연차 내역 조회
+	public List<Vacation> selectTimeView(String emplId);
 
 }

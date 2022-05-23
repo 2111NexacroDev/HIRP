@@ -1,8 +1,10 @@
 package com.highfive.hirp.todo.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.todo.domain.Memo;
 import com.highfive.hirp.todo.domain.Todo;
 import com.highfive.hirp.todo.service.TodoService;
@@ -24,12 +28,13 @@ public class TodoController {
 
 	// 할일 조회
 	@RequestMapping(value="/todo/list.hirp", method=RequestMethod.GET)
-	public ModelAndView todoListView(ModelAndView mv) {
+	public ModelAndView todoListView(ModelAndView mv, HttpServletRequest request) {
 		try {
-			List<Todo> tList = tService.printAllToDo();
-			List<Memo> mList = tService.printAllMemo();
-			// 지금 모든 항목 다 불러오는 쿼리로 써놔서 로그인 세션 만든 후에
-			// 아이디 같을 때, 날짜 일치할 때 불러오는 조건 추가로 걸어줘야함. 
+			HttpSession session = request.getSession();
+			String emplId  = (String) session.getAttribute("emplId");
+			List<Todo> tList = tService.printAllToDo(emplId);
+			List<Memo> mList = tService.printAllMemo(emplId);
+			
 			if(!tList.isEmpty() && !mList.isEmpty()) {
 				mv.addObject("tList", tList);
 				mv.addObject("mList", mList);
@@ -47,15 +52,56 @@ public class TodoController {
 		return mv;
 	}
 	
+	// 일자별 할 일 조회
+	@ResponseBody
+	@RequestMapping(value="/todo/listByDate.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
+	public String todoListByDate(@ModelAttribute Todo todo
+			,@RequestParam("selectedDate") String selectedDate
+			,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		todo.setEmplId(emplId);
+
+		// String -> Date 형변환
+		Date day = Date.valueOf(selectedDate);
+		todo.setTodoDate(day);
+		List<Todo> tList = tService.printToDoByDate(todo);
+		if(!tList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(tList);
+		} else {
+			return "fail";
+		}
+	}
+
+	// 완료 목록 조회
+	@RequestMapping(value="/todo/doneList.hirp", method=RequestMethod.GET)
+	public ModelAndView doneListView(ModelAndView mv, HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Todo> fList = tService.printFinishedToDo(emplId);
+			if(!fList.isEmpty()) {
+				mv.addObject("fList", fList);
+			} else {
+				mv.addObject("msg", "완료 내역 없음");
+			}
+			mv.setViewName("todo/done");
+		} catch(Exception e) {
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	// 할일 등록(ajax)
 	@ResponseBody
 	@RequestMapping(value="/todo/write.hirp", method=RequestMethod.POST)
 	public String todoRegister(
 			@ModelAttribute Todo todo
 			,HttpServletRequest request) {
-		todo.setEmplId("user1");
-		// 임시 처리, 후에 세션으로 수정해야함.
-		// 날짜를 추가해줘야해서 Todo 객체 이용하는 것으로 코딩함.
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		todo.setEmplId(emplId);
 		int result = tService.registerToDo(todo);
 		if(result > 0) {
 			return "success";
@@ -81,7 +127,6 @@ public class TodoController {
 			return "fail";
 		}
 	}
-
 	
 	// 할일 체크(ajax)		
 	@ResponseBody
@@ -121,7 +166,9 @@ public class TodoController {
 			@ModelAttribute Memo memo
 			,@RequestParam("memoConts") String memoConts
 			,HttpServletRequest request) {
-		memo.setEmplId("user1");
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		memo.setEmplId(emplId);
 		memo.setMemoConts(memoConts);
 		int result = tService.registerMemo(memo);
 		if(result > 0) {

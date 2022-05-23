@@ -7,10 +7,12 @@ public class MailFile {
 	private String fileExtension;
 	private String fileReName;
 	private String filePath;
+	private String emplId;
 	
 	public MailFile() {}
 
-	public MailFile(int fileNo, int mailNo, String fileName, String fileExtension, String fileReName, String filePath) {
+	public MailFile(int fileNo, int mailNo, String fileName, String fileExtension, String fileReName, String filePath,
+			String emplId) {
 		super();
 		this.fileNo = fileNo;
 		this.mailNo = mailNo;
@@ -18,6 +20,7 @@ public class MailFile {
 		this.fileExtension = fileExtension;
 		this.fileReName = fileReName;
 		this.filePath = filePath;
+		this.emplId = emplId;
 	}
 
 	public int getFileNo() {
@@ -68,10 +71,18 @@ public class MailFile {
 		this.filePath = filePath;
 	}
 
+	public String getEmplId() {
+		return emplId;
+	}
+
+	public void setEmplId(String emplId) {
+		this.emplId = emplId;
+	}
+
 	@Override
 	public String toString() {
 		return "MailFile [fileNo=" + fileNo + ", mailNo=" + mailNo + ", fileName=" + fileName + ", fileExtension="
-				+ fileExtension + ", fileReName=" + fileReName + ", filePath=" + filePath + "]";
+				+ fileExtension + ", fileReName=" + fileReName + ", filePath=" + filePath + ", emplId=" + emplId + "]";
 	}
 
 }
