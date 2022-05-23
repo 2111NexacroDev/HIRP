@@ -54,17 +54,14 @@
 		</beans:property>
 	</beans:bean>
 	
-	<context:component-scan base-package="com.highfive.hirp" />
 	
-	<websocket:handlers allowed-origins="http://localhost:8888">
-		<websocket:mapping handler="echoHandler" path="/echo" />
-		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-		<websocket:sockjs/>
-	</websocket:handlers>
-    
-	<beans:bean id="echoHandler" class="com.highfive.hirp.chat.handler.EchoHandler"></beans:bean>
+	<context:component-scan base-package="com.highfive.hirp" />
 
+	<websocket:handlers allowed-origins="*" >
+        <websocket:mapping handler="handlerChat" path="/chat" />
+        <websocket:sockjs websocket-enabled="true" />
+    </websocket:handlers>
+    
+    <beans:bean id="handlerChat" class="com.highfive.hirp.chat.handler.HandlerChat" ></beans:bean>
 	
 </beans:beans>
