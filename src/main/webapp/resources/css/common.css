@@ -141,6 +141,9 @@ button.emergency {
 button.emergency-opacity {
     background-color: #fa573c;
     border: 1px solid #fa573c;
+    color: #fff;
+    opacity: 0.5;
+    cursor:default;
 }
 
 button.noneBackground {
