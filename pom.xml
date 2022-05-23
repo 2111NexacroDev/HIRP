@@ -67,6 +67,7 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+
 		
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
