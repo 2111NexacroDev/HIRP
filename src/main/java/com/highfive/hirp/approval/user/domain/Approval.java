@@ -1,44 +1,37 @@
 package com.highfive.hirp.approval.user.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Approval {
-	private int docNo;
+	private int apprNo;
+	private String formNo;
 	private String emplId;
-	private int formNo;
-	private String docTitle;
-	private String docContents;
-	private String status;
+	private String apprTitle;
+	private String apprContents;
+	private String apprStatus;
 	private Date writeDate;
-	private String fileName;
-	private String fileRename;
-	private String TemporaryStorage;
+	private String temporaryStorage;
+	private String docNo;
+	private List<ApprAccept> aList;
+	private List<ApprAttachedFile> fList;	
 	
 	public Approval() {}
-	
-	
-	public Approval(int docNo, String emplId, int formNo, String docTitle, String docContents, String status,
-			Date writeDate, String fileName, String fileRename, String temporaryStorage) {
-		super();
-		this.docNo = docNo;
-		this.emplId = emplId;
+
+	public int getApprNo() {
+		return apprNo;
+	}
+
+	public void setApprNo(int apprNo) {
+		this.apprNo = apprNo;
+	}
+
+	public String getFormNo() {
+		return formNo;
+	}
+
+	public void setFormNo(String formNo) {
 		this.formNo = formNo;
-		this.docTitle = docTitle;
-		this.docContents = docContents;
-		this.status = status;
-		this.writeDate = writeDate;
-		this.fileName = fileName;
-		this.fileRename = fileRename;
-		TemporaryStorage = temporaryStorage;
-	}
-
-
-	public int getDocNo() {
-		return docNo;
-	}
-
-	public void setDocNo(int docNo) {
-		this.docNo = docNo;
 	}
 
 	public String getEmplId() {
@@ -49,36 +42,28 @@ public class Approval {
 		this.emplId = emplId;
 	}
 
-	public int getFormNo() {
-		return formNo;
+	public String getApprTitle() {
+		return apprTitle;
 	}
 
-	public void setFormNo(int formNo) {
-		this.formNo = formNo;
+	public void setApprTitle(String apprTitle) {
+		this.apprTitle = apprTitle;
 	}
 
-	public String getDocTitle() {
-		return docTitle;
+	public String getApprContents() {
+		return apprContents;
 	}
 
-	public void setDocTitle(String docTitle) {
-		this.docTitle = docTitle;
+	public void setApprContents(String apprContents) {
+		this.apprContents = apprContents;
 	}
 
-	public String getDocContents() {
-		return docContents;
+	public String getApprStatus() {
+		return apprStatus;
 	}
 
-	public void setDocContents(String docContents) {
-		this.docContents = docContents;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setApprStatus(String apprStatus) {
+		this.apprStatus = apprStatus;
 	}
 
 	public Date getWriteDate() {
@@ -89,36 +74,46 @@ public class Approval {
 		this.writeDate = writeDate;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileRename() {
-		return fileRename;
-	}
-
-	public void setFileRename(String fileRename) {
-		this.fileRename = fileRename;
-	}
-
 	public String getTemporaryStorage() {
-		return TemporaryStorage;
+		return temporaryStorage;
 	}
 
 	public void setTemporaryStorage(String temporaryStorage) {
-		TemporaryStorage = temporaryStorage;
+		this.temporaryStorage = temporaryStorage;
+	}
+
+	public String getDocNo() {
+		return docNo;
+	}
+
+	public void setDocNo(String docNo) {
+		this.docNo = docNo;
+	}
+
+	public List<ApprAccept> getaList() {
+		return aList;
+	}
+
+	public void setaList(List<ApprAccept> aList) {
+		this.aList = aList;
+	}
+
+	public List<ApprAttachedFile> getfList() {
+		return fList;
+	}
+
+	public void setfList(List<ApprAttachedFile> fList) {
+		this.fList = fList;
 	}
 
 	@Override
 	public String toString() {
-		return "Approval [docNo=" + docNo + ", emplId=" + emplId + ", formNo=" + formNo + ", docTitle=" + docTitle
-				+ ", docContents=" + docContents + ", status=" + status + ", writeDate=" + writeDate + ", fileName="
-				+ fileName + ", fileRename=" + fileRename + ", TemporaryStorage=" + TemporaryStorage + "]";
+		return "Approval [apprNo=" + apprNo + ", formNo=" + formNo + ", emplId=" + emplId + ", apprTitle=" + apprTitle
+				+ ", apprContents=" + apprContents + ", apprStatus=" + apprStatus + ", writeDate=" + writeDate
+				+ ", temporaryStorage=" + temporaryStorage + ", docNo=" + docNo + ", aList=" + aList + ", fList="
+				+ fList + "]";
 	}
+
 	
-	
+
 }
