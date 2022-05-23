@@ -16,7 +16,7 @@
 		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
-		<typeAlias type="com.highfive.hirp.employee.domain.Career" alias="Career"></typeAlias>
+<!-- 		<typeAlias type="com.highfive.hirp.employee.domain.Career" alias="Career"></typeAlias> -->
 		<typeAlias type="com.highfive.hirp.employee.domain.Certification" alias="Certification"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.JobRole" alias="JobRole"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Language" alias="Language"></typeAlias>
