@@ -4,11 +4,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
 	<meta name="viewport" content="user-scalable=1, initial-scale=0.1, width=device-width, target-densitydpi=device-dpi">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@600&family=Lexend+Exa:wght@300&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
-		rel="stylesheet"><!-- 노토산스 코리안 서체 CDN -->
 	<!-- META_CHECKVERSION : Add if value of checkversion property in Envrionment is true -->
 
 	
@@ -16,9 +11,7 @@
 
 	
 	<!-- USERFONT_STYLE : userfont style setting (value of userfontid property in Environment. crate contents contained in xfont file specified userfontid property in Environment) -->
-    <style id="userfont" type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-        </style>
+
 	
 	<!-- FRAMEWORK_LIBRARY : framework lodaing path (list of scripts files in the Framework.json file) -->
     <script type="text/javascript" src="./nexacro17lib/framework/SystemBase.js"></script>
@@ -115,7 +108,7 @@
 		{
 			<!-- SCREEN_INFORMATION : create screen information defined in Environment > ScreenDefinition -->
 			var screeninfo = [
-            {"id":"Desktop_screen","type":"desktop","themeid":"theme::hirpTheme","xadl":"Application_Desktop.xadl.js"}
+            {"id":"Desktop_screen","type":"desktop","themeid":"theme::default","xadl":"Application_Desktop.xadl.js"}
 			];
 			nexacro._initHTMLSysEvent(window, document);
 			nexacro._initEnvironment(screeninfo);

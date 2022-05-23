@@ -48,9 +48,6 @@ this.fn_openForm = function(obj, e) {
 	var sMenuId = objDs.getColumn(e.row, "MENU_ID");
 	var sMenuNM = objDs.getColumn(e.row, "MENU_NAME");
 	var sFormUrl = objDs.getColumn(e.row, "FORM_URL");
-	trace("form-left : sMenuId :"+sMenuId);
-	trace("form-left : sMenuNM :"+sMenuNM);
-	trace("form-left : sFormUrl :"+sFormUrl);
 	
 	if(sFormUrl.length <= 0) return;
 	
@@ -58,42 +55,12 @@ this.fn_openForm = function(obj, e) {
 	
 	var sWorkFramePath = objApp.mainframe.HFrameSet00.WorkFrame;
 	
-	//이미 열린 화면은 다시 열리지 않는다. 이미 열린 파일이 선택됐을 때 포커스 되도록 하는 것
-	var arrObj = sWorkFramePath.all; //열려있는 모든 화면 리스트
-	
-	//화면 이름이랑 메뉴아이디랑 같으면 메뉴 focus 바꿔주는 것.
-	for(var i = 0 ; i < arrObj.length; i++) {
-		trace("form-left : arrObj["+i+"].name  :"+arrObj[i].name );
-		if(arrObj[i].name == sMenuId) {	//화면 이름이랑 메뉴 아이디랑 같으면 
-			arrObj[i].setFocus();
-			trace("form-left : focus "+arrObj[i].name );
-			return;
-// 			arrObj[i].form.close();
-// 			trace("form-left : close "+arrObj[i].name );
-		}
-	}
-	
 	var objChildFrame = new ChildFrame(sMenuId, 0, 0, 1080, 720);
 	sWorkFramePath.addChild(sMenuId, objChildFrame);
-	
-	
-	//파라미터 넘겨주기
-	var oParam = {
-					MENU_ID : sMenuId,
-					MENU_NAME : sMenuNM,
-					FORM_URL : sFormUrl,
-				}
-	
-	objChildFrame.openParam = oParam;
-	
-	
 	objChildFrame.set_showtitlebar(false);
 /*	objChildFrame.set_formurl("FrameBase::deptManage.xfdl");*/
 	objChildFrame.set_formurl(sFormUrl);
 	objChildFrame.show();
-	
-	//mdi에 파라미터로 oParam 넘기기
-	/*objApp.mainframe.HFrameSet00.WorkFrame.form.fn_addTab(oParam);*/
 }
 ]]></Script>
   </Form>

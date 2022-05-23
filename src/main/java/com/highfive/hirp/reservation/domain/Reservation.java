@@ -1,20 +1,21 @@
 package com.highfive.hirp.reservation.domain;
 
+import java.sql.Date;
+
 public class Reservation {
 	private int reservationNo;
 	private String emplId;
 	private int utilityNo;
-	private String reservationStartDate;
-	private String reservationEndDate;
+	private Date reservationStartDate;
+	private Date reservationEndDate;
 	private String reservationConts;
 	private String isReturn;
-	private Utility utility;
 
 	public Reservation() {
 	}
 
-	public Reservation(int reservationNo, String emplId, int utilityNo, String reservationStartDate,
-			String reservationEndDate, String reservationConts, String isReturn, Utility utility) {
+	public Reservation(int reservationNo, String emplId, int utilityNo, Date reservationStartDate,
+			Date reservationEndDate, String reservationConts, String isReturn) {
 		super();
 		this.reservationNo = reservationNo;
 		this.emplId = emplId;
@@ -23,7 +24,6 @@ public class Reservation {
 		this.reservationEndDate = reservationEndDate;
 		this.reservationConts = reservationConts;
 		this.isReturn = isReturn;
-		this.utility = utility;
 	}
 
 	public int getReservationNo() {
@@ -50,19 +50,19 @@ public class Reservation {
 		this.utilityNo = utilityNo;
 	}
 
-	public String getReservationStartDate() {
+	public Date getReservationStartDate() {
 		return reservationStartDate;
 	}
 
-	public void setReservationStartDate(String reservationStartDate) {
+	public void setReservationStartDate(Date reservationStartDate) {
 		this.reservationStartDate = reservationStartDate;
 	}
 
-	public String getReservationEndDate() {
+	public Date getReservationEndDate() {
 		return reservationEndDate;
 	}
 
-	public void setReservationEndDate(String reservationEndDate) {
+	public void setReservationEndDate(Date reservationEndDate) {
 		this.reservationEndDate = reservationEndDate;
 	}
 
@@ -82,18 +82,10 @@ public class Reservation {
 		this.isReturn = isReturn;
 	}
 
-	public Utility getUtility() {
-		return utility;
-	}
-
-	public void setUtility(Utility utility) {
-		this.utility = utility;
-	}
-
 	@Override
 	public String toString() {
 		return "Reservation [reservationNo=" + reservationNo + ", emplId=" + emplId + ", utilityNo=" + utilityNo
 				+ ", reservationStartDate=" + reservationStartDate + ", reservationEndDate=" + reservationEndDate
-				+ ", reservationConts=" + reservationConts + ", isReturn=" + isReturn + ", utility=" + utility + "]";
+				+ ", reservationConts=" + reservationConts + ", isReturn=" + isReturn + "]";
 	}
 }

@@ -5,12 +5,6 @@ public class SurveySub {
 	private int surveyNo;
 	private String subId;
 	private String subAnswerstatus;
-	//Employee 정보 (dept, position join했음)
-	private String deptCode;
-	private String deptName;
-	private String positionCode;
-	private String positionName;
-	private String emplName;
 	
 	public SurveySub() {}
 
@@ -52,47 +46,6 @@ public class SurveySub {
 
 	public void setSubAnswerstatus(String subAnswerstatus) {
 		this.subAnswerstatus = subAnswerstatus;
-	}
-
-	
-	public String getDeptCode() {
-		return deptCode;
-	}
-
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
-	}
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
-	public String getPositionCode() {
-		return positionCode;
-	}
-
-	public void setPositionCode(String positionCode) {
-		this.positionCode = positionCode;
-	}
-
-	public String getPositionName() {
-		return positionName;
-	}
-
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
-	}
-
-	public String getEmplName() {
-		return emplName;
-	}
-
-	public void setEmplName(String emplName) {
-		this.emplName = emplName;
 	}
 
 	@Override
