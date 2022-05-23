@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none">
+  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none" dragscrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>

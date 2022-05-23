@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="empDetail" width="1280" height="720" titletext="New Form" scrolltype="none" onload="empDetail_onload">
+  <Form id="empDetail" width="1280" height="720" titletext="New Form" scrolltype="none" onload="empDetail_onload" dragscrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
@@ -367,7 +367,7 @@
             </Tabpage>
           </Tabpages>
         </Tab>
-        <Button id="btn_save" taborder="5" text="저장" left="560" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="580" right="360"/>
+        <Button id="btn_save" taborder="5" text="저장" left="560" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="580" right="360" onclick="btn_save_onclick"/>
         <Static id="link_emplLsit" taborder="6" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
         <Static id="link_addEmpl" taborder="7" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
       </Layout>
@@ -618,12 +618,12 @@
             <Col id="statusName">임시</Col>
           </Row>
           <Row>
-            <Col id="statusCode">재직중</Col>
-            <Col id="statusName">재직중</Col>
+            <Col id="statusCode">재직</Col>
+            <Col id="statusName">재직</Col>
           </Row>
           <Row>
-            <Col id="statusCode">휴직중</Col>
-            <Col id="statusName">휴직중</Col>
+            <Col id="statusCode">휴직</Col>
+            <Col id="statusName">휴직</Col>
           </Row>
           <Row>
             <Col id="statusCode">퇴사</Col>
@@ -689,6 +689,23 @@
           </Row>
         </Rows>
       </Dataset>
+      <Dataset id="ds_recruit">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">신입</Col>
+            <Col id="value">신입</Col>
+          </Row>
+          <Row>
+            <Col id="code">채용</Col>
+            <Col id="value">채용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_salary"/>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {	
@@ -711,7 +728,6 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			this.alert("사원 상세 조회 실패 : " + sErrorMsg);
 			return;
 		}
-		//this.alert("사원 상세 조회 성공");
 	}
 	else if(id=="tr_resign")
 	{
@@ -722,6 +738,60 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("퇴직 처리되었습니다.");
 		this.go("FrameBase::emplList.xfdl");
+	}
+	else if(id=="tr_empl_modify")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("저장 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("저장되었습니다.");
+	}
+	else if(id=="tr_remove_role")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("삭제 실패");
+			return;
+		}
+		this.alert("삭제 성공");
+	}
+	else if(id=="tr_remove_career")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("삭제 실패");
+			return;
+		}
+		this.alert("삭제 성공");
+	}
+	else if(id=="tr_remove_cert")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("삭제 실패");
+			return;
+		}
+		this.alert("삭제 성공");
+	}
+	else if(id=="tr_remove_lang")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("삭제 실패");
+			return;
+		}
+		this.alert("삭제 성공");
+	}
+	else if(id=="tr_remove_military")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("삭제 실패");
+			return;
+		}
+		this.alert("삭제 성공");
 	}
 }
 
@@ -755,7 +825,26 @@ this.Tab00_Tabpage2_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 };
 this.Tab00_Tabpage2_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var selectedRow = this.ds_jobRole.rowposition;
+	if(this.ds_jobRole.rowcount >= 1) 
+	{
+		var result = this.confirm("정말로 삭제하시겠습니까?" , "삭제", "취소");
+		var infoNo = this.Tab00.Tabpage2.form.Grid00.getCellText(this.ds_jobRole.rowposition, 0);
+		
+ 		if(result == true) {
+ 			this.ds_jobRole.deleteRow(this.ds_jobRole.rowposition);
+ 			this.transaction(
+ 				"tr_remove_role"// 1.ID
+ 				,"HirpURL::admin/removeJobRole.hirp"// 2.URL		
+ 				,"" // 3.InDs : F->S jsp(I,U,D)
+ 				,"" // 4.OutDs : S->F jsp(SELECT)
+ 				,"emplId="+selectedEmplId+" infoNo="+infoNo // 5.InVar : F->S(var)
+ 				,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 			);	
+ 		}
+	}
+	else {
+		this.alert("삭제할 행이 없습니다.");
+	}
 };
 
 this.Tab00_Tabpage3_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -764,7 +853,26 @@ this.Tab00_Tabpage3_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 };
 this.Tab00_Tabpage3_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var selectedRow = this.ds_career.rowposition;
+	if(this.ds_career.rowcount >= 1) 
+	{
+		var result = this.confirm("정말로 삭제하시겠습니까?" , "삭제", "취소");
+		var infoNo = this.Tab00.Tabpage3.form.Grid00.getCellText(this.ds_career.rowposition, 0);
+		
+		if(result == true) {
+			this.ds_career.deleteRow(this.ds_career.rowposition);
+ 			this.transaction(
+ 				"tr_remove_career"// 1.ID
+ 				,"HirpURL::admin/removeCareer.hirp"// 2.URL		
+ 				,"" // 3.InDs : F->S jsp(I,U,D)
+ 				,"" // 4.OutDs : S->F jsp(SELECT)
+ 				,"emplId="+selectedEmplId+" infoNo="+infoNo // 5.InVar : F->S(var)
+ 				,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 			);	
+		}
+	}
+	else {
+		this.alert("삭제할 행이 없습니다.");
+	}
 };
 
 this.Tab00_Tabpage4_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -773,7 +881,26 @@ this.Tab00_Tabpage4_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 };
 this.Tab00_Tabpage4_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var selectedRow = this.ds_cert.rowposition;
+	if(this.ds_cert.rowcount >= 1) 
+	{
+		var result = this.confirm("정말로 삭제하시겠습니까?" , "삭제", "취소");
+		var infoNo = this.Tab00.Tabpage4.form.Grid00.getCellText(this.ds_cert.rowposition, 0);
+		
+		if(result == true) {
+			this.ds_cert.deleteRow(this.ds_cert.rowposition);
+ 			this.transaction(
+ 				"tr_remove_cert"// 1.ID
+ 				,"HirpURL::admin/removeCert.hirp"// 2.URL		
+ 				,"" // 3.InDs : F->S jsp(I,U,D)
+ 				,"" // 4.OutDs : S->F jsp(SELECT)
+ 				,"emplId="+selectedEmplId+" infoNo="+infoNo // 5.InVar : F->S(var)
+ 				,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 			);	
+		}
+	}
+	else {
+		this.alert("삭제할 행이 없습니다.");
+	}
 };
 
 this.Tab00_Tabpage5_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -782,7 +909,26 @@ this.Tab00_Tabpage5_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 };
 this.Tab00_Tabpage5_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var selectedRow = this.ds_lang.rowposition;
+	if(this.ds_lang.rowcount >= 1) 
+	{
+		var result = this.confirm("정말로 삭제하시겠습니까?" , "삭제", "취소");
+		var infoNo = this.Tab00.Tabpage5.form.Grid00.getCellText(this.ds_lang.rowposition, 0);
+		
+		if(result == true) {
+			this.ds_lang.deleteRow(this.ds_lang.rowposition);
+ 			this.transaction(
+ 				"tr_remove_lang"// 1.ID
+ 				,"HirpURL::admin/removeLang.hirp"// 2.URL		
+ 				,"" // 3.InDs : F->S jsp(I,U,D)
+ 				,"" // 4.OutDs : S->F jsp(SELECT)
+ 				,"emplId="+selectedEmplId+" infoNo="+infoNo // 5.InVar : F->S(var)
+ 				,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 			);	
+		}
+	}
+	else {
+		this.alert("삭제할 행이 없습니다.");
+	}
 };
 
 this.Tab00_Tabpage6_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -791,7 +937,39 @@ this.Tab00_Tabpage6_btn_plus_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 };
 this.Tab00_Tabpage6_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var selectedRow = this.ds_military.rowposition;
-};]]></Script>
+	if(this.ds_military.rowcount >= 1) 
+	{
+		var result = this.confirm("정말로 삭제하시겠습니까?" , "삭제", "취소");
+		var infoNo = this.Tab00.Tabpage6.form.Grid00.getCellText(this.ds_military.rowposition, 0);
+		
+		if(result == true) {
+			this.ds_military.deleteRow(this.ds_military.rowposition);
+ 			this.transaction(
+ 				"tr_remove_military"// 1.ID
+ 				,"HirpURL::admin/removeMilitary.hirp"// 2.URL		
+ 				,"" // 3.InDs : F->S jsp(I,U,D)
+ 				,"" // 4.OutDs : S->F jsp(SELECT)
+ 				,"emplId="+selectedEmplId+" infoNo="+infoNo // 5.InVar : F->S(var)
+ 				,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 			);	
+		}
+	}
+	else {
+		this.alert("삭제할 행이 없습니다.");
+	}
+};
+
+// this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+// {
+// 	this.transaction(
+// 		"tr_empl_modify"// 1.ID
+// 		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
+// 		,"in_empl=ds_empl:U in_jobRole=ds_jobRole:U in_career=ds_career:U in_lang=ds_lang:U in_cert=ds_cert:U in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
+// 		,"" // 4.OutDs : S->F jsp(SELECT)
+// 		,"emplId="+selectedEmplId+" jobRoleNo="+jobRoleNo // 5.InVar : F->S(var)
+// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+// 	);	
+// };
+]]></Script>
   </Form>
 </FDL>

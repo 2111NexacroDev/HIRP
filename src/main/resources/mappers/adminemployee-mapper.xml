@@ -54,7 +54,7 @@
 		<result property="certEndDate" column="CERT_END_DATE"/>
 	</resultMap>
 	<resultMap type="JobRole" id="jobRoleResultMap">
-		<id property="jobRoleNo" column="JOB_ROLL_NO"/>
+		<id property="jobRoleNo" column="JOB_ROLE_NO"/>
 		<result property="emplId" column="EMPL_ID"/>
 		<result property="jobRoleDivision" column="JOB_ROLE_DIVISION"/>
 		<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
@@ -143,17 +143,6 @@
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
 	
-	<update id="resignEmployee">
-		UPDATE EMPL_TBL 
-		SET IS_STATUS = '퇴사',
-			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
-		WHERE EMPL_ID = #{emplId}
-	</update>
-	
-	<update id="updateLevelEmployee">
-		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
-	</update>
-	
 	<select id="selectAllJobById" resultMap="jobRoleResultMap">
 		SELECT * FROM JOB_ROLE_TBL WHERE EMPL_ID = #{emplId }
 	</select>
@@ -173,4 +162,35 @@
 	<select id="selectAllMilitaryById" resultMap="militaryResultMap">
 		SELECT * FROM MILITARY_TBL WHERE EMPL_ID = #{emplId }
 	</select>
+	
+	<update id="resignEmployee">
+		UPDATE EMPL_TBL 
+		SET IS_STATUS = '퇴사',
+			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<update id="updateLevelEmployee">
+		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<delete id="deleteInfoAboutJob">
+		DELETE FROM JOB_ROLE_TBL WHERE JOB_ROLE_NO = #{jobRoleNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutCareer">
+		DELETE FROM CAREER_TBL WHERE CAREER_NO = #{careerNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutLang">
+		DELETE FROM LANG_TBL WHERE LANG_NO = #{langNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutCert">
+		DELETE FROM CERT_TBL WHERE CERT_NO = #{certNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutMilitary">
+		DELETE FROM MILITARY_TBL WHERE MILITARY_NO = #{militaryNo}
+	</delete>
 </mapper>
