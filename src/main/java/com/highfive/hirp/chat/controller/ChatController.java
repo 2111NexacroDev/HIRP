@@ -29,7 +29,7 @@ public class ChatController {
 	private ChatService cService;
 	
 	// 채팅방 입장 테스트
-	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
+	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
 	public String view_chat(Model model
 			, HttpServletRequest request
 			, HttpServletResponse response) throws Exception {

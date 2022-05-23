@@ -15,7 +15,7 @@ public class NoticeBoard {
 	private Date writeDate;
 	private int noticeCount;
 	private String status;
-	List<BoardAttachedFile> bList;
+	private List<BoardAttachedFile> bList;
 	
 	public NoticeBoard() {}
 

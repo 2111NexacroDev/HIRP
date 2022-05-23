@@ -33,7 +33,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>*.hirp</url-pattern>
 	</servlet-mapping>
-
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

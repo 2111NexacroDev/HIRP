@@ -45,15 +45,13 @@
 			<artifactId>spring-messaging</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		
 		<!-- stomp -->
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-stomp</artifactId>
 			<version>5.3.2.RELEASE</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -69,7 +67,7 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.11.0</version>
 		</dependency>
-		
+
 		
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
