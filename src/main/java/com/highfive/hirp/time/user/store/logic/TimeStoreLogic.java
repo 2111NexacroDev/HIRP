@@ -55,7 +55,6 @@ public class TimeStoreLogic implements TimeStore{
 		return modify;
 	}
 
-//
 //	// 사용자 근태 조정 신청
 //	@Override
 //	public int updateTimeModify(SqlSession sqlSession, TimeModify timeModify) {

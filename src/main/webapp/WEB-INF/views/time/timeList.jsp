@@ -56,27 +56,8 @@
 		</aside>
 		<article id="sub" class="">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom">출/퇴근 내역</h1>
-
-			<div class="row mt-20 no-space">
-				<!-- <h4 class="col-12 mb-20">여백 필요 없을 경우</h4> -->
-				<div class="col basic-border">
-					<div>이번주 누적</div>
-				</div>
-				<div class="col basic-border">
-					<div>이번주 초과</div>
-				</div>
-				<div class="col basic-border">
-					<div>이번주 잔여</div>
-				</div>
-				<div class="col basic-border">
-					<div>이번달 누적</div>
-				</div>
-				<div class="col basic-border">
-					<div>이번달 연장</div>
-				</div>
-			</div><br><br><br><br><br>
-			출퇴근 내역
+			<h1 class="basic-border-bottom">출/퇴근 내역</h1><br><br><br>
+			출/퇴근 내역
 			<table class="table--basic mt-20">
 				<thead>
 					<tr>
