@@ -38,6 +38,7 @@
 			    <c:forEach items="${emplList }" var="empl">
 			     	<c:set var="count" value="${count+1}" />
 				    <!-- 직원명 div  -->
+				    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
 				    <div class="chat-row mt-10  padding-bottom-10" onclick="window.open('/chat.hirp','chattingRoom${count}','width=400,height=600,location=no,status=no,scrollbars=no');">
 					    <div class="mr-20 ml-20" style="width:30px;">
 			      		    <button class="btn--profile" type="button">
