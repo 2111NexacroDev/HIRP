@@ -91,8 +91,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public List<ApprAccept> printApprovalStatus(int docNo) {
-		List<ApprAccept> aList = aStore.selectApprovalStatus(sqlSession,docNo);
+	public List<ApprAccept> printApprovalStatus(int apprNo) {
+		List<ApprAccept> aList = aStore.selectApprovalStatus(sqlSession,apprNo);
 		return aList;
 	}
 
