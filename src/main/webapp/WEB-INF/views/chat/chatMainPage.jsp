@@ -57,7 +57,7 @@
 	            	</c:forEach>
 			    
 			    </div>
-        	</div>
+        	</div> 
         </article>
     </div>
     <script>
@@ -96,13 +96,7 @@
 						}
 						
 						
-						emplOneDiv +=		     	"<c:if test='${"+eList[i].emplProfile+" eq null}'>"
-												    +    "<img src='../resources/images/img_no_profile.png' alt='profile'>"
-								      		    +	"</c:if>"
-								      		    +	"<c:if test='${"+eList[i].emplProfile+" ne null}'>"
-												    +    "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>"
-								      		    +	"</c:if>"
-											+    "</button>"
+						emplOneDiv +=		"</button>"
 										+    "</div>"
 										+    "<div class='ml-20'>"
 										    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
