@@ -20,6 +20,7 @@ import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 
 @Controller
@@ -27,6 +28,9 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService cService;
+	
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	// 채팅방 입장 테스트
 	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
@@ -40,8 +44,23 @@ public class ChatController {
 	//채팅 메인페이지 (직원 목록)
 	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv) {
+		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+				
+			if(!emplList.isEmpty()){
+				mv.addObject("emplList", emplList);
+				System.out.println(emplList);
+				mv.setViewName("chat/chatMainPage");
+			} else {
+				mv.addObject("msg", "직원 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		
-		mv.setViewName("chat/chatMainPage");
 		return mv;
 	}
 	
