@@ -31,10 +31,25 @@
 	<!-- 조직도 조회 -->
 	<select id="selectAllGroup" 
 		resultMap="deptResultMap">
+		SELECT * 
+		FROM (
 		SELECT DEPT_NAME, DEPT_CODE, DEPT_UPPERCODE, DEPT_LEVEL
 		FROM DEPT_TBL
+		UNION SELECT
+		EMPL_NAME, EMPL_ID, DEPT_CODE, 3
+		FROM EMPL_TBL)
 		START WITH DEPT_UPPERCODE IS NULL
 		CONNECT BY PRIOR DEPT_CODE = DEPT_UPPERCODE
+	</select>
+	
+	<!-- 회원 조회 -->
+	<select id="selectAllGroupMember" parameterType="String" resultMap="groupResultMap">
+		SELECT A.*
+		FROM EMPL_TBL A
+	   WHERE 1=1
+	    <if test='emplId !="" and emplId != null'>
+  		AND A.EMPL_ID = #{emplId}
+  		</if>
 	</select>
 
 </mapper>

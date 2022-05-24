@@ -1078,3 +1078,7 @@ article {
 }
 
 /* 채팅창 끝 */
+
+#snb ul.no-margin>li  {
+	    margin-top: 10px;
+}

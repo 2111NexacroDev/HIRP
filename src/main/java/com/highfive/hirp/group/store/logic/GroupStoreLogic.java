@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
+import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.store.GroupStore;
 
@@ -33,5 +34,11 @@ public class GroupStoreLogic implements GroupStore{
 	public Member selectDetailGroup(SqlSession sqlSession, String emplId) {
 		Member member = sqlSession.selectOne("GroupMapper.selectDetailGroup", emplId);
 		return member;
+	}
+
+	@Override
+	public List<Employee> selectAllGroupMember(SqlSession sqlSession, String emplId) {
+		List<Employee> emplList = sqlSession.selectList("GroupMapper.selectAllGroupMember", emplId);
+		return emplList;
 	}
 }
