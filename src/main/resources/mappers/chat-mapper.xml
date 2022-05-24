@@ -4,5 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ChatMapper">
-
+	<resultMap type="ChatRoom" id="chatroomResultMap">
+		<id property="chatroomNo" column="CHATROOM_NO"/>
+		<result property="chatroomName" column="CHATROOM_NAME"/>
+		<result property="chatroomManager" column="CHATROOM_MANAGER"/>
+		<result property="chatroomDate" column="CHATROOM_DATE"/>
+		<association javaType="Message" property="message" column="MSG_NO">
+	        <id property="msgNo" column="MSG_NO"/>
+	        <result property="chatroomNo" column="CHATROOM_NO"/>
+	        <result property="msgSendid" column="MSG_SENDID"/>
+	        <result property="msgContents" column="MSG_CONTENTS"/>
+	        <result property="msgSenddate" column="MSG_SENDDATE"/>
+      	</association>  
+	</resultMap>
+	
+	<!-- 채팅방 목록 출력 -->
+	<!-- 내가 초대 되어있는 채팅방이고, 
+	최신 메세지순으로 정렬(메세지 다음으로는 채팅방 만든 순) -->
+	<select id="selectMyChattingRoom" resultMap="chatroomResultMap">
+		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE,
+		MSG_CONTENTS,
+		TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE
+		FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN MESSAGE_TBL USING(CHATROOM_NO)
+		WHERE (CHATROOM_NO, MSG_SENDDATE) 
+		    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
+		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
+	</select>
 </mapper>

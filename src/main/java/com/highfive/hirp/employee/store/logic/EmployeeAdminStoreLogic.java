@@ -34,6 +34,13 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		return eList;
 	}
 	
+	//직원 검색
+	@Override
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmplList", emplSearchKeyword);
+		return eList;
+	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
@@ -143,4 +150,6 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutMilitary", militaryNo);
 		return result;
 	}
+
+
 }

@@ -17,17 +17,7 @@ import com.highfive.hirp.employee.domain.Employee;
 public class ChatStoreLogic implements ChatStore{
 
 	//직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeList(SqlSession sqlSession) {
-		List<Employee> emplList = sqlSession.selectList("ChatMapper.selectEmployeeList");
-		return emplList;
-	}
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeListByName(SqlSession sqlSession, String name) {
-		List<Employee> emplList = sqlSession.selectList("ChatMapper.selectEmployeeListByName", name);
-		return emplList;
-	}
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	@Override
 	public int insertChattingRoom(SqlSession sqlSession, ChatRoom chatRoom) {

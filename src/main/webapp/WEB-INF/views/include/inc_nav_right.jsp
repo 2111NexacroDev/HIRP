@@ -3,7 +3,8 @@
 
 <nav id="nav--right">
     <c:if test="${sessionScope.emplId eq 'admin'}"><a class="a--adminLink" href="/admin.hirp">관리자 페이지로</a></c:if>
-    <button class="btn--chat" type="button" onclick="OpenWin_variety('','chatting room',200,500,10,10)"></button>
+    <button class="btn--chat" type="button" 
+    	onclick="window.open('/chatMain.hirp','chatting','width=400,height=600,location=no,status=no,scrollbars=no');"></button>
     <button class="btn--alarm" type="button">
         <span>3</span>
     </button>

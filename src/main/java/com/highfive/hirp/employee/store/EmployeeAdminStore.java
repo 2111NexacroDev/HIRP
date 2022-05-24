@@ -17,6 +17,7 @@ public interface EmployeeAdminStore {
 	List<Employee> selectBirthdayList(SqlSession sqlSession);
 	List<Employee> selectAllEmployee(SqlSession sqlSession);
 	List<Employee> selectAllEmployeeWithName(SqlSession sqlSession);
+	List<Employee> selectSearchEmplList(SqlSession sqlSession, String keyword);//직원 검색
 	List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode);
 	List<Employee> selectEmployeeWithDeptCode(SqlSession sqlSession, String deptCode);
 	List<Employee> selectAllRetiree(SqlSession sqlSession);

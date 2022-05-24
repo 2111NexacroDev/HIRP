@@ -190,7 +190,7 @@
 			</form>
 			
         </article>
-        
+        </div> <!-- common page에  div 안 닫힌 거 하나 있어서 넣어줬음. -->
         <script>
         	function onNextButton(e){
         		openModal(e);
@@ -279,7 +279,7 @@
 				console.log(emplSearchKeyword);
 				
 				$.ajax({
-					url:"/survey/searchEmplList.hirp",
+					url:"/searchEmplList.hirp",
 					type:"post",
 					data:{"emplSearchKeyword" : emplSearchKeyword},
 					success: function(eList){

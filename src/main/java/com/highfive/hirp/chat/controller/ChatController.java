@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,7 @@ import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 
 @Controller
@@ -27,6 +30,9 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService cService;
+	
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	// 채팅방 입장 테스트
 	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
@@ -38,9 +44,28 @@ public class ChatController {
 	}
 		
 	//채팅 메인페이지 (직원 목록)
+	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv) {
+		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+				
+			if(!emplList.isEmpty()){
+				mv.addObject("emplList", emplList);
+				System.out.println(emplList);
+				mv.setViewName("chat/chatMainPage");
+			} else {
+				mv.addObject("msg", "직원 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
+	
 	//직원 이름으로 검색
 	public ModelAndView chatEmplSearch(ModelAndView mv) {
 		return mv;
@@ -71,15 +96,29 @@ public class ChatController {
 	}
 	
 	//채팅방 목록 페이지
-	public ModelAndView chattingRoomList(ModelAndView mv) {
+	@RequestMapping(value = "chatroomList.hirp", method = RequestMethod.GET)
+	public ModelAndView chattingRoomList(ModelAndView mv
+			, HttpServletRequest request ) {
 		//내가 참여한 채팅방 목록 가져오기
 		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
-		
 		//마지막 채팅 내용 표시????
 		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
 		
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		try {
+			List<ChatRoom> chatroomList = cService.selectMyChattingRoom(emplId);
+			mv.addObject("chatroomList", chatroomList);
+			mv.setViewName("chat/chatRoomPage");
+			//list null체크 jsp에서 해주기 (채팅 목록 없어도 조회는 되어야 하니까)
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
+	
 	//채팅방 내부 페이지
 	public ModelAndView chattingRoomPage(ModelAndView mv
 			,@RequestParam("chatRoom") ChatRoom chatRoom) {

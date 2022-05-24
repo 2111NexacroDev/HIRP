@@ -63,5 +63,4 @@
     </websocket:handlers>
     
     <beans:bean id="handlerChat" class="com.highfive.hirp.chat.handler.HandlerChat" ></beans:bean>
-	
 </beans:beans>

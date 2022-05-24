@@ -14,10 +14,12 @@ public interface EmployeeAdminService {
 	public List<Employee> printBirthdayList();
 	public List<Employee> printAllEmployee();
 	public List<Employee> printAllEmployeeWithName(); //deptname, position name까지 select
+	public List<Employee> selectSearchEmplList(String keyword); //직원 검색, name 다 가져옴.
 	public List<Employee> printAllEmployeeWithDeptCode(String deptCode); //하위부서까지
 	public List<Employee> printEmployeeWithDeptCode(String deptCode); //내 부서 소속만
 	public List<Employee> printAllRetiree();
 	public List<Employee> printAllTempEmployee();
+	
 	
 	// 직원 항목별 정보 조회
 	public Employee printEmployeeInfo(String emplId);	

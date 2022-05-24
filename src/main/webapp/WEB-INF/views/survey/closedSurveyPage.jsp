@@ -40,28 +40,35 @@
 <%--                   		<c:set var="row_num" value="0"/> --%>
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
                     	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-                    	<c:forEach items="${sList }" var="survey" varStatus="status">
-<%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
-							<c:set var="row_num" value="${row_num-1 }"/>
-							<c:url var="sDetail" value="/survey/surveyResult.hirp">
-								<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-							</c:url>
+                    	<c:if test="${empty sList }">
                     		<tr>
-	                        	<td><c:out value="${row_num }"/> </td>
-	                            <td>
-	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-	                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
-	                            	</c:if>
-	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
-	                            		<button class="emergency-opacity" type="button" style="cursor:default;">미참여</button>
-	                            	</c:if>
-	                            </td>
-	                            <td style="cursor:pointer;"><a href="${sDetail}">${survey.surveyTitle }</a></td>
-	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.emplName } ${survey.positionName }</td>
+	                        	<td colspan="6" class="t-c"> 마감된 설문조사가 없습니다. </td>
 	                        </tr>
-                    	</c:forEach>
+                    	</c:if>
+                    	<c:if test="${not empty sList }">
+	                    	<c:forEach items="${sList }" var="survey" varStatus="status">
+	<%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
+								<c:set var="row_num" value="${row_num-1 }"/>
+								<c:url var="sDetail" value="/survey/surveyResult.hirp">
+									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+								</c:url>
+	                    		<tr>
+		                        	<td><c:out value="${row_num }"/> </td>
+		                            <td>
+		                            	<!-- 버튼은 둘 중 하나만 출력 -->
+		                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
+		                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
+		                            	</c:if>
+		                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
+		                            		<button class="emergency-opacity" type="button" style="cursor:default;">미참여</button>
+		                            	</c:if>
+		                            </td>
+		                            <td style="cursor:pointer;"><a href="${sDetail}">${survey.surveyTitle }</a></td>
+		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+		                            <td>${survey.emplName } ${survey.positionName }</td>
+		                        </tr>
+	                    	</c:forEach>
+	                    </c:if>
 <!--                         <tr> -->
 <!--                         	<td>3</td> -->
 <!--                             <td> -->

@@ -12,10 +12,7 @@ import com.highfive.hirp.employee.domain.Employee;
 public interface ChatService {
 
 	//직원 목록 가져오는 건 employee 합쳐서 만들어진 거 있으면 그쪽에서 가져다 쓰기
-	//직원 목록 가져오기
-	public List<Employee> selectEmployeeList();
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	public List<Employee> selectEmployeeListByName(String name);
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	public int insertChattingRoom(ChatRoom chatRoom);
 	public int insertChatRoomJoin(List<String> emplIdList);
