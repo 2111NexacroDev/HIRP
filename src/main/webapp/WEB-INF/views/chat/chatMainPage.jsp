@@ -39,8 +39,12 @@
 				    <div class="chat-row mt-10  padding-bottom-10">
 					    <div class="mr-20 ml-20" style="width:30px;">
 			      		    <button class="btn--profile" type="button">
-						        <img src="../resources/images/profile.jpg" alt="profile">
-						        <!-- 유저마다 다른 사진 출력돼야함 -->
+			      		    	<c:if test="${empl.emplProfile eq null}">
+							        <img src="../resources/images/img_no_profile.png" alt="profile">
+			      		    	</c:if>
+			      		    	<c:if test="${empl.emplProfile ne null}">
+							        <img src="../resources/uploadFiles/${empl.emplProfile }" alt="profile">
+			      		    	</c:if>
 						    </button>
 					    </div>
 					    <div class="ml-20">
