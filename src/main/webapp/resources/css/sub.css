@@ -588,10 +588,10 @@ section[class^="todo--"] {
     }
 }
 
-/* #snb>ul>li button {
+#snb>ul.ul--utility>li button {
     padding: 0;
     background-color: transparent;
-} */
+}
 
 /* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url("../images/icons/icon_success.png");
