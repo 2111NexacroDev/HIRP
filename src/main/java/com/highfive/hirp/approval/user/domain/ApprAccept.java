@@ -4,22 +4,24 @@ import java.sql.Date;
 
 public class ApprAccept {
 	private int acceptNo;
-	private int docNo;
+	private int apprNo;
 	private String emplId;
 	private int apprLevel;
+	private String apprType;
 	private String status;
 	private String apprComment;
 	private Date apprDate;
 	
 	public ApprAccept() {}
 
-	public ApprAccept(int acceptNo, int docNo, String emplId, int apprLevel, String status, String apprComment,
-			Date apprDate) {
+	public ApprAccept(int acceptNo, int apprNo, String emplId, int apprLevel, String apprType, String status,
+			String apprComment, Date apprDate) {
 		super();
 		this.acceptNo = acceptNo;
-		this.docNo = docNo;
+		this.apprNo = apprNo;
 		this.emplId = emplId;
 		this.apprLevel = apprLevel;
+		this.apprType = apprType;
 		this.status = status;
 		this.apprComment = apprComment;
 		this.apprDate = apprDate;
@@ -33,12 +35,12 @@ public class ApprAccept {
 		this.acceptNo = acceptNo;
 	}
 
-	public int getDocNo() {
-		return docNo;
+	public int getApprNo() {
+		return apprNo;
 	}
 
-	public void setDocNo(int docNo) {
-		this.docNo = docNo;
+	public void setApprNo(int apprNo) {
+		this.apprNo = apprNo;
 	}
 
 	public String getEmplId() {
@@ -55,6 +57,14 @@ public class ApprAccept {
 
 	public void setApprLevel(int apprLevel) {
 		this.apprLevel = apprLevel;
+	}
+
+	public String getApprType() {
+		return apprType;
+	}
+
+	public void setApprType(String apprType) {
+		this.apprType = apprType;
 	}
 
 	public String getStatus() {
@@ -83,10 +93,11 @@ public class ApprAccept {
 
 	@Override
 	public String toString() {
-		return "ApprAccept [acceptNo=" + acceptNo + ", docNo=" + docNo + ", emplId=" + emplId + ", apprLevel="
-				+ apprLevel + ", status=" + status + ", apprComment=" + apprComment + ", apprDate=" + apprDate + "]";
+		return "ApprAccept [acceptNo=" + acceptNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", apprLevel="
+				+ apprLevel + ", apprType=" + apprType + ", status=" + status + ", apprComment=" + apprComment
+				+ ", apprDate=" + apprDate + "]";
 	}
-	
+
 	
 	
 	

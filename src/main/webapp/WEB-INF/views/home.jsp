@@ -28,10 +28,14 @@
                     <!-- 컬럼1 -->
                     <section>
                         <figure class="figure--profile">
-                            <img src="../resources/images/profile.jpg" alt="profile">
-                            <!-- 유저마다 다른 사진 출력돼야함 -->
+                            <c:if test="${employee.emplProfile ne null}">
+                                <img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진">
+                            </c:if>
+                            <c:if test="${employee.emplProfile eq null}">
+                                <p>No Image</p>
+                            </c:if>
                         </figure>
-                        <h2 class="t-c">ㅇㅇㅇ</h2>
+                        <h2 class="t-c">${sessionScope.emplName }</h2>
                     </section>
                     <section>
                         <h2>근태관리</h2>

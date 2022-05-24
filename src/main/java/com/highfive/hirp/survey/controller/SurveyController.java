@@ -799,23 +799,68 @@ public class SurveyController {
 	}
 	
 	//설문 검색
+	@RequestMapping(value="/survey/search.hirp", method=RequestMethod.POST)
 	public ModelAndView surveySearch(ModelAndView mv
 			,@ModelAttribute Search search
 			,@RequestParam("surveyStatus") String surveyStatus
 			, HttpServletRequest request) {
 		//surveyStatus 담아서 진행중/마감 설문조사 나누어 검색하기
 		//내가 만든 설문은 surveyStatus 비워진 상태, session에서 아이디값 가져오기
-		
-		HttpSession session = request.getSession();
-		String emplId = session.getAttribute("emplId").toString();
-		
-		SurveySearch surveySearch = new SurveySearch(search);
-		if(surveyStatus == null) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = session.getAttribute("emplId").toString();
+			System.out.println("설문 검색");
+			System.out.println(search);
+			SurveySearch surveySearch = new SurveySearch(search);
 			surveySearch.setEmplId(emplId);
-		} else {
 			surveySearch.setSurveyStatus(surveyStatus);
+			
+			List<Survey> searchList = sService.printSeartchSurvey(surveySearch);
+			if(searchList != null) {
+				System.out.println(searchList);
+				mv.addObject("sList", searchList);
+				if(surveyStatus.equals("C")) {
+					System.out.println("진행중인 설문");
+					mv.setViewName("survey/proceedSurveyPage");
+				} else if (surveyStatus.equals("F")) {
+					System.out.println("마감된 설문");
+					mv.setViewName("survey/closedSurveyPage");
+				} else if(surveyStatus.equals("W")){
+					System.out.println("내가 작성한 설문");
+					List<SurveySub> subAllList = new ArrayList<SurveySub>();
+					List<Integer> subAllCountList = new ArrayList<Integer>();
+					List<Integer> answerSubCountList = new ArrayList<Integer>();
+					for(int j = 0; j < searchList.size(); j++) {
+						List<SurveySub> subList = sService.selectSurveySubByNo(searchList.get(j).getSurveyNo());
+						subAllList.addAll(subList); //응답자 목록 가져오기
+						subAllCountList.add(j, subList.size());
+						int answerSubCount = 0;
+						for(int i = 0 ; i < subList.size() ; i++) {
+							if(subList.get(i).getSubAnswerstatus().equals("Y")) {
+								answerSubCount++;
+							}
+						}
+						answerSubCountList.add(j, answerSubCount);
+					}
+					
+					//화면에서 nullcheck 해줄 거임.
+					mv.addObject("sList", searchList);
+					mv.addObject("subAllList", subAllList);
+					mv.addObject("subAllCountList", subAllCountList); //전체 응답 대상자 수
+					mv.addObject("answerSubCountList", answerSubCountList); //응답한 사람 수
+					mv.setViewName("survey/wroteSurveyPage");
+				} else {
+					mv.addObject("msg", "설문 검색 실패1");
+					mv.setViewName("common/errorPage");
+				}
+			} else {
+				mv.addObject("msg", "설문 검색 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
-		List<Survey> searchList = sService.printSeartchSurvey(surveySearch);
 		return mv;
 	}
 

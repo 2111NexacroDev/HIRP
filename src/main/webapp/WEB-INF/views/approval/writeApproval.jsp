@@ -2,15 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/views/include/inc_head.jsp"%>
-<link rel="stylesheet" href="../../../resources/css/sub.css">
-<!-- 하이알피 서브페이지 CSS -->
 
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style>
 #approvalLine-btn {
 	background-color: white;
@@ -21,8 +13,21 @@
 	float: right;
 }
 
+#submit-btn {
+	background-color: white;
+	border: solid 1px #888;
+	border-radius: 4px;
+	width: 80px;
+	height: 35px;
+	float: right;
+	margin :30px 0px;
+}
+
+
+
 #apprTable {
-	border: solid 1px lightgray;
+	border: solid 1px #888;
+	border-radius: 4px;
 	width: 230px;
 	font-size: 15px;
 	text-align: center;
@@ -40,7 +45,7 @@
 	height: 100px;
 	display: inline-block;
 	text-align : center;
-	border: solid 1px lightgray;
+	border: solid 1px #888;
 	margin : 0px;
 }
 
@@ -49,7 +54,7 @@
 	height: 100px;
 	display: inline-block;
 	text-align : center;
-	border: solid 1px lightgray;
+	border: solid 1px #888;
 
 }
 
@@ -58,7 +63,7 @@
 	height: 20%;
 	display: inline-block;
 	text-align : center;
-	border-bottom: solid 1px lightgray;
+	border-bottom: solid 1px #888;
 	margin : 0px;
 	padding-top : 2px;
 }
@@ -68,7 +73,7 @@
 	height: 60%;
 	display: inline-block;
 	text-align : center;
-	border-bottom: solid 1px lightgray;
+	border-bottom: solid 1px #888;
 	margin : 0px;
 	padding-top : 23px;
 
@@ -79,7 +84,7 @@
 	height: 20%;
 	display: inline-block;
 	text-align : center;
-	border-bottom: solid 1px lightgray;
+	border-bottom: solid 1px #888;
 	margin : 0px;
 	color :  #888;
 	padding-top : 2px;
@@ -88,65 +93,7 @@
 
 
 <body>
-	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
-
-	<div id="conts">
-		<aside id="snb">
-			<h1>전자결재</h1>
-			<a class="btn--function" class="basic" type="button"
-				onclick="openModal(this);">새 결재 진행</a>
-			<section class="section--modal">
-				<div class="bg-black"></div>
-				<!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-				<div class="section--modal__conts">
-					<button class="btn--close"></button>
-					<h3>결재양식 선택</h3>
-					<p class="mb-20">
-					<div>
-						<div class="bor-round shadow" id="formListDiv"
-							style="width: 250px; height: 180px;">
-							<ul>
-								<c:forEach var="form" items="${formList }">
-									<c:url var="fDetail" value="/approvalForm/detail.hirp">
-										<c:param name="formNo" value="${form.formNo }"></c:param>
-									</c:url>
-									<li><a href="${fDetail }">${form.formTitle }</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-					</div>
-					</p>
-					<div></div>
-					<div class="btns-wrap mt-20 t-r">
-						<button class="point" type="button">확인</button>
-						<button class="finished closeWindow" type="button">닫기</button>
-					</div>
-				</div>
-			</section>
-			<ul>
-				<li><a href="">결재하기</a>
-					<ul>
-						<li><a href="#">결재문서함</a></li>
-					</ul></li>
-				<li><a href="">기안문서함</a>
-					<ul>
-						<li><a href="#">상신문서함</a></li>
-						<li><a href="#">임시문서함</a></li>
-						<li><a href="#">반려문서함</a></li>
-						<li><a href="#">결재완료함</a></li>
-					</ul></li>
-				<li><a href="">참조함</a>
-					<ul>
-						<li><a href="#">참조문서함</a></li>
-						<li><a href="#">열람문서함</a></li>
-					</ul></li>
-			</ul>
-		</aside>
-
-		<article id="sub" class="">
-
-			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-
+<%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
 
 			<h1 class="basic-border-bottom">기안하기</h1>
 
@@ -158,14 +105,14 @@
 					<img src="../../../../resources/images/icons/btn_plus.png"
 						style="width: 10px; height: auto; vertical-align: middle;" />&nbsp&nbsp결재선
 				</button>
-				<section class="section--modal">
-					<div class="bg-black"></div>
+				<section class="section--modal" id="apprLineSession">
+					<div class="bg-#888"></div>
 					<div class="section--modal__conts"
 						style="border: none; width: 1200px;">
-						<button class="btn--close" type="button"></button>
+						<button class="btn--close" type="button" onclick="closeApprModal()"></button>
 						<h3>결재선 선택</h3>
 						<div class="row mt-20">
-							<div width="30%">
+							<div style="width:40%;">
 								<table class="table--basic mt-20" id="emplTable">
 									<tr>
 										<th>부서</th>
@@ -185,39 +132,41 @@
 
 								</table>
 							</div>
-							<div width="70%" id="emplListDiv">
+							<div style="width:60%;" id="emplListDiv">
 								<table class="table--basic mt-20" id="apprEmplTable">
-									<tr>
+									<tr id="apprEmplTableHead">
 										<th>부서</th>
 										<th>직급</th>
 										<th>이름</th>
 										<th>구분</th>
+										<th><button class="noneBackground" onclick='removeAllEmpl(this)'><i class="fa-solid fa-trash-can"></i></button></th>
 									</tr>
 								</table>
 							</div>
-							<div class="btns-wrap mt-20 t-r">
+						</div>
+						<br><br>
+						<div class="btns-wrap mt-20 t-r">
 								<button class="point" type="button" onclick="addApprLine()">확인</button>
-								<button class="finished closeWindow" type="button">닫기</button>
-							</div>
-
+								<button class="finished" type="button" onclick="closeApprModal()">닫기</button>
 						</div>
 				</section>
 				<br> <br>
-				<form action="/register/appr" method="post">
-					<div style="border: solid 1px lightgray; margin-top: 20px; position: relative;">
+				<form action="/register/appr.hirp" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="formNo" value="${apprform.formNo}">
+					<input type="hidden" name="emplId" value="${emplId}">
+					<div style="border: solid 1px #888; border-radius: 4px; margin-top: 20px; position: relative;">
 						<table id="apprTable">
-							<tr
-								style="height: 30px; border: solid 1px lightgray; line-height: 30px;">
+							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
 								<td>기안자</td>
 								<td>${emplName}${employee.positionCode }</td>
 							</tr>
 							<tr
-								style="height: 30px; border: solid 1px lightgray; line-height: 30px;">
+								style="height: 30px; border: solid 1px #888; line-height: 30px;">
 								<td>기안일</td>
 								<td><div id="current_date" /></td>
 							</tr>
 							<tr
-								style="height: 35px; border: solid 1px lightgray; line-height: 30px;">
+								style="height: 35px; border: solid 1px #888; line-height: 30px;">
 								<td>소속</td>
 								<td>${employee.deptCode}</td>
 							</tr>
@@ -238,21 +187,17 @@
 							</div>
 
 							<div>
-								<input type="text" size="125">
+								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;">
 							</div>
 						</div>
 						<div class="row mt-20">
 							<div style="line-height: 25px;">첨부파일</div>
 							<div>
-								<button id="btn-upload" type="button"
-									style="border: 1px solid #ddd; outline: none;">파일 추가</button>
+								<button id="btn-upload" type="button" style= "background-color: white; border: solid 1px #888; border-radius: 4px;">파일 추가</button>
 							</div>
-							<input id="uploadFiles" name="uploadFiles" type="file" multiple
-								style="display: none;"> <span
-								style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은
-								최대 10개까지 등록이 가능합니다.</span>
-							<div class="data_file_txt" id="data_file_txt"
-								style="margin: 40px; margin-left:0px;">
+							<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display: none;"> 
+							<span style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+							<div class="data_file_txt" id="data_file_txt" style="margin: 40px; margin-left:0px; width:100%">
 								<span></span> <br>
 								<div id="articlefileChange"></div>
 							</div>
@@ -260,10 +205,11 @@
 					
 					<br>
 					<div>
-						<textarea id="summernote" name="formContents">${apprform.formContents}</textarea>
+						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
 					</div>
-			</div>
+			<button type="submit" id="submit-btn">상신하기</button>
 			</form>
+			</div>
 		</article>
 	</div>
 
@@ -346,8 +292,7 @@
 		    	fileCount --;
 		        console.log(content_files);
 		    }
-
-		    
+     
 		    
 		    
 		    
@@ -386,9 +331,27 @@
 			}
 
 			
-			var arr = []; //2차원 배열{(deptNAme, positionName, emplName, emplId),(deptNAme, positionName, emplName, emplId),...}
+			var arr = []; //2차원 배열{(deptName, positionName, emplName, emplId),(deptName, positionName, emplName, emplId),...}
 			function addEmplDiv(tdArr) {
-				arr.push(tdArr);//tdArr 배열을 2차원 배열에 넣어줌
+				var dblCheck = null;
+				for(var i=0;i<arr.length;i++){
+				//중복된 결재자 추가 안되게 처리
+					dblCheck = JSON.stringify(arr[i][0])===JSON.stringify(tdArr[0])&&JSON.stringify(arr[i][1])===JSON.stringify(tdArr[1])&&JSON.stringify(arr[i][2])===JSON.stringify(tdArr[2])
+					if(dblCheck == true){
+						break;
+					}
+				}
+				if(dblCheck){
+					alert("이미 등록한 결재자입니다.");
+				}
+				else{
+				
+					arr.push(tdArr);//tdArr 배열을 2차원 배열에 넣어줌
+				if(arr.length > 6){
+					alert("결재선은 6명까지 등록가능합니다.");
+					arr.pop();
+				
+				}else{
 				var $apprEmplTable = $("#apprEmplTable");//모달창에 클릭한 값을 넣어줄 테이블
 				var emplDivHtml = "<tr>"
 						+ "<td>"
@@ -401,30 +364,75 @@
 						+ tdArr[2]
 						+ "</td>"
 						+ "<td>"
-						+ "<select id='apprOpt[]' name='apprOpt[]'style='width:50px;'>"
-						+ "<option value='approval'>결재</option>"
-						+ "<option value='agreement'>합의</option>"
-						+ "</select>" + "</td>" + "</tr>"
+						+ "<select id='apprOpt[]' name='apprOpt[]'style='width:50px;' onchange='addSelected(this)'>"
+						+ "<option value='결재'>결재</option>"
+						+ "<option value='합의'>합의</option>"
+						+ "</select>" + "</td>" 
+						+ "<td>"+"<button class='noneBackground' onclick='removeEmplTr(this)'><i class='fa-solid fa-trash-can'></i></button>"+"</td>"
+						+ "</tr>"
 				$apprEmplTable.append(emplDivHtml);//값을 넣어준다.
-			}
+			}}
+				}
+				
 
+			//모달창 테이블과 배열에서 해당 tr 삭제
+			function removeEmplTr(obj){
+				var emplTr = $(obj).closest('tr');//obj와 가장 가까운 tr
+				var emplTrNum = emplTr.prevAll().length;//tr의 index
+				arr.splice(emplTrNum-1,1);//배열에서 삭제
+				emplTr.remove();//table에서 삭제
+			}
+			
+			//모달창에서 선택한 요소 전체 삭제
+			function removeAllEmpl(){
+				var allEmplTr = $("#apprEmplTableHead").nextAll();//table head부분 제외한 나머지부분 전체 선택
+				arr=[];//배열 비워줌
+				allEmplTr.remove();//table에서 전체 삭제
+			}
+			
+			//모닫창 닫고 목록 테이블 삭제
+			function closeApprModal(){
+				 $("#apprLineSession").stop().fadeOut(100);
+				removeAllEmpl();
+			}
+			
+			//select 선택된 값 넣기
+			function addSelected(obj){
+				var emplTr = $(obj).closest('tr');//obj와 가장 가까운 tr
+				var emplTrNum = emplTr.prevAll().length;//tr의 index
+				 if(arr[emplTrNum-1].length > 4){
+					arr[emplTrNum-1].pop()
+					arr[emplTrNum-1].push($('select[name="apprOpt[]"]')[emplTrNum-1].value);
+				}else{
+					arr[emplTrNum-1].push($('select[name="apprOpt[]"]')[emplTrNum-1].value);
+				} 
+				//arr[i].push($('select[name="apprOpt[]"]')[i].value);
+			}
+			
 			
 			function addApprLine() {
+				
 				//배열에 값이 들어있을 경우 동작
-				if (arr != null) {
+				 if (arr != null) {
 					var $approvalLine = $("#approvalLine");
-
+					var otherDiv = $(".singleApprLine").first().nextAll();
+					otherDiv.remove();	
+					
+					
 					for (var i = 0; i < arr.length; i++) {
 						//결재type select 값 배열에 넣어줌
+						if(arr[i].length == 4 ){
 						arr[i].push($('select[name="apprOpt[]"]')[i].value);
-						arr[i].push($('select[name="apprOpt[]"] option:checked')[i].text);
+						}
+						console.log(arr);
 						//결재라인 div 출력
-						var apprLineHtml = /*"<div class='singleApprType'>"+arr[i][0]+"</div>"+*/"<div class='singleApprLine'>"+"<div class='singleApprLineTop'>"+ arr[i][1]+"</div>"+"<div class='singleApprLineMiddle'>"+ arr[i][2]+"</div>"+"<div class='singleApprLineBottom'>"+ arr[i][5]+"</div>"+ "</div>"
-								+ "<input type='hidden' value='arr[i][3]' name='emplId'>"
-								+ "<input type='hidden' value='arr[i][4]' name='apprType'>"
+						var apprLineHtml = /*"<div class='singleApprType'>"+arr[i][0]+"</div>"+*/"<div class='singleApprLine'>"+"<div class='singleApprLineTop'>"+ arr[i][1]+"</div>"+"<div class='singleApprLineMiddle'>"+ arr[i][2]+"</div>"+"<div class='singleApprLineBottom'>"+ arr[i][4]+"</div>"+ "</div>"
+								+ "<input type='hidden' value="+arr[i][3]+" name='aList["+i+"].emplId'>"
+								+ "<input type='hidden' value="+arr[i][4]+" name='aList["+i+"].apprType'>"
 						$approvalLine.append(apprLineHtml)
+						
 					}
-					arr = [];//배열값 비움
+				
 					$(".section--modal").stop().fadeOut(100);
 				} else {
 					$(".section--modal").stop().fadeOut(100);//배열이 null일 경우 모달창 닫기

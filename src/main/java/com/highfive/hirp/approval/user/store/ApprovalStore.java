@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.user.domain.ApprAccept;
+import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.common.Search;
@@ -31,7 +32,7 @@ public interface ApprovalStore {
 
 	int deleteStoragedAppr(SqlSession sqlSession, int docNo);
 
-	List<Approval> selectAllWaitingAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllWaitingAppr(SqlSession sqlSession, String emplId);
 
 	Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo);
 
@@ -53,9 +54,15 @@ public interface ApprovalStore {
 
 	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept);
 
-	Approval selectOneAppr(SqlSession sqlSession,int docNo);
+	Approval selectOneAppr(SqlSession sqlSession,int apprNo);
 
 	//양식등록
 	int insertApprForm(SqlSession sqlSession, ApprForm apprForm);
+
+	//최근등록한 결재번호 확인
+	int selectRecentApprNo(SqlSession sqlSession);
+
+	//결재 첨부파일 등록
+	int insertApprAttachedFile(SqlSession sqlSession, ApprAttachedFile apprFile);
 
 }

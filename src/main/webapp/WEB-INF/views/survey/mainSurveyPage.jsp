@@ -36,7 +36,7 @@
 		            		<div class="padding-20">
 			            		<!-- 버튼은 둘 중 하나만 출력 -->
 			            		<!-- 근데 생각해보니까 참여한 건 여기 출력되지 않아도 될 것 같아서 미참여로 고정함 -->
-								<button class="emergency" type="button">미참여</button>
+								<button class="emergency" type="button" style="cursor:default;">미참여</button>
 								<!-- <button class="finished" type="button">참여완료</button>	 -->
 								<h2 class="mt-10">${myList.surveyTitle }</h2>
 								<p class="mt-10 color-grey">${fn:substring(myList.surveyStartdate, 0, 10) } ~ ${fn:substring(myList.surveyEnddate, 0, 10) }</p>
@@ -92,17 +92,17 @@
                     <tbody>
                     	<c:forEach items="${sList }" var="survey">
                     		<tr>
-	                            <td>
+                    			<td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-	                            		<button class="finished" type="button">참여완료</button>
+	                            	<c:if test="${survey.surveyStatus eq 'C'}">
+	                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
 	                            	</c:if>
-	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
-										<button class="emergency" type="button">미참여</button>
-		                            </c:if>
+	                            	<c:if test="${survey.surveyStatus eq 'F'}">
+	                            		<button class="finished" type="button" style="cursor:default;">마감</button>
+	                            	</c:if>
 	                            </td>
 <%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
-	                            <td onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
+	                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
 	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
 	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
