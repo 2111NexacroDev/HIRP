@@ -26,5 +26,4 @@ public interface TimeService {
 
 	// 사용자 근태 조정 조회
 	public List<TimeModify> selectModifyView(String emplId);
-
 }

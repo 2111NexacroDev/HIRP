@@ -109,5 +109,4 @@
 		FROM TIMEMODIFY_TBL
 		WHERE EMPL_ID = #{emplId}
 	</select>
-	
 </mapper>

@@ -28,5 +28,4 @@ public interface TimeStore {
 
 	// 사용자 근태 조정 조회
 	List<TimeModify> selectModifyView(SqlSession sqlSession, String emplId);
-
 }
