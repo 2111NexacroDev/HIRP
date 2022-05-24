@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <link rel="stylesheet" href="../../../resources/css/common.css"> -->
-<!-- <link rel="stylesheet" href="../../../resources/css/chat.css"> -->
 <meta charset="UTF-8">
 <title>채팅</title>
 </head>
@@ -59,5 +57,33 @@
         	</div>
         </article>
     </div>
+    <script>
+	  	//응답자 목록에서 검색 (ajax)
+		function emplSearch(){
+			var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
+			console.log(emplSearchKeyword);
+			
+			$.ajax({
+				url:"/searchEmplList.hirp",
+				type:"post",
+				data:{"emplSearchKeyword" : emplSearchKeyword},
+				success: function(eList){
+					console.log("성공");
+	    			console.log(eList);
+	    			var count = eList.length;
+	    			
+	    		},
+	    		error: function(){ //왜 정렬이 가운데로 안되는지 모르겠군
+	    			console.log("실패");
+// 					var $tableBody = $("#emplTable tbody");
+// 	    			$tableBody.html("");//기존 내용 있으면 비우기
+// 	    			var $tr = $("<tr>");
+// 	    			var $text = $("<div class='t-c' style='align:center;'>").html("검색 결과가 없습니다."); //이거 td 안 합쳐짐.
+// 					$tr.append($text);
+// 					$tableBody.append($tr);
+	    		}
+			});
+		}
+	  </script>
 </body>
 </html>

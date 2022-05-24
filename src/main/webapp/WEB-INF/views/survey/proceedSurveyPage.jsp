@@ -41,74 +41,82 @@
 <!--                     	<c:set var="row_num" value="0"/> -->
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
                     	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-                    	<c:forEach items="${sList }" var="survey">
-<%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
-							<c:set var="row_num" value="${row_num-1 }"/>
-							<tr>
-	                        	<td><c:out value="${row_num }"/> </td>
-	                            <td>
-	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-<%-- 										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp"> --%>
-<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
-<%-- 										</c:url> --%>
-	                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
-	                            	</c:if>
-	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
-<%-- 	                            		<c:url var="sDetail" value="/survey/questDetail.hirp"> --%>
-<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
-<%-- 										</c:url> --%>
-	                            		<button class="emergency" type="button" style="cursor:default;">미참여</button>
-	                            	</c:if>
-	                            </td>
-	                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
-<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
-	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.emplName } ${survey.positionName }</td>
-	                            <td>
-	                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>
-		                            <!-- 응답자 목록 section -->
-		                            <section class="section--alert">
-					                    <div class="bg-black">
-					                    </div>
-					                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-					                    <div class="section--alert__survey">
-					                    	
-					                        <button class="btn--close"></button>
-					                        <h1 align="left" class="padding-0">
-								                응답 대상자 목록
-								            </h1>
-					                        <table class="table--basic mt-20" id="subListTbl">
-							                    <thead>
-							                        <tr>
-							                            <th>소속부서</th>
-							                            <th>성명</th>
-							                            <th style="text-align: center;">참여여부</th>
-							                        </tr>
-							                    </thead>
-							                    <tbody>
-							                    	<!-- ajax로 출력 -->
-							                        <tr>
-							                            <td>개발팀</td>
-							                            <td>이민선</td>
-							                            <td>X</td>
-							                        </tr>
-							                        <tr>
-							                            <td>개발팀</td>
-							                            <td>이융경</td>
-							                         	<td>O</td>
-							                        </tr>
-							                    </tbody>
-							                </table>
-							                
-					                        <div class="btns-wrap mt-20">
-					                            <button class="point closeWindow" type="button">확인</button>
-					                        </div>
-					                    </div>
-					                </section>
-				                </td>
+                    	<c:if test="${empty sList }">
+                    		<input type="hidden" value="slist null"/>
+                    		<tr>
+	                        	<td colspan="6" class="t-c"> 진행중인 설문조사가 없습니다. </td>
 	                        </tr>
-                    	</c:forEach>
+                    	</c:if>
+                    	<c:if test="${not empty sList }">
+	                    	<c:forEach items="${sList }" var="survey">
+	<%--                     		<c:set var="row_num" value="${row_num+1 }"/> --%>
+								<c:set var="row_num" value="${row_num-1 }"/>
+								<tr>
+		                        	<td><c:out value="${row_num }"/> </td>
+		                            <td>
+		                            	<!-- 버튼은 둘 중 하나만 출력 -->
+		                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
+	<%-- 										<c:url var="sDetail" value="/survey/updateAnswerPage.hirp"> --%>
+	<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
+	<%-- 										</c:url> --%>
+		                            		<button class="finished" type="button" style="cursor:default;">참여완료</button>
+		                            	</c:if>
+		                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
+	<%-- 	                            		<c:url var="sDetail" value="/survey/questDetail.hirp"> --%>
+	<%-- 											<c:param name="surveyNo" value="${survey.surveyNo}"></c:param> --%>
+	<%-- 										</c:url> --%>
+		                            		<button class="emergency" type="button" style="cursor:default;">미참여</button>
+		                            	</c:if>
+		                            </td>
+		                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus}');">${survey.surveyTitle }</td>
+	<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+		                            <td>${survey.emplName } ${survey.positionName }</td>
+		                            <td>
+		                            	<button class="finished" type="button" onclick="openSubListAlert(this, ${survey.surveyNo});">보기</button>
+			                            <!-- 응답자 목록 section -->
+			                            <section class="section--alert">
+						                    <div class="bg-black">
+						                    </div>
+						                    <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+						                    <div class="section--alert__survey">
+						                    	
+						                        <button class="btn--close"></button>
+						                        <h1 align="left" class="padding-0">
+									                응답 대상자 목록
+									            </h1>
+						                        <table class="table--basic mt-20" id="subListTbl">
+								                    <thead>
+								                        <tr>
+								                            <th>소속부서</th>
+								                            <th>성명</th>
+								                            <th style="text-align: center;">참여여부</th>
+								                        </tr>
+								                    </thead>
+								                    <tbody>
+								                    	<!-- ajax로 출력 -->
+								                        <tr>
+								                            <td>개발팀</td>
+								                            <td>이민선</td>
+								                            <td>X</td>
+								                        </tr>
+								                        <tr>
+								                            <td>개발팀</td>
+								                            <td>이융경</td>
+								                         	<td>O</td>
+								                        </tr>
+								                    </tbody>
+								                </table>
+								                
+						                        <div class="btns-wrap mt-20">
+						                            <button class="point closeWindow" type="button">확인</button>
+						                        </div>
+						                    </div>
+						                </section>
+					                </td>
+		                        </tr>
+	                    	</c:forEach>
+                    	</c:if>
 <!--                         <tr> -->
 <!--                         	<td>3</td> -->
 <!--                             <td> -->

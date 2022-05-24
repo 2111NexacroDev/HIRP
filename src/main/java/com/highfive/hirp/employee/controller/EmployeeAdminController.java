@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.dept.service.DeptService;
 import com.highfive.hirp.employee.domain.Career;
@@ -195,5 +199,21 @@ public class EmployeeAdminController {
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;	
+	}
+	
+	//직원 검색
+	@ResponseBody
+	@RequestMapping(value="/searchEmplList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String searchEmplList(
+			@RequestParam("emplSearchKeyword") String emplSearchKeyword){
+		System.out.println("직원 검색" + emplSearchKeyword); //값 잘 넘어옴
+
+		List<Employee> emplList = eAService.selectSearchEmplList(emplSearchKeyword);
+//		System.out.println(emplList);
+		if(!emplList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(emplList);
+		}
+		return "";
 	}
 }

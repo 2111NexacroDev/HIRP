@@ -279,7 +279,7 @@
 				console.log(emplSearchKeyword);
 				
 				$.ajax({
-					url:"/survey/searchEmplList.hirp",
+					url:"/searchEmplList.hirp",
 					type:"post",
 					data:{"emplSearchKeyword" : emplSearchKeyword},
 					success: function(eList){

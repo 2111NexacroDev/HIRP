@@ -41,6 +41,13 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		return eList;
 	}
 	
+	//직원 검색.
+	@Override
+	public List<Employee> selectSearchEmplList(String keyword) {
+		List<Employee> eList = eAStore.selectSearchEmplList(sqlSession, keyword);
+		return eList;
+	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> printAllEmployeeWithDeptCode(String deptCode) {
@@ -66,6 +73,8 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		List<Employee> tList = eAStore.selectTempEmployee(sqlSession);
 		return tList;
 	}
+	
+	
 
 	@Override
 	public Employee printEmployeeInfo(String emplId) {
@@ -120,4 +129,6 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		List<Military> mList = eAStore.selectAllMilitaryById(sqlSession, emplId);
 		return mList;
 	}
+
+
 }
