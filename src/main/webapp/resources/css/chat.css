@@ -222,3 +222,17 @@
     outline: none;
     border: 1px solid #ccc;
 }
+
+#conts h4 {
+	margin: 0 auto;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.chatting-time {
+	position:absolute;
+	right: 20px;
+	top: 0px;
+}

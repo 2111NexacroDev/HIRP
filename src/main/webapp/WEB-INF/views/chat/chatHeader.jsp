@@ -6,6 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/08c05a1f0f.js" crossorigin="anonymous"></script> <!-- fontawesome -->
+<!-- common이 위에 있어야 함. -->
 <link rel="stylesheet" href="../../../resources/css/common.css">
 <link rel="stylesheet" href="../../../resources/css/chat.css">
 <header id="cnb">

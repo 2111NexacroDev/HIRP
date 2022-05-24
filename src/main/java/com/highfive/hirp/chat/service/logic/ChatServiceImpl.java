@@ -24,18 +24,7 @@ public class ChatServiceImpl implements ChatService{
 	private ChatStore cStore;
 
 	//직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeList() {
-		List<Employee> empList = cStore.selectEmployeeList(sqlSession);
-		return empList;
-	}
-
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeListByName(String name) {
-		List<Employee> empList = cStore.selectEmployeeListByName(sqlSession, name);
-		return empList;
-	}
 	
 	//채팅방 추가(대화 상대, 채팅방 이름 설정)
 	@Override

@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,13 +97,25 @@ public class ChatController {
 	
 	//채팅방 목록 페이지
 	@RequestMapping(value = "chatroomList.hirp", method = RequestMethod.GET)
-	public ModelAndView chattingRoomList(ModelAndView mv) {
+	public ModelAndView chattingRoomList(ModelAndView mv
+			, HttpServletRequest request ) {
 		//내가 참여한 채팅방 목록 가져오기
 		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
-		
 		//마지막 채팅 내용 표시????
 		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
-		mv.setViewName("chat/chatRoomPage");
+		
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		try {
+			List<ChatRoom> chatroomList = cService.selectMyChattingRoom(emplId);
+			mv.addObject("chatroomList", chatroomList);
+			mv.setViewName("chat/chatRoomPage");
+			//list null체크 jsp에서 해주기 (채팅 목록 없어도 조회는 되어야 하니까)
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	

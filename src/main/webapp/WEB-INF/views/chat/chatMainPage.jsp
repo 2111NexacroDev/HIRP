@@ -28,8 +28,8 @@
             	</div>
 			    <!-- 검색창 -->
 			    <div class="row mt-20 t-c  padding-bottom-10">
-				    <input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
-					<button class="point" type="button" onclick="emplSearch();">검색</button>
+				    <input type="text" name="emplSearchKeyword" style="width:70%" placeholder="부서명 또는 사원명 검색">
+					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch();}" onclick="emplSearch();">검색</button>
 			    </div>
 			    <!-- 직원 목록 -->
 			    <c:set var="count" value="0" />

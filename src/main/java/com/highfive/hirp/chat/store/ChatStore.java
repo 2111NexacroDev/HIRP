@@ -14,9 +14,7 @@ import com.highfive.hirp.employee.domain.Employee;
 public interface ChatStore {
 
 	//직원 목록 가져오기
-	public List<Employee> selectEmployeeList(SqlSession sqlSession);
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	public List<Employee> selectEmployeeListByName(SqlSession sqlSession, String name);
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	public int insertChattingRoom(SqlSession sqlSession, ChatRoom chatRoom);
 	public int insertChatRoomJoin(SqlSession sqlSession, List<String> emplIdList);

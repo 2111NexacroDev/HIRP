@@ -45,11 +45,11 @@
 	</script>
 </head>
 <body>
-	<div style="width: 800px; height: 700px; padding: 10px; border: solid 1px #e1e3e9;">
+	<div style="margin: auto; width: 90%; height: 500px; padding: 10px; border: solid 1px #e1e3e9;">
 		<div id="divChatData"></div>
 	</div>
 	<div style="width: 100%; height: 10%; padding: 10px;">
-		<input type="text" id="message" size="110" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" />
+		<input type="text" id="message" size="35" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" />
 		<input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()" />
 	</div>
 </body>
