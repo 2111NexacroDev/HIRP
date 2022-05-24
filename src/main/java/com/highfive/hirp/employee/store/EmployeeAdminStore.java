@@ -24,14 +24,19 @@ public interface EmployeeAdminStore {
 	List<Employee> selectTempEmployee(SqlSession sqlSession);
 	Employee selectOneEmployee(SqlSession sqlSession, String emplId);
 	
-	int modifyEmployeeInfo(SqlSession sqlSession, Employee employee);
-	int resignEmployee(SqlSession sqlSession, String emplId);
-	int updateLevelEmployee(SqlSession sqlSession, String emplId);
-	
 	List<JobRole> selectAllJobById(SqlSession sqlSession, String emplId);
 	List<Career> selectAllCareerById(SqlSession sqlSession, String emplId);
 	List<Language> selectAllLanguageById(SqlSession sqlSession, String emplId);
 	List<Certification> selectAllCertById(SqlSession sqlSession, String emplId);
 	List<Military> selectAllMilitaryById(SqlSession sqlSession, String emplId);
-
+	
+	int modifyEmployeeInfo(SqlSession sqlSession, Employee employee);
+	int resignEmployee(SqlSession sqlSession, String emplId);
+	int updateLevelEmployee(SqlSession sqlSession, String emplId);
+	int deleteInfoAboutJob(SqlSession sqlSession, int jobNo);
+	int deleteInfoAboutCareer(SqlSession sqlSession, int infoNo);
+	int deleteInfoAboutLang(SqlSession sqlSession, int infoNo);
+	int deleteInfoAboutCert(SqlSession sqlSession, int infoNo);
+	int deleteInfoAboutMilitary(SqlSession sqlSession, int infoNo);
+	
 }

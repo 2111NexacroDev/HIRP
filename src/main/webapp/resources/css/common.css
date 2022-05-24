@@ -36,6 +36,12 @@ select {
     letter-spacing: -0.5px;
 }
 
+select,
+input,
+textarea {
+    outline: none;
+}
+
 input {
     font-size: 14px;
 }
@@ -92,7 +98,7 @@ select::-ms-expand {
 
 textarea {
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     line-height: 1.6;
     border: 1px solid #ccc;
 }
@@ -994,8 +1000,55 @@ article {
     background-color: rgba(0, 0, 0, .4);
 }
 
-.btn--paging {
+.btns--paging {
+    margin: 60px auto 40px;
     text-align: center;
+}
+
+.btns--paging a {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    margin: 0;
+}
+
+.btns--paging a.on {
+    margin: 0 2px;
+    background-color: #00498c;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.board__srch-wrap form {
+    position: relative;
+    display: inline-block;
+}
+
+.board__srch-wrap select {
+    width: 120px;
+    height: 40px;
+    margin-right: 4px;
+    outline: none;
+}
+
+.board__srch-wrap input[type="text"] {
+    width: 320px;
+    height: 40px;
+    padding-right: 110px;
+    outline: none;
+}
+
+.board__srch-wrap input[type="submit"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 90px;
+    height: 40px;
+    background-color: #0b2a60;
+    color: #fff;
+    cursor: pointer;
+    border: none;
 }
 
 .btns-wrap {
@@ -1035,3 +1088,7 @@ article {
 }
 
 /* 채팅창 끝 */
+
+#snb ul.no-margin>li  {
+	    margin-top: 10px;
+}

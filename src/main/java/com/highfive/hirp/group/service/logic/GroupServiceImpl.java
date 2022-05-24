@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
+import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.service.GroupService;
 import com.highfive.hirp.group.store.GroupStore;
@@ -42,5 +43,12 @@ public class GroupServiceImpl implements GroupService {
 	public Member detailGroupMember(String emplId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	//회원 전체 조회
+	@Override
+	public List<Employee> selectAllGroupMember(String emplId) {
+		List<Employee> emplList = gStore.selectAllGroupMember(sqlSession, emplId);
+		return emplList;
 	}
 }

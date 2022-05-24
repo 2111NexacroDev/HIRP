@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none">
+  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none" dragscrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
@@ -84,9 +84,14 @@
         <Button id="btn_search_retiree" taborder="11" top="395" width="28" height="28" cssclass="search" onclick="btn_search_retiree_onclick" text="" right="22"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[// 메뉴 이동 함수
+    <Script type="xscript5.1"><![CDATA[// 페이지 로드용 emplId 전역 변수 지정
+this.selectedEmplId;
+
+
+// 메뉴 이동 함수
 this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
+	selectedEmplId = "";
 	this.go("FrameBase::emplList.xfdl");
 };
 
@@ -119,7 +124,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			this.alert("사원 조회 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("사원 조회 성공");
+		//this.alert("사원 조회 성공");
 	}	
 }
 
@@ -136,9 +141,6 @@ this.btn_search_retiree_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 	var searchVal = this.edt_search_retiree.value;
 	this.ds_retiree.filter("emplName.indexOf('" + searchVal + "') > -1 ");
 };
-
-// 페이지 로드용 emplId 전역 변수 지정
-this.selectedEmplId;
 
 // 회원(재직자)별 상세 정보 페이지 로드
 this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)

@@ -2,7 +2,6 @@ package com.highfive.hirp.time.user.domain;
 
 import java.sql.Date;
 
-// 근태관리
 public class Time {
 	private int timeNo;
 	private String emplId;
@@ -11,11 +10,12 @@ public class Time {
 	private String timeEnd;
 	private String timeState;
 	private String timeContent;
+	private String timeAccrue;
 	
 	public Time() {}
 
 	public Time(int timeNo, String emplId, Date timeDate, String timeStart, String timeEnd, String timeState,
-			String timeContent) {
+			String timeContent, String timeAccrue) {
 		super();
 		this.timeNo = timeNo;
 		this.emplId = emplId;
@@ -24,6 +24,7 @@ public class Time {
 		this.timeEnd = timeEnd;
 		this.timeState = timeState;
 		this.timeContent = timeContent;
+		this.timeAccrue = timeAccrue;
 	}
 
 	public int getTimeNo() {
@@ -82,9 +83,18 @@ public class Time {
 		this.timeContent = timeContent;
 	}
 
+	public String getTimeAccrue() {
+		return timeAccrue;
+	}
+
+	public void setTimeAccrue(String timeAccrue) {
+		this.timeAccrue = timeAccrue;
+	}
+
 	@Override
 	public String toString() {
 		return "Time [timeNo=" + timeNo + ", emplId=" + emplId + ", timeDate=" + timeDate + ", timeStart=" + timeStart
-				+ ", timeEnd=" + timeEnd + ", timeState=" + timeState + ", timeContent=" + timeContent + "]";
+				+ ", timeEnd=" + timeEnd + ", timeState=" + timeState + ", timeContent=" + timeContent + ", timeAccrue="
+				+ timeAccrue + "]";
 	}
 }

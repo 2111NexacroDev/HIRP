@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
+import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.group.domain.Group;
 
 public interface GroupStore {
@@ -19,4 +20,7 @@ public interface GroupStore {
 
 	// 상세 회원 정보 열람
 	public Member selectDetailGroup(SqlSession sqlSession, String emplId);
+	
+	//회원 전체 조회
+	public List<Employee> selectAllGroupMember(SqlSession sqlSession, String emplId);
 }

@@ -52,7 +52,7 @@
                                 </li>
                             </c:forEach>
                             <c:choose>
-                                <c:when test="${empty tList}">
+                                <c:when test="${empty todayList}">
                                     <li class="no-data">
                                         <p>등록된 내용이 없습니다.</p>
                                     </li>
