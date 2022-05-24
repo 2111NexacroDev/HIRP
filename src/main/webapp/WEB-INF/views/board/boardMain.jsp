@@ -19,7 +19,7 @@
 
             <div id="guide" class="subConts padding-0">                
                 <h2 class="square-tit mt-40">공지게시판 새글</h2>
-                <table class="table--basic mt-40">
+                <table class="table--basic mt-20">
                     <colgroup>
                         <col style="width:10%;">
                         <col style="width:40%;">

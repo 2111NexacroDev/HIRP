@@ -62,8 +62,8 @@
 		</aside>
 		<article id="sub" class="">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom">근태 조정 신청 내역</h1>
-			<br> 신청 내역
+			<h1 class="basic-border-bottom">근태 조정 신청 내역</h1><br><br><br>
+			근태 조정 신청 내역
 			<table class="table--basic mt-20">
 				<thead>
 					<tr>

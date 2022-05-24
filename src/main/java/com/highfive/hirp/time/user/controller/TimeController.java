@@ -49,7 +49,9 @@ public class TimeController {
 			if ( time != null ) { // if(!time.isEmpty()) -> 리스트일때
 				mv.addObject("time", time);
 				mv.setViewName("time/timeList");
-			} 
+			} else { // 데이터가 없어도 화면 보이게
+				mv.setViewName("time/timeList");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
