@@ -10,8 +10,6 @@ import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.mail.domain.Address;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
-import com.highfive.hirp.mail.domain.Recipient;
-import com.highfive.hirp.mail.domain.Referrer;
 import com.highfive.hirp.mail.store.MailStore;
 @Repository
 public class MailStoreLogic implements MailStore{
@@ -23,14 +21,14 @@ public class MailStoreLogic implements MailStore{
 	}
 	
 	@Override
-	public int sendMailRecipient(SqlSession sqlSession, Recipient recipient) {
-		int result = sqlSession.insert("MailMapper.sendMailRecipient", recipient);
+	public int sendMailRecipient(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.sendMailRecipient", mail);
 		return result;
 	}
 	
 	@Override
-	public int sendMailReferrer(SqlSession sqlSession, Referrer referrer) {
-		int result = sqlSession.insert("MailMapper.sendMailReferrer", referrer);
+	public int sendMailReferrer(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.sendMailReferrer", mail);
 		return result;
 	}
 	
@@ -41,29 +39,19 @@ public class MailStoreLogic implements MailStore{
 	}
 	
 	@Override
-	public int sendBugReportRecipient(SqlSession sqlSession, Recipient recipient) {
-		int result = sqlSession.insert("MailMapper.sendBugReportRecipient", recipient);
+	public int sendBugReportRecipient(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.sendBugReportRecipient", mail);
 		return result;
 	}
 
+	// 메일 상세조회
 	@Override
 	public Mail selectOneByNo(SqlSession sqlSession, int mailNo) {
 		Mail mail = sqlSession.selectOne("MailMapper.selectOneByNo", mailNo);
 		return mail;
 	}
 	
-	@Override
-	public Recipient selectOneByNoMailRec(SqlSession sqlSession, int mailNo) {
-		Recipient recipient = sqlSession.selectOne("MailMapper.selectOneByNoMailRec", mailNo);
-		return recipient;
-	}
-	
-	@Override
-	public Referrer selectOneByNoMailRef(SqlSession sqlSession, int mailNo) {
-		Referrer referrer = sqlSession.selectOne("MailMapper.selectOneByNoMailRef", mailNo);
-		return referrer;
-	}
-	
+	// 첨부파일 조회
 	@Override
 	public MailFile selectOneByNoMailFile(SqlSession sqlSession, int mailNo) {
 		MailFile mailFile = sqlSession.selectOne("MailMapper.selectOneByNoMailFile", mailNo);
@@ -99,16 +87,38 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.insert("MailMapper.modifyMailFile", mailFile);
 		return result;
 	}
+	
+	// 메일 휴지통으로 이동
+	@Override
+	public int wasteMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.update("MailMapper.wasteMail", mailNo);
+		return result;
+	}
 
+	// 휴지통 메일 복구
 	@Override
 	public int restoreMail(SqlSession sqlSession, int mailNo) {
 		int result = sqlSession.update("MailMapper.restoreMail", mailNo);
+		return result;
+	}
+	
+	// 휴지통 메일 전체 삭제
+	@Override
+	public int deleteAllMail(SqlSession sqlSession) {
+		int result = sqlSession.delete("MailMapper.deleteAllMail");
 		return result;
 	}
 
 	@Override
 	public int removeMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.delete("MailMapper.removeMail", mail);
+		return result;
+	}
+	
+	// 중요 메일
+	@Override
+	public int impMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.update("MailMapper.updateImpMail", mail);
 		return result;
 	}
 
@@ -124,6 +134,7 @@ public class MailStoreLogic implements MailStore{
 		return result;
 	}
 
+	// 받은메일함 조회
 	@Override
 	public List<Mail> selectRecMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -134,6 +145,7 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 보낸메일함 조회
 	@Override
 	public List<Mail> selectSendMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -144,6 +156,7 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 임시보관함 조회
 	@Override
 	public List<Mail> selectTemMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -154,6 +167,7 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 내게쓴메일함 조회
 	@Override
 	public List<Mail> selectMyMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -164,6 +178,7 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 중요메일함 조회
 	@Override
 	public List<Mail> selectImpMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -174,6 +189,7 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 휴지통 조회
 	@Override
 	public List<Mail> selectWasMail(SqlSession sqlSession, Mail mail, PageInfo pi) {
 		int limit = pi.getListLimit();
@@ -184,36 +200,42 @@ public class MailStoreLogic implements MailStore{
 		return mList;
 	}
 
+	// 받은메일함 갯수
 	@Override
 	public int selectMailCountR(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountR", mail);
 		return totalCount;
 	}
 
+	// 보낸메일함 갯수
 	@Override
 	public int selectMailCountS(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountS", mail);
 		return totalCount;
 	}
 
+	// 임시보관함 갯수
 	@Override
 	public int selectMailCountT(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountT", mail);
 		return totalCount;
 	}
 
+	// 내게쓴메일함 갯수
 	@Override
 	public int selectMailCountM(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountM", mail);
 		return totalCount;
 	}
 
+	// 중요메일함 갯수
 	@Override
 	public int selectMailCountI(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountI", mail);
 		return totalCount;
 	}
 
+	// 휴지통 갯수
 	@Override
 	public int selectMailCountW(SqlSession sqlSession, Mail mail) {
 		int totalCount = sqlSession.selectOne("MailMapper.selectMailCountW", mail);

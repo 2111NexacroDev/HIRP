@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
@@ -30,7 +33,7 @@
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
                        <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
+                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button></li>
                    </ul>
                </li>
             </ul>
@@ -47,7 +50,24 @@
             </form>
         	
         	<h1 class="basic-border-bottom">
-				받은메일함
+				<c:if test="${mailCategory == 'R' }">
+					받은메일함
+	            </c:if>
+	            <c:if test="${mailCategory == 'S' }">
+					보낸메일함
+	            </c:if>
+            	<c:if test="${mailCategory == 'T' }">
+					임시보관함
+            	</c:if>
+            	<c:if test="${mailCategory == 'M' }">
+					내게쓴메일함
+            	</c:if>
+            	<c:if test="${mailCategory == 'I' }">
+					중요메일함
+            	</c:if>
+            	<c:if test="${mailCategory == 'W' }">
+					휴지통
+            	</c:if>
             </h1>
             <button class="basic mt-20" type="button">답장</button>
             <button class="basic mt-20" type="button">삭제</button>
@@ -59,8 +79,10 @@
 	            <form action="/mail/detail.hirp" method="get">
 	            	<table class="table--basic mt-20">
 	            		<tr>
-	            			<!-- 즐겨찾기 버튼 넣어야함 -->
-	            			<td></td>
+	            			<td class="mail--star">
+								<input type="checkbox" id="important" value="${mail.mailNo }">
+								<label for="important"></label>
+							</td>
 	            			<td>${mail.mailTitle }</td>
 	            		</tr>
 	            		<tr>
@@ -69,7 +91,7 @@
 	            		</tr>
 	            		<tr>
 	            			<td>받는사람:</td>
-	            			<td>${recipient.recipientId }</td>
+	            			<td>${mail.mailRecipient }</td>
 	            		</tr>
 	            		<tr>
 	            			<td>보낸날짜:</td>
@@ -86,5 +108,6 @@
             </div>
 		</article>
 	</div>
+	<script src="../../../resources/js/mail.js"></script>
 </body>
 </html>
