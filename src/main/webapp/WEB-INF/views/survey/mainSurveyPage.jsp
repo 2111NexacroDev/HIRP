@@ -90,24 +90,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<c:forEach items="${sList }" var="survey">
+                    	<c:if test="${empty sList }">
                     		<tr>
-                    			<td>
-	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.surveyStatus eq 'C'}">
-	                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
-	                            	</c:if>
-	                            	<c:if test="${survey.surveyStatus eq 'F'}">
-	                            		<button class="finished" type="button" style="cursor:default;">마감</button>
-	                            	</c:if>
-	                            </td>
-<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
-	                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
-	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
-	                            <td>${survey.emplName } ${survey.positionName }</td>
+	                        	<td colspan="6" class="t-c"> 진행중인 설문조사가 없습니다. </td>
 	                        </tr>
-                    	
-                    	</c:forEach>
+                    	</c:if>
+                    	<c:if test="${not empty sList }">
+	                    	<c:forEach items="${sList }" var="survey">
+	                    		<tr>
+	                    			<td>
+		                            	<!-- 버튼은 둘 중 하나만 출력 -->
+		                            	<c:if test="${survey.surveyStatus eq 'C'}">
+		                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
+		                            	</c:if>
+		                            	<c:if test="${survey.surveyStatus eq 'F'}">
+		                            		<button class="finished" type="button" style="cursor:default;">마감</button>
+		                            	</c:if>
+		                            </td>
+	<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+		                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
+		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+		                            <td>${survey.emplName } ${survey.positionName }</td>
+		                        </tr>
+	                    	
+	                    	</c:forEach>
+	                    </c:if>
 <!--                         <tr> -->
 <!--                             <td> -->
 <!--                             	버튼은 둘 중 하나만 출력 -->

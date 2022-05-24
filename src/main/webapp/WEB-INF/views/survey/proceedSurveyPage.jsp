@@ -42,7 +42,6 @@
                     	<!-- 오래된 글부터 1~로 번호 출력하기 -->
                     	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
                     	<c:if test="${empty sList }">
-                    		<input type="hidden" value="slist null"/>
                     		<tr>
 	                        	<td colspan="6" class="t-c"> 진행중인 설문조사가 없습니다. </td>
 	                        </tr>
