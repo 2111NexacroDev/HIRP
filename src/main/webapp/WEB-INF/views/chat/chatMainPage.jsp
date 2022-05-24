@@ -66,7 +66,7 @@
 			window.open('/chat.hirp','chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
     	
-		//응답자 목록에서 검색 (ajax)
+		//직원 목록에서 검색 (ajax)
 		function emplSearch(){
 			var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
 			console.log(emplSearchKeyword);

@@ -9,6 +9,8 @@
 		<result property="chatroomName" column="CHATROOM_NAME"/>
 		<result property="chatroomManager" column="CHATROOM_MANAGER"/>
 		<result property="chatroomDate" column="CHATROOM_DATE"/>
+		<result property="joinchatIdList" column="JOINCHAT_ID_LIST"/>
+		<result property="joinchatNameList" column="JOINCHAT_NAME_LIST"/>
 		<association javaType="Message" property="message" column="MSG_NO">
 	        <id property="msgNo" column="MSG_NO"/>
 	        <result property="chatroomNo" column="CHATROOM_NO"/>
@@ -32,6 +34,40 @@
 		WHERE (CHATROOM_NO, MSG_SENDDATE) 
 		    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
 		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
+		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
+	</select>
+	<!-- 채팅방 검색 -->
+	<!-- 채팅방 이름, 채팅방 참여자 이름 중에서 검색 -->
+	<select id="selectMyChattingRoomByKeyword" parameterType="hashMap" resultMap="chatroomResultMap">		
+		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE,
+		MSG_CONTENTS,
+		TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
+		JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST
+		FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN MESSAGE_TBL USING(CHATROOM_NO)
+		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+		JOIN (SELECT CHATROOM_NO
+		         , SUBSTR(
+		            XMLAGG(
+		                XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_NO).EXTRACT('//text()'
+		            ).GETSTRINGVAL()
+		           , 2) JOINCHAT_ID_LIST
+		         , SUBSTR(
+		            XMLAGG(
+		                XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY JOINCHAT_NO).EXTRACT('//text()'
+		            ).GETSTRINGVAL()
+		           , 2) JOINCHAT_NAME_LIST
+		      FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
+		            FROM CHATROOM_JOIN CJ
+		            JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
+		      GROUP BY CHATROOM_NO) 
+		    USING(CHATROOM_NO)
+		WHERE (CHATROOM_NO, MSG_SENDDATE) 
+		    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
+		    AND (CHATROOM_NAME LIKE '%' || #{chatroomSearchKeyword} || '%' OR JOINCHAT_NAME_LIST LIKE '%' || #{chatroomSearchKeyword} || '%')
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
 	</select>
 </mapper>

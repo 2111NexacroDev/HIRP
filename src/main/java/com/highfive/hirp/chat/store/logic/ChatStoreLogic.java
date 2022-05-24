@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,12 @@ public class ChatStoreLogic implements ChatStore{
 	@Override
 	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, String emplId) {
 		List<ChatRoom> roomList = sqlSession.selectList("ChatMapper.selectMyChattingRoom", emplId);
+		return roomList;
+	}
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	@Override
+	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, Map<String, String> searchMap) {
+		List<ChatRoom> roomList = sqlSession.selectList("ChatMapper.selectMyChattingRoomByKeyword", searchMap);
 		return roomList;
 	}
 	//채팅방 별로 채팅 내용 가져오기

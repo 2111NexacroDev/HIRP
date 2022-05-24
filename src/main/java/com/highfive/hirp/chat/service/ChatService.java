@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.highfive.hirp.chat.domain.ChatFile;
 import com.highfive.hirp.chat.domain.ChatList;
@@ -20,6 +21,8 @@ public interface ChatService {
 	//채팅방 목록 가져오기
 	//내가 참여한 채팅방 목록 가져오기
 	public List<ChatRoom> selectMyChattingRoom(String emplId);
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	public List<ChatRoom> selectMyChattingRoom(Map<String, String> searchMap);
 	// 채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
 	public List<ChatList> selectChatListByRoomNo(int chatroomNo);
 	//일단 얘네 두개 남겨놓겠음

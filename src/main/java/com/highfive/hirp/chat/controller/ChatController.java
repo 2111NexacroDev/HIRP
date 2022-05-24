@@ -2,6 +2,7 @@ package com.highfive.hirp.chat.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
@@ -117,6 +121,33 @@ public class ChatController {
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
+	}
+	
+	//채팅방 이름, 채팅 참여자 이름 검색
+	@ResponseBody
+	@RequestMapping(value="/searchChatroomList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String searchEmplList(
+			Model model
+			,@RequestParam("chatroomSearchKeyword") String chatroomSearchKeyword
+			, HttpServletRequest request ){
+		System.out.println("채팅방 검색" + chatroomSearchKeyword); //값 잘 넘어옴
+
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		//파라미터로 넘겨줄 map
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("emplId", emplId);
+		searchMap.put("chatroomSearchKeyword", chatroomSearchKeyword);
+		
+		List<ChatRoom> chatroomList = cService.selectMyChattingRoom(searchMap);
+		model.addAttribute("chatroomList", chatroomList);
+		System.out.println(chatroomList);
+		if(!chatroomList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(chatroomList);
+		}
+		return "";
 	}
 	
 	//채팅방 내부 페이지
