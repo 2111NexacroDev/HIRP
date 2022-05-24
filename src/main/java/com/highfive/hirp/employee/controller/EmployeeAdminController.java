@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -205,10 +206,12 @@ public class EmployeeAdminController {
 	@ResponseBody
 	@RequestMapping(value="/searchEmplList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	public String searchEmplList(
-			@RequestParam("emplSearchKeyword") String emplSearchKeyword){
+			Model model
+			,@RequestParam("emplSearchKeyword") String emplSearchKeyword){
 		System.out.println("직원 검색" + emplSearchKeyword); //값 잘 넘어옴
 
 		List<Employee> emplList = eAService.selectSearchEmplList(emplSearchKeyword);
+		model.addAttribute("emplList", emplList);
 //		System.out.println(emplList);
 		if(!emplList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
