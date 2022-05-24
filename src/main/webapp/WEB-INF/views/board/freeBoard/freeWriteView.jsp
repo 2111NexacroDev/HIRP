@@ -9,34 +9,54 @@
 <body>
   <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
   <div id="conts">
+    <%@ include file="/WEB-INF/views/include/inc_board.jsp" %>
     <article id="sub" class="">
       <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
       <h1 class="basic-border-bottom">글쓰기</h1>
-      <form  id="multiform" action="/free/register.hirp" method="post" enctype="multipart/form-data">
-    <!--  	<form name="dataForm" id="dataForm" action="/notice/register.hirp" >	-->	
-          게시판 선택
-          <select name="boardCode">
-            <option value="N">공지게시판</option>
-            <option value="F" selected>자유게시판</option>
-            <option value="A">익명게시판</option>
-            <option value="D">부서게시판</option>
-          </select>
-          <br>
-          제목
-          <input type="text" name ="freeTitle" style="width:1300px;">
-            첨부파일
-              <button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
-              <input id="uploadFiles" name="uploadFiles" type="file" multiple style="display:none;">
-              <span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-              <div class="data_file_txt" id="data_file_txt" style="margin:40px;">
-            <span>첨부 파일</span>
-            <br>
-            <div id="articlefileChange">
-            </div>
+      <div class="subConts page--board-write">
+        <form  id="multiform" action="/free/register.hirp" method="post" enctype="multipart/form-data">
+      <!--  	<form name="dataForm" id="dataForm" action="/notice/register.hirp" >	-->	
+          <table>
+            <tbody>
+              <tr>                
+                <td>게시판 선택</td>
+                <td>
+                  <select name="boardCode">
+                    <option value="N">공지게시판</option>
+                    <option value="F" selected>자유게시판</option>
+                    <option value="A">익명게시판</option>
+                    <option value="D">부서게시판</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>제목</td>
+                <td><input type="text" name ="freeTitle"></td>
+              </tr>
+              <tr>
+                <td>첨부파일</td>
+                <td>
+                  <button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
+                  <input id="uploadFiles" name="uploadFiles" type="file" multiple style="display:none;">
+                  <span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+                  <div class="data_file_txt" id="data_file_txt">
+                    <span>첨부 파일</span>
+                    <div id="articlefileChange">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>내용</td>
+                <td><textarea name="freeContents"></textarea></td>
+              </tr>
+            </tbody>
+          </table> 
+          <div class="btns-wrap">
+            <button class="point" type="submit">수정하기</button>
           </div>
-          <textarea name="freeContents"></textarea>
-            <button type="submit" style="border: 1px solid #ddd; outline: none;">전송</button>
-      </form>
+        </form>
+      </div>
     </article>
   </div>
 

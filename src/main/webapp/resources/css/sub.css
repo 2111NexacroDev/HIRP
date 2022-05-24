@@ -590,5 +590,61 @@ section[class^="todo--"] {
 /* 공용품 예약/관리 끝 */
 
 /* 게시판 */
+.page--board-write table {
+    width: 100%;
+}
 
+.page--board-write td {
+    padding: 16px 0;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.page--board-write td:first-of-type {
+    width: 120px;
+}
+
+.page--board-write td:last-of-type {
+    width: calc(100% - 120px);
+}
+
+.page--board-write td input[type="text"] {
+    width: 100%;
+}
+
+.page--board-write td select,
+.page--board-write td input[type="text"],
+.page--board-write .btns-wrap button {
+    height: 40px;
+}
+
+.page--board-write td textarea {
+    height: 460px;
+}
+
+.page--board-write tr:first-child td {
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.page--board-write .btns-wrap {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.page--board-write .btns-wrap button {
+    width: 70%;
+    max-width: 200px;
+}
+
+.page--board-write td input[type="file"],
+.page--board-write td span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.page--board-write .data_file_txt span {
+    margin: 10px 0;
+    font-size: 12px;
+    color: #999; 
+}
 /* 게시판 끝 */
