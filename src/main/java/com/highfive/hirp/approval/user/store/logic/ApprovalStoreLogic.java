@@ -83,9 +83,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return approval;
 	}
 
+	//결재자 정보 조회
 	@Override
-	public List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int docNo) {
-		List<ApprAccept> aList = sqlSession.selectList("",docNo);
+	public List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int apprNo) {
+		List<ApprAccept> aList = sqlSession.selectList("ApprMapper.selectAllApprAccept",apprNo);
 		return aList;
 	}
 
@@ -95,6 +96,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return result;
 	}
 
+	
 	@Override
 	public int updateApprovalStatus(SqlSession sqlSession, Approval approval) {
 		int result = sqlSession.update("",approval);
