@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.user.domain.ApprAccept;
+import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.service.ApprovalService;
@@ -78,8 +79,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public List<Approval> printAllWaitingAppr(ApprAccept apprAccept) {
-		List<Approval> aList = aStore.selectAllWaitingAppr(sqlSession,apprAccept);
+	public List<Approval> printAllWaitingAppr(String emplId) {
+		List<Approval> aList = aStore.selectAllWaitingAppr(sqlSession,emplId);
 		return aList;
 	}
 
@@ -143,9 +144,30 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return aList;
 	}
 	@Override
-	public Approval printOneAppr(int docNo) {
-		Approval approval = aStore.selectOneAppr(sqlSession,docNo);
+	public Approval printOneAppr(int apprNo) {
+		Approval approval = aStore.selectOneAppr(sqlSession,apprNo);
 		return approval;
+	}
+
+	//양식등록
+	@Override
+	public int registerApprForm(ApprForm apprForm) {
+		int result = aStore.insertApprForm(sqlSession,apprForm);
+		return result;
+	}
+
+	//최근 등록한 양식번호 조회
+	@Override
+	public int printRecentApprNo() {
+		int apprNo = aStore.selectRecentApprNo(sqlSession);
+		return apprNo;
+	}
+
+	//결재 첨부파일 등록
+	@Override
+	public int registerApprFile(ApprAttachedFile apprFile) {
+		int result = aStore.insertApprAttachedFile(sqlSession, apprFile);
+		return result;
 	}
 
 }

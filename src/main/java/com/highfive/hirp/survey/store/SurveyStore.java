@@ -34,12 +34,14 @@ public interface SurveyStore {
 	//설문조사 등록
 	//설문 추가
 	public int insertSurvey(SqlSession sqlSession, Survey survey);
+	//응답자 검색
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword);
 	//설문 문항 추가
 	public int insertSurveyQuest(SqlSession sqlSession, SurveyQuest surveyQuest);
 	//설문 보기 추가 (날짜/객관식의 경우)
 	public int insertSurveyQuestCh(SqlSession sqlSession, SurveyQuestCh qCh);
 	//설문 대상자 리스트 추가
-	public int insertSurveySub(SqlSession sqlSession, List<SurveySub> subList);
+	public int insertSurveySub(SqlSession sqlSession, SurveySub subList);
 	//현재 설문조사 시퀀스 번호 가져오기
 	public int selectSurveySeqNo(SqlSession sqlSession);
 
@@ -62,7 +64,7 @@ public interface SurveyStore {
 	//설문조사 번호로 설문조사 응답 가져오기
 	public List<SurveyAnswer> selectSurveyAnswerByNo(SqlSession sqlSession, int surveyNo);
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
-	public SurveyAnswer selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate);
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate);
 	//emplId, surveyNo 담아서 넘겨줌.
 
 	//설문조사 수정
@@ -72,6 +74,8 @@ public interface SurveyStore {
 	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo);
 	//설문조사 대상자 리스트 수정
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList);
+	//설문조사 대상자 리스트 삭제
+	public int deleteSurveySubList(SqlSession sqlSession, int surveyNo);
 	
 	//설문조사 삭제
 	//설문조사 정보 삭제

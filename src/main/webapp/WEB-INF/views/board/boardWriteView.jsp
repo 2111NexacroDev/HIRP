@@ -1,48 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <html>
-<head>
-<link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
+  <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
+<link rel="stylesheet" href="../../../resources/css/sub.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-  <title>파일업로드예제</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-</head>
 <body>
  <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
  <div id="conts">
   <article id="sub" class="">
     <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
     <h1 class="basic-border-bottom">글쓰기</h1>
-     <form  id="multiform" action="/notice/register.hirp" method="post" enctype="multipart/form-data">
-	<!--  	<form name="dataForm" id="dataForm" action="/notice/register.hirp" >	-->	
-				게시판 선택
-				<select name="boardCode">
-					<option value="N">공지게시판</option>
-					<option value="F">자유게시판</option>
-					<option value="A">익명게시판</option>
-					<option value="D">부서게시판</option>
-				</select>
-				<br>
-				제목
-				<input type="text" name ="noticeTitle" style="width:1300px;">
-			  	첨부파일
-			  		<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
-			  		<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display:none;">
-			  		<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-			  		<div class="data_file_txt" id="data_file_txt" style="margin:40px;">
-					<span>첨부 파일</span>
-					<br>
-					<div id="articlefileChange">
-					</div>
-				</div>
-				<textarea name="noticeContents"></textarea>
-			  	<button type="submit" style="border: 1px solid #ddd; outline: none;">전송</button>
-  	</form>
+    <div class="subConts">
+      <form  id="multiform" action="/notice/register.hirp" method="post" enctype="multipart/form-data">
+        <!--  	<form name="dataForm" id="dataForm" action="/notice/register.hirp" >	-->	
+              게시판 선택
+              <select name="boardCode">
+                <option value="N">공지게시판</option>
+                <option value="F">자유게시판</option>
+                <option value="A">익명게시판</option>
+                <option value="D">부서게시판</option>
+              </select>
+              <br>
+              제목
+              <input type="text" name ="noticeTitle" style="width:1300px;">
+                첨부파일
+                  <button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
+                  <input id="uploadFiles" name="uploadFiles" type="file" multiple style="display:none;">
+                  <span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+                  <div class="data_file_txt" id="data_file_txt" style="margin:40px;">
+                <span>첨부 파일</span>
+                <br>
+                <div id="articlefileChange">
+                </div>
+              </div>
+              <textarea name="noticeContents"></textarea>
+                <button type="submit" style="border: 1px solid #ddd; outline: none;">전송</button>
+          </form>
+    </div>
   </article>
 </div>
 
@@ -75,14 +71,14 @@ var fileNum = 0;
 var content_files = new Array();
 
 function fileCheck(e) {
-    var files = e.target.files;
+    var files = e.target.files;//파일객체, 파일 목록에 접근 가능
     
     // 파일 배열 담기
-    var filesArr = Array.prototype.slice.call(files);
+    var filesArr = Array.prototype.slice.call(files);//객체를 배열로 변환
     
     // 파일 개수 확인 및 제한
     if (fileCount + filesArr.length > totalCount) {
-      $.alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+      alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
       return;
     } else {
     	 fileCount = fileCount + filesArr.length;

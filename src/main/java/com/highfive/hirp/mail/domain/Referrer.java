@@ -4,14 +4,16 @@ public class Referrer {
 	private int referrerNo;
 	private int mailNo;
 	private String referrerId;
+	private String emplId;
 	
 	public Referrer() {}
 
-	public Referrer(int referrerNo, int mailNo, String referrerId) {
+	public Referrer(int referrerNo, int mailNo, String referrerId, String emplId) {
 		super();
 		this.referrerNo = referrerNo;
 		this.mailNo = mailNo;
 		this.referrerId = referrerId;
+		this.emplId = emplId;
 	}
 
 	public int getReferrerNo() {
@@ -38,9 +40,18 @@ public class Referrer {
 		this.referrerId = referrerId;
 	}
 
+	public String getEmplId() {
+		return emplId;
+	}
+
+	public void setEmplId(String emplId) {
+		this.emplId = emplId;
+	}
+
 	@Override
 	public String toString() {
-		return "Referrer [referrerNo=" + referrerNo + ", mailNo=" + mailNo + ", referrerId=" + referrerId + "]";
+		return "Referrer [referrerNo=" + referrerNo + ", mailNo=" + mailNo + ", referrerId=" + referrerId + ", emplId="
+				+ emplId + "]";
 	}
-	
+
 }

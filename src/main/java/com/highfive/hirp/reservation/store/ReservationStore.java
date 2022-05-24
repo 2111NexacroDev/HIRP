@@ -10,11 +10,15 @@ import com.highfive.hirp.reservation.domain.Utility;
 public interface ReservationStore {
 
 	List<Reservation> selectAllReservation(SqlSession sqlSession);
+	List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId);
+	Reservation selectOneReservationByNo(SqlSession sqlSession, int reservationNo);
 	int insertReservation(SqlSession sqlSession, Reservation reservation);
 	int updateReservation(SqlSession sqlSession, Reservation reservation);
 	int deleteReservation(SqlSession sqlSession, int reservationNo);
+	int returnUtility(SqlSession sqlSession, int reservationNo);
 	
 	List<Utility> selectAllUtility(SqlSession sqlSession);
+	Utility selectOneUtilityByNo(SqlSession sqlSession, int utilityNo);
 	int insertUtility(SqlSession sqlSession, Utility utility);
 	int updateUtility(SqlSession sqlSession, Utility utility);
 	int deleteUtility(SqlSession sqlSession, int utilityNo);

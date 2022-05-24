@@ -1,5 +1,7 @@
 package com.highfive.hirp.survey.domain;
 
+import java.util.List;
+
 public class SurveyAnswer {
 	private int surveyanswerNo;
 	private int surveyNo;
@@ -7,6 +9,8 @@ public class SurveyAnswer {
 	private String surveyanswerContent;
 	private String surveyanswerId;
 	private String surveyanswerStorage;
+	
+	private List<SurveyAnswer> surveyAnswerList;
 	
 	public SurveyAnswer() {}
 
@@ -67,6 +71,14 @@ public class SurveyAnswer {
 
 	public void setSurveyanswerStorage(String surveyanswerStorage) {
 		this.surveyanswerStorage = surveyanswerStorage;
+	}
+
+	public List<SurveyAnswer> getSurveyAnswerList() {
+		return surveyAnswerList;
+	}
+
+	public void setSurveyAnswerList(List<SurveyAnswer> surveyAnswerList) {
+		this.surveyAnswerList = surveyAnswerList;
 	}
 
 	@Override

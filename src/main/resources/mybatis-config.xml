@@ -16,15 +16,18 @@
 		<typeAlias type="com.highfive.hirp.todo.domain.Todo" alias="Todo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.todo.domain.Memo" alias="Memo"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Employee" alias="Employee"></typeAlias>
+		<typeAlias type="com.highfive.hirp.employee.domain.Career" alias="Career"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Certification" alias="Certification"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.JobRole" alias="JobRole"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Language" alias="Language"></typeAlias>
 		<typeAlias type="com.highfive.hirp.employee.domain.Military" alias="Military"></typeAlias>
+		
 		<!-- 융경 -->
 		<typeAlias type="com.highfive.hirp.group.domain.Group" alias="Group"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.Time" alias="Time"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.TimeModify" alias="TimeModify"></typeAlias>
 		<typeAlias type="com.highfive.hirp.time.user.domain.Vacation" alias="Vacation"></typeAlias>
+		
 		<!-- 민수 -->
 		<typeAlias type="com.highfive.hirp.favority.domain.Favority" alias="Favority"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.Address" alias="Address"></typeAlias>
@@ -35,18 +38,19 @@
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Project" alias="Project"></typeAlias>
 		<typeAlias type="com.highfive.hirp.project.domain.Board" alias="Board"></typeAlias>
+		
 		<!-- 민선 -->
 		<typeAlias type="com.highfive.hirp.dept.domain.Dept" alias="Dept"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.Survey" alias="Survey"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveySub" alias="SurveySub"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuest" alias="SurveyQuest"></typeAlias>
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveyQuestCh" alias="SurveyQuestCh"></typeAlias>
+		<typeAlias type="com.highfive.hirp.survey.domain.SurveyAnswer" alias="SurveyAnswer"></typeAlias>
 		<!-- survey, 나의 응답여부 -->
 		<!-- search, surveyStatus, emplId -->
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveySearch" alias="SurveySearch"></typeAlias>
 		<!-- emplId, surveyNo -->
 		<typeAlias type="com.highfive.hirp.survey.domain.SurveyUpdate" alias="SurveyUpdate"></typeAlias>
-
 
 		<!-- 우정 -->
 		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>
@@ -55,7 +59,10 @@
 		<typeAlias type="com.highfive.hirp.board.department.domain.DepartmentBoard" alias="DepartmentBoard"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.common.BoardAttachedFile" alias="BoardAttachedFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.board.reply.domain.Reply" alias="Reply"></typeAlias>
-
+		<typeAlias type="com.highfive.hirp.approval.admin.domain.ApprForm" alias="ApprForm"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.Approval" alias="Approval"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.ApprAccept" alias="ApprAccept"></typeAlias>
+		<typeAlias type="com.highfive.hirp.approval.user.domain.ApprAttachedFile" alias="ApprAttachedFile"></typeAlias>
 	</typeAliases>
 	<mappers>
 		<!-- 진실 -->
@@ -74,6 +81,7 @@
 		<mapper resource="mappers/departmentboard-mapper.xml" />
 		<mapper resource="mappers/boardfile-mapper.xml"/>
 		<mapper resource="mappers/boardreply-mapper.xml"/>
+		<mapper resource="mappers/approval-mapper.xml"/>
 		<!-- 민수 -->
 		<mapper resource="mappers/favority-mapper.xml" />
 		<mapper resource="mappers/mail-mapper.xml" />

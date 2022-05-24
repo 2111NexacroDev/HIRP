@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.user.domain.ApprAccept;
+import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.common.Search;
@@ -27,14 +28,26 @@ public interface ApprovalService {
 		//결재자 검색 조회(select search)
 		//public List<Group> searchAllGroup(Search search);
 		
-		//결재자 선택(insert appr_accept)
-		public int registerApprover(ApprAccept apprAccept);
+		
 		//참조자/열람자 선택(insert reference)
 		public int regitserReference(Reference reference);
+		
+		
 		
 		//문서 상신(insert approval)
 		//TEMPORARY_STORAGE DEFAULT값인 'N'로 들어감
 		public int registerAppr(Approval approval);
+		//결재자 등록(insert appr_accept)
+		public int registerApprover(ApprAccept apprAccept);
+		//결재 첨부파일 등록
+		public int registerApprFile(ApprAttachedFile apprFile);
+		
+		
+		
+		
+		
+		
+		
 		
 		//임시저장(insert approval)
 		//TEMPORARY_STORAGE 'Y';
@@ -46,7 +59,7 @@ public interface ApprovalService {
 		public int removeStoragedAppr(int docNo);
 		
 		//결재대기 문서함(select List session에서 id, 진행사항  : 대기)
-		public List<Approval> printAllWaitingAppr(ApprAccept apprAccept); 
+		public List<Approval> printAllWaitingAppr(String emplId); 
 		//결재대기 문서 조회(approval select)
 		public Approval printOneWaitngAppr(int docNo);
 		//결재선 진행 상태 조회(appr_accept select 결재상태 <조건> 문서번호 )
@@ -73,6 +86,14 @@ public interface ApprovalService {
 		//완료문서함(select List)
 		public List<Approval> printAllCompletedAppr(ApprAccept apprAccept);
 		//문서조회(select)
-		public Approval printOneAppr(int docNo);
+		public Approval printOneAppr(int apprNo);
+		
+		
+		//양식등록
+		public int registerApprForm(ApprForm apprForm);
+		
+		//최근 등록한 결재번호 조회
+		public int printRecentApprNo();
+		
 	
 }

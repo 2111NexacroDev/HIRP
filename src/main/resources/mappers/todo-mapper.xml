@@ -19,7 +19,22 @@
 	</resultMap>
 	
 	<select id="selectAllToDo" resultMap="todoResultMap">
-		SELECT * FROM TODO_TBL WHERE TO_CHAR(TODO_DATE, 'YYMMDD') = TO_CHAR(SYSDATE, 'YYMMDD') ORDER BY TODO_DATE DESC
+		SELECT * 
+		FROM TODO_TBL 
+		WHERE EMPL_ID = #{emplId} 
+		ORDER BY TODO_DATE ASC
+	</select>	
+	<select id="selectToDoByDate" resultMap="todoResultMap">
+		SELECT * 
+		FROM TODO_TBL 
+		WHERE EMPL_ID = #{emplId} AND TO_CHAR(TODO_DATE, 'YY-MM-DD') = #{todoDate}
+		ORDER BY TODO_DATE ASC
+	</select>
+	<select id="selectFinishedToDo" resultMap="todoResultMap">
+		SELECT * 
+		FROM TODO_TBL 
+		WHERE IS_FINISHED = 'Y' AND EMPL_ID = #{emplId} 
+		ORDER BY TODO_DATE DESC
 	</select>
 	<insert id="insertToDo">
 		INSERT INTO TODO_TBL VALUES(TODO_SEQ.NEXTVAL, #{emplId}, SYSDATE, #{todoConts}, DEFAULT)
@@ -35,7 +50,10 @@
 	</delete>
 	
 	<select id="selectAllMemo" resultMap="memoResultMap">
-		SELECT * FROM MEMO_TBL ORDER BY ENROLL_DATE ASC
+		SELECT * 
+		FROM MEMO_TBL
+		WHERE EMPL_ID = #{emplId}  
+		ORDER BY ENROLL_DATE ASC
 	</select>
 	<insert id="insertMemo">
 		INSERT INTO MEMO_TBL VALUES(MEMO_SEQ.NEXTVAL, #{emplId}, SYSDATE, #{memoConts})

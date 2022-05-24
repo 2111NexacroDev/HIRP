@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApprMapper">
+<resultMap type="ApprForm" id="apprFormResultMap">
+<id 	property="formNo" column="FORM_NO"></id>
+<result property="formTitle" column="FORM_TITLE"></result>
+<result property="formContents" column="FORM_CONTENTS"></result>
+<result property="writeDate" column="FORM_CRATE_DATE"></result>
+<result property="status" column="FORM_STATUS"></result>
+</resultMap>
+<resultMap type="Approval" id="apprResultMap">
+<id 	property="apprNo" column="APPR_NO"></id>
+<result property="formNo" column="FORM_NO"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="apprTitle" column="APPR_TITLE"></result>
+<result property="apprContents" column="APPR_CONTNETS"></result>
+<result property="apprStatus" column="APPR_STATUS"></result>
+<result property="writeDate" column="WRITE_DATE"></result>
+<result property="temporaryStorage" column="TEMPORARY_STORAGE"></result>
+<result property="docNo" column="DOC_NO"></result>
+<collection property="aList" column="APPR_NO" javaType="java.util.ArrayList" ofType="ApprAccept" select="selectAllApprAccept"></collection>
+<collection property="fList" column="APPR_NO" javaType="java.util.ArrayList" ofType="ApprAttachedFile" select="selectAllApprAttachedFile"></collection>
+</resultMap>
+
+<resultMap type="ApprAccept" id="apprAcceptResultMap">
+<id 	property="acceptNo" column="ACCEPT_NO"></id>
+<result property="apprNo" column="APPR_NO"></result>
+<result property="emplId" column="EMPL_ID"></result>
+<result property="apprLevel" column="APPR_LEVEL"></result>
+<result property="apprType" column="APPR_TYPE"></result>
+<result property="status" column="APPR_STATUS"></result>
+<result property="apprComment" column="APPR_COMMENT"></result>
+<result property="apprDate" column="APPR_DATE"></result>
+</resultMap>
+
+
+<resultMap type="ApprAttachedFile" id="apprAttachedFileResultMap">
+<id 	property="fileNo" column="FILE_NO"></id>
+<result property="apprNo" column="APPR_NO"></result>
+<result property="fileName" column="FILE_NAME"></result>
+<result property="fileRename" column="FILE_RENAME"></result>
+<result property="filePath" column="FILE_PATH"></result>
+</resultMap>
+<!-- 결재 폼 등록 -->
+<insert id="insertApprForm">
+	INSERT INTO APPR_FORM_TBL VALUES(APPR_FORM_SEQ.NEXTVAL, #{formTitle},#{formContents},DEFAULT,DEFAULT)
+</insert>
+<!-- 결재 폼 전체 조회 -->
+<select id="selectAllApprForm" resultMap="apprFormResultMap">
+	SELECT * FROM APPR_FORM_TBL
+</select>
+<!-- 결재홈 하나 조회 -->
+<select id="selectApprForm" resultMap="apprFormResultMap">
+	SELECT * FROM APPR_FORM_TBL WHERE FORM_NO = #{formNo}
+</select>
+<!-- 결재 테이블 등록 -->
+<insert id="insertAppr">
+	INSERT INTO APPROVAL_TBL(APPR_NO,FORM_NO,EMPL_ID,APPR_TITLE,APPR_CONTENTS,APPR_STATUS,WRITE_DATE,TEMPORARY_STORAGE) VALUES(APPR_SEQ.NEXTVAL,#{formNo},#{emplId},#{apprTitle},#{apprContents},DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<!-- 최신 결재 번호 가져오기 -->
+<select id="selectRecentApprNo" resultType="_int">
+	SELECT APPR_NO FROM(SELECT APPR_NO, RANK()OVER(ORDER BY WRITE_DATE DESC )RANK_NUM FROM APPROVAL_TBL)WHERE RANK_NUM = 1
+</select>
+<!-- 결재 첨부파일 등록 -->
+<insert id="insertApprAttachedFile">
+	INSERT INTO APPR_ATTACHED_FILE_TBL VALUES(APPR_FILE_SEQ.NEXTVAL,#{apprNo},#{fileName},#{fileRename},#{filePath})
+</insert>
+<!-- 결재자등록 -->
+<insert id="insertApprover">
+	INSERT INTO APPR_ACCEPT_TBL(ACCEPT_NO, APPR_NO,EMPL_ID, APPR_LEVEL,APPR_TYPE,APPR_STATUS) VALUES(APPR_ACCEPT_SEQ.NEXTVAL,#{apprNo},#{emplId},(SELECT NVL(MAX(APPR_LEVEL),0)+1 FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}),#{apprType},DEFAULT)
+</insert>
+
+
+<!-- 결재 대기 문서 리스트 조회 -->
+<select id="selectAllWaitingAppr" resultMap="apprResultMap">
+	SELECT APPR_NO, FORM_TITLE "FORM_NO", EMPL_NAME "EMPL_ID",APPR_TITLE,APPR_CONTENTS,APPR_STATUS,WRITE_DATE,TEMPORARY_STORAGE,DOC_NO 
+	FROM APPROVAL_TBL A 
+	JOIN EMPL_TBL E ON(A.EMPL_ID = E.EMPL_ID) 
+	JOIN APPR_FORM_TBL F ON(A.FORM_NO=F.FORM_NO) 
+	WHERE APPR_NO IN(SELECT APPR_NO FROM APPR_ACCEPT_TBL WHERE APPR_LEVEL IN (SELECT MIN(APPR_LEVEL)FROM APPR_ACCEPT_TBL GROUP BY APPR_NO) AND EMPL_ID=#{emplId} AND APPR_STATUS='대기')
+</select>
+
+<!-- 결재문서 조회 -->
+<select id="selectOneAppr" resultMap="apprResultMap">
+	SELECT * FROM APPROVAL_TBL WHERE  APPR_NO = #{apprNo}
+</select>
+
+<!-- 첨부파일 조회 -->
+<select id="selectAllApprAttachedFile"  resultMap="apprAttachedFileResultMap">
+	SELECT * FROM APPR_ATTACHED_FILE_TBL WHERE APPR_NO = #{apprNo}
+</select>
+
+<!-- 결재자 조회 -->
+<select id="selectAllApprAccept"  resultMap="apprAcceptResultMap">
+	SELECT * FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}
+</select>
+</mapper>

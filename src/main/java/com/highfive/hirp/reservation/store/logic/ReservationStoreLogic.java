@@ -11,13 +11,24 @@ import com.highfive.hirp.reservation.store.ReservationStore;
 
 @Repository
 public class ReservationStoreLogic implements ReservationStore {
-
 	@Override
 	public List<Reservation> selectAllReservation(SqlSession sqlSession) {
 		List<Reservation> rList = sqlSession.selectList("ReservationMapper.selectAllReservation");
 		return rList;
 	}
 
+	@Override
+	public List<Reservation> selectAllMyReservation(SqlSession sqlSession, String emplId) {
+		List<Reservation> myList = sqlSession.selectList("ReservationMapper.selectAllMyReservation", emplId);
+		return myList;
+	}
+
+	@Override
+	public Reservation selectOneReservationByNo(SqlSession sqlSession, int reservationNo) {
+		Reservation reservation = sqlSession.selectOne("ReservationMapper.selectOneReservationByNo", reservationNo);
+		return reservation;
+	}
+	
 	@Override
 	public int insertReservation(SqlSession sqlSession, Reservation reservation) {
 		int result = sqlSession.insert("ReservationMapper.insertReservation", reservation);
@@ -37,9 +48,21 @@ public class ReservationStoreLogic implements ReservationStore {
 	}
 
 	@Override
+	public int returnUtility(SqlSession sqlSession, int reservationNo) {
+		int result = sqlSession.update("ReservationMapper.returnUtility", reservationNo);
+		return result;
+	}
+	
+	@Override
 	public List<Utility> selectAllUtility(SqlSession sqlSession) {
 		List<Utility> uList = sqlSession.selectList("ReservationMapper.selectAllUtility");
 		return uList;
+	}
+	
+	@Override
+	public Utility selectOneUtilityByNo(SqlSession sqlSession, int utilityNo) {
+		Utility utility = sqlSession.selectOne("ReservationMapper.selectOneUtilityByNo", utilityNo);
+		return utility;
 	}
 
 	@Override

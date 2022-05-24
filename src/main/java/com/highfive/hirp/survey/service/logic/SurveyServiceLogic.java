@@ -71,6 +71,12 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.insertSurvey(sqlSession, survey);
 		return result;
 	}
+	//응답자 검색
+	@Override
+	public List<Employee> selectSearchEmplList(String emplSearchKeyword) {
+		List<Employee> emplList = sStore.selectSearchEmplList(sqlSession, emplSearchKeyword);
+		return emplList;
+	}
 	//설문 문항 추가
 	@Override
 	public int insertSurveyQuest(SurveyQuest surveyQuest) {
@@ -85,7 +91,7 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문 대상자 리스트 추가
 	@Override
-	public int insertSurveySub(List<SurveySub> subList) {
+	public int insertSurveySub(SurveySub subList) {
 		int result = sStore.insertSurveySub(sqlSession, subList);
 		return result;
 	}
@@ -94,6 +100,7 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.selectSurveySeqNo(sqlSession);
 		return result;
 	}
+	
 	
 	//전체 직원 가져오기
 	@Override
@@ -123,7 +130,7 @@ public class SurveyServiceLogic implements SurveyService{
 		List<SurveyQuest> surveyQuestList = sStore.selectAllSurveyQuestByNo(sqlSession, surveyQuestNo);
 		return surveyQuestList;
 	}
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문 문항 가져오기
 	@Override
 	public SurveyQuest selectOneSurveyQuestByNo(int surveyQuestNo) {
 		SurveyQuest surveyQuest = sStore.selectOneSurveyQuestByNo(sqlSession, surveyQuestNo);
@@ -143,8 +150,8 @@ public class SurveyServiceLogic implements SurveyService{
 	}
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
 	@Override
-	public SurveyAnswer selectSurveyMyAnswerByNo(SurveyUpdate ssUpdate) {
-		SurveyAnswer surveyAnswer = sStore.selectSurveyMyAnswerByNo(sqlSession, ssUpdate);
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SurveyUpdate ssUpdate) {
+		List<SurveyAnswer> surveyAnswer = sStore.selectSurveyMyAnswerByNo(sqlSession, ssUpdate);
 		return surveyAnswer;
 	}
 	//emplId, surveyNo 담아서 넘겨줌.
@@ -164,14 +171,20 @@ public class SurveyServiceLogic implements SurveyService{
 		return result;
 	}
 	
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문조사 대상자 리스트 수정
 	@Override
 	public int updateSurveySubList(List<SurveySub> subList) {
 		int result = sStore.updateSurveySubList(sqlSession, subList);
 		return result;
 	}
 	
-	//설문조사 삭제
+	//설문조사 대상자 리스트 삭제
+	@Override
+	public int deleteSurveySubList(int surveyNo) {
+		int result = sStore.deleteSurveySubList(sqlSession, surveyNo);
+		return result;
+	}
+
 	//설문조사 정보 삭제
 	@Override
 	public int deleteSurvey(int surveyNo) {
@@ -205,6 +218,8 @@ public class SurveyServiceLogic implements SurveyService{
 		List<Survey> searchSurvey = sStore.selectSearchSurvey(sqlSession, surveySearch);
 		return searchSurvey;
 	}
+
+
 
 
 

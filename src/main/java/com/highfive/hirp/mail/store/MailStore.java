@@ -13,32 +13,39 @@ import com.highfive.hirp.mail.domain.Referrer;
 
 public interface MailStore {
 
-	int selectListCount(SqlSession sqlSession);
 	int sendMail(SqlSession sqlSession, Mail mail);
 	int sendMailRecipient(SqlSession sqlSession, Recipient recipient);
 	int sendMailReferrer(SqlSession sqlSession, Referrer referrer);
 	int saveFile(SqlSession sqlSession, MailFile mailFile);
-	List<Mail> selectReceivedMail(SqlSession sqlSession, PageInfo pi);
+	int modifyMailFile(SqlSession sqlSession, MailFile mailFile);
+	int sendBugReportRecipient(SqlSession sqlSession, Recipient recipient);
+	
+	List<Mail> selectRecMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	List<Mail> selectSendMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	List<Mail> selectTemMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	List<Mail> selectMyMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	List<Mail> selectImpMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	List<Mail> selectWasMail(SqlSession sqlSession, Mail mail, PageInfo pi);
+	
 	Mail selectOneByNo(SqlSession sqlSession, int mailNo);
-	List<Mail> selectSentMail(SqlSession sqlSession);
-	int selectOneSentMail(SqlSession sqlSession, int mailNo);
-	List<Mail> selectTemporaryMail(SqlSession sqlSession);
-	int selectOneTemporaryMail(SqlSession sqlSession, int mailNo);
-	List<Mail> selectMyMail(SqlSession sqlSession);
-	int selectOneMyMail(SqlSession sqlSession, int mailNo);
-	List<Mail> selectImportantMail(SqlSession sqlSession);
-	int selectOneImportantMail(SqlSession sqlSession, int mailNo);
-	List<Mail> selectWasteBasketMail(SqlSession sqlSession);
-	int selectOneWasteBasketMail(SqlSession sqlSession, int mailNo);
-	int doSendBugReport(SqlSession sqlSession, Mail mail);
+	Recipient selectOneByNoMailRec(SqlSession sqlSession, int mailNo);
+	Referrer selectOneByNoMailRef(SqlSession sqlSession, int mailNo);
+	MailFile selectOneByNoMailFile(SqlSession sqlSession, int mailNo);
+	
 	List<Mail> searchMail(SqlSession sqlSession, Mail mail);
 	int modifyMail(SqlSession sqlSession, int mailNo, Mail mail);
 	int replyMail(SqlSession sqlSession, Mail mail);
 	int relayMail(SqlSession sqlSession, Mail mail);
-	int modifyMailFile(SqlSession sqlSession, MailFile mailFile);
 	int restoreMail(SqlSession sqlSession, int mailNo);
 	int removeMail(SqlSession sqlSession, Mail mail);
 	int registerAddress(SqlSession sqlSession, Address address);
 	int removeAddress(SqlSession sqlSession, Address address);
+	
+	int selectMailCountR(SqlSession sqlSession, Mail mail);
+	int selectMailCountS(SqlSession sqlSession, Mail mail);
+	int selectMailCountT(SqlSession sqlSession, Mail mail);
+	int selectMailCountM(SqlSession sqlSession, Mail mail);
+	int selectMailCountI(SqlSession sqlSession, Mail mail);
+	int selectMailCountW(SqlSession sqlSession, Mail mail);
 
 }

@@ -6,10 +6,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.highfive.hirp.employee.domain.Career;
+import com.highfive.hirp.employee.domain.Certification;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.domain.JobRole;
+import com.highfive.hirp.employee.domain.Language;
+import com.highfive.hirp.employee.domain.Military;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.employee.store.EmployeeAdminStore;
-import com.nexacro17.xapi.data.DataSet;
 
 @Service
 public class EmployeeAdminServiceImpl implements EmployeeAdminService {
@@ -20,8 +24,34 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	private EmployeeAdminStore eAStore;
 
 	@Override
+	public List<Employee> printBirthdayList() {
+		List<Employee> birthdayList = eAStore.selectBirthdayList(sqlSession);
+		return birthdayList;
+	}
+	
+	@Override
 	public List<Employee> printAllEmployee() {
 		List<Employee> eList = eAStore.selectAllEmployee(sqlSession);
+		return eList;
+	}
+	
+	@Override
+	public List<Employee> printAllEmployeeWithName() {
+		List<Employee> eList = eAStore.selectAllEmployeeWithName(sqlSession);
+		return eList;
+	}
+	
+	//하위부서까지
+	@Override
+	public List<Employee> printAllEmployeeWithDeptCode(String deptCode) {
+		List<Employee> eList = eAStore.selectAllEmployeeWithDeptCode(sqlSession, deptCode);
+		return eList;
+	}
+	
+	//내 소속 부서만
+	@Override
+	public List<Employee> printEmployeeWithDeptCode(String deptCode) {
+		List<Employee> eList = eAStore.selectEmployeeWithDeptCode(sqlSession, deptCode);
 		return eList;
 	}
 
@@ -50,14 +80,44 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	}
 
 	@Override
-	public int resignEmployee(int empNo) {
-		int result = eAStore.resignEmployee(sqlSession, empNo);
+	public int resignEmployee(String emplId) {
+		int result = eAStore.resignEmployee(sqlSession, emplId);
 		return result;
 	}
 
 	@Override
-	public int modifyLevelEmployee(int empNo) {
-		int result = eAStore.updateLevelEmployee(sqlSession, empNo);
+	public int modifyLevelEmployee(String emplId) {
+		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
 		return result;
+	}
+
+	@Override
+	public List<JobRole> selectAllJobById(String emplId) {
+		List<JobRole> jList = eAStore.selectAllJobById(sqlSession, emplId);
+		return jList;
+	}
+
+	@Override
+	public List<Career> selectAllCareerById(String emplId) {
+		List<Career> caList = eAStore.selectAllCareerById(sqlSession, emplId);
+		return caList;
+	}
+
+	@Override
+	public List<Language> selectAllLanguageById(String emplId) {
+		List<Language> lList = eAStore.selectAllLanguageById(sqlSession, emplId);
+		return lList;
+	}
+
+	@Override
+	public List<Certification> selectAllCertById(String emplId) {
+		List<Certification> cList = eAStore.selectAllCertById(sqlSession, emplId);
+		return cList;
+	}
+
+	@Override
+	public List<Military> selectAllMilitaryById(String emplId) {
+		List<Military> mList = eAStore.selectAllMilitaryById(sqlSession, emplId);
+		return mList;
 	}
 }

@@ -68,6 +68,12 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.insert("SurveyMapper.insertSurvey", survey);
 		return result;
 	}
+	//응답자 검색
+	@Override
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword) {
+		List<Employee> emplList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmplList", emplSearchKeyword);
+		return emplList;
+	}
 	//설문 문항 추가
 	@Override
 	public int insertSurveyQuest(SqlSession sqlSession, SurveyQuest surveyQuest) {
@@ -82,7 +88,7 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문 대상자 리스트 추가
 	@Override
-	public int insertSurveySub(SqlSession sqlSession, List<SurveySub> subList) {
+	public int insertSurveySub(SqlSession sqlSession, SurveySub subList) {
 		int result = sqlSession.insert("SurveyMapper.insertSurveySub", subList);
 		return result;
 	}
@@ -141,9 +147,9 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
 	@Override
-	public SurveyAnswer selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate) {
-		SurveyAnswer surveyAnswer = sqlSession.selectOne("SurveyMapper.selectSurveyMyAnswerByNo", ssUpdate);
-		return surveyAnswer;
+	public List<SurveyAnswer> selectSurveyMyAnswerByNo(SqlSession sqlSession, SurveyUpdate ssUpdate) {
+		List<SurveyAnswer> surveyAnswerList = sqlSession.selectList("SurveyMapper.selectSurveyMyAnswerByNo", ssUpdate);
+		return surveyAnswerList;
 	}
 	//emplId, surveyNo 담아서 넘겨줌.
 
@@ -164,6 +170,12 @@ public class SurveyStoreLogic implements SurveyStore{
 	@Override
 	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList) {
 		int result = sqlSession.update("SurveyMapper.updateSurveySubList", subList);
+		return result;
+	}
+	//설문조사 대상자 리스트 삭제
+	@Override
+	public int deleteSurveySubList(SqlSession sqlSession, int surveyNo) {
+		int result = sqlSession.delete("SurveyMapper.deleteSurveySubByNo", surveyNo);
 		return result;
 	}
 	
@@ -202,6 +214,7 @@ public class SurveyStoreLogic implements SurveyStore{
 		List<Survey> surveyList = sqlSession.selectList("SurveyMapper.selectSearchSurvey", surveySearch);
 		return surveyList;
 	}
+
 
 	
 }

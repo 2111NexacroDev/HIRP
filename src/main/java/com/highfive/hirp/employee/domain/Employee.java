@@ -28,6 +28,10 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private JobRole jobRole;
 	private Language language;
 	private Military military;
+	private Career career;
+	//회원 정보 이름으로 가져오기
+	private String deptName;
+	private String positionName;
 
 	public Employee() {}
 
@@ -35,7 +39,8 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
 			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
 			String isVeterans, Date endDate, String endReason, String emplProfile, Certification certification,
-			JobRole jobRole, Language language, Military military) {
+			JobRole jobRole, Language language, Military military, Career career, String deptName,
+			String positionName) {
 		super();
 		this.emplId = emplId;
 		this.deptCode = deptCode;
@@ -62,6 +67,9 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.jobRole = jobRole;
 		this.language = language;
 		this.military = military;
+		this.career = career;
+		this.deptName = deptName;
+		this.positionName = positionName;
 	}
 
 	public String getEmplId() {
@@ -264,6 +272,30 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.military = military;
 	}
 
+	public Career getCareer() {
+		return career;
+	}
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [emplId=" + emplId + ", deptCode=" + deptCode + ", positionCode=" + positionCode + ", emplPw="
@@ -273,6 +305,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 				+ ", gender=" + gender + ", isMarriage=" + isMarriage + ", isDisability=" + isDisability
 				+ ", isVeterans=" + isVeterans + ", endDate=" + endDate + ", endReason=" + endReason + ", emplProfile="
 				+ emplProfile + ", certification=" + certification + ", jobRole=" + jobRole + ", language=" + language
-				+ ", military=" + military + "]";
+				+ ", military=" + military + ", career=" + career + ", deptName=" + deptName + ", positionName="
+				+ positionName + "]";
 	}
 }

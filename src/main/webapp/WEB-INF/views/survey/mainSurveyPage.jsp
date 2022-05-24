@@ -36,17 +36,18 @@
 		            		<div class="padding-20">
 			            		<!-- 버튼은 둘 중 하나만 출력 -->
 			            		<!-- 근데 생각해보니까 참여한 건 여기 출력되지 않아도 될 것 같아서 미참여로 고정함 -->
-								<button class="emergency" type="button">미참여</button>
+								<button class="emergency" type="button" style="cursor:default;">미참여</button>
 								<!-- <button class="finished" type="button">참여완료</button>	 -->
 								<h2 class="mt-10">${myList.surveyTitle }</h2>
-								<p class="mt-10 color-grey">${myList.surveyStartdate }~${myList.surveyEnddate }</p>
+								<p class="mt-10 color-grey">${fn:substring(myList.surveyStartdate, 0, 10) } ~ ${fn:substring(myList.surveyEnddate, 0, 10) }</p>
+								
 								<div class="row mt-10">
 			                        <div class="col-4">
 										<p class="color-grey">작성자</p>
 										<!-- display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
 			                        </div>
 			                        <div class="">
-			                            <p class="">${myList.surveyWriter }</p>
+			                            <p class="">${myList.emplName } ${myList.positionName }</p>
 			                        </div>
 			                    </div>
 			                    <div class="row mt-10">
@@ -70,89 +71,15 @@
 			                    </div>
 		            		</div>
 		                	
-		                	<div class="t-c padding-20 basic-border-top">
-		                		<a href="#">설문 참여</a>
+		                	<div class="t-c padding-0 basic-border-top" onclick="location.href='#'">
+		                		<button class="noneBackground padding-20" style="width:95%" onclick="location.href='/survey/questDetail.hirp?surveyNo=${myList.surveyNo}'">설문 참여</button>
 		                	</div>
 		                </div>
 		                <!-- 박스 끝 -->
             		</c:forEach>
-            		
-            		<!-- db 데이터 두 개밖에 없어서 여러 개일 때 보려고 추가해둠. -->
-<!-- 	            	<div class="col-3 basic-border bor-round padding-0 mr-20 mb-20"> -->
-<!-- 	            		<div class="padding-20"> -->
-<!-- 		            		버튼은 둘 중 하나만 출력 -->
-<!-- 							<button class="emergency" type="button">미참여</button> -->
-<!-- 							<button class="finished" type="button">참여완료</button>	 -->
-<!-- 							<h2 class="mt-10">설문 제목</h2> -->
-<!-- 							<p class="mt-10 color-grey">2022-04-11~2022-04-12</p> -->
-<!-- 							<div class="row mt-10"> -->
-<!-- 		                        <div class="col-4"> -->
-<!-- 									<p class="color-grey">작성자</p> -->
-<!-- 									display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
-<!-- 		                        </div> -->
-<!-- 		                        <div class=""> -->
-<!-- 		                            <p class="">민봉식 대표이사</p> -->
-<!-- 		                        </div> -->
-<!-- 		                    </div> -->
-<!-- 		                    <div class="row mt-10"> -->
-<!-- 		                        <div class="col-4"> -->
-<!-- 									<div> -->
-<!-- 		                            	<p class="color-grey">설문 결과</p> -->
-<!-- 		                            </div> -->
-<!-- 		                        </div> -->
-<!-- 		                        <div class=""> -->
-<!-- 		                            <div> -->
-<!-- 		                            	<p class="">공개</p> -->
-<!-- 		                            </div> -->
-<!-- 		                        </div> -->
-<!-- 		                    </div> -->
-<!-- 	            		</div> -->
-	                	
-<!-- 	                	<div class="t-c padding-20 basic-border-top"> -->
-<!-- 	                		<a href="#">설문 참여</a> -->
-<!-- 	                	</div> -->
-<!-- 	                </div> -->
-<!-- 	                <div class="col-3 basic-border bor-round padding-0 mr-20 mb-20"> -->
-<!-- 	            		<div class="padding-20"> -->
-<!-- 		            		버튼은 둘 중 하나만 출력 -->
-<!-- 							<button class="emergency" type="button">미참여</button> -->
-<!-- 							<button class="finished" type="button">참여완료</button>	 -->
-<!-- 							<h2 class="mt-10">설문 제목</h2> -->
-<!-- 							<p class="mt-10 color-grey">2022-04-11~2022-04-12</p> -->
-<!-- 							<div class="row mt-10"> -->
-<!-- 		                        <div class="col-4"> -->
-<!-- 									<p class="color-grey">작성자</p> -->
-<!-- 									display inline-block으로 바꾸면 자기 사이즈만큼만 차지 -->
-<!-- 		                        </div> -->
-<!-- 		                        <div class=""> -->
-<!-- 		                            <p class="">민봉식 대표이사</p> -->
-<!-- 		                        </div> -->
-<!-- 		                    </div> -->
-<!-- 		                    <div class="row mt-10"> -->
-<!-- 		                        <div class="col-4"> -->
-<!-- 									<div> -->
-<!-- 		                            	<p class="color-grey">설문 결과</p> -->
-<!-- 		                            </div> -->
-<!-- 		                        </div> -->
-<!-- 		                        <div class=""> -->
-<!-- 		                            <div> -->
-<!-- 		                            	<p class="">공개</p> -->
-<!-- 		                            </div> -->
-<!-- 		                        </div> -->
-<!-- 		                    </div> -->
-<!-- 	            		</div> -->
-	                	
-<!-- 	                	<div class="t-c padding-20 basic-border-top"> -->
-<!-- 	                		<a href="#">설문 참여</a> -->
-<!-- 	                	</div> -->
-<!-- 	                </div> -->
-	                
             	</div>
-            	<!--  진행중인 설문 중 내가 대상자이면서, 아직 참여하지 않은 설문 끝 -->
-            
-            
-            <br><br><br>
-            <h2>최근 생성된 설문</h2>
+	            <br><br><br>
+	            <h2>최근 생성된 설문</h2>
             	<table class="table--basic mt-20">
                     <thead>
                         <tr>
@@ -165,18 +92,19 @@
                     <tbody>
                     	<c:forEach items="${sList }" var="survey">
                     		<tr>
-	                            <td>
+                    			<td>
 	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.subAnswerstatus eq 'Y'}">
-	                            		<button class="finished" type="button">참여완료</button>
+	                            	<c:if test="${survey.surveyStatus eq 'C'}">
+	                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
 	                            	</c:if>
-	                            	<c:if test="${survey.subAnswerstatus eq 'N' || empty survey.subAnswerstatus}">
-	                            		<button class="emergency" type="button">미참여</button>
+	                            	<c:if test="${survey.surveyStatus eq 'F'}">
+	                            		<button class="finished" type="button" style="cursor:default;">마감</button>
 	                            	</c:if>
 	                            </td>
-	                            <td>${survey.surveyTitle }</td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
-	                            <td>${survey.surveyWriter }</td>
+<%-- 	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+	                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }');">${survey.surveyTitle }</td>
+	                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+	                            <td>${survey.emplName } ${survey.positionName }</td>
 	                        </tr>
                     	
                     	</c:forEach>
@@ -208,5 +136,47 @@
             
             
         </article>
+	<script>
+		//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
+	    function openDetail(alertWindow, sNo, sMyAnswerStatus, surveyStatus) {
+	    	//ajax로 list 가져오기
+	    	$.ajax({
+	    		url: "/survey/subList.hirp",
+	    		type: "post",
+	    		data: {"surveyNo" : sNo},
+	    		success: function(sList){
+	    			console.log(sList);
+	    			var count = sList.length;
+					for(var i = 0 ; i < count; i++){
+						if(surveyStatus == "F"){
+							location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+							break;
+						} else {
+							if(sList[i].subId == "${sessionScope.emplId}"){
+								if(sMyAnswerStatus == "Y"){
+									//응답했을 때
+									location.href="/survey/updateAnswerPage.hirp?surveyNo="+sNo;
+									break;
+								} else {
+									//응답하지 않았을 때
+									location.href="/survey/questDetail.hirp?surveyNo="+sNo;
+									break;
+								}
+							} else {
+								if(i == count-1){
+									//응답 대상자가 아닐 때 (마지막 인덱스까지 검사)
+									location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+								}
+							}
+						}
+					}
+	    		},
+	    		error: function(){
+	    			
+	    		}
+	    	});
+	        
+	    }
+	</script>
 </body>
 </html>

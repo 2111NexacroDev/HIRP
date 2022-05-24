@@ -2,45 +2,37 @@ package com.highfive.hirp.approval.user.domain;
 
 public class Reference {
 
-	private int referenceNo;
-	private int docNo;
-	private String isComplete;
+	private int refNo;
+	private int apprNo;
 	private String emplId;
-	private String isReference;
+	private String isComplete;
+	private String refType;
 	
 	public Reference() {}
 
-	public Reference(int referenceNo, int docNo, String isComplete, String emplId, String isReference) {
+	public Reference(int refNo, int apprNo, String emplId, String isComplete, String refType) {
 		super();
-		this.referenceNo = referenceNo;
-		this.docNo = docNo;
-		this.isComplete = isComplete;
+		this.refNo = refNo;
+		this.apprNo = apprNo;
 		this.emplId = emplId;
-		this.isReference = isReference;
-	}
-
-	public int getReferenceNo() {
-		return referenceNo;
-	}
-
-	public void setReferenceNo(int referenceNo) {
-		this.referenceNo = referenceNo;
-	}
-
-	public int getDocNo() {
-		return docNo;
-	}
-
-	public void setDocNo(int docNo) {
-		this.docNo = docNo;
-	}
-
-	public String getIsComplete() {
-		return isComplete;
-	}
-
-	public void setIsComplete(String isComplete) {
 		this.isComplete = isComplete;
+		this.refType = refType;
+	}
+
+	public int getRefNo() {
+		return refNo;
+	}
+
+	public void setRefNo(int refNo) {
+		this.refNo = refNo;
+	}
+
+	public int getApprNo() {
+		return apprNo;
+	}
+
+	public void setApprNo(int apprNo) {
+		this.apprNo = apprNo;
 	}
 
 	public String getEmplId() {
@@ -51,19 +43,28 @@ public class Reference {
 		this.emplId = emplId;
 	}
 
-	public String getIsReference() {
-		return isReference;
+	public String getIsComplete() {
+		return isComplete;
 	}
 
-	public void setIsReference(String isReference) {
-		this.isReference = isReference;
+	public void setIsComplete(String isComplete) {
+		this.isComplete = isComplete;
+	}
+
+	public String getRefType() {
+		return refType;
+	}
+
+	public void setRefType(String refType) {
+		this.refType = refType;
 	}
 
 	@Override
 	public String toString() {
-		return "Reference [referenceNo=" + referenceNo + ", docNo=" + docNo + ", isComplete=" + isComplete + ", emplId="
-				+ emplId + ", isReference=" + isReference + "]";
+		return "Reference [refNo=" + refNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", isComplete=" + isComplete
+				+ ", refType=" + refType + "]";
 	}
+
 	
 	
 }

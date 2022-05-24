@@ -138,6 +138,14 @@ button.emergency {
     color: #fff;
 }
 
+button.emergency-opacity {
+    background-color: #fa573c;
+    border: 1px solid #fa573c;
+    color: #fff;
+    opacity: 0.5;
+    cursor: default;
+}
+
 button.noneBackground {
     background-color: #fff;
     border: 0px none;
@@ -148,6 +156,18 @@ button.colorGrey {
     background-color: #fff;
     border: 0px none;
     color: #ccc;
+}
+
+button.prev {
+    content: "\f104";
+    background-color: white;
+    font-family: fontawesome;
+}
+
+button.next {
+    content: "\f105";
+    background-color: white;
+    font-family: fontawesome;
 }
 
 img {
@@ -205,6 +225,32 @@ img {
 
 .color-white {
     color: #fff;
+    opacity: 0.5;
+    cursor: default;
+}
+
+button.prev {
+    content: "\f104";
+    background-color: white;
+    font-family: fontawesome;
+}
+
+button.next {
+    content: "\f105";
+    background-color: white;
+    font-family: fontawesome;
+}
+
+.bg-point {
+    background-color: #0b2a60;
+}
+
+.color-point {
+    color: #00498c;
+}
+
+.color-white {
+    color: #fff;
 }
 
 .color-grey {
@@ -219,36 +265,64 @@ img {
     text-align: right;
 }
 
+.mt-5 {
+    margin-top: 5px;
+}
+
 .mt-10 {
     margin-top: 10px;
-}
-
-.mr-10 {
-    margin-right: 10px;
-}
-
-.mb-10 {
-    margin-bottom: 10px;
-}
-
-.ml-10 {
-    margin-left: 10px;
 }
 
 .mt-20 {
     margin-top: 20px;
 }
 
+.mt-30 {
+    margin-top: 30px !important;
+}
+
+.mt-40 {
+    margin-top: 40px !important;
+}
+
+.mt-50 {
+    margin-top: 50px !important;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
 .mr-20 {
     margin-right: 20px;
 }
 
-.mb-20 {
-    margin-bottom: 20px;
+.ml-5 {
+    margin-left: 5px;
+}
+
+.ml-10 {
+    margin-left: 10px;
 }
 
 .ml-20 {
     margin-left: 20px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
 }
 
 .padding-0 {
@@ -262,6 +336,7 @@ img {
 .padding-top-10 {
     padding-top: 10px !important;
 }
+
 .padding-bottom-10 {
     padding-bottom: 10px !important;
 }
@@ -445,7 +520,6 @@ img {
     opacity: 1;
 }
 
-
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
@@ -626,26 +700,35 @@ img {
     padding-left: 20px;
 }
 
-#snb>ul>li>a {
+#snb>ul>li>a,
+#snb>ul>li>button {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
     font-size: 14px;
     font-weight: 500;
 }
 
-#snb>ul>li>a:before {
+#snb>ul>li button {
+    padding: 0;
+    background-color: transparent;
+}
+
+#snb>ul>li>a:before,
+#snb>ul>li>button:before {
     content: "\f107";
     font-family: "Fontawesome";
     margin-right: 10px;
     transition: all .3s;
 }
 
+#snb>ul>li>a.on:before,
+#snb>ul>li>button.on:before {
+    transform: rotate(-90deg);
+}
+
 #snb>ul.no-icon>li>a:before {
     display: none;
 }
-
-#snb>ul>li:hover>a:before {}
 
 #snb>ul {
     margin-top: 20px;
@@ -653,6 +736,10 @@ img {
 
 #snb>ul>li {
     margin-top: 24px;
+}
+
+#snb>ul>li>ul>li:first-child {
+    margin-top: 16px;
 }
 
 .btn--function {
@@ -715,7 +802,6 @@ img {
     background-position: center center;
     mragin-left: 8px;
 }
-
 
 @media screen and (min-width: 1201px) {
 
@@ -799,7 +885,6 @@ img {
 }
 
 @media screen and (min-width: 1201px) {
-
     .form--srch:hover input {
         border-color: #00a1b9;
     }
@@ -846,7 +931,6 @@ article {
     line-height: 1.6;
     border: 1px solid #ccc;
 }
-
 
 .section--alert,
 .section--modal {
@@ -939,7 +1023,6 @@ article {
     background-color: #fff;
     border: 1px solid #ccc;
 }
-
 
 /* 채팅창 끝 */
 

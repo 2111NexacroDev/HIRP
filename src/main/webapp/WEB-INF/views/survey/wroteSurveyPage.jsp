@@ -14,8 +14,9 @@
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
         	<!-- 검색폼 필요한 사람 쓰기, class 변경 안하고 id만 부여해서 사용하면 됨 -->
-            <form class="form--srch" action="">
-                <input type="text" name="" placeholder="통합검색">
+            <form class="form--srch" action="/survey/search.hirp" method="post">
+                <input type="text" style="width:200px;" name="searchValue" placeholder="설문 제목 또는 작성자 검색">
+                <input type="hidden" name="surveyStatus" value="W"/>
                 <button type="submit"></button>
             </form>
 
@@ -35,72 +36,104 @@
                         </tr>
                     </thead>
                     <tbody>
-                    	<!-- 위에서부터 1~로 번호 출력하기 -->
-<%--                   		<c:set var="row_num" value="0"/> --%>
-                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
-                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
-                    	<c:forEach items="${sList }" var="survey">
-<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
-							<c:set var="row_num" value="${row_num-1 }"/>
-							<c:if test="${survey.surveyStatus eq 'C'}">
-								<c:url var="sDetail" value="/survey/questDetail.hirp">
-									<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
-								</c:url>
-                           	</c:if>
-	                        <!-- 마감일 때는 결과 페이지를 보여주자. -->
+                    	<c:if test="${fn:length(sList) == 0}">
                     		<tr>
-	                        	<td><c:out value="${row_num }"/> </td>
-	                            <td>
-	                            	<!-- 버튼은 둘 중 하나만 출력 -->
-	                            	<c:if test="${survey.surveyStatus eq 'C'}">
-	                            		<button class="ongoing" type="button">진행중</button>
-	                            	</c:if>
-	                            	<c:if test="${survey.surveyStatus eq 'F'}">
-	                            		<button class="finished" type="button">마감</button>
-	                            	</c:if>
-	                            </td>
-	                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td>
-	                            <td>${survey.surveyStartdate }~${survey.surveyEnddate }</td>
-	                            <td>0/77(0.00%)</td>
-	                        </tr>
-                    	</c:forEach>
-<!--                         <tr> -->
-<!--                         	<td>3</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>설문제목1</td> -->
-<!--                             <td>2022-04-11~2022-04-12</td> -->
-<!--                             <td>0/77(0.00%)</td> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                         	<td>2</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>긴~~~~~~~~~ 설문 제목~~~~~~~~~</td> -->
-<!--                             <td>2022-05-01~2022-05-12</td> -->
-<!--                             <td>3/4(75.00%)</td> -->
-<!--                         </tr> -->
-<!--                         <tr> -->
-<!--                         	<td>1</td> -->
-<!--                             <td> -->
-<!--                             	버튼은 둘 중 하나만 출력 -->
-<!-- 								<button class="ongoing" type="button">진행중</button> -->
-<!-- 								<button class="finished" type="button">마감</button> -->
-<!--                             </td> -->
-<!--                             <td>설문제목3</td> -->
-<!--                             <td>2022-04-11~2022-04-12</td> -->
-<!--                             <td>1/26(3.85%)</td> -->
-<!--                         </tr> -->
+                    			<td colspan="5" align="center">
+                    				내가 작성한 설문조사가 없습니다.
+                    			</td>
+                    		</tr>
+                    	</c:if>
+                    	<c:if test="${fn:length(sList) > 0}">
+	                    	<!-- 위에서부터 1~로 번호 출력하기 -->
+	<%--                   		<c:set var="row_num" value="0"/> --%>
+	                    	<!-- 오래된 글부터 1~로 번호 출력하기 -->
+	                    	<c:set var="row_num" value="${fn:length(sList)+1 }"/>
+	                    	<c:forEach items="${sList }" var="survey" varStatus="status">
+	<%--                     	    <c:set var="row_num" value="${row_num+1 }"/> --%>
+								<c:set var="row_num" value="${row_num-1 }"/>
+								<!-- 진행 중이고, 참여하지 않았을 때 -->
+								<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'N'}">
+									<c:url var="sDetail" value="/survey/questDetail.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+	                           	</c:if>
+	                           	<!-- 진행 중이고, 참여했을 때 -->
+								<c:if test="${survey.surveyStatus eq 'C' && survey.subAnswerstatus eq 'Y'}">
+		                    		<c:url var="sDetail" value="/survey/updateAnswerPage.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+								</c:if>
+								<!-- 마감 되었을 때 -->
+	                           	<c:if test="${survey.surveyStatus eq 'F'}">
+		                           	<c:url var="sDetail" value="/survey/surveyResult.hirp">
+										<c:param name="surveyNo" value="${survey.surveyNo}"></c:param>
+									</c:url>
+	                           	</c:if>
+	                    		<tr>
+		                        	<td><c:out value="${row_num }"/> </td>
+		                            <td>
+		                            	<!-- 버튼은 둘 중 하나만 출력 -->
+		                            	<c:if test="${survey.surveyStatus eq 'C'}">
+		                            		<button class="ongoing" type="button" style="cursor:default;">진행중</button>
+		                            	</c:if>
+		                            	<c:if test="${survey.surveyStatus eq 'F'}">
+		                            		<button class="finished" type="button" style="cursor:default;">마감</button>
+		                            	</c:if>
+		                            </td>
+		                            <td style="cursor:pointer;" onclick="openDetail(this, ${survey.surveyNo}, '${survey.subAnswerstatus }', '${survey.surveyStatus }')">${survey.surveyTitle }</td>
+<%-- 		                            <td><a href="${sDetail}">${survey.surveyTitle }</a></td> --%>
+		                            <td>${fn:substring(survey.surveyStartdate, 0, 10) } ~ ${fn:substring(survey.surveyEnddate, 0, 10) }</td>
+		                            <td>${answerSubCountList[status.count-1] }/${subAllCountList[status.count-1]}(<fmt:formatNumber type="percent" value="${answerSubCountList[status.count-1]/subAllCountList[status.count-1] }" pattern="0.00%" />)</td>
+		                        </tr>
+	                    	</c:forEach>
+	                    	
+                    	</c:if>
                     </tbody>
                 </table>
 	   		 </div>
 	   		 <!-- 페이지 내용 끝 -->         
         </article>
+	<script>
+		//응답 대상자 아닐 때/응답 했을 때/응답 안했을 때 나눠서 detail 조회
+	    function openDetail(alertWindow, sNo, sMyAnswerStatus, surveyStatus) {
+	    	//ajax로 list 가져오기
+	    	$.ajax({
+	    		url: "/survey/subList.hirp",
+	    		type: "post",
+	    		data: {"surveyNo" : sNo},
+	    		success: function(sList){
+	    			console.log(sList);
+	    			var count = sList.length;
+					for(var i = 0 ; i < count; i++){
+						if(surveyStatus == "F"){
+							location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+							break;
+						} else {
+							if(sList[i].subId == "${sessionScope.emplId}"){
+								if(sMyAnswerStatus == "Y"){
+									//응답했을 때
+									location.href="/survey/updateAnswerPage.hirp?surveyNo="+sNo;
+									break;
+								} else {
+									//응답하지 않았을 때
+									location.href="/survey/questDetail.hirp?surveyNo="+sNo;
+									break;
+								}
+							} else {
+								if(i == count-1){
+									//응답 대상자가 아닐 때 (마지막 인덱스까지 검사)
+									location.href="/survey/surveyResult.hirp?surveyNo="+sNo;
+								}
+							}
+						}
+					}
+	    		},
+	    		error: function(){
+	    			
+	    		}
+	    	});
+	        
+	    }
+	</script>
 </body>
 </html>

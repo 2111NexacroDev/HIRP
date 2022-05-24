@@ -82,7 +82,8 @@ public class ProjectController {
 		try {
 			mv.setViewName("project/projectWriteForm");
 		}catch(Exception e) {
-			
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -90,16 +91,16 @@ public class ProjectController {
 	// 프로젝트 정보 입력
 	@RequestMapping(value="/project/register.hirp", method=RequestMethod.POST)
 	public ModelAndView projectRegister(ModelAndView mv
-			, @ModelAttribute Project project
 			, @RequestParam("projectName") String projectName
 			, @RequestParam("projectManager") String projectManager
-			, @RequestParam("startDate") Date startDate
-			, @RequestParam("endDate") Date endDate) {
+			, @RequestParam("startDate") String startDate
+			, @RequestParam("endDate") String endDate) {
 		try {
+			Project project = new Project();
 			project.setProjectName(projectName);
 			project.setProjectManager(projectManager);
-			project.setStartDate(startDate);
-			project.setEndDate(endDate);
+			project.setStartDate(Date.valueOf(startDate));
+			project.setEndDate(Date.valueOf(endDate));
 			int result = pService.registerProject(project);
 			if(result > 0) {
 				mv.setViewName("redirect:/project/list.hirp");

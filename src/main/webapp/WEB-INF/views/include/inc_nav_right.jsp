@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <nav id="nav--right">
-    <button class="btn--chat" type="button"></button>
+    <button class="btn--chat" type="button" onclick="OpenWin_variety('','chatting room',200,500,10,10)"></button>
     <button class="btn--alarm" type="button">
         <span>3</span>
     </button>
