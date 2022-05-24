@@ -932,16 +932,7 @@ textarea::-webkit-scrollbar { display: none; }
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-.ListView .detail
-{
-	border-top : 0px none;
-	border-right : 0px none;
-	border-bottom : 1px solid #dbdee2;
-	border-left : 0px none;
-	background : #f9f9f9;
-	font : 12px "Noto Sans KR";
-}
-.ListViewDetailBandControl.popupListViewdetail
+.ListViewDetailBandControl.popupListViewdetail.dummy
 {
 	border-top : 0px none;
 	border-right : 0px none;
@@ -954,11 +945,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	border : 1px solid #dbdee2;
 }
-.ListView .detail .cell
-{
-	border : 1px solid #dbdee2;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell
 {
 	border : 1px solid #dbdee2;
 }
@@ -1429,16 +1416,7 @@ textarea::-webkit-scrollbar { display: none; }
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-#nexacontainer .ListView .detail[status=readonly]
-{
-	border-top : 0px none;
-	border-right : 0px none;
-	border-bottom : 1px solid #dbdee2;
-	border-left : 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail[status=readonly]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy[status=readonly]
 {
 	border-top : 0px none;
 	border-right : 0px none;
@@ -1456,16 +1434,7 @@ textarea::-webkit-scrollbar { display: none; }
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-#nexacontainer .ListView .detail[status=focused]
-{
-	border-top : 0px none;
-	border-right : 0px none;
-	border-bottom : 1px solid #dbdee2;
-	border-left : 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail[status=focused]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy[status=focused]
 {
 	border-top : 0px none;
 	border-right : 0px none;
@@ -1483,16 +1452,7 @@ textarea::-webkit-scrollbar { display: none; }
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-#nexacontainer .ListView .detail[status=mouseover]
-{
-	border-top : 0px none;
-	border-right : 0px none;
-	border-bottom : 1px solid #dbdee2;
-	border-left : 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail[status=mouseover]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy[status=mouseover]
 {
 	border-top : 0px none;
 	border-right : 0px none;
@@ -1505,11 +1465,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	border : 1px solid #dbdee2;
 }
-#nexacontainer .ListView .detail .cell[status=readonly]
-{
-	border : 1px solid #dbdee2;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail .cell[status=readonly]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=readonly]
 {
 	border : 1px solid #dbdee2;
 }
@@ -1517,11 +1473,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	border : 1px solid #dbdee2;
 }
-#nexacontainer .ListView .detail .cell[status=focused]
-{
-	border : 1px solid #dbdee2;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail .cell[status=focused]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=focused]
 {
 	border : 1px solid #dbdee2;
 }
@@ -1529,11 +1481,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	border : 1px solid #c4c9cf;
 }
-#nexacontainer .ListView .detail .cell[status=mouseover]
-{
-	border : 1px solid #c4c9cf;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail .cell[status=mouseover]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=mouseover]
 {
 	border : 1px solid #c4c9cf;
 }
@@ -1875,11 +1823,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	background : #f2f9ff;
 }
-#nexacontainer .ListView .detail[userstatus=selected]
-{
-	background : #ebf3f9;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail[userstatus=selected]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy[userstatus=selected]
 {
 	background : #ebf3f9;
 }
@@ -2208,11 +2152,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	color : #999999;
 }
-#nexacontainer .ListView .detail[status=disabled]
-{
-	color : #999999;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail[status=disabled]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy[status=disabled]
 {
 	color : #999999;
 }
@@ -2220,11 +2160,7 @@ textarea::-webkit-scrollbar { display: none; }
 {
 	border : 1px solid #dbdee2;
 }
-#nexacontainer .ListView .detail .cell[status=disabled]
-{
-	border : 1px solid #dbdee2;
-}
-#nexacontainer .ListViewDetailBandControl.popupListViewdetail .cell[status=disabled]
+#nexacontainer .ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=disabled]
 {
 	border : 1px solid #dbdee2;
 }

@@ -24,7 +24,7 @@ if (nexacro.Environment)
         nexacro._addService("Base", "form", "./Base/", "session", null, "", "0", "0");
         nexacro._addService("FrameBase", "form", "./FrameBase/", "session", null, "", "0", "0");
         nexacro._addService("HirpURL", "JSP", "http://127.0.0.1:8888", "session", null, "", "0", "0");
-    	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacro17lib/component/");
+    	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacrolib/component/");
     	nexacro._theme_uri = "./_resource_/_theme_/";
     	// load components
         var registerclass = [

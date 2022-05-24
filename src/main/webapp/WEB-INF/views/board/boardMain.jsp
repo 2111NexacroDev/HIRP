@@ -9,35 +9,7 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <aside id="snb">
-            <h1>게시판</h1>
-            <a class="btn--function" href="/free/writeView.hirp">글쓰기</a>
-            <ul>
-                <li>
-                    <a href="">전사게시판</a>
-                    <ul>
-                        <li><a href="/notice/list.hirp">공지게시판</a></li>
-                        <li><a href="/free/list.hirp">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                 <li>
-                    <a href="">부서게시판</a>
-                    <ul>       
-                        <li><a href="#">개발팀 게시판</a></li>
-                    </ul>
-                    <br><!-- 나중에 수정 -->
-                </li>
-                <li>
-                    <a href="">나의 활동</a>
-                    <ul>       
-                        <li><a href="#">작성한 글 조회</a></li>
-                        <li><a href="#">작성한 댓글 조회</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </aside>
+        <%@ include file="/WEB-INF/views/include/inc_board.jsp" %>
 
         <article id="sub" class="">
        
@@ -47,7 +19,7 @@
 
             <div id="guide" class="subConts padding-0">                
                 <h2 class="square-tit mt-40">공지게시판 새글</h2>
-                <table class="table--basic mt-20">
+                <table class="table--basic mt-40">
                     <colgroup>
                         <col style="width:10%;">
                         <col style="width:40%;">
@@ -66,8 +38,8 @@
 							<th>첨부파일</th>
 						</tr>
                     </thead>
-                     <c:forEach var="notice" items="${nList }">
                     <tbody>
+                        <c:forEach var="notice" items="${nList }">
                         <tr>
                            	<c:url var="nDetail" value="/notice/detail.hirp">
 								<c:param name="noticeNo" value="${notice.noticeNo }"></c:param>
@@ -83,8 +55,8 @@
 							<c:if test="${not empty notice.bList}">O</c:if>
 							</td>
                         </tr>
-                        </tbody>
                         </c:forEach>
+                    </tbody>
                 </table>
 
 				<h2 class="square-tit mt-50">부서게시판 새글</h2>
