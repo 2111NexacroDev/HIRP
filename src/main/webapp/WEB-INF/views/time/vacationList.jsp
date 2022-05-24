@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -14,13 +14,19 @@
 		<aside id="snb">
 			<h1>근태관리</h1>
 			<title>현재 시간</title> <span id="result"></span>
-			<ul>
+			<ul class="no-margin">
+			<li class="row">
 				출근시간
-				<p id="timeStart">${time.timeStart }</p>
+				<p id="timeStart" class="ml-10">${time.timeStart }</p></li>
+				
+			<li class="row">
 				퇴근시간
-				<p id="timeEnd">${time.timeEnd }</p>
+				<p id="timeEnd" class="ml-10">${time.timeEnd }</p></li>
+			
+			<li class="row">
 				주간 누적 근무시간
-				<p></p>
+				<p id="timeAccrue" class="ml-10">${time.timeAccrue }</p></li>
+				<li>
 				<button class="finished mt-20" type="button" onclick="startBtn();">출근하기</button>
 				<button class="finished mt-20" type="button" onclick="endBtn();">퇴근하기</button>
 				<select class="mt-20" name="" id="">
@@ -29,20 +35,23 @@
 					<option value="">외근</option>
 					<option value="">출장</option>
 					<option value="">반차</option>
-				</select>
+				</select></li>
 			</ul>
 			<ul>
 				<li><div style="font-weight: bold;">근태관리</div>
 					<ul>
-						<li><a href="/time/timeListView.hirp">출/퇴근 내역</a></li>
+						<li><a href="/time/time.hirp">출/퇴근 내역</a></li>
 						<li><a href="/time/vacation.hirp">연차 내역</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 			<br>
-			<li><div style="font-weight: bold;">근태조정</div>
-				<ul>
-					<li><a href="/time/modify.hirp">근태 조정 신청</a></li>
-				</ul></li>
+			<ul>
+				<li><div style="font-weight: bold;">근태조정</div>
+					<ul>
+						<li><a href="/time/modify.hirp">근태 조정 신청 내역</a></li>
+					</ul>
+				</li>
 			</ul>
 		</aside>
 		<article id="sub" class="">
@@ -66,12 +75,8 @@
 				<div class="col basic-border">
 					<div>잔여 연차</div>
 				</div>
-			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br> 사용내역
+			</div><br><br><br><br><br>
+			사용 내역
 			<table class="table--basic mt-20">
 				<thead>
 					<tr>
@@ -101,23 +106,7 @@
 						</tr>
 					</tbody>
 				</c:forEach>
-
-				<!--                     <tbody> -->
-				<!--                         <tr> -->
-				<!--                             <td>내용1</td> -->
-				<!--                             <td>내용2</td> -->
-				<!--                             <td>내용3</td> -->
-				<!--                             <td>내용4</td> -->
-				<!--                             <td>내용5</td> -->
-				<!--                             <td>내용6</td> -->
-				<!--                             <td>내용7</td> -->
-				<!--                             <td>내용8</td> -->
-				<!--                             <td>내용9</td> -->
-				<!--                         </tr> -->
-
-				<!--                     </tbody> -->
 			</table>
-
 		</article>
 	</div>
 

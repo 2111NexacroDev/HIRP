@@ -12,6 +12,7 @@
 		<result property="timeEnd" column="TIME_END"/>
 		<result property="timeState" column="TIME_STATE"/>
 		<result property="timeContent" column="TIME_CONTENT"/>
+		<result property="timeAccrue" column="TIME_ACCRUE"/>
 	</resultMap>
 	<resultMap type="TimeModify" id="timeModifyResultMap">
 		<id property="timemNo" column="TIMEM_NO"/>
@@ -41,31 +42,72 @@
 	
 	<!-- 사용자 출근 등록 -->
 	<insert id="insertWorkStart" parameterType="Time">
-		INSERT INTO TIME_TBL
-		VALUES (TIME_SEQ.NEXTVAL, #{emplId}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), TO_CHAR(SYSDATE, 'HH24:MI:SS'), NULL, '업무', NULL) <!-- 시퀀스는 인서트할때만 -->
+		INSERT INTO TIME_TBL A
+		 SELECT TIME_SEQ.NEXTVAL
+		      , #{emplId}
+		      , SYSDATE
+		      , SYSDATE
+		      , NULL
+		      , '업무'
+		      , NULL
+              , NULL
+		  FROM DUAL
+		WHERE 1=1
+		  AND NOT EXISTS ( SELECT '1' FROM TIME_TBL B WHERE B.EMPL_ID = #{emplId} AND B.TIME_DATE = TRUNC(SYSDATE)) <!-- 당일기준 출근이력 없어야 등록 --> 
 	</insert>
 	
-	<!-- 사용자 퇴근 등록 -->
+	<!-- 사용자 퇴근 등록, 일근무시간 -->
 	<update id="updateWorkEnd" parameterType="Time">
 		UPDATE TIME_TBL
-		SET TIME_END = TO_CHAR(SYSDATE, 'HH24:MI:SS')
-		WHERE TO_CHAR(TIME_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND EMPL_ID = #{emplId}
+		SET TIME_END = SYSDATE
+		  , TIME_ACCRUE = SYSDATE - TIME_START
+		WHERE TO_CHAR(TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') 
+		  AND EMPL_ID = #{emplId}
+		  AND TIME_END IS NULL <!-- 이미 퇴근한 사람을 또 퇴근시킬수없음 -->
 		<!-- TO_CHAR(TIME_DATE, 'YYYY-MM-DD') 디비에 저장되어있는 데이터가 시분초가 들어가있는데 년월일까지만 비교하려고 넣음 -->
 	</update>
 	
-	<!-- 사용자 출,퇴근 내역 화면 -->
+	<!-- 사용자 출퇴근 내역 화면 -->
 	<select id="selectTime" parameterType="Time" resultMap="timeResultMap">
-		SELECT *
+		SELECT TIME_NO
+             , EMPL_ID
+             , TIME_DATE
+             , TIME_START
+             , TIME_END
+             , TIME_STATE
+             , TIME_CONTENT
+             , TRUNC((TIME_END - TIME_START) * 24) || '시간 ' || TRUNC((TIME_END - TIME_START) * 24 * 60) || '분' AS TIME_ACCRUE
 		FROM TIME_TBL
 		WHERE EMPL_ID = #{emplId }
+		  AND TO_CHAR(TIME_DATE,'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	</select>
+	
+	<!-- 사용자 출퇴근 내역 조회 -->
+	<select id="selectWorkView" parameterType="String" resultMap="timeResultMap">
+		SELECT TIME_NO
+             , EMPL_ID
+             , TIME_DATE
+             , TIME_START
+             , TIME_END
+             , TIME_STATE
+             , TIME_CONTENT
+             , TRUNC((TIME_END - TIME_START) * 24) || '시간 ' || TRUNC((TIME_END - TIME_START) * 24 * 60) || '분' AS TIME_ACCRUE
+		FROM TIME_TBL
+		WHERE EMPL_ID = #{emplId}
 	</select>
 	
 	<!-- 사용자 연차 내역 조회 -->
-	<select id="selectTimeView" parameterType="String" resultMap="vacationResultMap">
+	<select id="selectTimeView" parameterType="Time" resultMap="vacationResultMap">
 		SELECT *
 		FROM VACATION_TBL
 		WHERE EMPL_ID = #{emplId}
 	</select>
 	
+ 	<!-- 사용자 근태 조정 조회 -->
+	<select id="selectModifyView" parameterType="Vacation" resultMap="timeModifyResultMap">
+		SELECT *
+		FROM TIMEMODIFY_TBL
+		WHERE EMPL_ID = #{emplId}
+	</select>
 	
 </mapper>
