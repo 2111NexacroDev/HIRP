@@ -1,6 +1,7 @@
 package com.highfive.hirp.todo.controller;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +29,27 @@ public class TodoController {
 
 	// 할일 조회
 	@RequestMapping(value="/todo/list.hirp", method=RequestMethod.GET)
-	public ModelAndView todoListView(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView todoListView(ModelAndView mv
+			, @ModelAttribute Todo todo
+			, HttpServletRequest request) {
 		try {
+			// 세션 아이디 세팅
 			HttpSession session = request.getSession();
 			String emplId  = (String) session.getAttribute("emplId");
+			todo.setEmplId(emplId);
+			
+			// 모든 일자의 할 일 조회
 			List<Todo> tList = tService.printAllToDo(emplId);
+			
+			// 모든 일자의 메모 조회
 			List<Memo> mList = tService.printAllMemo(emplId);
+			
+			// 오늘 날짜 세팅
+			Date now = Date.valueOf(LocalDate.now());
+			todo.setTodoDate(now);
+			
+			// 오늘 날짜의 할 일 조회
+			List<Todo> todayList = tService.printToDoByDate(todo);
 			
 			if(!tList.isEmpty() && !mList.isEmpty()) {
 				mv.addObject("tList", tList);
@@ -45,6 +61,12 @@ public class TodoController {
 			} else {
 				// 아무 것도 없을 때
 			}
+			
+			// 오늘 날짜로 할 일 있을 때만 세팅
+			if(!todayList.isEmpty()) {
+				mv.addObject("todayList", todayList);				
+			}
+			
 			mv.setViewName("todo/todoList");
 		} catch(Exception e) {
 			mv.setViewName("common/errorPage");

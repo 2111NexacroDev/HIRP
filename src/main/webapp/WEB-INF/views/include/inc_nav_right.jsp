@@ -4,7 +4,7 @@
 <nav id="nav--right">
     <button class="btn--chat" type="button" 
     	onclick="window.open('/chatMain.hirp','chatting','width=400,height=600,location=no,status=no,scrollbars=no');"></button>
-    
+   
     <button class="btn--alarm" type="button">
         <span>3</span>
     </button>

@@ -29,60 +29,60 @@
 		<!-- 회원 정보 이름으로 가져오기 -->
 		<result property="deptName" column="DEPT_NAME"/>
 		<result property="positionName" column="POSITION_NAME"/>
-		<association javaType="Career" property="career" column="EMPL_ID">
-			<id property="careerNo" column="CAREER_NO"/>
-			<result property="emplId" column="EMPL_ID"/>
-			<result property="careerStartDate" column="CAREER_START_DATE"/>
-			<result property="careerEndDate" column="CAREER_END_DATE"/>
-			<result property="careerPlace" column="CAREER_PLACE"/>
-			<result property="careerRank" column="CAREER_RANK"/>
-			<result property="careerJobRole" column="CAREER_JOB_ROLE"/>
-			<result property="careerPeriod" column="CAREER_PERIOD"/>
-			<result property="careerEndReason" column="CAREER_END_REASON"/>
-			<result property="careerEtc" column="CAREER_ETC"/>
-		</association>
-		<association javaType="Certification" property="certification" column="EMPL_ID">
-			<id property="certNo" column="CERT_NO"/>
-			<result property="emplId" column="EMPL_ID"/>
-			<result property="certCategory" column="CERT_CATEGORY"/>
-			<result property="certName" column="CERT_NAME"/>
-			<result property="certEnrollNo" column="CERT_ENROLL_NO"/>
-			<result property="certLevel" column="CERT_LEVEL"/>
-			<result property="certInst" column="CERT_INST"/>
-			<result property="certStartDate" column="CERT_INST"/>
-			<result property="certEndDate" column="CERT_END_DATE"/>	
-		</association>
-		<association javaType="JobRole" property="jobRole" column="EMPL_ID">
-			<id property="jobRoleNo" column="JOB_ROLL_NO"/>
-			<result property="emplId" column="EMPL_ID"/>
-			<result property="jobRoleDivision" column="JOB_ROLE_DIVISION"/>
-			<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
-			<result property="jobRoleStartDate" column="JOB_ROLE_START_DATE"/>
-			<result property="jobRoleEndDate" column="JOB_ROLE_END_DATE"/>
-			<result property="jobRoleConts" column="ROB_ROLE_CONTS"/>
-			<result property="jobRoleEtc" column="JOB_ROLE_ETC"/>
-		</association>
-		<association javaType="Language" property="language" column="EMPL_ID">
-			<id property="langNo" column="LANG_NO"/>
-			<result property="emplId" column="EMPL_ID"/>
-			<result property="langCategory" column="LANG_CATEGORY"/>
-			<result property="langName" column="LANG_NAME"/>
-			<result property="langTestDate" column="LANG_TEST_DATE"/>
-			<result property="langInst" column="LANG_INST"/>
-			<result property="langScore" column="LANG_SCORE"/>
-			<result property="langGrade" column="LANG_GRADE"/>
-			<result property="langEtc" column="LANG_ETC"/>
-		</association>
-		<association javaType="Military" property="military" column="EMPL_ID">
-			<id property="militaryNo" column="MILITARY_NO"/>
-			<result property="emplId" column="EMPL_ID"/>
-			<result property="militaryGrade" column="MILITARY_GRADE"/>
-			<result property="militaryCode" column="MILITARY_CODE"/>
-			<result property="isMilitaryEnd" column="IS_MILITARY_END"/>
-			<result property="militaryStartDate" column="MILITARY_START_DATE"/>
-			<result property="militaryEndDate" column="MILITARY_END_DATE"/>
-			<result property="militaryEtc" column="MILITARY_ETC"/>
-		</association>
+	</resultMap>
+	<resultMap type="Career" id="careerResultMap">
+		<id property="careerNo" column="CAREER_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="careerStartDate" column="CAREER_START_DATE"/>
+		<result property="careerEndDate" column="CAREER_END_DATE"/>
+		<result property="careerPlace" column="CAREER_PLACE"/>
+		<result property="careerRank" column="CAREER_RANK"/>
+		<result property="careerJobRole" column="CAREER_JOB_ROLE"/>
+		<result property="careerPeriod" column="CAREER_PERIOD"/>
+		<result property="careerEndReason" column="CAREER_END_REASON"/>
+		<result property="careerEtc" column="CAREER_ETC"/>
+	</resultMap>
+	<resultMap type="Certification" id="certResultMap">
+		<id property="certNo" column="CERT_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="certCategory" column="CERT_CATEGORY"/>
+		<result property="certName" column="CERT_NAME"/>
+		<result property="certEnrollNo" column="CERT_ENROLL_NO"/>
+		<result property="certLevel" column="CERT_LEVEL"/>
+		<result property="certInst" column="CERT_INST"/>
+		<result property="certStartDate" column="CERT_INST"/>
+		<result property="certEndDate" column="CERT_END_DATE"/>
+	</resultMap>
+	<resultMap type="JobRole" id="jobRoleResultMap">
+		<id property="jobRoleNo" column="JOB_ROLL_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="jobRoleDivision" column="JOB_ROLE_DIVISION"/>
+		<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
+		<result property="jobRoleStartDate" column="JOB_ROLE_START_DATE"/>
+		<result property="jobRoleEndDate" column="JOB_ROLE_END_DATE"/>
+		<result property="jobRoleConts" column="ROB_ROLE_CONTS"/>
+		<result property="jobRoleEtc" column="JOB_ROLE_ETC"/>
+	</resultMap>
+	<resultMap type="Language" id="langResultMap">
+		<id property="langNo" column="LANG_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="langCategory" column="LANG_CATEGORY"/>
+		<result property="langName" column="LANG_NAME"/>
+		<result property="langTestDate" column="LANG_TEST_DATE"/>
+		<result property="langInst" column="LANG_INST"/>
+		<result property="langScore" column="LANG_SCORE"/>
+		<result property="langGrade" column="LANG_GRADE"/>
+		<result property="langEtc" column="LANG_ETC"/>
+	</resultMap>
+	<resultMap type="Military" id="militaryResultMap">
+		<id property="militaryNo" column="MILITARY_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="militaryGrade" column="MILITARY_GRADE"/>
+		<result property="militaryCode" column="MILITARY_CODE"/>
+		<result property="isMilitaryEnd" column="IS_MILITARY_END"/>
+		<result property="militaryStartDate" column="MILITARY_START_DATE"/>
+		<result property="militaryEndDate" column="MILITARY_END_DATE"/>
+		<result property="militaryEtc" column="MILITARY_ETC"/>
 	</resultMap>
 	
 	<select id="selectBirthdayList" resultMap="emplResultMap">
@@ -94,7 +94,7 @@
 	</select>
 	
 	<select id="selectAllEmployee" resultMap="emplResultMap">
-		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사') GROUP BY DEPT_CODE
+		SELECT * FROM EMPL_TBL WHERE NOT IS_STATUS IN ('임시','퇴사')
 	</select>
 	
 	<!-- 부서이름, 직급이름까지 가져오기 -->
@@ -153,4 +153,24 @@
 	<update id="updateLevelEmployee">
 		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
 	</update>
+	
+	<select id="selectAllJobById" resultMap="jobRoleResultMap">
+		SELECT * FROM JOB_ROLE_TBL WHERE EMPL_ID = #{emplId }
+	</select>
+	
+	<select id="selectAllLanguageById" resultMap="langResultMap">
+		SELECT * FROM LANG_TBL WHERE EMPL_ID = #{emplId }
+	</select>
+	
+	<select id="selectAllCertById" resultMap="certResultMap">
+		SELECT * FROM CERT_TBL WHERE EMPL_ID = #{emplId }
+	</select>
+	
+	<select id="selectAllCareerById" resultMap="careerResultMap">
+		SELECT * FROM CAREER_TBL WHERE EMPL_ID = #{emplId }
+	</select>
+	
+	<select id="selectAllMilitaryById" resultMap="militaryResultMap">
+		SELECT * FROM MILITARY_TBL WHERE EMPL_ID = #{emplId }
+	</select>
 </mapper>

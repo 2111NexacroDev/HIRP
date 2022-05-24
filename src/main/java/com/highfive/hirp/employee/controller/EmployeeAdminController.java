@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.dept.service.DeptService;
+import com.highfive.hirp.employee.domain.Career;
+import com.highfive.hirp.employee.domain.Certification;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.domain.JobRole;
+import com.highfive.hirp.employee.domain.Language;
+import com.highfive.hirp.employee.domain.Military;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.position.domain.Position;
 import com.highfive.hirp.position.service.PositionService;
@@ -80,6 +85,11 @@ public class EmployeeAdminController {
 		
 		// 직원 정보 조회
 		Employee employee = eAService.printEmployeeInfo(emplId);
+		List<JobRole> jList = eAService.selectAllJobById(emplId);
+		List<Career> caList = eAService.selectAllCareerById(emplId);
+		List<Language> lList = eAService.selectAllLanguageById(emplId);
+		List<Certification> cList = eAService.selectAllCertById(emplId);
+		List<Military> mList = eAService.selectAllMilitaryById(emplId);
 		
 		if(employee != null && !dList.isEmpty() && !pList.isEmpty()) {
 			nErrorCode = 0;
@@ -87,6 +97,12 @@ public class EmployeeAdminController {
 			result.addDataSet("out_dept", dList);
 			result.addDataSet("out_pos", pList);
 			result.addDataSet("out_empl", employee);
+			
+			if(!jList.isEmpty()) {result.addDataSet("out_jobRole", jList);}
+			if(!caList.isEmpty()) {result.addDataSet("out_career", caList);}
+			if(!lList.isEmpty()) {result.addDataSet("out_lang", lList);}
+			if(!cList.isEmpty()) {result.addDataSet("out_cert", cList);}
+			if(!mList.isEmpty()) {result.addDataSet("out_military", mList);}
 		}else {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
