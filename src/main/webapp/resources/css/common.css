@@ -263,6 +263,10 @@ button.next {
     color: #747474;
 }
 
+.t-l {
+    text-align: left;
+}
+
 .t-c {
     text-align: center;
 }
@@ -446,6 +450,18 @@ button.next {
         flex-grow: 1;
         max-width: 100%;
     }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
 }
 
 .grid-guide-wrap .row>*>* {
@@ -714,11 +730,6 @@ button.next {
     font-weight: 500;
 }
 
-#snb>ul>li button {
-    padding: 0;
-    background-color: transparent;
-}
-
 #snb>ul>li>a:before,
 #snb>ul>li>button:before {
     content: "\f107";
@@ -806,7 +817,7 @@ button.next {
 .btn--star {
     background: url(../images/icons/btn_bookmark.png) no-repeat;
     background-position: center center;
-    mragin-left: 8px;
+    margin-left: 4px;
 }
 
 @media screen and (min-width: 1201px) {
@@ -816,6 +827,22 @@ button.next {
     .btn--star:hover {
         background-color: #eee;
     }
+}
+
+.a--adminLink {
+    padding: 6px 12px;
+    margin-right: 10px;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    transition: background-color .3s;
+    letter-spacing: -.025em;
+    border-radius: 4px;
+}
+
+.a--adminLink:hover {
+    color: #fff;
+    background-color: #000;
 }
 
 #nav--right {

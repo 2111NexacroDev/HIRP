@@ -36,51 +36,52 @@
         	<h1 class="basic-border-bottom">
 				프로젝트 보기
             </h1>
-            <div class="subConts">
-	            <div class="basic-border mt-20 padding-20">
-	            	<h3>프로젝트정보</h3>
-	            	<div class="t-r">
-		            	<button class="basic" type="button" onclick="openAlert(this);">삭제</button>
-		            		<section class="section--alert">
-		                        <div class="bg-black"></div>
-		                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
-		                        <div class="section--alert__conts">
-		                            <button type="button" class="btn--close"></button>
-		                            <p>
-		                                확인을 누르시면<br>
-		                                프로젝트 삭제가 진행됩니다. 삭제하시겠습니까?
-		                            </p>
-		                            <div class="btns-wrap mt-20">
-		                                <button class="point" type="button" onclick="location.href='/project/remove.hirp?projectNo=${project.projectNo }'">확인</button>
-		                                <button class="finished closeWindow" type="button">닫기</button>
-		                            </div>
-		                        </div>
-		                    </section>
-		            	<button class="basic" type="button" onclick="openModal(this);">수정</button>
-		                    <section class="section--modal">
-		                        <div class="section--modal__conts">
-		                            <button type="button" class="btn--close"></button>
-		                            <h3>프로젝트 정보수정</h3>
-		                            <ul>
-		                                <li>
-		                                    <label for="">프로젝트명</label><input type="text" id="projectName" name="projectName" value="${project.projectName }">
-		                                </li>
-		                                <li>
-		                                    <label for="">담당자(PM)</label><input type="text" id="projectManager" name="projectManager" value="${project.projectManager }">
-		                                </li>
-		                                <li>
-		                                    <label for="">일자</label><input type="date" id="startDate" name="startDate" value="${project.startDate }">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="date" id="endDate" name="endDate" value="${project.endDate }">
-		                                </li>
-		                            </ul>
-		                            <div class="btns-wrap mt-20 t-r">
-		                                <button class="point" type="button" onclick="updateBtn();">확인</button>
-		                                <button class="finished closeWindow" type="button">닫기</button>
-		                            </div>
-		                        </div>
-		                    </section>
-		            	<button class="basic"><a href="/project/list.hirp">목록</a></button>
-	            	</div>
-	            	<table class="table--basic mt-20" style="margin-top: 40px;">
+            <div id="projectDetail" class="subConts">
+	            <div class="basic-border mt-20">
+					<div class="d-flex align-items-center justify-content-between">
+						<h2 class="square-tit">프로젝트정보</h2>
+						<div class="t-r">
+							<button class="basic" type="button" onclick="openAlert(this);">삭제</button>
+							<section class="section--alert">
+								<div class="bg-black"></div>
+								<div class="section--alert__conts">
+									<button type="button" class="btn--close"></button>
+									<p>
+										확인을 누르시면<br>
+										프로젝트 삭제가 진행됩니다. 삭제하시겠습니까?
+									</p>
+									<div class="btns-wrap mt-20">
+										<button class="point" type="button" onclick="location.href='/project/remove.hirp?projectNo=${project.projectNo }'">확인</button>
+										<button class="finished closeWindow" type="button">닫기</button>
+									</div>
+								</div>
+							</section>
+							<button class="basic" type="button" onclick="openModal(this);">수정</button>
+							<section class="section--modal">
+								<div class="section--modal__conts t-l">
+									<button type="button" class="btn--close"></button>
+									<h3>프로젝트 정보수정</h3>
+									<ul>
+										<li>
+											<label for="">프로젝트명</label><input type="text" id="projectName" class="ml-10" name="projectName" value="${project.projectName }">
+										</li>
+										<li class="mt-10">
+											<label for="">담당자(PM)</label><input type="text" id="projectManager" class="ml-10" name="projectManager" value="${project.projectManager }">
+										</li>
+										<li class="mt-10">
+											<label for="">일자</label><input type="date" id="startDate" class="ml-10" name="startDate" value="${project.startDate }">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="date" id="endDate" name="endDate" value="${project.endDate }">
+										</li>
+									</ul>
+									<div class="btns-wrap mt-20 t-r">
+										<button class="point" type="button" onclick="updateBtn();">확인</button>
+										<button class="finished closeWindow" type="button">닫기</button>
+									</div>
+								</div>
+							</section>
+							<button class="basic" onclick="location.href='/project/list.hirp'">목록</button>
+						</div>
+					</div>
+	            	<table class="table--basic mt-20">
 			            <tr>
 			                <td>프로젝트명</td>
 			                <td>${project.projectName }</td>
@@ -97,9 +98,9 @@
 		            <input type="hidden" id="projectNo" value="${project.projectNo }">
 	            </div>
 		            
-				<div class="basic-border mt-20 padding-20">
-					<h3>칸반보드보기</h3>
-					<div class="row mt-20">
+				<div class="basic-border mt-20">
+					<h2 class="square-tit">칸반보드보기</h2>
+					<div class="row mt-10">
 						<div class="col" data-order="0">
 							<div class="basic-border mt-20 padding-20 pos-rel">
 								<h3 id="noView"></h3><button class="btn--plus" type="button" onclick="openModal(this);">추가</button>
@@ -126,7 +127,7 @@
 							</div>
 						</div>
 						<div class="col" data-order="1">
-							<div class="basic-border mt-20 padding-20  pos-rel">
+							<div class="basic-border mt-20 padding-20 pos-rel">
 								<h3 id="beforeView"></h3><button class="btn--plus" type="button" onclick="openModal(this);">추가</button>
 									<section class="section--modal">
 										<div class="section--modal__conts">
@@ -136,7 +137,7 @@
 												<li>
 													<label for="">담당자</label><input type="text" id="emplName1" value="${project.projectManager }">
 												</li>
-												<li>
+												<li class="mt-10">
 													<label for="">내용</label><input type="text" id="bContents1">
 												</li>
 											</ul>
@@ -151,7 +152,7 @@
 							</div>
 						</div>
 						<div class="col" data-order="2">
-							<div class="basic-border mt-20 padding-20  pos-rel">
+							<div class="basic-border mt-20 padding-20 pos-rel">
 								<h3 id="proceedingView"></h3><button class="btn--plus" type="button" onclick="openModal(this);">추가</button>
 									<section class="section--modal">
 										<div class="section--modal__conts">
@@ -176,7 +177,7 @@
 							</div>
 						</div>
 						<div class="col" data-order="3">
-							<div class="basic-border mt-20 padding-20  pos-rel">
+							<div class="basic-border mt-20 padding-20 pos-rel">
 								<h3 id="completeView"></h3><button class="btn--plus" type="button" onclick="openModal(this);">추가</button>
 									<section class="section--modal">
 										<div class="section--modal__conts">
@@ -201,26 +202,26 @@
 							</div>
 						</div>
 						<div class="col" data-order="4">
-							<div class="basic-border mt-20 padding-20  pos-rel">
+							<div class="basic-border mt-20 padding-20 pos-rel">
 								<h3 id="stopView"></h3><button class="btn--plus" type="button" onclick="openModal(this);">추가</button>
-									<section class="section--modal">
-										<div class="section--modal__conts">
-											<button type="button" class="btn--close"></button>
-											<h3>칸반보드 추가</h3>
-											<ul>
-												<li>
-													<label for="">담당자</label><input type="text" id="emplName4" value="${project.projectManager }">
-												</li>
-												<li>
-													<label for="">내용</label><input type="text" id="bContents4">
-												</li>
-											</ul>
-											<div class="btns-wrap mt-20 t-r">
-												<button class="point" type="button" onclick="boardBtn(this);" value="4">추가</button>
-												<button class="finished closeWindow" type="button">닫기</button>
-											</div>
+								<section class="section--modal">
+									<div class="section--modal__conts">
+										<button type="button" class="btn--close"></button>
+										<h3>칸반보드 추가</h3>
+										<ul>
+											<li>
+												<label for="">담당자</label><input type="text" id="emplName4" value="${project.projectManager }">
+											</li>
+											<li>
+												<label for="">내용</label><input type="text" id="bContents4">
+											</li>
+										</ul>
+										<div class="btns-wrap mt-20 t-r">
+											<button class="point" type="button" onclick="boardBtn(this);" value="4">추가</button>
+											<button class="finished closeWindow" type="button">닫기</button>
 										</div>
-									</section>
+									</div>
+								</section>
 							</div>
 							<div class="basic-border mt-20 padding-20 kanbanCard" id="btbFour" data-draggable="target">
 							</div>
@@ -228,14 +229,14 @@
 					</div>
 				</div>
 				
-				<div class="basic-border mt-20 padding-20">
-					<h3>프로젝트진행률</h3>
-					<div class="progress-bar">
+				<div class="basic-border mt-20">
+					<h2 class="square-tit">프로젝트진행률</h2>
+					<div class="progress-bar mt-20">
 						<div class="progress" id="project-progress"></div>
 					</div>
-					<h3 id="progress"></h3>
+					<h3 id="progress" class="mt-10"></h3>
 	<!--             	계산식 {(완료)+0.5*(진행중)/(전체-중지)}*100 -->
-					<table class="table--basic mt-20" style="margin-top: 40px;">
+					<table class="table--basic mt-30">
 						<thead>
 							<tr>
 								<th>진행상태</th>
@@ -420,7 +421,7 @@
 					document.getElementById("stopView").innerHTML = "중지("+$("#btbFour >table").length+"/9999)";
 					var projectProgress =
 						Math.floor((($("#btbThree >table").length + 0.5) * ($("#btbTwo >table").length)) / (count-($("#btbFour >table").length)) * 100);
-					document.getElementById("progress").innerHTML = "진행률" + projectProgress + "%";
+					document.getElementById("progress").innerHTML = "진행률 <strong>" + projectProgress + "%</strong>";
 					document.getElementById("noP").innerHTML = $("#btbZero >table").length;
 					document.getElementById("beforeS").innerHTML = $("#btbOne >table").length;
 					document.getElementById("proceeding").innerHTML = $("#btbTwo >table").length;

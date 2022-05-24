@@ -129,8 +129,7 @@ function removeTodo(todoNo) {
         },
         success: function (data) {
             if (data == 'success') {
-                console.log('삭제 성공!');
-                window.location.reload();
+                alert('삭제 성공!');
             } else {
                 console.log('삭제 실패');
             }
@@ -198,7 +197,6 @@ function removeMemo(memoNo) {
         success: function (data) {
             if (data == 'success') {
                 console.log('삭제 성공!');
-                window.location.reload();
             } else {
                 console.log('삭제 실패');
             }

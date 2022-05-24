@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <nav id="nav--right">
+    <c:if test="${sessionScope.emplId eq 'admin'}"><a class="a--adminLink" href="/admin.hirp">관리자 페이지로</a></c:if>
     <button class="btn--chat" type="button" onclick="OpenWin_variety('','chatting room',200,500,10,10)"></button>
     <button class="btn--alarm" type="button">
         <span>3</span>
@@ -20,3 +21,11 @@
         </ul>
     </section>
 </nav>
+
+<script>
+    $(function(){        
+        if($('.form--srch').length > 0) {
+            $('.a--adminLink').hide();
+        }
+    });
+</script>

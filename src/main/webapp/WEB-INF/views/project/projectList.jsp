@@ -37,7 +37,7 @@
 				프로젝트 보기
             </h1>
             <div class="subConts">
-	        	<table class="table--basic mt-20" style="margin-top: 40px;">
+	        	<table class="table--basic mt-30">
 	                    <thead>
 	                        <tr>
 	                            <th>#</th>

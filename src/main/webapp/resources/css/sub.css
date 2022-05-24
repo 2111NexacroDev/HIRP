@@ -11,23 +11,31 @@
     justify-content: center;
 }
 
-.subConts>h2.square-tit {
+h2.square-tit {
     position: relative;
-    margin-top: 20px;
-    padding: 0 20px 0 44px;
+    padding: 0 0 0 24px;
     font-weight: 400;
     font-size: 18px;
 }
 
-.subConts>h2.square-tit:before {
+.subConts>h2.square-tit {
+    margin-top: 20px;   
+    padding: 0 20px 0 44px; 
+}
+
+h2.square-tit:before {
     content: "";
     position: absolute;
     top: 4px;
-    left: 20px;
+    left: 0;
     display: block;
     width: 14px;
     height: 14px;
     background: powderblue;
+}
+
+.subConts>h2.square-tit:before {
+    left: 20px;
 }
 
 /* 개인업무관리 */
@@ -580,6 +588,11 @@ section[class^="todo--"] {
     }
 }
 
+/* #snb>ul>li button {
+    padding: 0;
+    background-color: transparent;
+} */
+
 /* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url("../images/icons/icon_success.png");
     position: absolute;
@@ -648,3 +661,31 @@ section[class^="todo--"] {
     color: #999; 
 }
 /* 게시판 끝 */
+
+/* 프로젝트 관리 */
+#projectDetail>div {
+    padding: 40px 30px;
+}
+
+.progress-bar .progress {
+    background: linear-gradient(to right, #000 10%, #0b2a60, #00498c);
+    transition: width 1.4s;
+}
+
+.progress-bar+h3 {
+    font-size: 18px;
+    text-align: right;
+    font-weight: 300;
+}
+
+.progress-bar+h3 strong {
+    font-weight: 700;
+    color: #0b2a60;
+}
+
+#projectWrite .btns-wrap button {
+    width: 100px;
+    height: 36px;
+    margin: 40px 4px;
+}
+/* 프로젝트 관리 끝 */
