@@ -113,7 +113,7 @@ public class TimeController {
 				mv.setViewName("time/timeList");
 			} else {
 				mv.addObject("msg", "출퇴근 시간 내역이 없습니다.");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("time/timeList");
 			}
 
 		} catch (Exception e) {
