@@ -87,11 +87,9 @@
     <Script type="xscript5.1"><![CDATA[// 페이지 로드용 emplId 전역 변수 지정
 this.selectedEmplId;
 
-
 // 메뉴 이동 함수
 this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
-	selectedEmplId = "";
 	this.go("FrameBase::emplList.xfdl");
 };
 
@@ -146,6 +144,7 @@ this.btn_search_retiree_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+	console.log(selectedEmplId);
 	if(e.col == 4) {
 		this.go("FrameBase::empDetail.xfdl");
 	}
@@ -155,6 +154,7 @@ this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEven
 this.retiree_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	selectedEmplId = this.Grid00_00.getCellText(e.row, 5);
+	console.log(selectedEmplId);
 	if(e.col == 4) {
 		this.go("FrameBase::empDetail.xfdl");
 	}

@@ -161,11 +161,11 @@ public class EmployeeAdminController {
 			,@ParamDataSet(name="in_lang") 		DataSet in_lang
 			,@ParamDataSet(name="in_cert") 		DataSet in_cert
 			,@ParamDataSet(name="in_military") 	DataSet in_military
-			,@ParamVariable(name="jobRoleNo") 	int 	jobRoleNo
-			,@ParamVariable(name="certNo") 		int 	certNo
-			,@ParamVariable(name="careerNo") 	int 	careerNo
-			,@ParamVariable(name="langNo") 		int 	langNo
-			,@ParamVariable(name="militaryNo") 	int 	militaryNo
+//			,@ParamVariable(name="jobRoleNo") 	int 	jobRoleNo
+//			,@ParamVariable(name="certNo") 		int 	certNo
+//			,@ParamVariable(name="careerNo") 	int 	careerNo
+//			,@ParamVariable(name="langNo") 		int 	langNo
+//			,@ParamVariable(name="militaryNo") 	int 	militaryNo
 			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
@@ -174,8 +174,8 @@ public class EmployeeAdminController {
 		
 		// INSERT, UPDATE
 		// RowType에 따라서 INSERT OR UPDATE
-//		int iResult = 0;
-//		int uResult = 0;
+		int iResult = 0;
+		int uResult = 0;
 //		for(i = 0; i < inEmp.getRowCount(); i++) {
 //			int rowType = inEmp.getRowType(i);
 //			String empl_id 	 = dsGet(inEmp, i, "empl_id");
@@ -207,13 +207,13 @@ public class EmployeeAdminController {
 //				uResult += eService.modifyEmployee(employee);
 //			}
 //		}
-//		if(iResult < 0 && uResult < 0) {
-//			nErrorCode = -1;
-//			strErrorMsg = "FAIL";
-//		}else {
-//			nErrorCode 	= 0;
-//			strErrorMsg = "SUCC";
-//		}
+		if(iResult < 0 && uResult < 0) {
+			nErrorCode = -1;
+			strErrorMsg = "FAIL";
+		}else {
+			nErrorCode 	= 0;
+			strErrorMsg = "SUCC";
+		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;

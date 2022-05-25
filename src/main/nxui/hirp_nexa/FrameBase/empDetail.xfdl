@@ -6,7 +6,7 @@
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
         <Static id="Static00_00" taborder="0" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable no_bg">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable no_bg" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -27,7 +27,7 @@
                 <Cell colspan="5" text="사원 정보 상세" color="#333333" border="1px solid #cccccc,0px none" font="500 14px/normal &quot;Noto Sans KR&quot;" background="#f9f9f9"/>
               </Band>
               <Band id="body">
-                <Cell rowspan="4" text="expr:imgURL::profile" displaytype="imagecontrol"/>
+                <Cell rowspan="4" displaytype="imagecontrol" imagestretch="fixaspectratio" text="expr:&quot;HirpURL::/resources/uploadFiles/&quot; + emplProfile"/>
                 <Cell col="1" text="이름" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell col="2" text="bind:emplName" padding="0px 20px" edittype="text"/>
                 <Cell col="3" text="소속부서" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
@@ -638,7 +638,7 @@
           <Column id="careerPlace" type="STRING" size="100"/>
           <Column id="careerRank" type="STRING" size="100"/>
           <Column id="careerJobRole" type="STRING" size="100"/>
-          <Column id="careerPeriod" type="DATE" size="256"/>
+          <Column id="careerPeriod" type="STRING" size="256"/>
           <Column id="careerEndReason" type="STRING" size="100"/>
           <Column id="careerEtc" type="STRING" size="100"/>
           <Column id="careerNo" type="INT" size="256"/>
@@ -709,13 +709,13 @@
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {	
-	this.transaction(
-		"tr_empl_select"// 1.ID
-		,"HirpURL::admin/empDetail.hirp"// 2.URL		
-		,"" // 3.InDs : F->S jsp(I,U,D)
-		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
-		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
-		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	this.transaction(
+ 		"tr_empl_select"// 1.ID
+ 		,"HirpURL::admin/empDetail.hirp"// 2.URL		
+ 		,"" // 3.InDs : F->S jsp(I,U,D)
+ 		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
 };
 
@@ -797,7 +797,6 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 
 this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
-	selectedEmplId = "";
 	this.go("FrameBase::emplList.xfdl");
 };
 
@@ -971,6 +970,16 @@ this.Tab00_Tabpage6_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.Cl
 // 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 // 	);	
 // };
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	//this.Grid00.getBindCellIndex("body","body0");
+// 	var fileName = this.Grid00.getCellText(e.row, 0);
+// 	trace(e.row);
+// 	trace(e.col);
+// 	trace(fileName);
+//  	this.ds_empl.setColumn( e.row, e.col, "theme::hirpTheme/00_icon_home.png" );
+};
 ]]></Script>
   </Form>
 </FDL>
