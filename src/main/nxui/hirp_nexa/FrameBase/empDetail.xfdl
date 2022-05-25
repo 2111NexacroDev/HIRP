@@ -31,15 +31,15 @@
                 <Cell col="1" text="이름" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell col="2" text="bind:emplName" padding="0px 20px" edittype="text"/>
                 <Cell col="3" text="소속부서" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" padding="0px 20px"/>
+                <Cell col="4" text="bind:deptCode" displaytype="combotext" edittype="combo" combodataset="ds_dept" combocodecol="deptCode" combodatacol="deptName" padding="0px 20px" combodisplaynulltype="nulltext" combodisplaynulltext="소속부서 선택"/>
                 <Cell row="1" col="1" text="직위/직책" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo" padding="0px 20px" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
+                <Cell row="1" col="2" text="bind:positionCode" displaytype="combotext" edittype="combo" padding="0px 20px" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode" combodisplaynulltype="nulltext" combodisplaynulltext="직위 선택"/>
                 <Cell row="1" col="3" text="직통번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="1" col="4" text="bind:directNo" padding="0px 20px" edittype="text"/>
+                <Cell row="1" col="4" text="bind:directNo" padding="0px 20px" edittype="text" combodisplaynulltext="직통번호 입력" combodisplaynulltype="nulltext"/>
                 <Cell row="2" col="1" text="이메일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="2" text="bind:email" padding="0px 20px" edittype="text"/>
+                <Cell row="2" col="2" text="bind:email" padding="0px 20px" edittype="text" combodisplaynulltype="nulltext" combodisplaynulltext="이메일 입력"/>
                 <Cell row="2" col="3" text="휴대전화번호" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
-                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 20px" edittype="text"/>
+                <Cell row="2" col="4" text="bind:phoneNo" padding="0px 20px" edittype="text" combodisplaynulltext="휴대전화번호 입력" combodisplaynulltype="nulltext"/>
                 <Cell row="3" col="1" text="입사일" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
                 <Cell row="3" col="2" text="bind:startDate" padding="0px 20px" displaytype="date" calendardateformat="yyyy-MM-dd"/>
                 <Cell row="3" col="3" text="상태" textAlign="center" font="bold 12px/normal &quot;Gulim&quot;"/>
@@ -48,7 +48,7 @@
             </Format>
           </Formats>
         </Grid>
-        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="280" right="0" onchanged="Tab00_onchanged">
+        <Tab id="Tab00" taborder="4" tabindex="0" left="200" top="310" height="338" right="0" onchanged="Tab00_onchanged">
           <Tabpages>
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
@@ -83,9 +83,9 @@
                           <Cell text="사원아이디" textAlign="center" background="#f9f9f9"/>
                           <Cell col="1" text="bind:emplId" padding="0px 10px"/>
                           <Cell col="2" text="채용구분" textAlign="center" background="#f9f9f9"/>
-                          <Cell col="3" text="bind:recruitCategory" padding="0px 10px"/>
+                          <Cell col="3" text="bind:recruitCategory" padding="0px 10px" displaytype="combotext" edittype="combo" combodataset="ds_recruit" combocodecol="code" combodatacol="value" combodisplaynulltype="nulltext" combodisplaynulltext="채용구분 선택"/>
                           <Cell col="4" textAlign="center" background="#f9f9f9" text="급여구분"/>
-                          <Cell col="5" text="bind:salaryCategory" padding="0px 10px"/>
+                          <Cell col="5" text="bind:salaryCategory" padding="0px 10px" displaytype="combotext" edittype="combo" combodataset="ds_salary" combodatacol="value" combocodecol="code" combodisplaynulltext="급여구분 선택" combodisplaynulltype="nulltext"/>
                           <Cell col="6" textAlign="center" background="#f9f9f9" text="추천자"/>
                           <Cell col="7" text="bind:referrer" padding="0px 10px" displaytype="normal" edittype="text"/>
                           <Cell row="1" textAlign="center" background="#f9f9f9" text="생년월일"/>
@@ -93,11 +93,11 @@
                           <Cell row="1" col="2" textAlign="center" background="#f9f9f9" text="성별"/>
                           <Cell row="1" col="3" text="bind:gender" padding="0px 10px" edittype="combo" combodataset="ds_gender" combocodecol="code" combodatacol="value"/>
                           <Cell row="1" col="4" textAlign="center" background="#f9f9f9" text="결혼여부"/>
-                          <Cell row="1" col="5" text="bind:isMarriage" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
+                          <Cell row="1" col="5" text="bind:isMarriage" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value" combodisplaynulltext="결혼여부 선택" combodisplaynulltype="nulltext"/>
                           <Cell row="1" col="6" textAlign="center" background="#f9f9f9" text="장애여부"/>
-                          <Cell row="1" col="7" text="bind:isDisability" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
+                          <Cell row="1" col="7" text="bind:isDisability" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value" combodisplaynulltext="장애여부 선택" combodisplaynulltype="nulltext"/>
                           <Cell row="2" textAlign="center" background="#f9f9f9" text="보훈여부"/>
-                          <Cell row="2" col="1" text="bind:isVeterans" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value"/>
+                          <Cell row="2" col="1" text="bind:isVeterans" padding="0px 10px" edittype="combo" combodataset="ds_ny" combocodecol="code" combodatacol="value" combodisplaynulltext="보훈여부 선택" combodisplaynulltype="nulltext"/>
                           <Cell row="2" col="2" textAlign="center" background="#f9f9f9" text="퇴사일"/>
                           <Cell row="2" col="3" text="bind:endDate" padding="0px 10px" displaytype="date" edittype="date" calendardateformat="yyyy-MM-dd" calendardisplaynulltext="일자 선택" maskeditformat="####-##-##" calendardisplaynulltype="nulltext"/>
                           <Cell row="2" col="4" textAlign="center" background="#f9f9f9" text="퇴직사유"/>
@@ -109,7 +109,8 @@
                     </Formats>
                   </Grid>
                   <Button id="btnResign" taborder="1" text="퇴직처리" left="20" top="155" width="50" height="20" border="0px none, 0px none, 1px solid #c10000" color="#c10000" font="12px/normal &quot;Noto Sans KR&quot;" onclick="btnResign_onclick"/>
-                  <Static id="Static00" taborder="2" text="※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 저장 버튼을 눌러주세요!" top="149" width="620" height="32" onclick="Tab00_Tabpage1_Static00_onclick" right="20" textAlign="right" font="normal 12px/normal Noto Sans KR"/>
+                  <Static id="Static00" taborder="2" text="※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 각 페이지의 저장 버튼을 눌러주세요!" top="149" width="680" height="32" onclick="Tab00_Tabpage1_Static00_onclick" right="20" textAlign="right" font="normal 12px/normal Noto Sans KR"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -158,6 +159,7 @@
                   </Grid>
                   <Button id="btn_minus" taborder="1" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage2_btn_minus_onclick"/>
                   <Button id="btn_plus" taborder="2" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage2_btn_plus_onclick" border="1px solid #999999"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -212,6 +214,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage3_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage3_btn_minus_onclick"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -263,6 +266,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage4_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage4_btn_minus_onclick"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -314,6 +318,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage5_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage5_btn_minus_onclick"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -362,14 +367,14 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage6_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage6_btn_minus_onclick"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
                 </Layout>
               </Layouts>
             </Tabpage>
           </Tabpages>
         </Tab>
-        <Button id="btn_save" taborder="5" text="저장" left="560" cssclass="point" height="32" font="14px/normal &quot;Noto Sans KR&quot;" top="580" right="360" onclick="btn_save_onclick"/>
-        <Static id="link_emplLsit" taborder="6" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Static id="link_addEmpl" taborder="7" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="link_emplLsit" taborder="5" text="사원 조회" left="24" top="85" width="200" height="20" font="normal normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick" cursor="pointer"/>
+        <Static id="link_addEmpl" taborder="6" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="normal normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick" cursor="pointer"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -700,12 +705,35 @@
             <Col id="value">신입</Col>
           </Row>
           <Row>
-            <Col id="code">채용</Col>
-            <Col id="value">채용</Col>
+            <Col id="code">경력</Col>
+            <Col id="value">경력</Col>
           </Row>
         </Rows>
       </Dataset>
-      <Dataset id="ds_salary"/>
+      <Dataset id="ds_salary">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">연봉</Col>
+            <Col id="value">연봉</Col>
+          </Row>
+          <Row>
+            <Col id="code">월급</Col>
+            <Col id="value">월급</Col>
+          </Row>
+          <Row>
+            <Col id="code">일급</Col>
+            <Col id="value">일급</Col>
+          </Row>
+          <Row>
+            <Col id="code">시급</Col>
+            <Col id="value">시급</Col>
+          </Row>
+        </Rows>
+      </Dataset>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {	
@@ -971,15 +999,6 @@ this.Tab00_Tabpage6_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.Cl
 // 	);	
 // };
 
-this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
-{
-	//this.Grid00.getBindCellIndex("body","body0");
-// 	var fileName = this.Grid00.getCellText(e.row, 0);
-// 	trace(e.row);
-// 	trace(e.col);
-// 	trace(fileName);
-//  	this.ds_empl.setColumn( e.row, e.col, "theme::hirpTheme/00_icon_home.png" );
-};
 ]]></Script>
   </Form>
 </FDL>

@@ -1,0 +1,27 @@
+﻿-P
+"D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\hirp_nexa.xprj"
+-O
+"C:\Users\developer_corn\OneDrive\바탕 화면\새 폴더"
+-B
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-FILE
+"'D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\environment.xml','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\Application_Desktop.xadl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\color.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptAddPopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptColorPicker.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptDeletePopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptEmplListPopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptManage.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\empDetail.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplApproval.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplList.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\form_home.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Left.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Work.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\_resource_\_theme_\default','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\_resource_\_theme_\hirpTheme'"
+-JSVERSION
+"ECMAScript 2015(ES6)"
+-BOOTSTRAP
+-MODULE
+-BROWSER
+NRE,Internet Explorer 11,Internet Explorer 10,Chrome,Safari
+-D2
+"D:\__22_finalworkspace\HIRP\src\main\webapp\nexaui\."
+-DB2
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-DT2
+4369
+-DF2
+"'D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\environment.xml','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\Application_Desktop.xadl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\color.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptAddPopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptColorPicker.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptDeletePopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptEmplListPopup.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptManage.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\empDetail.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplApproval.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplList.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\form_home.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Left.xfdl','D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Work.xfdl'"
+-IGNORECOMPRESS
+"D:\__22_finalworkspace\HIRP\src\main\nxui\hirp_nexa\.ignorecompress"
+-RTL
+-Q
+68746

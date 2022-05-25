@@ -75,12 +75,12 @@
 
 
             obj = new Dataset("ds_recruit", this);
-            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"value\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">신입</Col><Col id=\"value\">신입</Col></Row><Row><Col id=\"code\">채용</Col><Col id=\"value\">채용</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"value\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">신입</Col><Col id=\"value\">신입</Col></Row><Row><Col id=\"code\">경력</Col><Col id=\"value\">경력</Col></Row></Rows>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("ds_salary", this);
-            obj._setContents("");
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"value\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">연봉</Col><Col id=\"value\">연봉</Col></Row><Row><Col id=\"code\">월급</Col><Col id=\"value\">월급</Col></Row><Row><Col id=\"code\">일급</Col><Col id=\"value\">일급</Col></Row><Row><Col id=\"code\">시급</Col><Col id=\"value\">시급</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -115,10 +115,10 @@
             obj.set_cellsizingtype("none");
             obj.set_autosizingtype("none");
             obj.set_cssclass("detailTable no_bg");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"139\"/><Column size=\"114\"/><Column size=\"175\"/><Column size=\"116\"/><Column size=\"182\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"39\"/><Row size=\"39\"/><Row size=\"38\"/><Row size=\"39\"/></Rows><Band id=\"head\"><Cell colspan=\"5\" text=\"사원 정보 상세\" color=\"#333333\" border=\"1px solid #cccccc,0px none\" font=\"500 14px/normal &quot;Noto Sans KR&quot;\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell rowspan=\"4\" displaytype=\"imagecontrol\" imagestretch=\"fixaspectratio\" text=\"expr:&quot;HirpURL::/resources/uploadFiles/&quot; + emplProfile\"/><Cell col=\"1\" text=\"이름\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell col=\"2\" text=\"bind:emplName\" padding=\"0px 20px\" edittype=\"text\"/><Cell col=\"3\" text=\"소속부서\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell col=\"4\" text=\"bind:deptCode\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_dept\" combocodecol=\"deptCode\" combodatacol=\"deptName\" padding=\"0px 20px\"/><Cell row=\"1\" col=\"1\" text=\"직위/직책\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"1\" col=\"2\" text=\"bind:positionCode\" displaytype=\"combotext\" edittype=\"combo\" padding=\"0px 20px\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\"/><Cell row=\"1\" col=\"3\" text=\"직통번호\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"1\" col=\"4\" text=\"bind:directNo\" padding=\"0px 20px\" edittype=\"text\"/><Cell row=\"2\" col=\"1\" text=\"이메일\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"2\" col=\"2\" text=\"bind:email\" padding=\"0px 20px\" edittype=\"text\"/><Cell row=\"2\" col=\"3\" text=\"휴대전화번호\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"2\" col=\"4\" text=\"bind:phoneNo\" padding=\"0px 20px\" edittype=\"text\"/><Cell row=\"3\" col=\"1\" text=\"입사일\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"3\" col=\"2\" text=\"bind:startDate\" padding=\"0px 20px\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\"/><Cell row=\"3\" col=\"3\" text=\"상태\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"3\" col=\"4\" text=\"bind:isStatus\" padding=\"0px 20px\" edittype=\"combo\" combodataset=\"ds_status\" combodatacol=\"statusName\" combodisplaynulltext=\"재직 상태\" combocodecol=\"statusCode\" combodisplaynulltype=\"nulltext\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"139\"/><Column size=\"114\"/><Column size=\"175\"/><Column size=\"116\"/><Column size=\"182\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"39\"/><Row size=\"39\"/><Row size=\"38\"/><Row size=\"39\"/></Rows><Band id=\"head\"><Cell colspan=\"5\" text=\"사원 정보 상세\" color=\"#333333\" border=\"1px solid #cccccc,0px none\" font=\"500 14px/normal &quot;Noto Sans KR&quot;\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell rowspan=\"4\" displaytype=\"imagecontrol\" imagestretch=\"fixaspectratio\" text=\"expr:&quot;HirpURL::/resources/uploadFiles/&quot; + emplProfile\"/><Cell col=\"1\" text=\"이름\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell col=\"2\" text=\"bind:emplName\" padding=\"0px 20px\" edittype=\"text\"/><Cell col=\"3\" text=\"소속부서\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell col=\"4\" text=\"bind:deptCode\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_dept\" combocodecol=\"deptCode\" combodatacol=\"deptName\" padding=\"0px 20px\" combodisplaynulltype=\"nulltext\" combodisplaynulltext=\"소속부서 선택\"/><Cell row=\"1\" col=\"1\" text=\"직위/직책\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"1\" col=\"2\" text=\"bind:positionCode\" displaytype=\"combotext\" edittype=\"combo\" padding=\"0px 20px\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\" combodisplaynulltype=\"nulltext\" combodisplaynulltext=\"직위 선택\"/><Cell row=\"1\" col=\"3\" text=\"직통번호\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"1\" col=\"4\" text=\"bind:directNo\" padding=\"0px 20px\" edittype=\"text\" combodisplaynulltext=\"직통번호 입력\" combodisplaynulltype=\"nulltext\"/><Cell row=\"2\" col=\"1\" text=\"이메일\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"2\" col=\"2\" text=\"bind:email\" padding=\"0px 20px\" edittype=\"text\" combodisplaynulltype=\"nulltext\" combodisplaynulltext=\"이메일 입력\"/><Cell row=\"2\" col=\"3\" text=\"휴대전화번호\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"2\" col=\"4\" text=\"bind:phoneNo\" padding=\"0px 20px\" edittype=\"text\" combodisplaynulltext=\"휴대전화번호 입력\" combodisplaynulltype=\"nulltext\"/><Cell row=\"3\" col=\"1\" text=\"입사일\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"3\" col=\"2\" text=\"bind:startDate\" padding=\"0px 20px\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\"/><Cell row=\"3\" col=\"3\" text=\"상태\" textAlign=\"center\" font=\"bold 12px/normal &quot;Gulim&quot;\"/><Cell row=\"3\" col=\"4\" text=\"bind:isStatus\" padding=\"0px 20px\" edittype=\"combo\" combodataset=\"ds_status\" combodatacol=\"statusName\" combodisplaynulltext=\"재직 상태\" combocodecol=\"statusCode\" combodisplaynulltype=\"nulltext\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
-            obj = new Tab("Tab00","200","310",null,"280","0",null,null,null,null,null,this);
+            obj = new Tab("Tab00","200","310",null,"338","0",null,null,null,null,null,this);
             obj.set_taborder("4");
             obj.set_tabindex("0");
             this.addChild(obj.name, obj);
@@ -132,7 +132,7 @@
             obj.set_binddataset("ds_empl");
             obj.set_cssclass("detailTable no_bg");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"0\" band=\"head\"/><Row size=\"42\"/><Row size=\"42\"/><Row size=\"42\"/></Rows><Band id=\"head\"><Cell colspan=\"4\" text=\"기본정보\" color=\"#333333\" border=\"1px solid #dbdee2\"/><Cell col=\"4\"/><Cell col=\"5\"/><Cell col=\"6\"/><Cell col=\"7\"/></Band><Band id=\"body\"><Cell text=\"사원아이디\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"1\" text=\"bind:emplId\" padding=\"0px 10px\"/><Cell col=\"2\" text=\"채용구분\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"bind:recruitCategory\" padding=\"0px 10px\"/><Cell col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"급여구분\"/><Cell col=\"5\" text=\"bind:salaryCategory\" padding=\"0px 10px\"/><Cell col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"추천자\"/><Cell col=\"7\" text=\"bind:referrer\" padding=\"0px 10px\" displaytype=\"normal\" edittype=\"text\"/><Cell row=\"1\" textAlign=\"center\" background=\"#f9f9f9\" text=\"생년월일\"/><Cell row=\"1\" col=\"1\" text=\"bind:birthday\" padding=\"0px 10px\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\"/><Cell row=\"1\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"성별\"/><Cell row=\"1\" col=\"3\" text=\"bind:gender\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_gender\" combocodecol=\"code\" combodatacol=\"value\"/><Cell row=\"1\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"결혼여부\"/><Cell row=\"1\" col=\"5\" text=\"bind:isMarriage\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\"/><Cell row=\"1\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"장애여부\"/><Cell row=\"1\" col=\"7\" text=\"bind:isDisability\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\"/><Cell row=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"보훈여부\"/><Cell row=\"2\" col=\"1\" text=\"bind:isVeterans\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\"/><Cell row=\"2\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴사일\"/><Cell row=\"2\" col=\"3\" text=\"bind:endDate\" padding=\"0px 10px\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltext=\"일자 선택\" maskeditformat=\"####-##-##\" calendardisplaynulltype=\"nulltext\"/><Cell row=\"2\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴직사유\"/><Cell row=\"2\" col=\"5\" text=\"bind:endReason\" padding=\"0px 10px\" displaytype=\"normal\" edittype=\"text\"/><Cell row=\"2\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell row=\"2\" col=\"7\" padding=\"0px 10px\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"0\" band=\"head\"/><Row size=\"42\"/><Row size=\"42\"/><Row size=\"42\"/></Rows><Band id=\"head\"><Cell colspan=\"4\" text=\"기본정보\" color=\"#333333\" border=\"1px solid #dbdee2\"/><Cell col=\"4\"/><Cell col=\"5\"/><Cell col=\"6\"/><Cell col=\"7\"/></Band><Band id=\"body\"><Cell text=\"사원아이디\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"1\" text=\"bind:emplId\" padding=\"0px 10px\"/><Cell col=\"2\" text=\"채용구분\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"bind:recruitCategory\" padding=\"0px 10px\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_recruit\" combocodecol=\"code\" combodatacol=\"value\" combodisplaynulltype=\"nulltext\" combodisplaynulltext=\"채용구분 선택\"/><Cell col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"급여구분\"/><Cell col=\"5\" text=\"bind:salaryCategory\" padding=\"0px 10px\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_salary\" combodatacol=\"value\" combocodecol=\"code\" combodisplaynulltext=\"급여구분 선택\" combodisplaynulltype=\"nulltext\"/><Cell col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"추천자\"/><Cell col=\"7\" text=\"bind:referrer\" padding=\"0px 10px\" displaytype=\"normal\" edittype=\"text\"/><Cell row=\"1\" textAlign=\"center\" background=\"#f9f9f9\" text=\"생년월일\"/><Cell row=\"1\" col=\"1\" text=\"bind:birthday\" padding=\"0px 10px\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\"/><Cell row=\"1\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"성별\"/><Cell row=\"1\" col=\"3\" text=\"bind:gender\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_gender\" combocodecol=\"code\" combodatacol=\"value\"/><Cell row=\"1\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"결혼여부\"/><Cell row=\"1\" col=\"5\" text=\"bind:isMarriage\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\" combodisplaynulltext=\"결혼여부 선택\" combodisplaynulltype=\"nulltext\"/><Cell row=\"1\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\" text=\"장애여부\"/><Cell row=\"1\" col=\"7\" text=\"bind:isDisability\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\" combodisplaynulltext=\"장애여부 선택\" combodisplaynulltype=\"nulltext\"/><Cell row=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"보훈여부\"/><Cell row=\"2\" col=\"1\" text=\"bind:isVeterans\" padding=\"0px 10px\" edittype=\"combo\" combodataset=\"ds_ny\" combocodecol=\"code\" combodatacol=\"value\" combodisplaynulltext=\"보훈여부 선택\" combodisplaynulltype=\"nulltext\"/><Cell row=\"2\" col=\"2\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴사일\"/><Cell row=\"2\" col=\"3\" text=\"bind:endDate\" padding=\"0px 10px\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltext=\"일자 선택\" maskeditformat=\"####-##-##\" calendardisplaynulltype=\"nulltext\"/><Cell row=\"2\" col=\"4\" textAlign=\"center\" background=\"#f9f9f9\" text=\"퇴직사유\"/><Cell row=\"2\" col=\"5\" text=\"bind:endReason\" padding=\"0px 10px\" displaytype=\"normal\" edittype=\"text\"/><Cell row=\"2\" col=\"6\" textAlign=\"center\" background=\"#f9f9f9\"/><Cell row=\"2\" col=\"7\" padding=\"0px 10px\"/></Band></Format></Formats>");
             this.Tab00.Tabpage1.addChild(obj.name, obj);
 
             obj = new Button("btnResign","20","155","50","20",null,null,null,null,null,null,this.Tab00.Tabpage1.form);
@@ -143,11 +143,18 @@
             obj.set_font("12px/normal \"Noto Sans KR\"");
             this.Tab00.Tabpage1.addChild(obj.name, obj);
 
-            obj = new Static("Static00",null,"149","620","32","20",null,null,null,null,null,this.Tab00.Tabpage1.form);
+            obj = new Static("Static00",null,"149","680","32","20",null,null,null,null,null,this.Tab00.Tabpage1.form);
             obj.set_taborder("2");
-            obj.set_text("※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 저장 버튼을 눌러주세요!");
+            obj.set_text("※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 각 페이지의 저장 버튼을 눌러주세요!");
             obj.set_textAlign("right");
             obj.set_font("normal 12px/normal Noto Sans KR");
+            this.Tab00.Tabpage1.addChild(obj.name, obj);
+
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage1.form);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            obj.set_cssclass("point");
+            obj.set_font("normal 14px/normal \"Arial\"");
             this.Tab00.Tabpage1.addChild(obj.name, obj);
 
             obj = new Tabpage("Tabpage2",this.Tab00);
@@ -173,6 +180,13 @@
             obj.set_border("1px solid #999999");
             this.Tab00.Tabpage2.addChild(obj.name, obj);
 
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage2.form);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            obj.set_cssclass("point");
+            obj.set_font("normal 14px/normal \"Arial\"");
+            this.Tab00.Tabpage2.addChild(obj.name, obj);
+
             obj = new Tabpage("Tabpage3",this.Tab00);
             obj.set_text("경력");
             this.Tab00.addChild(obj.name, obj);
@@ -194,6 +208,13 @@
             obj.set_taborder("2");
             obj.set_text("삭제");
             obj.set_border("1px solid #999999");
+            this.Tab00.Tabpage3.addChild(obj.name, obj);
+
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage3.form);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            obj.set_cssclass("point");
+            obj.set_font("normal 14px/normal \"Arial\"");
             this.Tab00.Tabpage3.addChild(obj.name, obj);
 
             obj = new Tabpage("Tabpage4",this.Tab00);
@@ -219,6 +240,13 @@
             obj.set_border("1px solid #999999");
             this.Tab00.Tabpage4.addChild(obj.name, obj);
 
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage4.form);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            obj.set_cssclass("point");
+            obj.set_font("normal 14px/normal \"Arial\"");
+            this.Tab00.Tabpage4.addChild(obj.name, obj);
+
             obj = new Tabpage("Tabpage5",this.Tab00);
             obj.set_text("어학");
             this.Tab00.addChild(obj.name, obj);
@@ -240,6 +268,13 @@
             obj.set_taborder("2");
             obj.set_text("삭제");
             obj.set_border("1px solid #999999");
+            this.Tab00.Tabpage5.addChild(obj.name, obj);
+
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage5.form);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            obj.set_cssclass("point");
+            obj.set_font("normal 14px/normal \"Arial\"");
             this.Tab00.Tabpage5.addChild(obj.name, obj);
 
             obj = new Tabpage("Tabpage6",this.Tab00);
@@ -265,25 +300,27 @@
             obj.set_border("1px solid #999999");
             this.Tab00.Tabpage6.addChild(obj.name, obj);
 
-            obj = new Button("btn_save","560","580",null,"32","360",null,null,null,null,null,this);
-            obj.set_taborder("5");
+            obj = new Button("btn_save","370","240",null,"36","370",null,null,null,null,null,this.Tab00.Tabpage6.form);
+            obj.set_taborder("3");
             obj.set_text("저장");
             obj.set_cssclass("point");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
-            this.addChild(obj.name, obj);
+            obj.set_font("normal 14px/normal \"Arial\"");
+            this.Tab00.Tabpage6.addChild(obj.name, obj);
 
             obj = new Static("link_emplLsit","24","85","200","20",null,null,null,null,null,null,this);
-            obj.set_taborder("6");
+            obj.set_taborder("5");
             obj.set_text("사원 조회");
-            obj.set_font("normal 14px/normal \"Noto Sans KR\"");
+            obj.set_font("normal normal 14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
             this.addChild(obj.name, obj);
 
             obj = new Static("link_addEmpl","24","120","106","20",null,null,null,null,null,null,this);
-            obj.set_taborder("7");
+            obj.set_taborder("6");
             obj.set_text("사원 추가/승인");
-            obj.set_font("14px/normal \"Noto Sans KR\"");
+            obj.set_font("normal normal 14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -569,15 +606,6 @@
         // 	);
         // };
 
-        this.Grid00_oncellclick = function(obj,e)
-        {
-        	//this.Grid00.getBindCellIndex("body","body0");
-        // 	var fileName = this.Grid00.getCellText(e.row, 0);
-        // 	trace(e.row);
-        // 	trace(e.col);
-        // 	trace(fileName);
-        //  	this.ds_empl.setColumn( e.row, e.col, "theme::hirpTheme/00_icon_home.png" );
-        };
 
         });
         
@@ -601,7 +629,6 @@
             this.Tab00.Tabpage5.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage5_btn_minus_onclick,this);
             this.Tab00.Tabpage6.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage6_btn_plus_onclick,this);
             this.Tab00.Tabpage6.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage6_btn_minus_onclick,this);
-            this.btn_save.addEventHandler("onclick",this.btn_save_onclick,this);
             this.link_emplLsit.addEventHandler("onclick",this.link_emplLsit_onclick,this);
             this.link_addEmpl.addEventHandler("onclick",this.link_addEmpl_onclick,this);
             this.ds_empl.addEventHandler("onload",this.ds_empl_onload,this);

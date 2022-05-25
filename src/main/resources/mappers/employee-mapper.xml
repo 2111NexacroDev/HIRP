@@ -30,7 +30,7 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertEmployee" parameterType="Employee"> <!-- 마이바티스에 줄이려고 써둠. id값 storelogic값과 같아야함 // 위에 타입, 아이디 중 적어줌 -->
-		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER) VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender})
+		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER, IS_STATUS) VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender}, '임시')
 	</insert>
 
 	<!-- 로그인 -->

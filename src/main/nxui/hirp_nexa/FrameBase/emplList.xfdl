@@ -32,8 +32,8 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
-                <Cell col="1" text="bind:deptCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" cssclass="deptCode" displaytype="combotext" edittype="combo" font="normal 12px/normal &quot;Noto Sans KR&quot;" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode"/>
-                <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="combotext" edittype="combo" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
+                <Cell col="1" text="bind:deptCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" cssclass="deptCode" displaytype="combotext" edittype="none" font="normal 12px/normal &quot;Noto Sans KR&quot;" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode"/>
+                <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="combotext" edittype="none" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
                 <Cell col="3" text="bind:directNo" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="4" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="buttoncontrol" text="조회/수정" edittype="button" cssclass="basic" padding="6px 20px"/>
                 <Cell col="5" text="bind:emplId"/>
@@ -67,8 +67,8 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" textAlign="center" border="1px solid #cccccc,0px none"/>
-                <Cell col="1" text="bind:deptCode" textAlign="center" displaytype="combotext" edittype="combo" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode" border="1px solid #cccccc,0px none"/>
-                <Cell col="2" text="bind:positionCode" textAlign="center" border="1px solid #cccccc,0px none" displaytype="combotext" edittype="combo" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
+                <Cell col="1" text="bind:deptCode" textAlign="center" displaytype="combotext" edittype="none" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode" border="1px solid #cccccc,0px none"/>
+                <Cell col="2" text="bind:positionCode" textAlign="center" border="1px solid #cccccc,0px none" displaytype="combotext" edittype="none" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
                 <Cell col="3" text="bind:phoneNo" textAlign="center" border="1px solid #cccccc,0px none"/>
                 <Cell col="4" textAlign="center" text="조회/수정" displaytype="buttoncontrol" edittype="button" border="1px solid #cccccc,0px none,1px solid #cccccc,1px solid #dbdee2" borderRadius="0px none" padding="6px 20px"/>
                 <Cell col="5" text="bind:emplId"/>
@@ -78,8 +78,8 @@
         </Grid>
         <Edit id="edt_search" taborder="7" top="70" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="재직자 이름 검색" right="20"/>
         <Button id="btn_search_empl" taborder="8" top="70" width="28" height="28" cssclass="search" onclick="btn_search_empl_onclick" text="" right="21"/>
-        <Static id="link_emplLsit" taborder="9" text="사원 조회" left="24" top="85" width="200" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Static id="link_addEmpl" taborder="10" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="link_emplLsit" taborder="9" text="사원 조회" left="24" top="85" width="200" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick" cursor="pointer"/>
+        <Static id="link_addEmpl" taborder="10" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick" cursor="pointer"/>
         <Edit id="edt_search_retiree" taborder="12" top="395" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="퇴사자 이름 검색" right="21"/>
         <Button id="btn_search_retiree" taborder="11" top="395" width="28" height="28" cssclass="search" onclick="btn_search_retiree_onclick" text="" right="22"/>
       </Layout>
