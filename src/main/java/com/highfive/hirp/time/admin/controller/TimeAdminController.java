@@ -4,10 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.time.admin.domain.TimeAdmin;
 import com.highfive.hirp.time.admin.service.TimeAdminService;
+import com.highfive.hirp.time.user.domain.Time;
+import com.highfive.hirp.time.user.domain.TimeModify;
+import com.highfive.hirp.time.user.domain.Vacation;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 
 @Controller
@@ -16,31 +21,63 @@ public class TimeAdminController {
 	@Autowired
 	private TimeAdminService taService;
 
-	// 관리자 출근 내역 조회
-	public NexacroResult timeStart() {
-		NexacroResult result = new NexacroResult();
-		List<TimeAdmin> timeAdmin = taService.adminStart();
-		return result;
-	}
-
-	// 관리자 퇴근 내역 조회
-	public NexacroResult timeEnd() {
-		NexacroResult result = new NexacroResult();
-		List<TimeAdmin> timeAdmin = taService.adminEnd();
+	// 관리자 출퇴근 내역 조회
+	@RequestMapping(value="/admin/timeView.hirp", method=RequestMethod.GET)
+	public NexacroResult timeView() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult(); 
+		List<Time> time = taService.inOutTimeView(); // 출퇴근 조회
+		if(!time.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCCESS";
+			result.addDataSet("outTimeView", time); // <>와 이름 같게. 넥사크로에서 어떻게 부를지 정함
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 
 	// 관리자 연차 신청 내역 조회
-	public NexacroResult timeVacation() {
+	@RequestMapping(value="/admin/vacationView.hirp", method=RequestMethod.GET)
+	public NexacroResult vacationView() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		List<TimeAdmin> timeAdmin = taService.adminTimeView();
+		List<Vacation> vacation = taService.vacationView();
+		if(!vacation.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCCESS";
+			result.addDataSet("outTimeView", vacation); // <>와 이름 같게. 넥사크로에서 어떻게 부를지 정함
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 
 	// 관리자 근태 조정 신청 내역 조회
-	public NexacroResult vacationModify() {
+	@RequestMapping(value="/admin/timeModifyView.hirp", method=RequestMethod.GET)
+	public NexacroResult timeModifyView() {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		List<TimeAdmin> timeAdmin = taService.AdminTimeModify();
+		List<TimeModify> timeModify = taService.timeModifyView();
+		if(!timeModify.isEmpty()) {
+			nErrorCode = 0;
+			strErrorMsg = "SUCCESS";
+			result.addDataSet("outTimeView", timeModify); // <>와 이름 같게. 넥사크로에서 어떻게 부를지 정함
+		}else {
+			nErrorCode = -1;
+			strErrorMsg = "Fail";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
 		return result;
 	}
 }

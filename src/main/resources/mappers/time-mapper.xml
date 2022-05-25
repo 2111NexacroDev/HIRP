@@ -69,42 +69,42 @@
 	
 	<!-- 사용자 출퇴근 내역 화면 -->
 	<select id="selectTime" parameterType="Time" resultMap="timeResultMap">
-		SELECT TIME_NO
-             , EMPL_ID
-             , TIME_DATE
-             , TIME_START
-             , TIME_END
-             , TIME_STATE
-             , TIME_CONTENT
-             , TRUNC((TIME_END - TIME_START) * 24) || '시간 ' || TRUNC((TIME_END - TIME_START) * 24 * 60) || '분' AS TIME_ACCRUE
-		FROM TIME_TBL
-		WHERE EMPL_ID = #{emplId }
-		  AND TO_CHAR(TIME_DATE,'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		SELECT A.TIME_NO
+		     , A.EMPL_ID
+		     , A.TIME_DATE
+		     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
+		     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
+		     , A.TIME_STATE
+		     , A.TIME_CONTENT
+		     , TRUNC(B.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(B.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(B.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
+		    FROM TIME_TBL A, (SELECT SUM(TIME_ACCRUE) AS TIME_ACCRUE FROM TIME_TBL WHERE EMPL_ID = #{emplId } AND TO_CHAR(TIME_DATE, 'W') = TO_CHAR(SYSDATE, 'W')) B
+		    WHERE EMPL_ID = #{emplId } AND TO_CHAR(A.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
 	</select>
 	
 	<!-- 사용자 출퇴근 내역 조회 -->
 	<select id="selectWorkView" parameterType="String" resultMap="timeResultMap">
-		SELECT TIME_NO
-             , EMPL_ID
-             , TIME_DATE
-             , TIME_START
-             , TIME_END
-             , TIME_STATE
-             , TIME_CONTENT
-             , TRUNC((TIME_END - TIME_START) * 24) || '시간 ' || TRUNC((TIME_END - TIME_START) * 24 * 60) || '분' AS TIME_ACCRUE
-		FROM TIME_TBL
-		WHERE EMPL_ID = #{emplId}
+		SELECT A.TIME_NO
+     , A.EMPL_ID
+     , A.TIME_DATE
+     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
+     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
+     , A.TIME_STATE
+     , A.TIME_CONTENT
+     , TRUNC(B.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(B.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(B.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
+    FROM TIME_TBL A
+        , (SELECT SUM(TIME_ACCRUE) AS TIME_ACCRUE FROM TIME_TBL WHERE TO_CHAR(TIME_DATE, 'W') = TO_CHAR(SYSDATE, 'W')) B
+    WHERE EMPL_ID = #{emplId } AND TO_CHAR(A.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
 	</select>
 	
 	<!-- 사용자 연차 내역 조회 -->
-	<select id="selectTimeView" parameterType="Time" resultMap="vacationResultMap">
+	<select id="selectTimeView" parameterType="Vacation" resultMap="vacationResultMap">
 		SELECT *
 		FROM VACATION_TBL
 		WHERE EMPL_ID = #{emplId}
 	</select>
 	
  	<!-- 사용자 근태 조정 조회 -->
-	<select id="selectModifyView" parameterType="Vacation" resultMap="timeModifyResultMap">
+	<select id="selectModifyView" parameterType="TimeModify" resultMap="timeModifyResultMap">
 		SELECT *
 		FROM TIMEMODIFY_TBL
 		WHERE EMPL_ID = #{emplId}
