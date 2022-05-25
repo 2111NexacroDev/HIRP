@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -22,6 +23,8 @@ public interface ChatStore {
 	//채팅방 목록 가져오기
 	//내가 참여한 채팅방 목록 가져오기
 	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, String emplId);
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, Map<String, String> searchMap);
 	//채팅방 별로 채팅 내용 가져오기
 	public List<Message> selectMessageByRoomNo(SqlSession sqlSession, int chatroomNo);
 	//보내진 첨부파일 가져오기

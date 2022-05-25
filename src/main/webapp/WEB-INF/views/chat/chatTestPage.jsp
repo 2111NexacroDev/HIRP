@@ -8,17 +8,33 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 	<script type="text/javascript">
-		var webSocket = {
+	var webSocket = {
 			init: function(param) {
 				this._url = param.url;
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage($('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', $('#message').val());
 				$('#message').val('');
 			},
-			receiveMessage: function(str) {
-				$('#divChatData').append('<div>' + str + '</div>');				
+			sendEnter: function() {
+				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', $('#message').val());
+				$('#message').val('');
+			},
+			receiveMessage: function(msgData) {
+
+				// 정의된 CMD 코드에 따라서 분기 처리
+				if(msgData.cmd == 'CMD_MSG_SEND') {					
+					$('#divChatData').append('<div>' + msgData.msg + '</div>');
+				}
+				// 입장
+				else if(msgData.cmd == 'CMD_ENTER') {
+					$('#divChatData').append('<div>' + msgData.msg + '</div>');
+				}
+				// 퇴장
+				else if(msgData.cmd == 'CMD_EXIT') {					
+					$('#divChatData').append('<div>' + msgData.msg + '</div>');
+				}
 			},
 			closeMessage: function(str) {
 				$('#divChatData').append('<div>' + '연결 끊김 : ' + str + '</div>');
@@ -28,15 +44,24 @@
 			},
 			_initSocket: function() {
 				this._socket = new SockJS(this._url);
+				this._socket.onopen = function(evt) {
+					webSocket.sendEnter();
+				};
 				this._socket.onmessage = function(evt) {
-					webSocket.receiveMessage(evt.data);
+					webSocket.receiveMessage(JSON.parse(evt.data));
 				};
 				this._socket.onclose = function(evt) {
-					webSocket.closeMessage(evt.data);
+					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(str) {
-				this._socket.send(str);
+			_sendMessage: function(chatroomNo, cmd, msg) {
+				var msgData = {
+						chatroomNo : chatroomNo,
+						cmd : cmd,
+						msg : msg
+				};
+				var jsonData = JSON.stringify(msgData);
+				this._socket.send(jsonData);
 			}
 		};
 		$(document).ready(function() {
