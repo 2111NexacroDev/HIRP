@@ -63,7 +63,7 @@ public interface ApprovalService {
 		//결재대기 문서 조회(approval select)
 		public Approval printOneWaitngAppr(int docNo);
 		//결재선 진행 상태 조회(appr_accept select 결재상태 <조건> 문서번호 )
-		public List<ApprAccept> printApprovalStatus(int docNo);
+		public List<ApprAccept> printApprovalStatus(int apprNo);
 		//결재자 결재진행(결재승인, 반려)
 		//(appr_accept update 결재상태 "승인,반려" <조건>문서번호,session id값 )
 		public int modifyApprStatus(ApprAccept apprAccept); 

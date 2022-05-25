@@ -36,7 +36,8 @@ public interface ApprovalStore {
 
 	Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo);
 
-	List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int docNo);
+	//결재자정보 조회
+	List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int apprNo);
 
 	int updateApprStatus(SqlSession sqlSession, ApprAccept apprAccept);
 
@@ -54,6 +55,7 @@ public interface ApprovalStore {
 
 	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept);
 
+	//결재문서 보기
 	Approval selectOneAppr(SqlSession sqlSession,int apprNo);
 
 	//양식등록

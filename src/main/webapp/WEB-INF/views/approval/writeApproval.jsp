@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <style>
 #approvalLine-btn {
 	background-color: white;
@@ -106,14 +107,14 @@
 						style="width: 10px; height: auto; vertical-align: middle;" />&nbsp&nbsp결재선
 				</button>
 				<section class="section--modal" id="apprLineSession">
-					<div class="bg-#888"></div>
+					<div class="bg-black"></div>
 					<div class="section--modal__conts"
 						style="border: none; width: 1200px;">
 						<button class="btn--close" type="button" onclick="closeApprModal()"></button>
 						<h3>결재선 선택</h3>
 						<div class="row mt-20">
 							<div style="width:40%;">
-								<table class="table--basic mt-20" id="emplTable">
+								<!-- <table class="table--basic mt-20" id="emplTable">
 									<tr>
 										<th>부서</th>
 										<th>직급</th>
@@ -130,7 +131,12 @@
 										</c:if>
 									</c:forEach>
 
-								</table>
+								</table> -->
+										<h1 class="basic-border-bottom"></h1>
+										<div id="organization" class="subConts">
+											<ul id="orgList">
+											</ul>
+										</div>
 							</div>
 							<div style="width:60%;" id="emplListDiv">
 								<table class="table--basic mt-20" id="apprEmplTable">
@@ -212,6 +218,9 @@
 			</div>
 		</article>
 	</div>
+
+
+
 
 		<script>
 		    var today = new Date();
@@ -438,6 +447,75 @@
 					$(".section--modal").stop().fadeOut(100);//배열이 null일 경우 모달창 닫기
 				}
 			}
+			
+			
+			// 조직도 조회
+			$(document).ready(function(){
+				$.ajax({
+					url : "/group/groupViewData.hirp",
+					type : "get",
+					dataType : "json",
+					success : function(data) {
+						if (data.length != 0) {
+							data.forEach(function(e, i) {
+								console.log(e);
+								var codeNm = e.deptName;
+								var codeId = e.deptCode;
+								var parentId = e.deptUppercode;
+								var codeLvl = e.deptLevel;
+								var $rootList = $("#orgList");
+								//var $li = '<li id="'+ codeId +'"><span>' + codeNm+ '</span></li>';
+								//var $sLi = '<li id="'+ codeId +'"><span>'+ codeNm + '</span></li>';
+								var $ul = '<ul><li id="'+ codeId +'"><a href="#">' + codeNm+ '</a></li></ul>';
+								// 1레벨은 그냥 추가
+								// 다음 레벨부터는 상위 li의 클래스를 폴더로 바꾸고 자기 자신을 추가
+								if (codeLvl == 0) {
+									var $li = '<li id="'+ codeId +'" lvl="' + codeLvl + '"><a href="#">'+ codeNm + '</a></li>';
+									$rootList.append($li);
+								} else {
+//	 								var parentLi = $("li[id='"+parentId+"']");
+//	 								var $bUl = parentLi.find("ul");
+//	 								if($bUl.length == 0) {
+//	 									$li = "<ul>" + $li + "</ul>";
+//	 									parentLi.append($li);
+//	 								}else{
+//	 									$bUl.append($li);
+//	 								}
+									$("#" + parentId).append($ul);
+								}
+							});
+						} else {
+							alert("조직도 데이터가 없습니다.");
+						}
+//	 					$.ajax({
+//	 						url : "/group/selectAllGroupMember.hirp",
+//	 						type : "get",
+//	 						dataType : "json",
+//	 						success : function(data) {
+//	 							if (data.length != 0) {
+//	 								data.forEach(function(e, i) {
+//	 									console.log(e);
+//	 									var emplName = e.emplName;
+//	 									var codeId = e.deptCode;
+//	 									var $ul = '<ul><li id="'+ codeId +'"><a href="#">' + emplName+ '</a></li></ul>';
+//	 									$("#" + codeId).append($ul);
+//	 								});
+//	 							} 
+//	 						},
+//	 						error : function() {
+//	 							alert("조직도 조회 중에 실패했습니다.");
+//	 						}
+//	 					});
+						$("#orgList, #navigation").treeview({
+							collapsed : true
+						});
+					},
+					error : function() {
+						alert("조직도 조회 중에 실패했습니다.");
+					}
+				});
+			});
+			
 		</script>
 	</body>
 </html>

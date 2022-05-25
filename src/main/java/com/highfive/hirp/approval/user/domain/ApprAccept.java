@@ -1,6 +1,9 @@
 package com.highfive.hirp.approval.user.domain;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.highfive.hirp.employee.domain.Employee;
 
 public class ApprAccept {
 	private int acceptNo;
@@ -11,21 +14,9 @@ public class ApprAccept {
 	private String status;
 	private String apprComment;
 	private Date apprDate;
+	private Employee employee;
 	
 	public ApprAccept() {}
-
-	public ApprAccept(int acceptNo, int apprNo, String emplId, int apprLevel, String apprType, String status,
-			String apprComment, Date apprDate) {
-		super();
-		this.acceptNo = acceptNo;
-		this.apprNo = apprNo;
-		this.emplId = emplId;
-		this.apprLevel = apprLevel;
-		this.apprType = apprType;
-		this.status = status;
-		this.apprComment = apprComment;
-		this.apprDate = apprDate;
-	}
 
 	public int getAcceptNo() {
 		return acceptNo;
@@ -91,14 +82,19 @@ public class ApprAccept {
 		this.apprDate = apprDate;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return "ApprAccept [acceptNo=" + acceptNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", apprLevel="
 				+ apprLevel + ", apprType=" + apprType + ", status=" + status + ", apprComment=" + apprComment
-				+ ", apprDate=" + apprDate + "]";
+				+ ", apprDate=" + apprDate + ", employee=" + employee + "]";
 	}
 
-	
-	
-	
 }
