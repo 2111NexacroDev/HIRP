@@ -55,8 +55,10 @@
 		            	</div>
 		            	<!-- 직원명 div 끝 -->
 	            	</c:forEach>
-			    
 			    </div>
+			    <!-- 직원 목록 끝 -->
+			    <!-- 채팅방 추가 floating 버튼 -->
+				<button type="button" class="point chat-floating_Btn"><i class="fa-solid fa-plus"></i></button>
         	</div> 
         </article>
     </div>
