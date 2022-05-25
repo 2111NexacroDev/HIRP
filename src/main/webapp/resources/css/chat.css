@@ -223,8 +223,10 @@
     border: 1px solid #ccc;
 }
 
-#conts h4 {
+#conts h3 {
 	margin: 0 auto;
+	margin-bottom : 10px;
+	font-weight: 600;
 }
 
 .inline-block {

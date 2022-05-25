@@ -16,7 +16,7 @@
 	<div id="conts">
         <article id="sub" class="">
         	
-        	<h1 class="chat-h1 basic-border-bottom">채팅</h1>
+        	<h1 class="chat-h1 basic-border-bottom mt-20">채팅</h1>
 
             <div id="" class="subConts">
             	<!-- 오늘 날짜 -->
@@ -53,7 +53,7 @@
 <!-- 							    </button> -->
 <!-- 						    </div> -->
 						    <div class="ml-20 pos-rel" style="width:100%;">
-						    	<h4 class="mb-20 inline-block">${chat.chatroomName}</h4>
+						    	<h3 class="mb-20 inline-block">${chat.chatroomName}</h3>
 						    	<div class="chatting-time">
 						    		<!-- 날짜별로 시간 다르게 나오게 하기 -->
 							    	<c:if test="${fn:substring(chat.message.msgSenddate, 0, 10) eq today}">
@@ -85,7 +85,46 @@
 			    </div>
 			    <!-- 직원 목록 div 끝 -->
 			    <!-- 채팅방 추가 floating 버튼 -->
-				<button type="button" class="point chat-floating_Btn"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="point chat-floating_Btn" onclick="openModal(this);"><i class="fa-solid fa-plus"></i></button>
+				<section class="section--modal modal--chat">
+					<div class="section--modal__conts" style="border: none">
+						<button class="btn--close" type="button"></button>
+						<h3>직원 선택</h3>
+						<div class="mb-20">
+							<ul>
+								<li>
+									<input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
+									<button class="point" type="button" onclick="emplSearch();">검색</button>
+								</li>
+							</ul>
+							<table class="table--basic mt-20" id="emplTable">
+								<thead>
+									<tr>
+										<th>부서</th>
+										<th>직급</th>
+										<th>이름</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${emplList }" var="empl">
+										<tr onclick="emplTrClick(this);">
+											<td>${empl.deptName}</td>
+											<td>${empl.positionName}</td>
+											<td>${empl.emplName}</td>
+										</tr>
+										<input type="hidden" name="deptCode" value="${empl.deptCode }">
+										<input type="hidden" name="positionCode" value="${empl.positionCode }">
+										<input type="hidden" name="emplId" value="${empl.emplId }">
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="btns-wrap mt-20 t-r">
+<!-- 													<button class="point" type="button">확인</button> -->
+							<button class="finished closeWindow" type="button">닫기</button>
+						</div>
+					</div>
+				</section>
         	</div> 
         </article>
     </div>
@@ -117,7 +156,7 @@
 	    				var countUp = "<c:set var='count' value='"+i+"' />";//원래는 여기 roomId 들어가야 할 듯.
 						var chatroomOneDiv =   "<div class='chat-row mt-10 basic-border-bottom padding-bottom-10' onclick=''>"
 							   + "<div class='ml-20 pos-rel' style='width:100%;'>"
-							    	+ "<h4 class='mb-20 inline-block'>"+cList[i].chatroomName+"</h4>"
+							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName+"</h3>"
 							    	+ "<div class='chatting-time'>";
 							    	
 						console.log("출력 : "+cList[i].message.msgSenddate.substring(0, 10));
