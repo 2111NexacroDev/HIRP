@@ -3,5 +3,66 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="">
+<mapper namespace="timeAdminMapper">
+<resultMap type="Time" id="timeResultMap">
+		<id property="timeNo" column="TIME_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="timeDate" column="TIME_DATE"/>
+		<result property="timeStart" column="TIME_START"/>
+		<result property="timeEnd" column="TIME_END"/>
+		<result property="timeState" column="TIME_STATE"/>
+		<result property="timeContent" column="TIME_CONTENT"/>
+		<result property="timeAccrue" column="TIME_ACCRUE"/>
+	</resultMap>
+	<resultMap type="TimeModify" id="timeModifyResultMap">
+		<id property="timemNo" column="TIMEM_NO"/>
+		<result property="timeNo" column="TIME_NO"/>
+		<result property="timemDepartment" column="TIMEM_DEPARTMENT"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="timemName" column="TIMEM_NAME"/>
+		<result property="timemTitle" column="TIMEM_TITLE"/>
+		<result property="timemStart" column="TIMEM_START"/>
+		<result property="timemEnd" column="TIMEM_END"/>
+		<result property="timemContent" column="TIMEM_CONTENT"/>
+		<result property="timemDate" column="TIMEM_DATE"/>
+		<result property="timemBefore" column="TIMEM_BEFORE"/>
+		<result property="timemAfter" column="TIMEM_AFTER"/>
+	</resultMap>
+	<resultMap type="Vacation" id="vacationResultMap">
+		<id property="vacationNo" column="VACATION_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="vacationName" column="VACATION_NAME"/>
+		<result property="vacationDepartment" column="VACATION_DEPARTMENT"/>
+		<result property="vacationDivision" column="VACATION_DIVISION"/>
+		<result property="vacationStart" column="VACATION_START"/>
+		<result property="vacationEnd" column="VACATION_END"/>
+		<result property="vacationContent" column="VACATION_CONTENT"/>
+		<result property="vacationState" column="VACATION_STATE"/>
+	</resultMap>
+	
+	<!-- 관리자 출퇴근 내역 조회 -->
+	<select id="selectInOutTimeView" parameterType="Time" resultMap="timeResultMap">
+		SELECT A.TIME_NO
+		     , A.EMPL_ID
+		     , A.TIME_DATE
+		     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
+		     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
+		     , A.TIME_STATE
+		     , A.TIME_CONTENT
+		     , TRUNC(B.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(B.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(B.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
+		    FROM TIME_TBL A, (SELECT SUM(TIME_ACCRUE) AS TIME_ACCRUE FROM TIME_TBL WHERE TO_CHAR(TIME_DATE, 'W') = TO_CHAR(SYSDATE, 'W')) B
+		    WHERE TO_CHAR(A.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	</select>
+	
+	<!-- 관리자 연차 신청 내역 조회 -->
+	<select id="selectVacationView" parameterType="Vacation" resultMap="vacationResultMap">
+		SELECT *
+		FROM VACATION_TBL
+	</select>
+	
+	<!-- 관리자 근태 조정 신청 내역 조회 -->
+	<select id="selectTimeModifyView" parameterType="TimeModify" resultMap="timeModifyResultMap">
+		SELECT *
+		FROM TIMEMODIFY_TBL
+	</select>
 </mapper>

@@ -223,8 +223,10 @@
     border: 1px solid #ccc;
 }
 
-#conts h4 {
+#conts h3 {
 	margin: 0 auto;
+	margin-bottom : 10px;
+	font-weight: 600;
 }
 
 .inline-block {
@@ -235,4 +237,15 @@
 	position:absolute;
 	right: 20px;
 	top: 0px;
+}
+
+.chat-floating_Btn {
+	border: 1px solid #ccc; 
+	border-radius: 50%; 
+	width: 50px; 
+	height: 50px; 
+	position:fixed; 
+	right: 20px; 
+	bottom: 20px;
+	font-size: 20px;
 }

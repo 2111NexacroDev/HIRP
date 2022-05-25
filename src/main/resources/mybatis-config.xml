@@ -80,6 +80,7 @@
 		<mapper resource="mappers/employee-mapper.xml" />
 		<mapper resource="mappers/group-mapper.xml" />
 		<mapper resource="mappers/time-mapper.xml" />
+		<mapper resource="mappers/timeAdmin-mapper.xml" />
 		<!-- 우정 -->
 		<mapper resource="mappers/noticeboard-mapper.xml" />
 		<mapper resource="mappers/anonymousboard-mapper.xml" />

@@ -18,20 +18,16 @@
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
 	<div id="conts">
 		<aside id="snb">
-			<h1>근태관리</h1>
-			<title>현재 시간</title> <span id="result"></span>
+			<h1>근태관리</h1><br><br>
+			<title>현재 시간</title>
+			<span id="result"></span><br><br>
 			<ul class="no-margin">
-			<li class="row">
-				출근시간
-				<p id="timeStart" class="ml-10">${time.timeStart }</p></li>
-				
-			<li class="row">
-				퇴근시간
-				<p id="timeEnd" class="ml-10">${time.timeEnd }</p></li>
-			
-			<li class="row">
-				주간 누적 근무시간
-				<p id="timeAccrue" class="ml-10">${time.timeAccrue }</p></li>
+				<li class="row">
+					출근시간<p id="timeStart" class="ml-10">${time.timeStart }</p>
+				</li>
+				<li class="row">
+					퇴근시간<p id="timeEnd" class="ml-10">${time.timeEnd }</p>
+				</li>
 				<li>
 				<button class="finished mt-20" type="button" onclick="startBtn();">출근하기</button>
 				<button class="finished mt-20" type="button" onclick="endBtn();">퇴근하기</button>
@@ -42,7 +38,7 @@
 					<option value="">출장</option>
 					<option value="">반차</option>
 				</select></li>
-			</ul>
+			</ul><br><br>
 			<ul>
 				<li><div style="font-weight: bold;">근태관리</div>
 					<ul>
@@ -53,7 +49,7 @@
 			</ul>
 			<br>
 			<ul>
-				<li><div style="font-weight:bold;">근태조정</div>
+				<li><div style="font-weight: bold;">근태조정</div>
 					<ul>
 						<li><a href="/time/modify.hirp">근태 조정 신청 내역</a></li>
 					</ul>
