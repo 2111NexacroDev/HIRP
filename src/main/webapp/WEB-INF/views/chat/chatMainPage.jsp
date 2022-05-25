@@ -49,6 +49,7 @@
 				    <c:forEach items="${emplList }" var="empl">
 				    	<c:if test="${empl.emplId ne sessionScope.emplId }"> <!-- 내가 아닐 때 -->
 					     	<c:set var="count" value="${count+1}" />
+					     	<input type="hidden" value=${count } name="roomId">
 						    <!-- 직원명 div  -->
 						    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
 						    <div class="chat-row mt-10  padding-bottom-10" onclick="chatWindow(${count});">
@@ -79,7 +80,7 @@
     <script>
     	//채팅창 열기
 		function chatWindow(count){ //원래는 roomId
-			window.open('/chat.hirp','chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
+			window.open('/chat.hirp?bang_id='+count,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
     	
 		//직원 목록에서 검색 (ajax)

@@ -42,7 +42,8 @@ public class ChatController {
 	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
 	public String view_chat(Model model
 			, HttpServletRequest request
-			, HttpServletResponse response) throws Exception {
+			, HttpServletResponse response
+			, @RequestParam("bang_id") String roomId) throws Exception {
 
 		return "chat/chatTestPage";
 	}
