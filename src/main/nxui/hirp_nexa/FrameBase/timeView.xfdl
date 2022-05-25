@@ -2,7 +2,98 @@
 <FDL version="2.1">
   <Form id="timeView" width="1280" height="720" titletext="New Form">
     <Layouts>
-      <Layout height="720" mobileorientation="landscape" width="1280"/>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="Div00" taborder="0" left="0" top="4" width="200" height="99.44%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;" text=""/>
+        <Static id="Static00_00" taborder="1" text="" left="199" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="1" background="#dddddd"/>
+        <Static id="Static00" taborder="2" text="관리자 근태관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
+        <Static id="link_emplLsit" taborder="3" text="전사 근태관리" left="18" top="145" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Grid id="Grid00" taborder="4" left="230" top="122" width="1020" height="568" binddataset="timeView" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="근태번호" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="1" text="아이디" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="2" text="날짜" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="3" text="출근시간" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="4" text="퇴근시간" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="5" text="업무상태" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="6" text="연차사유" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+                <Cell col="7" text="일근무시간" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:timeNo"/>
+                <Cell col="1" text="bind:emplId"/>
+                <Cell col="2" text="bind:timeDate" displaytype="date"/>
+                <Cell col="3" text="bind:timeStart"/>
+                <Cell col="4" text="bind:timeEnd"/>
+                <Cell col="5" text="bind:timeState"/>
+                <Cell col="6" text="bind:timeContent"/>
+                <Cell col="7" text="bind:timeAccrue"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="link_addEmpl00" taborder="5" text="출/퇴근 내역 조회" left="28" top="174" width="136" height="17" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="link_addEmpl00_00" taborder="6" text="연차 신청 내역 조회" left="28" top="196" width="136" height="17" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="Static01" taborder="7" text="출/퇴근 내역 조회" left="221" top="78" width="156" height="25" onclick="Static01_onclick" font="bold 15 px"/>
+        <Static id="link_emplLsit00" taborder="8" text="전사 근태관리" left="18" top="245" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_addEmpl00_01" taborder="9" text="근태 조정 신청 내역 조회" left="28" top="274" width="171" height="16" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+      </Layout>
     </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+// 출퇴근 내역 조회
+this.timeView_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
+{
+this.transaction(
+		"tr_select"// 1.ID
+		,"HirpURL::admin/timeView.hirp"// 2.URL		
+		,"" // 3.InDs : F->S jsp(I,U,D) 보내는것
+		,"timeView=outTimeView" // 4.OutDs : S->F jsp(SELECT) 받는것(넥사크로에있는것=이클립스에있는것)
+		,"" // 5.InVar : F->S(var) 파라미터 보내야할 때, 몽땅불러올 땐 필요없음
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);		
+};
+
+// 결과 체크 콜백 함수
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{	
+	if(id=="tr_select") // 위에 아이디와 맞춰주기
+	{
+		if(nErrorCode < 0) // 실패 나오면 -1
+		{
+			this.alert("출퇴근 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("출퇴근 조회 성공");
+	}	
+}]]></Script>
+    <Objects>
+      <Dataset id="timeView" onload="timeView_onload">
+        <ColumnInfo>
+          <Column id="timeNo" type="INT" size="256"/>
+          <Column id="emplId" type="STRING" size="256"/>
+          <Column id="timeDate" type="DATE" size="256"/>
+          <Column id="timeStart" type="DATE" size="256"/>
+          <Column id="timeEnd" type="DATE" size="256"/>
+          <Column id="timeState" type="STRING" size="20"/>
+          <Column id="timeContent" type="STRING" size="1000"/>
+          <Column id="timeAccrue" type="STRING" size="50"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
   </Form>
 </FDL>
