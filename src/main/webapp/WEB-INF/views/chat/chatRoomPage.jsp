@@ -39,7 +39,7 @@
 				     	<c:set var="count" value="${count+1}" />
 					    <!-- 채팅방 div  -->
 					    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
-					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" onclick="chatWindow(${count});">
+					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" onclick="chatWindow(${count}, ${chat.chatroomNo });">
 					    	<!-- 사진 추가할 거면 추가하기 -->
 <!-- 						    <div class="mr-20 ml-20" style="width:30px;"> -->
 <!-- 				      		    <button class="btn--profile" type="button"> -->
@@ -93,8 +93,8 @@
     
     <script>
 	  	//채팅창 열기
-		function chatWindow(count){ //원래는 roomId
-			window.open('/chat.hirp','chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
+		function chatWindow(count, chatroomNo){ //원래는 roomId
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
 		//채팅 목록에서 검색 (ajax)
 		function chSearch(){

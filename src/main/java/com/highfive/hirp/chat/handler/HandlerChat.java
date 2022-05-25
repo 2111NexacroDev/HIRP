@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class HandlerChat extends TextWebSocketHandler {
 
-	// (<"bang_id", 방ID>, <"session", 세션>) - (<"bang_id", 방ID>, <"session", 세션>) - (<"bang_id", 방ID>, <"session", 세션>) 형태 
+	// (<"chatroomNo", 방ID>, <"session", 세션>) - (<"chatroomNo", 방ID>, <"session", 세션>) - (<"chatroomNo", 방ID>, <"session", 세션>) 형태 
 		private List<Map<String, Object>> sessionList = new ArrayList<Map<String, Object>>();
 		
 		// 클라이언트가 서버로 메세지 전송 처리
@@ -40,19 +40,19 @@ public class HandlerChat extends TextWebSocketHandler {
 			case "CMD_ENTER":
 				// 세션 리스트에 저장
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("bang_id", mapReceive.get("bang_id"));
+				map.put("chatroomNo", mapReceive.get("chatroomNo"));
 				map.put("session", session);
 				sessionList.add(map);
 				
 				// 같은 채팅방에 입장 메세지 전송
 				for (int i = 0; i < sessionList.size(); i++) {
 					Map<String, Object> mapSessionList = sessionList.get(i);
-					String bang_id = (String) mapSessionList.get("bang_id");
+					String chatroomNo = (String) mapSessionList.get("chatroomNo");
 					WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 					
-					if(bang_id.equals(mapReceive.get("bang_id"))) {
+					if(chatroomNo.equals(mapReceive.get("chatroomNo"))) {
 						Map<String, String> mapToSend = new HashMap<String, String>();
-						mapToSend.put("bang_id", bang_id);
+						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_ENTER");
 						mapToSend.put("msg", emplId +  "님이 입장 했습니다.");
 						
@@ -67,12 +67,12 @@ public class HandlerChat extends TextWebSocketHandler {
 				// 같은 채팅방에 메세지 전송
 				for (int i = 0; i < sessionList.size(); i++) {
 					Map<String, Object> mapSessionList = sessionList.get(i);
-					String bang_id = (String) mapSessionList.get("bang_id");
+					String chatroomNo = (String) mapSessionList.get("chatroomNo");
 					WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 
-					if (bang_id.equals(mapReceive.get("bang_id"))) {
+					if (chatroomNo.equals(mapReceive.get("chatroomNo"))) {
 						Map<String, String> mapToSend = new HashMap<String, String>();
-						mapToSend.put("bang_id", bang_id);
+						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_MSG_SEND");
 						mapToSend.put("msg", emplId + " : " + mapReceive.get("msg"));
 
@@ -91,7 +91,7 @@ public class HandlerChat extends TextWebSocketHandler {
 			super.afterConnectionClosed(session, status);
 	        
 			ObjectMapper objectMapper = new ObjectMapper();
-			String now_bang_id = "";
+			String now_chatroomNo = "";
 			
 			//로그인할 때 저장했던 세션값 가져옴.
 			Map<String, Object> loginSession = session.getAttributes();
@@ -101,11 +101,11 @@ public class HandlerChat extends TextWebSocketHandler {
 			// 사용자 세션을 리스트에서 제거
 			for (int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> map = sessionList.get(i);
-				String bang_id = (String) map.get("bang_id");
+				String chatroomNo = (String) map.get("chatroomNo");
 				WebSocketSession sess = (WebSocketSession) map.get("session");
 				
 				if(session.equals(sess)) {
-					now_bang_id = bang_id;
+					now_chatroomNo = chatroomNo;
 					sessionList.remove(map);
 					break;
 				}	
@@ -114,12 +114,12 @@ public class HandlerChat extends TextWebSocketHandler {
 			// 같은 채팅방에 퇴장 메세지 전송 
 			for (int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
-				String bang_id = (String) mapSessionList.get("bang_id");
+				String chatroomNo = (String) mapSessionList.get("chatroomNo");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 
-				if (bang_id.equals(now_bang_id)) {
+				if (chatroomNo.equals(now_chatroomNo)) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
-					mapToSend.put("bang_id", bang_id);
+					mapToSend.put("chatroomNo", chatroomNo);
 					mapToSend.put("cmd", "CMD_EXIT");
 					mapToSend.put("msg", emplId + "님이 퇴장 했습니다.");
 

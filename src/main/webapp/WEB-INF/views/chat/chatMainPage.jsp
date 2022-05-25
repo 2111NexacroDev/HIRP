@@ -80,7 +80,7 @@
     <script>
     	//채팅창 열기
 		function chatWindow(count){ //원래는 roomId
-			window.open('/chat.hirp?bang_id='+count,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
+			window.open('/chat.hirp?chatroomNo='+count,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
     	
 		//직원 목록에서 검색 (ajax)

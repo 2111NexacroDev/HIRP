@@ -14,11 +14,11 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${param.bang_id}', 'CMD_MSG_SEND', $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${param.bang_id}', 'CMD_ENTER', $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -54,9 +54,9 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(bang_id, cmd, msg) {
+			_sendMessage: function(chatroomNo, cmd, msg) {
 				var msgData = {
-						bang_id : bang_id,
+						chatroomNo : chatroomNo,
 						cmd : cmd,
 						msg : msg
 				};

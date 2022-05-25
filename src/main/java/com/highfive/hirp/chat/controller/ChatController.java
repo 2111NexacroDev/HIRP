@@ -43,7 +43,7 @@ public class ChatController {
 	public String view_chat(Model model
 			, HttpServletRequest request
 			, HttpServletResponse response
-			, @RequestParam("bang_id") String roomId) throws Exception {
+			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
 
 		return "chat/chatTestPage";
 	}
