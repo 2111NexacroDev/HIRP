@@ -70,10 +70,8 @@ public class ChatController {
 		return mv;
 	}
 	
-	//직원 이름으로 검색
-	public ModelAndView chatEmplSearch(ModelAndView mv) {
-		return mv;
-	}
+	//직원 이름으로 검색 -> adminempl쪽에 공통으로 만듬.
+	
 	//채팅방 추가 페이지
 	public ModelAndView insertChattingRoomPage(ModelAndView mv
 			,@ModelAttribute Employee employee) {
@@ -113,6 +111,15 @@ public class ChatController {
 		
 		try {
 			List<ChatRoom> chatroomList = cService.selectMyChattingRoom(emplId);
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			
+			if(!emplList.isEmpty()){
+				mv.addObject("emplList", emplList);
+			} else {
+				mv.addObject("msg", "직원 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
 			mv.addObject("chatroomList", chatroomList);
 			mv.setViewName("chat/chatRoomPage");
 			//list null체크 jsp에서 해주기 (채팅 목록 없어도 조회는 되어야 하니까)

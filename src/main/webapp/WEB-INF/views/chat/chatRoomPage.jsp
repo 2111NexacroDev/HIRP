@@ -28,11 +28,11 @@
 				<fmt:formatDate value="${yesterday}" pattern="yyyy-MM-dd" var="yesterday"/>
 				
 			    <!-- 검색창 -->
-			    <div class="row mt-20 t-c basic-border-bottom padding-bottom">
+			    <div class="row mt-20 t-c padding-bottom">
 				    <input type="text" name="chatroomSearchKeyword" style="width:70%" placeholder="채팅방 또는 참여자 이름 검색">
 					<button class="point" type="button" onclick="chSearch();">검색</button>
 			    </div>
-			    <!-- 직원 목록 -->
+			    <!-- 채팅 목록 -->
 			    <c:set var="count" value="0" />
 			    <div id="chatList">
 			    	<c:forEach items="${chatroomList }" var="chat">
@@ -86,45 +86,7 @@
 			    <!-- 직원 목록 div 끝 -->
 			    <!-- 채팅방 추가 floating 버튼 -->
 				<button type="button" class="point chat-floating_Btn" onclick="openModal(this);"><i class="fa-solid fa-plus"></i></button>
-				<section class="section--modal modal--chat">
-					<div class="section--modal__conts" style="border: none">
-						<button class="btn--close" type="button"></button>
-						<h3>직원 선택</h3>
-						<div class="mb-20">
-							<ul>
-								<li>
-									<input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
-									<button class="point" type="button" onclick="emplSearch();">검색</button>
-								</li>
-							</ul>
-							<table class="table--basic mt-20" id="emplTable">
-								<thead>
-									<tr>
-										<th>부서</th>
-										<th>직급</th>
-										<th>이름</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${emplList }" var="empl">
-										<tr onclick="emplTrClick(this);">
-											<td>${empl.deptName}</td>
-											<td>${empl.positionName}</td>
-											<td>${empl.emplName}</td>
-										</tr>
-										<input type="hidden" name="deptCode" value="${empl.deptCode }">
-										<input type="hidden" name="positionCode" value="${empl.positionCode }">
-										<input type="hidden" name="emplId" value="${empl.emplId }">
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-						<div class="btns-wrap mt-20 t-r">
-<!-- 													<button class="point" type="button">확인</button> -->
-							<button class="finished closeWindow" type="button">닫기</button>
-						</div>
-					</div>
-				</section>
+
         	</div> 
         </article>
     </div>
