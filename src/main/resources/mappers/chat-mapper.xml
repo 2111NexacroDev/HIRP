@@ -20,6 +20,14 @@
       	</association>  
 	</resultMap>
 	
+	<resultMap type="Message" id="messageResultMap">
+		<id property="msgNo" column="MSG_NO"/>
+		<result property="chatroomNo" column="CHATROOM_NO"/>
+		<result property="msgSendid" column="MSG_SENDID"/>
+		<result property="msgContents" column="MSG_CONTENTS"/>
+		<result property="msgSenddate" column="MSG_SENDDATE"/>
+	</resultMap>
+	
 	<!-- 채팅방 목록 출력 -->
 	<!-- 내가 초대 되어있는 채팅방이고, 
 	최신 메세지순으로 정렬(메세지 다음으로는 채팅방 만든 순) -->
@@ -70,4 +78,8 @@
 		    AND (CHATROOM_NAME LIKE '%' || #{chatroomSearchKeyword} || '%' OR JOINCHAT_NAME_LIST LIKE '%' || #{chatroomSearchKeyword} || '%')
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
 	</select>
+	<insert id="insertMessage">
+		INSERT INTO MESSAGE_TBL
+		VALUES(MESSAGE_SEQ.NEXTVAL, #{chatroomNo}, #{msgSendid}, #{msgContents}, DEFAULT)
+	</insert>
 </mapper>

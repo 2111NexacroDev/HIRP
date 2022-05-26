@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -12,10 +13,15 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.service.ChatService;
 
 @Component
 public class HandlerChat extends TextWebSocketHandler {
 
+	@Autowired
+	private ChatService cService;
+	
 	// (<"chatroomNo", 방ID>, <"session", 세션>) - (<"chatroomNo", 방ID>, <"session", 세션>) - (<"chatroomNo", 방ID>, <"session", 세션>) 형태 
 		private List<Map<String, Object>> sessionList = new ArrayList<Map<String, Object>>();
 		
@@ -71,17 +77,29 @@ public class HandlerChat extends TextWebSocketHandler {
 					String chatroomNo = (String) mapSessionList.get("chatroomNo");
 					WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 
+					//채팅방에 메세지 출력
 					if (chatroomNo.equals(mapReceive.get("chatroomNo"))) {
 						Map<String, String> mapToSend = new HashMap<String, String>();
 						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_MSG_SEND");
 						mapToSend.put("emplId", emplId);
 						mapToSend.put("msg", mapReceive.get("msg"));
-
 						String jsonStr = objectMapper.writeValueAsString(mapToSend);
 						sess.sendMessage(new TextMessage(jsonStr));
 					}
+					
 				}
+				
+				//메세지 db에 저장
+				Message messageVo = new Message();
+				messageVo.setChatroomNo(Integer.parseInt(mapReceive.get("chatroomNo")));
+				messageVo.setMsgSendid(emplId);
+				messageVo.setMsgContents(mapReceive.get("msg"));
+				int result = cService.insertMessage(messageVo);
+				if(result > 0 ) { //DB에 추가 성공
+					System.out.println(emplId + " : "+ mapReceive.get("msg")+"메세지 추가");
+				}
+				
 				break;
 			}
 		}
