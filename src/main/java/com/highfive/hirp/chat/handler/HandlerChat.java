@@ -32,7 +32,8 @@ public class HandlerChat extends TextWebSocketHandler {
 			//로그인할 때 저장했던 세션값 가져옴.
 			Map<String, Object> loginSession = session.getAttributes();
 			String emplId = (String)loginSession.get("emplId");
-			System.out.println("로그인한 아이디 : " + emplId);
+			String emplName = (String)loginSession.get("emplName");
+			System.out.println("로그인한 아이디 : " + emplId + ", 로그인한 이름 : " + emplName);
 			
 			super.handleTextMessage(session, message);
 	        
@@ -56,11 +57,13 @@ public class HandlerChat extends TextWebSocketHandler {
 					String chatroomNo = (String) mapSessionList.get("chatroomNo");
 					WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 					
-					if(chatroomNo.equals(mapReceive.get("chatroomNo"))) {
+					if(chatroomNo.equals(mapReceive.get("chatroomNo"))) { //채팅방 번호가 같을 때 
+						
 						Map<String, String> mapToSend = new HashMap<String, String>();
 						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_ENTER");
 						mapToSend.put("emplId", emplId);
+						mapToSend.put("emplName", emplName);
 						mapToSend.put("msg", "님이 입장 했습니다.");
 						
 						String jsonStr = objectMapper.writeValueAsString(mapToSend);
@@ -83,6 +86,7 @@ public class HandlerChat extends TextWebSocketHandler {
 						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_MSG_SEND");
 						mapToSend.put("emplId", emplId);
+						mapToSend.put("emplName", emplName);
 						mapToSend.put("msg", mapReceive.get("msg"));
 						String jsonStr = objectMapper.writeValueAsString(mapToSend);
 						sess.sendMessage(new TextMessage(jsonStr));
@@ -116,7 +120,8 @@ public class HandlerChat extends TextWebSocketHandler {
 			//로그인할 때 저장했던 세션값 가져옴.
 			Map<String, Object> loginSession = session.getAttributes();
 			String emplId = (String)loginSession.get("emplId");
-			System.out.println("로그인한 아이디 : " + emplId);
+			String emplName = (String)loginSession.get("emplName");
+			System.out.println("로그인한 아이디 : " + emplId + ", 로그인한 이름 : " + emplName);
 			
 			// 사용자 세션을 리스트에서 제거
 			for (int i = 0; i < sessionList.size(); i++) {
@@ -142,6 +147,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					mapToSend.put("chatroomNo", chatroomNo);
 					mapToSend.put("cmd", "CMD_EXIT");
 					mapToSend.put("emplId", emplId);
+					mapToSend.put("emplName", emplName);
 					mapToSend.put("msg", "님이 퇴장 했습니다.");
 
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);

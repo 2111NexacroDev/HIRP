@@ -28,6 +28,7 @@ import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
+import com.highfive.hirp.survey.domain.SurveySub;
 
 @Controller
 public class ChatController {
@@ -39,17 +40,32 @@ public class ChatController {
 	private EmployeeAdminService eaService;
 	
 	// 채팅방 입장 테스트
-	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
+	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
 	public String view_chat(Model model
 			, HttpServletRequest request
 			, HttpServletResponse response
 			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
 
+		model.addAttribute("chatroomNo", chatroomNo);
 		return "chat/chatTestPage";
+	}
+	
+	//채팅 내용 조회
+	@ResponseBody
+	@RequestMapping(value="/chat/printMessage.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String proceedSurveySubList(
+			@RequestParam("chatroomNo") int chatroomNo){
+		//응답자 리스트 보기 (응답여부까지) -> 팝업창
+		List<Message> msgList = cService.selectMessageByRoomNo(chatroomNo);
+		if(!msgList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(msgList);
+		}
+		return "";
 	}
 		
 	//채팅 메인페이지 (직원 목록)
-	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
+	@RequestMapping(value="/chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv
 			, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -109,7 +125,7 @@ public class ChatController {
 	}
 	
 	//채팅방 목록 페이지
-	@RequestMapping(value = "chatroomList.hirp", method = RequestMethod.GET)
+	@RequestMapping(value = "/chatroomList.hirp", method = RequestMethod.GET)
 	public ModelAndView chattingRoomList(ModelAndView mv
 			, HttpServletRequest request ) {
 		//내가 참여한 채팅방 목록 가져오기
@@ -177,6 +193,7 @@ public class ChatController {
 		//조인해서 같이 가져와야 할 듯 (chatList 도메인 만들었음)
 		return mv;
 	}
+	
 	//채팅 전송 (첨부파일 가능)
 	public ModelAndView sendChat(ModelAndView mv
 			,@ModelAttribute Message Message

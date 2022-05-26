@@ -26,6 +26,8 @@
 		<result property="msgSendid" column="MSG_SENDID"/>
 		<result property="msgContents" column="MSG_CONTENTS"/>
 		<result property="msgSenddate" column="MSG_SENDDATE"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
 	</resultMap>
 	
 	<!-- 채팅방 목록 출력 -->
@@ -77,6 +79,16 @@
 		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
 		    AND (CHATROOM_NAME LIKE '%' || #{chatroomSearchKeyword} || '%' OR JOINCHAT_NAME_LIST LIKE '%' || #{chatroomSearchKeyword} || '%')
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
+	</select>
+	<!-- 채팅방 번호로 채팅 내역 조회 -->
+	<select id="selectMessageByRoomNo" resultMap="messageResultMap">
+		SELECT MSG_NO, MSG_SENDID, MSG_CONTENTS, MSG_SENDDATE, 
+		EMPL_NAME, DEPT_NAME
+		FROM MESSAGE_TBL
+		JOIN EMPL_TBL ON MSG_SENDID = EMPL_ID
+		JOIN DEPT_TBL USING(DEPT_CODE) 
+		WHERE CHATROOM_NO = #{chatroomNo}
+		ORDER BY MSG_NO ASC
 	</select>
 	<insert id="insertMessage">
 		INSERT INTO MESSAGE_TBL

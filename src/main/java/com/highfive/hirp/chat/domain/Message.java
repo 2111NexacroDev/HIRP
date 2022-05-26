@@ -8,6 +8,10 @@ public class Message {
 	private String msgSendid;
 	private String msgContents;
 	private String msgSenddate;
+	//empl
+	private String emplName;
+	private String deptName;
+	private String positionName;
 	
 	public Message() {}
 
@@ -60,11 +64,37 @@ public class Message {
 		this.msgSenddate = msgSenddate;
 	}
 
+	public String getEmplName() {
+		return emplName;
+	}
+	
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+	
+	public String getDeptName() {
+		return deptName;
+	}
+	
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	
+	public String getPositionName() {
+		return positionName;
+	}
+	
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Message [msgNo=" + msgNo + ", chatroomNo=" + chatroomNo + ", msgSendid=" + msgSendid + ", msgContents="
 				+ msgContents + ", msgSenddate=" + msgSenddate + "]";
 	}
-	
+
+
+
 	
 }
