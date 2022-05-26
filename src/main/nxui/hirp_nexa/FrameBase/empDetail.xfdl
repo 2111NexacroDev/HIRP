@@ -6,7 +6,7 @@
         <Div id="Div00" taborder="1" left="0" top="0" width="200" height="100.00%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
         <Static id="Static00_00" taborder="0" text="사원 상세 정보 조회" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
         <Static id="Static00" taborder="2" text="사원관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl_top" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable no_bg" oncellclick="Grid00_oncellclick">
+        <Grid id="Grid00" taborder="3" left="220" top="81" height="189" binddataset="ds_empl" autofittype="col" right="20" cellsizingtype="none" autosizingtype="none" cssclass="detailTable no_bg" oncellclick="Grid00_oncellclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -53,7 +53,7 @@
             <Tabpage id="Tabpage1" text="기본">
               <Layouts>
                 <Layout>
-                  <Grid id="Grid00" taborder="0" left="20" top="12" height="128" right="20" binddataset="ds_empl" cssclass="detailTable no_bg" autofittype="col" oncellclick="Tab00_Tabpage1_Grid00_oncellclick">
+                  <Grid id="Grid00" taborder="0" left="20" top="12" height="128" right="20" binddataset="ds_empl" cssclass="detailTable no_bg" autofittype="col">
                     <Formats>
                       <Format id="default">
                         <Columns>
@@ -734,30 +734,7 @@
           </Row>
         </Rows>
       </Dataset>
-      <Dataset id="ds_empl_top">
-        <ColumnInfo>
-          <Column id="emplId" type="STRING" size="20"/>
-          <Column id="deptCode" type="STRING" size="20"/>
-          <Column id="positionCode" type="STRING" size="20"/>
-          <Column id="emplName" type="STRING" size="20"/>
-          <Column id="startDate" type="DATE" size="256"/>
-          <Column id="email" type="STRING" size="50"/>
-          <Column id="directNo" type="STRING" size="20"/>
-          <Column id="phoneNo" type="STRING" size="20"/>
-          <Column id="recruitCategory" type="STRING" size="20"/>
-          <Column id="salaryCategory" type="STRING" size="20"/>
-          <Column id="referrer" type="STRING" size="20"/>
-          <Column id="isStatus" type="STRING" size="20"/>
-          <Column id="birthday" type="DATE" size="256"/>
-          <Column id="gender" type="STRING" size="10"/>
-          <Column id="isMarriage" type="STRING" size="1"/>
-          <Column id="isDisability" type="STRING" size="1"/>
-          <Column id="isVeterans" type="STRING" size="1"/>
-          <Column id="endDate" type="DATE" size="256"/>
-          <Column id="endReason" type="STRING" size="20"/>
-          <Column id="emplProfile" type="STRING" size="1000"/>
-        </ColumnInfo>
-      </Dataset>
+      <Dataset id="ds_empl_top"/>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {	
@@ -765,7 +742,7 @@
  		"tr_empl_select"// 1.ID
  		,"HirpURL::admin/empDetail.hirp"// 2.URL		
  		,"" // 3.InDs : F->S jsp(I,U,D)
- 		,"ds_empl=out_empl ds_empl_top=out_empl_top ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
+ 		,"ds_empl=out_empl ds_empl_top=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
  		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
  		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
@@ -844,15 +821,6 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			return;
 		}
 		this.alert("삭제 성공");
-	} 
-	else if(id=="tr_empl_modify_Info")
-	{
-		if(nErrorCode < 0)
-		{
-			this.alert("수정 실패! 다시 시도해주세요.");
-			return;
-		}
-		this.alert("수정 성공");
 	}
 }
 
@@ -1026,7 +994,7 @@ this.Tab00_Tabpage1_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.Cli
 	this.transaction(
  		"tr_empl_modify_Info"// 1.ID
  		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
- 		,"in_empl=ds_empl in_empl_top=ds_empl_top:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"in_empl=ds_empl:U in_empl_top=ds_empl:U" // 3.InDs : F->S jsp(I,U,D)
  		,"" // 4.OutDs : S->F jsp(SELECT)
  		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
  		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
@@ -1096,11 +1064,6 @@ this.Tab00_Tabpage6_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.Cli
  		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
  		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
  	);		
-};
-
-this.Tab00_Tabpage1_Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
-{
-	trace(this.ds_empl.rowposition);
 };
 ]]></Script>
   </Form>

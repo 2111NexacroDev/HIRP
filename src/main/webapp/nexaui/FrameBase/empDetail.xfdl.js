@@ -82,6 +82,11 @@
             obj = new Dataset("ds_salary", this);
             obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"value\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">연봉</Col><Col id=\"value\">연봉</Col></Row><Row><Col id=\"code\">월급</Col><Col id=\"value\">월급</Col></Row><Row><Col id=\"code\">일급</Col><Col id=\"value\">일급</Col></Row><Row><Col id=\"code\">시급</Col><Col id=\"value\">시급</Col></Row></Rows>");
             this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("ds_empl_top", this);
+            obj._setContents("<ColumnInfo><Column id=\"emplId\" type=\"STRING\" size=\"20\"/><Column id=\"deptCode\" type=\"STRING\" size=\"20\"/><Column id=\"positionCode\" type=\"STRING\" size=\"20\"/><Column id=\"emplName\" type=\"STRING\" size=\"20\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"50\"/><Column id=\"directNo\" type=\"STRING\" size=\"20\"/><Column id=\"phoneNo\" type=\"STRING\" size=\"20\"/><Column id=\"recruitCategory\" type=\"STRING\" size=\"20\"/><Column id=\"salaryCategory\" type=\"STRING\" size=\"20\"/><Column id=\"referrer\" type=\"STRING\" size=\"20\"/><Column id=\"isStatus\" type=\"STRING\" size=\"20\"/><Column id=\"birthday\" type=\"DATE\" size=\"256\"/><Column id=\"gender\" type=\"STRING\" size=\"10\"/><Column id=\"isMarriage\" type=\"STRING\" size=\"1\"/><Column id=\"isDisability\" type=\"STRING\" size=\"1\"/><Column id=\"isVeterans\" type=\"STRING\" size=\"1\"/><Column id=\"endDate\" type=\"DATE\" size=\"256\"/><Column id=\"endReason\" type=\"STRING\" size=\"20\"/><Column id=\"emplProfile\" type=\"STRING\" size=\"1000\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
             
             // UI Components Initialize
             obj = new Div("Div00","0","0","200","100.00%",null,null,null,null,null,null,this);
@@ -110,7 +115,7 @@
 
             obj = new Grid("Grid00","220","81",null,"189","20",null,null,null,null,null,this);
             obj.set_taborder("3");
-            obj.set_binddataset("ds_empl");
+            obj.set_binddataset("ds_empl_top");
             obj.set_autofittype("col");
             obj.set_cellsizingtype("none");
             obj.set_autosizingtype("none");
@@ -348,7 +353,7 @@
          		"tr_empl_select"// 1.ID
          		,"HirpURL::admin/empDetail.hirp"// 2.URL
          		,"" // 3.InDs : F->S jsp(I,U,D)
-         		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
+         		,"ds_empl=out_empl ds_empl_top=out_empl_top ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
         	);
@@ -427,6 +432,15 @@
         			return;
         		}
         		this.alert("삭제 성공");
+        	}
+        	else if(id=="tr_empl_modify_Info")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("수정 실패");
+        			return;
+        		}
+        		this.alert("수정 성공");
         	}
         }
 
@@ -600,7 +614,7 @@
         	this.transaction(
          		"tr_empl_modify_Info"// 1.ID
          		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
-         		,"in_empl=ds_empl:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_empl=ds_empl in_empl_top=ds_empl_top:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
