@@ -28,6 +28,7 @@
 		<result property="msgSenddate" column="MSG_SENDDATE"/>
 		<result property="emplName" column="EMPL_NAME"/>
 		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 	</resultMap>
 	
 	<!-- 채팅방 목록 출력 -->
@@ -83,10 +84,11 @@
 	<!-- 채팅방 번호로 채팅 내역 조회 -->
 	<select id="selectMessageByRoomNo" resultMap="messageResultMap">
 		SELECT MSG_NO, MSG_SENDID, MSG_CONTENTS, MSG_SENDDATE, 
-		EMPL_NAME, DEPT_NAME
+		EMPL_NAME, DEPT_NAME, POSITION_NAME
 		FROM MESSAGE_TBL
 		JOIN EMPL_TBL ON MSG_SENDID = EMPL_ID
 		JOIN DEPT_TBL USING(DEPT_CODE) 
+		JOIN POSITION_TBL USING(POSITION_CODE)
 		WHERE CHATROOM_NO = #{chatroomNo}
 		ORDER BY MSG_NO ASC
 	</select>

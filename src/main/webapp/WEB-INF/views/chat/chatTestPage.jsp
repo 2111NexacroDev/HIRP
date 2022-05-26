@@ -21,27 +21,27 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", "${sessionScope.emplName}", $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", "${sessionScope.emplName}",  "${sessionScope.deptName}", "${sessionScope.positionName}", $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", "${sessionScope.emplName}", $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", "${sessionScope.emplName}", "${sessionScope.deptName}", "${sessionScope.positionName}", $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
 
 				// 정의된 CMD 코드에 따라서 분기 처리
 				if(msgData.cmd == 'CMD_MSG_SEND') {					
-					$('#divChatData').append('<div style="text-align:right;">' + msgData.emplName + '</div>');
+					$('#divChatData').append('<div style="text-align:right;">' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + '</div>');
 					$('#divChatData').append('<div style="text-align:right;">' + msgData.msg + '</div>');
 				}
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
-					$('#divChatData').append('<div>' + msgData.emplName + msgData.msg + '</div>');
+					$('#divChatData').append('<div>' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + msgData.msg + '</div>');
 				}
 				// 퇴장
 				else if(msgData.cmd == 'CMD_EXIT') {					
-					$('#divChatData').append('<div>' + msgData.emplName + msgData.msg + '</div>');
+					$('#divChatData').append('<div>' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + msgData.msg + '</div>');
 				}
 			},
 			closeMessage: function(str) {
@@ -62,12 +62,14 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(chatroomNo, cmd, emplId, emplName, msg) {
+			_sendMessage: function(chatroomNo, cmd, emplId, emplName, deptName, positionName, msg) {
 				var msgData = {
 						chatroomNo : chatroomNo,
 						cmd : cmd,
 						emplId : emplId,
 						emplName : emplName,
+						deptName : deptName,
+						positionName : positionName,
 						msg : msg
 				};
 				var jsonData = JSON.stringify(msgData);
@@ -100,10 +102,10 @@
 	    					console.log("${sessionScope.emplId}");
 	    					console.log(msgList[i].msgSendid);
 	    					console.log(msgList[i].msgSendid == "${sessionScope.emplId}");
-		    				msgEmplId = "<div style='text-align:right;'>"+ msgList[i].emplName + "</div>";
+		    				msgEmplId = "<div style='text-align:right;'>"+ msgList[i].deptName + " "+ msgList[i].emplName + " " + msgList[i].positionName + "</div>";
 		    				msgContents = "<div style='text-align:right;'>"+ msgList[i].msgContents + "</div>";
 	    				} else {
-	    					msgEmplId = "<div>"+ msgList[i].emplName + "</div>";
+	    					msgEmplId = "<div>"+ msgList[i].deptName + " " + msgList[i].emplName + " " + msgList[i].positionName +"</div>";
 		    				msgContents = "<div>"+ msgList[i].msgContents + "</div>";
 	    				}
 						$divChatData.append(msgEmplId);
