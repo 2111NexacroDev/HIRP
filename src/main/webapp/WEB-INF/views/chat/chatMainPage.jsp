@@ -36,7 +36,7 @@
 			    <!-- 검색창 -->
 			    <div class="row mt-20 t-c  padding-bottom-10">
 				    <input type="text" name="emplSearchKeyword" style="width:70%" placeholder="부서명 또는 사원명 검색">
-					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch();}" onclick="emplSearch();">검색</button>
+					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch();}" onclick="emplSearch(this);">검색</button>
 			    </div>
 			    <!-- 직원 목록 -->
 			    <c:set var="count" value="0" />
@@ -70,19 +70,17 @@
 			    <!-- 채팅방 추가 floating 버튼 -->
 				<button type="button" class="point chat-floating_Btn"><i class="fa-solid fa-plus"></i></button>
         	</div> 
-
+			<!-- 채팅방 추가 모달창 -->
 			<section id="chatEmplListModal" class="modal--chatSelect shadow">
 				<h3>대화상대 선택 <span>3</span></h3>
 				<!-- 검색창 -->
 				<div class="modal--chatSelect__srch row mt-10 t-c padding-bottom-10">
 					<input type="text" name="emplSearchKeyword" placeholder="부서명 또는 사원명 검색">
-					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch();}" onclick="emplSearch();">검색</button>
+					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch(this);}" onclick="emplSearch(this);">검색</button>
 				</div>
 				<div class="modal--chatSelect__emplList">
 				    <c:forEach items="${emplList }" var="empl">
 				    	<c:if test="${empl.emplId ne sessionScope.emplId }"> <!-- 내가 아닐 때 -->
-					     	<c:set var="count" value="${count+1}" />
-					     	<input type="hidden" value=${count } name="roomId">
 						    <!-- 직원명 div  -->
 						    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
 						    <div class="chat-row mt-10  padding-bottom-10">
@@ -121,6 +119,7 @@
 					<button class="cancel" type="button">취소</button>
 				</div>
 			</section>
+			<!-- 채팅방 추가 모달창 끝-->
         </article>
     </div>
     <script>
@@ -130,14 +129,27 @@
 		}
     	
 		//직원 목록에서 검색 (ajax)
-		function emplSearch(){
-			var emplSearchKeyword = $("[name='emplSearchKeyword']").val(); //검색창에 입력한 값
-			console.log(emplSearchKeyword);
+		function emplSearch(obj){ //버튼 클릭 시 동작
+			console.log(obj);
+			console.log($(obj).prev()); //검색창 input
+			console.log($(obj).parent().next()); //id empllist 또는 모달창 empllist div
+			console.log($(obj).parent().next()[0]); //div의 아이디값 가져오기
+// 			console.log($("#emplList"));
+			var searchVal = $(obj).prev().val(); //검색한 내용
+			var $emplListDiv = $(obj).parent().next(); //id empllist 또는 모달창 empllist div
+			var emplDivId = $emplListDiv[0].id; //div의 아이디값 가져오기
+			console.log(searchVal);
+			console.log(emplDivId);
+			if(emplDivId == 'emplList'){
+				console.log("모달 아님");
+			} else {
+				console.log("모달임");
+			}
 			
 			$.ajax({
 				url:"/searchEmplList.hirp",
 				type:"post",
-				data:{"emplSearchKeyword" : emplSearchKeyword},
+				data:{"emplSearchKeyword" : searchVal},
 				success: function(eList){
 					console.log("성공");
 	    			console.log(eList);
@@ -145,8 +157,8 @@
 	    			var myId = "${sessionScope.emplId}";
 	    			console.log("아이디 : " + myId);
 	    			
-	    			var $emplDiv = $("#emplList");
-	    			$emplDiv.html("");//기존 내용 있으면 비우기
+// 	    			var $emplDiv = $("#emplList");
+	    			$emplListDiv.html("");//기존 내용 있으면 비우기
 	    			
 	    			for(var i=0; i<count; i++){
 	    				if(eList[i].emplId != myId){ //내가 아닌 데이터만 가져오기
@@ -161,21 +173,38 @@
 								emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
 							}
 							
-							
 							emplOneDiv +=	"</button>"
-											+    "</div>"
-											+    "<div class='ml-20'>"
-											    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
+									+    "</div>";
+									
+							if(emplDivId == 'emplList'){
+								emplOneDiv +=	"<div class='ml-20'>"
+												    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
 											+    "</div>"
 							            +	"</div>";
-		    				
-							$emplDiv.append(countUp);
-							$emplDiv.append(emplOneDiv);
+							} else {
+								emplOneDiv += "<div class='modal--chatSelect__empList__checkbox-wrap pos-rel ml-20'>"
+										    	+ "<label for=" + eList[i].emplId + ">"
+										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
+										    	+ "</label>"
+												+ "<input type='checkbox' id="+eList[i].emplId+">"
+										    + "</div>"
+										+	"</div>";
+							}
+							
+							$emplListDiv.append(countUp);
+							$emplListDiv.append(emplOneDiv);
+							
 	    				}
 					}
+	    			if(emplDivId == 'emplList'){
+	    				console.log("모달 아님");
+	    			} else {
+	    				console.log("모달임");
+	    			}
 	    		},
 	    		error: function(){
 	    			console.log("실패");
+// 	    			console.log(searchVal);
 // 					var $tableBody = $("#emplTable tbody");
 // 	    			$tableBody.html("");//기존 내용 있으면 비우기
 // 	    			var $tr = $("<tr>");

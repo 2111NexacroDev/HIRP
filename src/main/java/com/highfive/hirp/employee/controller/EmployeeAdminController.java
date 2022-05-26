@@ -363,7 +363,7 @@ public class EmployeeAdminController {
 
 		List<Employee> emplList = eAService.selectSearchEmplList(emplSearchKeyword);
 		model.addAttribute("emplList", emplList);
-//		System.out.println(emplList);
+		System.out.println("직원 검색 결과 " + emplList);
 		if(!emplList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			return gson.toJson(emplList);
