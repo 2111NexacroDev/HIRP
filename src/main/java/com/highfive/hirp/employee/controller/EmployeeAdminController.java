@@ -1,5 +1,6 @@
 package com.highfive.hirp.employee.controller;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.List;
@@ -153,66 +154,62 @@ public class EmployeeAdminController {
 	}
 	
 	// 사원 정보 수정
-	@RequestMapping(value="/admin/empChangeInfo.hirp", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/empChange{param}.hirp", method=RequestMethod.POST)
 	public NexacroResult empUpdate(
-			 @ParamDataSet(name="in_empl") 		DataSet in_empl
-			,@ParamDataSet(name="in_jobRole") 	DataSet in_jobRole
-			,@ParamDataSet(name="in_career") 	DataSet in_career
-			,@ParamDataSet(name="in_lang") 		DataSet in_lang
-			,@ParamDataSet(name="in_cert") 		DataSet in_cert
-			,@ParamDataSet(name="in_military") 	DataSet in_military
-//			,@ParamVariable(name="jobRoleNo") 	int 	jobRoleNo
-//			,@ParamVariable(name="certNo") 		int 	certNo
-//			,@ParamVariable(name="careerNo") 	int 	careerNo
-//			,@ParamVariable(name="langNo") 		int 	langNo
-//			,@ParamVariable(name="militaryNo") 	int 	militaryNo
+			 @PathVariable(name="param") String infoCategory
+			,@ParamDataSet(name="in_empl") 		DataSet in_empl
 			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		int 	i;
 		
-		// INSERT, UPDATE
-		// RowType에 따라서 INSERT OR UPDATE
-		int iResult = 0;
-		int uResult = 0;
-//		for(i = 0; i < inEmp.getRowCount(); i++) {
-//			int rowType = inEmp.getRowType(i);
-//			String empl_id 	 = dsGet(inEmp, i, "empl_id");
-//			String full_name = dsGet(inEmp, i, "full_name");
-//			String dept_cd 	 = dsGet(inEmp, i, "dept_cd");
-//			String pos_cd 	 = dsGet(inEmp, i, "pos_cd");
-//			String gender 	 = dsGet(inEmp, i, "gender");
-//			String hire_date = dsGet(inEmp, i, "hire_date");
-//			String married 	 = dsGet(inEmp, i, "married");
-//			int salary 		 = dsGet(inEmp, i, "salary") != "" 
-//									? Integer.parseInt(dsGet(inEmp, i, "salary")) : 0;
-//			String memo 	 = dsGet(inEmp, i, "memo");
-//			Employee employee = new Employee(
-//						empl_id
-//					, 	full_name
-//					, 	dept_cd
-//					, 	pos_cd
-//					, 	gender
-//					, 	hire_date
-//					, 	married
-//					, 	salary
-//					, 	memo);
-//			if( rowType == DataSet.ROW_TYPE_INSERTED) {
-//				iResult += eService.registerEmployee(employee);
-//				//int modifyResult = eAService.modifyEmployeeInfo(employee);
-//			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
-//				String sOrgEmpId = inEmp.getSavedData(i, "empl_id").toString();
-//				employee.setEmpl_id(sOrgEmpId);
-//				uResult += eService.modifyEmployee(employee);
+		if(infoCategory.equals("Info")) {
+			Employee employee = new Employee();
+			String sOrgEmpId = emplId.toString();
+			employee.setEmplId(sOrgEmpId);
+			employee.setBirthday(dsGet(in_empl, 0, "birthday"));
+			int uResult = eAService.modifyEmployeeInfo(employee);
+			if(uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}		
+		} else if(infoCategory.equals("JobRole")) {
+			// INSERT, UPDATE
+			// RowType에 따라서 INSERT OR UPDATE
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+//			for(i = 0; i < in_empl.getRowCount(); i++) {
+//				int rowType = in_empl.getRowType(i);
+//				Employee employee = new Employee();
+//				if( rowType == DataSet.ROW_TYPE_INSERTED) {
+//					iResult += eAService.registerEmployee(employee);
+//				}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
+//					String sOrgEmpId = in_empl.getSavedData(i, "emplId").toString();
+//					employee.setEmplId(sOrgEmpId);
+//					uResult += eAService.modifyEmployeeInfo(employee);
+//				}
 //			}
-//		}
-		if(iResult < 0 && uResult < 0) {
-			nErrorCode = -1;
-			strErrorMsg = "FAIL";
-		}else {
-			nErrorCode 	= 0;
-			strErrorMsg = "SUCC";
+//			if(iResult < 0 && uResult < 0) {
+//				nErrorCode = -1;
+//				strErrorMsg = "FAIL";
+//			}else {
+//				nErrorCode 	= 0;
+//				strErrorMsg = "SUCC";
+//			}			
+		} else if(infoCategory.equals("Career")) {
+			
+		} else if(infoCategory.equals("Cert")) {
+			
+		} else if(infoCategory.equals("Lang")) {
+			
+		} else if(infoCategory.equals("Military")) {
+			
+		} else {
+			System.out.println("파라미터 없음");
 		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);

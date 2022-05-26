@@ -30,12 +30,12 @@
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
                        <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
+                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button></li>
                    </ul>
                </li>
             </ul>
             
-            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
+            <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
@@ -45,42 +45,39 @@
                 <input type="text" name="" placeholder="통합검색">
                 <button type="submit"></button>
             </form>
-            <c:if test="${mailCategory == 'R' }">
-	        	<h1 class="basic-border-bottom">
+        	<h1 class="basic-border-bottom">
+	            <c:if test="${mailCategory == 'R' }">
 					받은메일함
-	            </h1>
-            </c:if>
-            <c:if test="${mailCategory == 'S' }">
-	        	<h1 class="basic-border-bottom">
+	            </c:if>
+	            <c:if test="${mailCategory == 'S' }">
 					보낸메일함
-	            </h1>
-            </c:if>
-            <c:if test="${mailCategory == 'T' }">
-	        	<h1 class="basic-border-bottom">
+	            </c:if>
+            	<c:if test="${mailCategory == 'T' }">
 					임시보관함
-	            </h1>
-            </c:if>
-            <c:if test="${mailCategory == 'M' }">
-	        	<h1 class="basic-border-bottom">
+            	</c:if>
+            	<c:if test="${mailCategory == 'M' }">
 					내게쓴메일함
-	            </h1>
-            </c:if>
-            <c:if test="${mailCategory == 'I' }">
-	        	<h1 class="basic-border-bottom">
+            	</c:if>
+            	<c:if test="${mailCategory == 'I' }">
 					중요메일함
-	            </h1>
-            </c:if>
-            <c:if test="${mailCategory == 'W' }">
-	        	<h1 class="basic-border-bottom">
+            	</c:if>
+            	<c:if test="${mailCategory == 'W' }">
 					휴지통
-	            </h1>
-            </c:if>
+            	</c:if>
+            </h1>
             
-            <input id="check1" class="mt-20" type="checkbox">
+            <input id="check1" class="mt-20" type="checkbox" onclick="selectAll(this);">
             <label for="check1"></label>
-            <button class="basic mt-20" type="button">답장</button>
-            <button class="basic mt-20" type="button">삭제</button>
-            <button class="basic mt-20" type="button">전달</button>
+            <c:if test="${mailCategory != 'W' && mailCategory != 'T' && mailCategory != 'M'}">
+            	<button class="basic mt-20" type="button" onclick="replyMail();">답장</button>
+           	</c:if>
+            <button class="basic mt-20" type="button" value="${mail.mailNo }" onclick="wasteMail('${mailCategory}');">삭제</button>
+            <c:if test="${mailCategory != 'W' && mailCategory != 'T'}">
+            	<button class="basic mt-20" type="button" onclick="relayMail();">전달</button>
+           	</c:if>
+            <c:if test="${mailCategory == 'W' }">
+            	<button class="basic mt-20" type="button" onclick="restoreMail();">복구</button>
+            </c:if>
             
             <div class="subConts">
 	        	<table class="table--basic mt-20" style="margin-top: 40px;">
@@ -91,8 +88,18 @@
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--star">
+									<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -103,8 +110,18 @@
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--star">
+									<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -112,11 +129,21 @@
 	                    <!-- 임시보관함 -->
 	                    <c:if test="${mailCategory == 'T' }">
 	                        <tr>
-	                            <c:url var="mDetail" value="/mail/detail.hirp">
+	                            <c:url var="mDetail" value="/mail/temporaryStorageDetailView.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--star">
+									<input type="checkbox" id="important" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -127,8 +154,18 @@
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--star">
+									<input type="checkbox" id="important" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -139,8 +176,18 @@
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--star">
+									<input type="checkbox" id="important" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -151,8 +198,13 @@
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
-								<td><input type="checkbox" value="${mail.mailNo }"></td>
-								<td><a href="${mDetail}">${mail.mailTitle }</a></td>
+								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
+								<td class="mail--read">
+									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+									<label for="read"></label>
+								</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
@@ -160,6 +212,7 @@
 					</c:forEach>
                 </table>
                 
+                <!-- 받은메일함 페이징 -->
                 <c:if test="${mailCategory == 'R' }">
 	                <div class="btns--paging">
 		                <c:if test="${pi.currentPage > '1' }">
@@ -264,5 +317,131 @@
 			</div>
         </article>
 	</div>
+	<script>
+		// 답장
+		function replyMail() {
+			var mailTag = $("input[name=mail]:checked");
+			var mailNo;
+			if(mailTag.length != 1)	{
+				alert("1개의 메일을 선택해 주세요.");
+			}else {
+				mailNo = mailTag[0].value;
+				location.href='/mail/mailReplyView.hirp?mailNo='+mailNo;
+			}
+		}	
+
+		// 전달
+		function relayMail() {
+			var mailTag = $("input[name=mail]:checked");
+			var mailNo;
+			if(mailTag.length != 1)	{
+				alert("1개의 메일을 선택해 주세요.");
+			}else {
+				mailNo = mailTag[0].value;
+				location.href='/mail/mailRelayView.hirp?mailNo='+mailNo;
+			}
+		}
+		
+		// 전체 선택
+		function selectAll(selectAll) {
+			const checkboxes = document.getElementsByName("mail");
+			
+			checkboxes.forEach((checkbox) => {
+				checkbox.checked = selectAll.checked;
+			})
+		};
+		
+		// 체크박스 선택 후 버튼 클릭 메일 휴지통으로 이동
+		function wasteMail(category) {
+			if(category == 'W') {
+				deleteSelectMail();
+			}else {
+				var mailTag = $("input[name=mail]:checked");
+				var mailNo = [];
+				for(var i = 0; i < mailTag.length; i++) {
+					mailNo.push(mailTag[i].value);
+				}
+				$.ajax({
+					url : "/mail/wasteMail.hirp",
+					type : "post",
+					data : { "mailNo" : mailNo },
+					traditional : true,
+					success : function() {
+						location.reload();
+					},
+					error : function() {
+						alert("ajax 실패!");
+					}
+				});
+			}
+		};
+				
+		// 휴지통 메일 복구
+		function restoreMail() {
+			var mailTag = $("input[name=mail]:checked");
+			var mailNo = [];
+			for(var i = 0; i < mailTag.length; i++) {
+				mailNo.push(mailTag[i].value);
+			}
+			$.ajax({
+				url : "/mail/restoreMail.hirp",
+				type : "post",
+				data : { "mailNo" : mailNo },
+				traditional : true,
+				success : function() {
+					location.reload();
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
+		}
+				
+		// 메일 읽음 표시
+		function readMail(read, mailNumber) {
+			var chkread = $(read).prop("checked");
+			var mailRead = 'Y';
+			if($(read).attr("type") == "checkbox") {
+				if(chkread == true) {
+					mailRead = 'Y';
+				}else {
+					mailRead = 'N';
+				}
+			}
+			$.ajax({
+				url : "/mail/readMail.hirp",
+				type : "post",
+				data : { "mailNo" : mailNumber, "mailRead" : mailRead },
+				success : function() {
+					location.reload;
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
+		}
+		
+		// 휴지통 선택 메일 삭제
+		function deleteSelectMail() {
+			var mailTag = $("input[name=mail]:checked");
+			var mailNo = [];
+			for(var i = 0; i < mailTag.length; i++) {
+				mailNo.push(mailTag[i].value);
+			}
+			$.ajax({
+				url : "/mail/deleteSelectMail.hirp",
+				type : "get",
+				data : { "mailNo" : mailNo },
+				traditional : true,
+				success : function() {
+					location.reload();
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
+		}
+	</script>
+	<script src="../../../resources/js/mail.js"></script>
 </body>
 </html>

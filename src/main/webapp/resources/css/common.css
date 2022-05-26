@@ -759,6 +759,10 @@ button.next {
     margin-top: 16px;
 }
 
+#snb ul.no-margin>li {
+    margin-top: 10px;
+}
+
 .btn--function {
     position: relative;
     display: block;
@@ -1101,6 +1105,10 @@ article {
 }
 
 /* 채팅창 */
+.chat-row {
+    cursor: pointer;
+}
+
 .modal--chat {
     position: fixed;
     right: 50px;
@@ -1109,13 +1117,76 @@ article {
     width: calc(100% - 100px);
     max-width: 380px;
     height: 500px;
-    /* 최솟값 */
     background-color: #fff;
     border: 1px solid #ccc;
 }
 
-/* 채팅창 끝 */
-
-#snb ul.no-margin>li  {
-	    margin-top: 10px;
+.modal--chatSelect {
+    z-index: 10;
+    position: fixed;
+    top: calc((100vh - 480px) / 2);
+    left: 7%;
+    display: none;
+    width: 86%;
+    height: 480px;
+    max-height: 90vh;
+    padding: 20px;
+    background: #fff;
+    border-radius: 20px;
 }
+
+.modal--chatSelect h3 {
+    padding: 16px 0;
+    font-size: 18px;
+}
+
+.modal--chatSelect__srch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal--chatSelect__srch input {
+    width: 74%;
+}
+
+.modal--chatSelect__srch button {
+    width: 24%;
+}
+
+.modal--chatSelect__emplList {
+    height: calc(100% - 142px);
+    overflow-y: auto;
+}
+
+.modal--chatSelect .btns-wrap {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    text-align: right;
+}
+
+.modal--chatSelect .btns-wrap button {
+    width: 70px;
+    padding: 8px 10px;
+    margin-left: 4px;
+}
+
+.modal--chatSelect__empList__checkbox-wrap {
+    width: calc(100% - 70px);
+}
+
+.modal--chatSelect__empList__checkbox-wrap input[type="checkbox"] {
+    position: absolute;
+    top: 1px;
+    right: 16px;
+    margin: 0px 4px 0 0;
+}
+
+.modal--chatSelect__empList__checkbox-wrap label {
+    cursor: pointer;
+}
+
+/* 채팅창 끝 */

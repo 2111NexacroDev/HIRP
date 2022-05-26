@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
 <link rel="stylesheet" href="../../../resources/css/project.css">
 
+<!-- textarea 에디터 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -30,12 +33,12 @@
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
                        <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button">비우기</button></li>
+                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button></li>
                    </ul>
                </li>
             </ul>
             
-            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
+            <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
@@ -58,10 +61,11 @@
 	            	<h4>파일첨부</h4>
 	            	<input type="file" size="50" name="uploadFile" value="파일선택">
 	            	<button class="basic mt-20" type="button">모두 삭제</button>
-	            	<textarea rows="" cols="" name="mailContents"></textarea>
+	            	<textarea id="summernote" rows="" cols="" name="mailContents"></textarea>
             	</form>
 	        </div>
         </article>
 	</div>
+	<script src="../../../resources/js/mail.js"></script>
 </body>
 </html>
