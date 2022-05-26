@@ -47,7 +47,7 @@
 					     	<input type="hidden" value=${count } name="roomId">
 						    <!-- 직원명 div  -->
 						    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
-						    <div class="chat-row mt-10  padding-bottom-10" onclick="chatWindow(${count});">
+						    <div class="chat-row mt-10  padding-bottom-10" ondblclick="chatWindow(${count});">
 							    <div class="mr-20 ml-20" style="width:30px;">
 					      		    <button class="btn--profile" type="button">
 					      		    	<c:if test="${empl.emplProfile eq null}">
@@ -71,7 +71,7 @@
 				<button type="button" class="point chat-floating_Btn"><i class="fa-solid fa-plus"></i></button>
         	</div> 
 
-			<section class="modal--chatSelect shadow">
+			<section id="chatEmplListModal" class="modal--chatSelect shadow">
 				<h3>대화상대 선택 <span>3</span></h3>
 				<!-- 검색창 -->
 				<div class="modal--chatSelect__srch row mt-10 t-c padding-bottom-10">
@@ -104,6 +104,17 @@
 			            	<!-- 직원명 div 끝 -->
 		            	</c:if>
 	            	</c:forEach>
+				</div>
+				<div class="btns-wrap">
+					<button class="point" type="button">확인</button>
+					<button class="cancel" type="button">취소</button>
+				</div>
+			</section>
+			
+			<section id="chatNameModal" class="modal--chatSelect shadow t-c">
+				<div style="width: 90%; position: absolute; top: 50%; margin-top: -80px;">
+					<h3 style="text-align:left"> 채팅방 이름 입력 </h3>
+					<input style="width: 95%;" type="text" name="chat" placeholder="채팅방 이름 입력">
 				</div>
 				<div class="btns-wrap">
 					<button class="point" type="button">확인</button>
@@ -163,7 +174,7 @@
 	    				}
 					}
 	    		},
-	    		error: function(){ //왜 정렬이 가운데로 안되는지 모르겠군
+	    		error: function(){
 	    			console.log("실패");
 // 					var $tableBody = $("#emplTable tbody");
 // 	    			$tableBody.html("");//기존 내용 있으면 비우기
@@ -174,15 +185,24 @@
 	    		}
 			});
 		}
-	
+		
 		$(function(){
 			$(".chat-floating_Btn").on("click", function(){
-				$(".modal--chatSelect").show();
+				$("#chatEmplListModal").show();
 			});
 
-			$(".modal--chatSelect .btns-wrap button.cancel").on("click", function(){
-				$(".modal--chatSelect").hide();
+			$("#chatEmplListModal .btns-wrap button.cancel").on("click", function(){
+				$("#chatEmplListModal").hide();
 			});
+			
+			$("#chatEmplListModal .btns-wrap .point").on("click", function(){
+				$("#chatNameModal").show();
+			});
+			
+			$("#chatNameModal .btns-wrap button.cancel").on("click", function(){
+				$("#chatNameModal").hide();
+			});
+
 		});
 	  </script>
 </body>

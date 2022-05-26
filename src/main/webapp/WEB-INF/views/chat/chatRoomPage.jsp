@@ -35,7 +35,7 @@
 				     	<c:set var="count" value="${count+1}" />
 					    <!-- 채팅방 div  -->
 					    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
-					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" onclick="chatWindow(${count}, ${chat.chatroomNo });">
+					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" ondblclick="chatWindow(${count}, ${chat.chatroomNo });">
 					    	<!-- 사진 추가할 거면 추가하기 -->
 <!-- 						    <div class="mr-20 ml-20" style="width:30px;"> -->
 <!-- 				      		    <button class="btn--profile" type="button"> -->
