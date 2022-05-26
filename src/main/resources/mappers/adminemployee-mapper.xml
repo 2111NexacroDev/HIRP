@@ -164,6 +164,28 @@
 		SELECT * FROM MILITARY_TBL WHERE EMPL_ID = #{emplId }
 	</select>
 	
+	<update id="modifyEmployeeInfo">
+		UPDATE EMPL_TBL
+		SET DEPT_CODE = #{deptCode},
+			POSITION_CODE = #{positionCode},
+			EMPL_NAME = #{emplName},
+			EMAIL = #{email},
+			DIRECT_NO = #{directNo},
+			PHONE_NO = #{phoneNo},
+			RECRUIT_CATEGORY = #{recruitCategory},
+			SALARY_CATEGORY = #{salaryCategory},
+			REFERRER = #{referrer},
+			IS_STATUS = #{isStatus},
+			BIRTHDAY = #{birthday},
+			GENDER = #{gender},
+			IS_MARRIAGE = #{isMarriage},
+			IS_DISABILITY = #{isDisability},
+			IS_VETERANS = #{isVeterans},
+			END_DATE = #{endDate},
+			END_REASON = #{endReason}
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
 	<update id="resignEmployee">
 		UPDATE EMPL_TBL 
 		SET IS_STATUS = '퇴사',

@@ -594,18 +594,83 @@
         	}
         };
 
-        // this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-        // {
-        // 	this.transaction(
-        // 		"tr_empl_modify"// 1.ID
-        // 		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
-        // 		,"in_empl=ds_empl:U in_jobRole=ds_jobRole:U in_career=ds_career:U in_lang=ds_lang:U in_cert=ds_cert:U in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
-        // 		,"" // 4.OutDs : S->F jsp(SELECT)
-        // 		,"emplId="+selectedEmplId+" jobRoleNo="+jobRoleNo // 5.InVar : F->S(var)
-        // 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-        // 	);
-        // };
+        // 기본정보 저장
+        this.Tab00_Tabpage1_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Info"// 1.ID
+         		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
+         		,"in_empl=ds_empl:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
 
+        // 직무 목록 저장
+        this.Tab00_Tabpage2_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_JobRole"// 1.ID
+         		,"HirpURL::admin/empChangeJobRole.hirp"// 2.URL
+         		,"in_jobRole=ds_jobRole:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
+
+        // 경력 목록 저장
+        this.Tab00_Tabpage3_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Career"// 1.ID
+         		,"HirpURL::admin/empChangeCareer.hirp"// 2.URL
+         		,"in_career=ds_career:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
+
+        // 자격 목록 저장
+        this.Tab00_Tabpage4_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Cert"// 1.ID
+         		,"HirpURL::admin/empChangeCert.hirp"// 2.URL
+         		,"in_cert=ds_cert:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
+
+        // 어학 목록 저장
+        this.Tab00_Tabpage5_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Lang"// 1.ID
+         		,"HirpURL::admin/empChangeLang.hirp"// 2.URL
+         		,"in_lang=ds_lang:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
+
+        // 병역 목록 저장
+        this.Tab00_Tabpage6_btn_save_onclick = function(obj,e)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Military"// 1.ID
+         		,"HirpURL::admin/empChangeMilitary.hirp"// 2.URL
+         		,"in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        };
 
         });
         
@@ -619,16 +684,22 @@
             this.Tab00.addEventHandler("onchanged",this.Tab00_onchanged,this);
             this.Tab00.Tabpage1.form.btnResign.addEventHandler("onclick",this.btnResign_onclick,this);
             this.Tab00.Tabpage1.form.Static00.addEventHandler("onclick",this.Tab00_Tabpage1_Static00_onclick,this);
+            this.Tab00.Tabpage1.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage1_btn_save_onclick,this);
             this.Tab00.Tabpage2.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage2_btn_minus_onclick,this);
             this.Tab00.Tabpage2.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage2_btn_plus_onclick,this);
+            this.Tab00.Tabpage2.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage2_btn_save_onclick,this);
             this.Tab00.Tabpage3.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage3_btn_plus_onclick,this);
             this.Tab00.Tabpage3.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage3_btn_minus_onclick,this);
+            this.Tab00.Tabpage3.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage3_btn_save_onclick,this);
             this.Tab00.Tabpage4.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage4_btn_plus_onclick,this);
             this.Tab00.Tabpage4.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage4_btn_minus_onclick,this);
+            this.Tab00.Tabpage4.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage4_btn_save_onclick,this);
             this.Tab00.Tabpage5.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage5_btn_plus_onclick,this);
             this.Tab00.Tabpage5.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage5_btn_minus_onclick,this);
+            this.Tab00.Tabpage5.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage5_btn_save_onclick,this);
             this.Tab00.Tabpage6.form.btn_plus.addEventHandler("onclick",this.Tab00_Tabpage6_btn_plus_onclick,this);
             this.Tab00.Tabpage6.form.btn_minus.addEventHandler("onclick",this.Tab00_Tabpage6_btn_minus_onclick,this);
+            this.Tab00.Tabpage6.form.btn_save.addEventHandler("onclick",this.Tab00_Tabpage6_btn_save_onclick,this);
             this.link_emplLsit.addEventHandler("onclick",this.link_emplLsit_onclick,this);
             this.link_addEmpl.addEventHandler("onclick",this.link_addEmpl_onclick,this);
             this.ds_empl.addEventHandler("onload",this.ds_empl_onload,this);

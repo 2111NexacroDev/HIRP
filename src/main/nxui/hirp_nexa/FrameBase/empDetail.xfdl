@@ -110,7 +110,7 @@
                   </Grid>
                   <Button id="btnResign" taborder="1" text="퇴직처리" left="20" top="155" width="50" height="20" border="0px none, 0px none, 1px solid #c10000" color="#c10000" font="12px/normal &quot;Noto Sans KR&quot;" onclick="btnResign_onclick"/>
                   <Static id="Static00" taborder="2" text="※ 셀을 더블 클릭하시면 정보를 수정하실 수 있습니다. 입력을 완료하신 후에는 반드시 각 페이지의 저장 버튼을 눌러주세요!" top="149" width="680" height="32" onclick="Tab00_Tabpage1_Static00_onclick" right="20" textAlign="right" font="normal 12px/normal Noto Sans KR"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage1_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -159,7 +159,7 @@
                   </Grid>
                   <Button id="btn_minus" taborder="1" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage2_btn_minus_onclick"/>
                   <Button id="btn_plus" taborder="2" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage2_btn_plus_onclick" border="1px solid #999999"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage2_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -214,7 +214,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage3_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage3_btn_minus_onclick"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage3_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -266,7 +266,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage4_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage4_btn_minus_onclick"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage4_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -318,7 +318,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage5_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage5_btn_minus_onclick"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage5_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -367,7 +367,7 @@
                   </Grid>
                   <Button id="btn_plus" taborder="1" text="추가" top="192" height="26" right="76" width="50" onclick="Tab00_Tabpage6_btn_plus_onclick" border="1px solid #999999"/>
                   <Button id="btn_minus" taborder="2" text="삭제" top="192" height="26" right="20" width="50" border="1px solid #999999" onclick="Tab00_Tabpage6_btn_minus_onclick"/>
-                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;"/>
+                  <Button id="btn_save" taborder="3" text="저장" left="370" top="240" height="36" right="370" cssclass="point" font="normal 14px/normal &quot;Arial&quot;" onclick="Tab00_Tabpage6_btn_save_onclick"/>
                 </Layout>
               </Layouts>
             </Tabpage>
@@ -734,6 +734,7 @@
           </Row>
         </Rows>
       </Dataset>
+      <Dataset id="ds_empl_top"/>
     </Objects>
     <Script type="xscript5.1"><![CDATA[this.ds_empl_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
 {	
@@ -741,7 +742,7 @@
  		"tr_empl_select"// 1.ID
  		,"HirpURL::admin/empDetail.hirp"// 2.URL		
  		,"" // 3.InDs : F->S jsp(I,U,D)
- 		,"ds_empl=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
+ 		,"ds_empl=out_empl ds_empl_top=out_empl ds_jobRole=out_jobRole ds_career=out_career ds_lang=out_lang ds_cert=out_cert ds_military=out_military ds_dept=out_dept ds_pos=out_pos" // 4.OutDs : S->F jsp(SELECT)
  		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
  		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
 	);	
@@ -987,18 +988,83 @@ this.Tab00_Tabpage6_btn_minus_onclick = function(obj:nexacro.Button,e:nexacro.Cl
 	}
 };
 
-// this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-// {
-// 	this.transaction(
-// 		"tr_empl_modify"// 1.ID
-// 		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
-// 		,"in_empl=ds_empl:U in_jobRole=ds_jobRole:U in_career=ds_career:U in_lang=ds_lang:U in_cert=ds_cert:U in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
-// 		,"" // 4.OutDs : S->F jsp(SELECT)
-// 		,"emplId="+selectedEmplId+" jobRoleNo="+jobRoleNo // 5.InVar : F->S(var)
-// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-// 	);	
-// };
+// 기본정보 저장
+this.Tab00_Tabpage1_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_Info"// 1.ID
+ 		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
+ 		,"in_empl=ds_empl:U in_empl_top=ds_empl:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);	
+};
 
+// 직무 목록 저장
+this.Tab00_Tabpage2_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_JobRole"// 1.ID
+ 		,"HirpURL::admin/empChangeJobRole.hirp"// 2.URL
+ 		,"in_jobRole=ds_jobRole:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);	
+};
+
+// 경력 목록 저장
+this.Tab00_Tabpage3_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_Career"// 1.ID
+ 		,"HirpURL::admin/empChangeCareer.hirp"// 2.URL
+ 		,"in_career=ds_career:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);		
+};
+
+// 자격 목록 저장
+this.Tab00_Tabpage4_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_Cert"// 1.ID
+ 		,"HirpURL::admin/empChangeCert.hirp"// 2.URL
+ 		,"in_cert=ds_cert:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);		
+};
+
+// 어학 목록 저장
+this.Tab00_Tabpage5_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_Lang"// 1.ID
+ 		,"HirpURL::admin/empChangeLang.hirp"// 2.URL
+ 		,"in_lang=ds_lang:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);		
+};
+
+// 병역 목록 저장
+this.Tab00_Tabpage6_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+ 		"tr_empl_modify_Military"// 1.ID
+ 		,"HirpURL::admin/empChangeMilitary.hirp"// 2.URL
+ 		,"in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
+ 		,"" // 4.OutDs : S->F jsp(SELECT)
+ 		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+ 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+ 	);		
+};
 ]]></Script>
   </Form>
 </FDL>
