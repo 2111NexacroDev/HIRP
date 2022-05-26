@@ -10,14 +10,14 @@ public class Career {
 	private String careerPlace;
 	private String careerRank;
 	private String careerJobRole;
-	private Date careerPeriod;
+	private String careerPeriod;
 	private String careerEndReason;
 	private String careerEtc;
 	
 	public Career() {}
 
 	public Career(int careerNo, String emplId, Date careerStartDate, Date careerEndDate, String careerPlace,
-			String careerRank, String careerJobRole, Date careerPeriod, String careerEndReason, String careerEtc) {
+			String careerRank, String careerJobRole, String careerPeriod, String careerEndReason, String careerEtc) {
 		super();
 		this.careerNo = careerNo;
 		this.emplId = emplId;
@@ -87,11 +87,11 @@ public class Career {
 		this.careerJobRole = careerJobRole;
 	}
 
-	public Date getCareerPeriod() {
+	public String getCareerPeriod() {
 		return careerPeriod;
 	}
 
-	public void setCareerPeriod(Date careerPeriod) {
+	public void setCareerPeriod(String careerPeriod) {
 		this.careerPeriod = careerPeriod;
 	}
 

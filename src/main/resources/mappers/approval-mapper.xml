@@ -15,7 +15,7 @@
 <result property="formNo" column="FORM_NO"></result>
 <result property="emplId" column="EMPL_ID"></result>
 <result property="apprTitle" column="APPR_TITLE"></result>
-<result property="apprContents" column="APPR_CONTNETS"></result>
+<result property="apprContents" column="APPR_CONTENTS"></result>
 <result property="apprStatus" column="APPR_STATUS"></result>
 <result property="writeDate" column="WRITE_DATE"></result>
 <result property="temporaryStorage" column="TEMPORARY_STORAGE"></result>
@@ -33,6 +33,7 @@
 <result property="status" column="APPR_STATUS"></result>
 <result property="apprComment" column="APPR_COMMENT"></result>
 <result property="apprDate" column="APPR_DATE"></result>
+<collection property="employee" column="EMPL_ID" ofType="Employee"  select="selectAllApprEmpl"></collection>
 </resultMap>
 
 
@@ -43,6 +44,31 @@
 <result property="fileRename" column="FILE_RENAME"></result>
 <result property="filePath" column="FILE_PATH"></result>
 </resultMap>
+
+<resultMap type="com.highfive.hirp.employee.domain.Employee" id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
+		<id property="emplId" column="EMPL_ID" />
+		<result property="deptCode" column="DEPT_CODE" />
+		<result property="positionCode" column="POSITION_CODE" />
+		<result property="emplPw" column="EMPL_PW" />
+		<result property="emplName" column="EMPL_NAME" />
+		<result property="startDate" column="START_DATE" />
+		<result property="email" column="EMAIL" />
+		<result property="directNo" column="DIRECT_NO" />
+		<result property="phoneNo" column="PHONE_NO" />
+		<result property="recruitCategory" column="RECRUIT_CATEGORY" />
+		<result property="salaryCategory" column="SALARY_CATEGORY" />
+		<result property="referrer" column="REFERRER" />
+		<result property="isStatus" column="IS_STATUS" />
+		<result property="birthday" column="BIRTHDAY" />
+		<result property="gender" column="GENDER" />
+		<result property="isMarriage" column="IS_MARRIAGE" />
+		<result property="isDisability" column="IS_DISABILITY" />
+		<result property="isVeterans" column="IS_VETERANS" />
+		<result property="endDate" column="END_DATE" />
+		<result property="endReason" column="END_REASON" />
+		<result property="emplProfile" column="EMPL_PROFILE" />
+</resultMap>
+
 <!-- 결재 폼 등록 -->
 <insert id="insertApprForm">
 	INSERT INTO APPR_FORM_TBL VALUES(APPR_FORM_SEQ.NEXTVAL, #{formTitle},#{formContents},DEFAULT,DEFAULT)
@@ -96,4 +122,15 @@
 <select id="selectAllApprAccept"  resultMap="apprAcceptResultMap">
 	SELECT * FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}
 </select>
+
+<!-- 결재자 정보 -->
+<select id="selectAllApprEmpl" resultMap="employeeResultMap">
+	SELECT EMPL_PROFILE, EMPL_NAME, EMPL_ID, EMPL_PW, DEPT_NAME "DEPT_CODE", POSITION_NAME "POSITION_CODE",
+		DIRECT_NO, EMAIL, PHONE_NO, TO_CHAR(BIRTHDAY, 'YYYY-MM-DD') "BIRTHDAY" <!-- string을 날짜형태로 변환하기 위해 적어줌 ""에는 컬럼명 써줌 -->
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE EMPL_ID = #{emplId}
+</select>
+
 </mapper>

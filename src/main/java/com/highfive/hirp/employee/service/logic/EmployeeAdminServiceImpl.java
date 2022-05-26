@@ -41,6 +41,13 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		return eList;
 	}
 	
+	//직원 검색.
+	@Override
+	public List<Employee> selectSearchEmplList(String keyword) {
+		List<Employee> eList = eAStore.selectSearchEmplList(sqlSession, keyword);
+		return eList;
+	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> printAllEmployeeWithDeptCode(String deptCode) {
@@ -66,29 +73,13 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		List<Employee> tList = eAStore.selectTempEmployee(sqlSession);
 		return tList;
 	}
+	
+	
 
 	@Override
 	public Employee printEmployeeInfo(String emplId) {
 		Employee emp = eAStore.selectOneEmployee(sqlSession, emplId);
 		return emp;
-	}
-
-	@Override
-	public int modifyEmployeeInfo(Employee employee) {
-		int result = eAStore.modifyEmployeeInfo(sqlSession, employee);
-		return result;
-	}
-
-	@Override
-	public int resignEmployee(String emplId) {
-		int result = eAStore.resignEmployee(sqlSession, emplId);
-		return result;
-	}
-
-	@Override
-	public int modifyLevelEmployee(String emplId) {
-		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
-		return result;
 	}
 
 	@Override
@@ -120,4 +111,54 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		List<Military> mList = eAStore.selectAllMilitaryById(sqlSession, emplId);
 		return mList;
 	}
+
+	@Override
+	public int modifyEmployeeInfo(Employee employee) {
+		int result = eAStore.modifyEmployeeInfo(sqlSession, employee);
+		return result;
+	}
+
+	@Override
+	public int resignEmployee(String emplId) {
+		int result = eAStore.resignEmployee(sqlSession, emplId);
+		return result;
+	}
+
+	@Override
+	public int modifyLevelEmployee(String emplId) {
+		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutJob(int jobNo) {
+		int result = eAStore.deleteInfoAboutJob(sqlSession, jobNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutCareer(int infoNo) {
+		int result = eAStore.deleteInfoAboutCareer(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutLang(int infoNo) {
+		int result = eAStore.deleteInfoAboutLang(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutCert(int infoNo) {
+		int result = eAStore.deleteInfoAboutCert(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutMilitary(int infoNo) {
+		int result = eAStore.deleteInfoAboutMilitary(sqlSession, infoNo);
+		return result;
+	}
+
+
 }

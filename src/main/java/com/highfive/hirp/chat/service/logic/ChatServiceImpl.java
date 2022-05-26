@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,7 @@ public class ChatServiceImpl implements ChatService{
 	private ChatStore cStore;
 
 	//직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeList() {
-		List<Employee> empList = cStore.selectEmployeeList(sqlSession);
-		return empList;
-	}
-
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeListByName(String name) {
-		List<Employee> empList = cStore.selectEmployeeListByName(sqlSession, name);
-		return empList;
-	}
 	
 	//채팅방 추가(대화 상대, 채팅방 이름 설정)
 	@Override
@@ -55,6 +45,12 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public List<ChatRoom> selectMyChattingRoom(String emplId) {
 		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, emplId);
+		return roomList;
+	}
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	@Override
+	public List<ChatRoom> selectMyChattingRoom(Map<String, String> searchMap) {
+		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, searchMap);
 		return roomList;
 	}
 	//채팅방 별로 채팅 내용 가져오기
@@ -125,6 +121,8 @@ public class ChatServiceImpl implements ChatService{
 		int result = cStore.deleteChatRoom(sqlSession, chatroomNo);
 		return result;
 	}
+
+
 
 
 

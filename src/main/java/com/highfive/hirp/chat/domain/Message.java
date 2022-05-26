@@ -7,11 +7,11 @@ public class Message {
 	private int chatroomNo;
 	private String msgSendid;
 	private String msgContents;
-	private Date msgSenddate;
+	private String msgSenddate;
 	
 	public Message() {}
 
-	public Message(int msgNo, int chatroomNo, String msgSendid, String msgContents, Date msgSenddate) {
+	public Message(int msgNo, int chatroomNo, String msgSendid, String msgContents, String msgSenddate) {
 		super();
 		this.msgNo = msgNo;
 		this.chatroomNo = chatroomNo;
@@ -52,11 +52,11 @@ public class Message {
 		this.msgContents = msgContents;
 	}
 
-	public Date getMsgSenddate() {
+	public String getMsgSenddate() {
 		return msgSenddate;
 	}
 
-	public void setMsgSenddate(Date msgSenddate) {
+	public void setMsgSenddate(String msgSenddate) {
 		this.msgSenddate = msgSenddate;
 	}
 
@@ -65,6 +65,6 @@ public class Message {
 		return "Message [msgNo=" + msgNo + ", chatroomNo=" + chatroomNo + ", msgSendid=" + msgSendid + ", msgContents="
 				+ msgContents + ", msgSenddate=" + msgSenddate + "]";
 	}
-
+	
 	
 }

@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
+import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.service.GroupService;
+import com.highfive.hirp.time.user.domain.Time;
 
 // 컨트롤러 오류는 jsp와 함께보기
 
@@ -39,6 +42,19 @@ public class GroupController {
 		}
 		return "";
 	}
+	// 직원 조회
+	@ResponseBody
+	@RequestMapping(value ="/group/selectAllGroupMember.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String selectAllGroupMember(@RequestParam(value = "emplId", required = false) String emplId) {
+		//emplid 값 안넘겨받으면 회원전체조회함
+		List<Employee> emplList = gService.selectAllGroupMember(emplId);
+		if(!emplList.isEmpty()) {
+			Gson gson = new Gson();
+			return gson.toJson(emplList);
+		}
+		return "fail";
+	}
+	
 	// 조직도 조회2
 	 @RequestMapping(value="/group/groupView.hirp", method=RequestMethod.GET) // jsp -> 서버
 	 public ModelAndView groupView (ModelAndView mv, HttpServletRequest request) { // 서버 -> db

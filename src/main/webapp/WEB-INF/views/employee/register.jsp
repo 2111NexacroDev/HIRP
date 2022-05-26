@@ -5,11 +5,11 @@
 	<%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 	<link rel="stylesheet" href="../../resources/css/employee.css">
 	<body class="page--employee">
-		<form class="shadow" action="/employee/register.hirp" method="post" enctype="multipart/form-data"> 
+		<form id="registerForm" class="shadow" action="/employee/register.hirp" method="post" enctype="multipart/form-data"> 
 			<!-- form이 있어야 controller로 넘어감 -> db    -->
 			<div class="subConts1">
 				<label>아이디</label>
-				<input name="emplId" type="text" placeholder="@hirp.com"> 
+				<input name="emplId" type="text" placeholder="20자 내의 영문으로 작성하셔야 합니다."> 
 				<!-- name은 컨트롤러 저장위해 필요. 컨트롤러와 같아야함 -->
 			</div>
 			
@@ -47,8 +47,9 @@
 			<button class="point mt-20" type="submit" onclick="btnRegister()";>회원가입</button>
 		</form>
 		<script> 
-			function btn(){ 
+			function btnRegister(){ 
 				alert('회원가입이 완료되었습니다.\n관리자 승인 후 로그인이 가능합니다.'); 
+				$('#registerForm').submit();
 			} 
 		</script>
 	</body>

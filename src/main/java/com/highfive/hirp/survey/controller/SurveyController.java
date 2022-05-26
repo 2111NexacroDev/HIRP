@@ -66,14 +66,9 @@ public class SurveyController {
 			//설문 리스트에 대한 나의 참여 여부
 			//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 			List<Survey> latestList = sService.selectAllSurvey(emplId);
-			if(!latestList.isEmpty()){
-				mv.addObject("sList", latestList);
-				System.out.println(latestList);
-				mv.setViewName("survey/mainSurveyPage");
-			} else {
-				mv.addObject("msg2", "최신 리스트 조회 실패");
-				mv.setViewName("common/errorPage");
-			}
+			mv.addObject("sList", latestList);
+			System.out.println(latestList);
+			mv.setViewName("survey/mainSurveyPage");
 			
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());
@@ -95,15 +90,10 @@ public class SurveyController {
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
 			List<Survey> proceedList = sService.selectProceedSurvey(emplId);
-			if(!proceedList.isEmpty()) {
-				mv.addObject("sList", proceedList);
-				System.out.println("proceedList 출력 : " + proceedList);
-				mv.setViewName("survey/proceedSurveyPage");
-				
-			} else {
-				mv.addObject("msg1", "진행중인 리스트 조회 실패");
-				mv.setViewName("common/errorPage");
-			}
+			mv.addObject("sList", proceedList);
+			System.out.println("proceedList 출력 : " + proceedList);
+			mv.setViewName("survey/proceedSurveyPage");
+			//empty 체크 안하는 이유는 설문조사 목록 없을 때 없다고 page에서 처리 해주어야 하기 때문임.
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
@@ -137,14 +127,9 @@ public class SurveyController {
 		//질문지랑 대상자 번호 비교해서 두개 조인해서 설문조사 질문지 + 응답여부까지 나오도록 하기
 		try {
 			List<Survey> closedList = sService.selectClosedSurvey(emplId);
-			if(!closedList.isEmpty()) {
-				mv.addObject("sList", closedList);
-				System.out.println("closedList 출력 : " + closedList);
-				mv.setViewName("survey/closedSurveyPage");
-			} else {
-				mv.addObject("msg1", "마감된 리스트 조회 실패");
-				mv.setViewName("common/errorPage");
-			}
+			mv.addObject("sList", closedList);
+			System.out.println("closedList 출력 : " + closedList);
+			mv.setViewName("survey/closedSurveyPage");
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
@@ -211,23 +196,7 @@ public class SurveyController {
 		}
 		return mv;
 	}
-	
-	//응답자 검색
-	@ResponseBody
-	@RequestMapping(value="/survey/searchEmplList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
-	public String searchEmplList(
-			@RequestParam("emplSearchKeyword") String emplSearchKeyword){
-		System.out.println("응답자 검색" + emplSearchKeyword); //값 잘 넘어옴
-		//응답자 리스트 보기 (응답여부까지) -> 팝업창
-		List<Employee> emplList = sService.selectSearchEmplList(emplSearchKeyword);
-//		System.out.println(emplList);
-		if(!emplList.isEmpty()) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			return gson.toJson(emplList);
-		}
-		return "";
-	}
-	
+
 	//설문 문항 페이지
 	@RequestMapping(value="/survey/writeQuest.hirp", method=RequestMethod.GET)
 	public ModelAndView writeSurveyQuestPage(ModelAndView mv) {

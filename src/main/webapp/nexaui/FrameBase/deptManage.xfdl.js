@@ -738,8 +738,8 @@
         			this.alert("부서 조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
-        		this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
+        		//this.alert("부서 조회 성공 : " + this.ds_dept.getRowCount() + "건");
+        		//this.alert("사원 조회 성공 : " + this.ds_empl.getRowCount() + "건");
         	}
 
         	if(id=="dept_add")

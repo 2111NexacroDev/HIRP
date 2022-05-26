@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none">
+  <Form id="emplList" width="1280" height="720" titletext="New Form" scrolltype="none" dragscrolltype="none">
     <Layouts>
       <Layout height="720" mobileorientation="landscape" width="1280">
         <Div id="Div00" taborder="0" left="0" top="0" width="200" height="100%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;"/>
@@ -32,8 +32,8 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
-                <Cell col="1" text="bind:deptCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" cssclass="deptCode" displaytype="combotext" edittype="combo" font="normal 12px/normal &quot;Noto Sans KR&quot;" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode"/>
-                <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="combotext" edittype="combo" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
+                <Cell col="1" text="bind:deptCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" cssclass="deptCode" displaytype="combotext" edittype="none" font="normal 12px/normal &quot;Noto Sans KR&quot;" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode"/>
+                <Cell col="2" text="bind:positionCode" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="combotext" edittype="none" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
                 <Cell col="3" text="bind:directNo" padding="8px 16px" textAlign="center" border="0px none, 0px none, 1px solid #cccccc"/>
                 <Cell col="4" textAlign="center" border="0px none, 0px none, 1px solid #cccccc" displaytype="buttoncontrol" text="조회/수정" edittype="button" cssclass="basic" padding="6px 20px"/>
                 <Cell col="5" text="bind:emplId"/>
@@ -67,8 +67,8 @@
               </Band>
               <Band id="body">
                 <Cell text="bind:emplName" textAlign="center" border="1px solid #cccccc,0px none"/>
-                <Cell col="1" text="bind:deptCode" textAlign="center" displaytype="combotext" edittype="combo" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode" border="1px solid #cccccc,0px none"/>
-                <Cell col="2" text="bind:positionCode" textAlign="center" border="1px solid #cccccc,0px none" displaytype="combotext" edittype="combo" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
+                <Cell col="1" text="bind:deptCode" textAlign="center" displaytype="combotext" edittype="none" combodataset="ds_dept" combodatacol="deptName" combocodecol="deptCode" border="1px solid #cccccc,0px none"/>
+                <Cell col="2" text="bind:positionCode" textAlign="center" border="1px solid #cccccc,0px none" displaytype="combotext" edittype="none" combodataset="ds_pos" combodatacol="positionName" combocodecol="positionCode"/>
                 <Cell col="3" text="bind:phoneNo" textAlign="center" border="1px solid #cccccc,0px none"/>
                 <Cell col="4" textAlign="center" text="조회/수정" displaytype="buttoncontrol" edittype="button" border="1px solid #cccccc,0px none,1px solid #cccccc,1px solid #dbdee2" borderRadius="0px none" padding="6px 20px"/>
                 <Cell col="5" text="bind:emplId"/>
@@ -78,13 +78,16 @@
         </Grid>
         <Edit id="edt_search" taborder="7" top="70" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="재직자 이름 검색" right="20"/>
         <Button id="btn_search_empl" taborder="8" top="70" width="28" height="28" cssclass="search" onclick="btn_search_empl_onclick" text="" right="21"/>
-        <Static id="link_emplLsit" taborder="9" text="사원 조회" left="24" top="85" width="200" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Static id="link_addEmpl" taborder="10" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="link_emplLsit" taborder="9" text="사원 조회" left="24" top="85" width="200" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick" cursor="pointer"/>
+        <Static id="link_addEmpl" taborder="10" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick" cursor="pointer"/>
         <Edit id="edt_search_retiree" taborder="12" top="395" width="162" height="30" onchanged="edt_search_onchanged" displaynulltext="퇴사자 이름 검색" right="21"/>
         <Button id="btn_search_retiree" taborder="11" top="395" width="28" height="28" cssclass="search" onclick="btn_search_retiree_onclick" text="" right="22"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[// 메뉴 이동 함수
+    <Script type="xscript5.1"><![CDATA[// 페이지 로드용 emplId 전역 변수 지정
+this.selectedEmplId;
+
+// 메뉴 이동 함수
 this.link_emplLsit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
 {
 	this.go("FrameBase::emplList.xfdl");
@@ -119,7 +122,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			this.alert("사원 조회 실패 : " + sErrorMsg);
 			return;
 		}
-		this.alert("사원 조회 성공");
+		//this.alert("사원 조회 성공");
 	}	
 }
 
@@ -137,13 +140,11 @@ this.btn_search_retiree_onclick = function(obj:nexacro.Button,e:nexacro.ClickEve
 	this.ds_retiree.filter("emplName.indexOf('" + searchVal + "') > -1 ");
 };
 
-// 페이지 로드용 emplId 전역 변수 지정
-this.selectedEmplId;
-
 // 회원(재직자)별 상세 정보 페이지 로드
 this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+	console.log(selectedEmplId);
 	if(e.col == 4) {
 		this.go("FrameBase::empDetail.xfdl");
 	}
@@ -153,6 +154,7 @@ this.empl_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEven
 this.retiree_detail_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	selectedEmplId = this.Grid00_00.getCellText(e.row, 5);
+	console.log(selectedEmplId);
 	if(e.col == 4) {
 		this.go("FrameBase::empDetail.xfdl");
 	}

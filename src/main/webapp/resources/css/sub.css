@@ -11,12 +11,17 @@
     justify-content: center;
 }
 
+h2.square-tit {
+    position: relative;
+    padding: 0 0 0 24px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
 .subConts>h2.square-tit {
     position: relative;
     margin-top: 20px;
     padding: 0 20px 0 44px;
-    font-weight: 400;
-    font-size: 18px;
 }
 
 .subConts>h2.square-tit:before {
@@ -586,6 +591,12 @@ section[class^="todo--"] {
 	left: 10px;
 	width: calc(100% - 20px);
 }
+
+#snb>ul.ul--utility>li button {
+    padding: 0;
+    background-color: transparent;
+}
+
 /* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url("../images/icons/icon_success.png");
     position: absolute;

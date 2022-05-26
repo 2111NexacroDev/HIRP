@@ -56,7 +56,7 @@ public class ApprovalController {
 		List<ApprForm> formList = aService.printAllApprForm();
 		if (!formList.isEmpty()) {
 			mv.addObject("formList", formList);
-			mv.setViewName("approval/approvalMain");
+			mv.setViewName("approval/approvalCommonPage");
 		} else {
 			mv.addObject("msg", "검색조회 실패");
 			mv.setViewName("common/errorPage");
@@ -233,8 +233,13 @@ public class ApprovalController {
 	@RequestMapping(value="/appr/detail.hirp",method=RequestMethod.GET)
 	public ModelAndView printOneWaitingAppr(ModelAndView mv,@RequestParam("apprNo")int apprNo) {
 		Approval approval = aService.printOneAppr(apprNo);
-		if(approval !=null) {
+		List<ApprAccept> aList = aService.printApprovalStatus(apprNo);
+		String emplId = approval.getEmplId();
+		Employee employee = eService.employeeMyPage(emplId);
+		if(!aList.isEmpty()) {
 			mv.addObject("approval", approval);
+			mv.addObject("aList", aList);
+			mv.addObject("employee", employee);
 			mv.setViewName("approval/approvalDetail");
 		} else {
 			mv.addObject("msg", "문서 조회 실패");

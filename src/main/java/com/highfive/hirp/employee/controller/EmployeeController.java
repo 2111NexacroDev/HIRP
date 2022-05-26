@@ -47,7 +47,7 @@ public class EmployeeController {
 		try {
 			int result = eService.registerEmployee(employee); // .뒤는 서비스의 ()로 가겠다
 			if (result > 0) { // 1성공
-				return "redirect:/employee/login.hirp";
+				return "redirect:/employee/loginView.hirp";
 			} else { // 0실패
 				model.addAttribute("msg", "회원가입에 실패했습니다.");
 				return "/common/errorPage";

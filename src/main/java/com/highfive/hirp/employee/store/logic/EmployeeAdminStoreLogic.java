@@ -34,6 +34,13 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		return eList;
 	}
 	
+	//직원 검색
+	@Override
+	public List<Employee> selectSearchEmplList(SqlSession sqlSession, String emplSearchKeyword) {
+		List<Employee> eList = sqlSession.selectList("EmployeeAdminMapper.selectSearchEmplList", emplSearchKeyword);
+		return eList;
+	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> selectAllEmployeeWithDeptCode(SqlSession sqlSession, String deptCode) {
@@ -67,24 +74,6 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 	}
 
 	@Override
-	public int modifyEmployeeInfo(SqlSession sqlSession, Employee employee) {
-		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo", employee);
-		return result;
-	}
-
-	@Override
-	public int resignEmployee(SqlSession sqlSession, String emplId) {
-		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee", emplId);
-		return result;
-	}
-
-	@Override
-	public int updateLevelEmployee(SqlSession sqlSession, String emplId) {
-		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee", emplId);
-		return result;
-	}
-
-	@Override
 	public List<JobRole> selectAllJobById(SqlSession sqlSession, String emplId) {
 		List<JobRole> jList = sqlSession.selectList("EmployeeAdminMapper.selectAllJobById", emplId);
 		return jList;
@@ -113,4 +102,54 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		List<Military> mList = sqlSession.selectList("EmployeeAdminMapper.selectAllMilitaryById", emplId);
 		return mList;
 	}
+
+	@Override
+	public int modifyEmployeeInfo(SqlSession sqlSession, Employee employee) {
+		int result = sqlSession.update("EmployeeAdminMapper.modifyEmployeeInfo", employee);
+		return result;
+	}
+
+	@Override
+	public int resignEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.resignEmployee", emplId);
+		return result;
+	}
+
+	@Override
+	public int updateLevelEmployee(SqlSession sqlSession, String emplId) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateLevelEmployee", emplId);
+		return result;
+	}
+
+	@Override
+	public int deleteInfoAboutJob(SqlSession sqlSession, int jobRoleNo) {
+		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutJob", jobRoleNo);
+		return result;
+	}
+
+	@Override
+	public int deleteInfoAboutCareer(SqlSession sqlSession, int careerNo) {
+		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutCareer", careerNo);
+		return result;
+	}
+
+	@Override
+	public int deleteInfoAboutLang(SqlSession sqlSession, int langNo) {
+		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutLang", langNo);
+		return result;
+	}
+
+	@Override
+	public int deleteInfoAboutCert(SqlSession sqlSession, int certNo) {
+		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutCert", certNo);
+		return result;
+	}
+
+	@Override
+	public int deleteInfoAboutMilitary(SqlSession sqlSession, int militaryNo) {
+		int result = sqlSession.delete("EmployeeAdminMapper.deleteInfoAboutMilitary", militaryNo);
+		return result;
+	}
+
+
 }

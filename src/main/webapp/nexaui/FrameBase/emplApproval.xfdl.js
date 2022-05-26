@@ -68,7 +68,7 @@
             obj.set_taborder("4");
             obj.set_binddataset("ds_temp");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/><Column size=\"80\"/></Columns><Rows><Row size=\"36\" band=\"head\"/><Row size=\"36\"/></Rows><Band id=\"head\"><Cell text=\"사원명\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"1\" text=\"소속부서\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"2\" text=\"직급\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"3\" text=\"휴대전화번호\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"4\" text=\"상세보기\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"5\" text=\"emplId\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"6\" text=\"가입승인\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:deptCode\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\"/><Cell col=\"2\" text=\"bind:positionCode\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\" displaytype=\"combotext\" edittype=\"combo\"/><Cell col=\"3\" text=\"bind:phoneNo\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"4\" text=\"보기/수정\" border=\"0px none,0px none,1px solid #cccccc\" displaytype=\"buttoncontrol\" padding=\"6px 26px\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:emplId\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"6\" text=\"승인\" border=\"0px none,0px none,1px solid #cccccc\" displaytype=\"buttoncontrol\" padding=\"6px 26px\" textAlign=\"center\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/><Column size=\"80\"/></Columns><Rows><Row size=\"36\" band=\"head\"/><Row size=\"36\"/></Rows><Band id=\"head\"><Cell text=\"사원명\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"1\" text=\"소속부서\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"2\" text=\"직급\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"3\" text=\"휴대전화번호\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"4\" text=\"상세보기\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"5\" text=\"emplId\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"6\" text=\"가입승인\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"1\" text=\"bind:deptCode\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\" combodisplaynulltype=\"nulltext\" combodisplaynulltext=\"부서선택\"/><Cell col=\"2\" text=\"bind:positionCode\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\" displaytype=\"combotext\" edittype=\"combo\" combodisplaynulltext=\"직급선택\" combodisplaynulltype=\"nulltext\"/><Cell col=\"3\" text=\"bind:phoneNo\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"4\" text=\"보기/수정\" border=\"0px none,0px none,1px solid #cccccc\" displaytype=\"buttoncontrol\" padding=\"6px 26px\" textAlign=\"center\"/><Cell col=\"5\" text=\"bind:emplId\" border=\"0px none,0px none,1px solid #cccccc\" textAlign=\"center\"/><Cell col=\"6\" text=\"승인\" border=\"0px none,0px none,1px solid #cccccc\" displaytype=\"buttoncontrol\" padding=\"6px 26px\" textAlign=\"center\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("link_emplLsit","24","85","200","20",null,null,null,null,null,null,this);
@@ -76,6 +76,7 @@
             obj.set_text("사원 조회");
             obj.set_font("normal 14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
             this.addChild(obj.name, obj);
 
             obj = new Static("link_addEmpl","24","120","106","20",null,null,null,null,null,null,this);
@@ -83,6 +84,21 @@
             obj.set_text("사원 추가/승인");
             obj.set_font("bold 14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02","220","460",null,"32","20",null,null,null,null,null,this);
+            obj.set_taborder("7");
+            obj.set_text("※ 수정하실 셀을 더블클릭하시면 소속부서와 직급을 수정하실 수 있습니다.");
+            obj.set_font("normal 12px/normal Noto Sans KR");
+            obj.set_textAlign("left");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02_00","220","490",null,"32","20",null,null,null,null,null,this);
+            obj.set_taborder("8");
+            obj.set_text("※ 수정 후 승인을 누르시면 정보가 업데이트되며, 가입이 승인되어 사내 정보에 접근 가능한 권한이 부여됩니다.");
+            obj.set_font("normal 12px/normal Noto Sans KR");
+            obj.set_textAlign("left");
             this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
@@ -138,7 +154,7 @@
         			this.alert("승인 대기 중인 사원이 없습니다.");
         			return;
         		}
-        		this.alert("사원 조회 성공");
+        		//this.alert("사원 조회 성공");
         	}
         }
 
@@ -158,6 +174,7 @@
         			,"emplId="+selectedEmplId // 5.InVar : F->S(var)
         			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
         		);
+        		this.go("FrameBase::emplList.xfdl");
         	}
         };
         });
@@ -171,6 +188,8 @@
             this.Grid00.addEventHandler("oncellclick",this.empl_detail_oncellclick,this);
             this.link_emplLsit.addEventHandler("onclick",this.link_emplLsit_onclick,this);
             this.link_addEmpl.addEventHandler("onclick",this.link_addEmpl_onclick,this);
+            this.Static02.addEventHandler("onclick",this.Static02_onclick,this);
+            this.Static02_00.addEventHandler("onclick",this.Static02_onclick,this);
             this.ds_temp.addEventHandler("onload",this.ds_empl_onload,this);
             this.ds_dept.addEventHandler("canrowposchange",this.ds_dept_canrowposchange,this);
         };

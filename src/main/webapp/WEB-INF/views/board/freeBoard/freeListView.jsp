@@ -21,12 +21,16 @@
            
             <h1 class="basic-border-bottom">자유게시판</h1>
 
-            <div id="guide" class="subConts">
-                
-            </div>
-            
-            
-                <table class="table--basic mt-20">
+            <div id="free" class="subConts padding-0">
+				<table class="table--basic mt-40">
+                    <colgroup>
+                        <col style="width:10%;">
+                        <col style="width:40%;">
+                        <col style="width:15%;">
+                        <col style="width:15%;">
+                        <col style="width:10%;">
+                        <col style="width:10%;">
+                    </colgroup>
                     <thead>
                         <tr>
 							<th>번호</th>
@@ -37,8 +41,8 @@
 							<th>첨부파일</th>
 						</tr>
                     </thead>
-                    <c:forEach var="free" items="${fList }">
                     <tbody>
+                    	<c:forEach var="free" items="${fList }">
                         <tr>
                            	<c:url var="fDetail" value="/free/detail.hirp">
 								<c:param name="freeNo" value="${free.freeNo }"></c:param>
@@ -54,20 +58,24 @@
 							<c:if test="${not empty free.bList}">O</c:if>
 							</td>
                         </tr>
-                        </tbody>
-                        </c:forEach>
-				</table>
-				<div class="btn--paging">
-                    <button class="basic mt-20">이전</button>
-						<c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
-							<c:url var="pagination" value="/notice/list.hirp">
-								<c:param name="page" value="${p}"></c:param>
-							</c:url>
-							&nbsp;<a href="${pagination }">${p }</a>&nbsp;
 						</c:forEach>
-					<button class="basic mt-20">다음</button>
+                    </tbody>
+				</table>
+				<div class="btns--paging">
+					<c:if test="${pi.currentPage > '1' }">
+						<button class="fa-solid fa-angle-left prev" onclick="location.href='/free/list.hirp?page=${pi.currentPage-1 }'"></button>
+					</c:if>
+					<c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
+						<c:url var="pagination" value="/free/list.hirp">
+							<c:param name="page" value="${p }"></c:param>
+						</c:url>
+						<a href="${pagination }">${p }</a>
+					</c:forEach>
+					<c:if test="${pi.currentPage < pi.endNavi }">
+						<button class="fa-solid fa-angle-right next" onclick="location.href='/free/list.hirp?page=${pi.currentPage+1 }'"></button>
+					</c:if>
 				</div>
-				<div class="t-c">
+				<div class="board__srch-wrap t-c">
 					<form action="/free/searchList.hirp" method="get">
 					<input type="hidden" name="currentPage" value="1">
 					<input type="hidden" name="listLimit" value="10">
@@ -80,7 +88,8 @@
 						<input type="text" name="searchValue">
 						<input type="submit" value="검색">
 					</form>
-					</div>
+				</div>
+            </div>
         </article>
     </div>
 </body>

@@ -2,10 +2,13 @@ package com.highfive.hirp.chat.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +16,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.survey.domain.SurveyAnswer;
 
 @Controller
@@ -28,23 +35,44 @@ public class ChatController {
 	@Autowired
 	private ChatService cService;
 	
+	@Autowired
+	private EmployeeAdminService eaService;
+	
 	// 채팅방 입장 테스트
 	@RequestMapping(value = "chat.hirp", method = RequestMethod.GET)
 	public String view_chat(Model model
 			, HttpServletRequest request
-			, HttpServletResponse response) throws Exception {
+			, HttpServletResponse response
+			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
 
 		return "chat/chatTestPage";
 	}
 		
 	//채팅 메인페이지 (직원 목록)
+	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv) {
+		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+				
+			if(!emplList.isEmpty()){
+				mv.addObject("emplList", emplList);
+				System.out.println(emplList);
+				mv.setViewName("chat/chatMainPage");
+			} else {
+				mv.addObject("msg", "직원 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
-	//직원 이름으로 검색
-	public ModelAndView chatEmplSearch(ModelAndView mv) {
-		return mv;
-	}
+	
+	//직원 이름으로 검색 -> adminempl쪽에 공통으로 만듬.
+	
 	//채팅방 추가 페이지
 	public ModelAndView insertChattingRoomPage(ModelAndView mv
 			,@ModelAttribute Employee employee) {
@@ -71,15 +99,65 @@ public class ChatController {
 	}
 	
 	//채팅방 목록 페이지
-	public ModelAndView chattingRoomList(ModelAndView mv) {
+	@RequestMapping(value = "chatroomList.hirp", method = RequestMethod.GET)
+	public ModelAndView chattingRoomList(ModelAndView mv
+			, HttpServletRequest request ) {
 		//내가 참여한 채팅방 목록 가져오기
 		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
-		
 		//마지막 채팅 내용 표시????
 		//내용 있으면 텍스트로 출력하고, 마지막 채팅이 사진이면 사진이라고 표기하고 싶음
 		
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		try {
+			List<ChatRoom> chatroomList = cService.selectMyChattingRoom(emplId);
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			
+			if(!emplList.isEmpty()){
+				mv.addObject("emplList", emplList);
+			} else {
+				mv.addObject("msg", "직원 리스트 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+			
+			mv.addObject("chatroomList", chatroomList);
+			mv.setViewName("chat/chatRoomPage");
+			//list null체크 jsp에서 해주기 (채팅 목록 없어도 조회는 되어야 하니까)
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
+	
+	//채팅방 이름, 채팅 참여자 이름 검색
+	@ResponseBody
+	@RequestMapping(value="/searchChatroomList.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String searchEmplList(
+			Model model
+			,@RequestParam("chatroomSearchKeyword") String chatroomSearchKeyword
+			, HttpServletRequest request ){
+		System.out.println("채팅방 검색" + chatroomSearchKeyword); //값 잘 넘어옴
+
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		//파라미터로 넘겨줄 map
+		Map<String, String> searchMap = new HashMap<>();
+		searchMap.put("emplId", emplId);
+		searchMap.put("chatroomSearchKeyword", chatroomSearchKeyword);
+		
+		List<ChatRoom> chatroomList = cService.selectMyChattingRoom(searchMap);
+		model.addAttribute("chatroomList", chatroomList);
+		System.out.println(chatroomList);
+		if(!chatroomList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(chatroomList);
+		}
+		return "";
+	}
+	
 	//채팅방 내부 페이지
 	public ModelAndView chattingRoomPage(ModelAndView mv
 			,@RequestParam("chatRoom") ChatRoom chatRoom) {

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.highfive.hirp.common.PageInfo;
+import com.highfive.hirp.common.Pagination;
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.time.user.domain.Time;
 import com.highfive.hirp.time.user.domain.TimeModify;
@@ -27,21 +29,28 @@ public class TimeController {
 
 	@Autowired
 	private TimeService tService;
+	
+	// 이미 있는 거를 덮어 씌우는 건 update
+	// 없었는데 새로 생기는건 insert
+	// 출근등록 - 시간이 아예 디비에 없다가 등록하면 그 때 생기는 거라서 insert
+	// 퇴근등록 - update
+	// 근태조정신청 - 시간을 바꿔주는 거라 update
+	// 등록, 수정에는 Http추가
 
-	// 사용자 출,퇴근 내역 화면
+	// 사용자 출퇴근 내역 화면
 	@RequestMapping(value = "/time/timeListView.hirp", method = RequestMethod.GET)
 	public ModelAndView timeListView(ModelAndView mv, HttpServletRequest request) {
 		try {
 			// 세션에있는 로그인한 아이디값 넣어주기
 			HttpSession session = request.getSession();
 			String emplId = (String) session.getAttribute("emplId");
-			Time time = tService.selectTime(emplId);
-			if (time != null) { // if(!time.isEmpty()) -> 리스트일때
+			Time time = new Time();
+			time = tService.selectTime(emplId);
+			if ( time != null ) { // if(!time.isEmpty()) -> 리스트일때
 				mv.addObject("time", time);
 				mv.setViewName("time/timeList");
-			} else {
-				mv.addObject("msg", "시간 조회에 실패했습니다");
-				mv.setViewName("common/errorPage");
+			} else { // 데이터가 없어도 화면 보이게
+				mv.setViewName("time/timeList");
 			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
@@ -86,33 +95,27 @@ public class TimeController {
 		}
 	}
 
-	// 사용자 연차 내역 화면
-	@RequestMapping(value = "/time/vacation.hirp", method = RequestMethod.GET)
-	public ModelAndView vacationListView(ModelAndView mv, HttpServletRequest request) {
+	// 사용자 출퇴근 내역 조회 화면
+	@RequestMapping(value = "/time/time.hirp", method = RequestMethod.GET)
+	public ModelAndView workListView(ModelAndView mv, HttpServletRequest request
+			, @RequestParam(value="page", required=false) Integer page) {
 		try {
-			// 세션에있는 로그인한 아이디값 넣어주기
 			HttpSession session = request.getSession();
 			String emplId = (String) session.getAttribute("emplId");
-			
-			List<Vacation> tList = tService.selectTimeView(emplId);
+			// 세션에있는 로그인한 아이디값 넣어주기
+			List<Time> tList = tService.selectWorkView(emplId); // 제네릭 List<Vacation>
 			Time time = tService.selectTime(emplId);
-			
-			if (time != null) { // if(!time.isEmpty()) -> 리스트일때
+			if ( time != null ) { // if(!time.isEmpty()) -> 리스트일때
 				mv.addObject("time", time);
-				mv.setViewName("time/vacationList");
-			} else {
-				mv.addObject("msg", "시간 조회에 실패했습니다");
-				mv.setViewName("common/errorPage");
-			}
-			
-			if ( !tList.isEmpty() ) {
+			} 
+			if (!tList.isEmpty()) {
 				mv.addObject("tList", tList);
-				mv.setViewName("time/vacationList");
+				mv.setViewName("time/timeList");
 			} else {
-				mv.addObject("msg", "연차 조회내역이 없습니다.");
-				mv.setViewName("common/errorPage");
+				mv.addObject("msg", "출퇴근 시간 내역이 없습니다.");
+				mv.setViewName("time/timeList");
 			}
-			
+
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
@@ -120,43 +123,78 @@ public class TimeController {
 		return mv;
 	}
 	
-	
-	
-	// 사용자 연차 내역 조회
-	@RequestMapping(value = "/time/timeView.hirp", method = RequestMethod.GET)
-	public ModelAndView timeView(ModelAndView mv, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String emplId = (String) session.getAttribute("emplId"); // 로그인을 해야만 세션 생기는것. 로그인 해야만 조회되는 이유
-		List<Vacation> tList = tService.selectTimeView(emplId);
-		if ( !tList.isEmpty() ) {
-			mv.addObject("tList", tList);
-			mv.setViewName("time/vacationList");
-		} else {
-			mv.addObject("msg", "연차 조회내역이 없습니다.");
+	// 사용자 연차 내역 조회 화면
+	@RequestMapping(value = "/time/vacation.hirp", method = RequestMethod.GET)
+	public ModelAndView vacationListView(ModelAndView mv, HttpServletRequest request) {
+		try {
+			// 세션에있는 로그인한 아이디값 넣어주기
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+
+			List<Vacation> tList = tService.selectTimeView(emplId); // 제네릭 List<Vacation>
+			Time time = tService.selectTime(emplId); // 같은 도메인 아니라 적어줌
+
+			if (time != null) { // if(!time.isEmpty()) -> 리스트일때 // Time time = tService.selectTime(emplId);있어서 list로 안써도 됨
+				mv.addObject("time", time);
+				mv.setViewName("time/vacationList");
+			} else {
+				mv.addObject("msg", "시간 조회에 실패했습니다.");
+				mv.setViewName("common/errorPage");
+			}
+
+			if (!tList.isEmpty()) {
+				mv.addObject("tList", tList);
+				mv.setViewName("time/vacationList");
+			} else {
+				mv.addObject("msg", "연차 내역이 없습니다.");
+				mv.setViewName("common/errorPage");
+			}
+
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
 
-//	// 사용자 근태 조정 신청 화면
-//	@RequestMapping(value="/time/modify.hirp", method=RequestMethod.GET)
-//	public ModelAndView modifyListView (ModelAndView mv) {
-//		mv.setViewName("time/modifyList");
-//		return mv;
-//	}	
+	// 사용자 근태 조정 조회 화면
+	@RequestMapping(value = "/time/modify.hirp", method = RequestMethod.GET)
+	public ModelAndView modifyListView(ModelAndView mv, HttpServletRequest request) {
+		try {
+			// 세션에있는 로그인한 아이디값 넣어주기
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
 
-//
+			List<TimeModify> tList = tService.selectModifyView(emplId); // <> 도메인에 있는 것을 여러개 받겠다
+			Time time = tService.selectTime(emplId);
+
+			if (time != null) { // if(!time.isEmpty()) -> 리스트일때
+				mv.addObject("time", time);
+				mv.setViewName("time/modifyList");
+			} else {
+				mv.addObject("msg", "시간 조회에 실패했습니다");
+				mv.setViewName("common/errorPage");
+			}
+
+			if (!tList.isEmpty()) {
+				mv.addObject("tList", tList);
+				mv.setViewName("time/modifyList");
+			} else {
+				mv.addObject("msg", "근태 조정 신청 내역이 없습니다.");
+				mv.setViewName("common/errorPage");
+			}
+
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
 //	// 사용자 근태 조정 신청
-//	public ModelAndView timeModify (ModelAndView mv, @ModelAttribute TimeModify timeModify, HttpServletRequest request) {
+//	@RequestMapping(value = "/time/modifyList.hirp", method = RequestMethod.POST)
+//	public ModelAndView timeModify(ModelAndView mv, @ModelAttribute TimeModify timeModify, HttpServletRequest request) {
 //		int result = tService.updateTimeModify(timeModify);
 //		return mv;
 //	}
 }
-
-// 이미 있는 거를 덮어 씌우는 건 update
-// 없었는데 새로 생기는건 insert
-
-// 출근등록 - 시간이 아예 디비에 없다가 등록하면 그 때 생기는 거라서 insert
-// 퇴근등록 - update
-// 근태조정신청 - 시간을 바꿔주는 거라 update
-// 등록, 수정에는 Http추가
