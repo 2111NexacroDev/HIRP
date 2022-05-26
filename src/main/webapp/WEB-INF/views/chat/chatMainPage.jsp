@@ -176,12 +176,12 @@
 							emplOneDiv +=	"</button>"
 									+    "</div>";
 									
-							if(emplDivId == 'emplList'){
+							if(emplDivId == 'emplList'){ //직원 리스트 검색일 때
 								emplOneDiv +=	"<div class='ml-20'>"
 												    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
 											+    "</div>"
 							            +	"</div>";
-							} else {
+							} else { //모달창 내부 검색일 때
 								emplOneDiv += "<div class='modal--chatSelect__empList__checkbox-wrap pos-rel ml-20'>"
 										    	+ "<label for=" + eList[i].emplId + ">"
 										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
