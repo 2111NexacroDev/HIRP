@@ -160,6 +160,7 @@
 // 	    			var $emplDiv = $("#emplList");
 	    			$emplListDiv.html("");//기존 내용 있으면 비우기
 	    			
+	    			//list가 null값이면 아무 데이터도 안나옴. controller에서 empty 체크 안함.
 	    			for(var i=0; i<count; i++){
 	    				if(eList[i].emplId != myId){ //내가 아닌 데이터만 가져오기
 		    				var countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.

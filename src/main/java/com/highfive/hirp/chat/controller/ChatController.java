@@ -99,16 +99,16 @@ public class ChatController {
 	
 	//직원 이름으로 검색 -> adminempl쪽에 공통으로 만듬.
 	
-	//채팅방 추가 페이지
-	public ModelAndView insertChattingRoomPage(ModelAndView mv
-			,@ModelAttribute Employee employee) {
-		//직원 리스트 출력
-		//직원 이름으로 검색
-		//위에 컨트롤러 사용하면 될 듯
-		//채팅방 추가 페이지 조회
-		
-		return mv;
-	}
+//	//채팅방 추가 페이지
+//	public ModelAndView insertChattingRoomPage(ModelAndView mv
+//			,@ModelAttribute Employee employee) {
+//		//직원 리스트 출력
+//		//직원 이름으로 검색
+//		//위에 컨트롤러 사용하면 될 듯
+//		//채팅방 추가 페이지 조회
+//		
+//		return mv;
+//	}
 	//채팅방 추가
 	public ModelAndView insertChattingRoom(ModelAndView mv
 			,@ModelAttribute ChatRoom chatroom
