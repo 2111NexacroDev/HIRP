@@ -60,13 +60,13 @@ public class ChatController {
 				
 			if(!emplList.isEmpty()){
 				mv.addObject("emplList", emplList);
-				System.out.println(emplList);
+//				System.out.println(emplList);
 				for(int i = 0; i < emplList.size(); i++) {
 					if(emplList.get(i).getEmplId().equals(emplId) ) {
 						System.out.println("나의 정보"+emplList.get(i));
 					}
 				}
-				
+				System.out.println("채팅방 열기");
 				mv.setViewName("chat/chatMainPage");
 			} else {
 				mv.addObject("msg", "직원 리스트 조회 실패");

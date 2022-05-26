@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	<!-- jstl core -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- jstl 함수 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!-- jstl fmt -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +19,11 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', $('#message').val());
+				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -30,13 +35,11 @@
 				}
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
-					$('#divChatData').append('<div>' + msgData.emplId + '</div>');
-					$('#divChatData').append('<div>' + msgData.msg + '</div>');
+					$('#divChatData').append('<div>' + msgData.emplId + msgData.msg + '</div>');
 				}
 				// 퇴장
 				else if(msgData.cmd == 'CMD_EXIT') {					
-					$('#divChatData').append('<div>' + msgData.emplId + '</div>');
-					$('#divChatData').append('<div>' + msgData.msg + '</div>');
+					$('#divChatData').append('<div>' + msgData.emplId + msgData.msg + '</div>');
 				}
 			},
 			closeMessage: function(str) {
