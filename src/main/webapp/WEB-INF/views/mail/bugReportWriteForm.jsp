@@ -38,7 +38,7 @@
                </li>
             </ul>
             
-            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
+            <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">

@@ -55,6 +55,20 @@ public class MailServiceImpl implements MailService{
 		return result;
 	}
 	
+	// 임시저장(보낸사람)
+	@Override
+	public int teporaryStorageMail(Mail mail) {
+		int result = mStore.teporaryStorageMail(sqlSession, mail);
+		return result;
+	}
+	
+	// 임시저장된 메일 수정
+	@Override
+	public int updateTemporaryStorage(Mail mail) {
+		int result = mStore.updateTemporaryStorage(sqlSession, mail);
+		return result;
+	}
+	
 	// 버그리포트 전송 (수신자 DB)
 	@Override
 	public int sendBugReportRecipient(Mail mail) {
@@ -80,12 +94,6 @@ public class MailServiceImpl implements MailService{
 	public List<Mail> searchMail(Mail mail) {
 		List<Mail> mList = mStore.searchMail(sqlSession, mail);
 		return mList;
-	}
-	
-	@Override
-	public int modifyMail(int mailNo, Mail mail) {
-		int result = mStore.modifyMail(sqlSession, mailNo, mail);
-		return result;
 	}
 	
 	@Override
@@ -121,6 +129,13 @@ public class MailServiceImpl implements MailService{
 		return result;
 	}
 	
+	// 휴지통 선택 메일 삭제
+	@Override
+	public int deleteSelectMail(int mailNo) {
+		int result = mStore.deleteSelectMail(sqlSession, mailNo);
+		return result;
+	}
+	
 	@Override
 	public int removeMail(Mail mail) {
 		int result = mStore.removeMail(sqlSession, mail);
@@ -131,6 +146,13 @@ public class MailServiceImpl implements MailService{
 	@Override
 	public int impMail(Mail mail) {
 		int result = mStore.impMail(sqlSession, mail);
+		return result;
+	}
+	
+	// 메일 읽음표시
+	@Override
+	public int readMail(Mail mail) {
+		int result = mStore.readMail(sqlSession, mail);
 		return result;
 	}
 	

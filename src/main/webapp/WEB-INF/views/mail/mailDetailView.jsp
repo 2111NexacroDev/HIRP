@@ -38,7 +38,7 @@
                </li>
             </ul>
             
-            <a class="btn--function" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
+            <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">버그리포트 작성</a>
         </aside>
 
         <article id="sub" class="">
@@ -69,9 +69,9 @@
 					휴지통
             	</c:if>
             </h1>
-            <button class="basic mt-20" type="button">답장</button>
-            <button class="basic mt-20" type="button">삭제</button>
-            <button class="basic mt-20" type="button">전달</button>
+            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailReplyView.hirp'">답장</button>
+            <button class="basic mt-20" type="button" onclick="wasteMail(${mail.mailNo});">삭제</button>
+            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailRelayView.hirp'">전달</button>
             <!-- 오른쪽으로 밀어야 함 -->
             <button class="basic mt-20"><a href="/mail/list.hirp">목록</a></button>
             
@@ -79,8 +79,9 @@
 	            <form action="/mail/detail.hirp" method="get">
 	            	<table class="table--basic mt-20">
 	            		<tr>
-	            			<td class="mail--star">
-								<input type="checkbox" id="important" value="${mail.mailNo }">
+							<td class="mail--star">
+								<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+								<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
 								<label for="important"></label>
 							</td>
 	            			<td>${mail.mailTitle }</td>
@@ -98,7 +99,9 @@
 	            			<td>${mail.mailDate }</td>
 	            		</tr>
 	            		<tr>
-	            			<td>${mailFile.fileName }</td>
+	            			<td>
+	            				<a href="../../../resources/nuploadFiles/${mailFile.fileReName }" download>${mailFile.fileName }</a>
+	            			</td>
 	            		</tr>
 	            		<tr>
 	            			<td>${mail.mailContents }</td>
@@ -108,6 +111,22 @@
             </div>
 		</article>
 	</div>
+	<script>
+		function wasteMail(mailNo) {
+			$.ajax({
+				url : "/mail/wasteMail.hirp",
+				type : "post",
+				data : { "mailNo" : mailNo },
+				success : function() {
+					// 이전페이지로 가서 새로고침
+					window.location = document.referrer;
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
+		}
+	</script>
 	<script src="../../../resources/js/mail.js"></script>
 </body>
 </html>

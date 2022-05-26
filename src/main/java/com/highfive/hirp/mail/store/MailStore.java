@@ -17,6 +17,9 @@ public interface MailStore {
 	int saveFile(SqlSession sqlSession, MailFile mailFile); // 메일 첨부파일
 	int modifyMailFile(SqlSession sqlSession, MailFile mailFile); // 첨부파일 수정
 	
+	int teporaryStorageMail(SqlSession sqlSession, Mail mail); // 임시저장(보낸사람)
+	int updateTemporaryStorage(SqlSession sqlSession, Mail mail); // 임시저장된 메일 수정
+	
 	int sendBugReportRecipient(SqlSession sqlSession, Mail mail); // 버그리포트 수신자
 	
 	List<Mail> selectRecMail(SqlSession sqlSession, Mail mail, PageInfo pi); // 받은메일함 조회
@@ -32,11 +35,12 @@ public interface MailStore {
 	int wasteMail(SqlSession sqlSession, int mailNo); // 메일 휴지통으로 이동
 	int restoreMail(SqlSession sqlSession, int mailNo); // 휴지통 메일 복구
 	int deleteAllMail(SqlSession sqlSession); // 휴지통 메일 전체 삭제
+	int deleteSelectMail(SqlSession sqlSession, int mailNo); // 휴지통 선택 메일 삭제
 	
 	int impMail(SqlSession sqlSession, Mail mail); // 중요 메일
+	int readMail(SqlSession sqlSession, Mail mail); // 메일 읽음표시
 	
 	List<Mail> searchMail(SqlSession sqlSession, Mail mail);
-	int modifyMail(SqlSession sqlSession, int mailNo, Mail mail);
 	int replyMail(SqlSession sqlSession, Mail mail);
 	int relayMail(SqlSession sqlSession, Mail mail);
 	int removeMail(SqlSession sqlSession, Mail mail);

@@ -32,18 +32,34 @@ public class MailStoreLogic implements MailStore{
 		return result;
 	}
 	
+	// 첨부파일 저장
 	@Override
 	public int saveFile(SqlSession sqlSession, MailFile mailFile) {
 		int result = sqlSession.insert("MailMapper.saveFile", mailFile);
 		return result;
 	}
 	
+	// 임시저장(보낸사람)
+	@Override
+	public int teporaryStorageMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.insert("MailMapper.teporaryStorageMail", mail);
+		return result;
+	}
+	
+	// 임시저장된 메일 수정
+	@Override
+	public int updateTemporaryStorage(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.update("MailMapper.updateTemporaryStorage", mail);
+		return result;
+	}
+	
+	// 버그리포트 수신자
 	@Override
 	public int sendBugReportRecipient(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.insert("MailMapper.sendBugReportRecipient", mail);
 		return result;
 	}
-
+	
 	// 메일 상세조회
 	@Override
 	public Mail selectOneByNo(SqlSession sqlSession, int mailNo) {
@@ -62,12 +78,6 @@ public class MailStoreLogic implements MailStore{
 	public List<Mail> searchMail(SqlSession sqlSession, Mail mail) {
 		List<Mail> mList = sqlSession.selectList("MailMapper.searchMail", mail);
 		return mList;
-	}
-
-	@Override
-	public int modifyMail(SqlSession sqlSession, int mailNo, Mail mail) {
-		int result = sqlSession.update("MailMapper.modifyMail", mailNo);
-		return result;
 	}
 
 	@Override
@@ -108,6 +118,13 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.delete("MailMapper.deleteAllMail");
 		return result;
 	}
+	
+	// 휴지통 선택 메일 삭제
+	@Override
+	public int deleteSelectMail(SqlSession sqlSession, int mailNo) {
+		int result = sqlSession.delete("MailMapper.deleteSelectMail", mailNo);
+		return result;
+	}
 
 	@Override
 	public int removeMail(SqlSession sqlSession, Mail mail) {
@@ -119,6 +136,13 @@ public class MailStoreLogic implements MailStore{
 	@Override
 	public int impMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.update("MailMapper.updateImpMail", mail);
+		return result;
+	}
+	
+	// 메일 읽음표시
+	@Override
+	public int readMail(SqlSession sqlSession, Mail mail) {
+		int result = sqlSession.update("MailMapper.readMail", mail);
 		return result;
 	}
 

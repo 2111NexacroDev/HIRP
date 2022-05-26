@@ -34,72 +34,92 @@
 	
 	<!-- 받은메일함 -->
 	<select id="selectRecMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT * FROM MAIL_TBL
+		WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 보낸메일함 -->
 	<select id="selectSendMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_SENDER = #{emplId} AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT * FROM MAIL_TBL
+		WHERE MAIL_SENDER = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 임시보관함 -->
 	<select id="selectTemMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT * FROM MAIL_TBL
+		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 내게쓴메일함 -->
 	<select id="selectMyMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT * FROM MAIL_TBL
+		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 중요메일함 -->
 	<select id="selectImpMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT * FROM MAIL_TBL
+		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 휴지통 -->
 	<select id="selectWasMail" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
+		SELECT * FROM MAIL_TBL
+		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
+		ORDER BY MAIL_NO DESC
 	</select>
 	
 	<!-- 받은메일함 갯수 -->
 	<select id="selectMailCountR" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 보낸메일함 갯수 -->
 	<select id="selectMailCountS" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE MAIL_SENDER = #{emplId} AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE MAIL_SENDER = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
 	</select>
 	
 	<!-- 임시보관함 갯수 -->
 	<select id="selectMailCountT" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 내게쓴메일함 갯수 -->
 	<select id="selectMailCountM" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 중요메일함 갯수 -->
 	<select id="selectMailCountI" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 휴지통 갯수 -->
 	<select id="selectMailCountW" resultType="_int">
-		SELECT COUNT(*) FROM MAIL_TBL WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
+		SELECT COUNT(*) FROM MAIL_TBL
+		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
 	</select>
 	
 	<!-- 메일함 상세조회 -->
 	<select id="selectOneByNo" resultMap="MailResultMap">
-		SELECT * FROM MAIL_TBL WHERE MAIL_NO = #{mailNo}
+		SELECT * FROM MAIL_TBL
+		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
 	<!-- 첨부파일 조회 -->
 	<select id="selectOneByNoMailFile" resultMap="MailFileResultMap">
-		SELECT * FROM MAIL_FILE_TBL WHERE MAIL_NO = #{mailNo}
+		SELECT * FROM MAIL_FILE_TBL
+		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
 	<!-- 메일 및 버그리포트 전송(보낸사람) -->
@@ -123,12 +143,26 @@
 		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{mailReferrer})
 	</insert>
 	
-	<!-- 메일 및 버그리포트 전송 시 첨부파일 저장 -->
+	<!-- 메일 및 버그리포트 및 임시저장 시 첨부파일 저장 -->
 	<insert id="saveFile" parameterType="MailFile">
 		INSERT INTO
 		MAIL_FILE_TBL
 		VALUES(FILE_NO.NEXTVAL, MAIL_NO.CURRVAL, #{fileName}, #{fileExtension}, #{fileReName}, #{filePath}, #{emplId})
 	</insert>
+	
+	<!-- 임시저장(보낸사람) -->
+	<insert id="teporaryStorageMail" parameterType="Mail">
+		INSERT INTO
+		MAIL_TBL
+		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, #{emplId})
+	</insert>
+	
+	<!-- 임시저장된 메일 수정 -->
+	<update id="updateTemporaryStorage" parameterType="Mail">
+		UPDATE MAIL_TBL SET
+		MAIL_RECIPIENT = #{mailRecipient}, MAIL_REFERRER = #{mailReferrer}, MAIL_TITLE = #{mailTitle}, MAIL_CONTENTS = #{mailContents}
+		WHERE MAIL_NO = #{mailNo}
+	</update>
 	
 	<!-- 버그리포트 전송 시 수신자 -->
 	<insert id="sendBugReportRecipient" parameterType="Mail">
@@ -151,16 +185,28 @@
 		WHERE MAIL_NO = #{mailNo}
 	</update>
 	
-	<!-- 휴지통 메일 전체 삭제 -->
-	<delete id="deleteAllMail">
-		DELETE FROM MAIL_TBL WHERE MAIL_WASTE_BASKET = 'Y'
-	</delete>
-	
 	<!-- 중요 메일 -->
 	<update id="updateImpMail" parameterType="Mail">
 		UPDATE MAIL_TBL SET
 		IMPORTANT_MAIL = #{importantMail}
 		WHERE MAIL_NO = #{mailNo}
 	</update>
+	
+	<!-- 메일 읽음표시 -->
+	<update id="readMail" parameterType="Mail">
+		UPDATE MAIL_TBL SET
+		MAIL_READ = #{mailRead}
+		WHERE MAIL_NO = #{mailNo}
+	</update>
+	
+	<!-- 휴지통 메일 전체 삭제 -->
+	<delete id="deleteAllMail">
+		DELETE FROM MAIL_TBL WHERE MAIL_WASTE_BASKET = 'Y'
+	</delete>
+	
+	<!-- 휴지통 선택 메일 삭제 -->
+	<delete id="deleteSelectMail">
+		DELETE FROM MAIL_TBL WHERE MAIL_NO = #{mailNo}
+	</delete>
 	
 </mapper>

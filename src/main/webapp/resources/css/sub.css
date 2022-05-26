@@ -580,6 +580,12 @@ section[class^="todo--"] {
     }
 }
 
+.bugReport {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: calc(100% - 20px);
+}
 /* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url("../images/icons/icon_success.png");
     position: absolute;
