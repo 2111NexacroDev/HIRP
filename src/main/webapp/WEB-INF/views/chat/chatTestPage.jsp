@@ -25,14 +25,17 @@
 
 				// 정의된 CMD 코드에 따라서 분기 처리
 				if(msgData.cmd == 'CMD_MSG_SEND') {					
+					$('#divChatData').append('<div>' + msgData.emplId + '</div>');
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
+					$('#divChatData').append('<div>' + msgData.emplId + '</div>');
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
 				// 퇴장
 				else if(msgData.cmd == 'CMD_EXIT') {					
+					$('#divChatData').append('<div>' + msgData.emplId + '</div>');
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
 			},
@@ -54,10 +57,11 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(chatroomNo, cmd, msg) {
+			_sendMessage: function(chatroomNo, cmd, emplId, msg) {
 				var msgData = {
 						chatroomNo : chatroomNo,
 						cmd : cmd,
+						emplId : emplId,
 						msg : msg
 				};
 				var jsonData = JSON.stringify(msgData);

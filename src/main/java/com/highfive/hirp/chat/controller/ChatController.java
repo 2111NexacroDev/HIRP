@@ -50,13 +50,23 @@ public class ChatController {
 		
 	//채팅 메인페이지 (직원 목록)
 	@RequestMapping(value="chatMain.hirp", method=RequestMethod.GET)
-	public ModelAndView chatEmplList(ModelAndView mv) {
+	public ModelAndView chatEmplList(ModelAndView mv
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
 		try {
 			List<Employee> emplList = eaService.printAllEmployeeWithName();
 				
 			if(!emplList.isEmpty()){
 				mv.addObject("emplList", emplList);
 				System.out.println(emplList);
+				for(int i = 0; i < emplList.size(); i++) {
+					if(emplList.get(i).getEmplId().equals(emplId) ) {
+						System.out.println("나의 정보"+emplList.get(i));
+					}
+				}
+				
 				mv.setViewName("chat/chatMainPage");
 			} else {
 				mv.addObject("msg", "직원 리스트 조회 실패");

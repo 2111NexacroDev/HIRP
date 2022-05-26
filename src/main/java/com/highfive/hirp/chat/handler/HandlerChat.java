@@ -54,7 +54,8 @@ public class HandlerChat extends TextWebSocketHandler {
 						Map<String, String> mapToSend = new HashMap<String, String>();
 						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_ENTER");
-						mapToSend.put("msg", emplId +  "님이 입장 했습니다.");
+						mapToSend.put("emplId", emplId);
+						mapToSend.put("msg", "님이 입장 했습니다.");
 						
 						String jsonStr = objectMapper.writeValueAsString(mapToSend);
 						sess.sendMessage(new TextMessage(jsonStr));
@@ -74,7 +75,8 @@ public class HandlerChat extends TextWebSocketHandler {
 						Map<String, String> mapToSend = new HashMap<String, String>();
 						mapToSend.put("chatroomNo", chatroomNo);
 						mapToSend.put("cmd", "CMD_MSG_SEND");
-						mapToSend.put("msg", emplId + " : " + mapReceive.get("msg"));
+						mapToSend.put("emplId", emplId);
+						mapToSend.put("msg", mapReceive.get("msg"));
 
 						String jsonStr = objectMapper.writeValueAsString(mapToSend);
 						sess.sendMessage(new TextMessage(jsonStr));
@@ -121,7 +123,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chatroomNo", chatroomNo);
 					mapToSend.put("cmd", "CMD_EXIT");
-					mapToSend.put("msg", emplId + "님이 퇴장 했습니다.");
+					mapToSend.put("emplId", emplId);
+					mapToSend.put("msg", "님이 퇴장 했습니다.");
 
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));

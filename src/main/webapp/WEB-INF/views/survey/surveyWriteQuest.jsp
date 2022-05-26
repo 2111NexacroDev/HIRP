@@ -93,7 +93,7 @@
 		           	</div>
 	            
 		           	<!-- 질문 추가 div 끝 -->
-		           	<input type="text" name="surveyNo" value="${surveyNo }"/>
+		           	<input type="hidden" name="surveyNo" value="${surveyNo }"/>
 				</div>
 			</form>
             

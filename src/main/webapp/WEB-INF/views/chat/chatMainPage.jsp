@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>채팅</title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/chat/chatHeader.jsp" %>
 	<div id="conts">
@@ -18,7 +14,7 @@
             	<div class="chat-row mt-10 basic-border-bottom padding-bottom-10">
 			    	<c:forEach items="${emplList }" var="empl">
 			    		<c:if test="${empl.emplId eq sessionScope.emplId }"> <!-- 나일 때 -->
-						    <div class="chat-row mt-10  padding-bottom-10" onclick="chatWindow(${count});">
+						    <div class="chat-row mt-10  padding-bottom-10" onclick="">
 							    <div class="mr-20 ml-20" style="width:30px;">
 					      		    <button class="btn--profile" type="button">
 					      		    	<c:if test="${empl.emplProfile eq null}">
@@ -33,10 +29,9 @@
 							    	${empl.deptName } ${empl.emplName } ${empl.positionName }
 							    </div>
 			            	</div>
-			    		
 			    		</c:if>
-		            	<!-- 직원명 div 끝 -->
 	            	</c:forEach>
+	            	<!-- 직원명 div 끝 -->
             	</div>
 			    <!-- 검색창 -->
 			    <div class="row mt-20 t-c  padding-bottom-10">

@@ -7,10 +7,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>채팅</title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/chat/chatHeader.jsp" %>
 	<div id="conts">
