@@ -48,35 +48,53 @@
 				메일쓰기
             </h1>
             <div class="subConts">
+<!--             	폼태그 바꿔줘야함 -->
             	<form action="/mail/send.hirp" method="post" enctype="multipart/form-data">
 		            <button class="basic mt-20" type="submit">보내기</button>
-		            <button class="basic mt-20" type="button" onclick="temporaryStorage();">임시저장</button>
+		            <button class="basic mt-20" type="button" onclick="updateTemporaryStorage(${mail.mailNo});">임시저장</button>
 	            	<h4>받는사람</h4>
 	            	<!-- 체크박스 선택하면 로그인 유저 아이디 나와야 함 -->
-	            	<input id="check1" class="mt-20" type="checkbox" name="check1" onclick="myMail();">
+	            	<input id="check1" class="mt-20" type="checkbox">
 	            	<label for="check1">나에게</label>
-	            	<input type="text" name="mailRecipient" id="mailRecipient">
+	            	<input type="text" name="mailRecipient" value="${mail.mailRecipient }">
 	            	<button class="basic mt-20" type="button">주소록</button><br>
 	            	<h4>참조</h4>
-	            	<input type="text" name="mailReferrer">
+	            	<input type="text" name="mailReferrer" value="${mail.mailReferrer }">
 	            	<button class="basic mt-20" type="button">주소록</button><br>
 	            	<h4>제목</h4>
-	            	<input type="text" name="mailTitle"><br>
+	            	<input type="text" name="mailTitle" value="${mail.mailTitle }"><br>
 	            	<h4>파일첨부</h4>
-	            	<input type="file" size="50" name="uploadFile" value="파일선택">
-	            	<textarea id="summernote" rows="" cols="" name="mailContents"></textarea>
+	            	<input type="file" size="50" name="uploadFile" value="${mailFile.fileName }">
+	            	<button class="basic mt-20" type="button">모두 삭제</button>
+	            	<textarea id="summernote" rows="" cols="" name="mailContents">${mail.mailContents }</textarea>
             	</form>
 	        </div>
         </article>
 	</div>
 	<script>
-		// 나에게
-		function myMail() {
-			if($("#check1").prop("checked")) {
-				$("#mailRecipient").val("아이디값 들어가야 함");
-			}else {
-				$("#mailRecipient").val("");
-			}
+		// 임시저장된 메일 수정
+		function updateTemporaryStorage(mailNo) {
+			var mailRecipient = $("input[name=mailRecipient]").val();
+			var mailReferrer = $("input[name=mailReferrer]").val();
+			var mailTitle = $("input[name=mailTitle]").val();
+// 			var mailFile = $("input[name=uploadFile]").val();
+			var mailContents = $("textarea[name=mailContents]").val();
+			$.ajax({
+				url : "/mail/updateTemporaryStorage.hirp",
+				type : "post",
+				data : { "mailNo" : mailNo,
+						 "mailRecipient" : mailRecipient,
+						 "mailReferrer" : mailReferrer,
+						 "mailTitle" : mailTitle,
+// 						 "mailFile" : mailFile,
+						 "mailContents" : mailContents},
+				success : function() {
+					location.href="Tlist.hirp";
+				},
+				error : function() {
+					alert("ajax 실패!");
+				}
+			});
 		}
 	</script>
 	<script src="../../../resources/js/mail.js"></script>

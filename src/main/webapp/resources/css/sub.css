@@ -19,23 +19,20 @@ h2.square-tit {
 }
 
 .subConts>h2.square-tit {
-    margin-top: 20px;   
-    padding: 0 20px 0 44px; 
+    position: relative;
+    margin-top: 20px;
+    padding: 0 20px 0 44px;
 }
 
-h2.square-tit:before {
+.subConts>h2.square-tit:before {
     content: "";
     position: absolute;
     top: 4px;
-    left: 0;
+    left: 20px;
     display: block;
     width: 14px;
     height: 14px;
     background: powderblue;
-}
-
-.subConts>h2.square-tit:before {
-    left: 20px;
 }
 
 /* 개인업무관리 */
@@ -588,6 +585,13 @@ section[class^="todo--"] {
     }
 }
 
+.bugReport {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: calc(100% - 20px);
+}
+
 #snb>ul.ul--utility>li button {
     padding: 0;
     background-color: transparent;
@@ -603,89 +607,5 @@ section[class^="todo--"] {
 /* 공용품 예약/관리 끝 */
 
 /* 게시판 */
-.page--board-write table {
-    width: 100%;
-}
 
-.page--board-write td {
-    padding: 16px 0;
-    vertical-align: middle;
-    border-bottom: 1px solid rgba(0,0,0,.1);
-}
-
-.page--board-write td:first-of-type {
-    width: 120px;
-}
-
-.page--board-write td:last-of-type {
-    width: calc(100% - 120px);
-}
-
-.page--board-write td input[type="text"] {
-    width: 100%;
-}
-
-.page--board-write td select,
-.page--board-write td input[type="text"],
-.page--board-write .btns-wrap button {
-    height: 40px;
-}
-
-.page--board-write td textarea {
-    height: 460px;
-}
-
-.page--board-write tr:first-child td {
-    border-top: 1px solid rgba(0,0,0,.1);
-}
-
-.page--board-write .btns-wrap {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.page--board-write .btns-wrap button {
-    width: 70%;
-    max-width: 200px;
-}
-
-.page--board-write td input[type="file"],
-.page--board-write td span {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.page--board-write .data_file_txt span {
-    margin: 10px 0;
-    font-size: 12px;
-    color: #999; 
-}
 /* 게시판 끝 */
-
-/* 프로젝트 관리 */
-#projectDetail>div {
-    padding: 40px 30px;
-}
-
-.progress-bar .progress {
-    background: linear-gradient(to right, #000 10%, #0b2a60, #00498c);
-    transition: width 1.4s;
-}
-
-.progress-bar+h3 {
-    font-size: 18px;
-    text-align: right;
-    font-weight: 300;
-}
-
-.progress-bar+h3 strong {
-    font-weight: 700;
-    color: #0b2a60;
-}
-
-#projectWrite .btns-wrap button {
-    width: 100px;
-    height: 36px;
-    margin: 40px 4px;
-}
-/* 프로젝트 관리 끝 */

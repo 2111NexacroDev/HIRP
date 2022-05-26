@@ -5,39 +5,41 @@ import java.sql.Date;
 public class Mail {
 	private int mailNo;
 	private String mailSender;
+	private String mailRecipient;
+	private String mailReferrer;
 	private String mailTitle;
 	private String mailContents;
 	private Date mailDate;
+	private String mailRead;
 	private String importantMail;
 	private String temporaryStorage;
 	private String mailWasteBasket;
-	private String emplId;
-	private String recipientId;
-	private String referrerId;
 	private String fileName;
 	private String fileReName;
 	private String filePath;
+	private String emplId;
 	
 	public Mail() {}
 
-	public Mail(int mailNo, String mailSender, String mailTitle, String mailContents, Date mailDate,
-			String importantMail, String temporaryStorage, String mailWasteBasket, String emplId, String recipientId,
-			String referrerId, String fileName, String fileReName, String filePath) {
+	public Mail(int mailNo, String mailSender, String mailRecipient, String mailReferrer, String mailTitle,
+			String mailContents, Date mailDate, String mailRead, String importantMail, String temporaryStorage,
+			String mailWasteBasket, String fileName, String fileReName, String filePath, String emplId) {
 		super();
 		this.mailNo = mailNo;
 		this.mailSender = mailSender;
+		this.mailRecipient = mailRecipient;
+		this.mailReferrer = mailReferrer;
 		this.mailTitle = mailTitle;
 		this.mailContents = mailContents;
 		this.mailDate = mailDate;
+		this.mailRead = mailRead;
 		this.importantMail = importantMail;
 		this.temporaryStorage = temporaryStorage;
 		this.mailWasteBasket = mailWasteBasket;
-		this.emplId = emplId;
-		this.recipientId = recipientId;
-		this.referrerId = referrerId;
 		this.fileName = fileName;
 		this.fileReName = fileReName;
 		this.filePath = filePath;
+		this.emplId = emplId;
 	}
 
 	public int getMailNo() {
@@ -54,6 +56,22 @@ public class Mail {
 
 	public void setMailSender(String mailSender) {
 		this.mailSender = mailSender;
+	}
+
+	public String getMailRecipient() {
+		return mailRecipient;
+	}
+
+	public void setMailRecipient(String mailRecipient) {
+		this.mailRecipient = mailRecipient;
+	}
+
+	public String getMailReferrer() {
+		return mailReferrer;
+	}
+
+	public void setMailReferrer(String mailReferrer) {
+		this.mailReferrer = mailReferrer;
 	}
 
 	public String getMailTitle() {
@@ -80,6 +98,14 @@ public class Mail {
 		this.mailDate = mailDate;
 	}
 
+	public String getMailRead() {
+		return mailRead;
+	}
+
+	public void setMailRead(String mailRead) {
+		this.mailRead = mailRead;
+	}
+
 	public String getImportantMail() {
 		return importantMail;
 	}
@@ -102,30 +128,6 @@ public class Mail {
 
 	public void setMailWasteBasket(String mailWasteBasket) {
 		this.mailWasteBasket = mailWasteBasket;
-	}
-
-	public String getEmplId() {
-		return emplId;
-	}
-
-	public void setEmplId(String emplId) {
-		this.emplId = emplId;
-	}
-
-	public String getRecipientId() {
-		return recipientId;
-	}
-
-	public void setRecipientId(String recipientId) {
-		this.recipientId = recipientId;
-	}
-
-	public String getReferrerId() {
-		return referrerId;
-	}
-
-	public void setReferrerId(String referrerId) {
-		this.referrerId = referrerId;
 	}
 
 	public String getFileName() {
@@ -152,13 +154,21 @@ public class Mail {
 		this.filePath = filePath;
 	}
 
+	public String getEmplId() {
+		return emplId;
+	}
+
+	public void setEmplId(String emplId) {
+		this.emplId = emplId;
+	}
+
 	@Override
 	public String toString() {
-		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailTitle=" + mailTitle + ", mailContents="
-				+ mailContents + ", mailDate=" + mailDate + ", importantMail=" + importantMail + ", temporaryStorage="
-				+ temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", emplId=" + emplId + ", recipientId="
-				+ recipientId + ", referrerId=" + referrerId + ", fileName=" + fileName + ", fileReName=" + fileReName
-				+ ", filePath=" + filePath + "]";
+		return "Mail [mailNo=" + mailNo + ", mailSender=" + mailSender + ", mailRecipient=" + mailRecipient
+				+ ", mailReferrer=" + mailReferrer + ", mailTitle=" + mailTitle + ", mailContents=" + mailContents
+				+ ", mailDate=" + mailDate + ", mailRead=" + mailRead + ", importantMail=" + importantMail
+				+ ", temporaryStorage=" + temporaryStorage + ", mailWasteBasket=" + mailWasteBasket + ", fileName="
+				+ fileName + ", fileReName=" + fileReName + ", filePath=" + filePath + ", emplId=" + emplId + "]";
 	}
 
 }

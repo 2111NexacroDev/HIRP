@@ -344,6 +344,7 @@
 					"boardStatus" : boardStatus
 				},
 				success : function(data) {
+					location.reload();
 					$(".section--modal").stop().fadeOut(100);
 					$("#bContents"+boardStatus).val("");
 					getBoardList();
@@ -443,7 +444,9 @@
 				url : "/project/updateBoard.hirp",
 				type : "post",
 				data : { "boardNo" : boardNo, "boardStatus" : boardStatus},
-				success : function(data) {},
+				success : function(data) {
+					location.reload();
+				},
 				error : function() {
 					alert("ajax 실패!");
 				}
