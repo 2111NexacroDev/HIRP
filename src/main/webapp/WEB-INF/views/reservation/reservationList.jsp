@@ -358,8 +358,12 @@
                         <th>반납처리</th>
                     </thead>
                     <tbody>
-                    <c:forEach items="${myList }" var="myList">
+                    <c:if test="${empty myList }">
                         <tr>
+                            <td class="t-c" colspan="4">등록된 내용이 없습니다.</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${myList }" var="myList">
                             <c:choose>
                                 <c:when test="${myList.utility.utilityCategory eq 'room'}">
                                     <td>회의실</td>
@@ -381,7 +385,6 @@
                                     <td>반납/사용완료</td>
                                 </c:when>
                             </c:choose>
-                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
