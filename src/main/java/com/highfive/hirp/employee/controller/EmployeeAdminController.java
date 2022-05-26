@@ -158,16 +158,6 @@ public class EmployeeAdminController {
 	public NexacroResult empUpdate(
 			 @PathVariable(name="param") String infoCategory
 			,@ParamDataSet(name="in_empl") 		DataSet in_empl
-//			,@ParamDataSet(name="in_jobRole") 	DataSet in_jobRole
-//			,@ParamDataSet(name="in_career") 	DataSet in_career
-//			,@ParamDataSet(name="in_lang") 		DataSet in_lang
-//			,@ParamDataSet(name="in_cert") 		DataSet in_cert
-//			,@ParamDataSet(name="in_military") 	DataSet in_military
-//			,@ParamVariable(name="jobRoleNo") 	int 	jobRoleNo
-//			,@ParamVariable(name="certNo") 		int 	certNo
-//			,@ParamVariable(name="careerNo") 	int 	careerNo
-//			,@ParamVariable(name="langNo") 		int 	langNo
-//			,@ParamVariable(name="militaryNo") 	int 	militaryNo
 			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
