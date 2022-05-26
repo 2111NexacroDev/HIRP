@@ -107,6 +107,7 @@ public class EmployeeAdminController {
 			result.addDataSet("out_dept", dList);
 			result.addDataSet("out_pos", pList);
 			result.addDataSet("out_empl", employee);
+			result.addDataSet("out_empl_top", employee);
 			
 			if(!jList.isEmpty()) {result.addDataSet("out_jobRole", jList);}
 			if(!caList.isEmpty()) {result.addDataSet("out_career", caList);}
@@ -156,8 +157,9 @@ public class EmployeeAdminController {
 	// 사원 정보 수정
 	@RequestMapping(value="/admin/empChange{param}.hirp", method=RequestMethod.POST)
 	public NexacroResult empUpdate(
-			 @PathVariable(name="param") String infoCategory
+			 @PathVariable(name="param") 		String infoCategory
 			,@ParamDataSet(name="in_empl") 		DataSet in_empl
+			,@ParamDataSet(name="in_empl_top") 	DataSet in_empl_top
 			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
@@ -166,8 +168,25 @@ public class EmployeeAdminController {
 		if(infoCategory.equals("Info")) {
 			Employee employee = new Employee();
 			String sOrgEmpId = emplId.toString();
+			//Date endDate = Date.valueOf(dsGet(in_empl, 3, "endDate"));
+			//if(endDate != null) {employee.setEndDate(endDate);}
 			employee.setEmplId(sOrgEmpId);
+			employee.setEmplName(dsGet(in_empl_top, 0, "emplName"));
+			employee.setDeptCode(dsGet(in_empl_top, 0, "deptCode"));
+			employee.setPositionCode(dsGet(in_empl_top, 0, "positionCode"));
+			employee.setDirectNo(dsGet(in_empl_top, 0, "directNo"));
+			employee.setEmail(dsGet(in_empl_top, 0, "email"));
+			employee.setPhoneNo(dsGet(in_empl_top, 0, "phoneNo"));
+			employee.setIsStatus(dsGet(in_empl_top, 0, "isStatus"));
+			employee.setRecruitCategory(dsGet(in_empl, 0, "recruitCategory"));
+			employee.setSalaryCategory(dsGet(in_empl, 0, "salaryCategory"));
+			employee.setReferrer(dsGet(in_empl, 0, "referrer"));
 			employee.setBirthday(dsGet(in_empl, 0, "birthday"));
+			employee.setGender(dsGet(in_empl, 0, "gender"));
+			employee.setIsMarriage(dsGet(in_empl, 0, "isMarriage"));
+			employee.setIsDisability(dsGet(in_empl, 0, "isDisability"));
+			employee.setIsVeterans(dsGet(in_empl, 0, "isVeterans"));
+			employee.setEndReason(dsGet(in_empl, 0, "endReason"));
 			int uResult = eAService.modifyEmployeeInfo(employee);
 			if(uResult < 0) {
 				nErrorCode = -1;
