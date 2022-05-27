@@ -9,6 +9,7 @@
 		<result property="chatroomName" column="CHATROOM_NAME"/>
 		<result property="chatroomManager" column="CHATROOM_MANAGER"/>
 		<result property="chatroomDate" column="CHATROOM_DATE"/>
+		<result property="chatroomType" column="CHATROOM_TYPE"/>
 		<result property="joinchatIdList" column="JOINCHAT_ID_LIST"/>
 		<result property="joinchatNameList" column="JOINCHAT_NAME_LIST"/>
 		<association javaType="Message" property="message" column="MSG_NO">
@@ -92,12 +93,12 @@
 		WHERE CHATROOM_NO = #{chatroomNo}
 		ORDER BY MSG_NO ASC
 	</select>
-	<!-- 채팅방 추가 -->
+	<!-- 그룹 채팅방 추가 -->
 	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
-		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE)
-		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT)
+		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE)
+		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT, 'G')
 	</insert>
-	<!-- 채팅 참가자 추가 -->
+	<!-- 그룹 채팅 참가자 추가 -->
 	<insert id="insertChatRoomJoin">
 		INSERT INTO CHATROOM_JOIN
 		VALUES(JOINCHAT_SEQ.NEXTVAL, #{chatroomNo}, #{joinchatId})

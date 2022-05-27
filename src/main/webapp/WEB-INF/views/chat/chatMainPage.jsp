@@ -180,26 +180,40 @@
 	    			//list가 null값이면 아무 데이터도 안나옴. controller에서 empty 체크 안함.
 	    			for(var i=0; i<count; i++){
 	    				if(eList[i].emplId != myId){ //내가 아닌 데이터만 가져오기
-		    				var countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
-		    				var emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10' onclick='chatWindow("+i+")'>"
-												  +  "<div class='mr-20 ml-20' style='width:30px;'>"
-									      		  +  "<button class='btn--profile' type='button'>";
-							var profile = "";
-							if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
-								emplOneDiv += "<img src='../resources/images/img_no_profile.png' alt='profile'>";
-							} else {
-								emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
-							}
-							
-							emplOneDiv +=	"</button>"
-									+    "</div>";
-									
+	    					var countUp = "";
+	    					var emplOneDiv = "";
+	    					
 							if(emplDivId == 'emplList'){ //직원 리스트 검색일 때
+			    				countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
+			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10' ondblclick='chatWindow("+i+")'>"
+													  +  "<div class='mr-20 ml-20' style='width:30px;'>"
+										      		  +  "<button class='btn--profile' type='button'>";
+								if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
+									emplOneDiv += "<img src='../resources/images/img_no_profile.png' alt='profile'>";
+								} else {
+									emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
+								}
+								
+								emplOneDiv +=	"</button>"
+										+    "</div>";
 								emplOneDiv +=	"<div class='ml-20'>"
 												    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
 											+    "</div>"
 							            +	"</div>";
 							} else { //모달창 내부 검색일 때
+								countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
+			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10'>"
+													  +  "<div class='mr-20 ml-20' style='width:30px;'>"
+										      		  +  "<button class='btn--profile' type='button'>";
+								if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
+									emplOneDiv += "<img src='../resources/images/img_no_profile.png' alt='profile'>";
+								} else {
+									emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
+								}
+								
+								emplOneDiv +=	"</button>"
+										+    "</div>";
+										
 								emplOneDiv += "<div class='modal--chatSelect__empList__checkbox-wrap pos-rel ml-20'>"
 										    	+ "<label for=" + eList[i].emplId + ">"
 										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName

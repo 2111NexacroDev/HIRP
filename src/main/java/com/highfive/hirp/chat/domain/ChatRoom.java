@@ -7,6 +7,7 @@ public class ChatRoom {
 	private String chatroomName;
 	private String chatroomManager;
 	private String chatroomDate;
+	private String chatroomType;
 	//메세지
 	private Message message;
 	//채팅방 참여자 list (string, 콤마로 구분)
@@ -58,6 +59,14 @@ public class ChatRoom {
 
 	public void setChatroomDate(String chatroomDate) {
 		this.chatroomDate = chatroomDate;
+	}
+
+	public String getChatroomType() {
+		return chatroomType;
+	}
+
+	public void setChatroomType(String chatroomType) {
+		this.chatroomType = chatroomType;
 	}
 
 	public Message getMessage() {
