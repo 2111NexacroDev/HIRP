@@ -95,6 +95,17 @@
 	    			$divChatData.html("");//기존 내용 있으면 비우기
 	    			
 	    			for(var i=0; i<count; i++){
+	    				//날짜 출력
+	    				if(i == 0) {
+		    				var date = "<div class='t-c'>"+msgList[i].msgSenddate.substr(0, 10)+"</div>";
+		    				$divChatData.append(date);
+	    				}
+	    				if(i > 0 && msgList[i].msgSenddate.substr(0, 10) != msgList[i-1].msgSenddate.substr(0, 10)){
+		    				var date = "<div class='t-c'>"+msgList[i].msgSenddate.substr(0, 10)+"</div>";
+		    				$divChatData.append(date);
+	    				}
+	    				
+	    				
 	    				var msgEmplId = "";
 	    				var msgContents = "";
 	    				if(msgList[i].msgSendid == "${sessionScope.emplId}"){

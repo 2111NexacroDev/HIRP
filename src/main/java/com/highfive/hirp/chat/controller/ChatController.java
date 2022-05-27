@@ -48,7 +48,7 @@ public class ChatController {
 			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
 
 		model.addAttribute("chatroomNo", chatroomNo);
-		return "chat/chatTestPage";
+		return "chat/chattingPage";
 	}
 	
 	//채팅 내용 조회

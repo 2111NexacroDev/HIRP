@@ -61,18 +61,18 @@ public class HandlerChat extends TextWebSocketHandler {
 					WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 					
 					if(chatroomNo.equals(mapReceive.get("chatroomNo"))) { //채팅방 번호가 같을 때 
-						
-						Map<String, String> mapToSend = new HashMap<String, String>();
-						mapToSend.put("chatroomNo", chatroomNo);
-						mapToSend.put("cmd", "CMD_ENTER");
-						mapToSend.put("emplId", emplId);
-						mapToSend.put("emplName", emplName);
-						mapToSend.put("deptName", deptName);
-						mapToSend.put("positionName", positionName);
-						mapToSend.put("msg", "님이 입장 했습니다.");
-						
-						String jsonStr = objectMapper.writeValueAsString(mapToSend);
-						sess.sendMessage(new TextMessage(jsonStr));
+						System.out.println(deptName+" "+emplName+" "+positionName+"("+emplId+") 님이 입장했습니다.");
+//						Map<String, String> mapToSend = new HashMap<String, String>();
+//						mapToSend.put("chatroomNo", chatroomNo);
+//						mapToSend.put("cmd", "CMD_ENTER");
+//						mapToSend.put("emplId", emplId);
+//						mapToSend.put("emplName", emplName);
+//						mapToSend.put("deptName", deptName);
+//						mapToSend.put("positionName", positionName);
+//						mapToSend.put("msg", "님이 입장 했습니다.");
+//						
+//						String jsonStr = objectMapper.writeValueAsString(mapToSend);
+//						sess.sendMessage(new TextMessage(jsonStr));
 					}
 				}
 				break;
@@ -108,7 +108,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				messageVo.setMsgContents(mapReceive.get("msg"));
 				int result = cService.insertMessage(messageVo);
 				if(result > 0 ) { //DB에 추가 성공
-					System.out.println(emplId + " : "+ mapReceive.get("msg")+"메세지 추가");
+					System.out.println(emplId + " : "+ mapReceive.get("msg")+" 메세지 추가");
 				}
 				
 				break;
@@ -153,17 +153,18 @@ public class HandlerChat extends TextWebSocketHandler {
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 
 				if (chatroomNo.equals(now_chatroomNo)) {
-					Map<String, String> mapToSend = new HashMap<String, String>();
-					mapToSend.put("chatroomNo", chatroomNo);
-					mapToSend.put("cmd", "CMD_EXIT");
-					mapToSend.put("emplId", emplId);
-					mapToSend.put("emplName", emplName);
-					mapToSend.put("deptName", deptName);
-					mapToSend.put("positionName", positionName);
-					mapToSend.put("msg", "님이 퇴장 했습니다.");
-
-					String jsonStr = objectMapper.writeValueAsString(mapToSend);
-					sess.sendMessage(new TextMessage(jsonStr));
+					System.out.println(deptName+" "+emplName+" "+positionName+"("+emplId+") 님이 퇴장했습니다.");
+//					Map<String, String> mapToSend = new HashMap<String, String>();
+//					mapToSend.put("chatroomNo", chatroomNo);
+//					mapToSend.put("cmd", "CMD_EXIT");
+//					mapToSend.put("emplId", emplId);
+//					mapToSend.put("emplName", emplName);
+//					mapToSend.put("deptName", deptName);
+//					mapToSend.put("positionName", positionName);
+//					mapToSend.put("msg", "님이 퇴장 했습니다.");
+//
+//					String jsonStr = objectMapper.writeValueAsString(mapToSend);
+//					sess.sendMessage(new TextMessage(jsonStr));
 				}
 			}
 		}
