@@ -208,7 +208,7 @@ public class ApprovalController {
 	
 	
 	//결재대기 문서함(select List session에서 id, 진행사항  : 대기)
-	@RequestMapping(value="/wating/appr.hirp")
+	@RequestMapping(value="/waiting/appr.hirp")
 	public ModelAndView printAllWaitingAppr(ModelAndView mv,HttpServletRequest request) {
 	try {
 		HttpSession session = request.getSession();
@@ -216,7 +216,7 @@ public class ApprovalController {
 		List<Approval> aList = aService.printAllWaitingAppr(emplId);
 		if (!aList.isEmpty()) {
 			mv.addObject("aList", aList);
-			mv.setViewName("approval/waitingList");
+			mv.setViewName("approval/apprList");
 		} else {
 			mv.addObject("msg", "문서 조회 실패");
 			mv.setViewName("common/errorPage");
@@ -228,6 +228,31 @@ public class ApprovalController {
 		return mv;
 	}
 	
+	
+	//상신 문서함
+		@RequestMapping(value="/myAppr.hirp")
+		public ModelAndView printAllMyAppr(ModelAndView mv,HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Approval> aList = aService.printAllMyAppr(emplId);
+			if (!aList.isEmpty()) {
+				mv.addObject("aList", aList);
+				mv.setViewName("approval/writtenApprList");
+			} else {
+				mv.addObject("msg", "문서 조회 실패");
+				mv.setViewName("common/errorPage");
+			} 
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}
+	
+	
+	
+	
 	//결재대기 문서 조회(approval select)
 	//결재선 진행 상태 조회(appr_accept select 결재상태 <조건> 문서번호 )
 	@RequestMapping(value="/appr/detail.hirp",method=RequestMethod.GET)
@@ -236,6 +261,7 @@ public class ApprovalController {
 		List<ApprAccept> aList = aService.printApprovalStatus(apprNo);
 		String emplId = approval.getEmplId();
 		Employee employee = eService.employeeMyPage(emplId);
+		
 		if(!aList.isEmpty()) {
 			mv.addObject("approval", approval);
 			mv.addObject("aList", aList);
@@ -254,11 +280,32 @@ public class ApprovalController {
 	//결재자 결재진행(결재승인, 반려)
 	//(appr_accept update 결재상태 "승인,반려" <조건>문서번호,session id값 )
 	//(update approval 진행상태"승인, 진행,반려")
-	public ModelAndView modifyApprStatus(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
+	@RequestMapping(value="/proceed/appr.hirp",method=RequestMethod.POST)
+	public ModelAndView proceedAppr(ModelAndView mv,
+			@ModelAttribute ApprAccept apprAccept,
+			@RequestParam(value="apprStatus", required = false) String apprStatus) {
+		try {
+			int result = aService.modifyApprAccept(apprAccept);
+			String aStatus = apprAccept.getaStatus();
+			if(aStatus!=null && aStatus!="") {
+				Approval approval = new Approval();
+				approval.setApprNo(apprAccept.getApprNo());
+				approval.setApprStatus(apprStatus);
+				int result2 = aService.modifyApprovalStatus(approval);
+			}
+			if (result > 0) {
+				
+				mv.setViewName("redirect:/approval/main.hirp");
+			} else {
+				mv.addObject("msg", "문서 상신 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch (Exception e) {
+				mv.addObject("msg", e.toString());
+				mv.setViewName("common/errorPage");
+			}
 		return mv;
-	}
-	
-	
+		}
 	//결재 상신 취소
 	//delete appr_accept
 	//delete approval
