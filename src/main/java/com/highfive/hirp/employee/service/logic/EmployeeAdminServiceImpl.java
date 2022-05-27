@@ -72,9 +72,7 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	public List<Employee> printAllTempEmployee() {
 		List<Employee> tList = eAStore.selectTempEmployee(sqlSession);
 		return tList;
-	}
-	
-	
+	}	
 
 	@Override
 	public Employee printEmployeeInfo(String emplId) {
@@ -160,5 +158,69 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		return result;
 	}
 
+	@Override
+	public int registerJobRole(JobRole jobRole) {
+		int result = eAStore.insertJobRole(sqlSession, jobRole);
+		return result;
+	}
 
+	@Override
+	public int registerCareer(Career career) {
+		int result = eAStore.insertCareer(sqlSession, career);
+		return result;
+	}
+
+	@Override
+	public int registerCert(Certification cert) {
+		int result = eAStore.insertCert(sqlSession, cert);
+		return result;
+	}
+
+	@Override
+	public int registerLang(Language lang) {
+		int result = eAStore.insertLang(sqlSession, lang);
+		return result;
+	}
+
+	@Override
+	public int registerMilitary(Military military) {
+		int result = eAStore.insertMilitary(sqlSession, military);
+		return result;
+	}
+	
+	@Override
+	public int modifyTopInfo(Employee employee) {
+		int result = eAStore.updateTopInfo(sqlSession, employee);
+		return result;
+	}
+
+	@Override
+	public int modifyJobRole(JobRole jobRole) {
+		int result = eAStore.updateJobRole(sqlSession, jobRole);
+		return result;
+	}
+
+	@Override
+	public int modifyCareer(Career career) {
+		int result = eAStore.updateCareer(sqlSession, career);
+		return result;
+	}
+
+	@Override
+	public int modifyCert(Certification cert) {
+		int result = eAStore.updateCert(sqlSession, cert);
+		return result;
+	}
+
+	@Override
+	public int modifyLang(Language lang) {
+		int result = eAStore.updateLang(sqlSession, lang);
+		return result;
+	}
+
+	@Override
+	public int modifyMilitary(Military military) {
+		int result = eAStore.updateMilitary(sqlSession, military);
+		return result;
+	}
 }

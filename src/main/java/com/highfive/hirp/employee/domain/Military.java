@@ -1,22 +1,20 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class Military {
 	private int militaryNo;
 	private String emplId;
 	private String militaryGrade;
 	private String militaryCode;
 	private String isMilitaryEnd;
-	private Date militaryStartDate;
-	private Date militaryEndDate;
+	private String militaryStartDate;
+	private String militaryEndDate;
 	private String militaryEtc;
 
 	public Military() {
 	}
 
 	public Military(int militaryNo, String emplId, String militaryGrade, String militaryCode, String isMilitaryEnd,
-			Date militaryStartDate, Date militaryEndDate, String militaryEtc) {
+			String militaryStartDate, String militaryEndDate, String militaryEtc) {
 		super();
 		this.militaryNo = militaryNo;
 		this.emplId = emplId;
@@ -68,19 +66,19 @@ public class Military {
 		this.isMilitaryEnd = isMilitaryEnd;
 	}
 
-	public Date getMilitaryStartDate() {
+	public String getMilitaryStartDate() {
 		return militaryStartDate;
 	}
 
-	public void setMilitaryStartDate(Date militaryStartDate) {
+	public void setMilitaryStartDate(String militaryStartDate) {
 		this.militaryStartDate = militaryStartDate;
 	}
 
-	public Date getMilitaryEndDate() {
+	public String getMilitaryEndDate() {
 		return militaryEndDate;
 	}
 
-	public void setMilitaryEndDate(Date militaryEndDate) {
+	public void setMilitaryEndDate(String militaryEndDate) {
 		this.militaryEndDate = militaryEndDate;
 	}
 

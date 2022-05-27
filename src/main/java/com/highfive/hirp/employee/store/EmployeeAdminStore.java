@@ -10,7 +10,6 @@ import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.domain.JobRole;
 import com.highfive.hirp.employee.domain.Language;
 import com.highfive.hirp.employee.domain.Military;
-import com.nexacro17.xapi.data.DataSet;
 
 public interface EmployeeAdminStore {
 
@@ -33,10 +32,24 @@ public interface EmployeeAdminStore {
 	int modifyEmployeeInfo(SqlSession sqlSession, Employee employee);
 	int resignEmployee(SqlSession sqlSession, String emplId);
 	int updateLevelEmployee(SqlSession sqlSession, String emplId);
+	
 	int deleteInfoAboutJob(SqlSession sqlSession, int jobNo);
 	int deleteInfoAboutCareer(SqlSession sqlSession, int infoNo);
 	int deleteInfoAboutLang(SqlSession sqlSession, int infoNo);
 	int deleteInfoAboutCert(SqlSession sqlSession, int infoNo);
 	int deleteInfoAboutMilitary(SqlSession sqlSession, int infoNo);
+	
+	int insertJobRole(SqlSession sqlSession, JobRole jobRole);
+	int insertCareer(SqlSession sqlSession, Career career);
+	int insertCert(SqlSession sqlSession, Certification cert);
+	int insertLang(SqlSession sqlSession, Language lang);
+	int insertMilitary(SqlSession sqlSession, Military military);
+	
+	int updateTopInfo(SqlSession sqlSession, Employee employee);
+	int updateJobRole(SqlSession sqlSession, JobRole jobRole);
+	int updateCareer(SqlSession sqlSession, Career career);
+	int updateCert(SqlSession sqlSession, Certification cert);
+	int updateLang(SqlSession sqlSession, Language lang);
+	int updateMilitary(SqlSession sqlSession, Military military);
 	
 }

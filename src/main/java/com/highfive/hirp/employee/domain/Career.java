@@ -1,12 +1,10 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class Career {
 	private int careerNo;
 	private String emplId;
-	private Date careerStartDate;
-	private Date careerEndDate;
+	private String careerStartDate;
+	private String careerEndDate;
 	private String careerPlace;
 	private String careerRank;
 	private String careerJobRole;
@@ -16,7 +14,7 @@ public class Career {
 	
 	public Career() {}
 
-	public Career(int careerNo, String emplId, Date careerStartDate, Date careerEndDate, String careerPlace,
+	public Career(int careerNo, String emplId, String careerStartDate, String careerEndDate, String careerPlace,
 			String careerRank, String careerJobRole, String careerPeriod, String careerEndReason, String careerEtc) {
 		super();
 		this.careerNo = careerNo;
@@ -47,19 +45,19 @@ public class Career {
 		this.emplId = emplId;
 	}
 
-	public Date getCareerStartDate() {
+	public String getCareerStartDate() {
 		return careerStartDate;
 	}
 
-	public void setCareerStartDate(Date careerStartDate) {
+	public void setCareerStartDate(String careerStartDate) {
 		this.careerStartDate = careerStartDate;
 	}
 
-	public Date getCareerEndDate() {
+	public String getCareerEndDate() {
 		return careerEndDate;
 	}
 
-	public void setCareerEndDate(Date careerEndDate) {
+	public void setCareerEndDate(String careerEndDate) {
 		this.careerEndDate = careerEndDate;
 	}
 

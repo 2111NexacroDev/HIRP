@@ -1,7 +1,5 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class Certification {
 	private int certNo;
 	private String emplId;
@@ -10,14 +8,14 @@ public class Certification {
 	private String certEnrollNo;
 	private String certLevel;
 	private String certInst;
-	private Date certStartDate;
-	private Date certEndDate;
+	private String certStartDate;
+	private String certEndDate;
 
 	public Certification() {
 	}
 
 	public Certification(int certNo, String emplId, String certCategory, String certName, String certEnrollNo,
-			String certLevel, String certInst, Date certStartDate, Date certEndDate) {
+			String certLevel, String certInst, String certStartDate, String certEndDate) {
 		super();
 		this.certNo = certNo;
 		this.emplId = emplId;
@@ -86,19 +84,19 @@ public class Certification {
 		this.certInst = certInst;
 	}
 
-	public Date getCertStartDate() {
+	public String getCertStartDate() {
 		return certStartDate;
 	}
 
-	public void setCertStartDate(Date certStartDate) {
+	public void setCertStartDate(String certStartDate) {
 		this.certStartDate = certStartDate;
 	}
 
-	public Date getCertEndDate() {
+	public String getCertEndDate() {
 		return certEndDate;
 	}
 
-	public void setCertEndDate(Date certEndDate) {
+	public void setCertEndDate(String certEndDate) {
 		this.certEndDate = certEndDate;
 	}
 

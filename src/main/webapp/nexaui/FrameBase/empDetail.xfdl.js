@@ -170,7 +170,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_jobRole");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"직무번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"직군\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"직무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"직무시작일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"직무종료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"담당업무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:jobRoleNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:jobRoleDivision\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:jobRoleTitle\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:jobRoleStartDate\" textAlign=\"center\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"5\" text=\"bind:jobRoleEndDate\" textAlign=\"center\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"6\" text=\"bind:jobRoleConts\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:jobRoleEtc\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"직무번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"직군\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"직무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"직무시작일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"직무종료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"담당업무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"관리번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:jobRoleNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:jobRoleDivision\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:jobRoleTitle\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:jobRoleStartDate\" textAlign=\"center\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\" calendareditformat=\"yyyy-MM-dd\"/><Cell col=\"5\" text=\"bind:jobRoleEndDate\" textAlign=\"center\" displaytype=\"date\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\" calendareditformat=\"yyyy-MM-dd\"/><Cell col=\"6\" text=\"bind:jobRoleConts\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:jobRoleEtc\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:jobRoleNo\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
             this.Tab00.Tabpage2.addChild(obj.name, obj);
 
             obj = new Button("btn_minus",null,"192","50","26","20",null,null,null,null,null,this.Tab00.Tabpage2.form);
@@ -200,7 +200,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_career");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"경력번호\"/><Cell col=\"1\" color=\"#333333\" text=\"NO\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"경력시작일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"경력종료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"근무처\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"직위\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"담당업무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"근속기간\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"퇴사사유\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"9\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:careerNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:careerStartDate\" edittype=\"date\" textAlign=\"center\" calendardateformat=\"yyyy-MM-dd\" displaytype=\"date\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"3\" text=\"bind:careerEndDate\" edittype=\"date\" textAlign=\"center\" calendardateformat=\"yyyy-MM-dd\" displaytype=\"date\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"4\" text=\"bind:careerPlace\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"5\" text=\"bind:careerRank\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:careerJobRole\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:careerPeriod\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:careerEndReason\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"9\" text=\"bind:careerEtc\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"경력번호\"/><Cell col=\"1\" color=\"#333333\" text=\"NO\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"경력시작일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"경력종료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"근무처\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"직위\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"담당업무\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"근속기간\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"퇴사사유\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"9\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"10\" text=\"관리번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:careerNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:careerStartDate\" edittype=\"date\" textAlign=\"center\" calendardateformat=\"yyyy-MM-dd\" displaytype=\"date\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"3\" text=\"bind:careerEndDate\" edittype=\"date\" textAlign=\"center\" calendardateformat=\"yyyy-MM-dd\" displaytype=\"date\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"4\" text=\"bind:careerPlace\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"5\" text=\"bind:careerRank\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:careerJobRole\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:careerPeriod\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:careerEndReason\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"9\" text=\"bind:careerEtc\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"10\" text=\"bind:careerNo\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
             this.Tab00.Tabpage3.addChild(obj.name, obj);
 
             obj = new Button("btn_plus",null,"192","50","26","76",null,null,null,null,null,this.Tab00.Tabpage3.form);
@@ -230,7 +230,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_cert");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"자격번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"구분\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"자격명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"자격증번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"자격등급\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"기관명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"취득일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"만료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:certNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:certCategory\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:certName\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:certEnrollNo\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"5\" text=\"bind:certLevel\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:certInst\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:certStartDate\" edittype=\"date\" textAlign=\"center\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"8\" text=\"bind:certEndDate\" edittype=\"date\" textAlign=\"center\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"자격번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"구분\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"3\" text=\"자격명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"자격증번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"자격등급\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"기관명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"취득일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"만료일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"9\" text=\"관리번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:certNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:certCategory\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:certName\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:certEnrollNo\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"5\" text=\"bind:certLevel\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:certInst\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:certStartDate\" edittype=\"date\" textAlign=\"center\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"8\" text=\"bind:certEndDate\" edittype=\"date\" textAlign=\"center\" displaytype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"9\" text=\"bind:certNo\" edittype=\"none\" textAlign=\"center\" displaytype=\"normal\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/></Band></Format></Formats>");
             this.Tab00.Tabpage4.addChild(obj.name, obj);
 
             obj = new Button("btn_plus",null,"192","50","26","76",null,null,null,null,null,this.Tab00.Tabpage4.form);
@@ -260,7 +260,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_lang");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"어학번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"2\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\" text=\"구분\"/><Cell col=\"3\" text=\"어학명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"평가일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"평가기관\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"점수\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"등급\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:langNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:langCategory\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:langName\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:langTestDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"5\" text=\"bind:langInst\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:langScore\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:langGrade\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:langEtc\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"어학번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"2\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\" text=\"구분\"/><Cell col=\"3\" text=\"어학명\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"4\" text=\"평가일\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"5\" text=\"평가기관\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"6\" text=\"점수\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"7\" text=\"등급\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"8\" text=\"비고\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"9\" text=\"관리번호\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/></Band><Band id=\"body\"><Cell text=\"bind:langNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:langCategory\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:langName\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:langTestDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"5\" text=\"bind:langInst\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"6\" text=\"bind:langScore\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"7\" text=\"bind:langGrade\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:langEtc\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"9\" text=\"bind:langNo\" textAlign=\"center\" edittype=\"none\"/></Band></Format></Formats>");
             this.Tab00.Tabpage5.addChild(obj.name, obj);
 
             obj = new Button("btn_plus",null,"192","50","26","76",null,null,null,null,null,this.Tab00.Tabpage5.form);
@@ -290,7 +290,7 @@
             obj.set_taborder("0");
             obj.set_binddataset("ds_military");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"병역번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"계급\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"3\" text=\"군번\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"4\" text=\"전역구분\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"5\" text=\"입대일\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"6\" text=\"제대일\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"7\" text=\"비고\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/></Band><Band id=\"body\"><Cell text=\"bind:militaryNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:militaryGrade\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:militaryCode\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:isMilitaryEnd\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"5\" text=\"bind:militaryStartDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"6\" text=\"bind:militaryEndDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"7\" text=\"bind:militaryEtc\" textAlign=\"center\" edittype=\"text\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"0\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"0\"/></Columns><Rows><Row size=\"30\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell text=\"병역번호\"/><Cell col=\"1\" text=\"NO\" color=\"#333333\" border=\"1px solid #dbdee2\" background=\"#f9f9f9\"/><Cell col=\"2\" text=\"계급\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"3\" text=\"군번\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"4\" text=\"전역구분\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"5\" text=\"입대일\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"6\" text=\"제대일\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"7\" text=\"비고\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/><Cell col=\"8\" text=\"관리번호\" color=\"#333333\" background=\"#f9f9f9\" border=\"1px solid #dbdee2\"/></Band><Band id=\"body\"><Cell text=\"bind:militaryNo\"/><Cell col=\"1\" text=\"expr:currow+1\" textAlign=\"center\"/><Cell col=\"2\" text=\"bind:militaryGrade\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"3\" text=\"bind:militaryCode\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"4\" text=\"bind:isMilitaryEnd\" textAlign=\"center\" edittype=\"combo\" displaytype=\"combotext\" combodataset=\"ds_ny\" combodatacol=\"value\" combocodecol=\"code\"/><Cell col=\"5\" text=\"bind:militaryStartDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"6\" text=\"bind:militaryEndDate\" displaytype=\"date\" textAlign=\"center\" edittype=\"date\" calendardateformat=\"yyyy-MM-dd\" calendardisplaynulltype=\"nulltext\" calendardisplaynulltext=\"일자 선택\"/><Cell col=\"7\" text=\"bind:militaryEtc\" textAlign=\"center\" edittype=\"text\"/><Cell col=\"8\" text=\"bind:militaryNo\" textAlign=\"center\" edittype=\"none\"/></Band></Format></Formats>");
             this.Tab00.Tabpage6.addChild(obj.name, obj);
 
             obj = new Button("btn_plus",null,"192","50","26","76",null,null,null,null,null,this.Tab00.Tabpage6.form);
@@ -441,6 +441,69 @@
         			return;
         		}
         		this.alert("수정 성공");
+        	}
+        	else if(id=="tr_empl_modify_JobRole")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_JobRole")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_Career")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_Lang")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_Cert")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_Military")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("저장 실패");
+        			return;
+        		}
+        		this.alert("저장 성공");
+        	}
+        	else if(id=="tr_empl_modify_Top")
+        	{
+        		if(nErrorCode < 0)
+        		{
+        			this.alert("상단 데이터 저장 실패");
+        			return;
+        		}
+        		//this.alert("회원 상세 정보 저장 성공");
         	}
         }
 
@@ -608,13 +671,26 @@
         	}
         };
 
+        // TOP TRANSACTION
+        this.fn_top_tran = function(id, nErrorCode, sErrorMsg)
+        {
+        	this.transaction(
+         		"tr_empl_modify_Top"// 1.ID
+         		,"HirpURL::admin/empChangeTop.hirp"// 2.URL
+         		,"in_data=ds_empl_top" // 3.InDs : F->S jsp(I,U,D)
+         		,"" // 4.OutDs : S->F jsp(SELECT)
+         		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
+         		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         	);
+        }
+
         // 기본정보 저장
         this.Tab00_Tabpage1_btn_save_onclick = function(obj,e)
         {
         	this.transaction(
          		"tr_empl_modify_Info"// 1.ID
-         		,"HirpURL::admin/empChangeInfo.hirp"// 2.URL
-         		,"in_empl=ds_empl in_empl_top=ds_empl_top:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"HirpURL::admin/empModifyInfo.hirp"// 2.URL
+         		,"in_empl=ds_empl in_empl_top=ds_empl_top" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
@@ -627,11 +703,12 @@
         	this.transaction(
          		"tr_empl_modify_JobRole"// 1.ID
          		,"HirpURL::admin/empChangeJobRole.hirp"// 2.URL
-         		,"in_jobRole=ds_jobRole:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_data=ds_jobRole:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
          	);
+        	this.fn_top_tran();
         };
 
         // 경력 목록 저장
@@ -640,11 +717,12 @@
         	this.transaction(
          		"tr_empl_modify_Career"// 1.ID
          		,"HirpURL::admin/empChangeCareer.hirp"// 2.URL
-         		,"in_career=ds_career:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_data=ds_career:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
          	);
+        	this.fn_top_tran();
         };
 
         // 자격 목록 저장
@@ -653,11 +731,12 @@
         	this.transaction(
          		"tr_empl_modify_Cert"// 1.ID
          		,"HirpURL::admin/empChangeCert.hirp"// 2.URL
-         		,"in_cert=ds_cert:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_data=ds_cert:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
          	);
+        	this.fn_top_tran();
         };
 
         // 어학 목록 저장
@@ -666,11 +745,12 @@
         	this.transaction(
          		"tr_empl_modify_Lang"// 1.ID
          		,"HirpURL::admin/empChangeLang.hirp"// 2.URL
-         		,"in_lang=ds_lang:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_data=ds_lang:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
          	);
+        	this.fn_top_tran();
         };
 
         // 병역 목록 저장
@@ -679,11 +759,12 @@
         	this.transaction(
          		"tr_empl_modify_Military"// 1.ID
          		,"HirpURL::admin/empChangeMilitary.hirp"// 2.URL
-         		,"in_military=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
+         		,"in_data=ds_military:U" // 3.InDs : F->S jsp(I,U,D)
          		,"" // 4.OutDs : S->F jsp(SELECT)
          		,"emplId="+selectedEmplId // 5.InVar : F->S(var)
          		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
          	);
+        	this.fn_top_tran();
         };
 
         });
