@@ -65,21 +65,13 @@
 
         this.Button00_onclick = function(obj,e)
         {
-        	var nLeft = system.clientToScreenX(this, 10);
-            var nTop  = system.clientToScreenY(this, 10);
-
-        	var objChild = new ChildFrame("popDeptAdd", "absolute", nLeft, nTop, 420, 180);
-        	objChild.set_formurl("FrameBase::guideMsg.xfdl");
-        	objChild.set_openalign("center middle");
-        	objChild.set_dragmovetype("all");
-        	objChild.showModal(this.getOwnerFrame(), null, this, null);
+        	alert("관리자님, 환영합니다! \n관리 기능은 왼쪽 메뉴를 이용하시면 됩니다!");
         };
 
         this.Button00_00_onclick = function(obj,e)
         {
         	location.href="/home.hirp";
         };
-
         });
         
         // Regist UI Components Event
