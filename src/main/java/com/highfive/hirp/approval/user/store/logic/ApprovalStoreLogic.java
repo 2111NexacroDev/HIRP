@@ -78,6 +78,12 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
+	public List<Approval> selectAllMyAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList = sqlSession.selectList("ApprMapper.selectAllMyAppr",emplId);
+		return aList;
+	}
+	
+	@Override
 	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
 		Approval approval = sqlSession.selectOne("",docNo);
 		return approval;
@@ -90,16 +96,20 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return aList;
 	}
 
+	//결재 진행
 	@Override
-	public int updateApprStatus(SqlSession sqlSession, ApprAccept apprAccept) {
-		int result = sqlSession.update("",apprAccept);
+	public int modifyApprAccept(SqlSession sqlSession, ApprAccept apprAccept) {
+		int result = sqlSession.update("ApprMapper.modifyApprAccept",apprAccept);
+		if(apprAccept.getaStatus().equals("반려")) {
+		int result2 = sqlSession.update("ApprMapper.modifyRejectAppr");
+		}
 		return result;
 	}
 
-	
+	//결재 테이블 상태 변경
 	@Override
 	public int updateApprovalStatus(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.update("",approval);
+		int result = sqlSession.update("ApprMapper.modifyApprStatus",approval);
 		return result;
 	}
 
@@ -165,5 +175,13 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		int result = sqlSession.insert("ApprMapper.insertApprAttachedFile",apprFile);
 		return result;
 	}
+
+
+
+	//반려된 문서 이후의 결재라인 수정
+//	@Override
+//	public int updateRejectedAppr(SqlSession sqlSession) {
+//		return result;
+//	}
 
 }
