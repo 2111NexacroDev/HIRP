@@ -65,7 +65,14 @@
 
         this.Button00_onclick = function(obj,e)
         {
-        	this.go("FrameBase::emplList.xfdl");
+        	var nLeft = system.clientToScreenX(this, 10);
+            var nTop  = system.clientToScreenY(this, 10);
+
+        	var objChild = new ChildFrame("popDeptAdd", "absolute", nLeft, nTop, 420, 180);
+        	objChild.set_formurl("FrameBase::guideMsg.xfdl");
+        	objChild.set_openalign("center middle");
+        	objChild.set_dragmovetype("all");
+        	objChild.showModal(this.getOwnerFrame(), null, this, null);
         };
 
         this.Button00_00_onclick = function(obj,e)
