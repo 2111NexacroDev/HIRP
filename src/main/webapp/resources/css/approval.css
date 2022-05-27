@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
-#apprbtn {
+.apprbtn {
 	float: right;
+	margin-left : 10px;
+	margin-bottom : 50px;
 }
 
 #apprTable {
@@ -54,7 +56,7 @@
 	text-align : center;
 	border-bottom: solid 1px #888;
 	margin : 0px;
-	padding-top : 3px;
+	padding-top : 23px;
 
 }
 
@@ -81,3 +83,51 @@ border-top : none;
 border-radius:0px 0px 4px 4px;
 padding : 10px;
 }
+
+
+
+<!---------------------------------->
+#approvalLine-btn {
+	background-color: white;
+	border: solid 1px #888;
+	border-radius: 4px;
+	width: 80px;
+	height: 35px;
+	float: right;
+}
+
+#submit-btn {
+	background-color: white;
+	border: solid 1px #888;
+	border-radius: 4px;
+	width: 80px;
+	height: 35px;
+	float: right;
+	margin :30px 0px;
+}
+
+.groupContainer{
+	width:250px; 
+	height:300px; 
+	border:1px solid #999;
+	overflow: auto;
+	margin-top : 20px;
+	margin-right : 20px;
+}
+
+ .groupContainer::-webkit-scrollbar {
+    width: 10px;
+  }
+  .groupContainer::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  .groupContainer::-webkit-scrollbar-track {
+    background-color: lightgray;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+
+

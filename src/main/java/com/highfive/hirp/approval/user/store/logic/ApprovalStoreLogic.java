@@ -52,10 +52,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	
-
+	//임시저장
 	@Override
-	public int insertStoragedAppr(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.insert("",approval);
+	public int insertTempStorageAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertTempStorageAppr",approval);
 		return result;
 	}
 
@@ -131,21 +131,24 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return aList;
 	}
 
+	//임시저장 리스트 조회
 	@Override
-	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList=sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTemporaryStorageAppr",emplId);
 		return aList;
 	}
 
+	//반려문서함 조회
 	@Override
-	public List<Approval> selectAllRejectedAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList= sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllRejectedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList= sqlSession.selectList("ApprMapper.selectAllRejectedAppr",emplId);
 		return aList;
 	}
 
+	//완료문서함 조회
 	@Override
-	public List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList= sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllCompletedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList= sqlSession.selectList("ApprMapper.selectAllCompletedAppr",emplId);
 		return aList;
 	}
 

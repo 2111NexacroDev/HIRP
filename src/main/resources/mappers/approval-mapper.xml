@@ -109,7 +109,7 @@
         SELECT APPR_NO, APPR_LEVEL FROM APPR_ACCEPT_TBL WHERE EMPL_ID = #{emplId}
         INTERSECT
         SELECT APPR_NO,MIN(APPR_LEVEL)FROM APPR_ACCEPT_TBL WHERE APPR_STATUS='대기' GROUP BY APPR_NO)B ON A.APPR_NO = B.APPR_NO
-		 WHERE APPR_STATUS IN ('진행','대기')
+		 WHERE APPR_STATUS IN ('진행','대기') AND TEMPORARY_STORAGE = 'N'
 </select>
 
 <!-- 상신문서함 조회 -->
@@ -118,7 +118,7 @@
          FROM APPROVAL_TBL A
          JOIN EMPL_TBL E ON(A.EMPL_ID = E.EMPL_ID) 
         JOIN APPR_FORM_TBL F ON(A.FORM_NO=F.FORM_NO) 
-		WHERE A.EMPL_ID= #{emplId}  
+		WHERE A.EMPL_ID= #{emplId} AND TEMPORARY_STORAGE ='N'  
 </select>
 
 
@@ -165,10 +165,35 @@
         WHERE ACCEPT_NO IN (SELECT ACCEPT_NO FROM APPR_ACCEPT_TBL
         WHERE APPR_NO IN (SELECT APPR_NO FROM APPR_ACCEPT_TBL WHERE APPR_STATUS = '반려') AND APPR_STATUS ='대기')
 </update>
-
+<!-- 결재문서의 상태 변경 대기/진행/반려/완료 -->
 <update id="modifyApprStatus">
  	UPDATE APPROVAL_TBL SET APPR_STATUS =#{apprStatus} 
  	WHERE APPR_NO = #{apprNo}
 </update>
+
+<!-- 임시저장 -->
+<insert id="insertTempStorageAppr">
+	INSERT INTO APPROVAL_TBL(APPR_NO,FORM_NO,EMPL_ID,APPR_TITLE,APPR_CONTENTS,TEMPORARY_STORAGE) VALUES(APPR_SEQ.NEXTVAL,#{formNo},#{emplId},#{apprTitle},#{apprContents},'Y')
+</insert>
+
+<!-- 임시저장 리스트 조회 -->
+<select id="selectAllTemporaryStorageAppr" resultMap="apprResultMap">
+	SELECT * FROM APPROVAL_TBL 
+	WHERE EMPL_ID = #{emplId} AND TEMPORARY_STORAGE ='Y'
+</select>
+
+<!-- 반려문서함 조회 -->
+<select id="selectAllRejectedAppr" resultMap="apprResultMap">
+	SELECT * FROM APPROVAL_TBL 
+	WHERE EMPL_ID = #{emplId} AND APPR_STATUS ='반려' AND TEMPORARY_STORAGE ='N'
+</select>
+
+<!--결재 완료 문서함 조회 -->
+<select id="selectAllCompletedAppr" resultMap="apprResultMap">
+	SELECT * FROM APPROVAL_TBL 
+	WHERE EMPL_ID = #{emplId} AND APPR_STATUS ='완료' AND TEMPORARY_STORAGE ='N'
+</select>
+
+
 
 </mapper>

@@ -26,7 +26,8 @@ public interface ApprovalStore {
 
 	int insertAppr(SqlSession sqlSession, Approval approval);
 
-	int insertStoragedAppr(SqlSession sqlSession, Approval approval);
+	//임시저장
+	int insertTempStorageAppr(SqlSession sqlSession, Approval approval);
 
 	int updateStoragedAppr(SqlSession sqlSession, int docNo);
 
@@ -51,11 +52,11 @@ public interface ApprovalStore {
 
 	List<Approval> selectAllWrittenAppr(SqlSession sqlSession, ApprAccept apprAccept);
 
-	List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId);
 
-	List<Approval> selectAllRejectedAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllRejectedAppr(SqlSession sqlSession, String emplId);
 
-	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, String emplId);
 
 	//결재문서 보기
 	Approval selectOneAppr(SqlSession sqlSession,int apprNo);

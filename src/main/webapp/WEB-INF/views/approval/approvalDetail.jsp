@@ -6,7 +6,7 @@
 <div id="guide" class="subConts">
 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가,필요 없으면 지울 것 -->
 			
-			<button class="basic mt-20" type="button" id="apprbtn" onclick="openModal1(this);">반려</button>
+			<button class="basic mt-20 apprbtn" type="button" id="apprbtn" onclick="openModal1(this);">반려</button>
 			<section class="section--modal modal-reject" >
 					<div class="bg-black"></div>
 					<div class="section--modal__conts">
@@ -24,13 +24,13 @@
                                 </li>
                             </ul>
 						<div class="btns-wrap mt-20 t-r">
-								<button class="point" type="submit">반려</button>
-								<button class="finished closeWindow"" type="button" >닫기</button>
+								<button class="point " type="submit">반려</button>
+								<button class="finished closeWindow " type="button" >닫기</button>
 						</div>
 						</form>
 				</section>
 			
-			<button class="point mt-20" type="button" id="apprbtn" onclick="openApprModal2(this);">결재</button>
+			<button class="point mt-20 apprbtn" type="button" id="apprbtn" onclick="openApprModal2(this);">결재</button>
 				<section class="section--modal modal--appr" >
 					<div class="bg-black"></div>
 					<div class="section--modal__conts">
