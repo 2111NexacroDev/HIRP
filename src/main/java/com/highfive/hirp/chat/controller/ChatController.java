@@ -125,12 +125,22 @@ public class ChatController {
 			chatroom.setChatroomManager(emplId); //채팅방 생성자 추가
 			System.out.println(chatroom);
 			System.out.println(chatroomJoin);
+			//채팅방 생성 후 chatroomNo return 
 			int chatroomNo = cService.insertChattingRoom(chatroom);
 			System.out.println("chatroomNo : " + chatroomNo);
-			//채팅방 참가자 리스트 추가
-//			System.out.println(joinList);
-//			int result2 = cService.insertChattingRoom(chatroom);
-			mv.setViewName("redirect:/chatroomList.hirp");
+			
+			//나 자신도 추가
+			chatroomJoin.getChatRoomJoinList().add(new ChatRoomJoin(0, chatroomNo, emplId));
+			for(int i = 0; i < chatroomJoin.getChatRoomJoinList().size(); i++) {
+				chatroomJoin.getChatRoomJoinList().get(i).setChatroomNo(chatroomNo);
+				//채팅방 참가자 리스트 추가
+				int result = cService.insertChatRoomJoin(chatroomJoin.getChatRoomJoinList().get(i));
+				if(result > 0 ) {
+					System.out.println("채팅방 참가자 추가 " + i+1);
+				}
+			}
+			
+			mv.setViewName("redirect:/chat.hirp?chatroomNo="+chatroomNo); //새창으로 띄울 방법은 없을까?
 			
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
