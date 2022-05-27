@@ -35,8 +35,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public int insertChatRoomJoin(List<String> emplIdList) {
-		int result = cStore.insertChatRoomJoin(sqlSession, emplIdList);
+	public int insertChatRoomJoin(ChatRoomJoin chatroomJoin) {
+		int result = cStore.insertChatRoomJoin(sqlSession, chatroomJoin);
 		return result;
 	}
 	

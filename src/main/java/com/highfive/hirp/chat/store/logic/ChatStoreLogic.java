@@ -22,12 +22,12 @@ public class ChatStoreLogic implements ChatStore{
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	@Override
 	public int insertChattingRoom(SqlSession sqlSession, ChatRoom chatRoom) {
-		int result = sqlSession.insert("ChatMapper.insertChattingRoom", chatRoom);
-		return result;
+		sqlSession.insert("ChatMapper.insertChattingRoom", chatRoom);
+		return chatRoom.getChatroomNo(); //번호 가져오기
 	}
 	@Override
-	public int insertChatRoomJoin(SqlSession sqlSession, List<String> emplIdList) {
-		int result = sqlSession.insert("ChatMapper.insertChatRoomJoin", emplIdList);
+	public int insertChatRoomJoin(SqlSession sqlSession, ChatRoomJoin chatroomJoin) {
+		int result = sqlSession.insert("ChatMapper.insertChatRoomJoin", chatroomJoin);
 		return result;
 	}
 	

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.highfive.hirp.chat.domain.ChatRoom;
+import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
@@ -110,11 +111,31 @@ public class ChatController {
 //		return mv;
 //	}
 	//채팅방 추가
+	@RequestMapping(value="/chat/addChatroom.hirp", method=RequestMethod.GET)
 	public ModelAndView insertChattingRoom(ModelAndView mv
 			,@ModelAttribute ChatRoom chatroom
-			,@RequestParam("joinList") List<String> joinList) {
-		//채팅방 정보 추가
-		//채팅방 참가자 리스트 추가
+			,@ModelAttribute ChatRoomJoin chatroomJoin
+			, HttpServletRequest request) {
+		
+		//userId
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		try {
+			//채팅방 정보 추가
+			chatroom.setChatroomManager(emplId); //채팅방 생성자 추가
+			System.out.println(chatroom);
+			System.out.println(chatroomJoin);
+			int chatroomNo = cService.insertChattingRoom(chatroom);
+			System.out.println("chatroomNo : " + chatroomNo);
+			//채팅방 참가자 리스트 추가
+//			System.out.println(joinList);
+//			int result2 = cService.insertChattingRoom(chatroom);
+			mv.setViewName("redirect:/chatroomList.hirp");
+			
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		
 		return mv;
 	}

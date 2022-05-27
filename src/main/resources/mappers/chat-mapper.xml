@@ -92,7 +92,18 @@
 		WHERE CHATROOM_NO = #{chatroomNo}
 		ORDER BY MSG_NO ASC
 	</select>
-	<insert id="insertMessage">
+	<!-- 채팅방 추가 -->
+	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
+		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE)
+		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT)
+	</insert>
+	<!-- 채팅 참가자 추가 -->
+	<insert id="insertChatRoomJoin">
+		INSERT INTO CHATROOM_JOIN
+		VALUES(JOINCHAT_SEQ.NEXTVAL, #{chatroomNo}, #{joinchatId})
+	</insert>
+	<!-- 채팅 메세지 추가 -->
+	<insert id="insertMessage" >
 		INSERT INTO MESSAGE_TBL
 		VALUES(MESSAGE_SEQ.NEXTVAL, #{chatroomNo}, #{msgSendid}, #{msgContents}, DEFAULT)
 	</insert>

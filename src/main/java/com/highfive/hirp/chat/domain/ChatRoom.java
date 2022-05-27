@@ -1,5 +1,7 @@
 package com.highfive.hirp.chat.domain;
 
+import java.util.List;
+
 public class ChatRoom {
 	private int chatroomNo;
 	private String chatroomName;
@@ -10,6 +12,8 @@ public class ChatRoom {
 	//채팅방 참여자 list (string, 콤마로 구분)
 	private String joinchatIdList;
 	private String joinchatNameList;
+	
+	private ChatRoomJoin chatRoomJoin;
 	
 	public ChatRoom() {}
 
@@ -80,12 +84,19 @@ public class ChatRoom {
 		this.joinchatNameList = joinchatNameList;
 	}
 
+	public ChatRoomJoin getChatRoomJoin() {
+		return chatRoomJoin;
+	}
+	
+	public void setChatRoomJoin(ChatRoomJoin chatRoomJoin) {
+		this.chatRoomJoin = chatRoomJoin;
+	}
+	
 	@Override
 	public String toString() {
 		return "ChatRoom [chatroomNo=" + chatroomNo + ", chatroomName=" + chatroomName + ", chatroomManager="
 				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", message=" + message + ", joinchatIdList="
 				+ joinchatIdList + ", joinchatNameList=" + joinchatNameList + "]";
 	}
-
 
 }

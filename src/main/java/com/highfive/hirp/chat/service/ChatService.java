@@ -16,7 +16,7 @@ public interface ChatService {
 	//직원 이름으로 검색해서 직원 목록 가져오기
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	public int insertChattingRoom(ChatRoom chatRoom);
-	public int insertChatRoomJoin(List<String> emplIdList);
+	public int insertChatRoomJoin(ChatRoomJoin chatroomJoin);
 	
 	//채팅방 목록 가져오기
 	//내가 참여한 채팅방 목록 가져오기
