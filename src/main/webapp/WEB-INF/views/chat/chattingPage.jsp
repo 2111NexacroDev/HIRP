@@ -1,5 +1,5 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	<!-- jstl core -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- jstl 함수 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!-- jstl fmt -->
@@ -82,6 +82,7 @@
 		
 		//이전 채팅 내역 불러오기
 		function chatMsgList(){
+			
 			$.ajax({
 				url:"/chat/printMessage.hirp",
 				type:"post",
@@ -108,6 +109,7 @@
 	    				
 	    				var msgEmplId = "";
 	    				var msgContents = "";
+	    				var msgDate = "";
 	    				if(msgList[i].msgSendid == "${sessionScope.emplId}"){
 	    					console.log("아이디 비교");
 	    					console.log("${sessionScope.emplId}");
@@ -115,12 +117,32 @@
 	    					console.log(msgList[i].msgSendid == "${sessionScope.emplId}");
 		    				msgEmplId = "<div style='text-align:right;'>"+ msgList[i].deptName + " "+ msgList[i].emplName + " " + msgList[i].positionName + "</div>";
 		    				msgContents = "<div style='text-align:right;'>"+ msgList[i].msgContents + "</div>";
-	    				} else {
+							if(msgList[i].msgSenddate.substring(11, 13) < 12) {
+								msgDate += "<div style='text-align:right;'> 오전 "+ msgList[i].msgSenddate.substring(11, 13) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							} else if (msgList[i].msgSenddate.substring(11, 13) == 12){
+								msgDate += "<div style='text-align:right;'> 오후 "+ msgList[i].msgSenddate.substring(11, 13) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							} else {
+								msgDate += "<div style='text-align:right;'> 오후 "+ (msgList[i].msgSenddate.substring(11, 13)*1-12) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							}
+							$divChatData.append(msgEmplId);
+							$divChatData.append(msgContents);
+							$divChatData.append(msgDate);
+	    				} else { //받은 메세지
 	    					msgEmplId = "<div>"+ msgList[i].deptName + " " + msgList[i].emplName + " " + msgList[i].positionName +"</div>";
 		    				msgContents = "<div>"+ msgList[i].msgContents + "</div>";
+							if(msgList[i].msgSenddate.substring(11, 13) < 12) {
+								msgDate += "<div> 오전 "+ msgList[i].msgSenddate.substring(11, 13) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							} else if (msgList[i].msgSenddate.substring(11, 13) == 12){
+								msgDate += "<div> 오후 "+ msgList[i].msgSenddate.substring(11, 13) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							} else {
+								msgDate += "<div> 오후 "+ (msgList[i].msgSenddate.substring(11, 13)*1-12) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
+							}
+							$divChatData.append(msgEmplId);
+							$divChatData.append(msgContents);
+							$divChatData.append(msgDate);
 	    				}
-						$divChatData.append(msgEmplId);
-						$divChatData.append(msgContents);
+	    				
+	    				
 					}
 	    			
 	    		},

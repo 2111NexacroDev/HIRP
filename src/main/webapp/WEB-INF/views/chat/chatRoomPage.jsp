@@ -57,7 +57,10 @@
 							    		<c:if test="${fn:substring(chat.message.msgSenddate, 11, 13) < 12}">
 									    	오전 ${fn:substring(chat.message.msgSenddate, 11, 13)}:${fn:substring(chat.message.msgSenddate, 14, 16)}
 							    		</c:if>
-							    		<c:if test="${fn:substring(chat.message.msgSenddate, 11, 13) >= 12}">
+							    		<c:if test="${fn:substring(chat.message.msgSenddate, 11, 13) eq 12}"> <!-- 12시 ~~분 일 때 -->
+									    	오후 ${fn:substring(chat.message.msgSenddate, 11, 13)}:${fn:substring(chat.message.msgSenddate, 14, 16)}
+							    		</c:if>
+							    		<c:if test="${fn:substring(chat.message.msgSenddate, 11, 13) > 12}">
 									    	오후 ${fn:substring(chat.message.msgSenddate, 11, 13) - 12}:${fn:substring(chat.message.msgSenddate, 14, 16)}
 							    		</c:if>
 							    	</c:if>
@@ -135,7 +138,11 @@
 							if(cList[i].message.msgSenddate.substring(11, 13) < 12) {
 								chatroomOneDiv += "오전 "+ cList[i].message.msgSenddate.substring(11, 13) + ":" + cList[i].message.msgSenddate.substring(14, 16);
 							} else {
-								chatroomOneDiv += "오후 "+ cList[i].message.msgSenddate.substring(11, 13) - 12 + ":" + cList[i].message.msgSenddate.substring(14, 16);
+								if(cList[i].message.msgSenddate.substring(11, 13) == '12'){ //12시 ~~분일 때
+									chatroomOneDiv += "오후 "+ cList[i].message.msgSenddate.substring(11, 13) + ":" + cList[i].message.msgSenddate.substring(14, 16);
+								} else {
+									chatroomOneDiv += "오후 "+ (cList[i].message.msgSenddate.substring(11, 13)*1 - 12) + ":" + cList[i].message.msgSenddate.substring(14, 16);
+								}
 							}
 						} else {
 							if(cList[i].message.msgSenddate.substring(0, 10) == yesterday) {
