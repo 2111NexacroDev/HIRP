@@ -25,7 +25,6 @@
         <ImageViewer id="ImageViewer00_00_00_00" taborder="5" left="5" top="296" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/10_icon_org.png') repeat center top" border="0px none"/>
         <ImageViewer id="ImageViewer00_00_00_00_00" taborder="6" left="5" top="335" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/06_icon_doc.png') repeat center top" border="0px none"/>
         <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="7" left="5" top="376" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/08_icon_att.png') repeat center top" border="0px none"/>
-        <Button id="btn_userPage" taborder="8" left="8" top="16" height="40" borderRadius="4px" width="40" background="url('theme://images/btn_TF_Close.png') repeat center center #666666" onclick="btn_userPage_onclick" cursor="pointer"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[// 최초 로드 시 홈화면으로 진입

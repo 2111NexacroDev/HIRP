@@ -76,13 +76,6 @@
             obj.set_background("url(\'theme::hirpTheme/08_icon_att.png\') repeat center top");
             obj.set_border("0px none");
             this.addChild(obj.name, obj);
-
-            obj = new Button("btn_userPage","8","16","40","40",null,null,null,null,null,null,this);
-            obj.set_taborder("8");
-            obj.set_borderRadius("4px");
-            obj.set_background("url(\'theme://images/btn_TF_Close.png\') repeat center center #666666");
-            obj.set_cursor("pointer");
-            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",200,720,this,function(p){});
@@ -209,7 +202,6 @@
             this.ImageViewer00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
             this.ImageViewer00_00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
             this.ImageViewer00_00_00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
-            this.btn_userPage.addEventHandler("onclick",this.btn_userPage_onclick,this);
         };
         this.loadIncludeScript("Form_Left.xfdl");
         this.loadPreloadList();

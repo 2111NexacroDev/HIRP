@@ -2,8 +2,29 @@
 <FDL version="2.1">
   <Form id="Form_home" width="1080" height="720" titletext="home">
     <Layouts>
-      <Layout width="1080" height="720" screenid="Desktop_screen"/>
+      <Layout width="1080" height="720" screenid="Desktop_screen">
+        <ImageViewer id="ImageViewer00" taborder="0" left="280" top="70" height="353" background="url('theme::hirpTheme/bg_admin_home_hirp.png') repeat center center/100%" border="0px none" right="320"/>
+        <Button id="Button00" taborder="1" text="관리자" left="280" top="400" width="230" height="42" font="normal 300 16px/normal &quot;Noto Sans KR&quot;" borderRadius="4px" cssclass="point" onclick="Button00_onclick" cursor="pointer"/>
+        <Button id="Button00_00" taborder="2" text="사용자" left="530" top="400" width="230" height="42" font="normal 300 16px/normal &quot;Noto Sans KR&quot;" borderRadius="4px" cssclass="point" onclick="Button00_00_onclick" cursor="pointer"/>
+      </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[]]></Script>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+    var nTop  = system.clientToScreenY(this, 10);
+	
+	var objChild = new ChildFrame("popDeptAdd", "absolute", nLeft, nTop, 420, 180);
+	objChild.set_formurl("FrameBase::guideMsg.xfdl");
+	objChild.set_openalign("center middle");
+	objChild.set_dragmovetype("all");
+	objChild.showModal(this.getOwnerFrame(), null, this, null);
+};
+
+this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	location.href="/home.hirp";
+};
+]]></Script>
   </Form>
 </FDL>
