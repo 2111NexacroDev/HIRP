@@ -77,13 +77,20 @@ public class ApprovalServiceImpl implements ApprovalService{
 		int result = aStore.deleteStoragedAppr(sqlSession,docNo);
 		return result;
 	}
-
+	//결재대기함
 	@Override
 	public List<Approval> printAllWaitingAppr(String emplId) {
 		List<Approval> aList = aStore.selectAllWaitingAppr(sqlSession,emplId);
 		return aList;
 	}
 
+	//상신문서함
+	@Override
+	public List<Approval> printAllMyAppr(String emplId) {
+		List<Approval> aList = aStore.selectAllMyAppr(sqlSession,emplId);
+		return aList;
+	}
+	
 	@Override
 	public Approval printOneWaitngAppr(int docNo) {
 		Approval approval = aStore.selectOneWaitingAppr(sqlSession,docNo);
@@ -96,9 +103,10 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return aList;
 	}
 
+	//결재자 상태 변경
 	@Override
-	public int modifyApprStatus(ApprAccept apprAccept) {
-		int result = aStore.updateApprStatus(sqlSession,apprAccept);
+	public int modifyApprAccept(ApprAccept apprAccept) {
+		int result = aStore.modifyApprAccept(sqlSession,apprAccept);
 		return result;
 	}
 
@@ -169,5 +177,13 @@ public class ApprovalServiceImpl implements ApprovalService{
 		int result = aStore.insertApprAttachedFile(sqlSession, apprFile);
 		return result;
 	}
+
+	
+
+//	@Override
+//	public int modifyRejectedAppr() {
+//		int result = aStore.updateRejectedAppr(sqlSession);
+//		return result;
+//	}
 
 }

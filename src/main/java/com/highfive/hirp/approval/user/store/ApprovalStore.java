@@ -31,15 +31,17 @@ public interface ApprovalStore {
 	int updateStoragedAppr(SqlSession sqlSession, int docNo);
 
 	int deleteStoragedAppr(SqlSession sqlSession, int docNo);
-
+	//결재대기함
 	List<Approval> selectAllWaitingAppr(SqlSession sqlSession, String emplId);
+	//상신문서함
+	List<Approval> selectAllMyAppr(SqlSession sqlSession, String emplId);
 
 	Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo);
 
 	//결재자정보 조회
 	List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int apprNo);
 
-	int updateApprStatus(SqlSession sqlSession, ApprAccept apprAccept);
+	int modifyApprAccept(SqlSession sqlSession, ApprAccept apprAccept);
 
 	int updateApprovalStatus(SqlSession sqlSession, Approval approval);
 
@@ -66,5 +68,9 @@ public interface ApprovalStore {
 
 	//결재 첨부파일 등록
 	int insertApprAttachedFile(SqlSession sqlSession, ApprAttachedFile apprFile);
+
+
+	//반려된 문서 이후의 결재라인 수정
+	//int updateRejectedAppr(SqlSession sqlSession);
 
 }
