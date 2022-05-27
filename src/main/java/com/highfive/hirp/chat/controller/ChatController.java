@@ -110,7 +110,7 @@ public class ChatController {
 //		
 //		return mv;
 //	}
-	//채팅방 추가
+	//그룹 채팅방 추가
 	@RequestMapping(value="/chat/addChatroom.hirp", method=RequestMethod.GET)
 	public ModelAndView insertChattingRoom(ModelAndView mv
 			,@ModelAttribute ChatRoom chatroom
@@ -123,6 +123,7 @@ public class ChatController {
 		try {
 			//채팅방 정보 추가
 			chatroom.setChatroomManager(emplId); //채팅방 생성자 추가
+			chatroom.setChatroomType("G");
 			System.out.println(chatroom);
 			System.out.println(chatroomJoin);
 			//채팅방 생성 후 chatroomNo return 
@@ -150,6 +151,47 @@ public class ChatController {
 		}
 		
 		return mv;
+	}
+	
+	//개인 채팅방 추가
+	@ResponseBody
+	@RequestMapping(value="/chat/addPersonChatroom.hirp", method=RequestMethod.POST)
+	public String insertPersonChattingRoom(ModelAndView mv
+			,@RequestParam("joinchatId") String joinchatId
+			, HttpServletRequest request) {
+		
+		//userId
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		System.out.println(joinchatId);
+		
+//			//채팅방 정보 추가
+//			chatroom.setChatroomManager(emplId); //채팅방 생성자 추가
+//			chatroom.setChatroomType("P");
+//			System.out.println(chatroom);
+//			System.out.println(chatroomJoin);
+//			//채팅방 생성 후 chatroomNo return 
+//			int chatroomNo = cService.insertChattingRoom(chatroom);
+//			System.out.println("chatroomNo : " + chatroomNo);
+//			
+//			//나 자신도 추가
+//			chatroomJoin.getChatRoomJoinList().add(new ChatRoomJoin(0, chatroomNo, emplId));
+//			for(int i = 0; i < chatroomJoin.getChatRoomJoinList().size(); i++) {
+//				chatroomJoin.getChatRoomJoinList().get(i).setChatroomNo(chatroomNo);
+//				//채팅방 참가자 리스트 추가
+//				int result = cService.insertChatRoomJoin(chatroomJoin.getChatRoomJoinList().get(i));
+//				if(result > 0 ) {
+//					System.out.println("채팅방 참가자 추가 " + i+1);
+//				}
+//			}
+////			mv.setViewName("redirect:/chatroomList.hirp");
+//			//chatroomNo 넘겨줘서 새창 열게 함.
+//			mv.setViewName("redirect:/chatroomList.hirp?chatroomNo="+chatroomNo);
+////			mv.setViewName("redirect:/chat.hirp?chatroomNo="+chatroomNo); //새창으로 띄울 방법은 없을까?
+			
+		
+		return "";
 	}
 	
 	//알림 설정(세션 이용하면 되지 않을까)

@@ -336,7 +336,7 @@
 
 		});
 		
-    	//채팅방 추가
+    	//그룹 채팅방 추가
     	function addChatroom(){
     		var checkList = $("input[name='joinchatId']:checked"); //체크된 input 찾기
     		console.log(checkList);
@@ -348,6 +348,8 @@
     		}
     		$("#addChatroomForm").submit();
     	}
+    	
+    	
     </script>
 </body>
 </html>

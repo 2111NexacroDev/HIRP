@@ -39,15 +39,12 @@
 					<button class="point" type="button" onKeypress="javascript:if(event.keyCode==13) {emplSearch();}" onclick="emplSearch(this);">검색</button>
 			    </div>
 			    <!-- 직원 목록 -->
-			    <c:set var="count" value="0" />
 			    <div id="emplList">
 				    <c:forEach items="${emplList }" var="empl">
 				    	<c:if test="${empl.emplId ne sessionScope.emplId }"> <!-- 내가 아닐 때 -->
-					     	<c:set var="count" value="${count+1}" />
-					     	<input type="hidden" value=${count } name="roomId">
 						    <!-- 직원명 div  -->
 						    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
-						    <div class="chat-row mt-10  padding-bottom-10" ondblclick="chatWindow(${count});">
+						    <div class="chat-row mt-10  padding-bottom-10" ondblclick="addPersonalChatroom('${empl.emplId}');">
 							    <div class="mr-20 ml-20" style="width:30px;">
 					      		    <button class="btn--profile" type="button">
 					      		    	<c:if test="${empl.emplProfile eq null}">
@@ -127,7 +124,23 @@
         </article>
     </div>
     <script>
-    	//채팅방 추가
+    	//개인 채팅방 추가
+    	function addPersonalChatroom(selectId){ // 개인 채팅하고 싶은 상대 아이디
+    		console.log(selectId);
+    		$.ajax({
+				url: "/chat/addPersonChatroom.hirp",
+				type: "post",
+				data: { "joinchatId" : selectId },
+				success: function(data){
+					console.log("ajax 성공");
+				},
+				error: function(){
+					console.log("ajax 실패");
+				}
+			});
+    	}
+    	
+    	//그룹 채팅방 추가
     	function addChatroom(){
     		var checkList = $("input[name='joinchatId']:checked"); //체크된 input 찾기
     		console.log(checkList);

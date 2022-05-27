@@ -96,7 +96,7 @@
 	<!-- 그룹 채팅방 추가 -->
 	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
 		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE)
-		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT, 'G')
+		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT, #{chatroomType})
 	</insert>
 	<!-- 그룹 채팅 참가자 추가 -->
 	<insert id="insertChatRoomJoin">
