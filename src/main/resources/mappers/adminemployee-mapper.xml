@@ -60,7 +60,7 @@
 		<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
 		<result property="jobRoleStartDate" column="JOB_ROLE_START_DATE"/>
 		<result property="jobRoleEndDate" column="JOB_ROLE_END_DATE"/>
-		<result property="jobRoleConts" column="ROB_ROLE_CONTS"/>
+		<result property="jobRoleConts" column="JOB_ROLE_CONTS"/>
 		<result property="jobRoleEtc" column="JOB_ROLE_ETC"/>
 	</resultMap>
 	<resultMap type="Language" id="langResultMap">
@@ -235,7 +235,7 @@
 			JOB_ROLE_TITLE = #{jobRoleTitle}, 
 			JOB_ROLE_START_DATE = #{jobRoleStartDate}, 
 			JOB_ROLE_END_DATE = #{jobRoleEndDate}, 
-			ROB_ROLE_CONTS = #{jobRoleConts}, 
+			JOB_ROLE_CONTS = #{jobRoleConts}, 
 			JOB_ROLE_ETC = #{jobRoleEtc}
 		WHERE JOB_ROLE_NO = #{jobRoleNo}
 	</update>
