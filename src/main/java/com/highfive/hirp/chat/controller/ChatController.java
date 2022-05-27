@@ -139,8 +139,10 @@ public class ChatController {
 					System.out.println("채팅방 참가자 추가 " + i+1);
 				}
 			}
-			
-			mv.setViewName("redirect:/chat.hirp?chatroomNo="+chatroomNo); //새창으로 띄울 방법은 없을까?
+//			mv.setViewName("redirect:/chatroomList.hirp");
+			//chatroomNo 넘겨줘서 새창 열게 함.
+			mv.setViewName("redirect:/chatroomList.hirp?chatroomNo="+chatroomNo);
+//			mv.setViewName("redirect:/chat.hirp?chatroomNo="+chatroomNo); //새창으로 띄울 방법은 없을까?
 			
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
@@ -158,7 +160,8 @@ public class ChatController {
 	//채팅방 목록 페이지
 	@RequestMapping(value = "/chatroomList.hirp", method = RequestMethod.GET)
 	public ModelAndView chattingRoomList(ModelAndView mv
-			, HttpServletRequest request ) {
+			, HttpServletRequest request 
+			,@RequestParam(value="chatroomNo", required=false) Integer chatroomNo) {
 		//내가 참여한 채팅방 목록 가져오기
 		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
 		//마지막 채팅 내용 표시????
@@ -176,6 +179,11 @@ public class ChatController {
 			} else {
 				mv.addObject("msg", "직원 리스트 조회 실패");
 				mv.setViewName("common/errorPage");
+			}
+			
+			//채팅방을 추가했을 경우 chatroomNo를 넘겨준다.
+			if(chatroomNo != null) {
+				mv.addObject("chatroomNo", chatroomNo);
 			}
 			
 			mv.addObject("chatroomList", chatroomList);

@@ -15,6 +15,7 @@
         	<h1 class="chat-h1 basic-border-bottom mt-20">채팅</h1>
 
             <div id="" class="subConts">
+            	<input type="hidden" value="${chatroomNo }"> <!-- 채팅방 추가 후에 chatroomNo 넘어오는지 확인 -->
             	<!-- 오늘 날짜 -->
 	            <jsp:useBean id="now" class="java.util.Date" />
 <%-- 	            <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today" /> --%>
@@ -35,7 +36,7 @@
 				     	<c:set var="count" value="${count+1}" />
 					    <!-- 채팅방 div  -->
 					    <!-- 여기 count로 해놨는데 사실은 roomid로 해야할 듯. -->
-					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" ondblclick="chatWindow(${count}, ${chat.chatroomNo });">
+					    <div class="chat-row mt-10 basic-border-bottom padding-bottom-10" ondblclick="chatWindow(${chat.chatroomNo });">
 					    	<!-- 사진 추가할 거면 추가하기 -->
 <!-- 						    <div class="mr-20 ml-20" style="width:30px;"> -->
 <!-- 				      		    <button class="btn--profile" type="button"> -->
@@ -88,9 +89,16 @@
     </div>
     
     <script>
+//     	console.log("${chatroomNo}" == ""); //비어있을 때 true
+    	
+    	if("${chatroomNo}" != ""){
+			window.onload = function(){
+				chatWindow("${chatroomNo}"); //새로 만든 채팅방 열기 (열어서 메세지 보내야 목록에 뜸)
+		    }
+    	}
 	  	//채팅창 열기
-		function chatWindow(count, chatroomNo){ //원래는 roomId
-			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
+		function chatWindow(chatroomNo){ //원래는 roomId
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
 		//채팅 목록에서 검색 (ajax)
 		function chSearch(){
