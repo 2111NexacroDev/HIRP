@@ -61,8 +61,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public int registerStoragedAppr(Approval approval) {
-		int result = aStore.insertStoragedAppr(sqlSession,approval);
+	public int registerTempStorageAppr(Approval approval) {
+		int result = aStore.insertTempStorageAppr(sqlSession,approval);
 		return result;
 	}
 
@@ -135,20 +135,20 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public List<Approval> printAllTemporaryStorageAppr(ApprAccept apprAccept) {
-		List<Approval> aList= aStore.selectAllTemporaryStorageAppr(sqlSession,apprAccept);
+	public List<Approval> printAllTemporaryStorageAppr(String emplId) {
+		List<Approval> aList= aStore.selectAllTemporaryStorageAppr(sqlSession,emplId);
 		return aList;
 	}
 
 	@Override
-	public List<Approval> printAllRejectedAppr(ApprAccept apprAccept) {
-		List<Approval> aList= aStore.selectAllRejectedAppr(sqlSession,apprAccept);
+	public List<Approval> printAllRejectedAppr(String emplId) {
+		List<Approval> aList= aStore.selectAllRejectedAppr(sqlSession,emplId);
 		return aList;
 	}
 
 	@Override
-	public List<Approval> printAllCompletedAppr(ApprAccept apprAccept) {
-		List<Approval> aList= aStore.selectAllCompletedAppr(sqlSession,apprAccept);
+	public List<Approval> printAllCompletedAppr(String emplId) {
+		List<Approval> aList= aStore.selectAllCompletedAppr(sqlSession,emplId);
 		return aList;
 	}
 	@Override

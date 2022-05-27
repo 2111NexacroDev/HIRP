@@ -51,7 +51,7 @@ public interface ApprovalService {
 		
 		//임시저장(insert approval)
 		//TEMPORARY_STORAGE 'Y';
-		public int registerStoragedAppr(Approval approval);
+		public int registerTempStorageAppr(Approval approval);
 		
 		//임시저장된 문서 수정
 		public int modifyStoragedAppr(int docNo);
@@ -80,13 +80,13 @@ public interface ApprovalService {
 		//상신문서함(select List)
 		public List<Approval> printAllWrittenAppr(ApprAccept apprAccept);
 		//임시저장함(select List)
-		public List<Approval> printAllTemporaryStorageAppr(ApprAccept apprAccept);
+		public List<Approval> printAllTemporaryStorageAppr(String emplId);
 		
 		//반려문서함(select List)
-		public List<Approval> printAllRejectedAppr(ApprAccept apprAccept);
+		public List<Approval> printAllRejectedAppr(String emplId);
 		
 		//완료문서함(select List)
-		public List<Approval> printAllCompletedAppr(ApprAccept apprAccept);
+		public List<Approval> printAllCompletedAppr(String emplId);
 		//문서조회(select)
 		public Approval printOneAppr(int apprNo);
 		

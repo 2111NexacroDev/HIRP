@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
-<h1 class="basic-border-bottom">결재문서함</h1>
+
+<h1 class="basic-border-bottom">상신문서함</h1>
 <div id="guide" class="subConts">
 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가,필요 없으면 지울 것 -->
 <table class="table--basic mt-20">

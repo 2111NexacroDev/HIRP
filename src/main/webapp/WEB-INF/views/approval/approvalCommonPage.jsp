@@ -35,7 +35,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 	<!--fontawesome  -->
 	<script src="https://kit.fontawesome.com/b1c70be712.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../../resources/css/approval.css"><!-- approval css -->
+	<link rel="stylesheet" href="../../resources/css/approval.css?afte"><!-- approval css -->
+
+<!-- 조직도 -->
+<script src="../../../resources/js/jquery.treeview.js"></script>
+<link rel="stylesheet" href="../../../resources/css/jquery.treeview.css" />
+<link rel="stylesheet" href="../../../resources/css/screen.css" />
 
 </head>
 
@@ -84,10 +89,10 @@
                  <li>
                     <a href="">기안문서함</a>
                     <ul>       
-                        <li><a href="/myAppr.hirp">상신문서함</a></li>
-                        <li><a href="#">임시문서함</a></li>
-                        <li><a href="#">반려문서함</a></li>
-                        <li><a href="#">결재완료함</a></li>
+                        <li><a href="/written/appr.hirp">상신문서함</a></li>
+                        <li><a href="/temporaryStorage/appr.hirp">임시문서함</a></li>
+                        <li><a href="/rejected/appr.hirp">반려문서함</a></li>
+                        <li><a href="/completed/appr.hirp">결재완료함</a></li>
                     </ul>
                 </li>
                 <li>
