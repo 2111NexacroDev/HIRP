@@ -25,6 +25,7 @@ import com.highfive.hirp.common.Pagination;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
+import com.highfive.hirp.common.Search;
 
 @Controller
 public class MailController {
@@ -189,6 +190,7 @@ public class MailController {
 			if(mail != null) {
 				mv.addObject("mail", mail);
 				mv.addObject("mailFile", mailFile);
+				mv.addObject("mailCategory", mailCategory);
 				mv.setViewName("mail/mailDetailView");
 			}else {
 				mv.addObject("msg", "메일 상세조회 실패");
@@ -344,24 +346,23 @@ public class MailController {
 		}
 	}
 	
-	// 검색
-	public ModelAndView searchList(ModelAndView mv
-			, @ModelAttribute Mail mail) {
-		return mv;
-	}
-	
-	// 주소록 보여주는 코드
-	public ModelAndView addressView(ModelAndView mv) {
-		return mv;
-	}
-	
-	// 주소록 저장
-	public ModelAndView saveAddress(ModelAndView mv) {
-		return mv;
-	}
-	
-	// 주소록 삭제
-	public ModelAndView deleteAddress(ModelAndView mv) {
+	// 메일 검색
+	@RequestMapping(value = "/mail/searchMail.hirp", method = RequestMethod.GET)
+	public ModelAndView mailSearchList(ModelAndView mv
+			, @ModelAttribute Search search) {
+		try {
+			List<Mail> mList = mService.searchMail(search);
+			if (!mList.isEmpty()) {
+				mv.addObject("mList", mList);
+				mv.setViewName("mail/mailList");
+			} else {
+				mv.addObject("msg", "검색조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -496,13 +497,6 @@ public class MailController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		return mv;
-	}
-	
-	
-	// 메일 휴지통에서 삭제
-	public ModelAndView mailDelete(ModelAndView mv
-			, @ModelAttribute Mail mail) {
 		return mv;
 	}
 	

@@ -31,7 +31,9 @@
 	</select>
 	
 	<select id="selectOneByNo" resultMap="projectResultMap">
-		SELECT * FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+		SELECT PROJECT_NO, PROJECT_NAME, P.START_DATE, P.END_DATE, E.EMPL_NAME "PROJECT_MANAGER"
+		FROM PROJECT_TBL P JOIN EMPL_TBL E ON (P.PROJECT_MANAGER = E.EMPL_ID)
+		WHERE PROJECT_NO = #{projectNo}
 	</select>
 	
 	<insert id="insertProject" parameterType="Project">

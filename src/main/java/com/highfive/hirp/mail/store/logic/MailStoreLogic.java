@@ -7,25 +7,28 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.highfive.hirp.common.PageInfo;
-import com.highfive.hirp.mail.domain.Address;
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.store.MailStore;
 @Repository
 public class MailStoreLogic implements MailStore{
 
+	// 메일 전송 보낸사람
 	@Override
 	public int sendMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.insert("MailMapper.sendMail", mail);
 		return result;
 	}
 	
+	// 메일 전송 수신자
 	@Override
 	public int sendMailRecipient(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.insert("MailMapper.sendMailRecipient", mail);
 		return result;
 	}
 	
+	// 메일 전송 참조자
 	@Override
 	public int sendMailReferrer(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.insert("MailMapper.sendMailReferrer", mail);
@@ -74,24 +77,28 @@ public class MailStoreLogic implements MailStore{
 		return mailFile;
 	}
 
+	// 메일 검색
 	@Override
-	public List<Mail> searchMail(SqlSession sqlSession, Mail mail) {
-		List<Mail> mList = sqlSession.selectList("MailMapper.searchMail", mail);
+	public List<Mail> searchMail(SqlSession sqlSession, Search search) {
+		List<Mail> mList = sqlSession.selectList("MailMapper.searchMail", search);
 		return mList;
 	}
 
+	// 답장
 	@Override
 	public int replyMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.update("MailMapper.replyMail", mail);
 		return result;
 	}
 
+	// 전달
 	@Override
 	public int relayMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.update("MailMapper.relayMail", mail);
 		return result;
 	}
 
+	// 첨부파일 수정
 	@Override
 	public int modifyMailFile(SqlSession sqlSession, MailFile mailFile) {
 		int result = sqlSession.insert("MailMapper.modifyMailFile", mailFile);
@@ -125,13 +132,6 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.delete("MailMapper.deleteSelectMail", mailNo);
 		return result;
 	}
-
-	@Override
-	public int removeMail(SqlSession sqlSession, Mail mail) {
-		int result = sqlSession.delete("MailMapper.removeMail", mail);
-		return result;
-	}
-	
 	// 중요 메일
 	@Override
 	public int impMail(SqlSession sqlSession, Mail mail) {
@@ -143,18 +143,6 @@ public class MailStoreLogic implements MailStore{
 	@Override
 	public int readMail(SqlSession sqlSession, Mail mail) {
 		int result = sqlSession.update("MailMapper.readMail", mail);
-		return result;
-	}
-
-	@Override
-	public int registerAddress(SqlSession sqlSession, Address address) {
-		int result = sqlSession.insert("MailMapper.registerAddress", address);
-		return result;
-	}
-
-	@Override
-	public int removeAddress(SqlSession sqlSession, Address address) {
-		int result = sqlSession.delete("MailMapper.removeAddress", address);
 		return result;
 	}
 

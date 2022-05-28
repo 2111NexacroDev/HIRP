@@ -7,18 +7,12 @@
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
-<head>
-<meta charset="UTF-8">
-<title></title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                	메일
-            </h1>
+            <h1>메일</h1>
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul>
@@ -41,10 +35,19 @@
         <article id="sub" class="">
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	
-        	<form class="form--srch" action="">
-                <input type="text" name="" placeholder="통합검색">
+        	<form class="form--srch" action="/mail/searchMail.hirp" method="get">
+        		<select name="searchCondition">
+					<option value="all">전체</option>
+					<option value="title">제목</option>
+					<option value="contents">내용</option>
+					<option value="sender">보낸사람</option>
+					<option value="recipient">받는사람</option>
+					<option value="referrer">참조</option>
+				</select>
+                <input type="text" name="searchValue" placeholder="메일검색">
                 <button type="submit"></button>
             </form>
+            
         	<h1 class="basic-border-bottom">
 	            <c:if test="${mailCategory == 'R' }">
 					받은메일함
@@ -328,7 +331,7 @@
 				mailNo = mailTag[0].value;
 				location.href='/mail/mailReplyView.hirp?mailNo='+mailNo;
 			}
-		}	
+		}
 
 		// 전달
 		function relayMail() {

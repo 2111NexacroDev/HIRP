@@ -122,6 +122,38 @@
 		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
+	<!-- 메일 검색 -->
+	<select id="searchMail" resultMap="MailResultMap">
+		<if test="searchCondition.toString() =='referrer'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_REFERRER LIKE '%' || #{searchValue} || '%'
+  		</if>
+		<if test="searchCondition.toString() =='recipient'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_RECIPIENT LIKE '%' || #{searchValue} || '%'
+  		</if>
+		<if test="searchCondition.toString() =='sender'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_SENDER LIKE '%' || #{searchValue} || '%'
+  		</if>
+  		<if test="searchCondition.toString() =='title'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_TITLE LIKE '%'|| #{searchValue}||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='contents'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_CONTENTS LIKE '%' ||  #{searchValue} ||  '%'
+  		</if>
+  		<if test="searchCondition.toString() =='all'">
+	  		SELECT * FROM MAIL_TBL
+	  		WHERE MAIL_CONTENTS LIKE '%' ||  #{searchValue} || '%'
+	  		OR MAIL_TITLE LIKE '%' ||  #{searchValue} || '%'
+	  		OR MAIL_SENDER LIKE '%' ||  #{searchValue} ||  '%'
+	  		OR MAIL_RECIPIENT LIKE '%' || #{searchValue} || '%'
+	  		OR MAIL_REFERRER LIKE '%' || #{searchValue} || '%'
+  		</if>
+	</select>
+	
 	<!-- 메일 및 버그리포트 전송(보낸사람) -->
 	<insert id="sendMail" parameterType="Mail">
 		INSERT INTO

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.highfive.hirp.common.PageInfo;
-import com.highfive.hirp.mail.domain.Address;
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
@@ -90,18 +90,21 @@ public class MailServiceImpl implements MailService{
 		return mailFile;
 	}
 	
+	// 메일 검색
 	@Override
-	public List<Mail> searchMail(Mail mail) {
-		List<Mail> mList = mStore.searchMail(sqlSession, mail);
+	public List<Mail> searchMail(Search search) {
+		List<Mail> mList = mStore.searchMail(sqlSession, search);
 		return mList;
 	}
 	
+	// 답장
 	@Override
 	public int replyMail(Mail mail) {
 		int result = mStore.replyMail(sqlSession, mail);
 		return result;
 	}
 	
+	// 전달
 	@Override
 	public int relayMail(Mail mail) {
 		int result = mStore.relayMail(sqlSession, mail);
@@ -136,12 +139,6 @@ public class MailServiceImpl implements MailService{
 		return result;
 	}
 	
-	@Override
-	public int removeMail(Mail mail) {
-		int result = mStore.removeMail(sqlSession, mail);
-		return result;
-	}
-	
 	// 중요 메일
 	@Override
 	public int impMail(Mail mail) {
@@ -156,18 +153,6 @@ public class MailServiceImpl implements MailService{
 		return result;
 	}
 	
-	@Override
-	public int registerAddress(Address address) {
-		int result = mStore.registerAddress(sqlSession, address);
-		return result;
-	}
-	
-	@Override
-	public int removeAddress(Address address) {
-		int result = mStore.removeAddress(sqlSession, address);
-		return result;
-	}
-
 	// 받은메일함 목록
 	@Override
 	public List<Mail> printMailRec(Mail mail, PageInfo pi) {

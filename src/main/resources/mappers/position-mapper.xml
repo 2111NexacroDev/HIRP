@@ -7,7 +7,7 @@
 	<resultMap type="Position" id="positionResultMap">
 		<id property="positionCode" column="POSITION_CODE"/>
 		<result property="positionName" column="POSITION_NAME"/>
-		<result property="positionUseMember" column="POSITION_USE_MANAGER"/>
+		<result property="positionUseManager" column="POSITION_USE_MANAGER"/>
 		<result property="positionSequence" column="POSITION_SEQUENCE"/>
 		<result property="positionLevel" column="POSITION_LEVEL"/>
 	</resultMap>
@@ -15,4 +15,19 @@
 	<select id="selectAllPosition" resultMap="positionResultMap">
 		SELECT * FROM POSITION_TBL ORDER BY POSITION_SEQUENCE DESC
 	</select>
+	
+	<insert id="insertPosition">
+		INSERT INTO POSITION_TBL
+		VALUES(#{positionCode}, #{positionName}, DEFAULT, POSITION_SEQUENCE.NEXTVAL, #{positionLevel})
+	</insert>
+	
+	<update id="updatePosition">
+		UPDATE POSITION_TBL
+		SET POSITION_CODE = #{positionCode}, POSITION_NAME = #{positionName}
+		WHERE POSITION_SEQUENCE = #{positionSequence}
+	</update>
+	
+	<delete id="deletePosition">
+		DELETE FROM POSITION_TBL WHERE POSITION_SEQUENCE = #{positionSequence}
+	</delete>
 </mapper>

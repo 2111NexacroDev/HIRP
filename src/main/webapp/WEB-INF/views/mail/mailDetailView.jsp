@@ -8,20 +8,12 @@
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
 <link rel="stylesheet" href="../../../resources/css/project.css?after">
-
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                	메일
-            </h1>
+            <h1>메일</h1>
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul>
@@ -33,7 +25,10 @@
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
                        <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button></li>
+                       <li>
+	                       <a href="/mail/Wlist.hirp">휴지통</a>
+	                       <button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button>
+                       </li>
                    </ul>
                </li>
             </ul>
@@ -69,14 +64,14 @@
 					휴지통
             	</c:if>
             </h1>
-            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailReplyView.hirp'">답장</button>
+            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailReplyView.hirp?mailNo=${mail.mailNo}'">답장</button>
             <button class="basic mt-20" type="button" onclick="wasteMail(${mail.mailNo});">삭제</button>
-            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailRelayView.hirp'">전달</button>
+            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailRelayView.hirp?mailNo=${mail.mailNo}'">전달</button>
             <!-- 오른쪽으로 밀어야 함 -->
-            <button class="basic mt-20"><a href="/mail/list.hirp">목록</a></button>
+            <button class="basic mt-20" type="button" onclick="historyBack();">목록</button>
             
             <div class="subConts">
-	            <form action="/mail/detail.hirp" method="get">
+	            <form action="/mail/${mailCategory }detail.hirp" method="get">
 	            	<table class="table--basic mt-20">
 	            		<tr>
 							<td class="mail--star">
@@ -112,6 +107,11 @@
 		</article>
 	</div>
 	<script>
+		function historyBack() {
+			history.back();
+		}
+	
+		// 메일 휴지통 이동
 		function wasteMail(mailNo) {
 			$.ajax({
 				url : "/mail/wasteMail.hirp",
