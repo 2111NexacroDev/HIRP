@@ -28,10 +28,10 @@
                     <!-- 컬럼1 -->
                     <section>
                         <figure class="figure--profile">
-                            <c:if test="${employee.emplProfile ne null}">
-                                <img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진">
+                            <c:if test="${sessionScope.emplProfile ne null}">
+                                <img src="../../../resources/uploadFiles/${sessionScope.emplProfile }" alt="프로필사진">
                             </c:if>
-                            <c:if test="${employee.emplProfile eq null}">
+                            <c:if test="${sessionScope.emplProfile eq null}">
                                 <p>No Image</p>
                             </c:if>
                         </figure>
