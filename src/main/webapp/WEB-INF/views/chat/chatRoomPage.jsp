@@ -153,7 +153,7 @@
     	}
 	  	//채팅창 열기
 		function chatWindow(chatroomNo){ //원래는 roomId
-			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,location=no,status=no,scrollbars=no');
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,left=410,location=no,status=no,scrollbars=no');
 		}
 		//채팅 목록에서 검색 (ajax)
 		function chSearch(){

@@ -1,5 +1,6 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	<!-- jstl core -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- jstl 함수 -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!-- jstl fmt -->
@@ -181,20 +182,36 @@
 			});
 		}
 		
-		
+		//채팅 정보창 열기
+		function chatInfoWindow(chatroomNo){ //원래는 roomId
+			window.open('/chatInfo.hirp?chatroomNo='+chatroomNo,'chattingRoomInfo'+chatroomNo,'width=400,height=500,left=820,top=0,location=no,status=no,scrollbars=no');
+		}
 	</script>
 </head>
 <body>
-	<div style="background-color:#0b2a60; height:50px;">
-	</div>
-	<div id="divChatParent" style="overflow:scroll; margin: auto; margin-top: 10px; width: 95%; height: 440px; padding: 10px; border: solid 1px #e1e3e9;">
-		<div id="divChatData" style="height:100%;"></div>
-	</div>
-	<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
-<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
-		<textarea id="message" style="width:80%; height:70px" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
-		</textarea>
-		<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
+	<div id="conts" class="pos-rel">
+        <article id="sub">
+			<div style="background-color:#0b2a60; height:50px;">
+				<h2 style="padding:12px 20px 16px; color:white; display:inline-block">
+					${chatroom.chatroomName} 
+					<c:if test="${chatroom.chatroomType eq 'G'}">
+						(${fn:length(chatRoomJoinList)})
+					</c:if>
+				</h2>
+				<c:if test="${chatroom.chatroomType eq 'G'}">
+					<button onclick="chatInfoWindow(${chatroom.chatroomNo})" style="float:right; margin-top: 10px; margin-right: 10px; font-size:18px; background:none; color:white;"><i class="fa-solid fa-ellipsis"></i></button>&nbsp;
+				</c:if>
+			</div>
+			<div id="divChatParent" style="overflow:scroll; margin: auto; margin-top: 10px; width: 95%; height: 440px; padding: 10px; border: solid 1px #e1e3e9;">
+				<div id="divChatData" style="height:100%;"></div>
+			</div>
+			<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
+		<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
+				<textarea id="message" style="width:80%; height:70px" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
+				</textarea>
+				<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
+			</div>
+		</article>
 	</div>
 </body>
 </html>

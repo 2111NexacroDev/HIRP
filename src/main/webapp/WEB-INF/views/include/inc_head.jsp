@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
-
+	<script src="https://kit.fontawesome.com/08c05a1f0f.js" crossorigin="anonymous"></script> <!-- fontawesome -->
     <link rel="stylesheet" href="../../resources/css/reset.css"><!-- 브라우저 기본 스타일 리셋하는 CSS -->
     <link rel="stylesheet" href="../../resources/css/common.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
