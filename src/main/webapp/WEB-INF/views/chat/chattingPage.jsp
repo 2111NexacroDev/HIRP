@@ -13,7 +13,29 @@
 	<title>웹소켓 채팅</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 	<script type="text/javascript">
+		
+		//현재 시간
+		var today = new Date();  
+		
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var dateString = year + '-' + month  + '-' + day;
+		
+		var hours = ('0' + today.getHours()).slice(-2); 
+		var minutes = ('0' + today.getMinutes()).slice(-2);
+		var seconds = ('0' + today.getSeconds()).slice(-2); 
+		var timeString = "";
 	
+		if(hours < 12) {
+			timeString += "오전 "+ hours + ":" + minutes;
+		} else if (hours == 12){
+			timeString += "오후 "+ hours + ":" + minutes;
+		} else {
+			timeString += "오후 "+ (hours*1-12) + ":" + minutes;
+		}
+		console.log(timeString);
+		
 	var webSocket = {
 			init: function(param) {
 				chatMsgList(); //웹소켓 연결될 때 이전 채팅 내역 불러오기
@@ -31,9 +53,15 @@
 			receiveMessage: function(msgData) {
 
 				// 정의된 CMD 코드에 따라서 분기 처리
-				if(msgData.cmd == 'CMD_MSG_SEND') {					
-					$('#divChatData').append('<div style="text-align:right;">' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + '</div>');
-					$('#divChatData').append('<div style="text-align:right;">' + msgData.msg + '</div>');
+				if(msgData.cmd == 'CMD_MSG_SEND') {
+					if("${sessionScope.emplId}" == msgData.emplId){ //내가 보낸 메세지
+						$('#divChatData').append('<div style="text-align:right;">' + msgData.msg + '</div>');
+						$('#divChatData').append('<div style="text-align:right;">' + timeString + '</div>');
+					} else { //다른 사람이 보낸 메세지
+						$('#divChatData').append('<div>' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + '</div>');
+						$('#divChatData').append('<div>' + msgData.msg + '</div>');
+						$('#divChatData').append('<div>' + timeString + '</div>');
+					}
 				}
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
@@ -77,16 +105,16 @@
 			}
 		};
 		$(document).ready(function() {
-			webSocket.init({ url: '<c:url value="/chat" />' });			
+			webSocket.init({ url: '<c:url value="/chat" />' });
+			$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight); //스크롤 젤 밑으로 내리기가 안되는 중..
 		});
 		
 		//이전 채팅 내역 불러오기
 		function chatMsgList(){
-			
 			$.ajax({
 				url:"/chat/printMessage.hirp",
 				type:"post",
-				data:{"chatroomNo" : "${chatroomNo}"},
+				data:{"chatroomNo" : "${chatroom.chatroomNo}"},
 				success: function(msgList){
 					console.log("성공");
 	    			console.log(msgList);
@@ -124,7 +152,7 @@
 							} else {
 								msgDate += "<div style='text-align:right;'> 오후 "+ (msgList[i].msgSenddate.substring(11, 13)*1-12) + ":" + msgList[i].msgSenddate.substring(14, 16) + "</div>";
 							}
-							$divChatData.append(msgEmplId);
+// 							$divChatData.append(msgEmplId);
 							$divChatData.append(msgContents);
 							$divChatData.append(msgDate);
 	    				} else { //받은 메세지
@@ -141,31 +169,32 @@
 							$divChatData.append(msgContents);
 							$divChatData.append(msgDate);
 	    				}
-	    				
-	    				
 					}
-	    			
 	    		},
 	    		error: function(){
-	    			console.log("실패");
-	// 				var $tableBody = $("#emplTable tbody");
-	//     			$tableBody.html("");//기존 내용 있으면 비우기
-	//     			var $tr = $("<tr>");
-	//     			var $text = $("<div class='t-c' style='align:center;'>").html("검색 결과가 없습니다."); //이거 td 안 합쳐짐.
-	// 				$tr.append($text);
-	// 				$tableBody.append($tr);
+	    			console.log("실패"); //새로 만든 방이라는 뜻
+	    			var $divChatData = $("#divChatData");
+	    			
+	    			var divDate = "<div class='t-c'>" + dateString + "</div>";
+	    			$divChatData.append(divDate);
 	    		}
 			});
 		}
+		
+		
 	</script>
 </head>
 <body>
-	<div style="overflow:scroll; margin: auto; margin-top: 20px; width: 90%; height: 500px; padding: 10px; border: solid 1px #e1e3e9;">
-		<div id="divChatData" style="height:100%"></div>
+	<div style="background-color:#0b2a60; height:50px;">
+	</div>
+	<div id="divChatParent" style="overflow:scroll; margin: auto; margin-top: 10px; width: 95%; height: 440px; padding: 10px; border: solid 1px #e1e3e9;">
+		<div id="divChatData" style="height:100%;"></div>
 	</div>
 	<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
-		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" />
-		<input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()" />
+<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
+		<textarea id="message" style="width:80%; height:70px" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
+		</textarea>
+		<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
 	</div>
 </body>
 </html>

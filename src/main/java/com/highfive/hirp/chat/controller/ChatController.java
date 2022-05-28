@@ -41,15 +41,41 @@ public class ChatController {
 	@Autowired
 	private EmployeeAdminService eaService;
 	
-	// 채팅방 입장 테스트
+	// 채팅방 입장
 	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
 	public String view_chat(Model model
 			, HttpServletRequest request
 			, HttpServletResponse response
 			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
-
-		model.addAttribute("chatroomNo", chatroomNo);
-		return "chat/chattingPage";
+		
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		try {
+			//파라미터로 넘겨줄 map
+			Map<String, String> searchMap = new HashMap<>();
+			searchMap.put("chatroomNo", Integer.toString(chatroomNo));
+			searchMap.put("emplId", emplId);
+			
+			ChatRoom chatroom = cService.selectChatRoomInfoByNo(searchMap);
+//			model.addAttribute("chatroomNo", chatroomNo);
+			model.addAttribute("chatroom", chatroom);
+			System.out.println(chatroom);
+			System.out.println("참가자 테스트");
+			if(chatroom.getChatroomType().equals("G")) {
+				List<ChatRoomJoin> chatRoomJoinList = cService.selectChatRoomJoinListByNo(chatroomNo);
+				if(chatRoomJoinList != null) {
+					model.addAttribute("chatRoomJoinList", chatRoomJoinList);
+					System.out.println(chatRoomJoinList);
+				} else {
+					System.out.println("참가자가 없어요!");
+				}
+			}
+			return "chat/chattingPage";
+			
+		} catch(Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
 	}
 	
 	//채팅 내용 조회

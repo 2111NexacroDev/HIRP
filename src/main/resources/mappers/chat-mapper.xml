@@ -12,6 +12,11 @@
 		<result property="chatroomType" column="CHATROOM_TYPE"/>
 		<result property="joinchatIdList" column="JOINCHAT_ID_LIST"/>
 		<result property="joinchatNameList" column="JOINCHAT_NAME_LIST"/>
+		<!-- 직원 정보 -->
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 		<association javaType="Message" property="message" column="MSG_NO">
 	        <id property="msgNo" column="MSG_NO"/>
 	        <result property="chatroomNo" column="CHATROOM_NO"/>
@@ -19,6 +24,17 @@
 	        <result property="msgContents" column="MSG_CONTENTS"/>
 	        <result property="msgSenddate" column="MSG_SENDDATE"/>
       	</association>  
+	</resultMap>
+	
+	<resultMap type="ChatRoomJoin" id="chatroomJoinResultMap">
+		<id property="joinchatNo" column="JOINCHAT_NO"/>
+		<result property="chatroomNo" column="CHATROOM_NO"/>
+		<result property="joinchatId" column="JOINCHAT_ID"/>
+		<!-- 직원 정보 -->
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 	</resultMap>
 	
 	<resultMap type="Message" id="messageResultMap">
@@ -173,6 +189,50 @@
 		JOIN POSITION_TBL USING(POSITION_CODE)
 		WHERE CHATROOM_NO = #{chatroomNo}
 		ORDER BY MSG_NO ASC
+	</select>
+	<!-- 채팅방 번호로 채팅방 정보 조회 -->
+	<select id="selectChatRoomInfoByNo" parameterType="hashMap" resultMap="chatroomResultMap">
+	SELECT CHATROOM_NO, 
+		CHATROOM_NAME, 
+		CHATROOM_MANAGER, TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+	FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
+	WHERE CHATROOM_NO IN (
+		    SELECT CHATROOM_NO
+		    FROM CHATROOM_TBL
+		    WHERE CHATROOM_TYPE = 'G'
+	    )
+		AND JOINCHAT_ID = #{emplId} AND CHATROOM_NO = #{chatroomNo}
+	UNION
+	SELECT CHATROOM_NO, 
+		NVL(DEPT_NAME,'')||' '||NVL(EMPL_NAME,'')||' '||NVL(POSITION_NAME,'') AS CHATROOM_NAME, 
+		CHATROOM_MANAGER, TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+	FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
+	WHERE CHATROOM_NO IN (
+		    SELECT CHATROOM_NO
+		    FROM CHATROOM_TBL
+		    JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		    WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{emplId}
+		) 
+		AND JOINCHAT_ID != #{emplId}
+		AND CHATROOM_NO = #{chatroomNo}
+	</select>
+	<!-- 채팅방 번호로 참여자 정보 가져오기 -->
+	<select id="selectChatRoomJoinListByNo" resultMap="chatroomJoinResultMap">
+		SELECT CHATROOM_NO, JOINCHAT_NO, JOINCHAT_ID,
+		EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
+		FROM CHATROOM_JOIN CJ
+		JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID
+		JOIN DEPT_TBL D USING(DEPT_CODE)
+		JOIN POSITION_TBL P USING(POSITION_CODE)
+		WHERE CHATROOM_NO = #{chatroomNo}
 	</select>
 	<!-- 채팅방 추가 -->
 	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
