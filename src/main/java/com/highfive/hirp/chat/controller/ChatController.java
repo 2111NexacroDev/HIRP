@@ -127,7 +127,7 @@ public class ChatController {
 					System.out.println("참가자가 없어요!");
 				}
 			}
-			return "chat/chattingPage";
+			return "chat/chatInfoPage";
 			
 		} catch(Exception e) {
 			model.addAttribute("msg", e.toString());
