@@ -184,7 +184,7 @@
 		
 		//채팅 정보창 열기
 		function chatInfoWindow(chatroomNo){ //원래는 roomId
-			window.open('/chatInfo.hirp?chatroomNo='+chatroomNo,'chattingRoomInfo'+chatroomNo,'width=400,height=500,left=820,top=0,location=no,status=no,scrollbars=no');
+			window.open('/chatInfo.hirp?chatroomNo='+chatroomNo,'chattingRoomInfo'+chatroomNo,'width=350,height=550,left=820,top=0,location=no,status=no,scrollbars=no');
 		}
 	</script>
 </head>
