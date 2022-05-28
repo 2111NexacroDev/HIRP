@@ -146,8 +146,6 @@
     
     <script>
 //     	console.log("${chatroomNo}" == ""); //비어있을 때 true
-    	
-    	
     	if("${chatroomNo}" != ""){
 			window.onload = function(){
 				chatWindow("${chatroomNo}"); //새로 만든 채팅방 열기 (열어서 메세지 보내야 목록에 뜸)
