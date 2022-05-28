@@ -100,12 +100,14 @@ public class ChatRoom {
 	public void setChatRoomJoin(ChatRoomJoin chatRoomJoin) {
 		this.chatRoomJoin = chatRoomJoin;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ChatRoom [chatroomNo=" + chatroomNo + ", chatroomName=" + chatroomName + ", chatroomManager="
-				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", message=" + message + ", joinchatIdList="
-				+ joinchatIdList + ", joinchatNameList=" + joinchatNameList + "]";
+				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", chatroomType=" + chatroomType + ", message="
+				+ message + ", joinchatIdList=" + joinchatIdList + ", joinchatNameList=" + joinchatNameList
+				+ ", chatRoomJoin=" + chatRoomJoin + "]";
 	}
-
+	
+	
 }

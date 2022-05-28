@@ -132,7 +132,13 @@
 				type: "post",
 				data: { "joinchatId" : selectId },
 				success: function(data){
+					//기존 채팅방 있으면 기존 채팅방 번호 넘겨주고,
+					//기존 채팅방 없으면 새로 만든 채팅방 번호 넘겨줌
+					//타입은 string으로 넘어옴
 					console.log("ajax 성공");
+					console.log(data);
+					
+					chatWindow(data);
 				},
 				error: function(){
 					console.log("ajax 실패");
@@ -154,8 +160,8 @@
     	}
     	
     	//채팅창 열기
-		function chatWindow(count){ //원래는 roomId
-			window.open('/chat.hirp?chatroomNo='+count,'chattingRoom'+count,'width=400,height=600,location=no,status=no,scrollbars=no');
+		function chatWindow(chatroomNo){ //원래는 roomId
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,location=no,status=no,scrollbars=no');
 		}
     	
 		//직원 목록에서 검색 (ajax)

@@ -25,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.domain.PersonalId;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
@@ -163,33 +164,43 @@ public class ChatController {
 		//userId
 		HttpSession session = request.getSession();
 		String emplId = session.getAttribute("emplId").toString();
-		
 		System.out.println(joinchatId);
 		
-//			//채팅방 정보 추가
-//			chatroom.setChatroomManager(emplId); //채팅방 생성자 추가
-//			chatroom.setChatroomType("P");
-//			System.out.println(chatroom);
-//			System.out.println(chatroomJoin);
-//			//채팅방 생성 후 chatroomNo return 
-//			int chatroomNo = cService.insertChattingRoom(chatroom);
-//			System.out.println("chatroomNo : " + chatroomNo);
-//			
-//			//나 자신도 추가
-//			chatroomJoin.getChatRoomJoinList().add(new ChatRoomJoin(0, chatroomNo, emplId));
-//			for(int i = 0; i < chatroomJoin.getChatRoomJoinList().size(); i++) {
-//				chatroomJoin.getChatRoomJoinList().get(i).setChatroomNo(chatroomNo);
-//				//채팅방 참가자 리스트 추가
-//				int result = cService.insertChatRoomJoin(chatroomJoin.getChatRoomJoinList().get(i));
-//				if(result > 0 ) {
-//					System.out.println("채팅방 참가자 추가 " + i+1);
-//				}
-//			}
-////			mv.setViewName("redirect:/chatroomList.hirp");
-//			//chatroomNo 넘겨줘서 새창 열게 함.
-//			mv.setViewName("redirect:/chatroomList.hirp?chatroomNo="+chatroomNo);
-////			mv.setViewName("redirect:/chat.hirp?chatroomNo="+chatroomNo); //새창으로 띄울 방법은 없을까?
+		//이미 만들어진 채팅방이 있는지 확인
+		PersonalId idList = new PersonalId(emplId, joinchatId);
+		ChatRoom chatRoom = cService.selectMyPersonalChattingRoom(idList);
+		System.out.println(chatRoom);
+		
+		if(chatRoom != null) {
+			return Integer.toString(chatRoom.getChatroomNo());
+		} else {
+			//이미 만들어진 채팅방이 없을 때
+			//채팅방 정보 추가
+			ChatRoom newChatroom = new ChatRoom();
+			newChatroom.setChatroomManager(emplId);
+			newChatroom.setChatroomName("personalChatting");
+			newChatroom.setChatroomType("P");
 			
+			System.out.println(newChatroom);
+			
+			//채팅방 생성 후 chatroomNo return 
+			int chatroomNo = cService.insertChattingRoom(newChatroom);
+			System.out.println("chatroomNo : " + chatroomNo);
+			
+			//채팅방 참가자 추가
+			ChatRoomJoin chatroomJoin1 = new ChatRoomJoin(0, chatroomNo, emplId); //나 자신
+			ChatRoomJoin chatroomJoin2 = new ChatRoomJoin(0, chatroomNo, joinchatId); //상대
+			
+			int result = cService.insertChatRoomJoin(chatroomJoin1);
+			int result2 = cService.insertChatRoomJoin(chatroomJoin2);
+			
+			if(result > 0 || result2 > 0) {
+				System.out.println("개인 채팅방 참가자 추가");
+				System.out.println(chatroomJoin1);
+				System.out.println(chatroomJoin2);
+				return Integer.toString(chatroomNo);
+			}
+		}
 		
 		return "";
 	}

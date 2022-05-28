@@ -8,6 +8,7 @@ import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.domain.PersonalId;
 import com.highfive.hirp.employee.domain.Employee;
 
 public interface ChatService {
@@ -23,6 +24,9 @@ public interface ChatService {
 	public List<ChatRoom> selectMyChattingRoom(String emplId);
 	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
 	public List<ChatRoom> selectMyChattingRoom(Map<String, String> searchMap);
+	//나와 상대방이 포함된 개인 채팅방 가져오기
+	public ChatRoom selectMyPersonalChattingRoom(PersonalId idList);
+	
 	// 채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
 	public List<ChatList> selectChatListByRoomNo(int chatroomNo);
 	//일단 얘네 두개 남겨놓겠음
