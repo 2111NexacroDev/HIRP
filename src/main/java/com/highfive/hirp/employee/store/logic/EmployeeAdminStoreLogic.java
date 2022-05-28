@@ -151,5 +151,69 @@ public class EmployeeAdminStoreLogic implements EmployeeAdminStore {
 		return result;
 	}
 
+	@Override
+	public int insertJobRole(SqlSession sqlSession, JobRole jobRole) {
+		int result = sqlSession.insert("EmployeeAdminMapper.insertJobRole", jobRole);
+		return result;
+	}
 
+	@Override
+	public int insertCareer(SqlSession sqlSession, Career career) {
+		int result = sqlSession.insert("EmployeeAdminMapper.insertCareer", career);
+		return result;
+	}
+
+	@Override
+	public int insertCert(SqlSession sqlSession, Certification cert) {
+		int result = sqlSession.insert("EmployeeAdminMapper.insertCert", cert);
+		return result;
+	}
+
+	@Override
+	public int insertLang(SqlSession sqlSession, Language lang) {
+		int result = sqlSession.insert("EmployeeAdminMapper.insertLang", lang);
+		return result;
+	}
+
+	@Override
+	public int insertMilitary(SqlSession sqlSession, Military military) {
+		int result = sqlSession.insert("EmployeeAdminMapper.insertMilitary", military);
+		return result;
+	}
+	
+	@Override
+	public int updateTopInfo(SqlSession sqlSession, Employee employee) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateTopInfo", employee);
+		return result;
+	}
+
+	@Override
+	public int updateJobRole(SqlSession sqlSession, JobRole jobRole) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateJobRole", jobRole);
+		return result;
+	}
+
+	@Override
+	public int updateCareer(SqlSession sqlSession, Career career) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateCareer", career);
+		return result;
+	}
+
+	@Override
+	public int updateCert(SqlSession sqlSession, Certification cert) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateCert", cert);
+		return result;
+	}
+
+	@Override
+	public int updateLang(SqlSession sqlSession, Language lang) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateLang", lang);
+		return result;
+	}
+
+	@Override
+	public int updateMilitary(SqlSession sqlSession, Military military) {
+		int result = sqlSession.update("EmployeeAdminMapper.updateMilitary", military);
+		return result;
+	}
 }

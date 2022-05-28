@@ -11,7 +11,7 @@ public class ApprAccept {
 	private String emplId;
 	private int apprLevel;
 	private String apprType;
-	private String status;
+	private String aStatus;
 	private String apprComment;
 	private Date apprDate;
 	private Employee employee;
@@ -58,12 +58,12 @@ public class ApprAccept {
 		this.apprType = apprType;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getaStatus() {
+		return aStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setaStatus(String aStatus) {
+		this.aStatus = aStatus;
 	}
 
 	public String getApprComment() {
@@ -93,8 +93,9 @@ public class ApprAccept {
 	@Override
 	public String toString() {
 		return "ApprAccept [acceptNo=" + acceptNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", apprLevel="
-				+ apprLevel + ", apprType=" + apprType + ", status=" + status + ", apprComment=" + apprComment
+				+ apprLevel + ", apprType=" + apprType + ", aStatus=" + aStatus + ", apprComment=" + apprComment
 				+ ", apprDate=" + apprDate + ", employee=" + employee + "]";
 	}
 
+	
 }

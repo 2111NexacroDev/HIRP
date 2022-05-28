@@ -1,134 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-#apprbtn {
-	float: right;
-}
 
-#apprTable {
-	border: solid 1px #888;
-	width: 230px;
-	font-size: 15px;
-	text-align: center;
-	margin: 30px;
-}
-
-#approvalLine {
-	position: absolute;
-	right: 30px;
-	top: 25px;
-}
-
-.singleApprLine {
-	width: 100px;
-	height: 110px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-	margin : 0px;
-}
-
-.singleApprType{
-	width: 20px;
-	height: 100px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-
-}
-
-
-.singleApprLineTop{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 2px;
-}
-
-.singleApprLineMiddle{
-	width: 100%;
-	height: 60%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 3px;
-
-}
-
-.singleApprLineBottom{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	margin : 0px;
-	color :  #888;
-	padding-top : 2px;
-}
-
-
-#apprContents{
-border: solid 1px #888;
-border-radius:4px 4px 0px 0px; 
-padding-left:120px;
-margin-top :20px;
-}
-
-#attached-file-div{
-border : solid 1px #888;
-border-top : none;
-border-radius:0px 0px 4px 4px;
-padding : 10px;
-}
-
-</style>
-</head>
-<body>
 <%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
 <h1 class="basic-border-bottom">결재문서함</h1>
 <div id="guide" class="subConts">
 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가,필요 없으면 지울 것 -->
 			
-			<button class="basic mt-20" type="button" id="apprbtn" onclick="openModal1(this);">반려</button>
+			<button class="basic mt-20 apprbtn" type="button" id="apprbtn" onclick="openModal1(this);">반려</button>
 			<section class="section--modal modal-reject" >
 					<div class="bg-black"></div>
 					<div class="section--modal__conts">
 						<button class="btn--close" type="button"></button>
 						<h3>반려하기</h3>
+                            <form action="/proceed/appr.hirp" method="post">
+                            <input type="hidden" value="${emplId}" name="emplId">
+                            <input type="hidden" value="${approval.apprNo}" name="apprNo">
+                            <input type="hidden" value="반려" name="aStatus">
+                            <input type="hidden" value="반려" name="apprStatus">
+                            
                             <ul>
                                 <li>
-                                	<textarea  cols="50" rows="7" placeholder="반려의견을 작성해주세요."></textarea>
+                                	<textarea  cols="50" rows="7" placeholder="반려의견을 작성해주세요." name="apprComment"></textarea>
                                 </li>
                             </ul>
 						<div class="btns-wrap mt-20 t-r">
-								<button class="point" type="button" onclick="rejectAppr()">반려</button>
-								<button class="finished closeWindow"" type="button" >닫기</button>
+								<button class="point " type="submit">반려</button>
+								<button class="finished closeWindow " type="button" >닫기</button>
 						</div>
+						</form>
 				</section>
 			
-			<button class="point mt-20" type="button" id="apprbtn" onclick="openApprModal2(this);">결재</button>
+			<button class="point mt-20 apprbtn" type="button" id="apprbtn" onclick="openApprModal2(this);">결재</button>
 				<section class="section--modal modal--appr" >
 					<div class="bg-black"></div>
 					<div class="section--modal__conts">
 						<button class="btn--close" type="button"></button>
 						<h3>결재하기</h3>
+                            <form action="/proceed/appr.hirp" method="post" name="frmSubmit">
+                            <input type="hidden" value="${emplId}" name="emplId">
+                            <input type="hidden" value="${approval.apprNo}" name="apprNo">
+                            <input type="hidden" value="승인" name="aStatus">
+                            <c:if test="${aList[0].emplId eq emplId}">
+                            <input type="hidden" value="진행" name="apprStatus">
+                            </c:if>
+                           <c:if test="${aList.get(aList.size()-1).emplId eq emplId}">
+                            <input type="hidden" value="완료" name="apprStatus">
+                            </c:if> 
                             <ul>
                                 <li>
-                                	<textarea  cols="50" rows="7" placeholder="의견을 작성해주세요."></textarea>
+                                	<textarea  cols="50" rows="7" placeholder="의견을 작성해주세요." name="apprComment"></textarea>
                                 </li>
                             </ul>
 						<div class="btns-wrap mt-20 t-r">
-								<button class="point" type="button" onclick="approveAppr()">승인</button>
+								<button class="point" type="submit">승인</button>
 								<button class="finished closeWindow" type="button" >닫기</button>
 						</div>
+							</form>
 				</section>
 			
 				
@@ -165,31 +92,36 @@ padding : 10px;
 								${employee.emplName} ${employee.positionCode}</div>
 								</c:if>
 								
-								<div class='singleApprLineBottom' style="color:rgb(192,1, 1);">
 								<c:if test="${approval.temporaryStorage eq'N'}">
+								<div class='singleApprLineBottom'>
 								${approval.writeDate}
-								</c:if>
 								</div>
+								</c:if>
 							</div>
 						<c:forEach var="appr" items="${aList}">
 							<div class="singleApprLine" style="font-size:14px; vertical-align:top;">
 								<div class='singleApprLineTop'>${appr.apprType }</div>
-								<c:if test="${appr.status eq'승인'}">
+								<c:if test="${appr.aStatus eq'승인'}">
 								<div class='singleApprLineMiddle'>
 								<img src="../../../../resources/images/icons/승인.png" style="width:40px; height:auto; vertical-align: middle;"/>
 								<br>
 								${appr.employee.emplName} ${appr.employee.positionCode }</div>
 								</c:if>
-								<c:if test="${appr.status eq'대기'}">
+								<c:if test="${appr.aStatus eq'대기'||appr.aStatus eq'반려'}">
 								<div class='singleApprLineMiddle' style="padding-top : 23px;">
 								${appr.employee.emplName} ${appr.employee.positionCode}</div>
 								</c:if>
 								
-								<div class='singleApprLineBottom' style="color:rgb(192,1, 1);">
-								<c:if test="${appr.status eq'승인'}">
-								${approval.writeDate}
-								</c:if>
+								<c:if test="${appr.aStatus eq'승인'}">
+								<div class='singleApprLineBottom'>
+								${appr.apprDate}
 								</div>
+								</c:if>
+								<c:if test="${appr.aStatus eq'반려'}">
+								<div class='singleApprLineBottom' style="color:rgb(192,1, 1);">
+								반려 ${appr.apprDate}
+								</div>
+								</c:if>
 							</div>	
 						</c:forEach>
 						</div>
@@ -221,6 +153,16 @@ padding : 10px;
 				    $(modalWindow).siblings('.modal-reject').css('display', 'flex');
 			}
 			    
+			
+			function submitForm(){
+				var apprStatus = $("#apprStatus");
+				var apprLevel = "${aList[0].emplId}";
+				var emplId = "${emplId}";
+				var theForm = document.frmSubmit;
+				//첫번째 결재자가 로그인한 사람이라면
+				console.log("${aList.get(aList.size()-1).emplId}");
+			}
+			
 			</script>
 			
 			

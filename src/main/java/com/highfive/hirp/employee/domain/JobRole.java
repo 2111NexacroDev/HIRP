@@ -1,22 +1,20 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class JobRole {
 	private int jobRoleNo;
 	private String emplId;
 	private String jobRoleDivision;
 	private String jobRoleTitle;
-	private Date jobRoleStartDate;
-	private Date jobRoleEndDate;
+	private String jobRoleStartDate;
+	private String jobRoleEndDate;
 	private String jobRoleConts;
 	private String jobRoleEtc;
 
 	public JobRole() {
 	}
 
-	public JobRole(int jobRoleNo, String emplId, String jobRoleDivision, String jobRoleTitle, Date jobRoleStartDate,
-			Date jobRoleEndDate, String jobRoleConts, String jobRoleEtc) {
+	public JobRole(int jobRoleNo, String emplId, String jobRoleDivision, String jobRoleTitle, String jobRoleStartDate,
+			String jobRoleEndDate, String jobRoleConts, String jobRoleEtc) {
 		super();
 		this.jobRoleNo = jobRoleNo;
 		this.emplId = emplId;
@@ -60,19 +58,27 @@ public class JobRole {
 		this.jobRoleTitle = jobRoleTitle;
 	}
 
-	public Date getJobRoleStartDate() {
+	public String getJobRoleStartDate() {
 		return jobRoleStartDate;
 	}
 
-	public void setJobRoleStartDate(Date jobRoleStartDate) {
+	public void setJobRoleStartDate(String jobRoleStartDate) {
+//		jobRoleStartDate = jobRoleStartDate.replaceAll("-", "");
+//		if(jobRoleStartDate.length() > 8) {
+//			jobRoleStartDate = jobRoleStartDate.substring(0, 9);
+//		}
 		this.jobRoleStartDate = jobRoleStartDate;
 	}
 
-	public Date getJobRoleEndDate() {
+	public String getJobRoleEndDate() {
 		return jobRoleEndDate;
 	}
 
-	public void setJobRoleEndDate(Date jobRoleEndDate) {
+	public void setJobRoleEndDate(String jobRoleEndDate) {
+//		jobRoleEndDate = jobRoleEndDate.replaceAll("-", "");
+//		if(jobRoleEndDate.length() > 8) {
+//			jobRoleEndDate = jobRoleEndDate.substring(0, 9);
+//		}
 		this.jobRoleEndDate = jobRoleEndDate;
 	}
 

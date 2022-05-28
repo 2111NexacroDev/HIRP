@@ -1,13 +1,11 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class Language {
 	private int langNo;
 	private String emplId;
 	private String langCategory;
 	private String langName;
-	private Date langTestDate;
+	private String langTestDate;
 	private String langInst;
 	private int langScore; 
 	private String langGrade;
@@ -15,7 +13,7 @@ public class Language {
 	
 	public Language() {}
 
-	public Language(int langNo, String emplId, String langCategory, String langName, Date langTestDate, String langInst,
+	public Language(int langNo, String emplId, String langCategory, String langName, String langTestDate, String langInst,
 			int langScore, String langGrade, String langEtc) {
 		super();
 		this.langNo = langNo;
@@ -61,11 +59,11 @@ public class Language {
 		this.langName = langName;
 	}
 
-	public Date getLangTestDate() {
+	public String getLangTestDate() {
 		return langTestDate;
 	}
 
-	public void setLangTestDate(Date langTestDate) {
+	public void setLangTestDate(String langTestDate) {
 		this.langTestDate = langTestDate;
 	}
 

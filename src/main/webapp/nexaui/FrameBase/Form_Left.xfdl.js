@@ -76,13 +76,6 @@
             obj.set_background("url(\'theme::hirpTheme/08_icon_att.png\') repeat center top");
             obj.set_border("0px none");
             this.addChild(obj.name, obj);
-
-            obj = new Button("btn_userPage","8","16","40","40",null,null,null,null,null,null,this);
-            obj.set_taborder("8");
-            obj.set_borderRadius("4px");
-            obj.set_background("url(\'theme://images/btn_TF_Close.png\') repeat center center #666666");
-            obj.set_cursor("pointer");
-            this.addChild(obj.name, obj);
             // Layout Functions
             //-- Default Layout : this
             obj = new Layout("default","Desktop_screen",200,720,this,function(p){});
@@ -102,11 +95,25 @@
         
         // User Script
         this.registerScript("Form_Left.xfdl", function() {
+        // 최초 로드 시 홈화면으로 진입
+        this.Form_Left_onload = function(obj,e)
+        {
+        	var objApp = nexacro.getApplication();
+        	var sWorkFramePath = objApp.mainframe.HFrameSet00.WorkFrame;
+        	var objChildFrame = new ChildFrame("home", 0, 0, 1080, 720);
+        	objChildFrame.set_dragmovetype("none");
+        	sWorkFramePath.addChild("home", objChildFrame);
+
+        	objChildFrame.set_showtitlebar(false);
+        	objChildFrame.set_formurl("FrameBase::form_home.xfdl");
+        	objChildFrame.show();
+        };
+
+        // gnb 셀 클릭
         this.gnb_admin_oncellclick = function(obj,e)
         {
         	this.fn_openForm(obj, e);
         };
-
 
         //클릭하면 form을 열어주는 함수
         //this.fn_openForm = function(paramRow) {
@@ -150,7 +157,6 @@
         	var objChildFrame = new ChildFrame(sMenuId, 0, 0, 1080, 720);
         	sWorkFramePath.addChild(sMenuId, objChildFrame);
 
-
         	//파라미터 넘겨주기
         	var oParam = {
         					MENU_ID : sMenuId,
@@ -160,22 +166,23 @@
 
         	objChildFrame.openParam = oParam;
 
-
         	objChildFrame.set_showtitlebar(false);
         /*	objChildFrame.set_formurl("FrameBase::deptManage.xfdl");*/
         	objChildFrame.set_formurl(sFormUrl);
         	objChildFrame.show();
+        	objChildFrame.set_dragmovetype("none");
 
         	//mdi에 파라미터로 oParam 넘기기
         	/*objApp.mainframe.HFrameSet00.WorkFrame.form.fn_addTab(oParam);*/
         }
 
-        // 로고 클릭 시 홈화면 이동
+        // 로고 클릭 시 리로드 이동
         this.logo_admin_onclick = function(obj,e)
         {
         	location.href="/admin.hirp";
         };
 
+        // 사용자 페이지 진입
         this.btn_userPage_onclick = function(obj,e)
         {
         	location.href="/";
@@ -186,6 +193,7 @@
         // Regist UI Components Event
         this.on_initEvent = function()
         {
+            this.addEventHandler("onload",this.Form_Left_onload,this);
             this.logo_admin.addEventHandler("onclick",this.logo_admin_onclick,this);
             this.gnb_admin.addEventHandler("oncellclick",this.gnb_admin_oncellclick,this);
             this.ImageViewer00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
@@ -194,7 +202,6 @@
             this.ImageViewer00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
             this.ImageViewer00_00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
             this.ImageViewer00_00_00_00_00_00.addEventHandler("onclick",this.ImageViewer00_onclick,this);
-            this.btn_userPage.addEventHandler("onclick",this.btn_userPage_onclick,this);
         };
         this.loadIncludeScript("Form_Left.xfdl");
         this.loadPreloadList();

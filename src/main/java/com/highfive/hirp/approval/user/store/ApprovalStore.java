@@ -26,20 +26,23 @@ public interface ApprovalStore {
 
 	int insertAppr(SqlSession sqlSession, Approval approval);
 
-	int insertStoragedAppr(SqlSession sqlSession, Approval approval);
+	//임시저장
+	int insertTempStorageAppr(SqlSession sqlSession, Approval approval);
 
 	int updateStoragedAppr(SqlSession sqlSession, int docNo);
 
 	int deleteStoragedAppr(SqlSession sqlSession, int docNo);
-
+	//결재대기함
 	List<Approval> selectAllWaitingAppr(SqlSession sqlSession, String emplId);
+	//상신문서함
+	List<Approval> selectAllMyAppr(SqlSession sqlSession, String emplId);
 
 	Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo);
 
 	//결재자정보 조회
 	List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int apprNo);
 
-	int updateApprStatus(SqlSession sqlSession, ApprAccept apprAccept);
+	int modifyApprAccept(SqlSession sqlSession, ApprAccept apprAccept);
 
 	int updateApprovalStatus(SqlSession sqlSession, Approval approval);
 
@@ -49,11 +52,11 @@ public interface ApprovalStore {
 
 	List<Approval> selectAllWrittenAppr(SqlSession sqlSession, ApprAccept apprAccept);
 
-	List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId);
 
-	List<Approval> selectAllRejectedAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllRejectedAppr(SqlSession sqlSession, String emplId);
 
-	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept);
+	List<Approval> selectAllCompletedAppr(SqlSession sqlSession, String emplId);
 
 	//결재문서 보기
 	Approval selectOneAppr(SqlSession sqlSession,int apprNo);
@@ -66,5 +69,9 @@ public interface ApprovalStore {
 
 	//결재 첨부파일 등록
 	int insertApprAttachedFile(SqlSession sqlSession, ApprAttachedFile apprFile);
+
+
+	//반려된 문서 이후의 결재라인 수정
+	//int updateRejectedAppr(SqlSession sqlSession);
 
 }

@@ -18,8 +18,7 @@ public interface EmployeeAdminService {
 	public List<Employee> printAllEmployeeWithDeptCode(String deptCode); //하위부서까지
 	public List<Employee> printEmployeeWithDeptCode(String deptCode); //내 부서 소속만
 	public List<Employee> printAllRetiree();
-	public List<Employee> printAllTempEmployee();
-	
+	public List<Employee> printAllTempEmployee();	
 	
 	// 직원 항목별 정보 조회
 	public Employee printEmployeeInfo(String emplId);	
@@ -33,9 +32,23 @@ public interface EmployeeAdminService {
 	public int modifyEmployeeInfo(Employee employee);
 	public int resignEmployee(String emplId);
 	public int modifyLevelEmployee(String tempId);
+	
 	public int removeInfoAboutJob(int jobNo);
 	public int removeInfoAboutCareer(int infoNo);
 	public int removeInfoAboutLang(int infoNo);
 	public int removeInfoAboutCert(int infoNo);
 	public int removeInfoAboutMilitary(int infoNo);
+	
+	public int registerJobRole(JobRole jobRole);
+	public int registerCareer(Career career);
+	public int registerCert(Certification cert);
+	public int registerLang(Language lang);
+	public int registerMilitary(Military military);
+	
+	public int modifyTopInfo(Employee employee);
+	public int modifyJobRole(JobRole jobRole);
+	public int modifyCareer(Career career);
+	public int modifyCert(Certification cert);
+	public int modifyLang(Language lang);
+	public int modifyMilitary(Military military);
 }

@@ -51,7 +51,7 @@ public interface ApprovalService {
 		
 		//임시저장(insert approval)
 		//TEMPORARY_STORAGE 'Y';
-		public int registerStoragedAppr(Approval approval);
+		public int registerTempStorageAppr(Approval approval);
 		
 		//임시저장된 문서 수정
 		public int modifyStoragedAppr(int docNo);
@@ -60,13 +60,15 @@ public interface ApprovalService {
 		
 		//결재대기 문서함(select List session에서 id, 진행사항  : 대기)
 		public List<Approval> printAllWaitingAppr(String emplId); 
+		//상신문서함
+		public List<Approval> printAllMyAppr(String emplId);
 		//결재대기 문서 조회(approval select)
 		public Approval printOneWaitngAppr(int docNo);
 		//결재선 진행 상태 조회(appr_accept select 결재상태 <조건> 문서번호 )
 		public List<ApprAccept> printApprovalStatus(int apprNo);
 		//결재자 결재진행(결재승인, 반려)
 		//(appr_accept update 결재상태 "승인,반려" <조건>문서번호,session id값 )
-		public int modifyApprStatus(ApprAccept apprAccept); 
+		public int modifyApprAccept(ApprAccept apprAccept); 
 		//(update approval 진행상태"승인, 진행,반려")
 		public int modifyApprovalStatus(Approval approval);
 		
@@ -78,13 +80,13 @@ public interface ApprovalService {
 		//상신문서함(select List)
 		public List<Approval> printAllWrittenAppr(ApprAccept apprAccept);
 		//임시저장함(select List)
-		public List<Approval> printAllTemporaryStorageAppr(ApprAccept apprAccept);
+		public List<Approval> printAllTemporaryStorageAppr(String emplId);
 		
 		//반려문서함(select List)
-		public List<Approval> printAllRejectedAppr(ApprAccept apprAccept);
+		public List<Approval> printAllRejectedAppr(String emplId);
 		
 		//완료문서함(select List)
-		public List<Approval> printAllCompletedAppr(ApprAccept apprAccept);
+		public List<Approval> printAllCompletedAppr(String emplId);
 		//문서조회(select)
 		public Approval printOneAppr(int apprNo);
 		
@@ -94,6 +96,9 @@ public interface ApprovalService {
 		
 		//최근 등록한 결재번호 조회
 		public int printRecentApprNo();
+		
+		//반려된 문서 이후의 결재라인 대기->null로 변경
+		//public int modifyRejectedAppr();
 		
 	
 }
