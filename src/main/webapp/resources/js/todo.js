@@ -19,7 +19,7 @@ $('.memo--list .btn--plus').on('click', function () {
     if ($('.memo--list .no-data').length != 0) {
         $('.memo--list .no-data').hide();
     }
-    if($('.notStored').length < 1) {
+    if ($('.notStored').length < 1) {
         $('.memo--list ul').append(
             '<li>' +
             '<textarea class="notStored" name="memoConts"></textarea>' +
@@ -30,15 +30,15 @@ $('.memo--list .btn--plus').on('click', function () {
             '</li>'
         );
         $('.p--memo-guide').fadeIn();
-        setTimeout(function(){$('.p--memo-guide').fadeOut(500)}, 2000);
+        setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
     } else {
         $('.p--memo-guide').text('작성하신 메모를 저장하신 후 추가해주세요!');
         $('.p--memo-guide').fadeIn();
-        setTimeout(function(){$('.p--memo-guide').fadeOut(500)}, 2000);
+        setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
     }
 });
 
-$('.todo--today label').on('click', function () {
+$(document).on('click', '.todo--today label', function () {
     let checkedValue = $(this).siblings('input[type="checkbox"]').prop('checked');
     let todoNo = $(this).attr('for');
     let isFinished;
