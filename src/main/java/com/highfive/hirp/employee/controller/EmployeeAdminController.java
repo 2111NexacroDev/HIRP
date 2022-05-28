@@ -103,9 +103,11 @@ public class EmployeeAdminController {
 		if(employee != null && !dList.isEmpty() && !pList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
+			
 			result.addDataSet("out_dept", dList);
 			result.addDataSet("out_pos", pList);
 			result.addDataSet("out_empl", employee);
+			result.addDataSet("out_empl_top", employee);
 			
 			if(!jList.isEmpty()) {result.addDataSet("out_jobRole", jList);}
 			if(!caList.isEmpty()) {result.addDataSet("out_career", caList);}
@@ -152,67 +154,237 @@ public class EmployeeAdminController {
 		return result;		
 	}
 	
-	// 사원 정보 수정
-	@RequestMapping(value="/admin/empChangeInfo.hirp", method=RequestMethod.POST)
-	public NexacroResult empUpdate(
-			 @ParamDataSet(name="in_empl") 		DataSet in_empl
-			,@ParamDataSet(name="in_jobRole") 	DataSet in_jobRole
-			,@ParamDataSet(name="in_career") 	DataSet in_career
-			,@ParamDataSet(name="in_lang") 		DataSet in_lang
-			,@ParamDataSet(name="in_cert") 		DataSet in_cert
-			,@ParamDataSet(name="in_military") 	DataSet in_military
-//			,@ParamVariable(name="jobRoleNo") 	int 	jobRoleNo
-//			,@ParamVariable(name="certNo") 		int 	certNo
-//			,@ParamVariable(name="careerNo") 	int 	careerNo
-//			,@ParamVariable(name="langNo") 		int 	langNo
-//			,@ParamVariable(name="militaryNo") 	int 	militaryNo
+	// 사원 기본 정보 수정
+	@RequestMapping(value="/admin/empModifyInfo.hirp", method=RequestMethod.POST)
+	public NexacroResult empUpdateBasic(
+			@ParamDataSet(name="in_empl") 		DataSet in_empl
+			,@ParamDataSet(name="in_empl_top") 	DataSet in_empl_top
 			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		int 	i;
+		String sOrgEmpId = emplId.toString();
 		
-		// INSERT, UPDATE
-		// RowType에 따라서 INSERT OR UPDATE
-		int iResult = 0;
-		int uResult = 0;
-//		for(i = 0; i < inEmp.getRowCount(); i++) {
-//			int rowType = inEmp.getRowType(i);
-//			String empl_id 	 = dsGet(inEmp, i, "empl_id");
-//			String full_name = dsGet(inEmp, i, "full_name");
-//			String dept_cd 	 = dsGet(inEmp, i, "dept_cd");
-//			String pos_cd 	 = dsGet(inEmp, i, "pos_cd");
-//			String gender 	 = dsGet(inEmp, i, "gender");
-//			String hire_date = dsGet(inEmp, i, "hire_date");
-//			String married 	 = dsGet(inEmp, i, "married");
-//			int salary 		 = dsGet(inEmp, i, "salary") != "" 
-//									? Integer.parseInt(dsGet(inEmp, i, "salary")) : 0;
-//			String memo 	 = dsGet(inEmp, i, "memo");
-//			Employee employee = new Employee(
-//						empl_id
-//					, 	full_name
-//					, 	dept_cd
-//					, 	pos_cd
-//					, 	gender
-//					, 	hire_date
-//					, 	married
-//					, 	salary
-//					, 	memo);
-//			if( rowType == DataSet.ROW_TYPE_INSERTED) {
-//				iResult += eService.registerEmployee(employee);
-//				//int modifyResult = eAService.modifyEmployeeInfo(employee);
-//			}else if( rowType == DataSet.ROW_TYPE_UPDATED) {
-//				String sOrgEmpId = inEmp.getSavedData(i, "empl_id").toString();
-//				employee.setEmpl_id(sOrgEmpId);
-//				uResult += eService.modifyEmployee(employee);
-//			}
-//		}
-		if(iResult < 0 && uResult < 0) {
+		Employee employee = new Employee();
+		employee.setEmplId(sOrgEmpId);
+		employee.setEmplName(dsGet(in_empl_top, 0, "emplName"));
+		employee.setDeptCode(dsGet(in_empl_top, 0, "deptCode"));
+		employee.setPositionCode(dsGet(in_empl_top, 0, "positionCode"));
+		employee.setDirectNo(dsGet(in_empl_top, 0, "directNo"));
+		employee.setEmail(dsGet(in_empl_top, 0, "email"));
+		employee.setPhoneNo(dsGet(in_empl_top, 0, "phoneNo"));
+		employee.setIsStatus(dsGet(in_empl_top, 0, "isStatus"));
+		employee.setRecruitCategory(dsGet(in_empl, 0, "recruitCategory"));
+		employee.setSalaryCategory(dsGet(in_empl, 0, "salaryCategory"));
+		employee.setReferrer(dsGet(in_empl, 0, "referrer"));
+		employee.setBirthday(dsGet(in_empl, 0, "birthday").split(" ")[0]);
+		employee.setGender(dsGet(in_empl, 0, "gender"));
+		employee.setIsMarriage(dsGet(in_empl, 0, "isMarriage"));
+		employee.setIsDisability(dsGet(in_empl, 0, "isDisability"));
+		employee.setIsVeterans(dsGet(in_empl, 0, "isVeterans"));
+		employee.setEndDate(dsGet(in_empl, 0, "endDate").split(" ")[0]);
+		employee.setEndReason(dsGet(in_empl, 0, "endReason"));
+		
+		int uResult = eAService.modifyEmployeeInfo(employee);
+		if(uResult < 0) {
 			nErrorCode = -1;
 			strErrorMsg = "FAIL";
 		}else {
 			nErrorCode 	= 0;
 			strErrorMsg = "SUCC";
+		}
+		result.addVariable("ErrorCode", nErrorCode);
+		result.addVariable("ErrorMsg", strErrorMsg);
+		return result;
+	}
+	
+	// 사원 부가 정보 추가/수정
+	@RequestMapping(value="/admin/empChange{param}.hirp", method=RequestMethod.POST)
+	public NexacroResult empModifyDetail(
+			 @PathVariable(name="param") 		String infoCategory
+			,@ParamDataSet(name="in_data") 		DataSet in_data
+			,@ParamVariable(name="emplId") 		String 	emplId) throws Exception {
+		int 	nErrorCode = 0;
+		String  strErrorMsg = "START";
+		NexacroResult result = new NexacroResult();
+		String sOrgEmpId = emplId.toString();
+		
+		if(infoCategory.equals("Top")) {
+			Employee employee = new Employee();
+			employee.setEmplId(sOrgEmpId);
+			employee.setEmplName(dsGet(in_data, 0, "emplName"));
+			employee.setDeptCode(dsGet(in_data, 0, "deptCode"));
+			employee.setPositionCode(dsGet(in_data, 0, "positionCode"));
+			employee.setDirectNo(dsGet(in_data, 0, "directNo"));
+			employee.setEmail(dsGet(in_data, 0, "email"));
+			employee.setPhoneNo(dsGet(in_data, 0, "phoneNo"));
+			employee.setIsStatus(dsGet(in_data, 0, "isStatus"));
+			int topResult = eAService.modifyTopInfo(employee);			
+			if(topResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}	
+		}
+		else if(infoCategory.equals("JobRole")) {
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+			for(i = 0; i < in_data.getRowCount(); i++) {
+				int rowType = in_data.getRowType(i);
+				JobRole jobRole = new JobRole();
+				jobRole.setEmplId(sOrgEmpId);
+				jobRole.setJobRoleDivision(dsGet(in_data, i, "jobRoleDivision"));
+				jobRole.setJobRoleTitle(dsGet(in_data, i, "jobRoleTitle"));
+				jobRole.setJobRoleStartDate(dsGet(in_data, i, "jobRoleStartDate").split(" ")[0]);
+				jobRole.setJobRoleEndDate(dsGet(in_data, i, "jobRoleEndDate").split(" ")[0]);
+				jobRole.setJobRoleConts(dsGet(in_data, i, "jobRoleConts"));
+				jobRole.setJobRoleEtc(dsGet(in_data, i, "jobRoleEtc"));
+				if(rowType == DataSet.ROW_TYPE_INSERTED) {
+					iResult += eAService.registerJobRole(jobRole);
+				}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+					int roleNo = Integer.parseInt(dsGet(in_data, i, "jobRoleNo"));
+					jobRole.setJobRoleNo(roleNo);
+					uResult += eAService.modifyJobRole(jobRole);
+				}
+			}
+			if(iResult < 0 && uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}			
+		} else if(infoCategory.equals("Career")) {
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+			for(i = 0; i < in_data.getRowCount(); i++) {
+				int rowType = in_data.getRowType(i);
+				Career career = new Career();
+				career.setEmplId(sOrgEmpId);
+				career.setCareerStartDate(dsGet(in_data, i, "careerStartDate").split(" ")[0]);
+				career.setCareerEndDate(dsGet(in_data, i, "careerEndDate").split(" ")[0]);
+				career.setCareerPlace(dsGet(in_data, i, "careerPlace"));
+				career.setCareerRank(dsGet(in_data, i, "careerRank"));
+				career.setCareerJobRole(dsGet(in_data, i, "careerJobRole"));
+				career.setCareerPeriod(dsGet(in_data, i, "careerPeriod"));
+				career.setCareerEndReason(dsGet(in_data, i, "careerEndReason"));
+				career.setCareerEtc(dsGet(in_data, i, "careerEtc"));
+				if(rowType == DataSet.ROW_TYPE_INSERTED) {
+					System.out.println("커리어"+career);
+					iResult += eAService.registerCareer(career);
+				}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+					int careerNo = Integer.parseInt(dsGet(in_data, i, "careerNo"));
+					career.setCareerNo(careerNo);
+					System.out.println("커리어"+career);
+					uResult += eAService.modifyCareer(career);
+				}
+			}
+
+			if(iResult < 0 && uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}				
+		} else if(infoCategory.equals("Cert")) {
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+			for(i = 0; i < in_data.getRowCount(); i++) {
+				int rowType = in_data.getRowType(i);
+				Certification cert = new Certification();
+				cert.setEmplId(sOrgEmpId);
+				cert.setCertCategory(dsGet(in_data, i, "certCategory"));
+				cert.setCertName(dsGet(in_data, i, "certName"));
+				cert.setCertEnrollNo(dsGet(in_data, i, "certEnrollNo"));
+				cert.setCertLevel(dsGet(in_data, i, "certLevel"));
+				cert.setCertInst(dsGet(in_data, i, "certInst"));
+				cert.setCertStartDate(dsGet(in_data, i, "certStartDate").split(" ")[0]);
+				cert.setCertEndDate(dsGet(in_data, i, "certEndDate").split(" ")[0]);
+				if(rowType == DataSet.ROW_TYPE_INSERTED) {
+					iResult += eAService.registerCert(cert);
+				}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+					int certNo = Integer.parseInt(dsGet(in_data, i, "certNo"));
+					cert.setCertNo(certNo);
+					uResult += eAService.modifyCert(cert);
+				}
+			}
+			
+			if(iResult < 0 && uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}	
+		} else if(infoCategory.equals("Lang")) {
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+			for(i = 0; i < in_data.getRowCount(); i++) {
+				int rowType = in_data.getRowType(i);
+				Language lang = new Language();
+				int langScore 		 = dsGet(in_data, i, "langScore") != "" 
+						? Integer.parseInt(dsGet(in_data, i, "langScore")) : 0;
+				lang.setEmplId(sOrgEmpId);
+				lang.setLangCategory(dsGet(in_data, i, "langCategory"));
+				lang.setLangName(dsGet(in_data, i, "langName"));
+				lang.setLangTestDate(dsGet(in_data, i, "langTestDate").split(" ")[0]);
+				lang.setLangInst(dsGet(in_data, i, "langInst"));
+				lang.setLangScore(langScore);
+				lang.setLangGrade(dsGet(in_data, i, "langGrade"));
+				lang.setLangEtc(dsGet(in_data, i, "langEtc"));
+				if(rowType == DataSet.ROW_TYPE_INSERTED) {
+					iResult += eAService.registerLang(lang);
+				}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+					int langNo = Integer.parseInt(dsGet(in_data, i, "langNo"));
+					lang.setLangNo(langNo);
+					uResult += eAService.modifyLang(lang);
+				}
+			}
+			if(iResult < 0 && uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}				
+		} else if(infoCategory.equals("Military")) {
+			int iResult = 0;
+			int uResult = 0;
+			int 	i;
+			for(i = 0; i < in_data.getRowCount(); i++) {
+				int rowType = in_data.getRowType(i);
+				Military military = new Military();
+				military.setEmplId(sOrgEmpId);
+				military.setMilitaryGrade(dsGet(in_data, i, "militaryGrade"));
+				military.setMilitaryCode(dsGet(in_data, i, "militaryCode"));
+				military.setIsMilitaryEnd(dsGet(in_data, i, "isMilitaryEnd"));
+				military.setMilitaryStartDate(dsGet(in_data, i, "militaryStartDate").split(" ")[0]);
+				military.setMilitaryEndDate(dsGet(in_data, i, "militaryEndDate").split(" ")[0]);
+				military.setMilitaryEtc(dsGet(in_data, i, "militaryEtc"));
+				if(rowType == DataSet.ROW_TYPE_INSERTED) {
+					iResult += eAService.registerMilitary(military);
+				}else if(rowType == DataSet.ROW_TYPE_UPDATED) {
+					int militaryNo = Integer.parseInt(dsGet(in_data, i, "militaryNo"));
+					military.setMilitaryNo(militaryNo);
+					uResult += eAService.modifyMilitary(military);
+				}
+			}
+			if(iResult < 0 && uResult < 0) {
+				nErrorCode = -1;
+				strErrorMsg = "FAIL";
+			}else {
+				nErrorCode 	= 0;
+				strErrorMsg = "SUCC";
+			}				
+		} else {
+			System.out.println("파라미터 없음");
 		}
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);

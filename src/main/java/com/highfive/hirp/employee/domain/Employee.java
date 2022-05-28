@@ -21,7 +21,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	private String isMarriage;
 	private String isDisability;
 	private String isVeterans;
-	private Date endDate;
+	private String endDate;
 	private String endReason;
 	private String emplProfile;
 	private Certification certification;
@@ -38,7 +38,7 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 	public Employee(String emplId, String deptCode, String positionCode, String emplPw, String emplName, Date startDate,
 			String email, String directNo, String phoneNo, String recruitCategory, String salaryCategory,
 			String referrer, String isStatus, String birthday, String gender, String isMarriage, String isDisability,
-			String isVeterans, Date endDate, String endReason, String emplProfile, Certification certification,
+			String isVeterans, String endDate, String endReason, String emplProfile, Certification certification,
 			JobRole jobRole, Language language, Military military, Career career, String deptName,
 			String positionName) {
 		super();
@@ -216,11 +216,11 @@ public class Employee { // db와 같게 소문자로 만들어줘야함
 		this.isVeterans = isVeterans;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
