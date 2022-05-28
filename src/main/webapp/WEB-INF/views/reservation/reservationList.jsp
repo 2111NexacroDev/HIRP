@@ -364,6 +364,7 @@
                         </tr>
                     </c:if>
                     <c:forEach items="${myList }" var="myList">
+                        <tr>
                             <c:choose>
                                 <c:when test="${myList.utility.utilityCategory eq 'room'}">
                                     <td>회의실</td>
@@ -385,6 +386,7 @@
                                     <td>반납/사용완료</td>
                                 </c:when>
                             </c:choose>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>
