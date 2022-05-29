@@ -50,7 +50,12 @@
 <!-- 							    </button> -->
 <!-- 						    </div> -->
 						    <div class="ml-20 pos-rel" style="width:100%;">
-						    	<h3 class="mb-20 inline-block">${chat.chatroomName}</h3>
+						    	<h3 class="mb-20 inline-block">
+						    		${chat.chatroomName} 
+						    		<c:if test="${chat.chatroomType eq 'G'}">
+							    		(${chat.joinCount })
+						    		</c:if>
+						    	</h3>
 						    	<div class="chatting-time">
 						    		<!-- 날짜별로 시간 다르게 나오게 하기 -->
 							    	<c:if test="${fn:substring(chat.message.msgSenddate, 0, 10) eq today}">
@@ -90,7 +95,7 @@
         	<form id="addChatroomForm" action="/chat/addChatroom.hirp" method="get">
 				<!-- 채팅방 추가 모달창 -->
 				<section id="chatEmplListModal" class="modal--chatSelect shadow">
-					<h3>대화상대 선택 <span>3</span></h3>
+					<h3>대화상대 선택 <span></span></h3>
 					<!-- 검색창 -->
 					<div class="modal--chatSelect__srch row mt-10 t-c padding-bottom-10">
 						<input type="text" name="emplSearchKeyword" placeholder="부서명 또는 사원명 검색">

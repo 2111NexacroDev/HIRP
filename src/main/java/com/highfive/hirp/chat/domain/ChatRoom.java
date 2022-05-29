@@ -13,6 +13,7 @@ public class ChatRoom {
 	//채팅방 참여자 list (string, 콤마로 구분)
 	private String joinchatIdList;
 	private String joinchatNameList;
+	private int joinCount; //참가자 수
 	//회원 정보
 	private String emplName;
 	private String deptName;
@@ -97,7 +98,14 @@ public class ChatRoom {
 	public void setJoinchatNameList(String joinchatNameList) {
 		this.joinchatNameList = joinchatNameList;
 	}
+	public int getJoinCount() {
+		return joinCount;
+	}
 
+	public void setJoinCount(int joinCount) {
+		this.joinCount = joinCount;
+	}
+	
 	public ChatRoomJoin getChatRoomJoin() {
 		return chatRoomJoin;
 	}
@@ -112,6 +120,7 @@ public class ChatRoom {
 				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", chatroomType=" + chatroomType + ", joinchatIdList=" + joinchatIdList + ", joinchatNameList=" + joinchatNameList
 				+ ", chatRoomJoin=" + chatRoomJoin + "]";
 	}
-	
+
+
 	
 }
