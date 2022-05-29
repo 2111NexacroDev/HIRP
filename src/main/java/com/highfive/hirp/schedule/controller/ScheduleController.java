@@ -51,13 +51,6 @@ public class ScheduleController {
 		return mv;
 	}
 	
-	// 일정 검색(자바스크립트로 대체 고려중)
-	public ModelAndView scheduleSearchList(ModelAndView mv
-			,@ModelAttribute Search search) {
-		List<Schedule> searchList = sService.printSearchSchedule(search);
-		return mv;
-	}	
-	
 	// 일정 등록
 	@RequestMapping(value="/schedule/write.hirp", method=RequestMethod.POST)
 	public ModelAndView scheduleRegister(ModelAndView mv
