@@ -25,17 +25,27 @@
 		<result property="isVeterans" column="IS_VETERANS" />
 		<result property="endDate" column="END_DATE" />
 		<result property="endReason" column="END_REASON" />
-		<result property="emplProfile" column="EMPL_PROFILE" />
+		<result property="emplProfile" column="END_REASON" />
+		<!-- 이름 추가 -->
+		<result property="deptName" column="DEPT_NAME" />
+		<result property="positionName" column="POSITION_NAME" />
 	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="insertEmployee" parameterType="Employee"> <!-- 마이바티스에 줄이려고 써둠. id값 storelogic값과 같아야함 // 위에 타입, 아이디 중 적어줌 -->
-		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER) VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender})
+		INSERT INTO EMPL_TBL (EMPL_ID, EMPL_PW, EMPL_NAME, BIRTHDAY, PHONE_NO, GENDER, IS_STATUS) VALUES(#{emplId}, #{emplPw}, #{emplName}, #{birthday}, #{phoneNo}, #{gender}, '임시')
 	</insert>
 
 	<!-- 로그인 -->
 	<select id="selectLoginEmployee" parameterType="Employee" resultMap="employeeResultMap"> <!-- resultmap은 맨 위에 id와 같게 적어줌. select일때 resultmap필요함. 한개면 resultType(_int, _string) 여러개면 resultMap -->
-		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId} AND EMPL_PW = #{emplPw}
+		SELECT EMPL_ID, DEPT_CODE, POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE,
+		EMAIL, DIRECT_NO, PHONE_NO, RECRUIT_CATEGORY, SALARY_CATEGORY, REFERRER,
+		IS_STATUS, BIRTHDAY, GENDER, IS_MARRIAGE, IS_DISABILITY, IS_VETERANS, 
+		END_DATE, END_REASON, END_REASON, DEPT_NAME, POSITION_NAME
+		FROM EMPL_TBL 
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
+		WHERE EMPL_ID = #{emplId} AND EMPL_PW = #{emplPw}
 	</select>
 
 	<!-- 비밀번호 찾기 -->

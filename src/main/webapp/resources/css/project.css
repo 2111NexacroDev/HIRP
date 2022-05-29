@@ -9,7 +9,7 @@
 }
 
 .progress-bar .progress {
-	width: 100%; /* 나타내고자하는 퍼센트 값 */
+	width: 0; /* 나타내고자하는 퍼센트 값 */
 	height: 30px;
 	padding: 0;
 	text-align: center;

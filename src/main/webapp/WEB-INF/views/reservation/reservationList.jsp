@@ -358,6 +358,11 @@
                         <th>반납처리</th>
                     </thead>
                     <tbody>
+                    <c:if test="${empty myList }">
+                        <tr>
+                            <td class="t-c" colspan="4">등록된 내용이 없습니다.</td>
+                        </tr>
+                    </c:if>
                     <c:forEach items="${myList }" var="myList">
                         <tr>
                             <c:choose>

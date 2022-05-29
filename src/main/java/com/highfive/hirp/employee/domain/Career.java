@@ -1,23 +1,21 @@
 package com.highfive.hirp.employee.domain;
 
-import java.sql.Date;
-
 public class Career {
 	private int careerNo;
 	private String emplId;
-	private Date careerStartDate;
-	private Date careerEndDate;
+	private String careerStartDate;
+	private String careerEndDate;
 	private String careerPlace;
 	private String careerRank;
 	private String careerJobRole;
-	private Date careerPeriod;
+	private String careerPeriod;
 	private String careerEndReason;
 	private String careerEtc;
 	
 	public Career() {}
 
-	public Career(int careerNo, String emplId, Date careerStartDate, Date careerEndDate, String careerPlace,
-			String careerRank, String careerJobRole, Date careerPeriod, String careerEndReason, String careerEtc) {
+	public Career(int careerNo, String emplId, String careerStartDate, String careerEndDate, String careerPlace,
+			String careerRank, String careerJobRole, String careerPeriod, String careerEndReason, String careerEtc) {
 		super();
 		this.careerNo = careerNo;
 		this.emplId = emplId;
@@ -47,19 +45,19 @@ public class Career {
 		this.emplId = emplId;
 	}
 
-	public Date getCareerStartDate() {
+	public String getCareerStartDate() {
 		return careerStartDate;
 	}
 
-	public void setCareerStartDate(Date careerStartDate) {
+	public void setCareerStartDate(String careerStartDate) {
 		this.careerStartDate = careerStartDate;
 	}
 
-	public Date getCareerEndDate() {
+	public String getCareerEndDate() {
 		return careerEndDate;
 	}
 
-	public void setCareerEndDate(Date careerEndDate) {
+	public void setCareerEndDate(String careerEndDate) {
 		this.careerEndDate = careerEndDate;
 	}
 
@@ -87,11 +85,11 @@ public class Career {
 		this.careerJobRole = careerJobRole;
 	}
 
-	public Date getCareerPeriod() {
+	public String getCareerPeriod() {
 		return careerPeriod;
 	}
 
-	public void setCareerPeriod(Date careerPeriod) {
+	public void setCareerPeriod(String careerPeriod) {
 		this.careerPeriod = careerPeriod;
 	}
 

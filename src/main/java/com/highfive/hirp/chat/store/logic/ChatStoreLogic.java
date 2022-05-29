@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.domain.PersonalId;
 import com.highfive.hirp.chat.store.ChatStore;
 import com.highfive.hirp.employee.domain.Employee;
 
@@ -17,26 +19,16 @@ import com.highfive.hirp.employee.domain.Employee;
 public class ChatStoreLogic implements ChatStore{
 
 	//직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeList(SqlSession sqlSession) {
-		List<Employee> emplList = sqlSession.selectList("ChatMapper.selectEmployeeList");
-		return emplList;
-	}
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeListByName(SqlSession sqlSession, String name) {
-		List<Employee> emplList = sqlSession.selectList("ChatMapper.selectEmployeeListByName", name);
-		return emplList;
-	}
 	//채팅방 추가 (대화 상대, 채팅방 이름 설정)
 	@Override
 	public int insertChattingRoom(SqlSession sqlSession, ChatRoom chatRoom) {
-		int result = sqlSession.insert("ChatMapper.insertChattingRoom", chatRoom);
-		return result;
+		sqlSession.insert("ChatMapper.insertChattingRoom", chatRoom);
+		return chatRoom.getChatroomNo(); //번호 가져오기
 	}
 	@Override
-	public int insertChatRoomJoin(SqlSession sqlSession, List<String> emplIdList) {
-		int result = sqlSession.insert("ChatMapper.insertChatRoomJoin", emplIdList);
+	public int insertChatRoomJoin(SqlSession sqlSession, ChatRoomJoin chatroomJoin) {
+		int result = sqlSession.insert("ChatMapper.insertChatRoomJoin", chatroomJoin);
 		return result;
 	}
 	
@@ -46,6 +38,18 @@ public class ChatStoreLogic implements ChatStore{
 	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, String emplId) {
 		List<ChatRoom> roomList = sqlSession.selectList("ChatMapper.selectMyChattingRoom", emplId);
 		return roomList;
+	}
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	@Override
+	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, Map<String, String> searchMap) {
+		List<ChatRoom> roomList = sqlSession.selectList("ChatMapper.selectMyChattingRoomByKeyword", searchMap);
+		return roomList;
+	}
+	//나와 상대방이 포함된 개인 채팅방 가져오기
+	@Override
+	public ChatRoom selectMyPersonalChattingRoom(SqlSession sqlSession, PersonalId idList) {
+		ChatRoom chatRoom = sqlSession.selectOne("ChatMapper.selectMyPersonalChattingRoom", idList);
+		return chatRoom;
 	}
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
@@ -116,6 +120,7 @@ public class ChatStoreLogic implements ChatStore{
 		int result = sqlSession.delete("ChatMapper.deleteChatRoom", chatroomNo);
 		return result;
 	}
+
 
 
 }

@@ -1,9 +1,13 @@
 package com.highfive.hirp.chat.domain;
 
+import java.util.List;
+
 public class ChatRoomJoin {
 	private int joinchatNo;
 	private int chatroomNo;
 	private String joinchatId;
+	
+	private List<ChatRoomJoin> chatRoomJoinList;
 	
 	public ChatRoomJoin() {}
 
@@ -37,12 +41,21 @@ public class ChatRoomJoin {
 	public void setJoinchatId(String joinchatId) {
 		this.joinchatId = joinchatId;
 	}
+	
+	public List<ChatRoomJoin> getChatRoomJoinList() {
+		return chatRoomJoinList;
+	}
+	
+	public void setChatRoomJoinList(List<ChatRoomJoin> chatRoomJoinList) {
+		this.chatRoomJoinList = chatRoomJoinList;
+	}
 
 	@Override
 	public String toString() {
 		return "ChatRoomJoin [joinchatNo=" + joinchatNo + ", chatroomNo=" + chatroomNo + ", joinchatId=" + joinchatId
-				+ "]";
+				+ ", chatRoomJoinList=" + chatRoomJoinList + "]";
 	}
 
+	
 	
 }

@@ -7,11 +7,15 @@ public class Message {
 	private int chatroomNo;
 	private String msgSendid;
 	private String msgContents;
-	private Date msgSenddate;
+	private String msgSenddate;
+	//empl
+	private String emplName;
+	private String deptName;
+	private String positionName;
 	
 	public Message() {}
 
-	public Message(int msgNo, int chatroomNo, String msgSendid, String msgContents, Date msgSenddate) {
+	public Message(int msgNo, int chatroomNo, String msgSendid, String msgContents, String msgSenddate) {
 		super();
 		this.msgNo = msgNo;
 		this.chatroomNo = chatroomNo;
@@ -52,19 +56,45 @@ public class Message {
 		this.msgContents = msgContents;
 	}
 
-	public Date getMsgSenddate() {
+	public String getMsgSenddate() {
 		return msgSenddate;
 	}
 
-	public void setMsgSenddate(Date msgSenddate) {
+	public void setMsgSenddate(String msgSenddate) {
 		this.msgSenddate = msgSenddate;
 	}
 
+	public String getEmplName() {
+		return emplName;
+	}
+	
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+	
+	public String getDeptName() {
+		return deptName;
+	}
+	
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	
+	public String getPositionName() {
+		return positionName;
+	}
+	
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+	
 	@Override
 	public String toString() {
 		return "Message [msgNo=" + msgNo + ", chatroomNo=" + chatroomNo + ", msgSendid=" + msgSendid + ", msgContents="
 				+ msgContents + ", msgSenddate=" + msgSenddate + "]";
 	}
+
+
 
 	
 }

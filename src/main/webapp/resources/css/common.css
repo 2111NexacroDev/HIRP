@@ -36,6 +36,12 @@ select {
     letter-spacing: -0.5px;
 }
 
+select,
+input,
+textarea {
+    outline: none;
+}
+
 input {
     font-size: 14px;
 }
@@ -92,7 +98,7 @@ select::-ms-expand {
 
 textarea {
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     line-height: 1.6;
     border: 1px solid #ccc;
 }
@@ -255,6 +261,10 @@ button.next {
 
 .color-grey {
     color: #747474;
+}
+
+.t-l {
+    text-align: left;
 }
 
 .t-c {
@@ -440,6 +450,18 @@ button.next {
         flex-grow: 1;
         max-width: 100%;
     }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
 }
 
 .grid-guide-wrap .row>*>* {
@@ -708,11 +730,6 @@ button.next {
     font-weight: 500;
 }
 
-#snb>ul>li button {
-    padding: 0;
-    background-color: transparent;
-}
-
 #snb>ul>li>a:before,
 #snb>ul>li>button:before {
     content: "\f107";
@@ -740,6 +757,10 @@ button.next {
 
 #snb>ul>li>ul>li:first-child {
     margin-top: 16px;
+}
+
+#snb ul.no-margin>li {
+    margin-top: 10px;
 }
 
 .btn--function {
@@ -772,6 +793,13 @@ button.next {
     letter-spacing: -1px;
 }
 
+#conts .chat-h1 {
+    padding: 0px 20px 16px;
+    font-size: 22px;
+    letter-spacing: -1px;
+}
+
+
 #conts h1 strong {
     font-weight: 700;
 }
@@ -780,11 +808,14 @@ button.next {
     font-size: 18px;
 }
 
+
 .btn--profile {
     width: 32px;
     height: 32px;
     border-radius: 32px;
     overflow: hidden;
+    padding: 0;
+    outline: none;
 }
 
 .btn--alarm {
@@ -800,7 +831,7 @@ button.next {
 .btn--star {
     background: url(../images/icons/btn_bookmark.png) no-repeat;
     background-position: center center;
-    mragin-left: 8px;
+    margin-left: 4px;
 }
 
 @media screen and (min-width: 1201px) {
@@ -810,6 +841,22 @@ button.next {
     .btn--star:hover {
         background-color: #eee;
     }
+}
+
+.a--adminLink {
+    padding: 6px 12px;
+    margin-right: 10px;
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    transition: background-color .3s;
+    letter-spacing: -.025em;
+    border-radius: 4px;
+}
+
+.a--adminLink:hover {
+    color: #fff;
+    background-color: #000;
 }
 
 #nav--right {
@@ -984,8 +1031,55 @@ article {
     background-color: rgba(0, 0, 0, .4);
 }
 
-.btn--paging {
+.btns--paging {
+    margin: 60px auto 40px;
     text-align: center;
+}
+
+.btns--paging a {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    margin: 0;
+}
+
+.btns--paging a.on {
+    margin: 0 2px;
+    background-color: #00498c;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.board__srch-wrap form {
+    position: relative;
+    display: inline-block;
+}
+
+.board__srch-wrap select {
+    width: 120px;
+    height: 40px;
+    margin-right: 4px;
+    outline: none;
+}
+
+.board__srch-wrap input[type="text"] {
+    width: 320px;
+    height: 40px;
+    padding-right: 110px;
+    outline: none;
+}
+
+.board__srch-wrap input[type="submit"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 90px;
+    height: 40px;
+    background-color: #0b2a60;
+    color: #fff;
+    cursor: pointer;
+    border: none;
 }
 
 .btns-wrap {
@@ -1011,6 +1105,10 @@ article {
 }
 
 /* 채팅창 */
+.chat-row {
+    cursor: pointer;
+}
+
 .modal--chat {
     position: fixed;
     right: 50px;
@@ -1019,13 +1117,76 @@ article {
     width: calc(100% - 100px);
     max-width: 380px;
     height: 500px;
-    /* 최솟값 */
     background-color: #fff;
     border: 1px solid #ccc;
 }
 
-/* 채팅창 끝 */
-
-#snb ul.no-margin>li  {
-	    margin-top: 10px;
+.modal--chatSelect {
+    z-index: 10;
+    position: fixed;
+    top: calc((100vh - 480px) / 2);
+    left: 7%;
+    display: none;
+    width: 86%;
+    height: 480px;
+    max-height: 90vh;
+    padding: 20px;
+    background: #fff;
+    border-radius: 20px;
 }
+
+.modal--chatSelect h3 {
+    padding: 16px 0;
+    font-size: 18px;
+}
+
+.modal--chatSelect__srch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal--chatSelect__srch input {
+    width: 74%;
+}
+
+.modal--chatSelect__srch button {
+    width: 24%;
+}
+
+.modal--chatSelect__emplList {
+    height: calc(100% - 142px);
+    overflow-y: auto;
+}
+
+.modal--chatSelect .btns-wrap {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    text-align: right;
+}
+
+.modal--chatSelect .btns-wrap button {
+    width: 70px;
+    padding: 8px 10px;
+    margin-left: 4px;
+}
+
+.modal--chatSelect__empList__checkbox-wrap {
+    width: calc(100% - 70px);
+}
+
+.modal--chatSelect__empList__checkbox-wrap input[type="checkbox"] {
+    position: absolute;
+    top: 1px;
+    right: 16px;
+    margin: 0px 4px 0 0;
+}
+
+.modal--chatSelect__empList__checkbox-wrap label {
+    cursor: pointer;
+}
+
+/* 채팅창 끝 */

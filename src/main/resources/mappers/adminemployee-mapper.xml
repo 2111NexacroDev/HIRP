@@ -54,13 +54,13 @@
 		<result property="certEndDate" column="CERT_END_DATE"/>
 	</resultMap>
 	<resultMap type="JobRole" id="jobRoleResultMap">
-		<id property="jobRoleNo" column="JOB_ROLL_NO"/>
+		<id property="jobRoleNo" column="JOB_ROLE_NO"/>
 		<result property="emplId" column="EMPL_ID"/>
 		<result property="jobRoleDivision" column="JOB_ROLE_DIVISION"/>
 		<result property="jobRoleTitle" column="JOB_ROLE_TITLE"/>
 		<result property="jobRoleStartDate" column="JOB_ROLE_START_DATE"/>
 		<result property="jobRoleEndDate" column="JOB_ROLE_END_DATE"/>
-		<result property="jobRoleConts" column="ROB_ROLE_CONTS"/>
+		<result property="jobRoleConts" column="JOB_ROLE_CONTS"/>
 		<result property="jobRoleEtc" column="JOB_ROLE_ETC"/>
 	</resultMap>
 	<resultMap type="Language" id="langResultMap">
@@ -99,12 +99,13 @@
 	
 	<!-- 부서이름, 직급이름까지 가져오기 -->
 	<select id="selectAllEmployeeWithName" resultMap="emplResultMap">
-		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL, EMPL_PROFILE,
 		DEPT_NAME, POSITION_NAME
 		FROM EMPL_TBL E
 		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
 		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
 		WHERE NOT IS_STATUS IN ('임시','퇴사')
+		ORDER BY DEPT_CODE, POSITION_CODE, EMPL_NAME
 	</select>
 	
 	<!-- 나와 같은 부서+하위 부서 사람들 가져오기 -->
@@ -118,9 +119,9 @@
 		SELECT EMPL_ID FROM EMPL_TBL 
 		WHERE NOT IS_STATUS IN ('임시','퇴사') AND DEPT_CODE = #{deptCode}
 	</select>
-	
+	<!-- 직원 검색 (회원이름, 부서이름) -->
 	<select id="selectSearchEmplList" resultMap="emplResultMap">
-		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL,
+		SELECT EMPL_ID, E.DEPT_CODE, E.POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE, EMAIL, EMPL_PROFILE,
 		DEPT_NAME, POSITION_NAME
 		FROM EMPL_TBL E
 		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
@@ -143,17 +144,6 @@
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '퇴사'
 	</select>
 	
-	<update id="resignEmployee">
-		UPDATE EMPL_TBL 
-		SET IS_STATUS = '퇴사',
-			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
-		WHERE EMPL_ID = #{emplId}
-	</update>
-	
-	<update id="updateLevelEmployee">
-		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
-	</update>
-	
 	<select id="selectAllJobById" resultMap="jobRoleResultMap">
 		SELECT * FROM JOB_ROLE_TBL WHERE EMPL_ID = #{emplId }
 	</select>
@@ -173,4 +163,148 @@
 	<select id="selectAllMilitaryById" resultMap="militaryResultMap">
 		SELECT * FROM MILITARY_TBL WHERE EMPL_ID = #{emplId }
 	</select>
+	
+	<update id="modifyEmployeeInfo">
+		UPDATE EMPL_TBL
+		SET DEPT_CODE = #{deptCode},
+			POSITION_CODE = #{positionCode},
+			EMPL_NAME = #{emplName},
+			EMAIL = #{email},
+			DIRECT_NO = #{directNo},
+			PHONE_NO = #{phoneNo},
+			RECRUIT_CATEGORY = #{recruitCategory},
+			SALARY_CATEGORY = #{salaryCategory},
+			REFERRER = #{referrer},
+			IS_STATUS = #{isStatus},
+			BIRTHDAY = #{birthday},
+			GENDER = #{gender},
+			IS_MARRIAGE = #{isMarriage},
+			IS_DISABILITY = #{isDisability},
+			IS_VETERANS = #{isVeterans},
+			END_DATE = #{endDate},
+			END_REASON = #{endReason}
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<update id="resignEmployee">
+		UPDATE EMPL_TBL 
+		SET IS_STATUS = '퇴사',
+			END_DATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<update id="updateLevelEmployee">
+		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<insert id="insertJobRole">
+		INSERT INTO JOB_ROLE_TBL VALUES (JOB_ROLE_SEQ.NEXTVAL, #{emplId}, #{jobRoleDivision}, #{jobRoleTitle}, #{jobRoleStartDate}, #{jobRoleEndDate}, #{jobRoleConts}, #{jobRoleEtc})
+	</insert>
+	
+	<insert id="insertCareer">
+		INSERT INTO CAREER_TBL VALUES (CAREER_SEQ.NEXTVAL, #{emplId}, #{careerStartDate}, #{careerEndDate}, #{careerPlace}, #{careerRank}, #{careerJobRole}, #{careerPeriod}, #{careerEndReason}, #{careerEtc})
+	</insert>
+		
+	<insert id="insertCert">
+		INSERT INTO CERT_TBL VALUES (CERT_SEQ.NEXTVAL, #{emplId}, #{certCategory}, #{certName}, #{certEnrollNo}, #{certLevel}, #{certInst}, #{certStartDate}, #{certEndDate})
+	</insert>
+		
+	<insert id="insertLang">
+		INSERT INTO LANG_TBL VALUES (LANG_SEQ.NEXTVAL, #{emplId}, #{langCategory}, #{langName}, #{langTestDate}, #{langInst}, #{langScore}, #{langGrade}, #{langEtc})
+	</insert>	
+	
+	<insert id="insertMilitary">
+		INSERT INTO MILITARY_TBL VALUES (MILITARY_SEQ.NEXTVAL, #{emplId}, #{militaryGrade}, #{militaryCode}, #{isMilitaryEnd}, #{militaryStartDate}, #{militaryEndDate}, #{militaryEtc})
+	</insert>
+	
+	<update id="updateTopInfo" parameterType="Employee">
+		UPDATE EMPL_TBL
+		SET DEPT_CODE = #{deptCode},
+			POSITION_CODE = #{positionCode},
+			EMPL_NAME = #{emplName},
+			EMAIL = #{email},
+			DIRECT_NO = #{directNo},
+			PHONE_NO = #{phoneNo},
+			IS_STATUS = #{isStatus}
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<update id="updateJobRole" parameterType="JobRole">
+		UPDATE JOB_ROLE_TBL
+		SET JOB_ROLE_DIVISION = #{jobRoleDivision}, 
+			JOB_ROLE_TITLE = #{jobRoleTitle}, 
+			JOB_ROLE_START_DATE = #{jobRoleStartDate}, 
+			JOB_ROLE_END_DATE = #{jobRoleEndDate}, 
+			JOB_ROLE_CONTS = #{jobRoleConts}, 
+			JOB_ROLE_ETC = #{jobRoleEtc}
+		WHERE JOB_ROLE_NO = #{jobRoleNo}
+	</update>
+	
+	<update id="updateCareer" parameterType="Career">
+		UPDATE CAREER_TBL
+		SET CAREER_START_DATE = #{careerStartDate}, 
+			CAREER_END_DATE = #{careerEndDate}, 
+			CAREER_PLACE = #{careerPlace}, 
+			CAREER_RANK = #{careerRank}, 
+			CAREER_JOB_ROLE = #{careerJobRole}, 
+			CAREER_PERIOD = #{careerPeriod}, 
+			CAREER_END_REASON = #{careerEndReason}, 
+			CAREER_ETC = #{careerEtc}
+		WHERE CAREER_NO = #{careerNo}
+	</update>
+		
+	<update id="updateCert" parameterType="Certification">
+		UPDATE CERT_TBL
+		SET CERT_CATEGORY = #{certCategory}, 
+			CERT_NAME = #{certName}, 
+			CERT_ENROLL_NO = #{certEnrollNo}, 
+			CERT_LEVEL = #{certLevel}, 
+			CERT_INST = #{certInst}, 
+			CERT_START_DATE = #{certStartDate}, 
+			CERT_END_DATE = #{certEndDate}
+		WHERE CERT_NO = #{certNo}
+	</update>
+		
+	<update id="updateLang" parameterType="Language">
+		UPDATE LANG_TBL
+		SET LANG_CATEGORY = #{langCategory}, 
+			LANG_NAME = #{langName}, 
+			LANG_TEST_DATE = #{langTestDate}, 
+			LANG_INST = #{langInst}, 
+			LANG_SCORE = #{langScore}, 
+			LANG_GRADE = #{langGrade}, 
+			LANG_ETC = #{langEtc}
+		WHERE LANG_NO = #{langNo}
+	</update>
+		
+	<update id="updateMilitary" parameterType="Military">
+		UPDATE MILITARY_TBL
+		SET MILITARY_GRADE = #{militaryGrade}, 
+			MILITARY_CODE = #{militaryCode}, 
+			IS_MILITARY_END = #{isMilitaryEnd}, 
+			MILITARY_START_DATE = #{militaryStartDate}, 
+			MILITARY_END_DATE = #{militaryEndDate}, 
+			MILITARY_ETC = #{militaryEtc}
+		WHERE MILITARY_NO = #{militaryNo}
+	</update>
+
+	<delete id="deleteInfoAboutJob">
+		DELETE FROM JOB_ROLE_TBL WHERE JOB_ROLE_NO = #{jobRoleNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutCareer">
+		DELETE FROM CAREER_TBL WHERE CAREER_NO = #{careerNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutLang">
+		DELETE FROM LANG_TBL WHERE LANG_NO = #{langNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutCert">
+		DELETE FROM CERT_TBL WHERE CERT_NO = #{certNo}
+	</delete>
+	
+	<delete id="deleteInfoAboutMilitary">
+		DELETE FROM MILITARY_TBL WHERE MILITARY_NO = #{militaryNo}
+	</delete>
 </mapper>

@@ -3,9 +3,20 @@
   <Form id="Form_home" width="1080" height="720" titletext="home">
     <Layouts>
       <Layout width="1080" height="720" screenid="Desktop_screen">
-        <Button id="Button00" taborder="0" text="홈화면이지롱" left="5" top="5" right="5" bottom="5"/>
+        <ImageViewer id="ImageViewer00" taborder="0" left="280" top="70" height="353" background="url('theme::hirpTheme/bg_admin_home_hirp.png') repeat center center/100%" border="0px none" right="320"/>
+        <Button id="Button00" taborder="1" text="관리자" left="280" top="400" width="230" height="42" font="normal 300 16px/normal &quot;Noto Sans KR&quot;" borderRadius="4px" cssclass="point" onclick="Button00_onclick" cursor="pointer"/>
+        <Button id="Button00_00" taborder="2" text="사용자" left="530" top="400" width="230" height="42" font="normal 300 16px/normal &quot;Noto Sans KR&quot;" borderRadius="4px" cssclass="point" onclick="Button00_00_onclick" cursor="pointer"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[]]></Script>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	alert("관리자님, 환영합니다! \n관리 기능은 왼쪽 메뉴를 이용하시면 됩니다!");
+};
+
+this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	location.href="/home.hirp";
+};]]></Script>
   </Form>
 </FDL>

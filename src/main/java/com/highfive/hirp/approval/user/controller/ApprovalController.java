@@ -56,7 +56,7 @@ public class ApprovalController {
 		List<ApprForm> formList = aService.printAllApprForm();
 		if (!formList.isEmpty()) {
 			mv.addObject("formList", formList);
-			mv.setViewName("approval/approvalMain");
+			mv.setViewName("approval/approvalCommonPage");
 		} else {
 			mv.addObject("msg", "검색조회 실패");
 			mv.setViewName("common/errorPage");
@@ -72,6 +72,7 @@ public class ApprovalController {
 	public String writeApprovalForm() {
 		return "/approval/writeApprovalFormpage";
 	}
+	
 	
 	//전자결재 양식 등록
 	@RequestMapping(value="/register/apprForm.hirp",method=RequestMethod.POST)
@@ -196,6 +197,25 @@ public class ApprovalController {
 	}
 	
 	
+	//문서 임시저장
+	@RequestMapping(value="/temporaryStorage/appr.hirp", method = RequestMethod.POST )
+	public ModelAndView temporaryStorageAppr(ModelAndView mv, @ModelAttribute Approval approval) {
+		try {
+			int result = aService.registerTempStorageAppr(approval);
+		
+			if (result > 0) {
+				mv.setViewName("redirect:/approval/main.hirp");
+			} else {
+				mv.addObject("msg", "문서 임시저장 실패");
+				mv.setViewName("common/errorPage");
+			} 
+	} catch (Exception e) {
+		mv.addObject("msg", e.toString());
+		mv.setViewName("common/errorPage");
+	}
+		return mv;
+	}
+	
 	//임시저장된 문서 수정
 	public ModelAndView modifyTemporaryStoragedAppr(ModelAndView mv,@RequestParam("docNo")int docNo) {
 		return mv;
@@ -208,7 +228,7 @@ public class ApprovalController {
 	
 	
 	//결재대기 문서함(select List session에서 id, 진행사항  : 대기)
-	@RequestMapping(value="/wating/appr.hirp")
+	@RequestMapping(value="/waiting/appr.hirp")
 	public ModelAndView printAllWaitingAppr(ModelAndView mv,HttpServletRequest request) {
 	try {
 		HttpSession session = request.getSession();
@@ -216,7 +236,7 @@ public class ApprovalController {
 		List<Approval> aList = aService.printAllWaitingAppr(emplId);
 		if (!aList.isEmpty()) {
 			mv.addObject("aList", aList);
-			mv.setViewName("approval/waitingList");
+			mv.setViewName("approval/apprList");
 		} else {
 			mv.addObject("msg", "문서 조회 실패");
 			mv.setViewName("common/errorPage");
@@ -228,31 +248,80 @@ public class ApprovalController {
 		return mv;
 	}
 	
+	
+	//상신 문서함
+		@RequestMapping(value="/written/appr.hirp",method=RequestMethod.GET)
+		public ModelAndView printAllMyAppr(ModelAndView mv,HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Approval> aList = aService.printAllMyAppr(emplId);
+			if (!aList.isEmpty()) {
+				mv.addObject("aList", aList);
+				mv.setViewName("approval/writtenApprList");
+			} else {
+				mv.addObject("msg", "문서 조회 실패");
+				mv.setViewName("common/errorPage");
+			} 
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}
+	
+	
 	//결재대기 문서 조회(approval select)
 	//결재선 진행 상태 조회(appr_accept select 결재상태 <조건> 문서번호 )
 	@RequestMapping(value="/appr/detail.hirp",method=RequestMethod.GET)
 	public ModelAndView printOneWaitingAppr(ModelAndView mv,@RequestParam("apprNo")int apprNo) {
 		Approval approval = aService.printOneAppr(apprNo);
-		if(approval !=null) {
+		List<ApprAccept> aList = aService.printApprovalStatus(apprNo);
+		String emplId = approval.getEmplId();
+		Employee employee = eService.employeeMyPage(emplId);
+		
+		if(!aList.isEmpty()) {
 			mv.addObject("approval", approval);
+			mv.addObject("aList", aList);
+			mv.addObject("employee", employee);
 			mv.setViewName("approval/approvalDetail");
 		} else {
 			mv.addObject("msg", "문서 조회 실패");
 			mv.setViewName("common/errorPage");
 		}
-		
-		
-		
 		return mv;
 	}
 	
 	//결재자 결재진행(결재승인, 반려)
 	//(appr_accept update 결재상태 "승인,반려" <조건>문서번호,session id값 )
 	//(update approval 진행상태"승인, 진행,반려")
-	public ModelAndView modifyApprStatus(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
+	@RequestMapping(value="/proceed/appr.hirp",method=RequestMethod.POST)
+	public ModelAndView proceedAppr(ModelAndView mv,
+			@ModelAttribute ApprAccept apprAccept,
+			@RequestParam(value="apprStatus", required = false) String apprStatus) {
+		try {
+			int result = aService.modifyApprAccept(apprAccept);
+			String aStatus = apprAccept.getaStatus();
+			if(aStatus!=null && aStatus!="") {
+				Approval approval = new Approval();
+				approval.setApprNo(apprAccept.getApprNo());
+				approval.setApprStatus(apprStatus);
+				int result2 = aService.modifyApprovalStatus(approval);
+			}
+			if (result > 0) {
+				
+				mv.setViewName("redirect:/approval/main.hirp");
+			} else {
+				mv.addObject("msg", "문서 상신 실패");
+				mv.setViewName("common/errorPage");
+			}
+		}catch (Exception e) {
+				mv.addObject("msg", e.toString());
+				mv.setViewName("common/errorPage");
+			}
 		return mv;
-	}
-	
+		}
+
 	
 	//결재 상신 취소
 	//delete appr_accept
@@ -261,33 +330,74 @@ public class ApprovalController {
 		return mv;
 	}
 
-	//상신문서함(select List)
-	public ModelAndView printAllWrittenAppr(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
-		return mv;
-	}
+	
 	
 	//임시저장함(select List)
-	public ModelAndView printAllTemporaryStorageAppr(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
-		return mv;
-	}
+	@RequestMapping(value="/temporaryStorage/appr.hirp",method=RequestMethod.GET)
+	public ModelAndView printAllTemporaryStorageAppr(ModelAndView mv,HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Approval> aList = aService.printAllTemporaryStorageAppr(emplId);
+			if (!aList.isEmpty()) {
+				mv.addObject("aList", aList);
+				mv.setViewName("approval/writtenApprList");
+			} else {
+				mv.addObject("msg", "문서 조회 실패");
+				mv.setViewName("common/errorPage");
+			} 
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}
 	
 	
 	//반려문서함(select List)
-	public ModelAndView printAllRejectedAppr(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
-		return mv;
-	}
+	@RequestMapping(value="/rejected/appr.hirp",method=RequestMethod.GET)
+	public ModelAndView printAllRejectedAppr(ModelAndView mv,HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Approval> aList = aService.printAllRejectedAppr(emplId);
+			if (!aList.isEmpty()) {
+				mv.addObject("aList", aList);
+				mv.setViewName("approval/writtenApprList");
+			} else {
+				mv.addObject("msg", "문서 조회 실패");
+				mv.setViewName("common/errorPage");
+			} 
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}
 
 	
 	//완료문서함(select List)
-	public ModelAndView printAllCompletedAppr(ModelAndView mv,@ModelAttribute ApprAccept apprAccept) {
-		return mv;
-	}
+	@RequestMapping(value="/completed/appr.hirp",method=RequestMethod.GET)
+	public ModelAndView printAllCompletedAppr(ModelAndView mv,HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<Approval> aList = aService.printAllCompletedAppr(emplId);
+			if (!aList.isEmpty()) {
+				mv.addObject("aList", aList);
+				mv.setViewName("approval/writtenApprList");
+			} else {
+				mv.addObject("msg", "문서 조회 실패");
+				mv.setViewName("common/errorPage");
+			} 
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}
 
-	//문서조회(select)
-	public ModelAndView printOneAppr(ModelAndView mv,@ModelAttribute Approval approval) {
-		return mv;
-	}
-	
+
 	
 	
 	

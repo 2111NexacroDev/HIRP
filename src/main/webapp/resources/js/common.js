@@ -62,6 +62,14 @@ $(function () {
             return false;
         }
     });
+
+    // 현재 페이지 하이라이팅
+    var pageNo = new URLSearchParams(location.search).get("page");
+    if(pageNo != null) {
+        $(".btns--paging a:nth-of-type("+ pageNo +")").addClass("on");
+    } else {
+        $(".btns--paging a:nth-of-type(1)").addClass("on");
+    }
 });
 
 function openAlert(alertWindow) {

@@ -10,14 +10,13 @@
 <link rel="stylesheet" href="../../../resources/css/sub.css">
 <link rel="stylesheet" href="../../../resources/css/jquery.treeview.css" />
 <link rel="stylesheet" href="../../../resources/css/screen.css" />
-<!-- 하이알피 서브페이지 CSS -->
 
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
 	<div id="conts">
 		<article id="sub" class="">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom"></h1>
+			<h1 class="basic-border-bottom">조직도</h1>
 			<div id="organization" class="subConts">
 				<ul id="orgList">
 				</ul>

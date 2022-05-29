@@ -52,10 +52,10 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	
-
+	//임시저장
 	@Override
-	public int insertStoragedAppr(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.insert("",approval);
+	public int insertTempStorageAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertTempStorageAppr",approval);
 		return result;
 	}
 
@@ -78,26 +78,38 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
+	public List<Approval> selectAllMyAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList = sqlSession.selectList("ApprMapper.selectAllMyAppr",emplId);
+		return aList;
+	}
+	
+	@Override
 	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
 		Approval approval = sqlSession.selectOne("",docNo);
 		return approval;
 	}
 
+	//결재자 정보 조회
 	@Override
-	public List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int docNo) {
-		List<ApprAccept> aList = sqlSession.selectList("",docNo);
+	public List<ApprAccept> selectApprovalStatus(SqlSession sqlSession, int apprNo) {
+		List<ApprAccept> aList = sqlSession.selectList("ApprMapper.selectAllApprAccept",apprNo);
 		return aList;
 	}
 
+	//결재 진행
 	@Override
-	public int updateApprStatus(SqlSession sqlSession, ApprAccept apprAccept) {
-		int result = sqlSession.update("",apprAccept);
+	public int modifyApprAccept(SqlSession sqlSession, ApprAccept apprAccept) {
+		int result = sqlSession.update("ApprMapper.modifyApprAccept",apprAccept);
+		if(apprAccept.getaStatus().equals("반려")) {
+		int result2 = sqlSession.update("ApprMapper.modifyRejectAppr");
+		}
 		return result;
 	}
 
+	//결재 테이블 상태 변경
 	@Override
 	public int updateApprovalStatus(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.update("",approval);
+		int result = sqlSession.update("ApprMapper.modifyApprStatus",approval);
 		return result;
 	}
 
@@ -119,21 +131,24 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return aList;
 	}
 
+	//임시저장 리스트 조회
 	@Override
-	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList=sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTemporaryStorageAppr",emplId);
 		return aList;
 	}
 
+	//반려문서함 조회
 	@Override
-	public List<Approval> selectAllRejectedAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList= sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllRejectedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList= sqlSession.selectList("ApprMapper.selectAllRejectedAppr",emplId);
 		return aList;
 	}
 
+	//완료문서함 조회
 	@Override
-	public List<Approval> selectAllCompletedAppr(SqlSession sqlSession, ApprAccept apprAccept) {
-		List<Approval> aList= sqlSession.selectList("",apprAccept);
+	public List<Approval> selectAllCompletedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList= sqlSession.selectList("ApprMapper.selectAllCompletedAppr",emplId);
 		return aList;
 	}
 
@@ -163,5 +178,13 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		int result = sqlSession.insert("ApprMapper.insertApprAttachedFile",apprFile);
 		return result;
 	}
+
+
+
+	//반려된 문서 이후의 결재라인 수정
+//	@Override
+//	public int updateRejectedAppr(SqlSession sqlSession) {
+//		return result;
+//	}
 
 }

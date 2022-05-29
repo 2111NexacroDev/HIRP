@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="messageGuide" width="420" height="180" titletext="New Form">
+    <Layouts>
+      <Layout height="180" mobileorientation="landscape" width="420">
+        <Static id="static_dept01_00" taborder="0" text="관리 기능은 왼쪽 메뉴를 이용하시면 됩니다!" left="20" top="52" height="41" font="normal 500 14px/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick" textAlign="center" right="20"/>
+        <Static id="static_dept01" taborder="1" text="관리자님, 환영합니다!" left="20" top="29" height="41" font="normal 500 14px/normal &quot;Noto Sans KR&quot;" onclick="static_dept01_onclick" textAlign="center" right="20"/>
+        <Button id="Button00" taborder="2" text="확인" left="150" top="105" width="120" height="30" cssclass="point" borderRadius="4px" font="normal 14px/normal &quot;Noto Sans KR&quot;" cursor="pointer" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

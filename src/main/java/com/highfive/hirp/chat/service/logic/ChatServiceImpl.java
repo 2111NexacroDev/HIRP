@@ -1,6 +1,7 @@
 package com.highfive.hirp.chat.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.domain.PersonalId;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.chat.store.ChatStore;
 import com.highfive.hirp.employee.domain.Employee;
@@ -24,18 +26,7 @@ public class ChatServiceImpl implements ChatService{
 	private ChatStore cStore;
 
 	//직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeList() {
-		List<Employee> empList = cStore.selectEmployeeList(sqlSession);
-		return empList;
-	}
-
 	//직원 이름으로 검색해서 직원 목록 가져오기
-	@Override
-	public List<Employee> selectEmployeeListByName(String name) {
-		List<Employee> empList = cStore.selectEmployeeListByName(sqlSession, name);
-		return empList;
-	}
 	
 	//채팅방 추가(대화 상대, 채팅방 이름 설정)
 	@Override
@@ -45,8 +36,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public int insertChatRoomJoin(List<String> emplIdList) {
-		int result = cStore.insertChatRoomJoin(sqlSession, emplIdList);
+	public int insertChatRoomJoin(ChatRoomJoin chatroomJoin) {
+		int result = cStore.insertChatRoomJoin(sqlSession, chatroomJoin);
 		return result;
 	}
 	
@@ -57,6 +48,19 @@ public class ChatServiceImpl implements ChatService{
 		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, emplId);
 		return roomList;
 	}
+	//채팅방 검색 (채팅방 이름, 채팅방 참여자 이름 + 내가 참여한 채팅 중에서)
+	@Override
+	public List<ChatRoom> selectMyChattingRoom(Map<String, String> searchMap) {
+		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, searchMap);
+		return roomList;
+	}
+	//나와 상대방이 포함된 개인 채팅방 가져오기
+	@Override
+	public ChatRoom selectMyPersonalChattingRoom(PersonalId idList) {
+		ChatRoom chatRoom = cStore.selectMyPersonalChattingRoom(sqlSession, idList);
+		return chatRoom;
+	}
+
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
 	public List<Message> selectMessageByRoomNo(int chatroomNo) {
@@ -125,6 +129,9 @@ public class ChatServiceImpl implements ChatService{
 		int result = cStore.deleteChatRoom(sqlSession, chatroomNo);
 		return result;
 	}
+
+
+
 
 
 

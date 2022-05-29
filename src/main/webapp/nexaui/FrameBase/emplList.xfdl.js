@@ -12,6 +12,7 @@
             this.set_name("emplList");
             this.set_titletext("New Form");
             this.set_scrolltype("none");
+            this.set_dragscrolltype("none");
             if (Form == this.constructor)
             {
                 this._setFormPosition(1280,720);
@@ -73,7 +74,7 @@
             obj.set_taborder("4");
             obj.set_binddataset("ds_empl");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"90\"/><Column size=\"0\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"35\"/></Rows><Band id=\"head\"><Cell text=\"이름\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"1\" text=\"부서\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"2\" text=\"직급\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"3\" text=\"직통번호\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"4\" text=\"상세정보\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"5\" text=\"사원ID\" color=\"#333333\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\"/><Cell col=\"1\" text=\"bind:deptCode\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" cssclass=\"deptCode\" displaytype=\"combotext\" edittype=\"combo\" font=\"normal 12px/normal &quot;Noto Sans KR&quot;\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\"/><Cell col=\"2\" text=\"bind:positionCode\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\"/><Cell col=\"3\" text=\"bind:directNo\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\"/><Cell col=\"4\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" displaytype=\"buttoncontrol\" text=\"조회/수정\" edittype=\"button\" cssclass=\"basic\" padding=\"6px 20px\"/><Cell col=\"5\" text=\"bind:emplId\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"90\"/><Column size=\"0\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"35\"/></Rows><Band id=\"head\"><Cell text=\"이름\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"1\" text=\"부서\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"2\" text=\"직급\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"3\" text=\"직통번호\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"4\" text=\"상세정보\" background=\"#ffffff\" border=\"0px none, 0px none, 1px solid #cccccc\" color=\"#333333\"/><Cell col=\"5\" text=\"사원ID\" color=\"#333333\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\"/><Cell col=\"1\" text=\"bind:deptCode\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" cssclass=\"deptCode\" displaytype=\"combotext\" edittype=\"none\" font=\"normal 12px/normal &quot;Noto Sans KR&quot;\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\"/><Cell col=\"2\" text=\"bind:positionCode\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" displaytype=\"combotext\" edittype=\"none\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\"/><Cell col=\"3\" text=\"bind:directNo\" padding=\"8px 16px\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\"/><Cell col=\"4\" textAlign=\"center\" border=\"0px none, 0px none, 1px solid #cccccc\" displaytype=\"buttoncontrol\" text=\"조회/수정\" edittype=\"button\" cssclass=\"basic\" padding=\"6px 20px\"/><Cell col=\"5\" text=\"bind:emplId\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static01_00","200","386","1080","40",null,null,null,null,null,null,this);
@@ -87,7 +88,7 @@
             obj.set_taborder("6");
             obj.set_binddataset("ds_retiree");
             obj.set_autofittype("col");
-            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"90\"/><Column size=\"0\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"35\"/></Rows><Band id=\"head\"><Cell text=\"이름\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"1\" text=\"부서\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"2\" text=\"직급\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"3\" text=\"연락처\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"4\" text=\"상세정보\" color=\"#333333\" border=\"1px solid #cccccc,0px none,1px solid #cccccc,1px solid #cccccc\"/><Cell col=\"5\" text=\"사원아이디\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"1\" text=\"bind:deptCode\" textAlign=\"center\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"2\" text=\"bind:positionCode\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\" displaytype=\"combotext\" edittype=\"combo\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\"/><Cell col=\"3\" text=\"bind:phoneNo\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"4\" textAlign=\"center\" text=\"조회/수정\" displaytype=\"buttoncontrol\" edittype=\"button\" border=\"1px solid #cccccc,0px none,1px solid #cccccc,1px solid #dbdee2\" borderRadius=\"0px none\" padding=\"6px 20px\"/><Cell col=\"5\" text=\"bind:emplId\"/></Band></Format></Formats>");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"100\"/><Column size=\"90\"/><Column size=\"0\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"35\"/></Rows><Band id=\"head\"><Cell text=\"이름\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"1\" text=\"부서\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"2\" text=\"직급\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"3\" text=\"연락처\" color=\"#333333\" border=\"0px none,0px none,1px solid #cccccc\"/><Cell col=\"4\" text=\"상세정보\" color=\"#333333\" border=\"1px solid #cccccc,0px none,1px solid #cccccc,1px solid #cccccc\"/><Cell col=\"5\" text=\"사원아이디\"/></Band><Band id=\"body\"><Cell text=\"bind:emplName\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"1\" text=\"bind:deptCode\" textAlign=\"center\" displaytype=\"combotext\" edittype=\"none\" combodataset=\"ds_dept\" combodatacol=\"deptName\" combocodecol=\"deptCode\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"2\" text=\"bind:positionCode\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\" displaytype=\"combotext\" edittype=\"none\" combodataset=\"ds_pos\" combodatacol=\"positionName\" combocodecol=\"positionCode\"/><Cell col=\"3\" text=\"bind:phoneNo\" textAlign=\"center\" border=\"1px solid #cccccc,0px none\"/><Cell col=\"4\" textAlign=\"center\" text=\"조회/수정\" displaytype=\"buttoncontrol\" edittype=\"button\" border=\"1px solid #cccccc,0px none,1px solid #cccccc,1px solid #dbdee2\" borderRadius=\"0px none\" padding=\"6px 20px\"/><Cell col=\"5\" text=\"bind:emplId\"/></Band></Format></Formats>");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_search",null,"70","162","30","20",null,null,null,null,null,this);
@@ -106,6 +107,7 @@
             obj.set_text("사원 조회");
             obj.set_font("bold 14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
             this.addChild(obj.name, obj);
 
             obj = new Static("link_addEmpl","24","120","106","20",null,null,null,null,null,null,this);
@@ -113,6 +115,7 @@
             obj.set_text("사원 추가/승인");
             obj.set_font("14px/normal \"Noto Sans KR\"");
             obj.set_padding("0px");
+            obj.set_cursor("pointer");
             this.addChild(obj.name, obj);
 
             obj = new Edit("edt_search_retiree",null,"395","162","30","21",null,null,null,null,null,this);
@@ -145,6 +148,9 @@
         
         // User Script
         this.registerScript("emplList.xfdl", function() {
+        // 페이지 로드용 emplId 전역 변수 지정
+        this.selectedEmplId;
+
         // 메뉴 이동 함수
         this.link_emplLsit_onclick = function(obj,e)
         {
@@ -180,7 +186,7 @@
         			this.alert("사원 조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("사원 조회 성공");
+        		//this.alert("사원 조회 성공");
         	}
         }
 
@@ -198,13 +204,11 @@
         	this.ds_retiree.filter("emplName.indexOf('" + searchVal + "') > -1 ");
         };
 
-        // 페이지 로드용 emplId 전역 변수 지정
-        this.selectedEmplId;
-
         // 회원(재직자)별 상세 정보 페이지 로드
         this.empl_detail_oncellclick = function(obj,e)
         {
         	selectedEmplId = this.Grid00.getCellText(e.row, 5);
+        	console.log(selectedEmplId);
         	if(e.col == 4) {
         		this.go("FrameBase::empDetail.xfdl");
         	}
@@ -214,6 +218,7 @@
         this.retiree_detail_oncellclick = function(obj,e)
         {
         	selectedEmplId = this.Grid00_00.getCellText(e.row, 5);
+        	console.log(selectedEmplId);
         	if(e.col == 4) {
         		this.go("FrameBase::empDetail.xfdl");
         	}

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="Form_Left" width="200" height="720" titletext="Form_Left" background="#404040">
+  <Form id="Form_Left" width="200" height="720" titletext="Form_Left" background="#404040" onload="Form_Left_onload">
     <Layouts>
       <Layout width="200" height="720" screenid="Desktop_screen">
-        <Button id="logo_admin" taborder="0" left="5" top="10" height="151" background="url('theme::default/images/logo_hirp_admin.png') no-repeat center center" right="5" border="0px none" text=""/>
-        <Grid id="gnb_admin" taborder="1" left="5" top="170" right="5" autofittype="col" binddataset="gds_menu" treeinitstatus="expand,all" border="0px none" bottom="10" background="transparent" oncellclick="gnb_admin_oncellclick" cssclass="gnb">
+        <Button id="logo_admin" taborder="0" left="40" top="66" height="94" background="url('theme::default/images/logo_hirp_admin.png') no-repeat center center" right="40" border="0px none" text="" onclick="logo_admin_onclick" cursor="pointer"/>
+        <Grid id="gnb_admin" taborder="1" left="5" top="176" right="5" autofittype="col" binddataset="gds_menu" treeinitstatus="expand,all" border="0px none" bottom="10" background="transparent" oncellclick="gnb_admin_oncellclick" cssclass="gnb" cursor="pointer">
           <Formats>
             <Format id="default">
               <Columns>
@@ -19,20 +19,33 @@
             </Format>
           </Formats>
         </Grid>
-        <ImageViewer id="ImageViewer00" taborder="2" left="5" top="170" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/00_icon_home.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00" taborder="3" left="5" top="210" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_empl.png') repeat right" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00" taborder="4" left="5" top="250" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_dept.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00_00" taborder="5" left="5" top="290" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/10_icon_org.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00_00_00" taborder="6" left="5" top="329" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/06_icon_doc.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="7" left="5" top="370" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/08_icon_att.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00" taborder="2" left="5" top="176" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/00_icon_home.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00" taborder="3" left="5" top="216" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_empl.png') repeat right" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00" taborder="4" left="5" top="256" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_dept.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00" taborder="5" left="5" top="296" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/10_icon_org.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00_00" taborder="6" left="5" top="335" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/06_icon_doc.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="7" left="5" top="376" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/08_icon_att.png') repeat center top" border="0px none"/>
       </Layout>
     </Layouts>
-    <Script type="xscript5.1"><![CDATA[
+    <Script type="xscript5.1"><![CDATA[// 최초 로드 시 홈화면으로 진입
+this.Form_Left_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var objApp = nexacro.getApplication();	
+	var sWorkFramePath = objApp.mainframe.HFrameSet00.WorkFrame;	
+	var objChildFrame = new ChildFrame("home", 0, 0, 1080, 720);
+	objChildFrame.set_dragmovetype("none");
+	sWorkFramePath.addChild("home", objChildFrame);	
+	
+	objChildFrame.set_showtitlebar(false);
+	objChildFrame.set_formurl("FrameBase::form_home.xfdl");
+	objChildFrame.show();
+};
+
+// gnb 셀 클릭
 this.gnb_admin_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	this.fn_openForm(obj, e); 
 };
-
 
 //클릭하면 form을 열어주는 함수
 //this.fn_openForm = function(paramRow) {
@@ -76,7 +89,6 @@ this.fn_openForm = function(obj, e) {
 	var objChildFrame = new ChildFrame(sMenuId, 0, 0, 1080, 720);
 	sWorkFramePath.addChild(sMenuId, objChildFrame);
 	
-	
 	//파라미터 넘겨주기
 	var oParam = {
 					MENU_ID : sMenuId,
@@ -86,15 +98,27 @@ this.fn_openForm = function(obj, e) {
 	
 	objChildFrame.openParam = oParam;
 	
-	
 	objChildFrame.set_showtitlebar(false);
 /*	objChildFrame.set_formurl("FrameBase::deptManage.xfdl");*/
 	objChildFrame.set_formurl(sFormUrl);
 	objChildFrame.show();
+	objChildFrame.set_dragmovetype("none");
 	
 	//mdi에 파라미터로 oParam 넘기기
 	/*objApp.mainframe.HFrameSet00.WorkFrame.form.fn_addTab(oParam);*/
 }
+
+// 로고 클릭 시 리로드 이동
+this.logo_admin_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	location.href="/admin.hirp";
+};
+
+// 사용자 페이지 진입
+this.btn_userPage_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	location.href="/";
+};
 ]]></Script>
   </Form>
 </FDL>

@@ -1,98 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
 
-<style>
-#approvalLine-btn {
-	background-color: white;
-	border: solid 1px #888;
-	border-radius: 4px;
-	width: 80px;
-	height: 35px;
-	float: right;
-}
-
-#submit-btn {
-	background-color: white;
-	border: solid 1px #888;
-	border-radius: 4px;
-	width: 80px;
-	height: 35px;
-	float: right;
-	margin :30px 0px;
-}
-
-
-
-#apprTable {
-	border: solid 1px #888;
-	border-radius: 4px;
-	width: 230px;
-	font-size: 15px;
-	text-align: center;
-	margin: 30px;
-}
-
-#approvalLine {
-	position: absolute;
-	right: 30px;
-	top: 30px;
-}
-
-.singleApprLine {
-	width: 100px;
-	height: 100px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-	margin : 0px;
-}
-
-.singleApprType{
-	width: 20px;
-	height: 100px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-
-}
-
-.singleApprLineTop{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 2px;
-}
-
-.singleApprLineMiddle{
-	width: 100%;
-	height: 60%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 23px;
-
-}
-
-.singleApprLineBottom{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	color :  #888;
-	padding-top : 2px;
-}
-</style>
-
-
-<body>
 <%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
 
 			<h1 class="basic-border-bottom">기안하기</h1>
@@ -100,19 +8,20 @@
 			<div id="guide" class="subConts">
 				<!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
             	필요 없으면 지울 것 -->
-				<button class="basic" type="button" id="approvalLine-btn"
+				<button class="basic apprbtn" type="button" id="approvalLine-btn"
 					onclick="openModal(this);">
 					<img src="../../../../resources/images/icons/btn_plus.png"
 						style="width: 10px; height: auto; vertical-align: middle;" />&nbsp&nbsp결재선
 				</button>
 				<section class="section--modal" id="apprLineSession">
-					<div class="bg-#888"></div>
+					<div class="bg-black"></div>
 					<div class="section--modal__conts"
 						style="border: none; width: 1200px;">
 						<button class="btn--close" type="button" onclick="closeApprModal()"></button>
 						<h3>결재선 선택</h3>
 						<div class="row mt-20">
-							<div style="width:40%;">
+						  <div class="groupContainer"> 
+						<!--  <div style="width:40%;border:1px solid lightgray">
 								<table class="table--basic mt-20" id="emplTable">
 									<tr>
 										<th>부서</th>
@@ -129,10 +38,14 @@
 											<input type="hidden" name="emplId" value="${empl.emplId }">
 										</c:if>
 									</c:forEach>
-
-								</table>
+								</table> -->
+								<div id="organization" class="subConts">
+									<ul id="orgList">
+									</ul> 
+								</div>
+								
 							</div>
-							<div style="width:60%;" id="emplListDiv">
+							<div style="width:450px;" id="emplListDiv">
 								<table class="table--basic mt-20" id="apprEmplTable">
 									<tr id="apprEmplTableHead">
 										<th>부서</th>
@@ -158,7 +71,7 @@
 						<table id="apprTable">
 							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
 								<td>기안자</td>
-								<td>${emplName}${employee.positionCode }</td>
+								<td>${emplName} ${employee.positionCode }</td>
 							</tr>
 							<tr
 								style="height: 30px; border: solid 1px #888; line-height: 30px;">
@@ -207,11 +120,15 @@
 					<div>
 						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
 					</div>
-			<button type="submit" id="submit-btn">상신하기</button>
+			<button class="point mt-20 apprbtn" type="submit">상신하기</button>
+			<button class="basic mt-20 apprbtn" type="button" onclick="tempStorage(this.form)">임시 저장</button>
 			</form>
 			</div>
 		</article>
 	</div>
+
+
+
 
 		<script>
 		    var today = new Date();
@@ -319,7 +236,7 @@
 		      });
     
   
-			function emplClick(e) {
+			/*function emplClick(e) {
 				var tdArr = new Array();
 				var tr = $(e)//클릭한 tr
 				var td = tr.children();//tr의 후손인 td
@@ -328,8 +245,25 @@
 				})
 				tdArr.push(tr.next().val());//hidden값인 emplId값을 배열에 넣어줌
 				addEmplDiv(tdArr); //(deptNAme, positionName, emplName, emplId)
-			}
+			}*/
 
+			
+			
+			function emplClick(e){
+				var arr = new Array();
+				var aTag = $(e);
+				aTag.each(function(i,e){
+				arr.push(aTag.parent().siblings('a').text());
+				arr.push(aTag.eq(i).text().split(' ')[1]);
+				arr.push(aTag.eq(i).text().split(' ')[0]);
+				arr.push(aTag.children('input').val());
+				console.log(arr);
+				addEmplDiv(arr); //(deptNAme, positionName, emplName, emplId)
+				})
+			}
+			 
+			
+			
 			
 			var arr = []; //2차원 배열{(deptName, positionName, emplName, emplId),(deptName, positionName, emplName, emplId),...}
 			function addEmplDiv(tdArr) {
@@ -438,6 +372,57 @@
 					$(".section--modal").stop().fadeOut(100);//배열이 null일 경우 모달창 닫기
 				}
 			}
+			var codeId = null;
+			var codeLvl = null;
+			// 조직도 조회
+			$(document).ready(function(){
+				$.ajax({
+					url : "/group/groupViewData.hirp",
+					type : "get",
+					dataType : "json",
+					success : function(data) {
+						if (data.length != 0) {
+							data.forEach(function(e, i) {
+								/*console.log(e);*/
+								var codeNm = e.deptName;
+								var codeId = e.deptCode;
+								var parentId = e.deptUppercode;
+								var codeLvl = e.deptLevel;
+								var $rootList = $("#orgList");
+								var $ul = '<ul id="emplUl"><li id="'+ codeId +'"><a href="#">' + codeNm+ '</a></li></ul>';
+								// 1레벨은 그냥 추가
+								// 다음 레벨부터는 상위 li의 클래스를 폴더로 바꾸고 자기 자신을 추가
+								if (codeLvl == 0) {
+									var $li = '<li id="'+ codeId +'" lvl="' + codeLvl + '"><a href="#">'+ codeNm + '</a></li>';
+									$rootList.append($li);
+								} else {
+									if(codeLvl == 3){
+										$ul = '<ul id="emplUl"><li id="'+ codeId +'" onclick="emplClick(this);"><a href="#">' + codeNm+ '</a><input type="hidden" value="'+codeId+'"></li></ul>';
+									}
+									$("#" + parentId).append($ul);
+								}
+							});
+						} else {
+							alert("조직도 데이터가 없습니다.");
+						}
+						$("#orgList, #navigation").treeview({
+							collapsed : true
+						});
+					},
+					error : function() {
+						alert("조직도 조회 중에 실패했습니다.");
+					}
+				});
+			});
+			
+			
+			function tempStorage(obj){
+				obj.action = "/temporaryStorage/appr.hirp";
+				obj.method = "post";
+				obj.submit();
+			}
+			
+			
 		</script>
 	</body>
 </html>

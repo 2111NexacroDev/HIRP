@@ -41,6 +41,13 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 		return eList;
 	}
 	
+	//직원 검색.
+	@Override
+	public List<Employee> selectSearchEmplList(String keyword) {
+		List<Employee> eList = eAStore.selectSearchEmplList(sqlSession, keyword);
+		return eList;
+	}
+	
 	//하위부서까지
 	@Override
 	public List<Employee> printAllEmployeeWithDeptCode(String deptCode) {
@@ -65,30 +72,12 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	public List<Employee> printAllTempEmployee() {
 		List<Employee> tList = eAStore.selectTempEmployee(sqlSession);
 		return tList;
-	}
+	}	
 
 	@Override
 	public Employee printEmployeeInfo(String emplId) {
 		Employee emp = eAStore.selectOneEmployee(sqlSession, emplId);
 		return emp;
-	}
-
-	@Override
-	public int modifyEmployeeInfo(Employee employee) {
-		int result = eAStore.modifyEmployeeInfo(sqlSession, employee);
-		return result;
-	}
-
-	@Override
-	public int resignEmployee(String emplId) {
-		int result = eAStore.resignEmployee(sqlSession, emplId);
-		return result;
-	}
-
-	@Override
-	public int modifyLevelEmployee(String emplId) {
-		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
-		return result;
 	}
 
 	@Override
@@ -119,5 +108,119 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	public List<Military> selectAllMilitaryById(String emplId) {
 		List<Military> mList = eAStore.selectAllMilitaryById(sqlSession, emplId);
 		return mList;
+	}
+
+	@Override
+	public int modifyEmployeeInfo(Employee employee) {
+		int result = eAStore.modifyEmployeeInfo(sqlSession, employee);
+		return result;
+	}
+
+	@Override
+	public int resignEmployee(String emplId) {
+		int result = eAStore.resignEmployee(sqlSession, emplId);
+		return result;
+	}
+
+	@Override
+	public int modifyLevelEmployee(String emplId) {
+		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutJob(int jobNo) {
+		int result = eAStore.deleteInfoAboutJob(sqlSession, jobNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutCareer(int infoNo) {
+		int result = eAStore.deleteInfoAboutCareer(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutLang(int infoNo) {
+		int result = eAStore.deleteInfoAboutLang(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutCert(int infoNo) {
+		int result = eAStore.deleteInfoAboutCert(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int removeInfoAboutMilitary(int infoNo) {
+		int result = eAStore.deleteInfoAboutMilitary(sqlSession, infoNo);
+		return result;
+	}
+
+	@Override
+	public int registerJobRole(JobRole jobRole) {
+		int result = eAStore.insertJobRole(sqlSession, jobRole);
+		return result;
+	}
+
+	@Override
+	public int registerCareer(Career career) {
+		int result = eAStore.insertCareer(sqlSession, career);
+		return result;
+	}
+
+	@Override
+	public int registerCert(Certification cert) {
+		int result = eAStore.insertCert(sqlSession, cert);
+		return result;
+	}
+
+	@Override
+	public int registerLang(Language lang) {
+		int result = eAStore.insertLang(sqlSession, lang);
+		return result;
+	}
+
+	@Override
+	public int registerMilitary(Military military) {
+		int result = eAStore.insertMilitary(sqlSession, military);
+		return result;
+	}
+	
+	@Override
+	public int modifyTopInfo(Employee employee) {
+		int result = eAStore.updateTopInfo(sqlSession, employee);
+		return result;
+	}
+
+	@Override
+	public int modifyJobRole(JobRole jobRole) {
+		int result = eAStore.updateJobRole(sqlSession, jobRole);
+		return result;
+	}
+
+	@Override
+	public int modifyCareer(Career career) {
+		int result = eAStore.updateCareer(sqlSession, career);
+		return result;
+	}
+
+	@Override
+	public int modifyCert(Certification cert) {
+		int result = eAStore.updateCert(sqlSession, cert);
+		return result;
+	}
+
+	@Override
+	public int modifyLang(Language lang) {
+		int result = eAStore.updateLang(sqlSession, lang);
+		return result;
+	}
+
+	@Override
+	public int modifyMilitary(Military military) {
+		int result = eAStore.updateMilitary(sqlSession, military);
+		return result;
 	}
 }

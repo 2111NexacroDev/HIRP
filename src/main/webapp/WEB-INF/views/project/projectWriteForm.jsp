@@ -37,26 +37,26 @@
         	<h1 class="basic-border-bottom">
 				프로젝트 만들기
             </h1>
-            <div class="subConts">
+            <div id="projectWrite" class="subConts">
 	            <form action="/project/register.hirp" method="post">
 		        	<div id="project">
 			        	<table class="table--basic mt-20" style="margin-top: 40px;">
 				            <tr>
 				                <td>프로젝트명</td>
-				                <td><input type="text" style="width:300px;border:0 solid black;" placeholder="프로젝트명" name="projectName"></td>
+				                <td><input type="text" style="width:300px;" placeholder="프로젝트명" name="projectName"></td>
 				            </tr>
 				            <tr>
 				                <td>담당자</td>
-				                <td><input type="text" style="width:300px;border:0 solid black;" placeholder="name" name="projectManager"><button class="basic mt-20" type="button">찾기</button></td>
+				                <td><input type="text" style="width:300px;" placeholder="name" name="projectManager"><button class="basic ml-10" type="button">찾기</button></td>
 				            </tr>
 				            <tr>
 				                <td>일자</td>
 				                <td><input type="date" name="startDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="date" name="endDate"></td>
 				            </tr>
 			            </table>
-			            <div class="t-c" id="btn">
-			                <button class="point mt-20" type="submit" id="btnSubmit">등록</button>
-			                <button class="basic mt-20" type="reset" id="btnCancel">취소</button>
+			            <div class="btns-wrap t-c" id="btn">
+			                <button class="point" type="submit" id="btnSubmit">등록</button>
+			                <button class="basic" type="reset" id="btnCancel">취소</button>
 		                </div>
 		            </div>
 		        </form>
