@@ -64,6 +64,8 @@ public class SurveyServiceLogic implements SurveyService{
 		List<SurveySub> surveySubList = sStore.selectSurveySubByNo(sqlSession, surveyNo);
 		return surveySubList;
 	}
+	
+	
 	//설문조사 등록
 	//설문조사 추가
 	@Override
@@ -89,7 +91,7 @@ public class SurveyServiceLogic implements SurveyService{
 		int result = sStore.insertSurveyQuestCh(sqlSession, qCh);
 		return result;
 	}
-	//설문 대상자 리스트 추가
+	//설문 대상자 추가
 	@Override
 	public int insertSurveySub(SurveySub subList) {
 		int result = sStore.insertSurveySub(sqlSession, subList);
@@ -101,22 +103,6 @@ public class SurveyServiceLogic implements SurveyService{
 		return result;
 	}
 	
-	
-	//전체 직원 가져오기
-	@Override
-	public List<Employee> selectAllSurveySub() {
-		List<Employee> emplList = sStore.selectAllSurveySub(sqlSession);
-		return emplList;
-	}
-	//현재 부서원 추가
-	//하위 부서원까지 추가
-	//특정 부서원만 추가
-	@Override
-	public List<String> selectSurveySubByDeptCode(HashMap<String, String> surveySubInfo) {
-		List<String> emplIdList = sStore.selectSurveySubByDeptCode(sqlSession, surveySubInfo);
-		return emplIdList;
-	}
-	
 	//설문조사 상세
 	//설문조사 정보 가져오기
 	@Override
@@ -124,23 +110,11 @@ public class SurveyServiceLogic implements SurveyService{
 		Survey survey = sStore.selectSurveyByNo(sqlSession, surveyNo);
 		return survey;
 	}
-	//설문조사에 포함된 설문 문항 가져오기
+	//설문조사에 포함된 설문 문항 리스트 가져오기 (보기까지)
 	@Override
 	public List<SurveyQuest> selectAllSurveyQuestByNo(int surveyQuestNo) {
 		List<SurveyQuest> surveyQuestList = sStore.selectAllSurveyQuestByNo(sqlSession, surveyQuestNo);
 		return surveyQuestList;
-	}
-	//설문 문항 가져오기
-	@Override
-	public SurveyQuest selectOneSurveyQuestByNo(int surveyQuestNo) {
-		SurveyQuest surveyQuest = sStore.selectOneSurveyQuestByNo(sqlSession, surveyQuestNo);
-		return surveyQuest;
-	}
-	//설문조사 보기 가져오기
-	@Override
-	public SurveyQuestCh selectSurveyQuestChByNo(int surveyQuestNo) {
-		SurveyQuestCh surveyQuestCh = sStore.selectSurveyQuestChByNo(sqlSession, surveyQuestNo);
-		return surveyQuestCh;
 	}
 	//설문조사 번호로 설문조사 응답 가져오기
 	@Override
@@ -168,13 +142,6 @@ public class SurveyServiceLogic implements SurveyService{
 	@Override
 	public int updateSurveyStatus(int surveyNo) {
 		int result = sStore.updateSurveyStatus(sqlSession, surveyNo);
-		return result;
-	}
-	
-	//설문조사 대상자 리스트 수정
-	@Override
-	public int updateSurveySubList(List<SurveySub> subList) {
-		int result = sStore.updateSurveySubList(sqlSession, subList);
 		return result;
 	}
 	
