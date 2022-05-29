@@ -31,7 +31,7 @@ public interface EmployeeAdminService {
 	// 삽입, 수정, 삭제
 	public int modifyEmployeeInfo(Employee employee);
 	public int resignEmployee(String emplId);
-	public int modifyLevelEmployee(String tempId);
+	public int modifyLevelEmployee(Employee employee);
 	
 	public int removeInfoAboutJob(int jobNo);
 	public int removeInfoAboutCareer(int infoNo);

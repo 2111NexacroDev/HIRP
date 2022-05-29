@@ -194,7 +194,11 @@
 	</update>
 	
 	<update id="updateLevelEmployee">
-		UPDATE EMPL_TBL SET IS_STATUS = '재직' WHERE EMPL_ID = #{emplId}
+		UPDATE EMPL_TBL 
+		SET IS_STATUS = '재직',
+			DEPT_CODE = #{deptCode},
+			POSITION_CODE = #{positionCode}
+		WHERE EMPL_ID = #{emplId}
 	</update>
 	
 	<insert id="insertJobRole">
