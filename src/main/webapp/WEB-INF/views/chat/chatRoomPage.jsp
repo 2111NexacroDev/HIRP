@@ -186,7 +186,13 @@
 	    				var countUp = "<c:set var='count' value='"+i+"' />";//원래는 여기 roomId 들어가야 할 듯.
 						var chatroomOneDiv =   "<div class='chat-row mt-10 basic-border-bottom padding-bottom-10' onclick=''>"
 							   + "<div class='ml-20 pos-rel' style='width:100%;'>"
-							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName+"</h3>"
+							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName;
+						
+						if(cList[i].chatroomType == 'G'){
+							chatroomOneDiv += " (" + cList[i].joinCount + ")";
+						}
+							    	
+						chatroomOneDiv += "</h3>"
 							    	+ "<div class='chatting-time'>";
 							    	
 						console.log("출력 : "+cList[i].message.msgSenddate.substring(0, 10));
