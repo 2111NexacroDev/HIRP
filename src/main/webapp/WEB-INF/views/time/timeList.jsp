@@ -13,25 +13,25 @@
 	<div id="conts">
 		<aside id="snb">
 			<h1>근태관리</h1><br><br>
-			<title>현재 시간</title>
-			<span id="result"></span><br><br>
+			<title>현재 시간</title> <span id="result"></span><br><br><br>
 			<ul class="no-margin">
-				<li class="row">
-					출근시간<p id="timeStart" class="ml-10">${time.timeStart }</p>
-				</li>
-				<li class="row">
-					퇴근시간<p id="timeEnd" class="ml-10">${time.timeEnd }</p>
-				</li>
+			<li class="row">
+				출근시간<p id="timeStart" class="ml-10">${time.timeStart }</p>
+			</li>
+			<li class="row">
+				퇴근시간<p id="timeEnd" class="ml-10">${time.timeEnd }</p>
+			</li>
 				<li>
-				<button class="finished mt-20" type="button" onclick="startBtn();">출근하기</button>
-				<button class="finished mt-20" type="button" onclick="endBtn();">퇴근하기</button>
-				<select class="mt-20" name="" id="">
-					<option value="">업무</option>
-					<option value="">업무 종료</option>
-					<option value="">외근</option>
-					<option value="">출장</option>
-					<option value="">반차</option>
-				</select></li>
+					<button class="finished mt-20" type="button" onclick="startBtn();">출근하기</button>
+					<button class="finished mt-20" type="button" onclick="endBtn();">퇴근하기</button>
+					<select class="mt-20" name="" id="">
+						<option value="">업무</option>
+						<option value="">업무 종료</option>
+						<option value="">외근</option>
+						<option value="">출장</option>
+						<option value="">반차</option>
+					</select>
+				</li>
 			</ul><br><br>
 			<ul>
 				<li><div style="font-weight: bold;">근태관리</div>
@@ -40,8 +40,7 @@
 						<li><a href="/time/vacation.hirp">연차 내역</a></li>
 					</ul>
 				</li>
-			</ul>
-			<br>
+			</ul><br>
 			<ul>
 				<li><div style="font-weight: bold;">근태조정</div>
 					<ul>
@@ -63,8 +62,7 @@
 						<th>출근시간</th>
 						<th>퇴근시간</th>
 						<th>업무상태</th>
-						<th>연차사유</th>
-						<th>주근무시간</th>
+						<th>일근무시간</th>
 					</tr>
 				</thead>
 				<c:forEach var="time" items="${tList }" >
@@ -76,7 +74,6 @@
 							<td>${time.timeStart }</td>
 							<td>${time.timeEnd }</td>
 							<td>${time.timeState }</td>
-							<td>${time.timeContent }</td>
 							<td>${time.timeAccrue }</td>
 						</tr>
 					</tbody>
@@ -96,8 +93,7 @@
 			var hours = ('0' + date.getHours()).slice(-2);
 			var minutes = ('0' + date.getMinutes()).slice(-2);
 			var seconds = ('0' + date.getSeconds()).slice(-2);
-			var dateString = year + '-' + month + '-' + day + '('
-					+ week[date.getDay()] + ')';
+			var dateString = year + '-' + month + '-' + day + '('+ week[date.getDay()] + ')';
 			var timeString = hours + ':' + minutes + ':' + seconds;
 			document.getElementById("result").innerHTML = dateString + '<br/>' + timeString;
 			setInterval(printClock, 1000); // 1초마다 바뀌게 해주는 것

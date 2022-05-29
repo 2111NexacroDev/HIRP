@@ -11,7 +11,6 @@
 		<result property="timeStart" column="TIME_START"/>
 		<result property="timeEnd" column="TIME_END"/>
 		<result property="timeState" column="TIME_STATE"/>
-		<result property="timeContent" column="TIME_CONTENT"/>
 		<result property="timeAccrue" column="TIME_ACCRUE"/>
 	</resultMap>
 	<resultMap type="TimeModify" id="timeModifyResultMap">
@@ -75,7 +74,6 @@
 		     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
 		     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
 		     , A.TIME_STATE
-		     , A.TIME_CONTENT
 		     , TRUNC(B.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(B.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(B.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
 		    FROM TIME_TBL A, (SELECT SUM(TIME_ACCRUE) AS TIME_ACCRUE FROM TIME_TBL WHERE EMPL_ID = #{emplId } AND TO_CHAR(TIME_DATE, 'W') = TO_CHAR(SYSDATE, 'W')) B
 		    WHERE EMPL_ID = #{emplId } AND TO_CHAR(A.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
@@ -84,29 +82,27 @@
 	<!-- 사용자 출퇴근 내역 조회 -->
 	<select id="selectWorkView" parameterType="String" resultMap="timeResultMap">
 		SELECT A.TIME_NO
-     , A.EMPL_ID
-     , A.TIME_DATE
-     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
-     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
-     , A.TIME_STATE
-     , A.TIME_CONTENT
-     , TRUNC(B.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(B.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(B.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
-    FROM TIME_TBL A
-        , (SELECT SUM(TIME_ACCRUE) AS TIME_ACCRUE FROM TIME_TBL WHERE TO_CHAR(TIME_DATE, 'W') = TO_CHAR(SYSDATE, 'W')) B
-    WHERE EMPL_ID = #{emplId } AND TO_CHAR(A.TIME_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	     , A.EMPL_ID
+	     , A.TIME_DATE
+	     , TO_CHAR(A.TIME_START, 'HH24:MI:SS') AS TIME_START
+	     , TO_CHAR(A.TIME_END, 'HH24:MI:SS') AS TIME_END
+	     , A.TIME_STATE
+	     , TRUNC(A.TIME_ACCRUE*24) || '시간' || TRUNC(MOD(A.TIME_ACCRUE*24,1)*60) || '분' || TRUNC(MOD(A.TIME_ACCRUE*24*60,1)*60) || '초' AS TIME_ACCRUE
+	    FROM TIME_TBL A
+	    WHERE EMPL_ID = #{emplId } ORDER BY 3 DESC
 	</select>
 	
 	<!-- 사용자 연차 내역 조회 -->
 	<select id="selectTimeView" parameterType="Vacation" resultMap="vacationResultMap">
 		SELECT *
 		FROM VACATION_TBL
-		WHERE EMPL_ID = #{emplId}
+		WHERE EMPL_ID = #{emplId} ORDER BY 6 DESC
 	</select>
 	
  	<!-- 사용자 근태 조정 조회 -->
 	<select id="selectModifyView" parameterType="TimeModify" resultMap="timeModifyResultMap">
 		SELECT *
 		FROM TIMEMODIFY_TBL
-		WHERE EMPL_ID = #{emplId}
+		WHERE EMPL_ID = #{emplId} ORDER BY 10 DESC
 	</select>
 </mapper>

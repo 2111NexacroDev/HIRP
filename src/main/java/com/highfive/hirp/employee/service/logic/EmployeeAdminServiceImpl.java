@@ -123,8 +123,8 @@ public class EmployeeAdminServiceImpl implements EmployeeAdminService {
 	}
 
 	@Override
-	public int modifyLevelEmployee(String emplId) {
-		int result = eAStore.updateLevelEmployee(sqlSession, emplId);
+	public int modifyLevelEmployee(Employee employee) {
+		int result = eAStore.updateLevelEmployee(sqlSession, employee);
 		return result;
 	}
 

@@ -509,12 +509,19 @@ public class EmployeeAdminController {
 	// 사원 가입 승인
 	@RequestMapping(value="/admin/emplLevelUp.hirp", method=RequestMethod.POST)
 	public NexacroResult signUpTempEmp(
-			@ParamVariable(name="emplId") String emplId) {
+			@ParamVariable(name="emplId") String emplId,
+			@ParamVariable(name="deptCode") String deptCode,
+			@ParamVariable(name="positionCode") String positionCode) {
 		int 	nErrorCode = 0;
 		String  strErrorMsg = "START";
 		String tempId = emplId;
 		NexacroResult result = new NexacroResult(); 
-		int modifyLevelResult = eAService.modifyLevelEmployee(tempId);		
+		
+		Employee employee = new Employee();
+		employee.setEmplId(tempId);
+		employee.setDeptCode(deptCode);
+		employee.setPositionCode(positionCode);
+		int modifyLevelResult = eAService.modifyLevelEmployee(employee);		
 		
 		if(modifyLevelResult > 0) {
 			nErrorCode = 0;
