@@ -25,7 +25,7 @@
 		<result property="isVeterans" column="IS_VETERANS" />
 		<result property="endDate" column="END_DATE" />
 		<result property="endReason" column="END_REASON" />
-		<result property="emplProfile" column="END_REASON" />
+		<result property="emplProfile" column="EMPL_PROFILE" />
 		<!-- 이름 추가 -->
 		<result property="deptName" column="DEPT_NAME" />
 		<result property="positionName" column="POSITION_NAME" />
@@ -41,7 +41,7 @@
 		SELECT EMPL_ID, DEPT_CODE, POSITION_CODE, EMPL_PW, EMPL_NAME, START_DATE,
 		EMAIL, DIRECT_NO, PHONE_NO, RECRUIT_CATEGORY, SALARY_CATEGORY, REFERRER,
 		IS_STATUS, BIRTHDAY, GENDER, IS_MARRIAGE, IS_DISABILITY, IS_VETERANS, 
-		END_DATE, END_REASON, END_REASON, DEPT_NAME, POSITION_NAME
+		END_DATE, END_REASON, END_REASON, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
 		FROM EMPL_TBL 
 		JOIN DEPT_TBL USING(DEPT_CODE)
 		JOIN POSITION_TBL USING(POSITION_CODE)

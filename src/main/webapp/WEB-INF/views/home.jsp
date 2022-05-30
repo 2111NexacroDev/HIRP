@@ -35,7 +35,7 @@
                                 <p>No Image</p>
                             </c:if>
                         </figure>
-                        <h2 class="t-c">${sessionScope.emplName }</h2>
+                        <h2 class="t-c">${sessionScope.deptName } ${sessionScope.emplName } ${sessionScope.positionName }</h2>
                     </section>
                     <section>
                         <h2>근태관리</h2>
