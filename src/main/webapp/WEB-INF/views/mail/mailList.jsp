@@ -25,7 +25,7 @@
                <li>
                    <a href="">메일함</a>
                    <ul>
-                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li class="on"><a href="/mail/Rlist.hirp">받은메일함</a></li>
                        <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
@@ -82,12 +82,12 @@
             <div class="subConts">
 	        	<table class="table--basic mt-20" style="margin-top: 40px;">	        	
                     <colgroup>
-                        <col style="width:5%;">
-                        <col style="width:5%;">
-                        <col style="width:5%;">
-                        <col style="width:50%;">
+                        <col style="width:4%;">
+                        <col style="width:4%;">
+                        <col style="width:4%;">
+                        <col style="width:60%;">
+                        <col style="width:8%;">
                         <col style="width:10%;">
-                        <col style="width:15%;">
                     </colgroup>
                    	<c:forEach items="${mList }" var="mail">
                     	<!-- 받은메일함 -->
