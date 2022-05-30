@@ -16,7 +16,7 @@
                 <li>
                     <a href="#none">업무 관리</a>
                     <ul>
-                        <li><a href="/todo/list.hirp">할 일/메모 목록</a></li>
+                        <li class="on"><a href="/todo/list.hirp">할 일/메모 목록</a></li>
                         <li><a href="/todo/doneList.hirp">완료 목록</a></li>
                     </ul>
                 </li>
