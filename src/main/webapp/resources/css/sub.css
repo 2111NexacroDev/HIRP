@@ -24,7 +24,8 @@ h2.square-tit {
     padding: 0 20px 0 44px;
 }
 
-.subConts>h2.square-tit:before {
+.subConts>h2.square-tit:before,
+#projectDetail .square-tit:before {
     content: "";
     position: absolute;
     top: 4px;
@@ -33,6 +34,10 @@ h2.square-tit {
     width: 14px;
     height: 14px;
     background: powderblue;
+}
+
+#projectDetail .square-tit:before {
+    left: 0;
 }
 
 /* 개인업무관리 */
@@ -391,8 +396,14 @@ section[class^="todo--"] {
     transform: rotate(45deg);
 }
 
+
 .fc .fc-day-sun {
     color: #FF000A;
+}
+
+#scheduleList .fc .fc-dayGridMonth-view .fc-day-sun.fc-day-today:before {
+    left: auto;
+    right: -6px;
 }
 
 .fc .fc-today-button,
@@ -710,7 +721,7 @@ section[class^="todo--"] {
 
 .mail--star input+label {
     position: absolute;
-    bottom: -2px;
+    bottom: -4px;
     left: 0;
     cursor: pointer;
 }
@@ -718,7 +729,7 @@ section[class^="todo--"] {
 .mail--star input+label:before {
     content: "\f005";
     font-family: "Fontawesome";
-    font-size: 18px;
+    font-size: 22px;
     color: #ccc;
 }
 

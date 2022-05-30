@@ -759,6 +759,11 @@ button.next {
     margin-top: 16px;
 }
 
+#snb>ul>li>ul>li.on {
+    font-weight: 500;
+    color: #00498c;
+}
+
 #snb ul.no-margin>li {
     margin-top: 10px;
 }

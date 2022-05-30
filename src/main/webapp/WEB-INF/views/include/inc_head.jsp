@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" href="../../resources/css/reset.css"><!-- 브라우저 기본 스타일 리셋하는 CSS -->
     <link rel="stylesheet" href="../../resources/css/common.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
+    <link rel="shortcut icon" href="../../resources/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="../../resources/images/favicon.png" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script
