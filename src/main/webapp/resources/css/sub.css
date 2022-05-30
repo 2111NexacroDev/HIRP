@@ -695,3 +695,66 @@ section[class^="todo--"] {
 }
 
 /* 프로젝트 관리 끝 */
+
+/* 메일 */
+.mail--star {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.mail--star input {
+    position: fixed;
+    left: -9999px;
+}
+
+.mail--star input+label {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    cursor: pointer;
+}
+
+.mail--star input+label:before {
+    content: "\f005";
+    font-family: "Fontawesome";
+    font-size: 18px;
+    color: #ccc;
+}
+
+.mail--star input:checked+label:before {
+    color: gold;
+}
+
+.mail--read {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.mail--read input {
+    position: fixed;
+    left: -9999px;
+}
+
+.mail--read input+label {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    cursor: pointer;
+}
+
+.mail--read input+label:before {
+    content: "\f0e0";
+    font-family: "Fontawesome";
+    font-size: 18px;
+    color: #0b2a60;
+}
+
+.mail--read input:checked+label:before {
+    content: "\f2b6";
+    color: #ccc;
+}
+
+
+/* 메일 끝 */
