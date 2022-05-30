@@ -77,12 +77,18 @@
             
             <div class="subConts">
 	            <form action="/mail/detail.hirp" method="get">
-	            	<table class="table--basic mt-20">
+	            	<table class="table--basic mt-20">	        	
+	                    <colgroup>
+	                        <col style="width:15%;">
+	                        <col style="width:85%;">
+	                    </colgroup>
 	            		<tr>
-							<td class="mail--star">
-								<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
-								<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
-								<label for="important"></label>
+							<td>
+								<div class="mail--star">
+									<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</div>
 							</td>
 	            			<td>${mail.mailTitle }</td>
 	            		</tr>
@@ -99,12 +105,12 @@
 	            			<td>${mail.mailDate }</td>
 	            		</tr>
 	            		<tr>
-	            			<td>
+	            			<td colspan="2">
 	            				<a href="../../../resources/nuploadFiles/${mailFile.fileReName }" download>${mailFile.fileName }</a>
 	            			</td>
 	            		</tr>
 	            		<tr>
-	            			<td>${mail.mailContents }</td>
+	            			<td colspan="2">${mail.mailContents }</td>
 	            		</tr>
 	            	</table>
 	            </form>
