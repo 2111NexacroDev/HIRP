@@ -26,18 +26,25 @@ import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 
 @Controller
 public class MailController {
-
 	@Autowired
 	private MailService mService;
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	// 메일 작성 페이지 이동
 	@RequestMapping(value="/mail/writeView.hirp", method=RequestMethod.GET)
 	public ModelAndView showSend(ModelAndView mv) {
 		try {
-			mv.setViewName("mail/mailWriteForm");
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			if(emplList != null) {
+				mv.addObject("emplList", emplList);
+				mv.setViewName("mail/mailWriteForm");
+			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");

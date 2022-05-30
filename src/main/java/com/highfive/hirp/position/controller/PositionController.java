@@ -7,18 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.highfive.hirp.dept.domain.Dept;
-import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.position.domain.Position;
 import com.highfive.hirp.position.service.PositionService;
 import com.nexacro.uiadapter17.spring.core.annotation.ParamDataSet;
-import com.nexacro.uiadapter17.spring.core.annotation.ParamVariable;
 import com.nexacro.uiadapter17.spring.core.data.NexacroResult;
 import com.nexacro17.xapi.data.DataSet;
 
 @Controller
 public class PositionController {
-
 	@Autowired
 	private PositionService pService;
 	
@@ -130,12 +126,6 @@ public class PositionController {
 		result.addVariable("ErrorCode", nErrorCode);
 		result.addVariable("ErrorMsg", strErrorMsg);
 		
-		return result;
-	}
-	
-	// 직급 순서바꾸기
-	public NexacroResult changePosition(@ParamVariable(name="in_positionSequence") String positionSequence) {
-		NexacroResult result = new NexacroResult();
 		return result;
 	}
 	

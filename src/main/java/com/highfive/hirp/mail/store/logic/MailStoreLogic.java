@@ -12,7 +12,7 @@ import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.store.MailStore;
 @Repository
-public class MailStoreLogic implements MailStore{
+public class MailStoreLogic implements MailStore {
 
 	// 메일 전송 보낸사람
 	@Override
@@ -132,6 +132,7 @@ public class MailStoreLogic implements MailStore{
 		int result = sqlSession.delete("MailMapper.deleteSelectMail", mailNo);
 		return result;
 	}
+	
 	// 중요 메일
 	@Override
 	public int impMail(SqlSession sqlSession, Mail mail) {

@@ -119,8 +119,6 @@
 				type:"post",
 				data:{"emplSearchKeyword" : emplSearchKeyword},
 				success: function(eList){
-					console.log("성공");
-	    			console.log(eList);
 	    			var count = eList.length;
 	    			
 	    			var $tableBody = $("#emplTable tbody");

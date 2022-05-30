@@ -23,7 +23,6 @@ import com.highfive.hirp.project.service.ProjectService;
 
 @Controller
 public class ProjectController {
-
 	@Autowired
 	private ProjectService pService;
 	@Autowired
@@ -58,8 +57,10 @@ public class ProjectController {
 	public ModelAndView projectDetailView(ModelAndView mv
 			, @RequestParam("projectNo") Integer projectNo) {
 		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			Project project = pService.printOneByNo(projectNo);
 			if(project != null) {
+				mv.addObject("emplList", emplList);
 				mv.addObject("project", project);
 				mv.setViewName("project/projectDetailView");
 			}else {

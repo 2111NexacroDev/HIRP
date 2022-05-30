@@ -13,8 +13,7 @@ import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
 import com.highfive.hirp.mail.store.MailStore;
 @Service
-public class MailServiceImpl implements MailService{
-	
+public class MailServiceImpl implements MailService {
 	@Autowired
 	private MailStore mStore;
 	@Autowired
