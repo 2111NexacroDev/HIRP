@@ -118,9 +118,11 @@
                         console.log(data[i]["isFinished"]);
                         if(data[i]["isFinished"] == 'N') {
                             $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox">');
+                            $('.todo--today ul li:last-child input[type="checkbox"]').prop('checked',false);
                         }
                         else if(data[i]["isFinished"] == 'Y') {
-                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox" checked>');
+                            $('.todo--today ul li:last-child').append('<input id="' + data[i]["todoNo"] + '" type="checkbox">');
+                            $('.todo--today ul li:last-child input[type="checkbox"]').prop('checked',true);
                         }
                         $('.todo--today ul li:last-child').append('<label for="'+ data[i]["todoNo"] +'"></label>');
                         $('.todo--today ul li:last-child').append('<input name="todoConts" type="text" value="'+ data[i]["todoConts"] +'">');

@@ -9,13 +9,12 @@ public class Time {
 	private String timeStart;
 	private String timeEnd;
 	private String timeState;
-	private String timeContent;
 	private String timeAccrue;
 	
 	public Time() {}
 
 	public Time(int timeNo, String emplId, Date timeDate, String timeStart, String timeEnd, String timeState,
-			String timeContent, String timeAccrue) {
+			String timeAccrue) {
 		super();
 		this.timeNo = timeNo;
 		this.emplId = emplId;
@@ -23,7 +22,6 @@ public class Time {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.timeState = timeState;
-		this.timeContent = timeContent;
 		this.timeAccrue = timeAccrue;
 	}
 
@@ -75,14 +73,6 @@ public class Time {
 		this.timeState = timeState;
 	}
 
-	public String getTimeContent() {
-		return timeContent;
-	}
-
-	public void setTimeContent(String timeContent) {
-		this.timeContent = timeContent;
-	}
-
 	public String getTimeAccrue() {
 		return timeAccrue;
 	}
@@ -94,7 +84,8 @@ public class Time {
 	@Override
 	public String toString() {
 		return "Time [timeNo=" + timeNo + ", emplId=" + emplId + ", timeDate=" + timeDate + ", timeStart=" + timeStart
-				+ ", timeEnd=" + timeEnd + ", timeState=" + timeState + ", timeContent=" + timeContent + ", timeAccrue="
-				+ timeAccrue + "]";
+				+ ", timeEnd=" + timeEnd + ", timeState=" + timeState + ", timeAccrue=" + timeAccrue + "]";
 	}
+
+	
 }

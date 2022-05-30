@@ -1,15 +1,20 @@
 package com.highfive.hirp.chat.domain;
 
+import java.util.List;
+
 public class ChatRoom {
 	private int chatroomNo;
 	private String chatroomName;
 	private String chatroomManager;
 	private String chatroomDate;
+	private String chatroomType;
 	//메세지
 	private Message message;
 	//채팅방 참여자 list (string, 콤마로 구분)
 	private String joinchatIdList;
 	private String joinchatNameList;
+	
+	private ChatRoomJoin chatRoomJoin;
 	
 	public ChatRoom() {}
 
@@ -56,6 +61,14 @@ public class ChatRoom {
 		this.chatroomDate = chatroomDate;
 	}
 
+	public String getChatroomType() {
+		return chatroomType;
+	}
+
+	public void setChatroomType(String chatroomType) {
+		this.chatroomType = chatroomType;
+	}
+
 	public Message getMessage() {
 		return message;
 	}
@@ -80,12 +93,21 @@ public class ChatRoom {
 		this.joinchatNameList = joinchatNameList;
 	}
 
+	public ChatRoomJoin getChatRoomJoin() {
+		return chatRoomJoin;
+	}
+	
+	public void setChatRoomJoin(ChatRoomJoin chatRoomJoin) {
+		this.chatRoomJoin = chatRoomJoin;
+	}
+
 	@Override
 	public String toString() {
 		return "ChatRoom [chatroomNo=" + chatroomNo + ", chatroomName=" + chatroomName + ", chatroomManager="
-				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", message=" + message + ", joinchatIdList="
-				+ joinchatIdList + ", joinchatNameList=" + joinchatNameList + "]";
+				+ chatroomManager + ", chatroomDate=" + chatroomDate + ", chatroomType=" + chatroomType + ", message="
+				+ message + ", joinchatIdList=" + joinchatIdList + ", joinchatNameList=" + joinchatNameList
+				+ ", chatRoomJoin=" + chatRoomJoin + "]";
 	}
-
-
+	
+	
 }

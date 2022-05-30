@@ -9,6 +9,7 @@
 		<result property="chatroomName" column="CHATROOM_NAME"/>
 		<result property="chatroomManager" column="CHATROOM_MANAGER"/>
 		<result property="chatroomDate" column="CHATROOM_DATE"/>
+		<result property="chatroomType" column="CHATROOM_TYPE"/>
 		<result property="joinchatIdList" column="JOINCHAT_ID_LIST"/>
 		<result property="joinchatNameList" column="JOINCHAT_NAME_LIST"/>
 		<association javaType="Message" property="message" column="MSG_NO">
@@ -18,6 +19,17 @@
 	        <result property="msgContents" column="MSG_CONTENTS"/>
 	        <result property="msgSenddate" column="MSG_SENDDATE"/>
       	</association>  
+	</resultMap>
+	
+	<resultMap type="Message" id="messageResultMap">
+		<id property="msgNo" column="MSG_NO"/>
+		<result property="chatroomNo" column="CHATROOM_NO"/>
+		<result property="msgSendid" column="MSG_SENDID"/>
+		<result property="msgContents" column="MSG_CONTENTS"/>
+		<result property="msgSenddate" column="MSG_SENDDATE"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 	</resultMap>
 	
 	<!-- 채팅방 목록 출력 -->
@@ -70,4 +82,44 @@
 		    AND (CHATROOM_NAME LIKE '%' || #{chatroomSearchKeyword} || '%' OR JOINCHAT_NAME_LIST LIKE '%' || #{chatroomSearchKeyword} || '%')
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
 	</select>
+	<!-- 나와 상대방이 포함된 개인 채팅방 가져오기 -->
+	<select id="selectMyPersonalChattingRoom" resultMap="chatroomResultMap">
+		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+		FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{myId}
+		INTERSECT
+		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+		FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{personId}
+	</select>
+	<!-- 채팅방 번호로 채팅 내역 조회 -->
+	<select id="selectMessageByRoomNo" resultMap="messageResultMap">
+		SELECT MSG_NO, MSG_SENDID, MSG_CONTENTS, MSG_SENDDATE, 
+		EMPL_NAME, DEPT_NAME, POSITION_NAME
+		FROM MESSAGE_TBL
+		JOIN EMPL_TBL ON MSG_SENDID = EMPL_ID
+		JOIN DEPT_TBL USING(DEPT_CODE) 
+		JOIN POSITION_TBL USING(POSITION_CODE)
+		WHERE CHATROOM_NO = #{chatroomNo}
+		ORDER BY MSG_NO ASC
+	</select>
+	<!-- 그룹 채팅방 추가 -->
+	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
+		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE)
+		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT, #{chatroomType})
+	</insert>
+	<!-- 그룹 채팅 참가자 추가 -->
+	<insert id="insertChatRoomJoin">
+		INSERT INTO CHATROOM_JOIN
+		VALUES(JOINCHAT_SEQ.NEXTVAL, #{chatroomNo}, #{joinchatId})
+	</insert>
+	<!-- 채팅 메세지 추가 -->
+	<insert id="insertMessage" >
+		INSERT INTO MESSAGE_TBL
+		VALUES(MESSAGE_SEQ.NEXTVAL, #{chatroomNo}, #{msgSendid}, #{msgContents}, DEFAULT)
+	</insert>
 </mapper>

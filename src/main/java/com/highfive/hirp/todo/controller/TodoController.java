@@ -44,13 +44,6 @@ public class TodoController {
 			// 모든 일자의 메모 조회
 			List<Memo> mList = tService.printAllMemo(emplId);
 			
-			// 오늘 날짜 세팅
-			Date now = Date.valueOf(LocalDate.now());
-			todo.setTodoDate(now);
-			
-			// 오늘 날짜의 할 일 조회
-			List<Todo> todayList = tService.printToDoByDate(todo);
-			
 			if(!tList.isEmpty() && !mList.isEmpty()) {
 				mv.addObject("tList", tList);
 				mv.addObject("mList", mList);
@@ -61,6 +54,13 @@ public class TodoController {
 			} else {
 				// 아무 것도 없을 때
 			}
+			
+			// 오늘 날짜 세팅
+			Date now = Date.valueOf(LocalDate.now());
+			todo.setTodoDate(now);
+			
+			// 오늘 날짜의 할 일 조회
+			List<Todo> todayList = tService.printToDoByDate(todo);
 			
 			// 오늘 날짜로 할 일 있을 때만 세팅
 			if(!todayList.isEmpty()) {
@@ -74,7 +74,7 @@ public class TodoController {
 		return mv;
 	}
 	
-	// 일자별 할 일 조회
+	// 일자별 할 일 조회(ajax)
 	@ResponseBody
 	@RequestMapping(value="/todo/listByDate.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
 	public String todoListByDate(@ModelAttribute Todo todo

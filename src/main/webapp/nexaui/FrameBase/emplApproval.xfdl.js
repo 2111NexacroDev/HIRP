@@ -162,20 +162,23 @@
         this.empl_detail_oncellclick = function(obj,e)
         {
         	selectedEmplId = this.Grid00.getCellText(e.row, 5);
-        	if(e.col == 4) {
-        		this.go("FrameBase::empDetail.xfdl");
-        	}
-        	else if(e.col == 6) {
-        		this.transaction(
-        			"tr_update"// 1.ID
-        			,"HirpURL::admin/emplLevelUp.hirp"// 2.URL
-        			,"" // 3.InDs : F->S jsp(I,U,D)
-        			,"" // 4.OutDs : S->F jsp(SELECT)
-        			,"emplId="+selectedEmplId // 5.InVar : F->S(var)
-        			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
-        		);
-        		this.go("FrameBase::emplList.xfdl");
-        	}
+        	deptCode = this.Grid00.getCellValue(e.row, 1);
+        	positionCode = this.Grid00.getCellValue(e.row, 2);
+
+         	if(e.col == 4) {
+         		this.go("FrameBase::empDetail.xfdl");
+         	}
+         	else if(e.col == 6) {
+         		this.transaction(
+         			"tr_update"// 1.ID
+         			,"HirpURL::admin/emplLevelUp.hirp"// 2.URL
+         			,"" // 3.InDs : F->S jsp(I,U,D)
+         			,"" // 4.OutDs : S->F jsp(SELECT)
+         			,"emplId="+selectedEmplId+" deptCode="+deptCode+" positionCode="+positionCode // 5.InVar : F->S(var)
+         			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+         		);
+         		this.go("FrameBase::emplList.xfdl");
+         	}
         };
         });
         

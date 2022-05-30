@@ -12,6 +12,7 @@ import com.highfive.hirp.chat.domain.ChatList;
 import com.highfive.hirp.chat.domain.ChatRoom;
 import com.highfive.hirp.chat.domain.ChatRoomJoin;
 import com.highfive.hirp.chat.domain.Message;
+import com.highfive.hirp.chat.domain.PersonalId;
 import com.highfive.hirp.chat.service.ChatService;
 import com.highfive.hirp.chat.store.ChatStore;
 import com.highfive.hirp.employee.domain.Employee;
@@ -35,8 +36,8 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public int insertChatRoomJoin(List<String> emplIdList) {
-		int result = cStore.insertChatRoomJoin(sqlSession, emplIdList);
+	public int insertChatRoomJoin(ChatRoomJoin chatroomJoin) {
+		int result = cStore.insertChatRoomJoin(sqlSession, chatroomJoin);
 		return result;
 	}
 	
@@ -53,6 +54,13 @@ public class ChatServiceImpl implements ChatService{
 		List<ChatRoom> roomList = cStore.selectMyChattingRoom(sqlSession, searchMap);
 		return roomList;
 	}
+	//나와 상대방이 포함된 개인 채팅방 가져오기
+	@Override
+	public ChatRoom selectMyPersonalChattingRoom(PersonalId idList) {
+		ChatRoom chatRoom = cStore.selectMyPersonalChattingRoom(sqlSession, idList);
+		return chatRoom;
+	}
+
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
 	public List<Message> selectMessageByRoomNo(int chatroomNo) {
@@ -121,6 +129,7 @@ public class ChatServiceImpl implements ChatService{
 		int result = cStore.deleteChatRoom(sqlSession, chatroomNo);
 		return result;
 	}
+
 
 
 
