@@ -69,7 +69,7 @@
 		<result property="surveyanswerId" column="SURVEYANSWER_ID"/>
 		<result property="surveyanswerStorage" column="SURVEYANSWER_STORAGE"/>
 	</resultMap>
-	
+	<!-- 리스트 조회 -->
 	<!-- 설문조사 최신(최대 출력 개수 지정) + 내 응답여부 (조인 사용) -->
 	<!-- resultmap을 사용하더라도 꼭 domain에 있는 모든 컬럼을 가져올 필요는 없음. -->
 	<select id="selectAllSurvey" resultMap="surveyResultMap">
@@ -174,11 +174,9 @@
 		JOIN POSITION_TBL D USING(POSITION_CODE)
 		WHERE SURVEY_NO = #{surveyNo}
 	</select>
-	<!-- 현재 설문조사 시퀀스 번호 가져오기 -->
-	<select id="selectSurveySeqNo" resultType="_int">
-		SELECT SURVEY_SEQ.CURRVAL FROM DUAL
-	</select>
 	
+	
+	<!-- 설문 등록 -->
 	<!-- 설문조사 추가 -->
 	<insert id="insertSurvey">
 		INSERT INTO SURVEY_TBL
@@ -187,11 +185,68 @@
 		#{surveyStartdate}, #{surveyEnddate}, 
 		#{surveyResult}, #{surveyEdit}, NULL, DEFAULT)
 	</insert>
-	<!-- 설문조사 응답자 추가 -->
+	<!-- 설문조사 대상자 추가 -->
 	<insert id="insertSurveySub">
 		INSERT INTO SURVEY_SUB(SUB_NO, SURVEY_NO, SUB_ID, SUB_ANSWERSTATUS) VALUES
 		(SURVEYSUB_SEQ.NEXTVAL, #{surveyNo}, #{subId}, DEFAULT)
 	</insert>
+	<!-- 설문 문항 추가 -->
+	<insert id="insertSurveyQuest">
+		INSERT INTO SURVEY_QUEST 
+		VALUES(SURVEYQUEST_SEQ.NEXTVAL, SURVEY_SEQ.CURRVAL,
+		#{questTitle}, #{questType1}, #{questType2}, DEFAULT)
+	</insert>
+	<!-- 설문 보기 추가 -->
+	<insert id="insertSurveyQuestCh">
+		INSERT INTO SURVEYQUEST_CH
+		VALUES(SURVEYQUEST_SEQ.CURRVAL, 
+		#{surveyCh1}, #{surveyCh2}, #{surveyCh3}, #{surveyCh4}, #{surveyChmax})
+	</insert>
+	<!-- 현재 설문조사 시퀀스 번호 가져오기 -->
+	<select id="selectSurveySeqNo" resultType="_int">
+		SELECT SURVEY_SEQ.CURRVAL FROM DUAL
+	</select>
+	
+	
+	<!-- 설문 상세 -->
+	<!-- 설문조사 정보 조회 -->
+	<!-- 조인해서 작성자 정보(이름) 함께 가져오기 -->
+	<select id="selectSurveyByNo" resultMap="surveyResultMap">
+		<!-- 전에 리스트 뽑은 것도 조인까지 이렇게 다 바꿔야 할 듯 -->
+		SELECT 
+		SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER,
+		SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
+		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT,
+		SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
+		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME
+		FROM SURVEY_TBL S
+		JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
+		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
+		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
+		WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	<!-- 설문조사 문항+보기 한번에 가져오기 -->
+	<select id="selectAllSurveyQuestByNo" resultMap="surveyQuestResultMap">
+		SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE,
+		QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED,
+		SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX
+		FROM SURVEY_QUEST Q
+		LEFT JOIN SURVEYQUEST_CH C ON Q.QUEST_NO = C.SURVEYQUEST_NO
+		WHERE SURVEY_NO = #{surveyNo}
+		ORDER BY QUEST_NO
+	</select>
+	<!-- 설문조사 번호로 응답 리스트 가져오기 -->
+	<select id="selectSurveyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER WHERE SURVEY_NO = #{surveyNo}
+	</select>
+	<!-- 설문조사 번호, 내 아이디로 내 응답 리스트 가져오기 -->
+	<select id="selectSurveyMyAnswerByNo" resultMap="surveyAnswerResultMap">
+		SELECT * FROM SURVEY_ANSWER 
+		WHERE SURVEY_NO = #{surveyNo} AND SURVEYANSWER_ID = #{emplId}
+	</select>
+	
+	
+	<!-- 설문 수정 -->
 	<!-- 설문조사 수정 -->
 	<update id="updateSurvey">
 		UPDATE SURVEY_TBL
@@ -218,97 +273,39 @@
 		</set>
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
-	<!-- 설문 문항 추가 -->
-	<insert id="insertSurveyQuest">
-		INSERT INTO SURVEY_QUEST 
-		VALUES(SURVEYQUEST_SEQ.NEXTVAL, SURVEY_SEQ.CURRVAL,
-		#{questTitle}, #{questType1}, #{questType2}, DEFAULT)
-	</insert>
-	<!-- 설문 보기 추가 -->
-	<insert id="insertSurveyQuestCh">
-		INSERT INTO SURVEYQUEST_CH
-		VALUES(SURVEYQUEST_SEQ.CURRVAL, 
-		#{surveyCh1}, #{surveyCh2}, #{surveyCh3}, #{surveyCh4}, #{surveyChmax})
-	</insert>
-	
-	<!-- 설문조사 정보 조회 -->
-	<!-- 조인해서 작성자 정보(이름) 함께 가져오기 -->
-	<select id="selectSurveyByNo" resultMap="surveyResultMap">
-		<!-- 전에 리스트 뽑은 것도 조인까지 이렇게 다 바꿔야 할 듯 -->
-		SELECT 
-		SURVEY_NO, SURVEY_TITLE, SURVEY_WRITER,
-		SURVEY_DATE, SURVEY_UPDATE, SURVEY_STATUS,
-		SURVEY_STARTDATE, SURVEY_ENDDATE, SURVEY_RESULT,
-		SURVEY_EDIT, SURVEY_STARTCOMMENT, SURVEY_STORAGE,
-		E.EMPL_NAME, D.DEPT_NAME, P.POSITION_NAME
-		FROM SURVEY_TBL S
-		JOIN EMPL_TBL E ON S.SURVEY_WRITER = E.EMPL_ID
-		JOIN DEPT_TBL D ON E.DEPT_CODE = D.DEPT_CODE
-		JOIN POSITION_TBL P ON E.POSITION_CODE = P.POSITION_CODE
-		WHERE SURVEY_NO = #{surveyNo}
-	</select>
-
-	<!-- 설문조사 문항+보기 한번에 가져오기 -->
-	<select id="selectAllSurveyQuestByNo" resultMap="surveyQuestResultMap">
-		SELECT QUEST_NO, SURVEY_NO, QUEST_TITLE,
-		QUEST_TYPE1, QUEST_TYPE2, QUEST_REQUIRED,
-		SURVEY_CH1, SURVEY_CH2, SURVEY_CH3, SURVEY_CH4, SURVEY_CHMAX
-		FROM SURVEY_QUEST Q
-		LEFT JOIN SURVEYQUEST_CH C ON Q.QUEST_NO = C.SURVEYQUEST_NO
-		WHERE SURVEY_NO = #{surveyNo}
-		ORDER BY QUEST_NO
-	</select>
-	
 	<!-- 설문조사 상태 수정 (마감) -->
 	<update id="updateSurveyStatus">
 		UPDATE SURVEY_TBL 
 		SET SURVEY_STATUS = 'F', SURVEY_ENDDATE = SYSDATE
 		WHERE SURVEY_NO = #{surveyNo}
 	</update>
-
-	<!-- 설문조사 삭제 -->
-	<delete id="deleteSurvey">
-		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
-	</delete>
-	<!-- 설문조사 번호로 설문조사 응답자 삭제 -->
+	<!-- 설문조사 대상자 리스트 삭제 -->
 	<delete id="deleteSurveySubByNo">
 		DELETE FROM SURVEY_SUB WHERE SURVEY_NO = #{surveyNo}
 	</delete>
-	<!-- 설문조사 응답 -->
+	
+	
+	<!-- 설문조사 삭제 -->
+	<!-- 설문조사 정보 삭제 -->
+	<delete id="deleteSurvey">
+		DELETE FROM SURVEY_TBL WHERE SURVEY_NO = #{surveyNo}
+	</delete>
+	
+	<!-- 응답 -->
+	<!-- 설문조사 응답 내용 추가 -->
 	<insert id="insertSurveySubAnswer">
 		INSERT INTO SURVEY_ANSWER VALUES(SURVEYANSWER_SEQ.NEXTVAL, #{surveyNo}, #{surveyquestNo}, #{surveyanswerContent}, #{surveyanswerId}, DEFAULT)
 	</insert>
-	<!-- 설문조사 응답자 응답 상태 변경 -->
+	<!-- 설문조사 응답자 응답상태 변경 -->
 	<update id="updateSubAnswerStatus">
 		UPDATE SURVEY_SUB SET SUB_ANSWERSTATUS = 'Y'
 		WHERE SURVEY_NO = #{surveyNo} AND SUB_ID = #{emplId}
 	</update>
-	<!-- 설문조사 응답자 수 -->
-	<select id="selectCountAnswerSubByNo">
-		SELECT COUNT(*) FROM SURVEY_SUB
-		WHERE SURVEY_NO = #{surveyNo} AND SUB_ANSWERSTATUS = 'Y';
-	</select>
-	<!-- 설문조사 응답 대상자 수 -->
-	<select id="selectCountAllSub">
-		SELECT COUNT(*) FROM SURVEY_SUB
-		WHERE SURVEY_NO = #{surveyNo}
-	</select>
-	
-	<!-- 설문조사 번호로 응답 리스트 가져오기 -->
-	<select id="selectSurveyAnswerByNo" resultMap="surveyAnswerResultMap">
-		SELECT * FROM SURVEY_ANSWER WHERE SURVEY_NO = #{surveyNo}
-	</select>
-	
-	<!-- 설문조사 번호, 내 아이디로 내 응답 리스트 가져오기 -->
-	<select id="selectSurveyMyAnswerByNo" resultMap="surveyAnswerResultMap">
-		SELECT * FROM SURVEY_ANSWER 
-		WHERE SURVEY_NO = #{surveyNo} AND SURVEYANSWER_ID = #{emplId}
-	</select>
-	
 	<!-- 설문조사 응답 수정 -->
 	<update id="updateSurveySubAnswer">
 		UPDATE SURVEY_ANSWER
 		SET SURVEYANSWER_CONTENT = #{surveyanswerContent}
 		WHERE SURVEYANSWER_NO = #{surveyanswerNo}
 	</update>
+	
 </mapper>

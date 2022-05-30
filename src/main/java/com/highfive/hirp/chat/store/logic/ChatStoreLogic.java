@@ -51,6 +51,19 @@ public class ChatStoreLogic implements ChatStore{
 		ChatRoom chatRoom = sqlSession.selectOne("ChatMapper.selectMyPersonalChattingRoom", idList);
 		return chatRoom;
 	}
+	//채팅방 번호, 내 아이디로 정보 가져오기
+	@Override
+	public ChatRoom selectChatRoomInfoByNo(SqlSession sqlSession, Map<String, String> searchMap) {
+		ChatRoom chatRoom = sqlSession.selectOne("ChatMapper.selectChatRoomInfoByNo", searchMap);
+		return chatRoom;
+	}
+	//채팅방 번호로 참여자 정보 가져오기
+	@Override
+	public List<ChatRoomJoin> selectChatRoomJoinListByNo(SqlSession sqlSession, int chatroomNo) {
+		List<ChatRoomJoin> roomList = sqlSession.selectList("ChatMapper.selectChatRoomJoinListByNo", chatroomNo);
+		return roomList;
+	}
+	
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
 	public List<Message> selectMessageByRoomNo(SqlSession sqlSession, int chatroomNo) {
@@ -120,6 +133,7 @@ public class ChatStoreLogic implements ChatStore{
 		int result = sqlSession.delete("ChatMapper.deleteChatRoom", chatroomNo);
 		return result;
 	}
+
 
 
 

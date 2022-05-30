@@ -12,6 +12,12 @@
 		<result property="chatroomType" column="CHATROOM_TYPE"/>
 		<result property="joinchatIdList" column="JOINCHAT_ID_LIST"/>
 		<result property="joinchatNameList" column="JOINCHAT_NAME_LIST"/>
+		<result property="joinCount" column="JOIN_COUNT"/>
+		<!-- 직원 정보 -->
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 		<association javaType="Message" property="message" column="MSG_NO">
 	        <id property="msgNo" column="MSG_NO"/>
 	        <result property="chatroomNo" column="CHATROOM_NO"/>
@@ -19,6 +25,17 @@
 	        <result property="msgContents" column="MSG_CONTENTS"/>
 	        <result property="msgSenddate" column="MSG_SENDDATE"/>
       	</association>  
+	</resultMap>
+	
+	<resultMap type="ChatRoomJoin" id="chatroomJoinResultMap">
+		<id property="joinchatNo" column="JOINCHAT_NO"/>
+		<result property="chatroomNo" column="CHATROOM_NO"/>
+		<result property="joinchatId" column="JOINCHAT_ID"/>
+		<!-- 직원 정보 -->
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
 	</resultMap>
 	
 	<resultMap type="Message" id="messageResultMap">
@@ -37,49 +54,156 @@
 	최신 메세지순으로 정렬(메세지 다음으로는 채팅방 만든 순) -->
 	<select id="selectMyChattingRoom" resultMap="chatroomResultMap">
 		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
-		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE,
-		MSG_CONTENTS,
-		TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE
-		FROM CHATROOM_TBL
-		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
-		JOIN MESSAGE_TBL USING(CHATROOM_NO)
-		WHERE (CHATROOM_NO, MSG_SENDDATE) 
-		    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
-		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
+				TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE,
+				MSG_CONTENTS,
+				TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
+				JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST, JOIN_COUNT
+		FROM 	CHATROOM_TBL
+				JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+				JOIN MESSAGE_TBL USING(CHATROOM_NO)
+				JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+				JOIN (SELECT CHATROOM_NO
+                    , SUBSTR(
+                        XMLAGG(
+                            XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_ID).EXTRACT('//text()'
+                        ).GETSTRINGVAL()
+                       , 2) JOINCHAT_ID_LIST
+                    , SUBSTR(
+                        XMLAGG(
+                            XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY EMPL_NAME).EXTRACT('//text()'
+                        ).GETSTRINGVAL()
+                       , 2) JOINCHAT_NAME_LIST
+                   , COUNT(*) AS JOIN_COUNT
+                FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
+                    FROM CHATROOM_JOIN CJ
+                    JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
+                GROUP BY CHATROOM_NO ORDER BY CHATROOM_NO) 
+				    USING(CHATROOM_NO)
+		WHERE 	(CHATROOM_NO, MSG_SENDDATE) 
+			    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+			    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId} AND CHATROOM_TYPE = 'G'
+		UNION
+		SELECT  CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+				TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE,
+				MSG_CONTENTS,
+				TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
+		        JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST, JOIN_COUNT
+		FROM    ( SELECT CHATROOM_NO, 
+			        NVL(DEPT_NAME,'')||' '||NVL(EMPL_NAME,'')||' '||NVL(POSITION_NAME,'') AS CHATROOM_NAME, 
+			        CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE
+			        FROM CHATROOM_TBL
+			        JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+			        JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+			        JOIN DEPT_TBL USING(DEPT_CODE)
+			        JOIN POSITION_TBL USING(POSITION_CODE)
+			        WHERE CHATROOM_NO IN (
+			            SELECT CHATROOM_NO
+			            FROM CHATROOM_TBL
+			            JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+			            WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{emplId}
+			        ) AND JOINCHAT_ID != #{emplId}
+		        ) CH
+				JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+				JOIN MESSAGE_TBL USING(CHATROOM_NO)
+				JOIN (SELECT CHATROOM_NO
+                        , SUBSTR(
+                            XMLAGG(
+                                XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_ID).EXTRACT('//text()'
+                            ).GETSTRINGVAL()
+                           , 2) JOINCHAT_ID_LIST
+                        , SUBSTR(
+                            XMLAGG(
+                                XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY EMPL_NAME).EXTRACT('//text()'
+                            ).GETSTRINGVAL()
+                           , 2) JOINCHAT_NAME_LIST
+                       , COUNT(*) AS JOIN_COUNT
+                    FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
+                        FROM CHATROOM_JOIN CJ
+                        JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
+                    GROUP BY CHATROOM_NO ORDER BY CHATROOM_NO) 
+				USING(CHATROOM_NO)
+		WHERE 	(CHATROOM_NO, MSG_SENDDATE) 
+			    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+			    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
 	</select>
 	<!-- 채팅방 검색 -->
 	<!-- 채팅방 이름, 채팅방 참여자 이름 중에서 검색 -->
-	<select id="selectMyChattingRoomByKeyword" parameterType="hashMap" resultMap="chatroomResultMap">		
+	<select id="selectMyChattingRoomByKeyword" parameterType="hashMap" resultMap="chatroomResultMap">
 		SELECT CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
-		TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE,
-		MSG_CONTENTS,
-		TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
-		JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST
-		FROM CHATROOM_TBL
-		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
-		JOIN MESSAGE_TBL USING(CHATROOM_NO)
-		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
-		JOIN (SELECT CHATROOM_NO
-		         , SUBSTR(
-		            XMLAGG(
-		                XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_NO).EXTRACT('//text()'
-		            ).GETSTRINGVAL()
-		           , 2) JOINCHAT_ID_LIST
-		         , SUBSTR(
-		            XMLAGG(
-		                XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY JOINCHAT_NO).EXTRACT('//text()'
-		            ).GETSTRINGVAL()
-		           , 2) JOINCHAT_NAME_LIST
-		      FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
-		            FROM CHATROOM_JOIN CJ
-		            JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
-		      GROUP BY CHATROOM_NO) 
-		    USING(CHATROOM_NO)
-		WHERE (CHATROOM_NO, MSG_SENDDATE) 
-		    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
-		    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
-		    AND (CHATROOM_NAME LIKE '%' || #{chatroomSearchKeyword} || '%' OR JOINCHAT_NAME_LIST LIKE '%' || #{chatroomSearchKeyword} || '%')
+				TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE,
+				MSG_CONTENTS,
+				TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
+				JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST, JOIN_COUNT
+		FROM 	CHATROOM_TBL
+				JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+				JOIN MESSAGE_TBL USING(CHATROOM_NO)
+				JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+				JOIN (SELECT CHATROOM_NO
+                    , SUBSTR(
+                        XMLAGG(
+                            XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_ID).EXTRACT('//text()'
+                        ).GETSTRINGVAL()
+                       , 2) JOINCHAT_ID_LIST
+                    , SUBSTR(
+                        XMLAGG(
+                            XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY EMPL_NAME).EXTRACT('//text()'
+                        ).GETSTRINGVAL()
+                       , 2) JOINCHAT_NAME_LIST
+                   , COUNT(*) AS JOIN_COUNT
+                FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
+                    FROM CHATROOM_JOIN CJ
+                    JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
+                GROUP BY CHATROOM_NO ORDER BY CHATROOM_NO) 
+				    USING(CHATROOM_NO)
+		WHERE 	(CHATROOM_NO, MSG_SENDDATE) 
+			    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+			    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId} AND CHATROOM_TYPE = 'G'
+			    AND (CHATROOM_NAME LIKE '%'|| #{chatroomSearchKeyword} ||'%' OR JOINCHAT_NAME_LIST LIKE '%'|| #{chatroomSearchKeyword} ||'%')
+		UNION
+		SELECT  CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, 
+				TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE,
+				MSG_CONTENTS,
+				TO_CHAR(MSG_SENDDATE, 'YYYY-MM-DD HH24:MI:SS') AS MSG_SENDDATE,
+		        JOINCHAT_ID_LIST, JOINCHAT_NAME_LIST, JOIN_COUNT
+		FROM    ( SELECT CHATROOM_NO, 
+			        NVL(DEPT_NAME,'')||' '||NVL(EMPL_NAME,'')||' '||NVL(POSITION_NAME,'') AS CHATROOM_NAME, 
+			        CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE
+			        FROM CHATROOM_TBL
+			        JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+			        JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+			        JOIN DEPT_TBL USING(DEPT_CODE)
+			        JOIN POSITION_TBL USING(POSITION_CODE)
+			        WHERE CHATROOM_NO IN (
+			            SELECT CHATROOM_NO
+			            FROM CHATROOM_TBL
+			            JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+			            WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{emplId}
+			        ) AND JOINCHAT_ID != #{emplId}
+		        ) CH
+				JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+				JOIN MESSAGE_TBL USING(CHATROOM_NO)
+				JOIN (SELECT CHATROOM_NO
+                        , SUBSTR(
+                            XMLAGG(
+                                XMLELEMENT(COL ,',', JOINCHAT_ID) ORDER BY JOINCHAT_ID).EXTRACT('//text()'
+                            ).GETSTRINGVAL()
+                           , 2) JOINCHAT_ID_LIST
+                        , SUBSTR(
+                            XMLAGG(
+                                XMLELEMENT(COL ,',', EMPL_NAME) ORDER BY EMPL_NAME).EXTRACT('//text()'
+                            ).GETSTRINGVAL()
+                           , 2) JOINCHAT_NAME_LIST
+                       , COUNT(*) AS JOIN_COUNT
+                    FROM (SELECT JOINCHAT_NO, CHATROOM_NO, JOINCHAT_ID, EMPL_NAME
+                        FROM CHATROOM_JOIN CJ
+                        JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID)
+                    GROUP BY CHATROOM_NO ORDER BY CHATROOM_NO) 
+				USING(CHATROOM_NO)
+		WHERE 	(CHATROOM_NO, MSG_SENDDATE) 
+			    IN (SELECT CHATROOM_NO, MAX(MSG_SENDDATE) "MSG_SENDDATE"
+			    FROM MESSAGE_TBL GROUP BY CHATROOM_NO) AND JOINCHAT_ID = #{emplId}
+			    AND (CHATROOM_NAME LIKE '%'|| #{chatroomSearchKeyword} ||'%' OR JOINCHAT_NAME_LIST LIKE '%'|| #{chatroomSearchKeyword} ||'%')
 		ORDER BY MSG_SENDDATE DESC NULLS LAST, CHATROOM_DATE DESC
 	</select>
 	<!-- 나와 상대방이 포함된 개인 채팅방 가져오기 -->
@@ -107,7 +231,51 @@
 		WHERE CHATROOM_NO = #{chatroomNo}
 		ORDER BY MSG_NO ASC
 	</select>
-	<!-- 그룹 채팅방 추가 -->
+	<!-- 채팅방 번호로 채팅방 정보 조회 -->
+	<select id="selectChatRoomInfoByNo" parameterType="hashMap" resultMap="chatroomResultMap">
+	SELECT CHATROOM_NO, 
+		CHATROOM_NAME, 
+		CHATROOM_MANAGER, TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+	FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
+	WHERE CHATROOM_NO IN (
+		    SELECT CHATROOM_NO
+		    FROM CHATROOM_TBL
+		    WHERE CHATROOM_TYPE = 'G'
+	    )
+		AND JOINCHAT_ID = #{emplId} AND CHATROOM_NO = #{chatroomNo}
+	UNION
+	SELECT CHATROOM_NO, 
+		NVL(DEPT_NAME,'')||' '||NVL(EMPL_NAME,'')||' '||NVL(POSITION_NAME,'') AS CHATROOM_NAME, 
+		CHATROOM_MANAGER, TO_CHAR(CHATROOM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CHATROOM_DATE, CHATROOM_TYPE
+	FROM CHATROOM_TBL
+		JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		JOIN EMPL_TBL ON EMPL_TBL.EMPL_ID = CHATROOM_JOIN.JOINCHAT_ID
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
+	WHERE CHATROOM_NO IN (
+		    SELECT CHATROOM_NO
+		    FROM CHATROOM_TBL
+		    JOIN CHATROOM_JOIN USING(CHATROOM_NO)
+		    WHERE CHATROOM_TYPE = 'P' AND JOINCHAT_ID = #{emplId}
+		) 
+		AND JOINCHAT_ID != #{emplId}
+		AND CHATROOM_NO = #{chatroomNo}
+	</select>
+	<!-- 채팅방 번호로 참여자 정보 가져오기 -->
+	<select id="selectChatRoomJoinListByNo" resultMap="chatroomJoinResultMap">
+		SELECT CHATROOM_NO, JOINCHAT_NO, JOINCHAT_ID,
+		EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
+		FROM CHATROOM_JOIN CJ
+		JOIN EMPL_TBL E ON CJ.JOINCHAT_ID = E.EMPL_ID
+		JOIN DEPT_TBL D USING(DEPT_CODE)
+		JOIN POSITION_TBL P USING(POSITION_CODE)
+		WHERE CHATROOM_NO = #{chatroomNo}
+	</select>
+	<!-- 채팅방 추가 -->
 	<insert id="insertChattingRoom" useGeneratedKeys="true" keyColumn="CHATROOM_NO" keyProperty="chatroomNo">
 		INSERT INTO CHATROOM_TBL(CHATROOM_NO, CHATROOM_NAME, CHATROOM_MANAGER, CHATROOM_DATE, CHATROOM_TYPE)
 		VALUES(CHATROOM_SEQ.NEXTVAL, #{chatroomName}, #{chatroomManager}, DEFAULT, #{chatroomType})

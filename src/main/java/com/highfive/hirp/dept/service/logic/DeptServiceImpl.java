@@ -23,18 +23,6 @@ public class DeptServiceImpl implements DeptService{
 		List<Dept> deptList = dStore.selectAllDept(sqlSession);
 		return deptList;
 	}
-	//부서 선택해서 부서 정보 가져오기
-	@Override
-	public Dept selectDeptInfo(String deptCode) {
-		Dept dept = dStore.selectDeptInfo(sqlSession, deptCode);
-		return dept;
-	}
-	//부서 이름 검색 부서 리스트 가져오기
-	@Override
-	public List<Dept> selectDeptSearch(String deptSearchName) {
-		List<Dept> deptList = dStore.selectDeptSearch(sqlSession, deptSearchName);
-		return deptList;
-	}
 	//부서 추가
 	@Override
 	public int insertDept(Dept dept) {

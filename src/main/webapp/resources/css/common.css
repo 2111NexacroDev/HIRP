@@ -357,7 +357,15 @@ button.next {
 }
 
 .padding-left {
-    padding-bottom: 20px !important;
+    padding-left: 20px !important;
+}
+
+.padding-right {
+    padding-right: 20px !important;
+}
+
+.padding-top {
+    padding-top: 20px !important;
 }
 
 .padding-bottom {
@@ -804,7 +812,6 @@ button.next {
     font-size: 22px;
     letter-spacing: -1px;
 }
-
 
 #conts h1 strong {
     font-weight: 700;

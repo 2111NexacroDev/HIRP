@@ -40,27 +40,16 @@ public interface SurveyStore {
 	public int insertSurveyQuest(SqlSession sqlSession, SurveyQuest surveyQuest);
 	//설문 보기 추가 (날짜/객관식의 경우)
 	public int insertSurveyQuestCh(SqlSession sqlSession, SurveyQuestCh qCh);
-	//설문 대상자 리스트 추가
+	//설문 대상자 추가
 	public int insertSurveySub(SqlSession sqlSession, SurveySub subList);
 	//현재 설문조사 시퀀스 번호 가져오기
 	public int selectSurveySeqNo(SqlSession sqlSession);
 
-	//전체 직원 가져오기 (이거 조직도에서 가져다가 쓰면 될 듯 아마두..)
-	public List<Employee> selectAllSurveySub(SqlSession sqlSession);
-	//현재 부서원 추가
-	//하위 부서원까지 추가
-	//특정 부서원만 추가
-	public List<String> selectSurveySubByDeptCode(SqlSession sqlSession, HashMap<String, String> surveySubInfo);
-	
 	//설문조사 상세
 	//설문조사 정보 가져오기
 	public Survey selectSurveyByNo(SqlSession sqlSession, int surveyNo);
-	//설문조사에 포함된 설문 문항 리스트 가져오기
+	//설문조사에 포함된 설문 문항 리스트 가져오기 (보기까지)
 	public List<SurveyQuest> selectAllSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
-	//설문조사에 포함된 설문 문항 가져오기
-	public SurveyQuest selectOneSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo);
-	//설문조사 보기 가져오기
-	public SurveyQuestCh selectSurveyQuestChByNo(SqlSession sqlSession, int surveyQuestNo);
 	//설문조사 번호로 설문조사 응답 가져오기
 	public List<SurveyAnswer> selectSurveyAnswerByNo(SqlSession sqlSession, int surveyNo);
 	//설문조사 번호, 내 아이디로 나의 응답 가져오기
@@ -72,8 +61,6 @@ public interface SurveyStore {
 	public int updateSurvey(SqlSession sqlSession, Survey survey);
 	//설문조사 상태 수정
 	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo);
-	//설문조사 대상자 리스트 수정
-	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList);
 	//설문조사 대상자 리스트 삭제
 	public int deleteSurveySubList(SqlSession sqlSession, int surveyNo);
 	
@@ -86,7 +73,6 @@ public interface SurveyStore {
 	public int insertSurveySubAnswer(SqlSession sqlSession, SurveyAnswer surveyAnswer);
 	//설문조사 응답자 응답상태 변경
 	public int updateSubAnswerStatus(SqlSession sqlSession, SurveyUpdate ssUpdate);
-
 	//설문조사 응답 수정
 	public int updateSurveySubAnswer(SqlSession sqlSession, SurveyAnswer surveyAnswer);
 	

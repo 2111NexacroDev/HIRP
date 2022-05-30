@@ -50,7 +50,12 @@
 <!-- 							    </button> -->
 <!-- 						    </div> -->
 						    <div class="ml-20 pos-rel" style="width:100%;">
-						    	<h3 class="mb-20 inline-block">${chat.chatroomName}</h3>
+						    	<h3 class="mb-20 inline-block">
+						    		${chat.chatroomName} 
+						    		<c:if test="${chat.chatroomType eq 'G'}">
+							    		(${chat.joinCount })
+						    		</c:if>
+						    	</h3>
 						    	<div class="chatting-time">
 						    		<!-- 날짜별로 시간 다르게 나오게 하기 -->
 							    	<c:if test="${fn:substring(chat.message.msgSenddate, 0, 10) eq today}">
@@ -90,7 +95,7 @@
         	<form id="addChatroomForm" action="/chat/addChatroom.hirp" method="get">
 				<!-- 채팅방 추가 모달창 -->
 				<section id="chatEmplListModal" class="modal--chatSelect shadow">
-					<h3>대화상대 선택 <span>3</span></h3>
+					<h3>대화상대 선택 <span></span></h3>
 					<!-- 검색창 -->
 					<div class="modal--chatSelect__srch row mt-10 t-c padding-bottom-10">
 						<input type="text" name="emplSearchKeyword" placeholder="부서명 또는 사원명 검색">
@@ -153,7 +158,7 @@
     	}
 	  	//채팅창 열기
 		function chatWindow(chatroomNo){ //원래는 roomId
-			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,location=no,status=no,scrollbars=no');
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,left=410,location=no,status=no,scrollbars=no');
 		}
 		//채팅 목록에서 검색 (ajax)
 		function chSearch(){
@@ -181,7 +186,13 @@
 	    				var countUp = "<c:set var='count' value='"+i+"' />";//원래는 여기 roomId 들어가야 할 듯.
 						var chatroomOneDiv =   "<div class='chat-row mt-10 basic-border-bottom padding-bottom-10' onclick=''>"
 							   + "<div class='ml-20 pos-rel' style='width:100%;'>"
-							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName+"</h3>"
+							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName;
+						
+						if(cList[i].chatroomType == 'G'){
+							chatroomOneDiv += " (" + cList[i].joinCount + ")";
+						}
+							    	
+						chatroomOneDiv += "</h3>"
 							    	+ "<div class='chatting-time'>";
 							    	
 						console.log("출력 : "+cList[i].message.msgSenddate.substring(0, 10));

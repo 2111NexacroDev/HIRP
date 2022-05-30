@@ -6,6 +6,11 @@ public class ChatRoomJoin {
 	private int joinchatNo;
 	private int chatroomNo;
 	private String joinchatId;
+	//회원 정보
+	private String emplName;
+	private String deptName;
+	private String positionName;
+	private String emplProfile;
 	
 	private List<ChatRoomJoin> chatRoomJoinList;
 	
@@ -48,6 +53,38 @@ public class ChatRoomJoin {
 	
 	public void setChatRoomJoinList(List<ChatRoomJoin> chatRoomJoinList) {
 		this.chatRoomJoinList = chatRoomJoinList;
+	}
+
+	public String getEmplName() {
+		return emplName;
+	}
+
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
+	public String getEmplProfile() {
+		return emplProfile;
+	}
+
+	public void setEmplProfile(String emplProfile) {
+		this.emplProfile = emplProfile;
 	}
 
 	@Override

@@ -70,7 +70,7 @@
         	<form id="addChatroomForm" action="/chat/addChatroom.hirp" method="get">
 				<!-- 채팅방 추가 모달창 -->
 				<section id="chatEmplListModal" class="modal--chatSelect shadow">
-					<h3>대화상대 선택 <span>3</span></h3>
+					<h3>대화상대 선택 <span></span></h3>
 					<!-- 검색창 -->
 					<div class="modal--chatSelect__srch row mt-10 t-c padding-bottom-10">
 						<input type="text" name="emplSearchKeyword" placeholder="부서명 또는 사원명 검색">
@@ -161,7 +161,7 @@
     	
     	//채팅창 열기
 		function chatWindow(chatroomNo){ //원래는 roomId
-			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600,location=no,status=no,scrollbars=no');
+			window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600, left=410, location=no,status=no,scrollbars=no');
 		}
     	
 		//직원 목록에서 검색 (ajax)
