@@ -207,8 +207,9 @@ img {
 }
 
 .table--basic th {
-    padding: 10px 20px;
+    padding: 14px 20px;
     text-align: left;
+    font-weight: 500;
 }
 
 .table--basic td {
@@ -767,6 +768,11 @@ button.next {
     margin-top: 16px;
 }
 
+#snb>ul>li>ul>li.on {
+    font-weight: 500;
+    color: #00498c;
+}
+
 #snb ul.no-margin>li {
     margin-top: 10px;
 }
@@ -823,6 +829,7 @@ button.next {
     overflow: hidden;
     padding: 0;
     outline: none;
+    background-color: #fff;
 }
 
 .btn--alarm {

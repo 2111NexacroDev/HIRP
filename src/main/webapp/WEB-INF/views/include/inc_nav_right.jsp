@@ -10,8 +10,12 @@
     </button>
     <button class="btn--star" type="button"></button>
     <button class="btn--profile" type="button">
-        <img src="../resources/images/profile.jpg" alt="profile">
-        <!-- 유저마다 다른 사진 출력돼야함 -->
+        <c:if test="${sessionScope.emplProfile ne null}">
+            <img src="../../../resources/uploadFiles/${sessionScope.emplProfile }" alt="프로필사진">
+        </c:if>
+        <c:if test="${sessionScope.emplProfile eq null}">
+            <p>No Image</p>
+        </c:if>
     </button>
 
     <section class="nav--right__info">
