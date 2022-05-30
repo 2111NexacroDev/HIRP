@@ -51,12 +51,16 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				
-				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", "${sessionScope.emplName}",  "${sessionScope.deptName}", "${sessionScope.positionName}", $('#message').val());
+				//개행 처리
+				var text = $('#message').val().replaceAll(/(\n|\r\n)/g, "<br>");
+				console.log(text);
+				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", "${sessionScope.emplName}",  "${sessionScope.deptName}", "${sessionScope.positionName}", text);
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", "${sessionScope.emplName}", "${sessionScope.deptName}", "${sessionScope.positionName}", $('#message').val());
+				//개행 처리
+				var text = $('#message').val().replaceAll(/(\n|\r\n)/g, "<br>");
+				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", "${sessionScope.emplName}", "${sessionScope.deptName}", "${sessionScope.positionName}", text);
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -72,7 +76,7 @@
 					}
 					if("${sessionScope.emplId}" == msgData.emplId){ //내가 보낸 메세지
 						$('#divChatData').append('<div class="" style="text-align: right; ">' 
-													+ '<div class="padding-10 mt-10 bor-round shadow" style=" display:inline-block; background-color:#FFF612;">' + msgData.msg + '</div>'
+													+ '<div class="padding-10 mt-10 bor-round shadow" style="text-align:left; max-width: 80%; word-wrap: break-word; word-break: break-word; display:inline-block; background-color:#FFF612;">' + msgData.msg + '</div>'
 												+ '</div>');
 						if(msgData.emplId != prevEmplId || timeString != prevMsgTime) {
 							//이전 채팅의 아이디와 이 채팅의 아이디가 다르거나, 이전 시간과 현재 시간이 같지 않을 때 시간 추가
@@ -91,7 +95,7 @@
 							$('#divChatData').append('<div class="mt-10">' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + '</div>');
 						}
 						$('#divChatData').append('<div class="">' 
-								+ '<div class="padding-10 mt-10 bor-round shadow" style=" display:inline-block; background-color:#ffffff;">' + msgData.msg + '</div>'
+								+ '<div class="padding-10 mt-10 bor-round shadow" style="max-width: 80%; word-wrap: break-word; word-break: break-word; display:inline-block; background-color:#ffffff;">' + msgData.msg + '</div>'
 							+ '</div>');
 // 						$('#divChatData').append('<div class="padding-10 mt-10 mb-10 bor-round shadow" style=" display:inline-block; background-color:#ffffff;">' + msgData.msg + '</div>');
 						
@@ -218,7 +222,7 @@
 	    					
 		    				msgEmplId = "<div class='mt-10' style='text-align:right;'>"+ msgList[i].deptName + " "+ msgList[i].emplName + " " + msgList[i].positionName + "</div>";
 		    				msgContents += "<div style='text-align:right;'>"
-						    					+ "<div class='padding-10 mt-10 bor-round shadow' style='display:inline-block; background-color:#FFF612;'>" 
+						    					+ "<div class='padding-10 mt-10 bor-round shadow' style='text-align:left; max-width: 80%; word-wrap: break-word; word-break: break-word; display:inline-block; background-color:#FFF612;'>" 
 						    						+ msgList[i].msgContents 
 						    					+ "</div>"
 											+ "</div>";
@@ -250,11 +254,16 @@
 							$divChatData.append(msgContents);
 							$divChatData.append(msgDate);
 	    				} else { //받은 메세지
-	    					if(prevId != msgList[i].msgSendid){ //저장한 아이디값과 (이전 메세지 아이디값) 현재 아이디값이 다르면 출력
+	    					//메모!!****중요!!
+	    					//|| msgList[i].msgSenddate.substring(11, 16) != prevTime
+	    					//만약에 시간이 달라질 때마다 상대방 이름을 띄우게 하고 싶으면 위 코드를 아래 if문에 추가하면 됨.
+	    					//근데 지금 시간이 메세지 아래 나와서 보기 싫으니까 .. 일단은 이대로 두겠음.
+	    					
+	    					if(prevId != msgList[i].msgSendid ){ //저장한 아이디값과 (이전 메세지 아이디값) 현재 아이디값이 다르면 출력
 			    				msgEmplId = "<div class='mt-10'>"+ msgList[i].deptName + " " + msgList[i].emplName + " " + msgList[i].positionName +"</div>";
 	    					}
 	    					msgContents += "<div>"
-					    					+ "<div class='padding-10 mt-10 bor-round shadow' style='display:inline-block; background-color:#ffffff;'>" 
+					    					+ "<div class='padding-10 mt-10 bor-round shadow' style='max-width: 80%; word-wrap: break-word; word-break: break-word; display:inline-block; background-color:#ffffff;'>" 
 					    						+ msgList[i].msgContents 
 					    					+ "</div>"
 										+ "</div>";
@@ -347,7 +356,8 @@
 			</div>
 			<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
 		<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
-				<textarea id="message" style="width:80%; height:70px" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
+				<!-- shift+enter로 개행 가능, 근데 그냥 엔터했을 때 왜 자꾸 한줄이 더 들어가냐구 ******* 중요 고쳐야함 -->
+				<textarea id="message" style="width:80%; height:70px; white-space: pre-wrap;" onkeypress="if(event.keyCode===13){ if (!event.shiftKey) { webSocket.sendChat();} }"> 
 				</textarea>
 				<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
 			</div>
