@@ -260,3 +260,11 @@
 	background-image: url(../images/icons/ic_toolbar.png);
 	background-position: -295px -146px;
 }
+
+.chat-dateStyle {
+	display:inline-block; 
+	border-radius: 20px; 
+	background-color:#ffffff; 
+	opacity:0.8; 
+	padding: 10px 30px 10px;
+}
