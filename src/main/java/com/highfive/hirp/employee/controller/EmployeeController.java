@@ -140,7 +140,7 @@ public class EmployeeController {
 				session.setAttribute("emplId", empFindPwd.getEmplId());
 				session.setAttribute("emplName", empFindPwd.getEmplName());
 				session.setAttribute("birthday", empFindPwd.getBirthday());
-				return "redirect:/findPwdView2.hirp";
+				return "redirect:/employee/findPwdView2.hirp";
 			} else {
 				model.addAttribute("msg", "입력한 정보가 일치하지 않습니다.");
 				return "common/errorPage";
