@@ -49,7 +49,6 @@
 		      , NULL
 		      , '업무'
 		      , NULL
-              , NULL
 		  FROM DUAL
 		WHERE 1=1
 		  AND NOT EXISTS ( SELECT '1' FROM TIME_TBL B WHERE B.EMPL_ID = #{emplId} AND B.TIME_DATE = TRUNC(SYSDATE)) <!-- 당일기준 출근이력 없어야 등록 --> 

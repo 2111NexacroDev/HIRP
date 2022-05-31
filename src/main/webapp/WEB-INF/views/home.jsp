@@ -47,12 +47,13 @@
                         <h2>일정</h2>
                         <div id="calendar"></div>
                     </section>
-                    <section>
-                        <h2>메일함</h2>
-                    </section>
                 </div><!-- //컬럼2 -->
                 <div>
                     <!-- 컬럼3 -->
+                    <section>
+                        <h2>날씨 예보 🌞</h2>
+                        <ul class="weather-box"></ul>
+                    </section>
                     <section>
                         <h2>이번 달 생일 🎉🎉</h2>
                         <ul class="ul--birthday">
@@ -60,9 +61,6 @@
                             <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
                         </c:forEach>
                         </ul>
-                    </section>
-                    <section>
-                        <h2>결재 대기 문서</h2>
                     </section>
                 </div><!-- //컬럼3 -->
             </div>
