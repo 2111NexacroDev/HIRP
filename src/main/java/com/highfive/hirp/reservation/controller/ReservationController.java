@@ -86,7 +86,7 @@ public class ReservationController {
 		return mv;
 	}
 	
-	// 예약 정보 조회
+	// 예약 정보 상세 조회
 	@ResponseBody
 	@RequestMapping(value="/reservation/reservationInfo.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
 	public String reservationViewByNo(Model model, 

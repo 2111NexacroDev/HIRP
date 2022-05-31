@@ -74,7 +74,7 @@ public class TodoController {
 		return mv;
 	}
 	
-	// 일자별 할 일 조회
+	// 일자별 할 일 조회(ajax)
 	@ResponseBody
 	@RequestMapping(value="/todo/listByDate.hirp", method=RequestMethod.GET, produces="application/json; charset=utf-8")
 	public String todoListByDate(@ModelAttribute Todo todo

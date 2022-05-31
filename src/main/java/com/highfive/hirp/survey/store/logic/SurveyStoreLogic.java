@@ -60,7 +60,6 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	
 
-
 	//설문조사 등록
 	//설문 추가
 	@Override
@@ -86,7 +85,7 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.insert("SurveyMapper.insertSurveyQuestCh", qCh);
 		return result;
 	}
-	//설문 대상자 리스트 추가
+	//설문 대상자 추가
 	@Override
 	public int insertSurveySub(SqlSession sqlSession, SurveySub subList) {
 		int result = sqlSession.insert("SurveyMapper.insertSurveySub", subList);
@@ -97,22 +96,8 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.selectOne("SurveyMapper.selectSurveySeqNo");
 		return result;
 	}
-	
-	//전체 직원 가져오기
-	@Override
-	public List<Employee> selectAllSurveySub(SqlSession sqlSession) {
-		List<Employee> surveySubList = sqlSession.selectList("SurveyMapper.selectAllSurveySub");
-		return surveySubList;
-	}
-	//현재 부서원 추가
-	//하위 부서원까지 추가
-	//특정 부서원만 추가
-	@Override
-	public List<String> selectSurveySubByDeptCode(SqlSession sqlSession, HashMap<String, String> surveySubInfo) {
-		List<String> surveySubList = sqlSession.selectList("SurveyMapper.selectSurveySubByDeptCode", surveySubInfo);
-		return surveySubList;
-	}
 
+	
 	//설문조사 상세
 	//설문조사 정보 가져오기
 	@Override
@@ -120,24 +105,11 @@ public class SurveyStoreLogic implements SurveyStore{
 		Survey survey = sqlSession.selectOne("SurveyMapper.selectSurveyByNo", surveyNo);
 		return survey;
 	}
-	//설문조사에 포함된 설문 문항 가져오기 (보기까지 한번에 가져와짐)
+	//설문조사에 포함된 설문 문항 리스트 가져오기 (보기까지)
 	@Override
 	public List<SurveyQuest> selectAllSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo) {
 		List<SurveyQuest> surveyQuestList = sqlSession.selectList("SurveyMapper.selectAllSurveyQuestByNo", surveyQuestNo);
 		return surveyQuestList;
-	}
-	
-	//설문조사에 포함된 설문 문항 가져오기 (보기까지 한번에 가져와짐)
-	@Override
-	public SurveyQuest selectOneSurveyQuestByNo(SqlSession sqlSession, int surveyQuestNo) {
-		SurveyQuest surveyQuest = sqlSession.selectOne("SurveyMapper.selectSurveyQuestByNo", surveyQuestNo);
-		return surveyQuest;
-	}
-	//설문조사 보기 가져오기
-	@Override
-	public SurveyQuestCh selectSurveyQuestChByNo(SqlSession sqlSession, int surveyQuestNo) {
-		SurveyQuestCh surveyQuestch = sqlSession.selectOne("SurveyMapper.selectSurveyQuestChByNo", surveyQuestNo);
-		return surveyQuestch;
 	}
 	//설문조사 번호로 설문조사 응답 가져오기
 	@Override
@@ -164,12 +136,6 @@ public class SurveyStoreLogic implements SurveyStore{
 	@Override
 	public int updateSurveyStatus(SqlSession sqlSession, int surveyNo) {
 		int result = sqlSession.update("SurveyMapper.updateSurveyStatus", surveyNo);
-		return result;
-	}
-	//설문조사 대상자 리스트 수정
-	@Override
-	public int updateSurveySubList(SqlSession sqlSession, List<SurveySub> subList) {
-		int result = sqlSession.update("SurveyMapper.updateSurveySubList", subList);
 		return result;
 	}
 	//설문조사 대상자 리스트 삭제
@@ -201,13 +167,14 @@ public class SurveyStoreLogic implements SurveyStore{
 		int result = sqlSession.update("SurveyMapper.updateSubAnswerStatus", ssUpdate);
 		return result;
 	}
-
 	//설문조사 응답 수정
 	@Override
 	public int updateSurveySubAnswer(SqlSession sqlSession, SurveyAnswer surveyAnswer) {
 		int result = sqlSession.update("SurveyMapper.updateSurveySubAnswer", surveyAnswer);
 		return result;
 	}
+	
+	
 	//설문조사 검색
 	@Override
 	public List<Survey> selectSearchSurvey(SqlSession sqlSession, SurveySearch surveySearch) {

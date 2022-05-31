@@ -31,7 +31,7 @@ public interface EmployeeAdminStore {
 	
 	int modifyEmployeeInfo(SqlSession sqlSession, Employee employee);
 	int resignEmployee(SqlSession sqlSession, String emplId);
-	int updateLevelEmployee(SqlSession sqlSession, String emplId);
+	int updateLevelEmployee(SqlSession sqlSession, Employee employee);
 	
 	int deleteInfoAboutJob(SqlSession sqlSession, int jobNo);
 	int deleteInfoAboutCareer(SqlSession sqlSession, int infoNo);

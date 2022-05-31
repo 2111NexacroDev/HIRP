@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="timeModify" width="1280" height="720" titletext="New Form">
+  <Form id="timeModify" width="1280" height="720" titletext="New Form" scrolltype="none">
     <Layouts>
       <Layout height="720" width="1280">
         <Div id="Div00" taborder="0" left="0" top="4" width="200" height="99.31%" background="#ffffff" border="0px none, 1px solid #dddddd, 0px none, 0px none" font="12px/normal &quot;Noto Sans KR&quot;" text=""/>
-        <Static id="Static00_00" taborder="1" text="" left="199" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="1" background="#dddddd"/>
-        <Static id="Static00" taborder="2" text="관리자 근태관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
-        <Static id="link_emplLsit" taborder="3" text="전사 근태관리" left="18" top="145" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Grid id="Grid00" taborder="4" left="230" top="122" width="1020" height="568" binddataset="timeModify" autofittype="col">
+        <Static id="Static00" taborder="1" text="관리자 근태관리" left="0" top="0" width="200" onclick="Static00_onclick" padding="16x 24px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" height="60"/>
+        <Static id="link_emplLsit" taborder="2" text="전사 근태관리" left="18" top="145" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Grid id="Grid00" taborder="3" left="220" top="106" height="568" binddataset="timeModify" autofittype="col" right="20">
           <Formats>
             <Format id="default">
               <Columns>
@@ -59,11 +58,12 @@
             </Format>
           </Formats>
         </Grid>
-        <Static id="link_addEmpl00" taborder="5" text="출/퇴근 내역 조회" left="28" top="174" width="136" height="17" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
-        <Static id="link_addEmpl00_00" taborder="6" text="연차 신청 내역 조회" left="28" top="196" width="136" height="17" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
-        <Static id="Static01" taborder="7" text="근태 조정 신청 내역 조회" left="221" top="78" width="189" height="25" onclick="Static01_onclick" font="bold 15 px"/>
-        <Static id="link_emplLsit00" taborder="8" text="전사 근태관리" left="18" top="245" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
-        <Static id="link_addEmpl00_01" taborder="9" text="근태 조정 신청 내역 조회" left="28" top="274" width="171" height="16" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick"/>
+        <Static id="link_addEmpl00" taborder="4" text="출/퇴근 내역 조회" left="28" top="174" width="136" height="17" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl00_onclick" cursor="pointer"/>
+        <Static id="link_addEmpl00_00" taborder="5" text="연차 신청 내역 조회" left="28" top="196" width="136" height="17" font="14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl00_00_onclick" cursor="pointer"/>
+        <Static id="link_emplLsit00" taborder="6" text="전사 근태관리" left="18" top="245" width="200" height="20" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick"/>
+        <Static id="link_addEmpl00_01" taborder="7" text="근태 조정 신청 내역 조회" left="28" top="274" width="171" height="16" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl00_01_onclick" cursor="pointer"/>
+        <Static id="Static00_00" taborder="8" text="전사 근태관리" left="200" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
+        <Static id="Static01" taborder="9" text="근태 조정 신청 내역 조회" left="200" top="60" width="1080" height="50" onclick="Static01_onclick" font="bold 16px/normal &quot;Noto Sans KR&quot;" padding="16px 20px 10px 20px"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -110,6 +110,22 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("조정 내용 조회 성공");
 	}	
-}]]></Script>
+}
+
+// 메뉴 이동
+this.link_addEmpl00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::timeView.xfdl");
+};
+
+this.link_addEmpl00_00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::timeVacation.xfdl");
+};
+
+this.link_addEmpl00_01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.go("FrameBase::timeModify.xfdl");
+};]]></Script>
   </Form>
 </FDL>

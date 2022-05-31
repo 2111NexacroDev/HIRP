@@ -60,7 +60,20 @@ public class ChatServiceImpl implements ChatService{
 		ChatRoom chatRoom = cStore.selectMyPersonalChattingRoom(sqlSession, idList);
 		return chatRoom;
 	}
-
+	
+	//채팅방 번호, 내 아이디로 정보 가져오기
+	@Override
+	public ChatRoom selectChatRoomInfoByNo(Map<String, String> searchMap) {
+		ChatRoom chatRoom = cStore.selectChatRoomInfoByNo(sqlSession, searchMap);
+		return chatRoom;
+	}
+	//채팅방 번호로 참여자 정보 가져오기
+	@Override
+	public List<ChatRoomJoin> selectChatRoomJoinListByNo(int chatroomNo) {
+		List<ChatRoomJoin> roomList = cStore.selectChatRoomJoinListByNo(sqlSession, chatroomNo);
+		return roomList;
+	}
+	
 	//채팅방 별로 채팅 내용 가져오기
 	@Override
 	public List<Message> selectMessageByRoomNo(int chatroomNo) {
@@ -129,6 +142,8 @@ public class ChatServiceImpl implements ChatService{
 		int result = cStore.deleteChatRoom(sqlSession, chatroomNo);
 		return result;
 	}
+
+
 
 
 

@@ -207,8 +207,9 @@ img {
 }
 
 .table--basic th {
-    padding: 10px 20px;
+    padding: 14px 20px;
     text-align: left;
+    font-weight: 500;
 }
 
 .table--basic td {
@@ -356,7 +357,15 @@ button.next {
 }
 
 .padding-left {
-    padding-bottom: 20px !important;
+    padding-left: 20px !important;
+}
+
+.padding-right {
+    padding-right: 20px !important;
+}
+
+.padding-top {
+    padding-top: 20px !important;
 }
 
 .padding-bottom {
@@ -759,6 +768,11 @@ button.next {
     margin-top: 16px;
 }
 
+#snb>ul>li>ul>li.on {
+    font-weight: 500;
+    color: #00498c;
+}
+
 #snb ul.no-margin>li {
     margin-top: 10px;
 }
@@ -799,7 +813,6 @@ button.next {
     letter-spacing: -1px;
 }
 
-
 #conts h1 strong {
     font-weight: 700;
 }
@@ -816,6 +829,7 @@ button.next {
     overflow: hidden;
     padding: 0;
     outline: none;
+    background-color: #fff;
 }
 
 .btn--alarm {

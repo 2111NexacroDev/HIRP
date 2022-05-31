@@ -5,7 +5,7 @@
 
 <!DOCTYPE html>
 <html>
-
+<!-- 설문조사 메인 페이지 입니다. -->
 <body>
 	<!-- survey 공통 -->
 	<%@ include file="/WEB-INF/views/survey/surveyCommonPage.jsp" %>

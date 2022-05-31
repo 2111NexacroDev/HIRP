@@ -25,7 +25,7 @@
                <li>
                    <a href="">메일함</a>
                    <ul>
-                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li class="on"><a href="/mail/Rlist.hirp">받은메일함</a></li>
                        <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
                        <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
                        <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
@@ -80,7 +80,15 @@
             </c:if>
             
             <div class="subConts">
-	        	<table class="table--basic mt-20" style="margin-top: 40px;">
+	        	<table class="table--basic mt-20" style="margin-top: 40px;">	        	
+                    <colgroup>
+                        <col style="width:4%;">
+                        <col style="width:4%;">
+                        <col style="width:4%;">
+                        <col style="width:60%;">
+                        <col style="width:8%;">
+                        <col style="width:10%;">
+                    </colgroup>
                    	<c:forEach items="${mList }" var="mail">
                     	<!-- 받은메일함 -->
                     	<c:if test="${mailCategory == 'R' }">
@@ -89,15 +97,19 @@
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
 								<td><input type="checkbox" name="mail" value="${mail.mailNo }"></td>
-								<td class="mail--star">
-									<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
-									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
-									<label for="important"></label>
+								<td>
+									<div class="mail--star">
+										<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+										<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+										<label for="important"></label>
+									</div>
 								</td>
-								<td class="mail--read">
-									<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
-									<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
-									<label for="read"></label>
+								<td>
+									<div class="mail--read">
+										<input type="checkbox" id="read" name="readMail" value="${mail.mailNo }" onclick="readMail(this, ${mail.mailNo});"
+										<c:if test="${mail.mailRead == 'Y' }">checked</c:if>>
+										<label for="read"></label>
+									</div>
 								</td>
 								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>

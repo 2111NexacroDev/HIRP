@@ -37,7 +37,7 @@
 				<li><div style="font-weight: bold;">근태관리</div>
 					<ul>
 						<li><a href="/time/time.hirp">출/퇴근 내역</a></li>
-						<li><a href="/time/vacation.hirp">연차 내역</a></li>
+						<li class="on"><a href="/time/vacation.hirp">연차 내역</a></li>
 					</ul>
 				</li>
 			</ul><br>

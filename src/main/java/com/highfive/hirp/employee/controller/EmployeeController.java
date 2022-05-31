@@ -83,6 +83,7 @@ public class EmployeeController {
 				session.setAttribute("emplName", empLogin.getEmplName());
 				session.setAttribute("deptName", empLogin.getDeptName());
 				session.setAttribute("positionName", empLogin.getPositionName());
+				session.setAttribute("emplProfile", empLogin.getEmplProfile());
 				if(emplId.equals("admin")) {
 					return "redirect:/admin.hirp";					
 				} else {
@@ -140,7 +141,7 @@ public class EmployeeController {
 				session.setAttribute("emplId", empFindPwd.getEmplId());
 				session.setAttribute("emplName", empFindPwd.getEmplName());
 				session.setAttribute("birthday", empFindPwd.getBirthday());
-				return "redirect:/findPwdView2.hirp";
+				return "redirect:/employee/findPwdView2.hirp";
 			} else {
 				model.addAttribute("msg", "입력한 정보가 일치하지 않습니다.");
 				return "common/errorPage";

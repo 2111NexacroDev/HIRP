@@ -22,9 +22,9 @@
 
             <ul>
                <li>
-                   <a href="">프로젝트관리</a>
+                   <a href="#none">프로젝트관리</a>
                    <ul>
-                       <li><a href="/project/list.hirp">프로젝트 보기</a></li>
+                       <li class="on"><a href="/project/list.hirp">프로젝트 보기</a></li>
                    </ul>
                </li>
             </ul>

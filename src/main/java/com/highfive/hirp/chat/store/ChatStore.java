@@ -28,6 +28,12 @@ public interface ChatStore {
 	public List<ChatRoom> selectMyChattingRoom(SqlSession sqlSession, Map<String, String> searchMap);
 	//나와 상대방이 포함된 개인 채팅방 가져오기
 	public ChatRoom selectMyPersonalChattingRoom(SqlSession sqlSession, PersonalId idList);
+	
+	//채팅방 번호, 내 아이디로 정보 가져오기
+	public ChatRoom selectChatRoomInfoByNo(SqlSession sqlSession, Map<String, String> searchMap);
+	//채팅방 번호로 참여자 정보 가져오기
+	public List<ChatRoomJoin> selectChatRoomJoinListByNo(SqlSession sqlSession, int chatroomNo);
+
 	//채팅방 별로 채팅 내용 가져오기
 	public List<Message> selectMessageByRoomNo(SqlSession sqlSession, int chatroomNo);
 	//보내진 첨부파일 가져오기
