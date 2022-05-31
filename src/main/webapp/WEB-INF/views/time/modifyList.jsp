@@ -50,7 +50,7 @@
 			<ul>
 				<li><div style="font-weight: bold;">근태조정</div>
 					<ul>
-						<li><a href="/time/modify.hirp">근태 조정 신청 내역</a></li>
+						<li class="on"><a href="/time/modify.hirp">근태 조정 신청 내역</a></li>
 					</ul>
 				</li>
 			</ul>

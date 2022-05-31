@@ -14,7 +14,7 @@
             <img src="../../../resources/uploadFiles/${sessionScope.emplProfile }" alt="프로필사진">
         </c:if>
         <c:if test="${sessionScope.emplProfile eq null}">
-            <p>No Image</p>
+            <img src="../../../resources/images/img_no_profile.png" alt="프로필사진">
         </c:if>
     </button>
 
