@@ -55,13 +55,13 @@
 				var text = $('#message').val().replaceAll(/(\n|\r\n)/g, "<br>");
 				console.log(text);
 				this._sendMessage('${param.chatroomNo}', 'CMD_MSG_SEND', "${sessionScope.emplId}", "${sessionScope.emplName}",  "${sessionScope.deptName}", "${sessionScope.positionName}", text);
-				$('#message').val('');
+				$('textarea').val('');
 			},
 			sendEnter: function() {
 				//개행 처리
 				var text = $('#message').val().replaceAll(/(\n|\r\n)/g, "<br>");
 				this._sendMessage('${param.chatroomNo}', 'CMD_ENTER', "${sessionScope.emplId}", "${sessionScope.emplName}", "${sessionScope.deptName}", "${sessionScope.positionName}", text);
-				$('#message').val('');
+				$('textarea').val('');
 			},
 			receiveMessage: function(msgData) {
 				// 정의된 CMD 코드에 따라서 분기 처리
@@ -357,8 +357,7 @@
 			<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
 		<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
 				<!-- shift+enter로 개행 가능, 근데 그냥 엔터했을 때 왜 자꾸 한줄이 더 들어가냐구 ******* 중요 고쳐야함 -->
-				<textarea id="message" style="width:80%; height:70px; white-space: pre-wrap;" onkeypress="if(event.keyCode===13){ if (!event.shiftKey) { webSocket.sendChat();} }"> 
-				</textarea>
+				<textarea id="message" style="width:80%; height:70px; white-space: pre-wrap;" onkeypress="if(event.keyCode===13 && !event.shiftKey) {  event.preventDefault(); webSocket.sendChat() }"></textarea>
 				<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
 			</div>
 		</article>
