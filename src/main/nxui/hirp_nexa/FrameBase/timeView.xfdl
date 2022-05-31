@@ -80,6 +80,10 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 		}
 		this.alert("출퇴근 조회 성공");
 	}	
+<<<<<<< HEAD
+}
+
+=======
 }
 
 // 메뉴 이동
@@ -97,6 +101,7 @@ this.link_addEmpl00_01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEven
 {
 	this.go("FrameBase::timeModify.xfdl");
 };
+>>>>>>> refs/remotes/origin/main
 ]]></Script>
     <Objects>
       <Dataset id="timeView" onload="timeView_onload">
