@@ -16,7 +16,7 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <article id="main">
+        <article id="main">     
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <h1 class="basic-border-bottom">
@@ -47,22 +47,23 @@
                         <h2>일정</h2>
                         <div id="calendar"></div>
                     </section>
-                    <section>
-                        <h2>메일함</h2>
-                    </section>
                 </div><!-- //컬럼2 -->
                 <div>
                     <!-- 컬럼3 -->
+                    <section>
+                        <h2>날씨 예보 🌞</h2>
+                        <ul class="weather-box"></ul>
+                    </section>
                     <section>
                         <h2>이번 달 생일 🎉🎉</h2>
                         <ul class="ul--birthday">
                         <c:forEach items="${birthdayList }" var="birthdayList">
                             <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
                         </c:forEach>
+                        <c:if test="${empty birthdayList }">
+                            <li class="no-data">이번 달 생일인 사원이 없습니다 :)</li>
+                        </c:if>
                         </ul>
-                    </section>
-                    <section>
-                        <h2>결재 대기 문서</h2>
                     </section>
                 </div><!-- //컬럼3 -->
             </div>
