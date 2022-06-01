@@ -16,7 +16,7 @@
     <%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 
     <div id="conts">
-        <article id="main">
+        <article id="main">     
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
             <h1 class="basic-border-bottom">
@@ -60,6 +60,9 @@
                         <c:forEach items="${birthdayList }" var="birthdayList">
                             <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
                         </c:forEach>
+                        <c:if test="${empty birthdayList }">
+                            <li class="no-data">이번 달 생일인 사원이 없습니다 :)</li>
+                        </c:if>
                         </ul>
                     </section>
                 </div><!-- //컬럼3 -->

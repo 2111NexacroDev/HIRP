@@ -13,7 +13,7 @@ $(function () {
     let addr = location.href;
     let fullAddr = addr.split('/');
     let selelctAddr = fullAddr[3];
-    if (selelctAddr == '') {
+    if (selelctAddr == '' || selelctAddr == 'home.hirp') {
         $('#gnb>nav>ul>li:first-child>a').addClass('on');
     } else {
         for (let i = 1; i <= $('#gnb>nav>ul>li').length; i++) {
@@ -65,8 +65,8 @@ $(function () {
 
     // 현재 페이지 하이라이팅
     var pageNo = new URLSearchParams(location.search).get("page");
-    if(pageNo != null) {
-        $(".btns--paging a:nth-of-type("+ pageNo +")").addClass("on");
+    if (pageNo != null) {
+        $(".btns--paging a:nth-of-type(" + pageNo + ")").addClass("on");
     } else {
         $(".btns--paging a:nth-of-type(1)").addClass("on");
     }
