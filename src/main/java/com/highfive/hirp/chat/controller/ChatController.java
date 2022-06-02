@@ -317,7 +317,11 @@ public class ChatController {
 //			model.addAttribute("chatroomNo", chatroomNo);
 			model.addAttribute("chatroom", chatroom);
 			System.out.println(chatroom);
-
+			
+			//직원 리스트
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			model.addAttribute("emplList", emplList);
+			
 			if(chatroom.getChatroomType().equals("G")) {
 				List<ChatRoomJoin> chatRoomJoinList = cService.selectChatRoomJoinListByNo(chatroomNo);
 				if(chatRoomJoinList != null) {
