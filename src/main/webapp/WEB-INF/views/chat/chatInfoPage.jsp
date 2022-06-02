@@ -27,7 +27,7 @@
 				    <section id="chatNameModal" class="modal--chatSelect shadow t-c">
 						<div style="width: 90%; position: absolute; top: 50%; margin-top: -80px;">
 							<h3 style="text-align:left"> 채팅방 이름 입력 </h3>
-							<input style="width: 95%;" type="text" name="chatroomName" placeholder="채팅방 이름 입력">
+							<input style="width: 95%;" type="text" name="chatroomName" placeholder="${chatroom.chatroomName } ">
 						</div>
 						<div class="btns-wrap">
 							<button class="point" type="button" onclick="updateChatroomName('${chatroom.chatroomNo}');">확인</button>
