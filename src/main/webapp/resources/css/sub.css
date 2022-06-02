@@ -396,14 +396,17 @@ section[class^="todo--"] {
     transform: rotate(45deg);
 }
 
-
-.fc .fc-day-sun {
-    color: #FF000A;
+#scheduleList .fc-scrollgrid-sync-table>tbody[role="presentation"]>tr:first-of-type .fc-daygrid-day.fc-day-today:before {
+    top: 0 !important;
 }
 
 #scheduleList .fc .fc-dayGridMonth-view .fc-day-sun.fc-day-today:before {
     left: auto;
     right: -6px;
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
 }
 
 .fc .fc-today-button,

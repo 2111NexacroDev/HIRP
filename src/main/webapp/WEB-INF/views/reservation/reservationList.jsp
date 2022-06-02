@@ -453,6 +453,7 @@
                     'reservationNo': reservationNo
                 },
                 success: function(data) {
+                    let booker = data["emplId"];
                     let startDate = data["reservationStartDate"].split('T')[0];
                     let startTime = parseInt(data["reservationStartDate"].split('T')[1].split(':')[0]);
                     let startMinutes = data["reservationStartDate"].split('T')[1].split(':')[1];
@@ -491,6 +492,18 @@
                     $('.modal--reservationEdit input[name="reservationNo"]').val(data["reservationNo"]);
                     $('.modal--reservationEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
                     $('.modal--reservationEdit textarea[name="reservationConts"]').val(data["reservationConts"]);
+
+                    // 예약자만 수정 가능
+                    if(booker != '${sessionScope.emplId}') {
+                        $('.modal--reservationEdit .btns-wrap').html('<p style="color:red;">예약 정보는 예약 당사자만 수정 가능합니다.</p>');
+                        $('.modal--reservationEdit li *').prop({'readonly':true, 'disabled':true});
+                    } else {
+                        $('.modal--reservationEdit .btns-wrap').html(`<a class="delete" href="/reservation/delete.hirp">예약 취소</a>
+                            <button id="editReservation" class="point" type="button">수정</button>
+                            <button class="finished closeWindow" type="button">닫기</button>`);
+                        $('.modal--reservationEdit li *').prop({'readonly':false, 'disabled':false});
+                    }
+
                     $('.modal--reservationEdit').css('display', 'flex');
                 }, 
                 error: function() {
@@ -499,65 +512,65 @@
             });           
         }
 
-        $('.modal--utilityEdit a.delete').on('click', function(){
-            $('.modal--utilityEdit form').attr('action','/utility/delete.hirp');
-            $('.modal--utilityEdit form').submit();
-            return false;
-        });
+        $(function () {            
+            $('.modal--utilityEdit a.delete').on('click', function(){
+                $('.modal--utilityEdit form').attr('action','/utility/delete.hirp');
+                $('.modal--utilityEdit form').submit();
+                return false;
+            });
 
-        $('.modal--reservationEdit a.delete').on('click', function(){
-            $('.modal--reservationEdit form').attr('action','/reservation/delete.hirp');
-            $('.modal--reservationEdit form').submit();
-            return false;
-        });
+            $('.modal--reservationEdit a.delete').on('click', function(){
+                $('.modal--reservationEdit form').attr('action','/reservation/delete.hirp');
+                $('.modal--reservationEdit form').submit();
+                return false;
+            });
 
-        $('#addReservation').on('click', function(){
-            let startDate = $('input[name="startDate"]').val();
-            let startTime1 = $('input[name="startDate"]').siblings('.time-select-1').val();
-            let startTime2 = $('input[name="startDate"]').siblings('.time-select-2').val();
-            if(startTime1 == 'pm') {
-                startTime2 = parseInt(startTime2) + 12;
-            }
-            let startTime3 = $('input[name="startDate"]').siblings('.time-select-3').val();
-            let startDateTime = startDate+'T'+startTime2+':'+startTime3;
+            $('#addReservation').on('click', function(){
+                let startDate = $('input[name="startDate"]').val();
+                let startTime1 = $('input[name="startDate"]').siblings('.time-select-1').val();
+                let startTime2 = $('input[name="startDate"]').siblings('.time-select-2').val();
+                if(startTime1 == 'pm') {
+                    startTime2 = parseInt(startTime2) + 12;
+                }
+                let startTime3 = $('input[name="startDate"]').siblings('.time-select-3').val();
+                let startDateTime = startDate+'T'+startTime2+':'+startTime3;
 
-            let endDate = $('input[name="endDate"]').val();
-            let endTime1 = $('input[name="endDate"]').siblings('.time-select-1').val();
-            let endTime2 = $('input[name="endDate"]').siblings('.time-select-2').val();
-            if(endTime1 == 'pm') {
-                endTime2 = parseInt(endTime2) + 12;
-            }
-            let endTime3 = $('input[name="endDate"]').siblings('.time-select-3').val();
-            let endDateTime = endDate+'T'+endTime2+':'+endTime3;
-            $('input[name="reservationStartDate"]').val(startDateTime);
-            $('input[name="reservationEndDate"]').val(endDateTime);
-            $(this).parents('.modal--reservation').children('form').submit();
-        });
+                let endDate = $('input[name="endDate"]').val();
+                let endTime1 = $('input[name="endDate"]').siblings('.time-select-1').val();
+                let endTime2 = $('input[name="endDate"]').siblings('.time-select-2').val();
+                if(endTime1 == 'pm') {
+                    endTime2 = parseInt(endTime2) + 12;
+                }
+                let endTime3 = $('input[name="endDate"]').siblings('.time-select-3').val();
+                let endDateTime = endDate+'T'+endTime2+':'+endTime3;
+                $('input[name="reservationStartDate"]').val(startDateTime);
+                $('input[name="reservationEndDate"]').val(endDateTime);
+                $(this).parents('.modal--reservation').children('form').submit();
+            });
 
-        $('#editReservation').on('click', function(){
-            let startDate = $('.modal--reservationEdit input[name="startDate"]').val();
-            let startTime1 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-1').val();
-            let startTime2 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-2').val();
-            if(startTime1 == 'pm') {
-                startTime2 = parseInt(startTime2) + 12;
-            }
-            let startTime3 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-3').val();
-            let startDateTime = startDate+'T'+startTime2+':'+startTime3;
+            $(document).on('click', '#editReservation', function(){
+                let startDate = $('.modal--reservationEdit input[name="startDate"]').val();
+                let startTime1 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-1').val();
+                let startTime2 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-2').val();
+                if(startTime1 == 'pm') {
+                    startTime2 = parseInt(startTime2) + 12;
+                }
+                let startTime3 = $('.modal--reservationEdit input[name="startDate"]').siblings('.time-select-3').val();
+                let startDateTime = startDate+'T'+startTime2+':'+startTime3;
 
-            let endDate = $('.modal--reservationEdit input[name="endDate"]').val();
-            let endTime1 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-1').val();
-            let endTime2 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val();
-            if(endTime1 == 'pm') {
-                endTime2 = parseInt(endTime2) + 12;
-            }
-            let endTime3 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val();
-            let endDateTime = endDate+'T'+endTime2+':'+endTime3;
-            $('.modal--reservationEdit input[name="reservationStartDate"]').val(startDateTime);
-            $('.modal--reservationEdit input[name="reservationEndDate"]').val(endDateTime);
-            $(this).parents('.modal--reservationEdit').children('form').submit();
-        });
+                let endDate = $('.modal--reservationEdit input[name="endDate"]').val();
+                let endTime1 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-1').val();
+                let endTime2 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val();
+                if(endTime1 == 'pm') {
+                    endTime2 = parseInt(endTime2) + 12;
+                }
+                let endTime3 = $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val();
+                let endDateTime = endDate+'T'+endTime2+':'+endTime3;
+                $('.modal--reservationEdit input[name="reservationStartDate"]').val(startDateTime);
+                $('.modal--reservationEdit input[name="reservationEndDate"]').val(endDateTime);
+                $(this).parents('.modal--reservationEdit').children('form').submit();
+            });
 
-        $(function () {
             // 날짜 유효성 체크 - 끝나는 날짜 선택할 때
             $('input[name="endDate"]').on('change', function(){
                 let startDate = $('input[name="startDate"]').val();                
@@ -662,6 +675,7 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: '#ffdc3c',
                         borderColor: '#ffdc3c',
+                        textColor: '#000',
                         extendedProps: {
                             'reservationNo': '${rList.reservationNo }',
                         }
