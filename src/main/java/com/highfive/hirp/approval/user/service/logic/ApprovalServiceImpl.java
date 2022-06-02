@@ -42,18 +42,21 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return apprForm;
 	}
 
+	//결재자 등록
 	@Override
 	public int registerApprover(ApprAccept apprAccept) {
 		int result = aStore.insertApprover(sqlSession,apprAccept);
 		return result;
 	}
 
+	//참조자등록
 	@Override
 	public int regitserReference(Reference reference) {
 		int result = aStore.insertReference(sqlSession,reference);
 		return result;
 	}
 
+	//결재등록
 	@Override
 	public int registerAppr(Approval approval) {
 		int result = aStore.insertAppr(sqlSession,approval);
@@ -61,20 +64,20 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public int registerTempStorageAppr(Approval approval) {
-		int result = aStore.insertTempStorageAppr(sqlSession,approval);
+	public int registerTempAppr(Approval approval) {
+		int result = aStore.insertTempAppr(sqlSession,approval);
 		return result;
 	}
 
 	@Override
-	public int modifyStoragedAppr(int docNo) {
-		int result = aStore.updateStoragedAppr(sqlSession,docNo);
+	public int modifyTempAppr(Approval approval) {
+		int result = aStore.updateTempAppr(sqlSession,approval);
 		return result;
 	}
 
 	@Override
-	public int removeStoragedAppr(int docNo) {
-		int result = aStore.deleteStoragedAppr(sqlSession,docNo);
+	public int removeTempAppr(int apprNo) {
+		int result = aStore.deleteTempAppr(sqlSession,apprNo);
 		return result;
 	}
 	//결재대기함
@@ -91,11 +94,12 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return aList;
 	}
 	
-	@Override
-	public Approval printOneWaitngAppr(int docNo) {
-		Approval approval = aStore.selectOneWaitingAppr(sqlSession,docNo);
-		return approval;
-	}
+//	
+//	@Override
+//	public Approval printOneWaitngAppr(int docNo) {
+//		Approval approval = aStore.selectOneWaitingAppr(sqlSession,docNo);
+//		return approval;
+//	}
 
 	@Override
 	public List<ApprAccept> printApprovalStatus(int apprNo) {
@@ -110,6 +114,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return result;
 	}
 
+	//결재 상태 변경
 	@Override
 	public int modifyApprovalStatus(Approval approval) {
 		int result = aStore.updateApprovalStatus(sqlSession,approval);
@@ -134,23 +139,28 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return aList;
 	}
 
+	//임시저장함
 	@Override
-	public List<Approval> printAllTemporaryStorageAppr(String emplId) {
-		List<Approval> aList= aStore.selectAllTemporaryStorageAppr(sqlSession,emplId);
+	public List<Approval> printAllTempAppr(String emplId) {
+		List<Approval> aList= aStore.selectAllTempAppr(sqlSession,emplId);
 		return aList;
 	}
 
+	//완료
 	@Override
 	public List<Approval> printAllRejectedAppr(String emplId) {
 		List<Approval> aList= aStore.selectAllRejectedAppr(sqlSession,emplId);
 		return aList;
 	}
 
+	
+	//완료
 	@Override
 	public List<Approval> printAllCompletedAppr(String emplId) {
 		List<Approval> aList= aStore.selectAllCompletedAppr(sqlSession,emplId);
 		return aList;
 	}
+	//문서 상세보기
 	@Override
 	public Approval printOneAppr(int apprNo) {
 		Approval approval = aStore.selectOneAppr(sqlSession,apprNo);
@@ -178,12 +188,18 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return result;
 	}
 
-	
+	@Override
+	public List<Reference> printAllRefApprList(Reference reference) {
+		List<Reference> rList = aStore.selectAllRefApprList(reference);
+		return null;
+	}
 
-//	@Override
-//	public int modifyRejectedAppr() {
-//		int result = aStore.updateRejectedAppr(sqlSession);
-//		return result;
-//	}
+	@Override
+	public List<Reference> printAllViewApprList(Reference reference) {
+		List<Reference> rList = aStore.selectAllViewApprList(reference);
+		return null;
+	}
+
+
 
 }
