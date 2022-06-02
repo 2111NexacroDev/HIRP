@@ -145,7 +145,7 @@
                 navLinks: false,
                 selectable: false,
                 //selectMirror: true,
-                locale: 'ko',
+                locale: 'en',
                 events: [
                     <c:forEach items="${sListCompany }" var="sCompany">
                     {

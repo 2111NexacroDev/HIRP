@@ -1,16 +1,10 @@
 @charset "UTF-8";
 
-#main #calendar * {
-    border: none;
-}
-
-#main .fc-col-header th {
-    padding: 10px 0;
-}
+#main #calendar * {}
 
 #main .fc .fc-daygrid-day-top {
     display: block;
-    text-align: center;
+    text-align: left;
 }
 
 #main .fc-day-sun {
@@ -21,9 +15,9 @@
     color: rgb(103, 103, 255);
 }
 
-#main .fc-daygrid-day-events {
+/* #main .fc-daygrid-day-events {
     display: none;
-}
+} */
 
 #main .row {
     padding: 24px 24px 60px;
@@ -408,7 +402,7 @@
 }
 
 .fc * {
-    text-align: center;
+    text-align: left;
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
@@ -437,15 +431,6 @@
 
 .fc .fc-button-primary:hover {
     background: none !important;
-}
-
-.fc .fc-scrollgrid-liquid {
-    border-left: none;
-}
-
-.fc-theme-standard td,
-.fc-theme-standard th {
-    border-bottom: none;
 }
 
 .fc .fc-col-header-cell-cushion,
