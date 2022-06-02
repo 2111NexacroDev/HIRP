@@ -18,7 +18,7 @@
         	<!-- 버튼 div -->
         	<div class="t-c mt-20 mb-20 basic-border-bottom" style="padding-bottom:30px;">
 	        	<div class="t-c" style="display:inline-block">
-	        		<button class="btn--profile" type="button">
+	        		<button class="btn--profile mb-10" type="button">
 	      		    	<i class="fa-solid fa-pen"></i>
 				    </button>
 				    <div>
@@ -26,7 +26,7 @@
 				    </div>
 			    </div>
 			    <div class="t-c ml-20" style="display:inline-block">
-	        		<button class="btn--profile" type="button">
+	        		<button class="btn--profile mb-10" type="button">
 	      		    	<i class="fa-solid fa-plus"></i>
 				    </button>
 				    <div>
@@ -34,7 +34,7 @@
 				    </div>
 			    </div>
 			    <div class="t-c ml-20" style="display:inline-block">
-	        		<button class="btn--profile" type="button">
+	        		<button class="btn--profile mb-10" type="button">
 	      		    	<i class="fa-solid fa-arrow-right-from-bracket"></i>
 				    </button>
 				    <div>

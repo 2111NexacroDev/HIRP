@@ -34,11 +34,6 @@
         </Row>
         <Row>
           <Col id="MENU_ID">50</Col>
-          <Col id="MENU_NAME">전자결재관리</Col>
-          <Col id="MENU_LEVEL">0</Col>
-        </Row>
-        <Row>
-          <Col id="MENU_ID">60</Col>
           <Col id="MENU_NAME">근태관리</Col>
           <Col id="MENU_LEVEL">0</Col>
           <Col id="FORM_URL">FrameBase::timeView.xfdl</Col>
