@@ -29,7 +29,7 @@
                     <c:forEach items="${uList }" var="utility">
                     <c:if test="${utility.utilityCategory eq 'room'}">
                         <li>
-                            <button type="button">${utility.utilityName}</button>
+                            ${utility.utilityName}
                             <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                         </li>
                     </c:if>
@@ -42,7 +42,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'car'}">
                                 <li>
-                                    <button type="button">${utility.utilityName}</button>
+                                    ${utility.utilityName}
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
@@ -55,7 +55,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'etc'}">
                                 <li>
-                                    <button type="button">${utility.utilityName}</button>
+                                    ${utility.utilityName}
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
