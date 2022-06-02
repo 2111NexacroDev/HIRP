@@ -30,7 +30,7 @@
 							<input style="width: 95%;" type="text" name="chatroomName" placeholder="채팅방 이름 입력">
 						</div>
 						<div class="btns-wrap">
-							<button class="point" type="button" onclick="">확인</button>
+							<button class="point" type="button" onclick="updateChatroomName('${chatroom.chatroomNo}');">확인</button>
 							<button class="cancel" type="button">취소</button>
 						</div>
 					</section>
@@ -137,6 +137,27 @@
         </article>
     </div>
     <script>
+    	//채팅방 이름 변경
+    	function updateChatroomName(chatroomNo){
+    		console.log($("input[name=chatroomName]").val());
+    		var chatroomName = $("input[name=chatroomName]").val();
+    		$.ajax({
+				url : "/updateChatroom.hirp",
+				type : "post",
+				data :{"chatroomNo" : chatroomNo,
+					"chatroomName" : chatroomName},
+				success : function(data){
+// 					exitChatPage(chatroomNo);
+// 					alert("채팅방 이름 변경 성공");
+					window.location.reload(); //추가되면 info창 바로 로드
+					//동시에 채팅방 창도 reload
+					window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600, left=410, location=no,status=no,scrollbars=no');
+				},
+				error : function(data){
+// 					alert("채팅방 이름 변경 실패");
+				}
+			});
+    	}
     	//초대
     	function addChatroomJoin(chatroomNo){
     		console.log($("input[name=joinchatId]:checked"));
@@ -153,13 +174,13 @@
 					"joinchatIdList" : joinchatIdList},
 				success : function(data){
 // 					exitChatPage(chatroomNo);
-					alert("채팅방 초대 성공");
+// 					alert("채팅방 초대 성공");
 					window.location.reload(); //추가되면 info창 바로 로드
 					//동시에 채팅방 창도 reload
 					window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600, left=410, location=no,status=no,scrollbars=no');
 				},
 				error : function(data){
-					alert("채팅방 초대 실패");
+// 					alert("채팅방 초대 실패");
 				}
 			});
     	}

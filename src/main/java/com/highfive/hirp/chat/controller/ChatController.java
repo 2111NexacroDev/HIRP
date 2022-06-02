@@ -376,11 +376,17 @@ public class ChatController {
 		return mv;
 	}
 	//채팅방 이름 변경
-	public ModelAndView chattingRoomRename(ModelAndView mv
-			,@RequestParam("ChatRoom") ChatRoom chatRoom) {
+	@ResponseBody
+	@RequestMapping(value="/updateChatroom.hirp", method=RequestMethod.POST)
+	public String chattingRoomRename(
+			@ModelAttribute("ChatRoom") ChatRoom chatRoom) {
 		//채팅방 정보 넘겨 받아서 채팅방 이름 변경 (정보 update)
-		
-		return mv;
+		int result = cService.updateChatRoomInfo(chatRoom);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	//채팅 대화상대 초대

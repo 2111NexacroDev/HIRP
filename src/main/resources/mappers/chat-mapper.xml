@@ -290,6 +290,11 @@
 		INSERT INTO MESSAGE_TBL
 		VALUES(MESSAGE_SEQ.NEXTVAL, #{chatroomNo}, #{msgSendid}, #{msgContents}, DEFAULT)
 	</insert>
+	<!-- 채팅방 이름 변경 -->
+	<update id="updateChatRoomInfo">
+		UPDATE CHATROOM_TBL SET CHATROOM_NAME = #{chatroomName}
+		WHERE CHATROOM_NO = #{chatroomNo}
+	</update>
 	<!-- 채팅방 나가기 -->
 	<delete id="deleteMyIdChatRoomJoin">
 		DELETE FROM CHATROOM_JOIN
