@@ -518,17 +518,17 @@ public class ApprovalController {
 		}
 
 
-	@RequestMapping(value="/temporaryStorage/appr.hirp",method=RequestMethod.GET)
-	public ModelAndView printAllRefApprList(ModelAndView mv,Reference reference) {
-		List<Reference> rList = aService.printAllRefApprList(reference);
-	return mv;
-	}
-	
-	@RequestMapping(value="/temporaryStorage/appr.hirp",method=RequestMethod.GET)
-	public ModelAndView printAllViewApprList(ModelAndView mv,Reference reference) {
-		List<Reference> rList = aService.printAllViewApprList(reference);
-	return mv;
-	}
+		/*
+		 * @RequestMapping(value="/temporaryStorage/appr.hirp",method=RequestMethod.GET)
+		 * public ModelAndView printAllRefApprList(ModelAndView mv,Reference reference)
+		 * { List<Reference> rList = aService.printAllRefApprList(reference); return mv;
+		 * }
+		 * 
+		 * @RequestMapping(value="/temporaryStorage/appr.hirp",method=RequestMethod.GET)
+		 * public ModelAndView printAllViewApprList(ModelAndView mv,Reference reference)
+		 * { List<Reference> rList = aService.printAllViewApprList(reference); return
+		 * mv; }
+		 */
 	
 	
 	

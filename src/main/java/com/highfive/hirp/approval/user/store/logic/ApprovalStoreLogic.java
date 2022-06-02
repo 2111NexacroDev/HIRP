@@ -181,6 +181,18 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return result;
 	}
 
+	@Override
+	public List<Reference> selectAllRefApprList(Reference reference) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reference> selectAllViewApprList(Reference reference) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 
