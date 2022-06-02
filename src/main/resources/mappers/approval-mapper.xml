@@ -22,6 +22,7 @@
 <result property="docNo" column="DOC_NO"></result>
 <collection property="aList" column="APPR_NO" javaType="java.util.ArrayList" ofType="ApprAccept" select="selectAllApprAccept"></collection>
 <collection property="fList" column="APPR_NO" javaType="java.util.ArrayList" ofType="ApprAttachedFile" select="selectAllApprAttachedFile"></collection>
+<collection property="employee" column="EMPL_ID" ofType="Employee"  select="selectAllApprEmpl"></collection>
 </resultMap>
 
 <resultMap type="ApprAccept" id="apprAcceptResultMap">
@@ -134,7 +135,7 @@
 
 <!-- 결재자 조회 -->
 <select id="selectAllApprAccept"  resultMap="apprAcceptResultMap">
-	SELECT * FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}
+	SELECT * FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo} ORDER BY APPR_LEVEL ASC
 </select>
 
 <!-- 결재자 정보 -->
@@ -177,7 +178,7 @@
 </insert>
 
 <!-- 임시저장 리스트 조회 -->
-<select id="selectAllTemporaryStorageAppr" resultMap="apprResultMap">
+<select id="selectAllTempAppr" resultMap="apprResultMap">
 	SELECT * FROM APPROVAL_TBL 
 	WHERE EMPL_ID = #{emplId} AND TEMPORARY_STORAGE ='Y'
 </select>
@@ -193,7 +194,16 @@
 	SELECT * FROM APPROVAL_TBL 
 	WHERE EMPL_ID = #{emplId} AND APPR_STATUS ='완료' AND TEMPORARY_STORAGE ='N'
 </select>
+<!-- 임시저장 문서 수정 -->
+<update id="updateStorageAppr">
+	UPDATE APPROVAL_TBL SET APPR_TITLE = #{apprTitle}, APPR_CONTENTS=#{apprContents}, WRITE_DATE = SYSDATE, TEMPORARY_STORAGE = 'N' WHERE APPR_NO = #{apprNo}
+</update>
 
+<delete id="deleteStorageApprAccept">
+	DELETE FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}
+</delete>
 
-
+<delete id="deleteStorageApprFile">
+	DELETE FROM APPR_ATTACHED_FILE_TBL WHERE APPR_NO = #{apprNo}
+</delete>
 </mapper>
