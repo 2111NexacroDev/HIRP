@@ -30,7 +30,7 @@
 							<input style="width: 95%;" type="text" name="chatroomName" placeholder="채팅방 이름 입력">
 						</div>
 						<div class="btns-wrap">
-							<button class="point" type="button" onclick="addChatroom();">확인</button>
+							<button class="point" type="button" onclick="">확인</button>
 							<button class="cancel" type="button">취소</button>
 						</div>
 					</section>
@@ -42,7 +42,7 @@
 				    <div>
 				    	직원초대
 				    </div>
-				    <form id="addChatroomForm" action="/chat/addChatroom.hirp" method="get">
+<!-- 				    <form id="addChatroomJoinForm" action="/addChatroomJoin.hirp" method="post"> -->
 						<!-- 채팅방 추가 모달창 -->
 						<section id="chatEmplListModal" class="modal--chatSelect shadow">
 							<h3>대화상대 선택 <span></span></h3>
@@ -90,14 +90,14 @@
 				            	</c:forEach>
 							</div>
 							<div class="btns-wrap">
-								<button class="point" type="button">확인</button>
+								<button class="point" type="button" onclick="addChatroomJoin('${chatroom.chatroomNo }');">확인</button>
 								<button class="cancel" type="button">취소</button>
 							</div>
 						</section>
 						
 						<!-- 채팅 참가자 추가 모달창 끝-->
 		        	
-		        	</form>
+<!-- 		        	</form> -->
 				    
 			    </div>
 			    <div class="t-c ml-20" style="display:inline-block">
@@ -137,6 +137,33 @@
         </article>
     </div>
     <script>
+    	//초대
+    	function addChatroomJoin(chatroomNo){
+    		console.log($("input[name=joinchatId]:checked"));
+    		
+    		var joinchatIdList = [];
+    	    $("input[name='joinchatId']:checked").each(function(i) {
+    	    	joinchatIdList.push($(this).val());
+    	    });
+    	    console.log(joinchatIdList);
+    		$.ajax({
+				url : "/addChatroomJoin.hirp",
+				type : "post",
+				data :{"chatroomNo" : chatroomNo,
+					"joinchatIdList" : joinchatIdList},
+				success : function(data){
+// 					exitChatPage(chatroomNo);
+					alert("채팅방 초대 성공");
+					window.location.reload(); //추가되면 info창 바로 로드
+					//동시에 채팅방 창도 reload
+					window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600, left=410, location=no,status=no,scrollbars=no');
+				},
+				error : function(data){
+					alert("채팅방 초대 실패");
+				}
+			});
+    	}
+    	
 		//채팅창 닫기
 		function exitChatPage(chatroomNo){
 			console.log(chatroomNo);
@@ -163,18 +190,25 @@
 		}
 		
 		$(function(){
+			//직원 초대창 열기
 			$("#addEmpl").on("click", function(){
 				$("#chatEmplListModal").show();
 			});
-
+			//직원 초대창 확인
+			$("#chatEmplListModal .btns-wrap button.point").on("click", function(){
+				$("#chatEmplListModal").hide();
+			});
+			
+			//직원 초대창 취소
 			$("#chatEmplListModal .btns-wrap button.cancel").on("click", function(){
 				$("#chatEmplListModal").hide();
 			});
 			
+			//채팅방 이름 수정창 열기
 			$("#editChatroom").on("click", function(){
 				$("#chatNameModal").show();
 			});
-			
+			//채팅방 이름 수정창 닫기(취소)
 			$("#chatNameModal .btns-wrap button.cancel").on("click", function(){
 				$("#chatNameModal").hide();
 			});

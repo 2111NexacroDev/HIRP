@@ -382,15 +382,35 @@ public class ChatController {
 		
 		return mv;
 	}
+	
 	//채팅 대화상대 초대
-	public ModelAndView chattingAddJoin(ModelAndView mv
-			,@RequestParam("chatroomNo") int chatroomNo
-			,@RequestParam("joinList") List<String> joinList) {
+	@ResponseBody
+	@RequestMapping(value="/addChatroomJoin.hirp", method=RequestMethod.POST)
+	public String chattingAddJoin(ModelAndView mv
+			, HttpServletRequest request
+			,@RequestParam("joinchatIdList[]") List<String> joinchatIdList
+			,@RequestParam("chatroomNo") int chatroomNo) {
 		//채팅 대화상대 추가
 		//list로 받아서 대화상대를 다수 추가하면 for문으로 insert 해주기
-		
-		return mv;
+		//userId
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		System.out.println("chatroomNo : " + chatroomNo);
+		int result = 0;
+		//채팅방 참가자 리스트 추가
+		for(int i = 0; i < joinchatIdList.size(); i++) {
+			ChatRoomJoin chatroomJoin = new ChatRoomJoin(0, chatroomNo, joinchatIdList.get(i));
+			result += cService.insertChatRoomJoin(chatroomJoin);
+		}
+		if(result > 0 ) {
+			System.out.println("채팅방 참가자 추가 성공");
+			return "success";
+		} else {
+			return "fail";
+		}
+			
 	}
+
 	//채팅방 나가기
 	@ResponseBody
 	@RequestMapping(value="/deleteChatRoomJoin.hirp", method=RequestMethod.POST)
