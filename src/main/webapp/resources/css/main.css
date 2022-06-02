@@ -403,6 +403,9 @@
     line-height: 1.8;
 }
 
+.todo--today input[type="text"] {
+    font-size: 14px;
+}
 
 .fc * {
     text-align: center;
