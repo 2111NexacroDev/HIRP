@@ -34,7 +34,7 @@
 				    </div>
 			    </div>
 			    <div class="t-c ml-20" style="display:inline-block">
-	        		<button class="btn--profile mb-10" type="button">
+	        		<button class="btn--profile mb-10" type="button" onclick="exitChatRoom(${chatroom.chatroomNo});">
 	      		    	<i class="fa-solid fa-arrow-right-from-bracket"></i>
 				    </button>
 				    <div>
@@ -69,5 +69,31 @@
         	</div>
         </article>
     </div>
+    <script>
+		//채팅창 닫기
+		function exitChatPage(chatroomNo){
+			console.log(chatroomNo);
+			//채팅방 정보창 닫기
+			window.close('', 'chattingRoomInfo'+chatroomNo);
+			//채팅방 닫기
+			var chattingPage = window.open('/chat.hirp?chatroomNo='+chatroomNo,'chattingRoom'+chatroomNo,'width=400,height=600, left=410, location=no,status=no,scrollbars=no');
+			chattingPage.close();
+		}
+		
+		//채팅방 나가기
+		function exitChatRoom(chatroomNo) {
+			$.ajax({
+				url : "/deleteChatRoomJoin.hirp",
+				type : "post",
+				data : {"chatroomNo" : chatroomNo},
+				success : function(data){
+					exitChatPage(chatroomNo);
+				},
+				error : function(data){
+					alert("채팅방 나가기 실패");
+				}
+			});
+		}
+    </script>
 </body>
 </html>

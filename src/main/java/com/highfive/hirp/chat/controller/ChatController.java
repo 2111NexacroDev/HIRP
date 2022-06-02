@@ -388,10 +388,23 @@ public class ChatController {
 		return mv;
 	}
 	//채팅방 나가기
-	public ModelAndView chattingRoomLeave(ModelAndView mv
+	@ResponseBody
+	@RequestMapping(value="/deleteChatRoomJoin.hirp", method=RequestMethod.POST)
+	public String chattingRoomLeave(
+			HttpServletRequest request
 			,@RequestParam("chatroomNo") int chatroomNo) {
 		//아이디 세션에서 가져와서 두 개 담아서 chatRoomJoin으로 넘겨주기
-		return mv;
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		ChatRoomJoin chatroomJoin = new ChatRoomJoin(0, chatroomNo, emplId);
+		
+		int result = cService.deleteMyIdChatRoomJoin(chatroomJoin);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	//채팅방 삭제 (본인이 만든 채팅방인 경우만)
 	public ModelAndView chattingRoomDelete(ModelAndView mv
