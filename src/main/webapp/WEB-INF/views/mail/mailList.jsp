@@ -85,18 +85,29 @@
 			</div>
             
             <div class="subConts">
-	        	<table class="table--basic">	        	
-                    <colgroup>
-                        <col style="width:2%;">
-                        <col style="width:2%;">
-                        <col style="width:2%;">
-                        <col style="width:60%;">
-                        <col style="width:8%;">
-                        <col style="width:10%;">
-                    </colgroup>
+	        	<table class="table--basic">
+					<c:if test="${mailCategory == 'W' }">
+						<colgroup>
+							<col style="width:2%;">
+							<col style="width:2%;">
+							<col style="width:60%;">
+							<col style="width:8%;">
+							<col style="width:10%;">
+						</colgroup>
+					</c:if>
+					<c:if test="${mailCategory != 'W' }">
+						<colgroup>
+							<col style="width:2%;">
+							<col style="width:2%;">
+							<col style="width:2%;">
+							<col style="width:60%;">
+							<col style="width:8%;">
+							<col style="width:10%;">
+						</colgroup>
+					</c:if>
                    	<c:forEach items="${mList }" var="mail">
                     	<!-- 받은메일함 -->
-                    	<c:if test="${mailCategory == 'R' }">
+                    	<c:if test="${mailCategory == 'R' }"> 	
 	                        <tr>
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
@@ -122,7 +133,7 @@
 	                        </tr>
 	                    </c:if>
 	                    <!-- 보낸메일함 -->
-                    	<c:if test="${mailCategory == 'S' }">
+                    	<c:if test="${mailCategory == 'S' }"> 	
 	                        <tr>
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
@@ -148,7 +159,7 @@
 	                        </tr>
 	                    </c:if>
 	                    <!-- 임시보관함 -->
-	                    <c:if test="${mailCategory == 'T' }">
+	                    <c:if test="${mailCategory == 'T' }"> 
 	                        <tr>
 	                            <c:url var="mDetail" value="/mail/temporaryStorageDetailView.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
@@ -200,7 +211,7 @@
 	                        </tr>
 	                    </c:if>
 	                    <!-- 중요메일함 -->
-	                    <c:if test="${mailCategory == 'I' }">
+	                    <c:if test="${mailCategory == 'I' }"> 	
 	                        <tr>
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
@@ -226,7 +237,7 @@
 	                        </tr>
 	                    </c:if>
 	                    <!-- 휴지통 -->
-	                    <c:if test="${mailCategory == 'W' }">
+	                    <c:if test="${mailCategory == 'W' }">			
 	                        <tr>
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
@@ -243,6 +254,11 @@
 								<td>${mail.mailSender }</td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
+							<c:if test="${mList eq null}">
+								<tr>
+									<td colspan="5">휴지통이 비어 있습니다.</td>
+								</tr>
+							</c:if>
 	                    </c:if>
 					</c:forEach>
                 </table>

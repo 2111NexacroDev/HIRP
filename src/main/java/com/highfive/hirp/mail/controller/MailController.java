@@ -189,6 +189,7 @@ public class MailController {
 			if(mail != null) {
 				mv.addObject("mail", mail);
 				mv.addObject("mailFile", mailFile);
+				mv.addObject("mailCategory", mailCategory);
 				mv.setViewName("mail/mailDetailView");
 			}else {
 				mv.addObject("msg", "메일 상세조회 실패");
