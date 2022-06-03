@@ -16,29 +16,16 @@
 				<section class="section--modal" id="apprLineSession">
 					<div class="bg-black"></div>
 					<div class="section--modal__conts"
-						style="border: none; width: 1200px;">
+						style="border: none; width: 1400px;">
+						<ul class="tabs">
+							<li class="tab-link current" data-tab="tab-1">결재자 선택</li>
+							<li class="tab-link" data-tab="tab-2">참조자/열람자 선택</li>
+						</ul>
 						<button class="btn--close" type="button" onclick="closeApprModal()"></button>
+						<div class="row mt-20 tab-content current" id="tab-1">
 						<h3>결재선 선택</h3>
-						<div class="row mt-20">
 						  <div id="groupContainer" class="container"> 
-						<!--  <div style="width:40%;border:1px solid lightgray">
-								<table class="table--basic mt-20" id="emplTable">
-									<tr>
-										<th>부서</th>
-										<th>직급</th>
-										<th>이름</th>
-									</tr>
-									<c:forEach items="${emplList }" var="empl">
-										<c:if test="${empl.deptName eq employee.deptCode }">
-											<tr onclick="emplClick(this);">
-												<td>${empl.deptName}</td>
-												<td>${empl.positionName}</td>
-												<td>${empl.emplName}</td>
-											</tr>
-											<input type="hidden" name="emplId" value="${empl.emplId }">
-										</c:if>
-									</c:forEach>
-								</table> -->
+						
 								<div id="organization" class="subConts">
 									<ul id="orgList">
 									</ul> 
@@ -55,8 +42,46 @@
 										<th><button class="noneBackground" onclick='removeAllEmpl(this)'><i class="fa-solid fa-trash-can"></i></button></th>
 									</tr>
 								</table>
-							</div>
+							</div> 
 						</div>
+						<div id="tab-2" class="tab-content">
+							<h3>참조자/열람자 선택</h3>
+							
+								 <div style="width:40%;border:1px solid lightgray">
+								 <div id="organization" class="subConts">
+									<ul id="orgList2">
+									</ul> 
+								</div>
+								 <%-- <table class="table--basic mt-20" id="emplTable">
+									<tr>
+										<th>부서</th>
+										<th>직급</th>
+										<th>이름</th>
+									</tr>
+									<c:forEach items="${emplList }" var="empl">
+										<c:if test="${empl.deptName eq employee.deptCode }">
+											<tr onclick="refClick(this);">
+												<td>${empl.deptName}</td>
+												<td>${empl.positionName}</td>
+												<td>${empl.emplName}</td>
+											</tr>
+											<input type="hidden" name="emplId" value="${empl.emplId }">
+										</c:if>
+									</c:forEach>
+								</table>  --%>
+								
+						</div>
+						<div class="container">
+								<table class="table--basic mt-20" id="refTable">
+									<tr id="apprEmplTableHead">
+										<th>부서</th>
+										<th>직급</th>
+										<th>이름</th>
+										<th>구분</th>
+										<th><button class="noneBackground" onclick='removeAllEmpl(this)'><i class="fa-solid fa-trash-can"></i></button></th>
+									</tr>
+								</table>
+							</div> 
 						<br><br>
 						<div class="btns-wrap mt-20 t-r">
 								<button class="point" type="button" onclick="addApprLine()">확인</button>
@@ -104,6 +129,15 @@
 							</div>
 						</div>
 						<div class="row mt-20">
+							<div style="width: 6%">
+								<div style="font-size: 15px; line-height: 30px; text-align: center;">참조자</div>
+							</div>
+
+							<div>
+								<input type="text" size="125" name="refName" id="refInput" style="border-radius: 4px;">
+							</div>
+						</div>
+						<div class="row mt-20">
 							<div style="line-height: 25px;">첨부파일</div>
 							<div>
 								<button id="btn-upload" type="button" style= "background-color: white; border: solid 1px #888; border-radius: 4px;">파일 추가</button>
@@ -131,7 +165,22 @@
 
 
 		<script>
-		    var today = new Date();
+			$(document).ready(function(){
+				
+				$('ul.tabs li').click(function(){
+					var tab_id = $(this).attr('data-tab');
+	
+					$('ul.tabs li').removeClass('current');
+					$('.tab-content').removeClass('current');
+	
+					$(this).addClass('current');
+					$("#"+tab_id).addClass('current');
+				})
+	
+			});
+		
+		
+			var today = new Date();
 			 // 년도 getFullYear()
 			var year = today.getFullYear(); 
 			 // 월 getMonth() (0~11로 1월이 0으로 표현되기 때문에 + 1을 해주어야 원하는 월을 구할 수 있다.)
@@ -236,7 +285,7 @@
 		      });
     
   
-			/*function emplClick(e) {
+			function refClick(e) {
 				var tdArr = new Array();
 				var tr = $(e)//클릭한 tr
 				var td = tr.children();//tr의 후손인 td
@@ -244,8 +293,8 @@
 					tdArr.push(td.eq(i).text());//td의 각각의 값을 배열에 넣어줌(deptName, positionName, emplName값 들어가있음)  
 				})
 				tdArr.push(tr.next().val());//hidden값인 emplId값을 배열에 넣어줌
-				addEmplDiv(tdArr); //(deptNAme, positionName, emplName, emplId)
-			}*/
+				addrefDiv(tdArr); //(deptNAme, positionName, emplName, emplId)
+			}
 
 			
 			
@@ -308,6 +357,50 @@
 			}}
 				}
 				
+			var refArr = []; //2차원 배열{(deptName, positionName, emplName, emplId),(deptName, positionName, emplName, emplId),...}
+			function addrefDiv(tdArr) {
+				var dblCheck = null;
+				for(var i=0;i<refArr.length;i++){
+				//중복된 결재자 추가 안되게 처리
+					dblCheck = JSON.stringify(refArr[i][0])===JSON.stringify(tdArr[0])&&JSON.stringify(refArr[i][1])===JSON.stringify(tdArr[1])&&JSON.stringify(refArr[i][2])===JSON.stringify(tdArr[2])
+					if(dblCheck == true){
+						break;
+					}
+				}
+				if(dblCheck){
+					alert("이미 등록한 결재자입니다.");
+				}
+				else{
+				
+					refArr.push(tdArr);//tdArr 배열을 2차원 배열에 넣어줌
+				if(arr.length > 6){
+					alert("결재선은 6명까지 등록가능합니다.");
+					refArr.pop();
+				
+				}else{
+				var $refTable = $("#refTable");//모달창에 클릭한 값을 넣어줄 테이블
+				var emplDivHtml = "<tr>"
+						+ "<td>"
+						+ tdArr[0]
+						+ "</td>"
+						+ "<td>"
+						+ tdArr[1]
+						+ "</td>"
+						+ "<td>"
+						+ tdArr[2]
+						+ "</td>"
+						+ "<td>"
+						+ "<select id='apprOpt[]' name='apprOpt[]'style='width:50px;' onchange='addSelected(this)'>"
+						+ "<option value='참조'>참조</option>"
+						+ "<option value='열람'>열람</option>"
+						+ "</select>" + "</td>" 
+						+ "<td>"+"<button class='noneBackground' onclick='removeEmplTr(this)'><i class='fa-solid fa-trash-can'></i></button>"+"</td>"
+						+ "</tr>"
+				$refTable.append(emplDivHtml);//값을 넣어준다.
+			}}
+				}
+			
+			
 
 			//모달창 테이블과 배열에서 해당 tr 삭제
 			function removeEmplTr(obj){
@@ -324,6 +417,7 @@
 				allEmplTr.remove();//table에서 전체 삭제
 			}
 			
+		
 			//모닫창 닫고 목록 테이블 삭제
 			function closeApprModal(){
 				 $("#apprLineSession").stop().fadeOut(100);
@@ -341,6 +435,7 @@
 					arr[emplTrNum-1].push($('select[name="apprOpt[]"]')[emplTrNum-1].value);
 				} 
 				//arr[i].push($('select[name="apprOpt[]"]')[i].value);
+				
 			}
 			
 			
@@ -349,6 +444,7 @@
 				//배열에 값이 들어있을 경우 동작
 				 if (arr != null) {
 					var $approvalLine = $("#approvalLine");
+					var $refInput =  $("#refInput");
 					var otherDiv = $(".singleApprLine").first().nextAll();
 					otherDiv.remove();	
 					
@@ -364,6 +460,11 @@
 								+ "<input type='hidden' value="+arr[i][3]+" name='aList["+i+"].emplId'>"
 								+ "<input type='hidden' value="+arr[i][4]+" name='aList["+i+"].apprType'>"
 						$approvalLine.append(apprLineHtml)
+					}
+					
+					
+					for (var i = 0; i < refArr.length; i++) {
+						$refInput.value(arr[i][4]);
 						
 					}
 				
@@ -372,8 +473,7 @@
 					$(".section--modal").stop().fadeOut(100);//배열이 null일 경우 모달창 닫기
 				}
 			}
-			var codeId = null;
-			var codeLvl = null;
+			
 			// 조직도 조회
 			$(document).ready(function(){
 				$.ajax({
@@ -405,9 +505,12 @@
 						} else {
 							alert("조직도 데이터가 없습니다.");
 						}
-						$("#orgList, #navigation").treeview({
+						$("#orgList2, #orgList, #navigation").treeview({
 							collapsed : true
 						});
+						var $rootList2 = $("#orgList").clone().html();
+						$("#orgList2").html($rootList2);
+						console.log($rootList2);
 					},
 					error : function() {
 						alert("조직도 조회 중에 실패했습니다.");
