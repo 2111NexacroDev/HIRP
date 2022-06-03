@@ -13,12 +13,18 @@
 	
 	<div id="conts">
         <aside id="snb">
+<<<<<<< HEAD
             <h1>메일</h1>
+=======
+            <h1>
+                메일
+            </h1>
+>>>>>>> refs/remotes/origin/main
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul>
                <li>
-                   <a href="">메일함</a>
+                   <a href="#none">메일함</a>
                    <ul>
                        <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
                        <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
@@ -71,13 +77,24 @@
             <button class="basic mt-20" type="button" onclick="historyBack();">목록</button>
             
             <div class="subConts">
+<<<<<<< HEAD
 	            <form action="/mail/${mailCategory }detail.hirp" method="get">
 	            	<table class="table--basic mt-20">
+=======
+	            <form action="/mail/detail.hirp" method="get">
+	            	<table class="table--basic mt-20">	        	
+	                    <colgroup>
+	                        <col style="width:15%;">
+	                        <col style="width:85%;">
+	                    </colgroup>
+>>>>>>> refs/remotes/origin/main
 	            		<tr>
-							<td class="mail--star">
-								<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
-								<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
-								<label for="important"></label>
+							<td>
+								<div class="mail--star">
+									<input type="checkbox" id="important" name="impMail" value="${mail.mailNo }" onclick="importantMail(this);"
+									<c:if test="${mail.importantMail == 'Y' }">checked</c:if>>
+									<label for="important"></label>
+								</div>
 							</td>
 	            			<td>${mail.mailTitle }</td>
 	            		</tr>
@@ -94,12 +111,12 @@
 	            			<td>${mail.mailDate }</td>
 	            		</tr>
 	            		<tr>
-	            			<td>
+	            			<td colspan="2">
 	            				<a href="../../../resources/nuploadFiles/${mailFile.fileReName }" download>${mailFile.fileName }</a>
 	            			</td>
 	            		</tr>
 	            		<tr>
-	            			<td>${mail.mailContents }</td>
+	            			<td colspan="2">${mail.mailContents }</td>
 	            		</tr>
 	            	</table>
 	            </form>

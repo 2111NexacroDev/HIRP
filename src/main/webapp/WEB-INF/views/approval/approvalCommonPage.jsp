@@ -90,7 +90,7 @@
                     <a href="">기안문서함</a>
                     <ul>       
                         <li><a href="/written/appr.hirp">상신문서함</a></li>
-                        <li><a href="/temporaryStorage/appr.hirp">임시문서함</a></li>
+                        <li><a href="/temporaryStorage/appr.hirp">임시저장함</a></li>
                         <li><a href="/rejected/appr.hirp">반려문서함</a></li>
                         <li><a href="/completed/appr.hirp">결재완료함</a></li>
                     </ul>

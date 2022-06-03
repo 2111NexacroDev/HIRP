@@ -27,6 +27,9 @@
 							<c:if test="${employee.emplProfile ne null}">
 								<img src="../../../resources/uploadFiles/${employee.emplProfile }" alt="프로필사진"> 
 							</c:if>
+							<c:if test="${employee.emplProfile eq null}">
+								<img src="../../../resources/images/img_no_profile.png" alt="프로필사진 없음">
+							</c:if>
 							<!-- 사진 폼으로 바꿔줘야함 -->
 							<button class="basic" type="button" onclick="openModal(this)">이미지 수정</button>
 							<form class="section--modal" id="profileForm" enctype="multipart/form-data">

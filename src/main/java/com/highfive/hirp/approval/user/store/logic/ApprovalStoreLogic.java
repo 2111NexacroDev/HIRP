@@ -33,6 +33,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return apprForm;
 	}
 
+	//결재 등록
 	@Override
 	public int insertAppr(SqlSession sqlSession, Approval approval) {
 		int result = sqlSession.insert("ApprMapper.insertAppr",approval);
@@ -54,20 +55,21 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	
 	//임시저장
 	@Override
-	public int insertTempStorageAppr(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.insert("ApprMapper.insertTempStorageAppr",approval);
+	public int insertTempAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertTempAppr",approval);
 		return result;
 	}
 
 	@Override
-	public int updateStoragedAppr(SqlSession sqlSession, int docNo) {
-		int result = sqlSession.update("",docNo);
+	public int updateTempAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.update("ApprMapper.updateTempAppr",approval);
 		return result;
 	}
 
 	@Override
-	public int deleteStoragedAppr(SqlSession sqlSession, int docNo) {
-		int result = sqlSession.delete("",docNo);
+	public int deleteTempAppr(SqlSession sqlSession, int apprNo) {
+		int result = sqlSession.delete("ApprMapper.deleteStorageApprAccept",apprNo);
+		int result2 = sqlSession.delete("ApprMapper.deleteStorageApprFile",apprNo);
 		return result;
 	}
 
@@ -83,11 +85,11 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return aList;
 	}
 	
-	@Override
-	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
-		Approval approval = sqlSession.selectOne("",docNo);
-		return approval;
-	}
+//	@Override
+//	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
+//		Approval approval = sqlSession.selectOne("",docNo);
+//		return approval;
+//	}
 
 	//결재자 정보 조회
 	@Override
@@ -133,8 +135,8 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	//임시저장 리스트 조회
 	@Override
-	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId) {
-		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTemporaryStorageAppr",emplId);
+	public List<Approval> selectAllTempAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTempAppr",emplId);
 		return aList;
 	}
 
@@ -178,6 +180,19 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		int result = sqlSession.insert("ApprMapper.insertApprAttachedFile",apprFile);
 		return result;
 	}
+
+	@Override
+	public List<Reference> selectAllRefApprList(Reference reference) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reference> selectAllViewApprList(Reference reference) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

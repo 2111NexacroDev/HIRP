@@ -27,6 +27,8 @@
 	text-align : center;
 	border: solid 1px #888;
 	margin : 0px;
+	font-size:14px; 
+	vertical-align : top;
 }
 
 .singleApprType{
@@ -60,6 +62,16 @@
 
 }
 
+.singleApprLineMiddle2{
+	width: 100%;
+	height: 60%;
+	display: inline-block;
+	text-align : center;
+	border-bottom: solid 1px #888;
+	margin : 0px;
+
+}
+
 .singleApprLineBottom{
 	width: 100%;
 	height: 20%;
@@ -87,6 +99,8 @@ padding : 10px;
 
 
 <!---------------------------------->
+
+ 
 #approvalLine-btn {
 	background-color: white;
 	border: solid 1px #888;
@@ -104,30 +118,63 @@ padding : 10px;
 	height: 35px;
 	float: right;
 	margin :30px 0px;
-}
+} 
 
-.groupContainer{
-	width:250px; 
-	height:300px; 
+
+
+.container{
 	border:1px solid #999;
 	overflow: auto;
-	margin-top : 20px;
-	margin-right : 20px;
-}
+	height:300px;
+	}
 
- .groupContainer::-webkit-scrollbar {
+	#groupContainer{
+		width:200px; 
+		margin-right : 20px;
+		
+	}
+
+ .container::-webkit-scrollbar {
     width: 10px;
   }
-  .groupContainer::-webkit-scrollbar-thumb {
+  .container::-webkit-scrollbar-thumb {
     background-color: #999;
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
   }
-  .groupContainer::-webkit-scrollbar-track {
+  .container::-webkit-scrollbar-track {
     background-color: lightgray;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
   }
 
 
+
+
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	color: #222;
+}
+
+.tab-content{
+	display: none;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+}

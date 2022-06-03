@@ -83,6 +83,7 @@ public class EmployeeController {
 				session.setAttribute("emplName", empLogin.getEmplName());
 				session.setAttribute("deptName", empLogin.getDeptName());
 				session.setAttribute("positionName", empLogin.getPositionName());
+				session.setAttribute("emplProfile", empLogin.getEmplProfile());
 				if(emplId.equals("admin")) {
 					return "redirect:/admin.hirp";					
 				} else {

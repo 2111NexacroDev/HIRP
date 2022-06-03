@@ -20,8 +20,8 @@
                 <Column size="80"/>
               </Columns>
               <Rows>
-                <Row size="24" band="head"/>
-                <Row size="24"/>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
               </Rows>
               <Band id="head">
                 <Cell text="근태번호" border="0px none, 0px none, 1px solid #cccccc" color="#333333"/>
@@ -79,7 +79,7 @@ this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
 			return;
 		}
 		this.alert("출퇴근 조회 성공");
-	}	
+	}
 }
 
 // 메뉴 이동

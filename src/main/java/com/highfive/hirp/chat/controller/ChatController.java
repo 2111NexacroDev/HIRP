@@ -41,31 +41,6 @@ public class ChatController {
 	@Autowired
 	private EmployeeAdminService eaService;
 	
-	// 채팅방 입장 테스트
-	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
-	public String view_chat(Model model
-			, HttpServletRequest request
-			, HttpServletResponse response
-			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
-
-		model.addAttribute("chatroomNo", chatroomNo);
-		return "chat/chattingPage";
-	}
-	
-	//채팅 내용 조회
-	@ResponseBody
-	@RequestMapping(value="/chat/printMessage.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
-	public String proceedSurveySubList(
-			@RequestParam("chatroomNo") int chatroomNo){
-		//응답자 리스트 보기 (응답여부까지) -> 팝업창
-		List<Message> msgList = cService.selectMessageByRoomNo(chatroomNo);
-		if(!msgList.isEmpty()) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			return gson.toJson(msgList);
-		}
-		return "";
-	}
-		
 	//채팅 메인페이지 (직원 목록)
 	@RequestMapping(value="/chatMain.hirp", method=RequestMethod.GET)
 	public ModelAndView chatEmplList(ModelAndView mv
@@ -100,17 +75,7 @@ public class ChatController {
 	}
 	
 	//직원 이름으로 검색 -> adminempl쪽에 공통으로 만듬.
-	
-//	//채팅방 추가 페이지
-//	public ModelAndView insertChattingRoomPage(ModelAndView mv
-//			,@ModelAttribute Employee employee) {
-//		//직원 리스트 출력
-//		//직원 이름으로 검색
-//		//위에 컨트롤러 사용하면 될 듯
-//		//채팅방 추가 페이지 조회
-//		
-//		return mv;
-//	}
+
 	//그룹 채팅방 추가
 	@RequestMapping(value="/chat/addChatroom.hirp", method=RequestMethod.GET)
 	public ModelAndView insertChattingRoom(ModelAndView mv
@@ -276,15 +241,104 @@ public class ChatController {
 		return "";
 	}
 	
-	//채팅방 내부 페이지
-	public ModelAndView chattingRoomPage(ModelAndView mv
-			,@RequestParam("chatRoom") ChatRoom chatRoom) {
-		//채팅방 목록 페이지에서 chatroom 정보 가져오기
+	// 채팅방 내부 페이지
+	@RequestMapping(value = "/chat.hirp", method = RequestMethod.GET)
+	public String chattingRoomPage(Model model
+			, HttpServletRequest request
+			, HttpServletResponse response
+			, @RequestParam("chatroomNo") int chatroomNo) throws Exception {
 		
-		//채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
-		//조인해서 같이 가져와야 할 듯 (chatList 도메인 만들었음)
-		return mv;
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		try {
+			//파라미터로 넘겨줄 map
+			Map<String, String> searchMap = new HashMap<>();
+			searchMap.put("chatroomNo", Integer.toString(chatroomNo));
+			searchMap.put("emplId", emplId);
+			
+			ChatRoom chatroom = cService.selectChatRoomInfoByNo(searchMap);
+//			model.addAttribute("chatroomNo", chatroomNo);
+			model.addAttribute("chatroom", chatroom);
+			System.out.println(chatroom);
+
+			if(chatroom.getChatroomType().equals("G")) {
+				List<ChatRoomJoin> chatRoomJoinList = cService.selectChatRoomJoinListByNo(chatroomNo);
+				if(chatRoomJoinList != null) {
+					model.addAttribute("chatRoomJoinList", chatRoomJoinList);
+					System.out.println(chatRoomJoinList);
+				} else {
+					System.out.println("참가자가 없어요!");
+				}
+			}
+			return "chat/chattingPage";
+			
+		} catch(Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
 	}
+	
+	//채팅 내용 조회
+	@ResponseBody
+	@RequestMapping(value="/chat/printMessage.hirp", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public String proceedSurveySubList(
+			@RequestParam("chatroomNo") int chatroomNo){
+		//응답자 리스트 보기 (응답여부까지) -> 팝업창
+		List<Message> msgList = cService.selectMessageByRoomNo(chatroomNo);
+		if(!msgList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(msgList);
+		}
+		return "";
+	}
+	
+	// 채팅 정보 조회
+	@RequestMapping(value = "/chatInfo.hirp", method = RequestMethod.GET)
+	public String chatInfo(Model model
+			, HttpServletRequest request
+			, HttpServletResponse response
+			,@RequestParam("chatroomNo") int chatroomNo
+//			,@ModelAttribute ChatRoom chatroom
+//			,@ModelAttribute ChatRoomJoin chatroomJoin
+			) throws Exception {
+
+		System.out.println("채팅방 정보 조회");
+		System.out.println(chatroomNo);
+		
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		try {
+			//파라미터로 넘겨줄 map
+			Map<String, String> searchMap = new HashMap<>();
+			searchMap.put("chatroomNo", Integer.toString(chatroomNo));
+			searchMap.put("emplId", emplId);
+			
+			ChatRoom chatroom = cService.selectChatRoomInfoByNo(searchMap);
+//			model.addAttribute("chatroomNo", chatroomNo);
+			model.addAttribute("chatroom", chatroom);
+			System.out.println(chatroom);
+			
+			//직원 리스트
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			model.addAttribute("emplList", emplList);
+			
+			if(chatroom.getChatroomType().equals("G")) {
+				List<ChatRoomJoin> chatRoomJoinList = cService.selectChatRoomJoinListByNo(chatroomNo);
+				if(chatRoomJoinList != null) {
+					model.addAttribute("chatRoomJoinList", chatRoomJoinList);
+					System.out.println(chatRoomJoinList);
+				} else {
+					System.out.println("참가자가 없어요!");
+				}
+			}
+			return "chat/chatInfoPage";
+			
+		} catch(Exception e) {
+			model.addAttribute("msg", e.toString());
+			return "common/errorPage";
+		}
+	}
+	
 	
 	//채팅 전송 (첨부파일 가능)
 	public ModelAndView sendChat(ModelAndView mv
@@ -322,26 +376,65 @@ public class ChatController {
 		return mv;
 	}
 	//채팅방 이름 변경
-	public ModelAndView chattingRoomRename(ModelAndView mv
-			,@RequestParam("ChatRoom") ChatRoom chatRoom) {
+	@ResponseBody
+	@RequestMapping(value="/updateChatroom.hirp", method=RequestMethod.POST)
+	public String chattingRoomRename(
+			@ModelAttribute("ChatRoom") ChatRoom chatRoom) {
 		//채팅방 정보 넘겨 받아서 채팅방 이름 변경 (정보 update)
-		
-		return mv;
+		int result = cService.updateChatRoomInfo(chatRoom);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
+	
 	//채팅 대화상대 초대
-	public ModelAndView chattingAddJoin(ModelAndView mv
-			,@RequestParam("chatroomNo") int chatroomNo
-			,@RequestParam("joinList") List<String> joinList) {
+	@ResponseBody
+	@RequestMapping(value="/addChatroomJoin.hirp", method=RequestMethod.POST)
+	public String chattingAddJoin(ModelAndView mv
+			, HttpServletRequest request
+			,@RequestParam("joinchatIdList[]") List<String> joinchatIdList
+			,@RequestParam("chatroomNo") int chatroomNo) {
 		//채팅 대화상대 추가
 		//list로 받아서 대화상대를 다수 추가하면 for문으로 insert 해주기
-		
-		return mv;
+		//userId
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		System.out.println("chatroomNo : " + chatroomNo);
+		int result = 0;
+		//채팅방 참가자 리스트 추가
+		for(int i = 0; i < joinchatIdList.size(); i++) {
+			ChatRoomJoin chatroomJoin = new ChatRoomJoin(0, chatroomNo, joinchatIdList.get(i));
+			result += cService.insertChatRoomJoin(chatroomJoin);
+		}
+		if(result > 0 ) {
+			System.out.println("채팅방 참가자 추가 성공");
+			return "success";
+		} else {
+			return "fail";
+		}
+			
 	}
+
 	//채팅방 나가기
-	public ModelAndView chattingRoomLeave(ModelAndView mv
+	@ResponseBody
+	@RequestMapping(value="/deleteChatRoomJoin.hirp", method=RequestMethod.POST)
+	public String chattingRoomLeave(
+			HttpServletRequest request
 			,@RequestParam("chatroomNo") int chatroomNo) {
 		//아이디 세션에서 가져와서 두 개 담아서 chatRoomJoin으로 넘겨주기
-		return mv;
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		ChatRoomJoin chatroomJoin = new ChatRoomJoin(0, chatroomNo, emplId);
+		
+		int result = cService.deleteMyIdChatRoomJoin(chatroomJoin);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	//채팅방 삭제 (본인이 만든 채팅방인 경우만)
 	public ModelAndView chattingRoomDelete(ModelAndView mv

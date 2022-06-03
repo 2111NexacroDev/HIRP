@@ -1,42 +1,44 @@
-$('.todo--today .btn--plus').on('click', function () {
-    if ($('.todo--today .no-data').length != 0) {
-        $('.todo--today .no-data').hide();
-    }
-    $('.todo--today ul').append(
-        '<li>' +
-        '<input id="todoNew" type="checkbox">' +
-        '<label for="todoNew"></label>' +
-        '<input name="todoConts" type="text" placeholder="진행하실 업무를 입력하시고 등록을 눌러주세요!">' +
-        '<div class="btns-wrap">' +
-        '<button class="point" onclick="addTodo(this)">등록</button>' +
-        '<button class="finished" onclick="removeLine(this)">취소</button>' +
-        '</div>' +
-        '</li>'
-    );
-});
-
-$('.memo--list .btn--plus').on('click', function () {
-    if ($('.memo--list .no-data').length != 0) {
-        $('.memo--list .no-data').hide();
-    }
-    if ($('.notStored').length < 1) {
-        $('.memo--list ul').append(
+$(function () {
+    $('.todo--today .btn--plus').on('click', function () {
+        if ($('.todo--today .no-data').length != 0) {
+            $('.todo--today .no-data').hide();
+        }
+        $('.todo--today ul').append(
             '<li>' +
-            '<textarea class="notStored" name="memoConts"></textarea>' +
+            '<input id="todoNew" type="checkbox">' +
+            '<label for="todoNew"></label>' +
+            '<input name="todoConts" type="text" placeholder="진행하실 업무를 입력하시고 등록을 눌러주세요!">' +
             '<div class="btns-wrap">' +
-            '<button class="point" onclick="addMemo(this)">등록</button>' +
+            '<button class="point" onclick="addTodo(this)">등록</button>' +
             '<button class="finished" onclick="removeLine(this)">취소</button>' +
             '</div>' +
             '</li>'
         );
-        $('.p--memo-guide').fadeIn();
-        setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
-    } else {
-        $('.p--memo-guide').text('작성하신 메모를 저장하신 후 추가해주세요!');
-        $('.p--memo-guide').fadeIn();
-        setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
-    }
-});
+    });
+
+    $('.memo--list .btn--plus').on('click', function () {
+        if ($('.memo--list .no-data').length != 0) {
+            $('.memo--list .no-data').hide();
+        }
+        if ($('.notStored').length < 1) {
+            $('.memo--list ul').append(
+                '<li>' +
+                '<textarea class="notStored" name="memoConts"></textarea>' +
+                '<div class="btns-wrap">' +
+                '<button class="point" onclick="addMemo(this)">등록</button>' +
+                '<button class="finished" onclick="removeLine(this)">취소</button>' +
+                '</div>' +
+                '</li>'
+            );
+            $('.p--memo-guide').fadeIn();
+            setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
+        } else {
+            $('.p--memo-guide').text('작성하신 메모를 저장하신 후 추가해주세요!');
+            $('.p--memo-guide').fadeIn();
+            setTimeout(function () { $('.p--memo-guide').fadeOut(500) }, 2000);
+        }
+    });
+})
 
 $(document).on('click', '.todo--today label', function () {
     let checkedValue = $(this).siblings('input[type="checkbox"]').prop('checked');

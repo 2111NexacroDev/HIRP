@@ -15,12 +15,18 @@
 	
 	<div id="conts">
         <aside id="snb">
+<<<<<<< HEAD
             <h1>메일</h1>
+=======
+            <h1>
+                메일
+            </h1>
+>>>>>>> refs/remotes/origin/main
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul>
                <li>
-                   <a href="">메일함</a>
+                   <a href="#none">메일함</a>
                    <ul>
                        <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
                        <li><a href="/mail/Slist.hirp">보낸메일함</a></li>

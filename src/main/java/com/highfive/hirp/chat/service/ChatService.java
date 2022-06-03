@@ -27,6 +27,11 @@ public interface ChatService {
 	//나와 상대방이 포함된 개인 채팅방 가져오기
 	public ChatRoom selectMyPersonalChattingRoom(PersonalId idList);
 	
+	//채팅방 번호, 내 아이디로 정보 가져오기
+	public ChatRoom selectChatRoomInfoByNo(Map<String, String> searchMap);
+	//채팅방 번호로 참여자 정보 가져오기
+	public List<ChatRoomJoin> selectChatRoomJoinListByNo(int chatroomNo);
+	
 	// 채팅방 별로 채팅, 첨부파일 내용 같이 가져오기
 	public List<ChatList> selectChatListByRoomNo(int chatroomNo);
 	//일단 얘네 두개 남겨놓겠음

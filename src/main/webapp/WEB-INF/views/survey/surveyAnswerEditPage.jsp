@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<!-- 설문조사 응답 페이지 (상세1) -->
+<!-- 설문조사 응답 수정 페이지 (상세1-2)-->
 <body>
 	<!-- survey 공통 -->
 	<%@ include file="/WEB-INF/views/survey/surveyCommonPage.jsp" %>
