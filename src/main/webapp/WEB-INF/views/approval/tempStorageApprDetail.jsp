@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
 
-			<h1 class="basic-border-bottom">기안하기</h1>
+			<h1 class="basic-border-bottom">임시저장함</h1>
 
 			<div id="guide" class="subConts">
 				<!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
@@ -21,24 +21,6 @@
 						<h3>결재선 선택</h3>
 						<div class="row mt-20">
 						  <div id="groupContainer" class="container"> 
-						<!--  <div style="width:40%;border:1px solid lightgray">
-								<table class="table--basic mt-20" id="emplTable">
-									<tr>
-										<th>부서</th>
-										<th>직급</th>
-										<th>이름</th>
-									</tr>
-									<c:forEach items="${emplList }" var="empl">
-										<c:if test="${empl.deptName eq employee.deptCode }">
-											<tr onclick="emplClick(this);">
-												<td>${empl.deptName}</td>
-												<td>${empl.positionName}</td>
-												<td>${empl.emplName}</td>
-											</tr>
-											<input type="hidden" name="emplId" value="${empl.emplId }">
-										</c:if>
-									</c:forEach>
-								</table> -->
 								<div id="organization" class="subConts">
 									<ul id="orgList">
 									</ul> 
@@ -64,14 +46,13 @@
 						</div>
 				</section>
 				<br> <br>
-				<form action="/register/appr.hirp" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="formNo" value="${apprform.formNo}">
-					<input type="hidden" name="emplId" value="${emplId}">
+				<form action="/register/TempAppr.hirp" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="apprNo" value="${approval.apprNo}">
 					<div style="border: solid 1px #888; border-radius: 4px; margin-top: 20px; position: relative;">
 						<table id="apprTable">
 							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
 								<td>기안자</td>
-								<td>${emplName} ${employee.positionCode }</td>
+								<td>${approval.employee.emplName} ${approval.employee.positionCode }</td>
 							</tr>
 							<tr
 								style="height: 30px; border: solid 1px #888; line-height: 30px;">
@@ -81,18 +62,26 @@
 							<tr
 								style="height: 35px; border: solid 1px #888; line-height: 30px;">
 								<td>소속</td>
-								<td>${employee.deptCode}</td>
+								<td>${approval.employee.deptCode}</td>
 							</tr>
 						</table>
-						<div id="approvalLine" class="fz-0">
+						<div id="approvalLine">
 							<!-- <div class="singleApprType">기안자</div> -->
 							<div class="singleApprLine">
 							<div class='singleApprLineTop'>기안자</div>
-							<div class='singleApprLineMiddle'>${emplName} ${employee.positionCode}</div>
+							<div class='singleApprLineMiddle'>${approval.employee.emplName} ${approval.employee.positionCode }</div>
 							<div class='singleApprLineBottom'></div>
 							</div>
+						<c:forEach var="appr" items="${aList}">
+							<div class="singleApprLine">
+								<div class='singleApprLineTop'>${appr.apprType }</div>
+								<div class='singleApprLineMiddle'>
+								${appr.employee.emplName} ${appr.employee.positionCode }</div>
+								<div class='singleApprLineBottom'>
+								</div>
+							</div>
+						</c:forEach>
 						</div>
-						
 						</div>
 						<div class="row mt-20">
 							<div style="width: 6%">
@@ -100,14 +89,17 @@
 							</div>
 
 							<div>
-								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;">
+								<input type="text" size="125" name="apprTitle"  value="${approval.apprTitle} "style="border-radius: 4px;">
 							</div>
 						</div>
 						<div class="row mt-20">
 							<div style="line-height: 25px;">첨부파일</div>
 							<div>
-								<button id="btn-upload" type="button" style= "background-color: white; border: solid 1px #888; border-radius: 4px;">파일 추가</button>
+								<button id="btn-upload" type="button""style= "background-color: white; border: solid 1px #888; border-radius: 4px;">파일 추가</button>
 							</div>
+							<c:forEach var="fList" items="${approval.fList}">
+									<span class="mr-10">${fList.fileName}</span>									
+							</c:forEach>
 							<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display: none;"> 
 							<span style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
 							<div class="data_file_txt" id="data_file_txt" style="margin: 40px; margin-left:0px; width:100%">
@@ -118,10 +110,10 @@
 					
 					<br>
 					<div>
-						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
+						<textarea id="summernote" name="apprContents">${approval.apprContents}</textarea>
 					</div>
+			<button class="emergency mt-20 apprbtn" type="button">삭제</button>
 			<button class="point mt-20 apprbtn" type="submit">상신하기</button>
-			<button class="basic mt-20 apprbtn" type="button" onclick="tempStorage(this.form)">임시 저장</button>
 			</form>
 			</div>
 		</article>
@@ -416,11 +408,7 @@
 			});
 			
 			
-			function tempStorage(obj){
-				obj.action = "/temporaryStorage/appr.hirp";
-				obj.method = "post";
-				obj.submit();
-			}
+		
 			
 			
 		</script>

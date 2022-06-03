@@ -116,6 +116,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	//완료
 	// 공지글 등록
 	@RequestMapping(value = "/notice/register.hirp", method = RequestMethod.POST)
 	public ModelAndView registerNotice(ModelAndView mv, @ModelAttribute NoticeBoard noticeboard,
@@ -159,6 +160,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	
 	// 공지글 수정 페이지
 	@RequestMapping(value = "/notice/modifyView.hirp", method = RequestMethod.GET)
 	public ModelAndView noticeUpdateView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) {
@@ -173,6 +175,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	//완료
 	// 공지글 수정
 	@RequestMapping(value = "/notice/modify.hirp", method = RequestMethod.POST)
 	public ModelAndView modifyNotice(
