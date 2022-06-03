@@ -31,6 +31,7 @@
           <Col id="MENU_ID">40</Col>
           <Col id="MENU_NAME">직급관리</Col>
           <Col id="MENU_LEVEL">0</Col>
+          <Col id="FORM_URL">FrameBase::positionView.xfdl</Col>
         </Row>
         <Row>
           <Col id="MENU_ID">50</Col>

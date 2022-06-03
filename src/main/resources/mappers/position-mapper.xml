@@ -28,6 +28,6 @@
 	</update>
 	
 	<delete id="deletePosition">
-		DELETE FROM POSITION_TBL WHERE POSITION_SEQUENCE = #{positionSequence}
+		DELETE FROM POSITION_TBL WHERE POSITION_CODE = #{positionCode}
 	</delete>
 </mapper>

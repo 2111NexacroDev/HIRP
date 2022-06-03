@@ -12,14 +12,15 @@
 		<targetPlatform>Windows,WindowsRT,macOS,iOS,Android</targetPlatform>
 	</customer>
 	<date>
-		<activation>2022-04-01</activation>
+		<activation>2022-05-01</activation>
 		<term unit="month">2</term>
 	</date>
-	<key>ZFSQGGA296HHEJDGFE8JW7KQJCBJABVHQ</key>
-	<SignatureValue>W9wCkdHNS4qoamEhBpPLASf1aJw4HbAb0CY6QPW6TC1a+zTaD7zXvwPL+g5vsqGD
-d4eT3mVE7CfbHBDhBPkkW1xeJJ3u9b07eeEbWOJn9vEPC99QwKhaQLuimw2NqZ5f
-wWtu8ji2VCClXAT4c6vFsSb5p8LpT374jsruHL7ltQBiLwiWEXGzqRUtM7w50bNq
-+xz0q5iEGAZFzx2lthY+UmVvgCQooxNZGDpFV5/t9kmlouYKZrYM6VTncbZY9Pni
-lTgHDyquUOTirIYlMOqisZ6EvPcF2MbwcHFbvSjtQe5uzZeu930d9vp3VaxuYDRl
-JCKS/LvFIitI2cqAarXGIg==</SignatureValue>
+	<key>MHD5TNBPAHXJ5TQVND69F6KRKNTRGPEAF</key>
+	<SignatureValue>WedCwZtgQrA+yaLJEEJcre3Hbi73oYzS/WIXZR/0i1KYA0Xufz1yPWphtS35nxT6
+kLopw64THchjyDrWEhDPBLaoSZjmmpZ7Ba4LOs0s6coSck+EuJvgA/h0FJOEVl5a
+29wTf79ZZmPHgc5daAIKi3LmPIJyazDL/OS7kQkxgUnw2oFfWV7IlT8SYut/f9nR
+JV3FDBvGIIUyfTemhAFSyUf3SUCFWGxYz1CZnkX6b6XSdcSwgCisymYgbyrvpY5B
+BloXOrUPZqqcEG4BwY9CdI1ZyCDzXteJYGRq36kPUUS3c/fmBLcJX3zEPk0+2BkV
+hT/WJbDmXYC+dHgbAcau9g==</SignatureValue>
 </license>
+

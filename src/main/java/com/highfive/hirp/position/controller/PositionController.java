@@ -28,7 +28,7 @@ public class PositionController {
 		if(!pList.isEmpty()) {
 			nErrorCode = 0;
 			strErrorMsg = "SUCC";
-			result.addDataSet("out_dept", pList);
+			result.addDataSet("in_position", pList);
 		}else {
 			nErrorCode = -1;
 			strErrorMsg = "Fail";
@@ -70,7 +70,7 @@ public class PositionController {
 	}
 	
 	// 직급 수정
-	@RequestMapping(value="/admin/positionSave.hirp", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/positionUpdate.hirp", method=RequestMethod.POST)
 	public NexacroResult updatePositon(@ParamDataSet(name="in_position") DataSet inPosition) throws Exception {
 		int nErrorCode = 0;
 		String strErrorMsg = "START";
@@ -106,7 +106,6 @@ public class PositionController {
 		int nErrorCode = 0;
 		String strErrorMsg = "START";
 		NexacroResult result = new NexacroResult();
-		
 		int i;
 		int dResult = 0;
 		
