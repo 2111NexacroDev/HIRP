@@ -822,7 +822,6 @@ button.next {
     font-size: 18px;
 }
 
-
 .btn--profile {
     width: 32px;
     height: 32px;
@@ -831,6 +830,7 @@ button.next {
     padding: 0;
     outline: none;
     background-color: #fff;
+    border: 1px solid #ccc;
 }
 
 .btn--alarm {
