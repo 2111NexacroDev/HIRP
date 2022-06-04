@@ -54,6 +54,10 @@ $(function () {
         containment: 'window'
     });
 
+    $('.btn--alarm').on('click', function () {
+        $(this).children('span').text('');
+    })
+
     // 서브메뉴 접힘/펼침
     $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {
         if ($(this).siblings('ul').length != 0) {

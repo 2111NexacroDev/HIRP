@@ -19,19 +19,27 @@
 				<li>
 					<dl>
 						<dt>출근시간</dt>
-						<dd id="timeStart" class="ml-10">${time.timeStart }</dd>
+						<dd id="timeStart" class="ml-10">
+							<c:if test="${time.timeStart eq null}">미출근</c:if>
+							<c:if test="${time.timeStart ne null}">${time.timeStart }</c:if>                                            
+						</dd>
 					</dl>
 				</li>
 				<li>
 					<dl>
 						<dt>퇴근시간</dt>
-						<dd id="timeEnd" class="ml-10">${time.timeEnd }</dd>
+						<dd id="timeEnd" class="ml-10">
+							<c:if test="${time.timeEnd eq null}">미퇴근</c:if>
+							<c:if test="${time.timeEnd ne null}">${time.timeEnd }</c:if>           
+						</dd>
 					</dl>
 				</li>
 				<li>
 					<div class="btns-wrap">
-						<button class="finished" type="button" onclick="startBtn();">출근하기</button>	
-						<button class="finished" type="button" onclick="endBtn();">퇴근하기</button>
+						<c:if test="${time.timeStart eq null}"><button class="finished" type="button" onclick="startBtn();">출근하기</button></c:if>
+						<c:if test="${time.timeStart ne null}"><button class="finished" type="button" disabled>출근하기</button></c:if>  
+						<c:if test="${time.timeEnd eq null}"><button class="finished" type="button" onclick="endBtn();">퇴근하기</button></c:if>
+						<c:if test="${time.timeEnd ne null}"><button class="finished" type="button" disabled>퇴근하기</button></c:if>   
 					</div>
 					<select class="mt-10" name="" id="">
 						<option value="">업무</option>
@@ -83,7 +91,10 @@
 								<td>${time.emplId }</td>
 								<td>${time.timeDate }</td>
 								<td>${time.timeStart }</td>
-								<td>${time.timeEnd }</td>
+								<td>
+									<c:if test="${time.timeEnd eq null}">미퇴근</c:if>
+									<c:if test="${time.timeEnd ne null}">${time.timeEnd }</c:if>  
+								</td>
 								<td>${time.timeState }</td>
 								<td>${time.timeAccrue }</td>
 							</tr>

@@ -46,19 +46,27 @@
                                 <li>
                                     <dl>
                                         <dt>출근시간</dt>
-                                        <dd id="timeStart" class="ml-10">미출근</dd>
+                                        <dd id="timeStart" class="ml-10">
+                                            <c:if test="${time.timeStart eq null}">미출근</c:if>
+                                            <c:if test="${time.timeStart ne null}">${time.timeStart }</c:if>                                            
+                                        </dd>
                                     </dl>
                                 </li>
                                 <li class="mt-10">
                                     <dl>
                                         <dt>퇴근시간</dt>
-                                        <dd id="timeEnd" class="ml-10">미퇴근</dd>
+                                        <dd id="timeEnd" class="ml-10">
+                                            <c:if test="${time.timeEnd eq null}">미퇴근</c:if>
+                                            <c:if test="${time.timeEnd ne null}">${time.timeEnd }</c:if>           
+                                        </dd>
                                     </dl>
                                 </li>
                                 <li>
                                     <div class="btns-wrap">
-                                        <button class="finished" type="button" onclick="startBtn();">출근하기</button>	
-                                        <button class="finished" type="button" onclick="endBtn();">퇴근하기</button>
+                                        <c:if test="${time.timeStart eq null}"><button class="finished" type="button" onclick="startBtn();">출근하기</button></c:if>
+                                        <c:if test="${time.timeStart ne null}"><button class="finished" type="button" disabled>출근하기</button></c:if>  
+                                        <c:if test="${time.timeEnd eq null}"><button class="finished" type="button" onclick="endBtn();">퇴근하기</button></c:if>
+                                        <c:if test="${time.timeEnd ne null}"><button class="finished" type="button" disabled>퇴근하기</button></c:if>  
                                     </div>
                                     <select class="mt-10" name="" id="">
                                         <option value="">업무</option>
@@ -77,6 +85,22 @@
                     <section>
                         <h2>전사 일정</h2>
                         <div id="calendar"></div>
+                    </section>
+                    <section>
+                        <h2>이번 달 생일 🎉🎉</h2>
+                        <ul class="ul--birthday">
+                        <c:forEach items="${birthdayList }" var="birthdayList">
+                            <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
+                        </c:forEach>
+                        <c:if test="${empty birthdayList }">
+                            <li class="no-data">이번 달 생일인 사원이 없습니다 :)</li>
+                        </c:if>
+                        </ul>
+                    </section>
+                </div><!-- //컬럼2 -->
+                <div>
+                    <!-- 컬럼3 -->
+                    <section class="weather-box">
                     </section>
                     <section class="todo--today">
                         <h2>오늘의 업무</h2>
@@ -106,22 +130,6 @@
                             </c:choose>
                         </ul>
                         <button class="btn--plus" type="button"></button>
-                    </section>
-                </div><!-- //컬럼2 -->
-                <div>
-                    <!-- 컬럼3 -->
-                    <section class="weather-box">
-                    </section>
-                    <section>
-                        <h2>이번 달 생일 🎉🎉</h2>
-                        <ul class="ul--birthday">
-                        <c:forEach items="${birthdayList }" var="birthdayList">
-                            <li><strong>${birthdayList.birthday}일</strong> ${birthdayList.deptName} ${birthdayList.emplName}</li>
-                        </c:forEach>
-                        <c:if test="${empty birthdayList }">
-                            <li class="no-data">이번 달 생일인 사원이 없습니다 :)</li>
-                        </c:if>
-                        </ul>
                     </section>
                 </div><!-- //컬럼3 -->
             </div>
@@ -174,6 +182,52 @@
             });
             calendar.render();
         })
+
+        // 출근시간
+        function startBtn() {
+            var emplId = "${sessionScope.emplId}";
+            $.ajax({
+                url: "/time/timeStart.hirp",
+                type: "POST",
+                data: {
+                    "emplId": emplId
+                },
+                success: function (data, result) {
+                    if (data == "fail") {
+                        alert("이미 출근 하셨습니다.");
+                    } else {
+                        alert("출근시간 등록에 성공했습니다.");
+                    }
+                    location.reload();
+                },
+                error: function () {
+                    alert("출근시간 등록에 실패했습니다.");
+                }
+            });
+        }
+
+        // 퇴근시간
+        function endBtn() {
+            var emplId = "${sessionScope.emplId}";
+            $.ajax({
+                url: "/time/timeEnd.hirp",
+                type: "POST",
+                data: {
+                    "emplId": emplId
+                },
+                success: function (data, result) {
+                    if (data == "fail") {
+                        alert("이미 퇴근 하셨습니다.");
+                    } else {
+                        alert("퇴근시간 등록에 성공했습니다.");
+                    }
+
+                },
+                error: function () {
+                    alert("퇴근시간 등록에 실패했습니다.");
+                }
+            });
+        }
     </script>
 </body>
 
