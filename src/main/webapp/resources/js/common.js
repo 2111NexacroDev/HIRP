@@ -45,7 +45,7 @@ $(function () {
         $(this).parent().parent().stop().fadeOut(100);
     });
 
-    $('.closeWindow').on('click', function () {
+    $(document).on('click', '.closeWindow', function () {
         $(this).parent().parent().parent().stop().fadeOut(100);
     });
 

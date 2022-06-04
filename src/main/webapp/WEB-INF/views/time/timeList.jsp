@@ -144,6 +144,7 @@
 						alert("이미 출근 하셨습니다.");
 					} else {
 						alert("출근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 				},
 				error : function() {
@@ -166,6 +167,7 @@
 						alert("이미 퇴근 하셨습니다.");
 					} else {
 						alert("퇴근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 
 				},

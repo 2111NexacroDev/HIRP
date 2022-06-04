@@ -176,13 +176,6 @@ button.next {
     font-family: fontawesome;
 }
 
-button:disabled {
-    border-color: #333 !important;
-    color: #333 !important;
-    opacity: .7;
-    cursor: default;
-}
-
 img {
     max-width: 100%;
 }

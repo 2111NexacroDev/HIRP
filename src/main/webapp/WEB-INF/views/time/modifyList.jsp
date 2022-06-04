@@ -150,6 +150,7 @@
 			},
 			success : function() {
 				alert("출근시간 등록에 성공했습니다.");
+                location.reload();
 			},
 			error : function() {
 				alert("출근시간 등록에 실패했습니다.");
@@ -169,7 +170,8 @@
 				"emplId" : emplId
 			},
 			success : function() {
-				alert("퇴근시간 등록에 성공했습니다.");
+				alert("퇴근시간 등록에 성공했습니다.");				
+				location.reload();
 			},
 			error : function() {
 				alert("퇴근시간 등록에 실패했습니다.");

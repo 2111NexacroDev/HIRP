@@ -214,13 +214,28 @@
             }
 
             // 카테고리 세팅
+            let emplId = '${sessionScope.emplId}';
             if(data.event.extendedProps.scheduleCategory == '전사') {
                 $('input[value="전사"]').prop('checked', true);
+                if(emplId != 'admin') {
+                    $('.btns-wrap').css('display', 'none');
+                    $('.modal--shcedule h3').append('<span>※ 전사 일정은 관리팀에서만 수정 가능합니다.</span>');
+                } else {
+                    $('.btns-wrap').css('display', 'block');
+                }
             } else if(data.event.extendedProps.scheduleCategory == '부서') {
                 $('input[value="부서"]').prop('checked', true);
+                $('.btns-wrap').css('display', 'block');
+                if($('.modal--shcedule h3 span').length != 0) {
+                    $('.modal--shcedule h3 span').remove();
+                }
             } else {
                 // 개인 일정
                 $('input[value="개인"]').prop('checked', true);
+                $('.btns-wrap').css('display', 'block');
+                if($('.modal--shcedule h3 span').length != 0) {
+                    $('.modal--shcedule h3 span').remove();
+                }
             }
 
             // 알림 여부 세팅

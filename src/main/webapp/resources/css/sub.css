@@ -465,6 +465,13 @@ section[class^="todo--"] {
     padding: 10px;
 }
 
+.modal--shcedule h3 span {
+    float: right;
+    color: red;
+    font-size: 14px;
+    text-align: right;
+}
+
 /* 일정 관리 끝 */
 
 /* 공용품 예약/관리 */
@@ -745,7 +752,7 @@ section[class^="todo--"] {
     border-top: none;
 }
 
-.mailDetail .table--basic th, 
+.mailDetail .table--basic th,
 .mailDetail .table--basic td {
     border: none;
 }
@@ -756,7 +763,7 @@ section[class^="todo--"] {
 
 .mailDetail .table--basic tr:hover td {
     background: none;
-} 
+}
 
 .mailDetail .table--basic td:first-child {
     padding: 10px 0;
@@ -768,11 +775,11 @@ section[class^="todo--"] {
     font-size: 20px;
 }
 
-.mailDetail .table--basic td.td--mailTitle > * {
+.mailDetail .table--basic td.td--mailTitle>* {
     display: inline-block;
 }
 
-.mailDetail .table--basic td.td--mailTitle > h3 {
+.mailDetail .table--basic td.td--mailTitle>h3 {
     margin-left: 10px;
 }
 
@@ -925,6 +932,7 @@ section[class^="todo--"] {
 #mailWrite .btns-wrap button {
     margin-right: 4px;
 }
+
 /* 메일 끝 */
 
 /* 근태 */
