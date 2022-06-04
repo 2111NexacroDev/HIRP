@@ -49,7 +49,6 @@
 				chatMsgList(); //웹소켓 연결될 때 이전 채팅 내역 불러오기
 				this._url = param.url;
 				this._initSocket();
-				$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 			},
 			sendChat: function() {
 				//개행 처리
@@ -125,6 +124,7 @@
 				else if(msgData.cmd == 'CMD_EXIT') {					
 					$('#divChatData').append('<div>' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + msgData.msg + '</div>');
 				}
+				//스크롤 제일 밑으로 고정
 				$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 			},
 			closeMessage: function(str) {
@@ -157,14 +157,11 @@
 				};
 				var jsonData = JSON.stringify(msgData);
 				this._socket.send(jsonData);
-				$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 			}
 		};
 	
 		$(document).ready(function() {
 			webSocket.init({ url: '<c:url value="/chat" />' });
-/* 			$("#divChatParent").scrollTop(800); //스크롤 젤 밑으로 내리기가 안되는 중..
-			console.log("스크롤 높이"+$("#divChatParent")[0].scrollHeight); */
 		});
 		
 		//이전 채팅 내역 불러오기
@@ -318,6 +315,7 @@
 	    				//prevDay = "" 라서 날짜가 무조건 나옴..
 		    			prevDay = msgList[i].msgSenddate.substr(0, 10);
 					}
+	    			//스크롤 제일 밑으로
 	    			$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 	    		},
 	    		error: function(){
