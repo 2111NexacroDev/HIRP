@@ -799,6 +799,7 @@ button.next {
     border: 1px solid #888;
     border-radius: 4px;
     transition: text-shadow .2s;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 1201px) {

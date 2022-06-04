@@ -11,7 +11,7 @@
 		var message = "${msg}";
 		var returnUrl = "${url}";
 		alert(message);
-		location.href= returnUrl;
+		location.href=returnUrl;
 </script>
 </body>
 </html>

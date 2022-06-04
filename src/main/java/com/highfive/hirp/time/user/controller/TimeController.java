@@ -147,7 +147,8 @@ public class TimeController {
 				mv.setViewName("time/vacationList");
 			} else {
 				mv.addObject("msg", "연차 내역이 없습니다.");
-				mv.setViewName("common/errorPage");
+				mv.addObject("url", "/time/time.hirp");
+				mv.setViewName("common/errorPage2");
 			}
 
 		} catch (Exception e) {
@@ -181,7 +182,8 @@ public class TimeController {
 				mv.setViewName("time/modifyList");
 			} else {
 				mv.addObject("msg", "근태 조정 신청 내역이 없습니다.");
-				mv.setViewName("common/errorPage");
+				mv.addObject("url", "/time/time.hirp");
+				mv.setViewName("common/errorPage2");
 			}
 
 		} catch (Exception e) {
