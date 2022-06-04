@@ -190,14 +190,20 @@ public class ApprovalServiceImpl implements ApprovalService{
 
 	@Override
 	public List<Reference> printAllRefApprList(Reference reference) {
-		List<Reference> rList = aStore.selectAllRefApprList(reference);
+		List<Reference> rList = aStore.selectAllRefApprList(sqlSession, reference);
 		return null;
 	}
 
 	@Override
 	public List<Reference> printAllViewApprList(Reference reference) {
-		List<Reference> rList = aStore.selectAllViewApprList(reference);
+		List<Reference> rList = aStore.selectAllViewApprList(sqlSession, reference);
 		return null;
+	}
+
+	@Override
+	public List<Approval> printProceedAppr(String emplId) {
+		List<Approval> ingList = aStore.selectProceedAppr(sqlSession,emplId);
+		return ingList;
 	}
 
 

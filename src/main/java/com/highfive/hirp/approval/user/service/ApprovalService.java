@@ -98,6 +98,8 @@ public interface ApprovalService {
 		public int printRecentApprNo();
 		public List<Reference> printAllRefApprList(Reference reference);
 		public List<Reference> printAllViewApprList(Reference reference);
+		//진행중인 문서 조회
+		public List<Approval> printProceedAppr(String emplId);
 		
 	
 		//반려된 문서 이후의 결재라인 대기->null로 변경
