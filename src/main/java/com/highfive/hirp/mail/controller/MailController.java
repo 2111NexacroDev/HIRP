@@ -214,6 +214,8 @@ public class MailController {
 	@RequestMapping(value="/bugReport/WriteView.hirp", method=RequestMethod.GET)
 	public ModelAndView showBugReport(ModelAndView mv) {
 		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			mv.addObject("emplList", emplList);
 			mv.setViewName("mail/bugReportWriteForm");
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
@@ -356,8 +358,12 @@ public class MailController {
 	// 메일 검색
 	@RequestMapping(value = "/mail/searchMail.hirp", method = RequestMethod.GET)
 	public ModelAndView mailSearchList(ModelAndView mv
-			, @ModelAttribute Search search) {
+			, @ModelAttribute Search search
+			, HttpServletRequest request) {
 		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			search.setEmplId(emplId);
 			List<Mail> mList = mService.searchMail(search);
 			if (!mList.isEmpty()) {
 				mv.addObject("mList", mList);

@@ -46,7 +46,7 @@
 									<section class="section--modal modal--chat">
 										<div class="section--modal__conts" style="border: none">
 											<button class="btn--close" type="button"></button>
-											<h3>직원 선택</h3>
+											<h3>담당자</h3>
 											<div class="mb-20">
 												<ul>
 													<li>

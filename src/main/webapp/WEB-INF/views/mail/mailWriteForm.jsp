@@ -15,25 +15,19 @@
 	
 	<div id="conts">
         <aside id="snb">
-<<<<<<< HEAD
             <h1>메일</h1>
-=======
-            <h1>
-                메일
-            </h1>
->>>>>>> refs/remotes/origin/main
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
-            <ul>
+            <ul class="ul--mail">
                <li>
                    <a href="#none">메일함</a>
                    <ul>
-                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
-                       <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
-                       <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
-                       <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
-                       <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li><a href="/mail/Wlist.hirp">휴지통</a><button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button></li>
+                       <li <c:if test="${mailCategory == 'R' }">class="on"</c:if>><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li <c:if test="${mailCategory == 'S' }">class="on"</c:if>><a href="/mail/Slist.hirp">보낸메일함</a></li>
+                       <li <c:if test="${mailCategory == 'T' }">class="on"</c:if>><a href="/mail/Tlist.hirp">임시보관함</a></li>
+                       <li <c:if test="${mailCategory == 'M' }">class="on"</c:if>><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
+                       <li <c:if test="${mailCategory == 'I' }">class="on"</c:if>><a href="/mail/Ilist.hirp">중요메일함</a></li>
+                       <li <c:if test="${mailCategory == 'W' }">class="on"</c:if>><a href="/mail/Wlist.hirp">휴지통</a><button class="basic" type="button" onclick="deleteAllMail();">비우기</button></li>
                    </ul>
                </li>
             </ul>
@@ -57,10 +51,10 @@
 	            	<label for="check1">나에게</label>
 	            	<input type="text" name="mailRecipient" id="mailRecipient">
 	            	<button class="basic mt-20" type="button" onclick="onAddEmplButton(this);">주소록</button>
-					<section class="section--modal modal--recipient">
+					<section class="section--modal modal--chat modal--recipient">
 						<div class="section--modal__conts" style="border: none">
 							<button class="btn--close" type="button"></button>
-							<h3>직원 선택</h3>
+							<h3>받는 사람</h3>
 							<div class="mb-20">
 								<ul>
 									<li>
@@ -99,10 +93,10 @@
 	            	<h4>참조</h4>
 	            	<input type="text" name="mailReferrer" id="mailReferrer">
 	            	<button class="basic mt-20" type="button" onclick="onAddEmplButtonRef(this);">주소록</button>
-	            	<section class="section--modal modal--referrer">
+	            	<section class="section--modal modal--chat modal--referrer">
 						<div class="section--modal__conts" style="border: none">
 							<button class="btn--close" type="button"></button>
-							<h3>직원 선택</h3>
+							<h3>참조</h3>
 							<div class="mb-20">
 								<ul>
 									<li>
@@ -148,10 +142,19 @@
         </article>
 	</div>
 	<script>
+		function openModal(modalWindow) {
+		    $(modalWindow).siblings('.modal--recipient').css('display', 'flex');
+		}
+		
+		function openModal2(modalWindow) {
+		    $(modalWindow).siblings('.modal--referrer').css('display', 'flex');
+		}
+		
 		// 나에게
 		function myMail() {
+			var uid = '<%=(String)session.getAttribute("emplId")%>';
 			if($("#check1").prop("checked")) {
-				$("#mailRecipient").val("아이디값 들어가야 함");
+				$("#mailRecipient").val(uid+"@hirp.com");
 			}else {
 				$("#mailRecipient").val("");
 			}
@@ -159,8 +162,7 @@
 		
 		//수신자 추가 버튼
 		function onAddEmplButton(e){
-// 			openModal(e);
-			$(modalWindow).siblings('.modal--recipient').css('display', 'flex');
+			openModal(e);
 			//본인 소속팀과 하위 부서 check 해제
 			$("#subjectRadio2").prop("checked", true);
 			$("#subDeptCheck").prop("checked", false);
@@ -168,7 +170,7 @@
 		
 		// 참조자 추가 버튼
 		function onAddEmplButtonRef(e){
-			$(modalWindow).siblings('.modal--referrer').css('display', 'flex');
+			openModal2(e);
 			//본인 소속팀과 하위 부서 check 해제
 			$("#subjectRadio2").prop("checked", true);
 			$("#subDeptCheck").prop("checked", false);
@@ -233,7 +235,7 @@
 			
  			tdArr.push(hiddenEmplId.val());
 			
- 			$("#mailRecipient").val(tdArr[3]);
+ 			$("#mailRecipient").val(tdArr[3]+'@hirp.com');
 		}
 		
 		// 참조 주소록 tr이 클릭될 때
@@ -251,7 +253,7 @@
 			
  			tdArr.push(hiddenEmplId.val());
 			
- 			$("#mailReferrer").val(tdArr[3]);
+ 			$("#mailReferrer").val(tdArr[3]+'@hirp.com');
 		}
 	</script>
 	<script src="../../../resources/js/mail.js"></script>

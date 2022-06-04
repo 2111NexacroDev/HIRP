@@ -15,28 +15,19 @@
 	
 	<div id="conts">
         <aside id="snb">
-<<<<<<< HEAD
             <h1>메일</h1>
-=======
-            <h1>
-                메일
-            </h1>
->>>>>>> refs/remotes/origin/main
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
-            <ul>
+            <ul class="ul--mail">
                <li>
                    <a href="#none">메일함</a>
                    <ul>
-                       <li><a href="/mail/Rlist.hirp">받은메일함</a></li>
-                       <li><a href="/mail/Slist.hirp">보낸메일함</a></li>
-                       <li><a href="/mail/Tlist.hirp">임시보관함</a></li>
-                       <li><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
-                       <li><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li>
-	                       <a href="/mail/Wlist.hirp">휴지통</a>
-	                       <button class="basic mt-20" type="button" onclick="deleteAllMail();">비우기</button>
-                       </li>
+                       <li <c:if test="${mailCategory == 'R' }">class="on"</c:if>><a href="/mail/Rlist.hirp">받은메일함</a></li>
+                       <li <c:if test="${mailCategory == 'S' }">class="on"</c:if>><a href="/mail/Slist.hirp">보낸메일함</a></li>
+                       <li <c:if test="${mailCategory == 'T' }">class="on"</c:if>><a href="/mail/Tlist.hirp">임시보관함</a></li>
+                       <li <c:if test="${mailCategory == 'M' }">class="on"</c:if>><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
+                       <li <c:if test="${mailCategory == 'I' }">class="on"</c:if>><a href="/mail/Ilist.hirp">중요메일함</a></li>
+                       <li <c:if test="${mailCategory == 'W' }">class="on"</c:if>><a href="/mail/Wlist.hirp">휴지통</a><button class="basic" type="button" onclick="deleteAllMail();">비우기</button></li>
                    </ul>
                </li>
             </ul>
