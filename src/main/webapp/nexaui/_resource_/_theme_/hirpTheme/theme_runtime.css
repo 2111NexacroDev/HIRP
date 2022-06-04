@@ -662,13 +662,7 @@
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-.ListView .detail
-{
-	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
-	background : #f9f9f9;
-	font : 12px "Noto Sans KR";
-}
-.ListViewDetailBandControl.popupListViewdetail
+.ListViewDetailBandControl.popupListViewdetail.dummy
 {
 	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #f9f9f9;
@@ -678,11 +672,7 @@
 {
 	border : 1px solid #dbdee2;
 }
-.ListView .detail .cell
-{
-	border : 1px solid #dbdee2;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell
 {
 	border : 1px solid #dbdee2;
 }
@@ -1137,13 +1127,7 @@
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-.ListView .detail[status=readonly]
-{
-	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-.ListViewDetailBandControl.popupListViewdetail[status=readonly]
+.ListViewDetailBandControl.popupListViewdetail.dummy[status=readonly]
 {
 	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #ffffff;
@@ -1155,13 +1139,7 @@
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-.ListView .detail[status=focused]
-{
-	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-.ListViewDetailBandControl.popupListViewdetail[status=focused]
+.ListViewDetailBandControl.popupListViewdetail.dummy[status=focused]
 {
 	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #ffffff;
@@ -1173,13 +1151,7 @@
 	background : #ffffff;
 	font : 12px "Noto Sans KR";
 }
-.ListView .detail[status=mouseover]
-{
-	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
-	background : #ffffff;
-	font : 12px "Noto Sans KR";
-}
-.ListViewDetailBandControl.popupListViewdetail[status=mouseover]
+.ListViewDetailBandControl.popupListViewdetail.dummy[status=mouseover]
 {
 	border : 0px none, 0px none, 1px solid #dbdee2, 0px none;
 	background : #ffffff;
@@ -1189,11 +1161,7 @@
 {
 	border : 1px solid #dbdee2;
 }
-.ListView .detail .cell[status=readonly]
-{
-	border : 1px solid #dbdee2;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell[status=readonly]
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=readonly]
 {
 	border : 1px solid #dbdee2;
 }
@@ -1201,11 +1169,7 @@
 {
 	border : 1px solid #dbdee2;
 }
-.ListView .detail .cell[status=focused]
-{
-	border : 1px solid #dbdee2;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell[status=focused]
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=focused]
 {
 	border : 1px solid #dbdee2;
 }
@@ -1213,11 +1177,7 @@
 {
 	border : 1px solid #c4c9cf;
 }
-.ListView .detail .cell[status=mouseover]
-{
-	border : 1px solid #c4c9cf;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell[status=mouseover]
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=mouseover]
 {
 	border : 1px solid #c4c9cf;
 }
@@ -1546,11 +1506,7 @@
 {
 	background : #f2f9ff;
 }
-.ListView .detail[userstatus=selected]
-{
-	background : #ebf3f9;
-}
-.ListViewDetailBandControl.popupListViewdetail[userstatus=selected]
+.ListViewDetailBandControl.popupListViewdetail.dummy[userstatus=selected]
 {
 	background : #ebf3f9;
 }
@@ -1876,11 +1832,7 @@
 {
 	color : #999999;
 }
-.ListView .detail[status=disabled]
-{
-	color : #999999;
-}
-.ListViewDetailBandControl.popupListViewdetail[status=disabled]
+.ListViewDetailBandControl.popupListViewdetail.dummy[status=disabled]
 {
 	color : #999999;
 }
@@ -1888,11 +1840,7 @@
 {
 	border : 1px solid #dbdee2;
 }
-.ListView .detail .cell[status=disabled]
-{
-	border : 1px solid #dbdee2;
-}
-.ListViewDetailBandControl.popupListViewdetail .cell[status=disabled]
+.ListViewDetailBandControl.popupListViewdetail.dummy .cell[status=disabled]
 {
 	border : 1px solid #dbdee2;
 }
