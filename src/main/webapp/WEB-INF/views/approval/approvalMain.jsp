@@ -87,6 +87,12 @@ height : 35px;
 						</tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty ingList }">
+                    <tr>
+                    	<td colspan="4" class="t-c"> 진행중인 문서가 없습니다. </td>
+                    </tr>
+                    </c:if>
+                    <c:if test="${not empty ingList }">
                     <c:forEach var="ingList" items="${ingList}" >
                     		<tr>
                     		<c:url var="proceedAppr" value="/proceed/appr.hirp">
@@ -98,6 +104,7 @@ height : 35px;
                         	<td><button class="ongoing mt-20" type="button">진행중</button></td>
                     	</tr>
                     </c:forEach>
+                    </c:if>
                     </tbody>
                 </table>
 
@@ -118,6 +125,12 @@ height : 35px;
 						</tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty cList }">
+                    <tr>
+                    	<td colspan="4" class="t-c"> 완료된 문서가 없습니다. </td>
+                    </tr>
+                    </c:if>
+                    <c:if test="${not empty cList }">
                     <c:forEach var="cList" items="${cList}" >
                     		<tr>
                     		<c:url var="aDetail" value="/appr/detail.hirp">
@@ -129,6 +142,7 @@ height : 35px;
                         	<td><button class="finished mt-20" type="button">완료</button></td>
                     	</tr>
                     </c:forEach>
+                    </c:if>
                     </tbody>
                 </table>
                
