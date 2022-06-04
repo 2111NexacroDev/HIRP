@@ -71,9 +71,11 @@ public interface ApprovalStore {
 	//결재 첨부파일 등록
 	int insertApprAttachedFile(SqlSession sqlSession, ApprAttachedFile apprFile);
 
-	List<Reference> selectAllRefApprList(Reference reference);
+	List<Reference> selectAllRefApprList(SqlSession sqlSession, Reference reference);
 
-	List<Reference> selectAllViewApprList(Reference reference);
+	List<Reference> selectAllViewApprList(SqlSession sqlSession, Reference reference);
+
+	List<Approval> selectProceedAppr(SqlSession sqlSession, String emplId);
 
 
 
