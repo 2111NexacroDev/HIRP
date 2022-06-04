@@ -396,14 +396,17 @@ section[class^="todo--"] {
     transform: rotate(45deg);
 }
 
-
-.fc .fc-day-sun {
-    color: #FF000A;
+#scheduleList .fc-scrollgrid-sync-table>tbody[role="presentation"]>tr:first-of-type .fc-daygrid-day.fc-day-today:before {
+    top: 0 !important;
 }
 
 #scheduleList .fc .fc-dayGridMonth-view .fc-day-sun.fc-day-today:before {
     left: auto;
     right: -6px;
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
 }
 
 .fc .fc-today-button,
@@ -719,12 +722,58 @@ section[class^="todo--"] {
 /* 프로젝트 관리 끝 */
 
 /* 메일 */
-.mailList .btns-wrap {
+.mailList .btns-wrap+.subConts,
+.mailDetail .btns-wrap+.subConts {
+    padding: 0 20px 20px;
+}
+
+.mailDetail .btns-wrap+.subConts {
+    border-top: 1px solid #ccc;
+}
+
+.mailList .btns-wrap,
+.mailDetail .btns-wrap {
     position: relative;
 }
 
-.mailList .btns-wrap>* {
+.mailList .btns-wrap>*,
+.mailDetail .btns-wrap>* {
     vertical-align: top;
+}
+
+.mailDetail .table--basic {
+    border-top: none;
+}
+
+.mailDetail .table--basic th, 
+.mailDetail .table--basic td {
+    border: none;
+}
+
+.mailDetail .table--basic td {
+    padding: 10px 20px;
+}
+
+.mailDetail .table--basic tr:hover td {
+    background: none;
+} 
+
+.mailDetail .table--basic td:first-child {
+    padding: 10px 0;
+}
+
+.mailDetail .table--basic td.td--mailTitle {
+    padding: 4px 20px 24px 0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.mailDetail .table--basic td.td--mailTitle > * {
+    display: inline-block;
+}
+
+.mailDetail .table--basic td.td--mailTitle > h3 {
+    margin-left: 10px;
 }
 
 .mailList .btns-wrap input[type="checkbox"] {
@@ -738,16 +787,22 @@ section[class^="todo--"] {
     display: inline-block;
     width: 28px;
     height: 28px;
-    border: 1px solid #ccc;
 }
 
-.mailList .btns-wrap button {
+.mailList .btns-wrap button,
+.mailDetail .btns-wrap button {
     border-color: #ccc;
+}
+
+.mailDetail .table--basic td.td--mailFile {
+    padding: 10px 10px 10px 34px;
+    background: #eee url("../../resources/images/icons/icon_file.png") no-repeat 10px center !important;
 }
 
 .ul--mail>li>ul>li>a+button {
     float: right;
     padding: 4px 8px;
+    font-weight: 300;
     font-size: 12px;
     color: #888;
     border-color: #888;
@@ -826,6 +881,50 @@ section[class^="todo--"] {
     margin: 3px 0 0 3px;
 }
 
+.ul--mailWrite {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.ul--mailWrite>li {
+    display: flex;
+    align-items: center;
+}
+
+.ul--mailWrite>li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.ul--mailWrite>li>*:first-child {
+    width: 160px;
+}
+
+.ul--mailWrite>li>*:last-child:not([type="file"]) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 160px);
+}
+
+.ul--mailWrite input[name="check1"] {
+    margin: 2px 4px 0 40px;
+}
+
+.ul--mailWrite>li>div input[type="text"]:not(:only-child) {
+    width: calc(100% - 70px);
+}
+
+#mailWrite .note-editor {
+    margin: 0 20px;
+}
+
+#mailWrite .btns-wrap {
+    padding: 10px 20px 6px;
+}
+
+#mailWrite .btns-wrap button {
+    margin-right: 4px;
+}
 /* 메일 끝 */
 
 /* 근태 */
