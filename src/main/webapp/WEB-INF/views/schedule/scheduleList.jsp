@@ -44,15 +44,19 @@
                                 name="scheduleStartDate">&nbsp;&nbsp;~&nbsp;&nbsp;<input type="datetime-local"
                                 name="scheduleEndDate">
                         </li>
-                        <li>
+                        <li class="categories">
                             <label class="mr-20" for="">일정구분</label>
                             <div class="fz-0">
-                                <input id="valueA" name="scheduleCategory" type="radio" value="개인" checked>
-                                <label class="mr-20" for="valueA">개인일정</label>
-                                <input id="valueB" name="scheduleCategory" type="radio" value="부서">
-                                <label class="mr-20" for="valueB">부서일정</label>
-                                <input id="valueC" name="scheduleCategory" type="radio" value="전사">
-                                <label for="valueC">전사일정</label>
+                                <c:if test="${sessionScope.emplId ne 'admin'}">
+                                    <input id="valueA" name="scheduleCategory" type="radio" value="개인" checked>
+                                    <label class="mr-20" for="valueA">개인일정</label>
+                                    <input id="valueB" name="scheduleCategory" type="radio" value="부서">
+                                    <label class="mr-20" for="valueB">부서일정</label>
+                                </c:if>
+                                <c:if test="${sessionScope.emplId eq 'admin'}">
+                                    <input id="valueC" name="scheduleCategory" type="radio" value="전사">
+                                    <label for="valueC">전사일정</label>
+                                </c:if>
                             </div>
                         </li>
                         <li>
@@ -81,8 +85,10 @@
                     <a href="">내 캘린더</a>
                     <ul class="ul--category">
                         <li><input id="company" type="checkbox" checked><label for="company">전사 일정</label></li>
-                        <li><input id="team" type="checkbox" checked><label for="team">부서 일정</label></li>
-                        <li><input id="personal" type="checkbox" checked><label for="personal">개인 일정</label></li>
+                        <c:if test="${sessionScope.emplId ne 'admin'}">
+                            <li><input id="team" type="checkbox" checked><label for="team">부서 일정</label></li>
+                            <li><input id="personal" type="checkbox" checked><label for="personal">개인 일정</label></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
@@ -105,6 +111,8 @@
     </div>
 
     <script>
+        let emplId = '${sessionScope.emplId}';
+        
         // 입력값 초기화 함수
         function openCleanedScheduleModal() {
             // 스케쥴 넘버 제거
@@ -148,9 +156,15 @@
             $('input[name="scheduleColor"]').val('defaultColor');
 
             // 카테고리 세팅
-            $('input[value="전사"]').prop('checked', false);
-            $('input[value="부서"]').prop('checked', false);
-            $('input[value="개인"]').prop('checked', true);
+            $('.categories').css('display', 'block');
+            $('.categories div>*').css('display', 'inline-block');
+            if(emplId != 'admin') {
+                $('input[value="전사"]').prop('checked', false);
+                $('input[value="부서"]').prop('checked', false);
+                $('input[value="개인"]').prop('checked', true);
+            } else {
+                $('input[value="전사"]').prop('checked', true);
+            }
 
             // 알림 여부 세팅
             document.getElementsByName('scheduleAlarm')[0].value = 'N';
@@ -214,27 +228,41 @@
             }
 
             // 카테고리 세팅
-            let emplId = '${sessionScope.emplId}';
-            if(data.event.extendedProps.scheduleCategory == '전사') {
-                $('input[value="전사"]').prop('checked', true);
-                if(emplId != 'admin') {
+            if(emplId != 'admin') {
+                if(data.event.extendedProps.scheduleCategory == '전사') {
+                    $('input[value="전사"]').prop('checked', true);
                     $('.btns-wrap').css('display', 'none');
                     $('.modal--shcedule h3').append('<span>※ 전사 일정은 관리팀에서만 수정 가능합니다.</span>');
-                } else {
+                    $('.categories').css('display', 'none');
+                    $('input[value="개인"], input[value="개인"]+label').css('display', 'none');
+                    $('input[value="부서"], input[value="부서"]+label').css('display', 'none');
+                } else if(data.event.extendedProps.scheduleCategory == '부서') {
+                    $('input[value="부서"]').prop('checked', true);
                     $('.btns-wrap').css('display', 'block');
+                    $('.categories').css('display', 'block');
+                    $('input[value="전사"], input[value="전사"]+label').css('display', 'none');
+                    $('input[value="개인"], input[value="개인"]+label').css('display', 'inline-block');
+                    $('input[value="부서"], input[value="부서"]+label').css('display', 'inline-block');
+                    if($('.modal--shcedule h3 span').length != 0) {
+                        $('.modal--shcedule h3 span').remove();
+                    }
+                } else { // 개인 일정
+                    $('input[value="개인"]').prop('checked', true);
+                    $('input[value="전사"], input[value="전사"]+label').css('display', 'none');
+                    $('input[value="개인"], input[value="개인"]+label').css('display', 'inline-block');
+                    $('input[value="부서"], input[value="부서"]+label').css('display', 'inline-block');
+                    $('.btns-wrap').css('display', 'block');
+                    $('.categories').css('display', 'block');
+                    if($('.modal--shcedule h3 span').length != 0) {
+                        $('.modal--shcedule h3 span').remove();
+                    }
                 }
-            } else if(data.event.extendedProps.scheduleCategory == '부서') {
-                $('input[value="부서"]').prop('checked', true);
-                $('.btns-wrap').css('display', 'block');
-                if($('.modal--shcedule h3 span').length != 0) {
-                    $('.modal--shcedule h3 span').remove();
-                }
-            } else {
-                // 개인 일정
-                $('input[value="개인"]').prop('checked', true);
-                $('.btns-wrap').css('display', 'block');
-                if($('.modal--shcedule h3 span').length != 0) {
-                    $('.modal--shcedule h3 span').remove();
+            } else {// 관리자일 경우
+                if(data.event.extendedProps.scheduleCategory == '전사') {
+                    $('input[value="전사"]').prop('checked', true);
+                    $('input[value="전사"], input[value="전사"]+label').css('display', 'inline-block');
+                    $('input[value="개인"], input[value="개인"]+label').css('display', 'none');
+                    $('input[value="부서"], input[value="부서"]+label').css('display', 'none');
                 }
             }
 

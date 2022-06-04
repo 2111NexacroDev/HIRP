@@ -8,7 +8,7 @@ import com.highfive.hirp.schedule.domain.Schedule;
 public interface ScheduleService {
 	public List<Schedule> printSearchSchedule(Search search);
 	public List<Schedule> printAllCompanySchedule();
-	public List<Schedule> printAllTeamSchedule(String loginUser);
+	public List<Schedule> printAllTeamSchedule(Schedule schedule);
 	public List<Schedule> printAllPersonalSchedule(String loginUser);
 	
 	public int registerCompanySchedule(Schedule schedule);
