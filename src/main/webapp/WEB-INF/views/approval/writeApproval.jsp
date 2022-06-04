@@ -24,7 +24,7 @@
 						<button class="btn--close" type="button" onclick="closeApprModal()"></button>
 						<div class="row mt-20 tab-content current" id="tab-1">
 						<h3>결재선 선택</h3>
-						  <div id="groupContainer" class="container"> 
+						  <div id="groupContainer" class="container" style="float:left; "> 
 						
 								<div id="organization" class="subConts">
 									<ul id="orgList">
@@ -32,7 +32,7 @@
 								</div>
 								
 							</div>
-							<div class="container"style="width:450px;" id="emplListDiv">
+							<div class="container"style="width:450px;float:left;" id="emplListDiv">
 								<table class="table--basic mt-20" id="apprEmplTable">
 									<tr id="apprEmplTableHead">
 										<th>부서</th>
@@ -44,10 +44,11 @@
 								</table>
 							</div> 
 						</div>
+						
 						<div id="tab-2" class="tab-content">
 							<h3>참조자/열람자 선택</h3>
 							
-								 <div style="width:40%;border:1px solid lightgray">
+								 <div id="groupContainer" class="container" style="float:left;"> 
 								 <div id="organization" class="subConts">
 									<ul id="orgList2">
 									</ul> 
@@ -71,7 +72,7 @@
 								</table>  --%>
 								
 						</div>
-						<div class="container">
+						<div class="container" style="float:left;">
 								<table class="table--basic mt-20" id="refTable">
 									<tr id="apprEmplTableHead">
 										<th>부서</th>
@@ -502,15 +503,15 @@
 									$("#" + parentId).append($ul);
 								}
 							});
+								var $rootList2 = $("#orgList").clone().html();
+								$("#orgList2").html($rootList2);
 						} else {
 							alert("조직도 데이터가 없습니다.");
 						}
 						$("#orgList2, #orgList, #navigation").treeview({
 							collapsed : true
 						});
-						var $rootList2 = $("#orgList").clone().html();
-						$("#orgList2").html($rootList2);
-						console.log($rootList2);
+						
 					},
 					error : function() {
 						alert("조직도 조회 중에 실패했습니다.");

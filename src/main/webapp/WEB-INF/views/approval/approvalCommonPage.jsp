@@ -60,13 +60,8 @@
                             <p class="mb-20">
                                <div>
 		                            <div class="bor-round shadow" id="formListDiv" style="width: 250px; height:180px;">
-		                            <ul>
-		                            <c:forEach var="form" items="${formList }" >
-		                            	<c:url var="fDetail" value="/approvalForm/detail.hirp">
-		                            		<c:param name="formNo" value="${form.formNo }"></c:param>
-		                            	</c:url>
-									<li><a href="${fDetail }">${form.formTitle }</a></li>
-		                            </c:forEach>
+		                            <ul id="apprFormListUl">
+		                            
 		                            </ul>
 		                            </div>
                       		  </div>
@@ -98,11 +93,41 @@
                 <li>
                     <a href="">참조함</a>
                     <ul>       
-                        <li><a href="#">참조문서함</a></li>
-                        <li><a href="#">열람문서함</a></li>
+                        <li><a href="/ref/appr.hirp">참조문서함</a></li>
+                        <li><a href="/viewer/appr.hirp">열람문서함</a></li>
                     </ul>
                 </li>
             </ul>
         </aside>
         <article id="sub" class="">
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
+            
+            <script>
+            function openModal(modalWindow) {
+                $(modalWindow).siblings('.section--modal').css('display', 'flex');
+               
+            }
+            
+            getFormList();
+            
+            function getFormList() {
+    		 $.ajax({
+    				url  : "/apprForm/list.hirp",
+    				type : "get",
+    				dataType : "json",
+    				success : function(data) { 
+    					var apprFormListUl = $("#apprFormListUl");
+    					 for(var i = 0; i < data.length; i++) {
+    						var apprList = "<c:url var='fDetail' value='/approvalForm/detail.hirp?formNo="+data[i].formNo+"'></c:url><li><a href='${fDetail }'>"+data[i].formTitle+"</li>"
+    						apprFormListUl.append(apprList);
+    					} 
+    					
+    				},
+    				error   : function() { 
+    					alert("조회실패");
+    				}
+    			});
+    			
+    		}
+             
+            </script>

@@ -182,15 +182,21 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
-	public List<Reference> selectAllRefApprList(Reference reference) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reference> selectAllRefApprList(SqlSession sqlSession, Reference reference) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllRefApprList",reference);
+		return rList;
 	}
 
 	@Override
-	public List<Reference> selectAllViewApprList(Reference reference) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reference> selectAllViewApprList(SqlSession sqlSession, Reference reference) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllViewApprList",reference);
+		return rList;
+	}
+
+	@Override
+	public List<Approval> selectProceedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> ingList = sqlSession.selectList("ApprMapper.selectProceedAppr",emplId);
+		return ingList;
 	}
 
 
