@@ -74,7 +74,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">전자결재</a>
+                    <a href="/alarm/printAlarm30.hirp">전자결재</a>
                 </li>
                 <li>
                     <a href="/alarm/printAlarm40.hirp">설문조사</a>
@@ -85,24 +85,30 @@
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
 <%--         	<c:out value="${path}" /> --%>
+			<h1 class="basic-border-bottom">
         	<c:if test="${path eq '/alarm/allAlarm.hirp'}" >
-        		<h1 class="basic-border-bottom">전체 알림</h1>
+        		전체 알림
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
-        		<h1 class="basic-border-bottom">메일</h1>
+        		메일
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
-        		<h1 class="basic-border-bottom">전사 일정</h1>
+        		전사 일정
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '21'}" >
-        		<h1 class="basic-border-bottom">부서 일정</h1>
+        		부서 일정
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '22'}" >
-        		<h1 class="basic-border-bottom">개인 일정</h1>
+        		개인 일정
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '30'}" >
+        		전자결재
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
-        		<h1 class="basic-border-bottom">설문조사</h1>
+        		설문조사
         	</c:if>
+        	&nbsp;<button type="button">전체 삭제</button>
+        	</h1>
 <%--         	<c:if test="${fn:substring(path, 17, 19) eq '1%'}" > --%>
 <!--         		<h1 class="basic-border-bottom">게시판</h1> -->
 <%--         	</c:if> --%>
