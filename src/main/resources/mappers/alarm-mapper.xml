@@ -4,5 +4,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="AlarmMapper">
-
+	<resultMap type="Alarm" id="alarmResultMap">
+		<id property="alarmNo" column="CHATROOM_NO"/>
+		<result property="emplId" column="CHATROOM_NAME"/>
+		<result property="alarmDate" column="CHATROOM_MANAGER"/>
+		<result property="alarmContents" column="CHATROOM_DATE"/>
+		<result property="alarmCode" column="CHATROOM_TYPE"/>
+		<result property="alarmStatus" column="JOINCHAT_ID_LIST"/>
+		<result property="alarmSendid" column="JOINCHAT_NAME_LIST"/>
+		<!-- 보낸 사람 정보 -->
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
+		<result property="emplProfile" column="EMPL_PROFILE"/>
+	</resultMap>
+	
+	<!-- 모든 알림 -->
+	<select id="selectAllAlarm" resultMap="alarmResultMap">
+		SELECT 
+		ALARM_NO, A.EMPL_ID,
+		TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ALARM_DATE,
+		ALARM_CONTENTS, ALARM_CODE, ALARM_STATUS, A.ALARM_SENDID,
+		EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
+		FROM ALARM_TBL A
+		JOIN EMPL_TBL E ON E.EMPL_ID = A.ALARM_SENDID
+		JOIN DEPT_TBL D USING(DEPT_CODE)
+		JOIN POSITION_TBL P USING(POSITION_CODE)
+		WHERE A.EMPL_ID = #{emplId}
+		<![CDATA[AND ALARM_DATE <= SYSDATE]]>
+		ORDER BY ALARM_DATE DESC
+	</select>
+	
+	<!-- 알림 설정된 애들 중에 안 읽은 알림 최대 10개 -->
+	<!-- 아직 알림 설정이 안 되어있어서 안 읽은 것 중 최신 10개 -->
+	<select id="selectUnreadAlarm" resultMap="alarmResultMap">
+		SELECT * FROM (
+		    SELECT 
+		    ALARM_NO, A.EMPL_ID,
+		    TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ALARM_DATE,
+		    ALARM_CONTENTS, ALARM_CODE, ALARM_STATUS, A.ALARM_SENDID,
+		    EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
+		    FROM ALARM_TBL A
+		    JOIN EMPL_TBL E ON E.EMPL_ID = A.ALARM_SENDID
+		    JOIN DEPT_TBL D USING(DEPT_CODE)
+		    JOIN POSITION_TBL P USING(POSITION_CODE)
+		    WHERE A.EMPL_ID = #{emplId}
+		    <![CDATA[AND ALARM_DATE <= SYSDATE]]>
+		    AND ALARM_STATUS = 'N'
+		    ORDER BY ALARM_DATE DESC, ALARM_NO DESC
+		) <![CDATA[WHERE ROWNUM <= 10]]>
+	</select>
 </mapper>

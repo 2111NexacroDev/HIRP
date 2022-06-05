@@ -27,28 +27,60 @@
     </section>
     
     <section class="nav--right__alarm">
-        <div class="mt-20">
-        	<div class="mb-10">
-	        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-        	</div>
-        	<span class="mr-10 colorGrey">3시간 전</span>
-        	<span class="colorGrey">관리자</span>
-        </div>
-        <div class="mt-20">
-        	<div class="mb-10">
-	        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-        	</div>
-        	<span class="mr-10 colorGrey">3시간 전</span>
-        	<span class="colorGrey">관리자</span>
-        </div>
-        <div class="mt-20">
-        	<div class="mb-10">
-	        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-        	</div>
-        	<span class="mr-10 colorGrey">3시간 전</span>
-        	<span class="colorGrey">관리자</span>
-        </div>
-        <a class="mt-20 mb-20 t-c colorBlue" href="#">전체 알림 보기</a>
+    	<!-- 알림 리스트 -->
+    	<div style="height:300px; overflow:scroll;">
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+	        <div class="mt-20">
+	        	<div class="mb-10">
+		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
+	        	</div>
+	        	<span class="mr-10 colorGrey">3시간 전</span>
+	        	<span class="colorGrey">관리자</span>
+	        </div>
+    	
+    	</div>
+        <a class="mt-10 mb-10 t-c colorBlue" href="#">전체 알림 보기</a>
     </section>
 </nav>
 

@@ -943,8 +943,8 @@ button.next {
     right: 80px;
     top: 100%;
     display: none;
-    width: 300px;
-    padding: 6px 10px;
+    width: 350px;
+    padding: 6px 18px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, .4);
     border-radius: 5px;

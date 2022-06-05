@@ -32,6 +32,7 @@ public class AlarmStoreLogic implements AlarmStore{
 		return result;
 	}
 
+	//알림
 	@Override
 	public List<Alarm> selectAllAlarm(SqlSession sqlSession, String emplId) {
 		List<Alarm> allAlarmList = sqlSession.selectList("AlarmMapper.selectAllAlarm", emplId);
