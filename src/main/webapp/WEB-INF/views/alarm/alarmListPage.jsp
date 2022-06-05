@@ -68,16 +68,16 @@
                 <li>
                     <a href="">일정관리</a>
                     <ul>       
-                        <li><a href="#">전사일정</a></li>
-                        <li><a href="#">팀일정</a></li>
-                        <li><a href="#">내일정</a></li>
+                        <li><a href="/alarm/printAlarm20.hirp">전사 일정</a></li>
+                        <li><a href="/alarm/printAlarm21.hirp">부서 일정</a></li>
+                        <li><a href="/alarm/printAlarm22.hirp">개인 일정</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="">전자결재</a>
                 </li>
                 <li>
-                    <a href="">설문조사</a>
+                    <a href="/alarm/printAlarm40.hirp">설문조사</a>
                 </li>
             </ul>
         </aside>
@@ -90,6 +90,18 @@
         	</c:if>
         	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
         		<h1 class="basic-border-bottom">메일</h1>
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
+        		<h1 class="basic-border-bottom">전사 일정</h1>
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '21'}" >
+        		<h1 class="basic-border-bottom">부서 일정</h1>
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '22'}" >
+        		<h1 class="basic-border-bottom">개인 일정</h1>
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
+        		<h1 class="basic-border-bottom">설문조사</h1>
         	</c:if>
 <%--         	<c:if test="${fn:substring(path, 17, 19) eq '1%'}" > --%>
 <!--         		<h1 class="basic-border-bottom">게시판</h1> -->

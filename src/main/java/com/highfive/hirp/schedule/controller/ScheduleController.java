@@ -111,9 +111,9 @@ public class ScheduleController {
 								Alarm alarm = new Alarm(emplList.get(i).getEmplId(), alarmDate, "[전사일정] '"+schedule.getScheduleTitle()+"' 일정 하루 전입니다.",
 										"20", "N", loginUser);
 								int result3 = aService.insertAlarm(alarm);
-								if(result3 > 0) {
-									System.out.println("[전사일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
-								}
+//								if(result3 > 0) {
+//									System.out.println("[전사일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
+//								}
 							}
 						}
 					}
@@ -133,9 +133,9 @@ public class ScheduleController {
 								Alarm alarm = new Alarm(deptEmplList.get(i).getEmplId(), alarmDate, "[부서일정] '"+schedule.getScheduleTitle()+"' 일정 하루 전입니다.",
 										"21", "N", loginUser);
 								int result3 = aService.insertAlarm(alarm);
-								if(result3 > 0) {
-									System.out.println("[부서일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
-								}
+//								if(result3 > 0) {
+//									System.out.println("[부서일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
+//								}
 							}
 						}
 					}
@@ -151,9 +151,9 @@ public class ScheduleController {
 						Alarm alarm = new Alarm(loginUser, alarmDate, "[개인일정] '"+schedule.getScheduleTitle()+"' 일정 하루 전입니다.",
 								"22", "N", loginUser);
 						int result2 = aService.insertAlarm(alarm);
-						if(result2 > 0) {
-							System.out.println("[개인일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
-						}
+//						if(result2 > 0) {
+//							System.out.println("[개인일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
+//						}
 					}
 					mv.setViewName("redirect:/schedule/list.hirp");
 				} else {	
