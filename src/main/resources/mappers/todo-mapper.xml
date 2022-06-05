@@ -37,7 +37,7 @@
 		ORDER BY TODO_DATE DESC
 	</select>
 	<insert id="insertToDo">
-		INSERT INTO TODO_TBL VALUES(TODO_SEQ.NEXTVAL, #{emplId}, SYSDATE, #{todoConts}, DEFAULT)
+		INSERT INTO TODO_TBL VALUES(TODO_SEQ.NEXTVAL, #{emplId}, #{todoDate}, #{todoConts}, DEFAULT)
 	</insert>
 	<update id="updateToDo">
 		UPDATE TODO_TBL SET TODO_CONTS = #{todoConts} WHERE TODO_NO = #{todoNo}
