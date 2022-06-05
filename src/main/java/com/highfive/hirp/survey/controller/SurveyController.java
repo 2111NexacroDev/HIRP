@@ -269,6 +269,7 @@ public class SurveyController {
 //					subList.add(surveySub);
 //					System.out.println(subList.get(i));
 						result2 = sService.insertSurveySub(surveySub);
+						//설문조사 알림 추가
 						if(result2 > 0) {
 							Alarm alarm = new Alarm(surveySub.getSubId(), today, "[설문조사] '"+survey.getSurveyTitle()+"' 설문조사가 등록되었습니다.",
 									"40", "N", emplId);
