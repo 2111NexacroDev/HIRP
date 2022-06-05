@@ -9,7 +9,7 @@ import com.highfive.hirp.schedule.domain.Schedule;
 
 public interface ScheduleStore {
 	public List<Schedule> selectAllCompanySchedule(SqlSession sqlSession);
-	public List<Schedule> selectAllTeamSchedule(SqlSession sqlSession, String loginUser);
+	public List<Schedule> selectAllTeamSchedule(SqlSession sqlSession, Schedule schedule);
 	public List<Schedule> selectAllSchedule(SqlSession sqlSession, String loginUser);
 	public List<Schedule> selectSearchSchedule(SqlSession sqlSession, Search search);
 	

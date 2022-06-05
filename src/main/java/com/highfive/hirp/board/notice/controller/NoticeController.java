@@ -30,6 +30,8 @@ import com.google.gson.JsonIOException;
 import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
 import com.highfive.hirp.board.common.SaveMultipartFile;
+import com.highfive.hirp.board.department.domain.DepartmentBoard;
+import com.highfive.hirp.board.department.service.DepartmentBoardService;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
 import com.highfive.hirp.board.reply.domain.Reply;
@@ -42,12 +44,17 @@ public class NoticeController {
 
 	@Autowired
 	public NoticeBoardService nService;
+	
+	@Autowired
+	public DepartmentBoardService dService;
 
 	@RequestMapping(value = "board/main.hirp")
 	public ModelAndView boardMain(ModelAndView mv) {
 		List<NoticeBoard> nList = nService.printNewestNotice();
+		List<DepartmentBoard> dList = dService.printNewestDepartment();
 		if (!nList.isEmpty()) {
 			mv.addObject("nList", nList);
+			mv.addObject("dList", dList);
 			mv.setViewName("/board/boardMain");
 		} else {
 			mv.addObject("msg", "조회 실패");

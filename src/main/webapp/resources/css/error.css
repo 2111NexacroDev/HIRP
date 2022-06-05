@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 200px;
+    background: #ddedfa url("../images/img_404.jpeg") no-repeat center 40px;
+    font-family: "Noto Sans KR", sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+}

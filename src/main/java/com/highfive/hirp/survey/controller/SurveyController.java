@@ -463,7 +463,7 @@ public class SurveyController {
 		try {
 			int result = sService.updateSurveyStatus(surveyNo);
 			if(result > 0) {
-				mv.setViewName("redirect:/survey/main.hirp");
+				mv.setViewName("redirect:/survey/closed.hirp");
 			} else {
 				mv.addObject("msg1", "설문조사 상태 업데이트 실패");
 				mv.setViewName("common/errorPage");
@@ -577,7 +577,7 @@ public class SurveyController {
 			}
 			if(result > 0 && result2 > 0) {
 				//설문조사 응답자 목록에서 answerstatus 업데이트
-				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
+				mv.setViewName("redirect:/survey/proceed.hirp"); //이거 바꾸기
 			} else {
 				mv.addObject("msg", "설문조사 응답 제출 실패");
 				mv.setViewName("common/errorPage");
@@ -661,7 +661,7 @@ public class SurveyController {
 			}
 			if(result > 0) {
 				//설문조사 응답자 목록에서 answerstatus 업데이트
-				mv.setViewName("redirect:/survey/main.hirp"); //이거 바꾸기
+				mv.setViewName("redirect:/survey/proceed.hirp"); //이거 바꾸기
 			} else {
 				mv.addObject("msg", "설문조사 응답 수정 실패");
 				mv.setViewName("common/errorPage");

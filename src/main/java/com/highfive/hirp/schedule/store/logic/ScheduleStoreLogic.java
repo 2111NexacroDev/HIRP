@@ -18,8 +18,8 @@ public class ScheduleStoreLogic implements ScheduleStore {
 	}
 
 	@Override
-	public List<Schedule> selectAllTeamSchedule(SqlSession sqlSession, String loginUser) {
-		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllTeamSchedule", loginUser);
+	public List<Schedule> selectAllTeamSchedule(SqlSession sqlSession, Schedule schedule) {
+		List<Schedule> sList = sqlSession.selectList("ScheduleMapper.selectAllTeamSchedule", schedule);
 		return sList;
 	}
 

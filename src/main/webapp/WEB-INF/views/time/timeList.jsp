@@ -19,18 +19,24 @@
 				<li>
 					<dl>
 						<dt>출근시간</dt>
-						<dd id="timeStart" class="ml-10">${time.timeStart }</dd>
+						<dd id="timeStart" class="ml-10">
+							<c:if test="${empty time}">미출근 수정</c:if>
+							<c:if test="${not empty time}">${time.timeStart }</c:if>                                            
+						</dd>
 					</dl>
 				</li>
 				<li>
 					<dl>
 						<dt>퇴근시간</dt>
-						<dd id="timeEnd" class="ml-10">${time.timeEnd }</dd>
+						<dd id="timeEnd" class="ml-10">
+							<c:if test="${time.timeEnd eq null}">미퇴근</c:if>
+							<c:if test="${time.timeEnd ne null}">${time.timeEnd }</c:if>           
+						</dd>
 					</dl>
 				</li>
 				<li>
 					<div class="btns-wrap">
-						<button class="finished" type="button" onclick="startBtn();">출근하기</button>	
+						<button class="finished" type="button" onclick="startBtn();">출근하기</button>
 						<button class="finished" type="button" onclick="endBtn();">퇴근하기</button>
 					</div>
 					<select class="mt-10" name="" id="">
@@ -83,7 +89,10 @@
 								<td>${time.emplId }</td>
 								<td>${time.timeDate }</td>
 								<td>${time.timeStart }</td>
-								<td>${time.timeEnd }</td>
+								<td>
+									<c:if test="${time.timeEnd eq null}">미퇴근</c:if>
+									<c:if test="${time.timeEnd ne null}">${time.timeEnd }</c:if>  
+								</td>
 								<td>${time.timeState }</td>
 								<td>${time.timeAccrue }</td>
 							</tr>
@@ -135,6 +144,7 @@
 						alert("이미 출근 하셨습니다.");
 					} else {
 						alert("출근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 				},
 				error : function() {
@@ -157,6 +167,7 @@
 						alert("이미 퇴근 하셨습니다.");
 					} else {
 						alert("퇴근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 
 				},

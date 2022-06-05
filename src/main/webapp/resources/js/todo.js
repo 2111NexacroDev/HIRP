@@ -73,12 +73,14 @@ $(document).on('click', '.todo--today label', function () {
 
 function addTodo(obj) {
     let todoConts = $(obj).parent().siblings('input[name="todoConts"]').val();
+    let selectedDate = $('.todo--today h2').text();
 
     $.ajax({
         url: '/todo/write.hirp',
         type: 'post',
         data: {
-            'todoConts': todoConts
+            'todoConts': todoConts,
+            'selectedDate': selectedDate
         },
         success: function (data) {
             if (data == 'success') {

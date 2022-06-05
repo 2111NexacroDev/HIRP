@@ -1,7 +1,5 @@
 package com.highfive.hirp.schedule.domain;
 
-import java.sql.Date;
-
 public class Schedule {
 	private int scheduleNo;
 	private String emplId;
@@ -13,13 +11,14 @@ public class Schedule {
 	private String scheduleEndDate;
 	private String schedulePlace;
 	private String scheduleAlarm;
+	private String deptCode;
 
 	public Schedule() {
 	}
 
 	public Schedule(int scheduleNo, String emplId, String scheduleCategory, String scheduleTitle, String scheduleColor,
 			String scheduleConts, String scheduleStartDate, String scheduleEndDate, String schedulePlace,
-			String scheduleAlarm) {
+			String scheduleAlarm, String deptCode) {
 		super();
 		this.scheduleNo = scheduleNo;
 		this.emplId = emplId;
@@ -31,6 +30,7 @@ public class Schedule {
 		this.scheduleEndDate = scheduleEndDate;
 		this.schedulePlace = schedulePlace;
 		this.scheduleAlarm = scheduleAlarm;
+		this.deptCode = deptCode;
 	}
 
 	public int getScheduleNo() {
@@ -113,11 +113,20 @@ public class Schedule {
 		this.scheduleAlarm = scheduleAlarm;
 	}
 
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Schedule [scheduleNo=" + scheduleNo + ", emplId=" + emplId + ", scheduleCategory=" + scheduleCategory
 				+ ", scheduleTitle=" + scheduleTitle + ", scheduleColor=" + scheduleColor + ", scheduleConts="
 				+ scheduleConts + ", scheduleStartDate=" + scheduleStartDate + ", scheduleEndDate=" + scheduleEndDate
-				+ ", schedulePlace=" + schedulePlace + ", scheduleAlarm=" + scheduleAlarm + "]";
+				+ ", schedulePlace=" + schedulePlace + ", scheduleAlarm=" + scheduleAlarm + ", deptCode=" + deptCode
+				+ "]";
 	}
 }

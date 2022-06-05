@@ -120,9 +120,17 @@ public class TodoController {
 	@RequestMapping(value="/todo/write.hirp", method=RequestMethod.POST)
 	public String todoRegister(
 			@ModelAttribute Todo todo
+			,@RequestParam("selectedDate") String selectedDate
 			,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String emplId = (String) session.getAttribute("emplId");
+		if(selectedDate.equals("TODAY")) {
+			Date now = Date.valueOf(LocalDate.now());
+			todo.setTodoDate(now);
+		} else {
+			Date day = Date.valueOf(selectedDate);
+			todo.setTodoDate(day);
+		}
 		todo.setEmplId(emplId);
 		int result = tService.registerToDo(todo);
 		if(result > 0) {

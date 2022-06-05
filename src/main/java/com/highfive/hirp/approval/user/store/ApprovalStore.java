@@ -10,6 +10,7 @@ import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.time.user.domain.Vacation;
 
 public interface ApprovalStore {
 
@@ -71,14 +72,21 @@ public interface ApprovalStore {
 	//결재 첨부파일 등록
 	int insertApprAttachedFile(SqlSession sqlSession, ApprAttachedFile apprFile);
 
-	List<Reference> selectAllRefApprList(Reference reference);
+	List<Reference> selectAllRefApprList(SqlSession sqlSession, String emplId);
 
-	List<Reference> selectAllViewApprList(Reference reference);
+	List<Reference> selectAllViewApprList(SqlSession sqlSession, String emplId);
+
+	List<Approval> selectProceedAppr(SqlSession sqlSession, String emplId);
+
+	//참조자등록
+	int insertApprRef(SqlSession sqlSession, Reference reference);
+
+	int insertVacation(SqlSession sqlSession, Vacation vacation);
+
+	int insertVacationAppr(SqlSession sqlSession, Approval approval);
 
 
 
 
-	//반려된 문서 이후의 결재라인 수정
-	//int updateRejectedAppr(SqlSession sqlSession);
 
 }

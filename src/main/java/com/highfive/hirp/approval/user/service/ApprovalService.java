@@ -13,6 +13,7 @@ import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.group.domain.Group;
+import com.highfive.hirp.time.user.domain.Vacation;
 
 public interface ApprovalService {
 
@@ -23,8 +24,6 @@ public interface ApprovalService {
 		//폼 가져오기(select appr_form)
 		public ApprForm printApprForm(int formNo);
 		
-		//결재자 선택 화면(조직도)(select employee)
-		//public List<Group> printAllGroup();
 		//결재자 검색 조회(select search)
 		//public List<Group> searchAllGroup(Search search);
 		
@@ -96,12 +95,18 @@ public interface ApprovalService {
 		
 		//최근 등록한 결재번호 조회
 		public int printRecentApprNo();
-		public List<Reference> printAllRefApprList(Reference reference);
-		public List<Reference> printAllViewApprList(Reference reference);
+		//참조함 조회
+		public List<Reference> printAllRefApprList(String emplId);
+		//열람함 조회
+		public List<Reference> printAllViewApprList(String emplId);
+		//진행중인 문서 조회
+		public List<Approval> printProceedAppr(String emplId);
+		//참조자/열람자 등록
+		public int registerApprRef(Reference reference);
+		//연차등록
+		public int registerVacation(Vacation vacation);
+		public int registerVacationAppr(Approval approval);
 		
 	
-		//반려된 문서 이후의 결재라인 대기->null로 변경
-		//public int modifyRejectedAppr();
-		
 	
 }

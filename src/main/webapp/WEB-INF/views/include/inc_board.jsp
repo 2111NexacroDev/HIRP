@@ -4,6 +4,28 @@
 <script>
     $(function(){
         let addr = location.href;
+        if(addr.match('/board/') || addr.match('/notice/')) {
+            $('#gnb ul>li:nth-child(3) a').addClass('on');
+            $('#snb>ul>li:nth-child(1)>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('/free/')) {
+            $('#gnb ul>li:nth-child(3) a').addClass('on');
+            $('#snb>ul>li:nth-child(1)>ul>li:nth-child(2)').addClass('on');
+        }
+        if(addr.match('/anonymous/')) {
+            $('#gnb ul>li:nth-child(3) a').addClass('on');
+            $('#snb>ul>li:nth-child(1)>ul>li:nth-child(3)').addClass('on');
+        }
+        if(addr.match('/department/')) {
+            $('#gnb ul>li:nth-child(3) a').addClass('on');
+            $('#snb>ul>li:nth-child(2)>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('/written/')) {
+            $('#gnb ul>li:nth-child(3) a').addClass('on');
+            $('#snb>ul>li:nth-child(3)>ul>li:nth-child(1)').addClass('on');
+        }
+        
+
         $('.btn--boardWrite').on('click', function(){
             if(addr.match('/board/') || addr.match('/notice/') || addr.match('/written/')) {location.href = '/board/writeView.hirp';}
             if(addr.match('/free/')) {location.href = '/free/writeView.hirp';}

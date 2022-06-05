@@ -20,7 +20,7 @@
 
     <section class="nav--right__info">
         <ul>
-            <li><a href="/employee/mypageView1.hirp">내 정보 수정</a></li>
+            <li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
             <li><a href="#">알림 설정</a></li>
             <li><a href="/employee/logout.hirp">로그아웃</a></li>
         </ul>
