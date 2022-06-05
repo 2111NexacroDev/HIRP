@@ -28,7 +28,7 @@
     
     <section class="nav--right__alarm">
     	<!-- 알림 리스트 -->
-    	<div style="height:300px; overflow:scroll;">
+    	<div id="alarmList" style="max-height:300px; overflow:scroll;">
 	        <div class="mt-20">
 	        	<div class="mb-10">
 		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
@@ -90,4 +90,49 @@
             $('.a--adminLink').hide();
         }
     });
+    
+    //알림 버튼 클릭 시
+    
+    $('.btn--alarm').on('click', function () {
+//     	alert("알림");
+    	$.ajax({
+			url:"/alarm/printUnreadAlarm.hirp",
+			type:"post",
+			data:{},
+			success: function(){
+				alert("알림 조회 성공");
+				var aCount = aList.length; //data 길이
+				var $alarmListDiv = $("#alarmList");
+				$alarmListDiv.html("");
+				console.log(aList);
+				console.log(aCount);
+				console.log($alarmListDiv);
+				
+				for(var i = 0 ; i < aCount; i++){
+					var $alarmDiv = "<div class='mt-20'>"
+				        	+ "<div class='mb-10'>"
+					        	+ aList[i].alarmContents
+				        	+ "</div>"
+				        	+ "<span class='mr-10 colorGrey'>3시간 전</span>"
+				        	+ "<span class='colorGrey'>"
+				        		+ aList[i].emplName
+				        	+"</span>"
+				        + "</div>";
+				    
+				    $alarmListDiv.append($alarmDiv);
+				}
+				
+			},
+    		error: function(){
+//     			alert("알림 조회 실패");
+    			var $alarmListDiv = $("#alarmList");
+				$alarmListDiv.html("");
+				var $alarmDiv = "<div class='mt-20 padding-20 t-c'>"
+						        	+ "새로운 알림이 없습니다."
+						        + "</div>";
+				$alarmListDiv.append($alarmDiv);
+    		}
+		});
+    });
+
 </script>

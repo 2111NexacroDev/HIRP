@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Alarm {
 	private int alarmNo;
 	private String emplId; //받는 사람
-	private Date alarmDate;
+	private String alarmDate;
 	private String alarmContents;
 	private String alarmCode;
 	private String alarmStatus;
@@ -17,9 +17,10 @@ public class Alarm {
 	private String emplProfile;
 	
 	public Alarm() {}
-	
-	public Alarm(int alarmNo, String emplId, Date alarmDate, String alarmContents, String alarmCode, String alarmStatus,
-			String alarmSendid) {
+
+	public Alarm(int alarmNo, String emplId, String alarmDate, String alarmContents, String alarmCode,
+			String alarmStatus, String alarmSendid, String emplName, String deptName, String positionName,
+			String emplProfile) {
 		super();
 		this.alarmNo = alarmNo;
 		this.emplId = emplId;
@@ -28,6 +29,10 @@ public class Alarm {
 		this.alarmCode = alarmCode;
 		this.alarmStatus = alarmStatus;
 		this.alarmSendid = alarmSendid;
+		this.emplName = emplName;
+		this.deptName = deptName;
+		this.positionName = positionName;
+		this.emplProfile = emplProfile;
 	}
 
 	public int getAlarmNo() {
@@ -46,11 +51,11 @@ public class Alarm {
 		this.emplId = emplId;
 	}
 
-	public Date getAlarmDate() {
+	public String getAlarmDate() {
 		return alarmDate;
 	}
 
-	public void setAlarmDate(Date alarmDate) {
+	public void setAlarmDate(String alarmDate) {
 		this.alarmDate = alarmDate;
 	}
 
@@ -81,7 +86,7 @@ public class Alarm {
 	public String getAlarmSendid() {
 		return alarmSendid;
 	}
-	
+
 	public void setAlarmSendid(String alarmSendid) {
 		this.alarmSendid = alarmSendid;
 	}
@@ -89,31 +94,31 @@ public class Alarm {
 	public String getEmplName() {
 		return emplName;
 	}
-	
+
 	public void setEmplName(String emplName) {
 		this.emplName = emplName;
 	}
-	
+
 	public String getDeptName() {
 		return deptName;
 	}
-	
+
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-	
+
 	public String getPositionName() {
 		return positionName;
 	}
-	
+
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
 	}
-	
+
 	public String getEmplProfile() {
 		return emplProfile;
 	}
-	
+
 	public void setEmplProfile(String emplProfile) {
 		this.emplProfile = emplProfile;
 	}
@@ -122,8 +127,9 @@ public class Alarm {
 	public String toString() {
 		return "Alarm [alarmNo=" + alarmNo + ", emplId=" + emplId + ", alarmDate=" + alarmDate + ", alarmContents="
 				+ alarmContents + ", alarmCode=" + alarmCode + ", alarmStatus=" + alarmStatus + ", alarmSendid="
-				+ alarmSendid + "]";
+				+ alarmSendid + ", emplName=" + emplName + ", deptName=" + deptName + ", positionName=" + positionName
+				+ ", emplProfile=" + emplProfile + "]";
 	}
-
+	
 	
 }

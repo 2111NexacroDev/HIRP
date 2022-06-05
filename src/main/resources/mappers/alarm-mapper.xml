@@ -5,13 +5,13 @@
 
 <mapper namespace="AlarmMapper">
 	<resultMap type="Alarm" id="alarmResultMap">
-		<id property="alarmNo" column="CHATROOM_NO"/>
-		<result property="emplId" column="CHATROOM_NAME"/>
-		<result property="alarmDate" column="CHATROOM_MANAGER"/>
-		<result property="alarmContents" column="CHATROOM_DATE"/>
-		<result property="alarmCode" column="CHATROOM_TYPE"/>
-		<result property="alarmStatus" column="JOINCHAT_ID_LIST"/>
-		<result property="alarmSendid" column="JOINCHAT_NAME_LIST"/>
+		<id property="alarmNo" column="ALARM_NO"/>
+		<result property="emplId" column="EMPL_ID"/>
+		<result property="alarmDate" column="ALARM_DATE"/>
+		<result property="alarmContents" column="ALARM_CONTENTS"/>
+		<result property="alarmCode" column="ALARM_CODE"/>
+		<result property="alarmStatus" column="ALARM_STATUS"/>
+		<result property="alarmSendid" column="ALARM_SENDID"/>
 		<!-- 보낸 사람 정보 -->
 		<result property="emplName" column="EMPL_NAME"/>
 		<result property="deptName" column="DEPT_NAME"/>
@@ -40,7 +40,7 @@
 	<select id="selectUnreadAlarm" resultMap="alarmResultMap">
 		SELECT * FROM (
 		    SELECT 
-		    ALARM_NO, A.EMPL_ID,
+		    ALARM_NO, A.EMPL_ID AS EMPL_ID,
 		    TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ALARM_DATE,
 		    ALARM_CONTENTS, ALARM_CODE, ALARM_STATUS, A.ALARM_SENDID,
 		    EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE

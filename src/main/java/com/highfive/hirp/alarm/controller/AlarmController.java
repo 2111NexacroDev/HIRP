@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.alarm.domain.Alarm;
 import com.highfive.hirp.alarm.domain.AlarmCode;
 import com.highfive.hirp.alarm.domain.AlarmSetting;
@@ -104,19 +107,30 @@ public class AlarmController {
 	}
 	
 	//안읽은 알림 가져오기(종 누르면 설정한 알림만 보는 거)
-	
-	public ModelAndView printUnReadAlarm(
-			ModelAndView mv) {
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
+	@ResponseBody
+	@RequestMapping(value="/alarm/printUnreadAlarm.hirp", method = RequestMethod.POST
+			, produces="application/json;charset=utf-8")
+	public String printUnReadAlarm(
+			Model model
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		//임시
+		AlarmSetting alarmSetting = new AlarmSetting();
+		alarmSetting.setEmplId(emplId);
+		//알림 셋팅 가져오기
+//		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
 		//안 읽은 알림 띄워주기
-		List<Alarm> unreadAlarm = aService.selectUnreadAlarm(alarmSetting);
+		List<Alarm> unreadAlarmList = aService.selectUnreadAlarm(alarmSetting);
+		model.addAttribute("unreadAlarmList", unreadAlarmList);
 		//알림 읽음으로 상태 변경하기
 		
-		return mv;
+		
+		if(!unreadAlarmList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(unreadAlarmList);
+		}
+		return "";
 	}
 	
 	
