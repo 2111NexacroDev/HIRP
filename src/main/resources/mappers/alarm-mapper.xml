@@ -71,4 +71,10 @@
 		AND ALARM_CODE LIKE #{alarmCode}
 		ORDER BY ALARM_DATE DESC
 	</select>
+	
+	<!-- 알림 설정 추가 -->
+	<insert id="insertAlarmSetting">
+		INSERT INTO ALARMSETTING_TBL(EMPL_ID)
+		VALUES(#{emplId})
+	</insert>
 </mapper>
