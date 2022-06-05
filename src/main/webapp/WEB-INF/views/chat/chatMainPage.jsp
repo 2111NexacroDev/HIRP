@@ -6,9 +6,7 @@
 	<%@ include file="/WEB-INF/views/chat/chatHeader.jsp" %>
 	<div id="conts" class="pos-rel">
         <article id="sub">
-        	
         	<h1 class="chat-h1 basic-border-bottom mt-20">직원</h1>
-
             <div id="" class="subConts">
             	<!-- 내정보 -->
             	<div class="chat-row mt-10 basic-border-bottom padding-bottom-10">
