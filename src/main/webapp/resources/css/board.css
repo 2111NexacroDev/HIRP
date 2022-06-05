@@ -164,5 +164,9 @@
 }
 
 #reWriter {
-    /* padding-left: 100px; */
+    padding: 16px 10px 16px 30px;
+}
+
+#reWriter img {
+    margin-right: 6px;
 }
