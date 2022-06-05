@@ -125,7 +125,9 @@
 				
 	        	<div id="alarmList" class="">
 	        		<c:if test="${fn:length(alarmList) eq 0 }">
-	        		
+	        			<div class="basic-border-bottom padding-20 t-c">
+	        				등록된 알림이 없습니다.
+	        			</div>
 	        		</c:if>
 	        		<c:if test="${fn:length(alarmList) ne 0 }">
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
