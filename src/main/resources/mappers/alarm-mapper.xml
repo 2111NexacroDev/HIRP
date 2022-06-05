@@ -77,4 +77,12 @@
 		INSERT INTO ALARMSETTING_TBL(EMPL_ID)
 		VALUES(#{emplId})
 	</insert>
+	
+	<!-- 알림 추가 -->
+	<insert id="insertAlarm">
+		INSERT INTO ALARM_TBL
+		VALUES(ALARM_SEQ.NEXTVAL, #{emplId}, SYSDATE,
+		#{alarmContents},
+		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
+	</insert>
 </mapper>

@@ -52,9 +52,9 @@ public class EmployeeController {
 			if (result > 0) { // 1성공
 				//회원가입 성공 시 알림 추가
 				int result2 = aService.insertAlarmSetting(emplId);
-				if(result2 > 0) {
-					System.out.println("알림 설정 추가 성공");
-				}
+//				if(result2 > 0) {
+//					System.out.println("알림 설정 추가 성공");
+//				}
 				return "redirect:/employee/loginView.hirp";
 			} else { // 0실패
 				model.addAttribute("msg", "회원가입에 실패했습니다.");

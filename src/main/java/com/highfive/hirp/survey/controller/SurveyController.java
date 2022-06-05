@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
@@ -45,6 +47,8 @@ public class SurveyController {
 	private SurveyService sService;
 	@Autowired
 	private EmployeeAdminService eaService;
+	@Autowired
+	private AlarmService aService;
 	
 	//설문조사 메인페이지 (최신 리스트 조회)
 	@RequestMapping(value="/survey/main.hirp", method=RequestMethod.GET)
@@ -260,6 +264,14 @@ public class SurveyController {
 //					subList.add(surveySub);
 //					System.out.println(subList.get(i));
 						result2 = sService.insertSurveySub(surveySub);
+						if(result2 > 0) {
+							Alarm alarm = new Alarm(surveySub.getSubId(), "[설문조사] '"+survey.getSurveyTitle()+"' 설문조사가 등록되었습니다.",
+									"40", "N", emplId);
+							int result3 = aService.insertAlarm(alarm);
+							if(result3 > 0) {
+								System.out.println(surveySub.getSubId()+"의 알림이 추가되었습니다.");
+							}
+						}
 					}
 					
 				}
