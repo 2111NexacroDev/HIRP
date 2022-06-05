@@ -110,12 +110,14 @@
 		        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
 						    <div class="alarm-row mt-10  padding-bottom-10" onclick="">
 							    <div class="mr-20 ml-20" style="width:30px;">
-							    	<c:if test="${alarm.emplProfile eq null}">
-								        <img src="../resources/images/img_no_profile.png" alt="profile">
-				      		    	</c:if>
-				      		    	<c:if test="${alarm.emplProfile ne null}">
-								        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
-				      		    	</c:if>
+								    <button class="btn--profile" type="button">
+								    	<c:if test="${alarm.emplProfile eq null}">
+									        <img src="../resources/images/img_no_profile.png" alt="profile">
+					      		    	</c:if>
+					      		    	<c:if test="${alarm.emplProfile ne null}">
+									        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
+					      		    	</c:if>
+				      		    	</button>
 							    </div>
 			            	</div>
 						    <div>

@@ -103,6 +103,20 @@ public class ScheduleController {
 			if(category.equals("전사")) { // 카테고리 전사일 경우
 				int result = sService.registerCompanySchedule(schedule);
 				if(result > 0) {
+					//알림 설정된 경우
+					if(schedule.getScheduleAlarm().equals("Y")) {
+						List<Employee> emplList = eaService.printAllEmployee();
+						if(!emplList.isEmpty()) {
+							for(int i = 0 ; i < emplList.size(); i++) {
+								Alarm alarm = new Alarm(emplList.get(i).getEmplId(), alarmDate, "[전사일정] '"+schedule.getScheduleTitle()+"' 일정 하루 전입니다.",
+										"20", "N", loginUser);
+								int result3 = aService.insertAlarm(alarm);
+								if(result3 > 0) {
+									System.out.println("[전사일정] "+schedule.getScheduleTitle()+"의 알림이 추가되었습니다.");
+								}
+							}
+						}
+					}
 					mv.setViewName("redirect:/schedule/list.hirp");
 				} else {
 					mv.setViewName("common/errorPage");
