@@ -1,4 +1,20 @@
 $(function () {
+    let windowSize = $(window).width();
+    if (windowSize < 768) {
+        $('#gnb').addClass('on');
+    } else {
+        $('#gnb').removeClass('on');
+    }
+
+    $(window).resize(function () {
+        let windowSize = $(window).width();
+        if (windowSize < 768) {
+            $('#gnb').addClass('on');
+        } else {
+            $('#gnb').removeClass('on');
+        }
+    })
+
     // 햄버거 버튼 여닫기
     $('#gnb__btn--burger').on('click', function () {
         $('#gnb').toggleClass('on');
@@ -29,7 +45,7 @@ $(function () {
         $(this).parent().parent().stop().fadeOut(100);
     });
 
-    $('.closeWindow').on('click', function () {
+    $(document).on('click', '.closeWindow', function () {
         $(this).parent().parent().parent().stop().fadeOut(100);
     });
 

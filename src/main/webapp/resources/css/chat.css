@@ -28,17 +28,20 @@
         padding-bottom: 100px;
     }
 
-/*     #cnb nav { */
-/*         height: calc(100% - 180px); */
-/*         overflow-y: auto; */
-/*     } */
+    /*     #cnb nav { */
+    /*         height: calc(100% - 180px); */
+    /*         overflow-y: auto; */
+    /*     } */
 }
+
 #cnb ul {
-	padding-left:0px;
+    padding-left: 0px;
 }
+
 #cnb li {
-	list-style:none;
+    list-style: none;
 }
+
 #cnb nav a {
     display: flex;
     align-items: center;
@@ -84,9 +87,10 @@
 }
 
 #cnb nav .chat-icon-2 li:nth-child(1) a {
-   	background-image: url("../images/icons/chat_noti_icon.png");
+    background-image: url("../images/icons/chat_noti_icon.png");
     background-size: 24px;
 }
+
 #cnb nav .chat-icon-2 li:nth-child(2) a {
     background-image: url("../images/icons/chat_setting_icon.png");
     background-size: 24px;
@@ -208,9 +212,17 @@
     left: 56px;
 }
 
+.subConts>.chat-row:first-child {
+    font-size: 18px;
+}
+
 .chat-row {
-	display: flex;
+    display: flex;
     align-items: center;
+}
+
+input[name="emplSearchKeyword"]+button {
+    padding: 7px 10px;
 }
 
 .btn--profile {
@@ -224,47 +236,47 @@
 }
 
 #conts h3 {
-	margin: 0 auto;
-	margin-bottom : 10px;
-	font-weight: 600;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .inline-block {
-	display: inline-block;
+    display: inline-block;
 }
 
 .chatting-time {
-	position:absolute;
-	right: 20px;
-	top: 0px;
+    position: absolute;
+    right: 20px;
+    top: 0px;
 }
 
 .chat-floating_Btn {
-	border: 1px solid #ccc; 
-	border-radius: 50%; 
-	width: 50px; 
-	height: 50px; 
-	position:fixed; 
-	right: 20px; 
-	bottom: 20px;
-	font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 20px;
 }
 
 /* 목록 아이콘 */
-.h2--list{
-	width:80px;
-	height: 20px;
-	background: url(../images/icons/ic_toolbar.png) no-repeat center center;
-	outline: none;
-/* 	opacity: 0.5; */
-	background-image: url(../images/icons/ic_toolbar.png);
-	background-position: -295px -146px;
+.h2--list {
+    width: 80px;
+    height: 20px;
+    background: url(../images/icons/ic_toolbar.png) no-repeat center center;
+    outline: none;
+    /* 	opacity: 0.5; */
+    background-image: url(../images/icons/ic_toolbar.png);
+    background-position: -295px -146px;
 }
 
 .chat-dateStyle {
-	display:inline-block; 
-	border-radius: 20px; 
-	background-color:#ffffff; 
-	opacity:0.8; 
-	padding: 10px 30px 10px;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #ffffff;
+    opacity: 0.8;
+    padding: 10px 30px 10px;
 }

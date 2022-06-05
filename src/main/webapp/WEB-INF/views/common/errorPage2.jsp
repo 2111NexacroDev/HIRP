@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Error</title>
 </head>
 <body>
 <script>
 		var message = "${msg}";
 		var returnUrl = "${url}";
 		alert(message);
-		location.href= returnUrl;
+		location.href=returnUrl;
 </script>
 </body>
 </html>

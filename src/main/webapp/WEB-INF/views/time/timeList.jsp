@@ -20,8 +20,8 @@
 					<dl>
 						<dt>출근시간</dt>
 						<dd id="timeStart" class="ml-10">
-							<c:if test="${time.timeStart eq null}">미출근</c:if>
-							<c:if test="${time.timeStart ne null}">${time.timeStart }</c:if>                                            
+							<c:if test="${empty time}">미출근 수정</c:if>
+							<c:if test="${not empty time}">${time.timeStart }</c:if>                                            
 						</dd>
 					</dl>
 				</li>
@@ -36,10 +36,8 @@
 				</li>
 				<li>
 					<div class="btns-wrap">
-						<c:if test="${time.timeStart eq null}"><button class="finished" type="button" onclick="startBtn();">출근하기</button></c:if>
-						<c:if test="${time.timeStart ne null}"><button class="finished" type="button" disabled>출근하기</button></c:if>  
-						<c:if test="${time.timeEnd eq null}"><button class="finished" type="button" onclick="endBtn();">퇴근하기</button></c:if>
-						<c:if test="${time.timeEnd ne null}"><button class="finished" type="button" disabled>퇴근하기</button></c:if>   
+						<button class="finished" type="button" onclick="startBtn();">출근하기</button>
+						<button class="finished" type="button" onclick="endBtn();">퇴근하기</button>
 					</div>
 					<select class="mt-10" name="" id="">
 						<option value="">업무</option>
@@ -146,6 +144,7 @@
 						alert("이미 출근 하셨습니다.");
 					} else {
 						alert("출근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 				},
 				error : function() {
@@ -168,6 +167,7 @@
 						alert("이미 퇴근 하셨습니다.");
 					} else {
 						alert("퇴근시간 등록에 성공했습니다.");
+                    	location.reload();
 					}
 
 				},

@@ -15,6 +15,7 @@
 		<result property="scheduleEndDate" column="SCHEDULE_END_DATE"/>
 		<result property="schedulePlace" column="SCHEDULE_PLACE"/>
 		<result property="scheduleAlarm" column="SCHEDULE_ALARM"/>
+		<result property="deptName" column="DEPT_NAME"/>
 	</resultMap>
 	<select id="selectAllCompanySchedule" resultMap="scheduleResultMap">
 		SELECT * FROM ALL_SCHEDULE_TBL ORDER BY SCHEDULE_START_DATE DESC
@@ -22,7 +23,8 @@
 	<select id="selectAllTeamSchedule" resultMap="scheduleResultMap">
 		SELECT * 
 		FROM SCHEDULE_TBL 
-		WHERE SCHEDULE_CATEGORY = '부서' AND EMPL_ID = (SELECT A.DEPT_MASTER FROM DEPT_TBL A JOIN EMPL_TBL B USING(DEPT_CODE) WHERE B.EMPL_ID = #{emplId})
+		WHERE SCHEDULE_CATEGORY = '부서' 
+		AND EMPL_ID IN (SELECT EMPL_ID FROM EMPL_TBL WHERE DEPT_CODE = #{deptCode})
 	</select>
 	<select id="selectAllPersonalSchedule" resultMap="scheduleResultMap">
 		SELECT * FROM SCHEDULE_TBL WHERE EMPL_ID = #{emplId} AND SCHEDULE_CATEGORY = '개인' ORDER BY SCHEDULE_START_DATE DESC

@@ -47,7 +47,7 @@
         <Static id="link_emplLsit" taborder="5" text="사원 조회" left="24" top="85" width="200" height="20" font="normal 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_emplLsit_onclick" cursor="pointer"/>
         <Static id="link_addEmpl" taborder="6" text="사원 추가/승인" left="24" top="120" width="106" height="20" font="bold 14px/normal &quot;Noto Sans KR&quot;" padding="0px" onclick="link_addEmpl_onclick" cursor="pointer"/>
         <Static id="Static02" taborder="7" text="※ 수정하실 셀을 더블클릭하시면 소속부서와 직급을 수정하실 수 있습니다." left="220" top="460" height="32" onclick="Static02_onclick" font="normal 12px/normal Noto Sans KR" textAlign="left" right="20"/>
-        <Static id="Static02_00" taborder="8" text="※ 수정 후 승인을 누르시면 정보가 업데이트되며, 가입이 승인되어 사내 정보에 접근 가능한 권한이 부여됩니다." left="220" top="490" height="32" onclick="Static02_onclick" font="normal 12px/normal Noto Sans KR" textAlign="left" right="20"/>
+        <Static id="Static02_00" taborder="8" text="※ 부서, 직급 수정 후 승인을 누르시면 정보가 업데이트되며, 가입이 승인되어 사내 정보에 접근 가능한 권한이 부여됩니다." left="220" top="490" height="32" onclick="Static02_onclick" font="normal 12px/normal Noto Sans KR" textAlign="left" right="20"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[// 메뉴이동 함수

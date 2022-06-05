@@ -176,13 +176,6 @@ button.next {
     font-family: fontawesome;
 }
 
-button:disabled {
-    border-color: #333 !important;
-    color: #333 !important;
-    opacity: .7;
-    cursor: default;
-}
-
 img {
     max-width: 100%;
 }
@@ -799,6 +792,7 @@ button.next {
     border: 1px solid #888;
     border-radius: 4px;
     transition: text-shadow .2s;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 1201px) {
@@ -828,7 +822,6 @@ button.next {
     font-size: 18px;
 }
 
-
 .btn--profile {
     width: 32px;
     height: 32px;
@@ -837,6 +830,7 @@ button.next {
     padding: 0;
     outline: none;
     background-color: #fff;
+    border: 1px solid #ccc;
 }
 
 .btn--alarm {

@@ -63,10 +63,8 @@
                                 </li>
                                 <li>
                                     <div class="btns-wrap">
-                                        <c:if test="${time.timeStart eq null}"><button class="finished" type="button" onclick="startBtn();">출근하기</button></c:if>
-                                        <c:if test="${time.timeStart ne null}"><button class="finished" type="button" disabled>출근하기</button></c:if>  
-                                        <c:if test="${time.timeEnd eq null}"><button class="finished" type="button" onclick="endBtn();">퇴근하기</button></c:if>
-                                        <c:if test="${time.timeEnd ne null}"><button class="finished" type="button" disabled>퇴근하기</button></c:if>  
+                                        <button class="finished" type="button" onclick="startBtn();">출근하기</button>
+                                        <button class="finished" type="button" onclick="endBtn();">퇴근하기</button>
                                     </div>
                                     <select class="mt-10" name="" id="">
                                         <option value="">업무</option>
@@ -221,7 +219,7 @@
                     } else {
                         alert("퇴근시간 등록에 성공했습니다.");
                     }
-
+                    location.reload();
                 },
                 error: function () {
                     alert("퇴근시간 등록에 실패했습니다.");

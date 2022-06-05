@@ -59,8 +59,10 @@
                     </tbody>
                 </table>
 
+
 				<h2 class="square-tit mt-40">부서게시판 새글</h2>
                 <table class="table--basic mt-20">
+
                     <colgroup>
                         <col style="width:10%;">
                         <col style="width:40%;">
@@ -70,7 +72,9 @@
                         <col style="width:10%;">
                     </colgroup>
                     <thead>
+
                          <tr>
+
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -82,6 +86,7 @@
                     <tbody>
                         <c:forEach var="deptBoard" items="${dList }">
                         <tr>
+
                            	<c:url var="dDetail" value="/dept/detail.hirp">
 								<c:param name="deptNo" value="${deptBoard.deptNo }"></c:param>
 							</c:url>
@@ -95,6 +100,7 @@
 							<c:if test="${empty deptBoard.bList}">X</c:if>
 							<c:if test="${not empty deptBoard.bList}">O</c:if>
 							</td>
+
                         </tr>
                         </c:forEach>
                     </tbody>
