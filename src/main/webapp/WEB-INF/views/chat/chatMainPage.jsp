@@ -236,7 +236,7 @@
 										    	+ "<label for=" + eList[i].emplId + ">"
 										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
 										    	+ "</label>"
-												+ "<input type='checkbox' id="+eList[i].emplId+">"
+										    	+ "<input type='checkbox' id="+eList[i].emplId+" name='joinchatId' value="+eList[i].emplId+">"
 										    + "</div>"
 										+	"</div>";
 							}
