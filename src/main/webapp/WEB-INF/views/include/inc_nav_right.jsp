@@ -21,7 +21,7 @@
     <section class="nav--right__info">
         <ul>
             <li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
-            <li><a href="#">알림 설정</a></li>
+            <li><a href="/alarm/settingPage.hirp">알림 설정</a></li>
             <li><a href="/employee/logout.hirp">로그아웃</a></li>
         </ul>
     </section>
@@ -36,51 +36,8 @@
 	        	<span class="mr-10 colorGrey">3시간 전</span>
 	        	<span class="colorGrey">관리자</span>
 	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-    	
     	</div>
-        <a class="mt-10 mb-10 t-c colorBlue" href="#">전체 알림 보기</a>
+        <a class="mt-10 mb-10 t-c colorBlue" href="/alarm/allAlarm.hirp">전체 알림 보기</a>
     </section>
 </nav>
 

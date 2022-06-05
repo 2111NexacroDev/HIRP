@@ -30,8 +30,9 @@ public class AlarmController {
 	private AlarmService aService;
 
 	//알림 설정 페이지로 이동
-	@RequestMapping(value="/alarm/settingPage", method=RequestMethod.GET)
+	@RequestMapping(value="/alarm/settingPage.hirp", method=RequestMethod.GET)
 	public ModelAndView alarmSettingPage(ModelAndView mv) {
+		mv.setViewName("alarm/alarmSettingPage");
 		return mv;
 	}
 	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
@@ -55,6 +56,7 @@ public class AlarmController {
 	}
 	
 	//전체 알림 가져오기
+	@RequestMapping(value="/alarm/allAlarm.hirp", method=RequestMethod.GET)
 	public ModelAndView printAllAlarm(
 			ModelAndView mv,
 			HttpServletRequest request) {
@@ -62,9 +64,9 @@ public class AlarmController {
 //		HttpSession session = request.getSession();
 //		Employee employee = (Employee) session.getAttribute("loginMember");
 //		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		List<Alarm> allAlarm = aService.selectAllAlarm(emplId);
-		
+//		String emplId = "사용자 아이디";
+//		List<Alarm> allAlarm = aService.selectAllAlarm(emplId);
+		mv.setViewName("alarm/alarmListPage");
 		return mv;
 	}
 	
