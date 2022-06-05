@@ -59,8 +59,10 @@
                     </tbody>
                 </table>
 
-				<h2 class="square-tit mt-50">부서게시판 새글</h2>
-				<table class="table--basic mt-20">
+
+				<h2 class="square-tit mt-40">부서게시판 새글</h2>
+                <table class="table--basic mt-20">
+
                     <colgroup>
                         <col style="width:10%;">
                         <col style="width:40%;">
@@ -70,7 +72,9 @@
                         <col style="width:10%;">
                     </colgroup>
                     <thead>
-                        <tr>
+
+                         <tr>
+
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -80,46 +84,25 @@
 						</tr>
                     </thead>
                     <tbody>
+                        <c:forEach var="deptBoard" items="${dList }">
                         <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
+
+                           	<c:url var="dDetail" value="/dept/detail.hirp">
+								<c:param name="deptNo" value="${deptBoard.deptNo }"></c:param>
+							</c:url>
+							<td><a href="${dDetail }">${deptBoard.deptNo }</a></td>
+							
+							<td><a href="${dDetail }">${deptBoard.deptTitle }</a></td>
+							<td>${deptBoard.emplId }</td>
+							<td>${deptBoard.writeDate}</td>
+							<td>${deptBoard.deptCount }</td>
+							<td>
+							<c:if test="${empty deptBoard.bList}">X</c:if>
+							<c:if test="${not empty deptBoard.bList}">O</c:if>
+							</td>
+
                         </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
-                        <tr>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                            <td>내용1</td>
-                            <td>내용2</td>
-                            <td>내용3</td>
-                        </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -23,8 +23,14 @@
 							</c:if>
 						</tr>
                     </thead>
-                    <c:forEach var="approval" items="${aList }">
                     <tbody>
+                    <c:if test="${empty aList }">
+                    <tr>
+                    	<td colspan="4" class="t-c"> 문서함이 비어있습니다. </td>
+                    </tr>
+                    </c:if>
+                    <c:if test="${not empty aList }">
+                    <c:forEach var="approval" items="${aList }">
                         <tr>
                         	<c:url var="aDetail" value="/appr/detail.hirp">
 								<c:param name="apprNo" value="${approval.apprNo }"></c:param>
@@ -73,6 +79,7 @@
                         </tr>
                         </tbody>
                         </c:forEach>
+                    </c:if>    
 				</table>
 
 </body>

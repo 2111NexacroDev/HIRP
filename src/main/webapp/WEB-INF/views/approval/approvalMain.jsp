@@ -24,6 +24,7 @@ height : 35px;
                 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
             	필요 없으면 지울 것 -->
 
+			<div class="row">
                <c:forEach var="aList" items="${aList}" >
                  <!-- 박스 시작 -->
                 <div class="col-3 basic-border bor-round padding-0 mr-20 mb-20">
