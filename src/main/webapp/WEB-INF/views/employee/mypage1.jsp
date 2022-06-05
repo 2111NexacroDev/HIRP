@@ -14,14 +14,14 @@
 			<h1>마이페이지</h1>
 
 			<ul class="no-icon">
-				<li><a href="/employee/mypageView1.hirp">내 정보 수정</a></li>
+				<li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
 				<li><a href="#">알림 설정</a></li>
 			</ul>
 		</aside>
 
 		<article id="sub">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom">내 정보 수정</h1>
+			<h1 class="basic-border-bottom">내 정보 보기</h1>
 			<div id="mypage" class="subConts mypage-prev align--middle">
 				<form class="shadow" action="/employee/mypageOk.hirp" method="post">
 					<div class="t-c">
