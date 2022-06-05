@@ -18,9 +18,11 @@ public class Alarm {
 	public Alarm() {}
 
 	//알림 insert할 때 사용
-	public Alarm(String emplId, String alarmContents, String alarmCode, String alarmStatus, String alarmSendid) {
+	public Alarm(String emplId, String alarmDate, String alarmContents, String alarmCode, String alarmStatus,
+			String alarmSendid) {
 		super();
 		this.emplId = emplId;
+		this.alarmDate = alarmDate;
 		this.alarmContents = alarmContents;
 		this.alarmCode = alarmCode;
 		this.alarmStatus = alarmStatus;

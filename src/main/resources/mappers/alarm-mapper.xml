@@ -81,7 +81,7 @@
 	<!-- 알림 추가 -->
 	<insert id="insertAlarm">
 		INSERT INTO ALARM_TBL
-		VALUES(ALARM_SEQ.NEXTVAL, #{emplId}, SYSDATE,
+		VALUES(ALARM_SEQ.NEXTVAL, #{emplId}, #{alarmDate},
 		#{alarmContents},
 		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
 	</insert>
