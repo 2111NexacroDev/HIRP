@@ -83,7 +83,17 @@
         </aside>
         <article id="sub">
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
-        	<h1 class="basic-border-bottom">설문 홈</h1>
+        	<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+<%--         	<c:out value="${path}" /> --%>
+        	<c:if test="${path eq '/alarm/allAlarm.hirp'}" >
+        		<h1 class="basic-border-bottom">전체 알림</h1>
+        	</c:if>
+        	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
+        		<h1 class="basic-border-bottom">메일</h1>
+        	</c:if>
+<%--         	<c:if test="${fn:substring(path, 17, 19) eq '1%'}" > --%>
+<!--         		<h1 class="basic-border-bottom">게시판</h1> -->
+<%--         	</c:if> --%>
             <!-- 메인 상단 끝 -->
             
             <!-- 페이지 내용 -->
