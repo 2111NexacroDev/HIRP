@@ -89,9 +89,10 @@ public class MailController {
 			if(!emplId.equals(mail.getMailRecipient())) { 
 				result = mService.sendMailRecipient(mail);
 				//내가 수신자가 아닐 때 수신자한테 알림 띄워줌
+				String recipient = mail.getMailRecipient().substring(0, mail.getMailRecipient().indexOf("@"));
 				if(result > 0) {
 					Employee employee = eaService.printEmployeeInfo(emplId);
-					Alarm alarm = new Alarm(mail.getMailRecipient(), today, 
+					Alarm alarm = new Alarm(recipient, today, 
 							"[메일 도착] '"+employee.getDeptName() +" "+ employee.getEmplName() +" "+employee.getPositionName() +"' 로부터 메일이 도착했습니다.",
 							"00", "N", emplId);
 					int result3 = aService.insertAlarm(alarm);
@@ -103,9 +104,10 @@ public class MailController {
 			if(!referrer.isEmpty()) { //참조자가 있을 때
 				result = mService.sendMailReferrer(mail);
 				//수신자한테 알림 띄워줌
+				String refer = mail.getMailReferrer().substring(0, mail.getMailReferrer().indexOf("@"));
 				if(result > 0) {
 					Employee employee = eaService.printEmployeeInfo(emplId);
-					Alarm alarm = new Alarm(mail.getMailReferrer(), today, 
+					Alarm alarm = new Alarm(refer, today, 
 							"[메일 도착] '"+employee.getDeptName() +" "+ employee.getEmplName() +" "+employee.getPositionName() +"' 로부터 메일이 도착했습니다.",
 							"00", "N", emplId);
 					int result3 = aService.insertAlarm(alarm);
