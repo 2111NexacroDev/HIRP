@@ -1,6 +1,5 @@
 package com.highfive.hirp.alarm.domain;
 
-import java.sql.Date;
 
 public class Alarm {
 	private int alarmNo;
