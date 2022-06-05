@@ -86,32 +86,30 @@
         	<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
 <%--         	<c:out value="${path}" /> --%>
 			<h1 class="basic-border-bottom">
-        	<c:if test="${path eq '/alarm/allAlarm.hirp'}" >
-        		전체 알림
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
-        		메일
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
-        		전사 일정
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '21'}" >
-        		부서 일정
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '22'}" >
-        		개인 일정
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '30'}" >
-        		전자결재
-        	</c:if>
-        	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
-        		설문조사
-        	</c:if>
-        	&nbsp;<button type="button">전체 삭제</button>
+	        	<c:if test="${path eq '/alarm/allAlarm.hirp'}" >
+	        		전체 알림
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
+	        		메일
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
+	        		전사 일정
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '21'}" >
+	        		부서 일정
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '22'}" >
+	        		개인 일정
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '30'}" >
+	        		전자결재
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
+	        		설문조사
+	        	</c:if>
+	        	&nbsp;&nbsp;&nbsp;<button type="button"><i class="fa-solid fa-xmark"></i> 전체 삭제</button>
         	</h1>
-<%--         	<c:if test="${fn:substring(path, 17, 19) eq '1%'}" > --%>
-<!--         		<h1 class="basic-border-bottom">게시판</h1> -->
-<%--         	</c:if> --%>
+        	
             <!-- 메인 상단 끝 -->
             
             <!-- 페이지 내용 -->
@@ -151,7 +149,7 @@
 						        			${fn:substring(alarm.alarmDate, 5, 10)} ${fn:substring(alarm.alarmDate, 11, 13)}:${fn:substring(alarm.alarmDate, 14, 16)}
 						        		</c:if>
 						        	</span>
-						        	<span class="colorGrey">${alarm.emplName }</span>
+						        	<span class="colorGrey">${alarm.deptName } ${alarm.emplName } ${alarm.positionName }</span>
 					        	</div>
 				        	</div>
 				        	<div style="position:absolute; right:20px;">

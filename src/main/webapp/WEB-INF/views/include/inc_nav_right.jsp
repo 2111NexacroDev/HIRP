@@ -99,7 +99,7 @@
 		        	
 	        		$alarmDiv += "</span>"
 					        	+ "<span class='colorGrey'>"
-					        		+ aList[i].emplName
+					        		+ aList[i].deptName +" "+ aList[i].emplName +" " + aList[i].positionName
 					        	+"</span>"
 					        + "</div>";
 				    
