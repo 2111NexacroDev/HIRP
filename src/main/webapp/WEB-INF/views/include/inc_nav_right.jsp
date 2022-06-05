@@ -99,7 +99,7 @@
 			url:"/alarm/printUnreadAlarm.hirp",
 			type:"post",
 			data:{},
-			success: function(){
+			success: function(aList){
 				alert("알림 조회 성공");
 				var aCount = aList.length; //data 길이
 				var $alarmListDiv = $("#alarmList");
