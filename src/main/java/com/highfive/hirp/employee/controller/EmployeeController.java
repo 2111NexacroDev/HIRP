@@ -241,6 +241,7 @@ public class EmployeeController {
 		       String fileRename = fileMap.get("fileName");
 		       if(filePath != null && !filePath.equals("")) {
 		          employee.setEmplProfile(fileRename); // 추가
+		          session.setAttribute("emplProfile", fileRename);
 		       }
 		    }
 		    // 디비에 해당 데이터 저장
