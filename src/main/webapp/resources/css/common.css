@@ -937,6 +937,24 @@ button.next {
     line-height: 36px;
 }
 
+.nav--right__alarm {
+    z-index: 10;
+    position: absolute;
+    right: 80px;
+    top: 100%;
+    display: none;
+    width: 300px;
+    padding: 6px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+}
+
+.nav--right__alarm a {
+    display: block;
+    line-height: 36px;
+}
+
 .form--srch {
     position: absolute;
     top: 15px;
@@ -1212,3 +1230,10 @@ article {
 }
 
 /* 채팅창 끝 */
+
+.colorGrey {
+	color: #888888;
+}
+.colorBlue {
+	color: #1860d6;
+}

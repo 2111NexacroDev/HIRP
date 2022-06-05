@@ -24,7 +24,7 @@ $(function () {
     $('.btn--profile').on('click', function () {
         $('.nav--right__info').stop().fadeToggle(100);
     });
-
+    
     // 주소별 gnb 강조색 위치 변경
     let addr = location.href;
     let fullAddr = addr.split('/');
@@ -83,9 +83,14 @@ $(function () {
         containment: 'window'
     });
 
+  	// 알림 메뉴 열기/닫기
+    $('.btn--alarm').on('click', function () {
+        $('.nav--right__alarm').stop().fadeToggle(100);
+    });
+    //알림 클릭 시 숫자 없어짐
     $('.btn--alarm').on('click', function () {
         $(this).children('span').text('');
-    })
+    });
 
     // 서브메뉴 접힘/펼침
     $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {
