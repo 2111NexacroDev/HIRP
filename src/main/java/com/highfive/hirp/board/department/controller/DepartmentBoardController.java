@@ -150,7 +150,7 @@ public class DepartmentBoardController {
 //						  if(!deptEmplList.isEmpty()) {
 //								for(int i=0; i<deptEmplList.size(); i++) {
 //									if(!deptEmplList.get(i).getEmplId().equals(emplId)) {
-//										//공지게시판 알림 추가
+//										//부서게시판 알림 추가
 //										Alarm alarm = new Alarm(deptEmplList.get(i).getEmplId(), today, "[부서게시판] '"+departmentboard.getDeptTitle()+"' 글이 등록되었습니다.",
 //												"10", "N", emplId);
 //										int result2 = aService.insertAlarm(alarm);

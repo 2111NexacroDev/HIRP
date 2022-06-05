@@ -59,7 +59,7 @@
                 <li>
                     <a href="">게시판</a>
                     <ul>       
-                        <li><a href="#">공지게시판</a></li>
+                        <li><a href="/alarm/printAlarm10.hirp">공지게시판</a></li>
                         <li><a href="#">자유게시판</a></li>
                         <li><a href="#">익명게시판</a></li>
                         <li><a href="#">부서게시판</a></li>
@@ -92,6 +92,9 @@
 	        	<c:if test="${fn:substring(path, 17, 19) eq '00'}" >
 	        		메일
 	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '10'}" >
+	        		공지게시판
+	        	</c:if>
 	        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
 	        		전사 일정
 	        	</c:if>
@@ -121,43 +124,49 @@
 				<fmt:formatDate value="${now}" pattern="HH:mm:ss" var="time" /> <!-- 현재 시간 -->
 				
 	        	<div id="alarmList" class="">
-	        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
-		        		<!-- 알림 한 묶음 시작 -->
-		        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
-						    <div class="alarm-row mt-10  padding-bottom-10" onclick="">
-							    <div class="mr-20 ml-20" style="width:30px;">
-								    <button class="btn--profile" type="button">
-								    	<c:if test="${alarm.emplProfile eq null}">
-									        <img src="../resources/images/img_no_profile.png" alt="profile">
-					      		    	</c:if>
-					      		    	<c:if test="${alarm.emplProfile ne null}">
-									        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
-					      		    	</c:if>
-				      		    	</button>
-							    </div>
-			            	</div>
-						    <div>
-					        	${alarm.alarmContents }
-					        	<div class="mt-10">
-						        	<span class="mr-10 colorGrey">
-					        			<!-- 오늘 -->
-						        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) eq today}">
-						        			${ fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13) }시간 전
-						        		</c:if>
-						        		<!-- 오늘 아님 -->
-						        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) ne today}">
-						        			${fn:substring(alarm.alarmDate, 5, 10)} ${fn:substring(alarm.alarmDate, 11, 13)}:${fn:substring(alarm.alarmDate, 14, 16)}
-						        		</c:if>
-						        	</span>
-						        	<span class="colorGrey">${alarm.deptName } ${alarm.emplName } ${alarm.positionName }</span>
+	        		<c:if test="${fn:length(alarmList) eq 0 }">
+	        		
+	        		</c:if>
+	        		<c:if test="${fn:length(alarmList) ne 0 }">
+		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
+			        		<!-- 알림 한 묶음 시작 -->
+			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
+							    <div class="alarm-row" onclick="">
+								    <div class="mr-20 ml-20" style="width:30px;">
+									    <button class="btn--profile" type="button">
+									    	<c:if test="${alarm.emplProfile eq null}">
+										        <img src="../resources/images/img_no_profile.png" alt="profile">
+						      		    	</c:if>
+						      		    	<c:if test="${alarm.emplProfile ne null}">
+										        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
+						      		    	</c:if>
+					      		    	</button>
+								    </div>
+				            	</div>
+							    <div>
+						        	${alarm.alarmContents }
+						        	<div class="mt-10">
+							        	<span class="mr-10 colorGrey">
+						        			<!-- 오늘 -->
+							        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) eq today}">
+							        			${ fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13) }시간 전
+							        		</c:if>
+							        		<!-- 오늘 아님 -->
+							        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) ne today}">
+							        			${fn:substring(alarm.alarmDate, 5, 10)} ${fn:substring(alarm.alarmDate, 11, 13)}:${fn:substring(alarm.alarmDate, 14, 16)}
+							        		</c:if>
+							        	</span>
+							        	<span class="colorGrey">${alarm.deptName } ${alarm.emplName } ${alarm.positionName }</span>
+						        	</div>
 					        	</div>
-				        	</div>
-				        	<div style="position:absolute; right:20px;">
-					        	<button type="button" class="noneBackground" ><i class="fa-solid fa-xmark"></i></button>
-				        	</div>
-		            	</div>
-		            	<!-- 알림 한 묶음 끝 -->
-	        		</c:forEach>
+					        	<div style="position:absolute; right:20px;">
+						        	<button type="button" class="noneBackground" ><i class="fa-solid fa-xmark"></i></button>
+					        	</div>
+			            	</div>
+			            	<!-- 알림 한 묶음 끝 -->
+		        		</c:forEach>
+	        		
+	        		</c:if>
 	        		
 <!-- 	            	알림 한 묶음 시작 -->
 <!-- 	            	<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10"> -->
