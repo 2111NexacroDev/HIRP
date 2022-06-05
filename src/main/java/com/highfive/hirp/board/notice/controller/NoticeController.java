@@ -178,7 +178,7 @@ public class NoticeController {
 					for(int i=0; i<emplList.size(); i++) {
 						if(!emplList.get(i).getEmplId().equals(emplId)) {
 							//공지게시판 알림 추가
-							Alarm alarm = new Alarm(emplList.get(i).getEmplId(), today, "[공지게시판] '"+noticeboard.getNoticeTitle()+"' 글이(가) 등록되었습니다.",
+							Alarm alarm = new Alarm(emplList.get(i).getEmplId(), today, "[공지게시판] '"+noticeboard.getNoticeTitle()+"' 글이 등록되었습니다.",
 									"10", "N", emplId);
 							int result2 = aService.insertAlarm(alarm);
 							if(result2 > 0) {
