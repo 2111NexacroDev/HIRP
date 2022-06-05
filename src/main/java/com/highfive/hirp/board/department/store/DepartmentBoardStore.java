@@ -38,6 +38,7 @@ public interface DepartmentBoardStore {
 	public int deleteBoardFile(SqlSession sqlSession, int fileNo);
 
 	public int updateBoardFile(SqlSession sqlSession, BoardAttachedFile boardFile);
+	public List<DepartmentBoard> selectNewestDepartment(SqlSession sqlSession);
 
 
 }

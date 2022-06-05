@@ -27,13 +27,18 @@ public class ScheduleController {
 	public ModelAndView scheduleListView(ModelAndView mv, HttpServletRequest request) {
 		try {
 			HttpSession session = request.getSession();
-			String loginUser = (String) session.getAttribute("emplId");
+			Schedule schedule = new Schedule();
+			String loginUser = (String) session.getAttribute("emplId");			
+			String deptCode = (String) session.getAttribute("deptCode");
+			schedule.setDeptCode(deptCode);
+			schedule.setEmplId(loginUser);
+			
 			// 전사일정 조회
 			List<Schedule> sListCompany = sService.printAllCompanySchedule();
 			// 개인일정 조회
 			List<Schedule> sListPersonal = sService.printAllPersonalSchedule(loginUser);
 			// 부서일정 조회
-			List<Schedule> sListTeam = sService.printAllTeamSchedule(loginUser);
+			List<Schedule> sListTeam = sService.printAllTeamSchedule(schedule);
 			if(!sListCompany.isEmpty()) {
 				mv.addObject("sListCompany", sListCompany);
 			}

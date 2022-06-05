@@ -4,6 +4,7 @@ import java.lang.reflect.Member;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.dept.domain.Dept;
 import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeService;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.group.service.GroupService;
 import com.highfive.hirp.time.user.domain.Time;
@@ -27,9 +30,11 @@ import com.highfive.hirp.time.user.domain.Time;
 
 @Controller
 public class GroupController {
+	@Autowired
+	private GroupService gService;
 	
 	@Autowired
-	private GroupService gService;	
+	private EmployeeService eService;
 	
 	// 조직도 조회1
 	@ResponseBody // ajax사용 위해서 필요함
@@ -72,10 +77,19 @@ public class GroupController {
 	}
 	
 	// 상세 회원 정보 열람
-	@RequestMapping(value="/group/groupDetailView", method=RequestMethod.GET)
-	public ModelAndView groupDetailView (ModelAndView mv, @RequestParam("emplId") String emplId) {
-		Member member = gService.detailGroupMember(emplId);  // 둘째줄 설명 String->문자받을때 // int->결과확인 // 한명의그룹이어서<>아님 // 위에있는것가져와야함
-		return mv;
+	@ResponseBody
+	@RequestMapping(value="/group/groupDetailView.hirp", method=RequestMethod.GET, produces="application/json;charset=utf-8")
+	public String groupDetailView (@RequestParam("emplId") String emplId) {
+		//Member member = gService.detailGroupMember(emplId);  // 둘째줄 설명 String->문자받을때 // int->결과확인 // 한명의그룹이어서<>아님 // 위에있는것가져와야함
+		// 마이페이지 상세조회에 이미 만들어 놓은 로직 있어서 가져다 씀!
+		Employee employee = eService.employeeMyPage(emplId); // db에서 데이터 갖고옴
+		if (employee != null) {
+			// employee에 값이 들어있다. 값은 마이페이지에 출력할 값.
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(employee);
+		} else {
+			return "";
+		}
 	}
 }
 

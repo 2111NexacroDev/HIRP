@@ -26,8 +26,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 	}
 
 	@Override
-	public List<Schedule> printAllTeamSchedule(String loginUser) {
-		List<Schedule> sList = sStore.selectAllTeamSchedule(sqlSession, loginUser);
+	public List<Schedule> printAllTeamSchedule(Schedule schedule) {
+		List<Schedule> sList = sStore.selectAllTeamSchedule(sqlSession, schedule);
 		return sList;
 	}
 

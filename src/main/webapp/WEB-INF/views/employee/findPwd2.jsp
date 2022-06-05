@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
@@ -7,10 +8,10 @@
 	<body class="page--employee">	
 		<form id="modifyPwdForm" action="/employee/modifyPwd.hirp" method="post" enctype="multipart/form-data">
 			<h1>비밀번호 재설정</h1>
-			<p>비밀번호 재설정을 위하여 본인의 아이디와<br>재설정할 비밀번호를 정확하게 입력해 주세요.</p>
+			<p>비밀번호 재설정을 위하여 <br>재설정할 비밀번호를 정확하게 입력해 주세요.</p>
 			<div id="guide1" class="subConts1 mt-30">
 				<label>아이디</label>
-				<input name="emplId" type="text" placeholder="@hirp.com">
+				<input name="emplId" type="text" placeholder="@hirp.com" value="${sessionScope.emplId}" readonly>
 			</div>
 			<div id="guide2" class="subConts2 mt-30">
 				<label>비밀번호</label>

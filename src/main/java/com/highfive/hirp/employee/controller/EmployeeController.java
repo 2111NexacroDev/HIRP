@@ -90,7 +90,7 @@ public class EmployeeController {
 					return "redirect:/home.hirp";				
 				}
 			} else {
-				model.addAttribute("msg", "로그인에 실패했습니다.");
+				model.addAttribute("msg", "<strong>로그인에 실패했습니다.</strong> 입력하신 정보가 정확한지 다시 한 번 확인해주세요! <small>※ 신규 가입하셨을 경우, 관리자 승인 전까지 접속이 허용되지 않을 수 있습니다. 관리팀에 문의해주세요!</small>");
 				return "common/errorPage";
 			}
 		} catch (Exception e) {
@@ -198,7 +198,7 @@ public class EmployeeController {
 		}
 		return mv;
 	}
-
+	
 	/*
 	 * // 마이페이지 화면2
 	 * 
@@ -241,6 +241,7 @@ public class EmployeeController {
 		       String fileRename = fileMap.get("fileName");
 		       if(filePath != null && !filePath.equals("")) {
 		          employee.setEmplProfile(fileRename); // 추가
+		          session.setAttribute("emplProfile", fileRename);
 		       }
 		    }
 		    // 디비에 해당 데이터 저장

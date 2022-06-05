@@ -124,6 +124,8 @@
 				else if(msgData.cmd == 'CMD_EXIT') {					
 					$('#divChatData').append('<div>' + msgData.deptName + " " + msgData.emplName + " " + msgData.positionName + msgData.msg + '</div>');
 				}
+				//스크롤 제일 밑으로 고정
+				$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 			},
 			closeMessage: function(str) {
 				$('#divChatData').append('<div>' + '연결 끊김 : ' + str + '</div>');
@@ -157,9 +159,9 @@
 				this._socket.send(jsonData);
 			}
 		};
+	
 		$(document).ready(function() {
 			webSocket.init({ url: '<c:url value="/chat" />' });
-			$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight); //스크롤 젤 밑으로 내리기가 안되는 중..
 		});
 		
 		//이전 채팅 내역 불러오기
@@ -313,7 +315,8 @@
 	    				//prevDay = "" 라서 날짜가 무조건 나옴..
 		    			prevDay = msgList[i].msgSenddate.substr(0, 10);
 					}
-	    			
+	    			//스크롤 제일 밑으로
+	    			$("#divChatParent").scrollTop($("#divChatParent")[0].scrollHeight);
 	    		},
 	    		error: function(){
 	    			console.log("실패"); //새로 만든 방이라는 뜻
@@ -335,6 +338,8 @@
 		function chatInfoWindow(chatroomNo){ //원래는 roomId
 			window.open('/chatInfo.hirp?chatroomNo='+chatroomNo,'chattingRoomInfo'+chatroomNo,'width=350,height=550,left=820,top=0,location=no,status=no,scrollbars=no');
 		}
+		
+
 	</script>
 </head>
 <body>
@@ -357,8 +362,8 @@
 			<div class="t-c" style="width: 100%; height: 10%; padding: 10px;">
 		<!-- 		<input type="text" id="message" style="width:70%" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" /> -->
 				<!-- shift+enter로 개행 가능, 근데 그냥 엔터했을 때 왜 자꾸 한줄이 더 들어가냐구 ******* 중요 고쳐야함 -->
-				<textarea id="message" style="width:80%; height:70px; white-space: pre-wrap;" onkeypress="if(event.keyCode===13 && !event.shiftKey) {  event.preventDefault(); webSocket.sendChat() }"></textarea>
-				<input type="button" id="btnSend" style="position:relative; bottom:10px" value="채팅 전송" onclick="webSocket.sendChat()" />
+				<textarea id="message" style="border:none; resize: none; width:80%; height:75px; white-space: pre-wrap;" onkeypress="if(event.keyCode===13 && !event.shiftKey) {  event.preventDefault(); webSocket.sendChat() }"></textarea>
+				<input type="button" style="background-color: #FFF612; border: 1px solid #ccc; border-radius:5px; padding: 5px 10px; margin-left:10px; position:relative; bottom:50px" value="전송" onclick="webSocket.sendChat()" />
 			</div>
 		</article>
 	</div>

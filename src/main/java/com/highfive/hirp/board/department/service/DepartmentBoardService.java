@@ -37,4 +37,6 @@ public interface DepartmentBoardService {
 		public int viewCount(int anonymousNo);
 		//첨부파일 수정
 		public int modifyDepartmentFile(BoardAttachedFile bFile);
+
+		public List<DepartmentBoard> printNewestDepartment();
 }

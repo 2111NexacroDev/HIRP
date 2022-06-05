@@ -10,21 +10,92 @@
 <link rel="stylesheet" href="../../../resources/css/sub.css">
 <link rel="stylesheet" href="../../../resources/css/jquery.treeview.css" />
 <link rel="stylesheet" href="../../../resources/css/screen.css" />
+<link rel="stylesheet" href="../../../resources/css/employee.css">
 
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp"%>
 	<div id="conts">
+		<aside id="snb" class="snb--org">
+			<h1>조직도</h1>
+			<ul id="orgList">
+			</ul>
+		</aside>
 		<article id="sub" class="">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom">조직도</h1>
-			<div id="organization" class="subConts">
-				<ul id="orgList">
+
+			<h1 class="basic-border-bottom">상세 회원 정보 조회</h1>
+			<div id="mypage" class="subConts mypage-update">
+				<ul>
+					<li>
+						<label for="">사진</label>
+						<div class="profile-wrap">
+							<img src="../../../resources/images/img_no_profile.png" alt="프로필사진 없음">
+						</div>
+					</li>
+					<li>
+						<label for="">이름</label> 
+						<input name="emplName" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">부서</label>
+						<input name="deptCode" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">직위</label>
+						<input name="positionCode" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">직통번호</label>
+						<input name="directNo" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">이메일</label>
+						<input name="email" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">연락처</label>
+						<input name="phoneNo" type="text" value="선택된 직원 없음" readonly>
+					</li>
+					<li>
+						<label for="">생년월일</label>
+						<input name="birthday" type="text" value="선택된 직원 없음" readonly>
+					</li>
 				</ul>
 			</div>
 		</article>
 	</div>
 
 	<script>
+		function emplDetailView(e){
+			var aTag = $(e);
+			aTag.each(function(i,e){
+				aTag.children('input').val();
+			});
+			let selectedId = aTag.children('input').val();
+			$.ajax({
+				url: "/group/groupDetailView.hirp",
+				type: "get",
+				data: {"emplId" : selectedId},
+				success : function(data) {
+					$("input[name=emplName]").val(data["emplName"]);
+					$("input[name=deptCode]").val(data["deptCode"]);
+					$("input[name=positionCode]").val(data["positionCode"]);
+					$("input[name=directNo]").val(data["directNo"]);
+					$("input[name=email]").val(data["email"]);
+					$("input[name=phoneNo]").val(data["phoneNo"]);
+					$("input[name=birthday]").val(data["birthday"]);
+					if(data["emplProfile"] != null) {
+						$(".profile-wrap img").attr("src","../../../resources/uploadFiles/"+data["emplProfile"]);
+					} else {
+						$(".profile-wrap img").attr("src","../../../resources/images/img_no_profile.png");
+					}
+				},
+				error : function() {
+					alert("직원 조회에 실패했습니다.");
+				}
+			});
+		}
+
 		// 조직도 조회
 		$(document).ready(function(){
 			$.ajax({
@@ -49,6 +120,9 @@
 								var $li = '<li id="'+ codeId +'" lvl="' + codeLvl + '"><a href="#">'+ codeNm + '</a></li>';
 								$rootList.append($li);
 							} else {
+								if(codeLvl == 3){
+									$ul = '<ul id="emplUl"><li id="'+ codeId +'" onclick="emplDetailView(this);"><a href="#">' + codeNm+ '</a><input type="hidden" value="'+codeId+'"></li></ul>';
+								}
 // 								var parentLi = $("li[id='"+parentId+"']");
 // 								var $bUl = parentLi.find("ul");
 // 								if($bUl.length == 0) {
@@ -83,7 +157,7 @@
 // 						}
 // 					});
 					$("#orgList, #navigation").treeview({
-						collapsed : true
+						collapsed : false
 					});
 				},
 				error : function() {

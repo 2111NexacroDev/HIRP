@@ -46,6 +46,9 @@
 	            <form action='${sInfoUpdate}' method="post">
 	       			<button class="noneBackground"><i class="fa-solid fa-pen-to-square"></i> 수정</button>&nbsp;
 	            </form>
+	            <form action='${sStatusUpdate}' method="post">
+	                <button class="noneBackground" type="submit"><i class="fa-regular fa-clock"></i> 마감</button>&nbsp;
+	            </form>
 	            <form action='${sDelete}' method="post">
 	                <button class="noneBackground" type="submit"><i class="fa-regular fa-trash-can"></i> 삭제</button>&nbsp;
 	            </form>

@@ -8,27 +8,12 @@ public class Vacation {
 	private String vacationName;
 	private String vacationDepartment;
 	private String vacationDivision;
-	private Date vacationStart;
-	private Date vacationEnd;
+	private String vacationStart;
+	private String vacationEnd;
 	private String vacationContent;
 	private String vacationState;
 	
 	public Vacation () {}
-
-	public Vacation(int vacationNo, String emplId, String vacationName, String vacationDepartment,
-			String vacationDivision, Date vacationStart, Date vacationEnd, String vacationContent,
-			String vacationState) {
-		super();
-		this.vacationNo = vacationNo;
-		this.emplId = emplId;
-		this.vacationName = vacationName;
-		this.vacationDepartment = vacationDepartment;
-		this.vacationDivision = vacationDivision;
-		this.vacationStart = vacationStart;
-		this.vacationEnd = vacationEnd;
-		this.vacationContent = vacationContent;
-		this.vacationState = vacationState;
-	}
 
 	public int getVacationNo() {
 		return vacationNo;
@@ -70,19 +55,19 @@ public class Vacation {
 		this.vacationDivision = vacationDivision;
 	}
 
-	public Date getVacationStart() {
+	public String getVacationStart() {
 		return vacationStart;
 	}
 
-	public void setVacationStart(Date vacationStart) {
+	public void setVacationStart(String vacationStart) {
 		this.vacationStart = vacationStart;
 	}
 
-	public Date getVacationEnd() {
+	public String getVacationEnd() {
 		return vacationEnd;
 	}
 
-	public void setVacationEnd(Date vacationEnd) {
+	public void setVacationEnd(String vacationEnd) {
 		this.vacationEnd = vacationEnd;
 	}
 
@@ -109,6 +94,7 @@ public class Vacation {
 				+ ", vacationStart=" + vacationStart + ", vacationEnd=" + vacationEnd + ", vacationContent="
 				+ vacationContent + ", vacationState=" + vacationState + "]";
 	}
+
 	
 	
 }

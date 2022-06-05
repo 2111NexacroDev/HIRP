@@ -6,9 +6,7 @@
 	<%@ include file="/WEB-INF/views/chat/chatHeader.jsp" %>
 	<div id="conts" class="pos-rel">
         <article id="sub">
-        	
         	<h1 class="chat-h1 basic-border-bottom mt-20">직원</h1>
-
             <div id="" class="subConts">
             	<!-- 내정보 -->
             	<div class="chat-row mt-10 basic-border-bottom padding-bottom-10">
@@ -127,10 +125,11 @@
     	//개인 채팅방 추가
     	function addPersonalChatroom(selectId){ // 개인 채팅하고 싶은 상대 아이디
     		console.log(selectId);
+    		console.log(selectId.toString());
     		$.ajax({
 				url: "/chat/addPersonChatroom.hirp",
 				type: "post",
-				data: { "joinchatId" : selectId },
+				data: { "joinchatId" : selectId.toString() },
 				success: function(data){
 					//기존 채팅방 있으면 기존 채팅방 번호 넘겨주고,
 					//기존 채팅방 없으면 새로 만든 채팅방 번호 넘겨줌
@@ -204,7 +203,7 @@
 	    					
 							if(emplDivId == 'emplList'){ //직원 리스트 검색일 때
 			    				countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
-			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10' ondblclick='chatWindow("+i+")'>"
+			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10' ondblclick='addPersonalChatroom(\""+eList[i].emplId+"\")'>"
 													  +  "<div class='mr-20 ml-20' style='width:30px;'>"
 										      		  +  "<button class='btn--profile' type='button'>";
 								if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
@@ -237,7 +236,7 @@
 										    	+ "<label for=" + eList[i].emplId + ">"
 										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
 										    	+ "</label>"
-												+ "<input type='checkbox' id="+eList[i].emplId+">"
+										    	+ "<input type='checkbox' id="+eList[i].emplId+" name='joinchatId' value="+eList[i].emplId+">"
 										    + "</div>"
 										+	"</div>";
 							}

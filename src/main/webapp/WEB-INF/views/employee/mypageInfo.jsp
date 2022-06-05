@@ -12,13 +12,13 @@
 			<h1>마이페이지</h1>
 
 			<ul class="no-icon">
-				<li><a href="/employee/mypageView1.hirp">내 정보 수정</a></li>
+				<li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
 				<li><a href="#">알림 설정</a></li>
 			</ul>
 		</aside>
 		<article id="sub">
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
-			<h1 class="basic-border-bottom">내 정보 수정</h1>
+			<h1 class="basic-border-bottom">내 정보 보기</h1>
 			<div id="mypage" class="subConts mypage-update">
 				<ul>
 					<li>
@@ -39,8 +39,14 @@
 									<button class="btn--close"></button>
 									<h3>프로필 사진 수정</h3>
 									<p class="mb-20">
-										<img src="" alt="프로필사진"><br>
-										<input type="file" name="profileImg" id="emplProfile">
+										<div class="profile-wrap">
+											<figure>
+												<img src="../../../resources/images/img_no_profile.png" alt="image preview">
+											</figure>
+										</div>
+										<div class="profile-upload mt-20">
+											<input type="file" id="emplProfile" name="profileImg" value="">
+										</div>
 									</p>
 									<div class="btns-wrap mt-20 t-r">
 										<button class="point" type="button" id="profileModify">확인</button>
@@ -138,6 +144,22 @@
 				document.getElementById('modifyPwdForm').submit();
 			}
 		}
+
+        function readImage(input) {
+            if(input.files && input.files[0]) {
+                const reader = new FileReader()
+                reader.onload = e => {
+                    const previewImage = document.querySelector(".profile-wrap>figure>img");
+                    previewImage.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        const inputImage = document.getElementById("emplProfile");
+        inputImage.addEventListener("change", e => {
+            readImage(e.target);
+        })
 
 		// 프로필 사진 수정
 		$("#profileModify").on("click", function() {

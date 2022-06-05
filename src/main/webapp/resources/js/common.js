@@ -1,4 +1,20 @@
 $(function () {
+    let windowSize = $(window).width();
+    if (windowSize < 768) {
+        $('#gnb').addClass('on');
+    } else {
+        $('#gnb').removeClass('on');
+    }
+
+    $(window).resize(function () {
+        let windowSize = $(window).width();
+        if (windowSize < 768) {
+            $('#gnb').addClass('on');
+        } else {
+            $('#gnb').removeClass('on');
+        }
+    })
+
     // 햄버거 버튼 여닫기
     $('#gnb__btn--burger').on('click', function () {
         $('#gnb').toggleClass('on');
@@ -13,6 +29,8 @@ $(function () {
     let addr = location.href;
     let fullAddr = addr.split('/');
     let selelctAddr = fullAddr[3];
+
+    // 현재 주소와 메뉴 링크가 같을 경우 하이라이트
     if (selelctAddr == '' || selelctAddr == 'home.hirp') {
         $('#gnb>nav>ul>li:first-child>a').addClass('on');
     } else {
@@ -24,12 +42,23 @@ $(function () {
         $('#gnb>nav>ul>li:first-child>a').removeClass('on');
     }
 
+    // 중간 이름이 동일한 경우
+    if (addr.match('/mail')) {
+        $('#gnb>nav>ul>li:nth-child(2)>a').addClass('on');
+    }
+    if (addr.match('/approval')) {
+        $('#gnb>nav>ul>li:nth-child(7)>a').addClass('on');
+    }
+    if (addr.match('/survey')) {
+        $('#gnb>nav>ul>li:nth-child(8)>a').addClass('on');
+    }
+
     /* 모달 및 팝업 닫기 */
     $('.btn--close').on('click', function () {
         $(this).parent().parent().stop().fadeOut(100);
     });
 
-    $('.closeWindow').on('click', function () {
+    $(document).on('click', '.closeWindow', function () {
         $(this).parent().parent().parent().stop().fadeOut(100);
     });
 
@@ -53,6 +82,10 @@ $(function () {
     $('.modal--chat').draggable({
         containment: 'window'
     });
+
+    $('.btn--alarm').on('click', function () {
+        $(this).children('span').text('');
+    })
 
     // 서브메뉴 접힘/펼침
     $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {

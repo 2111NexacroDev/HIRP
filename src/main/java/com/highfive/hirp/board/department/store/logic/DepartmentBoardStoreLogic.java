@@ -107,4 +107,10 @@ public class DepartmentBoardStoreLogic implements DepartmentBoardStore{
 		int result = sqlSession.insert("DepartmentBoardMapper.updateBoardFile",boardFile);
 		return result;
 	}
+
+	@Override
+	public List<DepartmentBoard> selectNewestDepartment(SqlSession sqlSession) {
+		List<DepartmentBoard> dList = sqlSession.selectList("DepartmentBoardMapper.selectNewestDepartment");
+		return dList;
+	}
 }

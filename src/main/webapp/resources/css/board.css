@@ -1,0 +1,172 @@
+@charset "utf-8";
+
+#boardTop {
+    position: relative;
+    width: 100%;
+    padding: 30px;
+    border: solid 1px lightgray;
+}
+
+#title-div {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.write-div {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    display: inline-block;
+}
+
+.write-div img {
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.write-div:last-child {
+    font-size: 10px;
+    color: lightgray;
+}
+
+.write-div+.write-div {
+    font-size: 12px;
+    color: #999;
+}
+
+#attached-file-div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+    display: flex;
+    align-items: center;
+}
+
+#attached-file-div>div:not(:last-child) {
+    margin-right: 30px;
+}
+
+#attached-file-div img+a {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+#board-contents-div {
+    min-height: 400px;
+    margin-top: 30px;
+}
+
+#reply-div {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+#reply-div textarea,
+#reply-div button {
+    height: 90px;
+}
+
+#reply-div>div:first-child {
+    position: relative;
+    width: calc(100% - 110px);
+}
+
+#reply-div>div:first-child span {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+}
+
+#reply-div textarea {
+    width: 100%;
+    padding: 16px 20px;
+    padding-top: 36px;
+}
+
+.board-btn-div {
+    position: absolute;
+    top: 28px;
+    right: 30px;
+}
+
+.board-detail-btn {
+    float: right;
+    background-color: white;
+    border: solid 1px lightgray;
+    border-radius: 6px;
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.board-detail-btn img {
+    margin-right: 4px;
+}
+
+#reply-div {
+    width: 100%;
+}
+
+#rSubmit {
+    background-color: white;
+    border: solid 1px lightgray;
+    height: 30px;
+    width: 100px;
+}
+
+#board-bottom-div {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+
+#board-bottom-div2 {
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+}
+
+
+.reply-table {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.reply-table th,
+.reply-table td {
+    /* vertical-align: middle; */
+    /* border-collapse: collapse;
+        border-bottom: 1px solid #ccc; */
+}
+
+.reply-table th {
+    padding: 10px 20px;
+    text-align: left;
+}
+
+.reply-table td {
+    padding: 16px 20px;
+}
+
+.rContent {
+    color: gray;
+}
+
+#reWriter {
+    padding: 16px 10px 16px 30px;
+}
+
+#reWriter img {
+    margin-right: 6px;
+}

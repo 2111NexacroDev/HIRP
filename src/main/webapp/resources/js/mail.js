@@ -60,7 +60,7 @@ function deleteAllMail() {
 
 // 메일 작성 에디터
 $('#summernote').summernote({
-    placeholder: 'Hello stand alone ui',
+    placeholder: '',
     tabsize: 2,
     height: 500,
     toolbar: [

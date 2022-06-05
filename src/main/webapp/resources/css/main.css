@@ -1,16 +1,10 @@
 @charset "UTF-8";
 
-#main #calendar * {
-    border: none;
-}
-
-#main .fc-col-header th {
-    padding: 10px 0;
-}
+#main #calendar * {}
 
 #main .fc .fc-daygrid-day-top {
     display: block;
-    text-align: center;
+    text-align: left;
 }
 
 #main .fc-day-sun {
@@ -21,9 +15,9 @@
     color: rgb(103, 103, 255);
 }
 
-#main .fc-daygrid-day-events {
+/* #main .fc-daygrid-day-events {
     display: none;
-}
+} */
 
 #main .row {
     padding: 24px 24px 60px;
@@ -104,6 +98,10 @@
 
 .ul--birthday li.no-data {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
     text-align: center;
 }
 
@@ -128,7 +126,7 @@
     display: block;
     margin: auto;
     text-align: center;
-    padding: 40px 0;
+    padding: 40px 20px !important;
     overflow: hidden;
     border-radius: 10px;
     background-image: linear-gradient(#30A2C5, #00242F);
@@ -167,9 +165,6 @@
 }
 
 .temperature {
-    width: 200px;
-    height: 200px;
-    background: rgb(206, 206, 206);
     border-radius: 50%;
     text-align: center;
     display: flex;
@@ -177,10 +172,10 @@
     justify-content: center;
     flex-direction: column;
     margin: auto;
-    box-shadow: 0 30px 20px #1d1d1d36;
+    /* box-shadow: 0 30px 20px #1d1d1d36; */
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .temperature p {
@@ -195,11 +190,15 @@
     font-weight: 300;
 }
 
+.description {
+    font-size: 16px;
+    font-weight: 300;
+}
+
 .extra {
     display: flex;
     justify-content: space-around;
     color: #fff;
-    padding-bottom: 30px;
 }
 
 .extra .col .info {
@@ -238,4 +237,274 @@
 .dataweather .firm {
     padding-top: 20px;
     font-size: 12px;
+}
+
+.snb--time h3 {
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #888;
+}
+
+.snb--time h4 {
+    font-weight: 300;
+    font-size: 12px;
+    color: #888;
+}
+
+.snb--time h4 span {
+    display: block;
+    margin-top: 10px;
+    font-family: "century gothic", Noto Sans KR, applegothic !important;
+    font-size: 42px;
+    color: #5e5e5e;
+}
+
+.snb--time dl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.snb--time dl dd {
+    opacity: .7;
+}
+
+.snb--time .btns-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.snb--time .btns-wrap button {
+    width: calc(50% - 4px);
+    height: 38px;
+    border: 1px solid #0b2a60;
+    border-radius: 38px;
+    background-color: #fff;
+    color: #0b2a60;
+}
+
+.snb--time .btns-wrap+select {
+    width: 100%;
+    height: 38px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    border: 1px solid #0b2a60;
+    border-radius: 38px;
+    background-color: #fff;
+    color: #0b2a60;
+    cursor: pointer;
+}
+
+.snb--time .btns-wrap+select {
+    background: url("../images/bg_select_arrow_blue.png") no-repeat 95% center/10px auto;
+}
+
+.todo--today {
+    position: relative;
+    width: 100%;
+}
+
+.todo--today li {
+    position: relative;
+    padding-right: 120px;
+    padding-left: 30px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.todo--today label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #999;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.todo--today input[type="text"] {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 10px;
+    font-size: 15px;
+    outline: none;
+    border: none;
+}
+
+.todo--today input[type="checkbox"] {
+    position: fixed;
+    width: 0;
+    height: 0;
+    left: -999px;
+}
+
+.todo--today input[type="checkbox"]:checked+label {
+    border-color: #00498c;
+}
+
+.todo--today input[type="checkbox"]:checked+label:before {
+    content: "\f00c";
+    display: inline-block;
+    font-family: "Fontawesome";
+    color: #00498c;
+}
+
+.todo--today input[type="checkbox"]:checked+label+input {
+    text-decoration: line-through;
+}
+
+.todo--today li .btns-wrap {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    display: none;
+    font-size: 0;
+}
+
+.todo--today li input:focus+.btns-wrap,
+.todo--today li:hover input+.btns-wrap {
+    display: block;
+}
+
+.todo--today li .btns-wrap button:not(:last-of-type) {
+    margin-right: 4px;
+}
+
+.todo--today .btn--plus {
+    top: 20px;
+}
+
+.todo--today .no-data {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0 !important;
+    border-bottom: none !important;
+}
+
+.todo--today .no-data p {
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.todo--today input[type="text"] {
+    font-size: 14px;
+}
+
+.fc * {
+    text-align: left;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin: 0;
+    padding: 0 20px;
+    align-items: flex-end;
+}
+
+.fc-header-toolbar>div:nth-child(2)>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.fc .fc-button .fc-icon {
+    color: #999;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.fc .fc-button-primary:hover {
+    background: none !important;
+}
+
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+    padding: 8px 4px;
+}
+
+.fc .fc-daygrid-day-top {
+    flex-direction: row;
+}
+
+.fc .fc-button-group button {
+    background-color: transparent;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0 !important;
+    outline: none;
+}
+
+.fc .fc-button-group button.fc-button-active,
+.fc .fc-button-group button:hover {
+    background-color: transparent !important;
+    font-weight: 700;
+    color: #000 !important;
+    border-color: #000;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.fc .fc-toolbar-title {
+    margin: 0 16px;
+}
+
+.fc .fc-today-button {
+    margin-left: 10px;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    position: relative;
+}
+
+#scheduleList .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
+    content: url("../images/img_star.png");
+    position: absolute;
+    top: -23px;
+    left: -33px;
+    transform: rotate(45deg);
+}
+
+.fc .fc-day-sun {
+    color: #FF000A;
+}
+
+#scheduleList .fc .fc-dayGridMonth-view .fc-day-sun.fc-day-today:before {
+    left: auto;
+    right: -6px;
+}
+
+.fc .fc-today-button,
+.fc .fc-today-button:hover,
+.fc .fc-today-button:disabled,
+.fc .fc-today-button:disabled:hover {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    border-radius: 0;
+    opacity: 1;
+}
+
+.fc-event {
+    cursor: pointer;
 }

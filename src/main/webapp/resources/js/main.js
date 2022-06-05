@@ -1,11 +1,22 @@
-$(function () {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'ko'
-    });
-    calendar.render();
+// 근태
+// 지금 시간
+function printClock() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var week = new Array('일', '월', '화', '수', '목', '금', '토');
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+    var seconds = ('0' + date.getSeconds()).slice(-2);
+    var dateString = year + '-' + month + '-' + day + '(' + week[date.getDay()] + ')';
+    var timeString = hours + ':' + minutes + ':' + seconds;
+    document.getElementById("result").innerHTML = dateString + '<br/>' + '<span>' + timeString + '</span>';
+    setInterval(printClock, 1000); // 1초마다 바뀌게 해주는 것
+}
 
+$(function () {
+    // 날씨 기능
     const monthNames = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
     let dateObj = new Date();
@@ -25,7 +36,7 @@ $(function () {
         <div class="titlebar">
             <p class="date">${newdate}</p>
             <h4 class="city">${data.name}</h4>
-            <p class="description">오늘의 날씨는 '${data.weather[0].description}' !</p>
+            <p class="description">지금 날씨는 '${data.weather[0].description}' !</p>
         </div>
         <div class="temperature">
             <p><img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png" /></p>
@@ -49,4 +60,7 @@ $(function () {
             </div>
         </div>`)
         });
+
+    // 켜지자마자 실행할것들 (뒤에 적을땐 안적어도 상관없음)
+    printClock();
 });

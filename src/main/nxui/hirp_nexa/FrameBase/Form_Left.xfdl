@@ -23,8 +23,7 @@
         <ImageViewer id="ImageViewer00_00" taborder="3" left="5" top="216" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_empl.png') repeat right" border="0px none"/>
         <ImageViewer id="ImageViewer00_00_00" taborder="4" left="5" top="256" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/btn_dept.png') repeat center top" border="0px none"/>
         <ImageViewer id="ImageViewer00_00_00_00" taborder="5" left="5" top="296" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/10_icon_org.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00_00_00" taborder="6" left="5" top="335" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/06_icon_doc.png') repeat center top" border="0px none"/>
-        <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="7" left="5" top="376" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/08_icon_att.png') repeat center top" border="0px none"/>
+        <ImageViewer id="ImageViewer00_00_00_00_00_00" taborder="6" left="5" top="336" width="40" height="40" onclick="ImageViewer00_onclick" background="url('theme::hirpTheme/08_icon_att.png') repeat center top" border="0px none"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[// 최초 로드 시 홈화면으로 진입

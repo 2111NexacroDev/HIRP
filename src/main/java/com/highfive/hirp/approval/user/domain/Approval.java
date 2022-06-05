@@ -17,6 +17,8 @@ public class Approval {
 	private String docNo;
 	private List<ApprAccept> aList;
 	private List<ApprAttachedFile> fList;
+	private Employee employee;
+	private List<Reference> rList;
 	
 	
 	
@@ -156,13 +158,40 @@ public class Approval {
 
 
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+
+
+	public List<Reference> getrList() {
+		return rList;
+	}
+
+
+
+	public void setrList(List<Reference> rList) {
+		this.rList = rList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Approval [apprNo=" + apprNo + ", formNo=" + formNo + ", emplId=" + emplId + ", apprTitle=" + apprTitle
 				+ ", apprContents=" + apprContents + ", apprStatus=" + apprStatus + ", writeDate=" + writeDate
 				+ ", temporaryStorage=" + temporaryStorage + ", docNo=" + docNo + ", aList=" + aList + ", fList="
-				+ fList + "]";
+				+ fList + ", employee=" + employee + ", rList=" + rList + "]";
 	}
+
+
+	
 
 
 }

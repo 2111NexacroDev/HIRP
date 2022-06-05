@@ -30,6 +30,8 @@ import com.google.gson.JsonIOException;
 import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
 import com.highfive.hirp.board.common.SaveMultipartFile;
+import com.highfive.hirp.board.department.domain.DepartmentBoard;
+import com.highfive.hirp.board.department.service.DepartmentBoardService;
 import com.highfive.hirp.board.notice.domain.NoticeBoard;
 import com.highfive.hirp.board.notice.service.NoticeBoardService;
 import com.highfive.hirp.board.reply.domain.Reply;
@@ -42,12 +44,17 @@ public class NoticeController {
 
 	@Autowired
 	public NoticeBoardService nService;
+	
+	@Autowired
+	public DepartmentBoardService dService;
 
 	@RequestMapping(value = "board/main.hirp")
 	public ModelAndView boardMain(ModelAndView mv) {
 		List<NoticeBoard> nList = nService.printNewestNotice();
+		List<DepartmentBoard> dList = dService.printNewestDepartment();
 		if (!nList.isEmpty()) {
 			mv.addObject("nList", nList);
+			mv.addObject("dList", dList);
 			mv.setViewName("/board/boardMain");
 		} else {
 			mv.addObject("msg", "조회 실패");
@@ -116,6 +123,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	//완료
 	// 공지글 등록
 	@RequestMapping(value = "/notice/register.hirp", method = RequestMethod.POST)
 	public ModelAndView registerNotice(ModelAndView mv, @ModelAttribute NoticeBoard noticeboard,
@@ -159,6 +167,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	
 	// 공지글 수정 페이지
 	@RequestMapping(value = "/notice/modifyView.hirp", method = RequestMethod.GET)
 	public ModelAndView noticeUpdateView(ModelAndView mv, @RequestParam("noticeNo") int noticeNo) {
@@ -173,6 +182,7 @@ public class NoticeController {
 		return mv;
 	}
 
+	//완료
 	// 공지글 수정
 	@RequestMapping(value = "/notice/modify.hirp", method = RequestMethod.POST)
 	public ModelAndView modifyNotice(

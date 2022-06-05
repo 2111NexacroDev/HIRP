@@ -12,6 +12,7 @@ import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.store.ApprovalStore;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.time.user.domain.Vacation;
 @Repository
 public class ApprovalStoreLogic implements ApprovalStore{
 
@@ -33,6 +34,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return apprForm;
 	}
 
+	//결재 등록
 	@Override
 	public int insertAppr(SqlSession sqlSession, Approval approval) {
 		int result = sqlSession.insert("ApprMapper.insertAppr",approval);
@@ -54,20 +56,21 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	
 	//임시저장
 	@Override
-	public int insertTempStorageAppr(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.insert("ApprMapper.insertTempStorageAppr",approval);
+	public int insertTempAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertTempAppr",approval);
 		return result;
 	}
 
 	@Override
-	public int updateStoragedAppr(SqlSession sqlSession, int docNo) {
-		int result = sqlSession.update("",docNo);
+	public int updateTempAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.update("ApprMapper.updateTempAppr",approval);
 		return result;
 	}
 
 	@Override
-	public int deleteStoragedAppr(SqlSession sqlSession, int docNo) {
-		int result = sqlSession.delete("",docNo);
+	public int deleteTempAppr(SqlSession sqlSession, int apprNo) {
+		int result = sqlSession.delete("ApprMapper.deleteStorageApprAccept",apprNo);
+		int result2 = sqlSession.delete("ApprMapper.deleteStorageApprFile",apprNo);
 		return result;
 	}
 
@@ -83,11 +86,11 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return aList;
 	}
 	
-	@Override
-	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
-		Approval approval = sqlSession.selectOne("",docNo);
-		return approval;
-	}
+//	@Override
+//	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
+//		Approval approval = sqlSession.selectOne("",docNo);
+//		return approval;
+//	}
 
 	//결재자 정보 조회
 	@Override
@@ -133,8 +136,8 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	//임시저장 리스트 조회
 	@Override
-	public List<Approval> selectAllTemporaryStorageAppr(SqlSession sqlSession, String emplId) {
-		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTemporaryStorageAppr",emplId);
+	public List<Approval> selectAllTempAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> aList=sqlSession.selectList("ApprMapper.selectAllTempAppr",emplId);
 		return aList;
 	}
 
@@ -179,12 +182,45 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return result;
 	}
 
+	@Override
+	public List<Reference> selectAllRefApprList(SqlSession sqlSession, String emplId) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllRefApprList",emplId);
+		return rList;
+	}
+
+	@Override
+	public List<Reference> selectAllViewApprList(SqlSession sqlSession, String emplId) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllViewApprList",emplId);
+		return rList;
+	}
+
+	@Override
+	public List<Approval> selectProceedAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> ingList = sqlSession.selectList("ApprMapper.selectProceedAppr",emplId);
+		return ingList;
+	}
+
+	//참조자 등록
+	@Override
+	public int insertApprRef(SqlSession sqlSession, Reference reference) {
+		int result = sqlSession.insert("ApprMapper.insertApprRef",reference);
+		return result;
+	}
+
+	@Override
+	public int insertVacation(SqlSession sqlSession, Vacation vacation) {
+		int result = sqlSession.insert("ApprMapper.insertVacation",vacation);
+		return result;
+	}
+
+	@Override
+	public int insertVacationAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertVacationAppr",approval);
+		return result;
+	}
 
 
-	//반려된 문서 이후의 결재라인 수정
-//	@Override
-//	public int updateRejectedAppr(SqlSession sqlSession) {
-//		return result;
-//	}
+
+
 
 }

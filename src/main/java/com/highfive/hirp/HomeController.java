@@ -1,5 +1,7 @@
 package com.highfive.hirp;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
@@ -9,12 +11,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeAdminService;
+import com.highfive.hirp.schedule.domain.Schedule;
+import com.highfive.hirp.schedule.service.ScheduleService;
+import com.highfive.hirp.time.user.domain.Time;
+import com.highfive.hirp.time.user.service.TimeService;
+import com.highfive.hirp.todo.domain.Todo;
+import com.highfive.hirp.todo.service.TodoService;
 
 /**
  * Handles requests for the application home page.
@@ -23,14 +32,58 @@ import com.highfive.hirp.employee.service.EmployeeAdminService;
 public class HomeController {
 	@Autowired
 	private EmployeeAdminService eaService;
-	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	private TodoService tService;
+	
+	@Autowired
+	private ScheduleService sService;
+	
+	@Autowired
+	private TimeService timeService;
 
 	// 홈으로 이동하는 화면
 	@RequestMapping(value = "/home.hirp", method = RequestMethod.GET)
-	public ModelAndView homeView(ModelAndView mv) {
+	public ModelAndView homeView(ModelAndView mv, 
+			@ModelAttribute Todo todo,
+			@ModelAttribute Time time,			
+			HttpServletRequest request) {
 		try {
+			// 세션 세팅
+			HttpSession session = request.getSession();
+			String emplId  = (String) session.getAttribute("emplId");
+			
+			// 간편 전사일정 조회
+			List<Schedule> sListCompany = sService.printAllCompanySchedule();
+			
+			if(!sListCompany.isEmpty()) {
+				mv.addObject("sListCompany", sListCompany);
+			}
+			
+			// 생일자 조회
 			List<Employee> birthdayList = eaService.printBirthdayList();
-			mv.addObject("birthdayList", birthdayList);
+			if(!birthdayList.isEmpty()) {
+				mv.addObject("birthdayList", birthdayList);
+			}
+			
+			// 간편 업무관리 
+			Date now = Date.valueOf(LocalDate.now());
+			todo.setTodoDate(now);
+			
+			todo.setEmplId(emplId);
+			List<Todo> todayList = tService.printToDoByDate(todo);
+			
+			if(!todayList.isEmpty()) {
+				mv.addObject("todayList", todayList);				
+			}
+			
+			// 간편 근태
+			time = timeService.selectTime(emplId);
+			if(time != null) {
+				mv.addObject("time", time);
+				System.out.println("tiem:"+time);
+			}
+			
 			mv.setViewName("home");
 		} catch(Exception e) {
 			mv.addObject("msg", "조회 오류");
