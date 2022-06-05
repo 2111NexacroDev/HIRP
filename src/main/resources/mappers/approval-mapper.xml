@@ -96,6 +96,9 @@
 <insert id="insertAppr">
 	INSERT INTO APPROVAL_TBL(APPR_NO,FORM_NO,EMPL_ID,APPR_TITLE,APPR_CONTENTS,APPR_STATUS,WRITE_DATE,TEMPORARY_STORAGE) VALUES(APPR_SEQ.NEXTVAL,#{formNo},#{emplId},#{apprTitle},#{apprContents},DEFAULT,DEFAULT,DEFAULT)
 </insert>
+<insert id="insertVacationAppr">
+	INSERT INTO APPROVAL_TBL(APPR_NO,FORM_NO,EMPL_ID,APPR_TITLE,APPR_CONTENTS,APPR_STATUS,WRITE_DATE,TEMPORARY_STORAGE) VALUES(APPR_SEQ.NEXTVAL,1,#{emplId},#{apprTitle},VACATION_SEQ.CURRVAL,DEFAULT,DEFAULT,DEFAULT)
+</insert>
 <!-- 최신 결재 번호 가져오기 -->
 <select id="selectRecentApprNo" resultType="_int">
 	SELECT APPR_NO FROM(SELECT APPR_NO, RANK()OVER(ORDER BY WRITE_DATE DESC )RANK_NUM FROM APPROVAL_TBL)WHERE RANK_NUM = 1
@@ -121,6 +124,7 @@
         INTERSECT
         SELECT APPR_NO,MIN(APPR_LEVEL)FROM APPR_ACCEPT_TBL WHERE APPR_STATUS='대기' GROUP BY APPR_NO)B ON A.APPR_NO = B.APPR_NO
 		 WHERE APPR_STATUS IN ('진행','대기') AND TEMPORARY_STORAGE = 'N'
+		 ORDER BY WRITE_DATE DESC
 </select>
 
 <!-- 상신문서함 조회 -->
@@ -130,6 +134,7 @@
          JOIN EMPL_TBL E ON(A.EMPL_ID = E.EMPL_ID) 
         JOIN APPR_FORM_TBL F ON(A.FORM_NO=F.FORM_NO) 
 		WHERE A.EMPL_ID= #{emplId} AND TEMPORARY_STORAGE ='N'  
+		ORDER BY WRITE_DATE DESC
 </select>
 
 
@@ -191,18 +196,21 @@
 <select id="selectAllTempAppr" resultMap="apprResultMap">
 	SELECT * FROM APPROVAL_TBL 
 	WHERE EMPL_ID = #{emplId} AND TEMPORARY_STORAGE ='Y'
+	ORDER BY WRITE_DATE DESC
 </select>
 
 <!-- 반려문서함 조회 -->
 <select id="selectAllRejectedAppr" resultMap="apprResultMap">
 	SELECT * FROM APPROVAL_TBL 
 	WHERE EMPL_ID = #{emplId} AND APPR_STATUS ='반려' AND TEMPORARY_STORAGE ='N'
+	ORDER BY WRITE_DATE DESC
 </select>
 
 <!--결재 완료 문서함 조회 -->
 <select id="selectAllCompletedAppr" resultMap="apprResultMap">
 	SELECT * FROM APPROVAL_TBL 
 	WHERE EMPL_ID = #{emplId} AND APPR_STATUS ='완료' AND TEMPORARY_STORAGE ='N'
+	ORDER BY WRITE_DATE DESC
 </select>
 <!-- 임시저장 문서 수정 -->
 <update id="updateStorageAppr">
@@ -227,6 +235,7 @@
    	FROM APPROVAL_TBL A
    	JOIN APPR_REFERENCE_TBL R USING(APPR_NO)
    	WHERE R.EMPL_ID = #{emplId} AND REF_TYPE='참조자'
+   	ORDER BY WRITE_DATE DESC
 </select>
 
 <select id="selectAllViewApprList" resultMap="apprResultMap">
@@ -234,6 +243,7 @@
    	FROM APPROVAL_TBL A
    	JOIN APPR_REFERENCE_TBL R USING(APPR_NO)
    	WHERE R.EMPL_ID = #{emplId} AND REF_TYPE='열람자' AND APPR_STATUS ='완료'
+   	ORDER BY WRITE_DATE DESC
 </select>
 
 <select id="selectProceedAppr" resultMap="apprResultMap">
@@ -243,5 +253,14 @@ SELECT  A.APPR_NO , FORM_TITLE "FORM_NO",  EMPL_NAME "EMPL_ID",APPR_TITLE ,APPR_
         JOIN APPR_FORM_TBL F ON(A.FORM_NO=F.FORM_NO) 
         WHERE A.EMPL_ID = #{emplId} AND APPR_STATUS ='진행'
 </select>
+
+<insert id="insertApprRef">
+	INSERT INTO APPR_REFERENCE_TBL VALUES(APPR_REF_SEQ.NEXTVAL,#{apprNo},#{emplId},#{refType})
+</insert>
+
+<insert id="insertVacation">
+	INSERT INTO VACATION_TBL VALUES(VACATION_SEQ.NEXTVAL,#{emplId},#{vacationName},#{vacationDepartment},#{vacationDivision},#{vacationStart},#{vacationEnd},#{vacationContent},'N')
+</insert>
+
 
 </mapper>

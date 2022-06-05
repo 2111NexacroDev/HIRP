@@ -103,6 +103,11 @@ public class DepartmentBoardServiceImpl implements DepartmentBoardService{
 		int result = dStore.updateBoardFile(sqlSession, bFile);
 		return result;
 	}
+	@Override
+	public List<DepartmentBoard> printNewestDepartment() {
+		List<DepartmentBoard> dList = dStore.selectNewestDepartment(sqlSession);
+		return dList;
+	}
 	
 
 }

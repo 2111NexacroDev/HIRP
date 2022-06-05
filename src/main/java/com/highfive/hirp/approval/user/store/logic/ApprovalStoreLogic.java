@@ -12,6 +12,7 @@ import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.store.ApprovalStore;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.time.user.domain.Vacation;
 @Repository
 public class ApprovalStoreLogic implements ApprovalStore{
 
@@ -182,14 +183,14 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
-	public List<Reference> selectAllRefApprList(SqlSession sqlSession, Reference reference) {
-		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllRefApprList",reference);
+	public List<Reference> selectAllRefApprList(SqlSession sqlSession, String emplId) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllRefApprList",emplId);
 		return rList;
 	}
 
 	@Override
-	public List<Reference> selectAllViewApprList(SqlSession sqlSession, Reference reference) {
-		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllViewApprList",reference);
+	public List<Reference> selectAllViewApprList(SqlSession sqlSession, String emplId) {
+		List<Reference> rList = sqlSession.selectList("ApprMapper.selectAllViewApprList",emplId);
 		return rList;
 	}
 
@@ -199,13 +200,27 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return ingList;
 	}
 
+	//참조자 등록
+	@Override
+	public int insertApprRef(SqlSession sqlSession, Reference reference) {
+		int result = sqlSession.insert("ApprMapper.insertApprRef",reference);
+		return result;
+	}
+
+	@Override
+	public int insertVacation(SqlSession sqlSession, Vacation vacation) {
+		int result = sqlSession.insert("ApprMapper.insertVacation",vacation);
+		return result;
+	}
+
+	@Override
+	public int insertVacationAppr(SqlSession sqlSession, Approval approval) {
+		int result = sqlSession.insert("ApprMapper.insertVacationAppr",approval);
+		return result;
+	}
 
 
 
-	//반려된 문서 이후의 결재라인 수정
-//	@Override
-//	public int updateRejectedAppr(SqlSession sqlSession) {
-//		return result;
-//	}
+
 
 }

@@ -14,6 +14,7 @@ import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.service.ApprovalService;
 import com.highfive.hirp.approval.user.store.ApprovalStore;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.time.user.domain.Vacation;
 
 @Service
 public class ApprovalServiceImpl implements ApprovalService{
@@ -189,21 +190,40 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public List<Reference> printAllRefApprList(Reference reference) {
-		List<Reference> rList = aStore.selectAllRefApprList(sqlSession, reference);
-		return null;
+	public List<Reference> printAllRefApprList(String emplId) {
+		List<Reference> rList = aStore.selectAllRefApprList(sqlSession, emplId);
+		return rList;
 	}
 
 	@Override
-	public List<Reference> printAllViewApprList(Reference reference) {
-		List<Reference> rList = aStore.selectAllViewApprList(sqlSession, reference);
-		return null;
+	public List<Reference> printAllViewApprList(String emplId) {
+		List<Reference> rList = aStore.selectAllViewApprList(sqlSession, emplId);
+		return rList;
 	}
 
 	@Override
 	public List<Approval> printProceedAppr(String emplId) {
 		List<Approval> ingList = aStore.selectProceedAppr(sqlSession,emplId);
 		return ingList;
+	}
+
+	//참조자 등록
+	@Override
+	public int registerApprRef(Reference reference) {
+		int result = aStore.insertApprRef(sqlSession, reference);
+		return result;
+	}
+
+	@Override
+	public int registerVacation(Vacation vacation) {
+		int result = aStore.insertVacation(sqlSession, vacation);
+		return result;
+	}
+
+	@Override
+	public int registerVacationAppr(Approval approval) {
+		int result = aStore.insertVacationAppr(sqlSession, approval);
+		return result;
 	}
 
 
