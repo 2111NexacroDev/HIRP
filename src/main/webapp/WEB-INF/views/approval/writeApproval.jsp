@@ -503,8 +503,8 @@
 									$("#" + parentId).append($ul);
 								}
 							});
-								var $rootList2 = $("#orgList").clone().html();
-								$("#orgList2").html($rootList2);
+							var $rootList2 = $("#orgList").clone().html();
+							$("#orgList2").html($rootList2);
 						} else {
 							alert("조직도 데이터가 없습니다.");
 						}

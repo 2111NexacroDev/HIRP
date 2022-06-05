@@ -29,6 +29,8 @@ $(function () {
     let addr = location.href;
     let fullAddr = addr.split('/');
     let selelctAddr = fullAddr[3];
+
+    // 현재 주소와 메뉴 링크가 같을 경우 하이라이트
     if (selelctAddr == '' || selelctAddr == 'home.hirp') {
         $('#gnb>nav>ul>li:first-child>a').addClass('on');
     } else {
@@ -38,6 +40,17 @@ $(function () {
             }
         };
         $('#gnb>nav>ul>li:first-child>a').removeClass('on');
+    }
+
+    // 중간 이름이 동일한 경우
+    if (addr.match('/mail')) {
+        $('#gnb>nav>ul>li:nth-child(2)>a').addClass('on');
+    }
+    if (addr.match('/approval')) {
+        $('#gnb>nav>ul>li:nth-child(7)>a').addClass('on');
+    }
+    if (addr.match('/survey')) {
+        $('#gnb>nav>ul>li:nth-child(8)>a').addClass('on');
     }
 
     /* 모달 및 팝업 닫기 */

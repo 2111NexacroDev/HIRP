@@ -59,7 +59,7 @@
                             <h3>결재양식 선택</h3>
                             <p class="mb-20">
                                <div>
-		                            <div class="bor-round shadow" id="formListDiv" style="width: 250px; height:180px;">
+		                            <div class="bor-round shadow" id="formListDiv">
 		                            <ul id="apprFormListUl">
 		                            
 		                            </ul>
