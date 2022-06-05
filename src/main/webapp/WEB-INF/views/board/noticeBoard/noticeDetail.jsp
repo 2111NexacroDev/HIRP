@@ -132,11 +132,10 @@
 
 						var $br = $("<br>");
 						var $rWriter 	 = $("<td width='160'><b>").text(data[i].emplId).append("</b>");
-						var $reWriter 	 = $("<td width='160' id='reWriter'><img src='../../../../resources/images/icons/rereply.png' style='width:20px; height:auto; vertical-align: middle; align :right;'/>");
+						var $reWriter 	 = $("<td width='160' id='reWriter'><img src='../../../../resources/images/icons/rereply.png' style='width:20px; height:auto; vertical-align: middle; align :right;'/><b>"+data[i].emplId+"</b>");
 						var $rContent 	 = $("<td width='250' colspan='2' class='rContent'>").text(data[i].replyContents);
-						var $reContent 	 = $("<td width='250' class='rContent' >").text(data[i].replyContents);
+						var $reContent 	 = $("<td width='250' colspan='2' class='rContent' >").text(data[i].replyContents);
 						var $rCreateDate = $("<td class='t-c' width='120'>").text(data[i].writeDate);
-						var $reCreateDate = $("<td class='t-c' width='120'>").text(data[i].writeDate);
 						var $btnArea 	 = $("<td class='t-c' width='100'>")
 											.append("<a href='javascript:void(0)' onclick='modReplyView(this, "+data[i].replyNo+", \""+data[i].replyContents+"\");'>수정</a> ")
 											.append("<a href='javascript:void(0)' onclick='removeReply("+data[i].replyNo+");'>삭제</a>")
@@ -152,10 +151,11 @@
 							$tr.append($btnReReply);
 							$tableBody.append($tr);
 						}else{
-							$tr.append($reWriter).append($rWriter);
+							$tr.append($reWriter);
 							$tr.append($reContent);
-							$tr.append($reCreateDate);
+							$tr.append($rCreateDate);
 							$tr.append($btnArea);
+							$tr.append("<td></td>");
 							$tableBody.append($tr);
 						}
 
