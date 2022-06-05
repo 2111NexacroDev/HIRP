@@ -62,6 +62,7 @@ public class MailController {
 		try {
 			HttpSession session = request.getSession();
 			String emplId = (String) session.getAttribute("emplId");
+			String emplEmail = emplId + "@hirp.com";
 			String referrer = mail.getMailReferrer();
 			mail.setEmplId(emplId);
 			mailFile.setEmplId(emplId);
@@ -79,7 +80,7 @@ public class MailController {
 				}
 			}
 			int result = mService.sendMail(mail);
-			if(!emplId.equals(mail.getMailRecipient())) {
+			if(!emplEmail.equals(mail.getMailRecipient())) {
 				result = mService.sendMailRecipient(mail);
 			}
 			if(!referrer.isEmpty()) {

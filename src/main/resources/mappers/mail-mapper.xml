@@ -36,42 +36,42 @@
 	<select id="selectRecMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE MAIL_RECIPIENT = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 보낸메일함 -->
 	<select id="selectSendMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE MAIL_SENDER = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 임시보관함 -->
 	<select id="selectTemMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 내게쓴메일함 -->
 	<select id="selectMyMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 중요메일함 -->
 	<select id="selectImpMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 휴지통 -->
 	<select id="selectWasMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
 		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
-		ORDER BY MAIL_NO DESC
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 받은메일함 갯수 -->
@@ -186,7 +186,7 @@
 	<insert id="teporaryStorageMail" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, #{emplId})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), #{mailRecipient}, #{mailReferrer}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, CONCAT(#{emplId},'@hirp.com'))
 	</insert>
 	
 	<!-- 임시저장된 메일 수정 -->
@@ -200,7 +200,7 @@
 	<insert id="sendBugReportRecipient" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, 'hirpDevelopment', #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{emplId})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), 'hirpDevelopment@hirp.com', #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CONCAT(#{emplId},'@hirp.com'))
 	</insert>
 	
 	<!-- 메일 휴지통으로 이동 -->
