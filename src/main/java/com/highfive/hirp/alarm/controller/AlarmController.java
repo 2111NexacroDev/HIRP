@@ -97,6 +97,8 @@ public class AlarmController {
 		HttpSession session = request.getSession();
 		String emplId = session.getAttribute("emplId").toString();
 		
+		
+		
 		List<Alarm> alarmList = aService.selectAlarmByCode(emplId, alarmCode);
 		mv.addObject("alarmList", alarmList);
 		System.out.println(alarmList);
@@ -136,11 +138,10 @@ public class AlarmController {
 			, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String emplId = session.getAttribute("emplId").toString();
-		//임시
-		AlarmSetting alarmSetting = new AlarmSetting();
-		alarmSetting.setEmplId(emplId);
 		//알림 셋팅 가져오기
-//		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
+		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
+		alarmSetting.setEmplId(emplId);
+		
 		//안 읽은 알림 띄워주기
 		List<Alarm> unreadAlarmList = aService.selectUnreadAlarm(alarmSetting);
 		model.addAttribute("unreadAlarmList", unreadAlarmList);

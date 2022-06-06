@@ -93,7 +93,6 @@
 	    		} else {
 	    			$($checkBox[i]).prop("checked", false);
 	    		}
-	    		if()
 	    	}
 		});
 	

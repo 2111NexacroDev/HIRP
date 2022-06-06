@@ -74,6 +74,49 @@
 		    WHERE A.EMPL_ID = #{emplId}
 		    <![CDATA[AND ALARM_DATE <= SYSDATE]]>
 		    AND ALARM_STATUS = 'N'
+		    AND ALARM_CODE IN (
+		    <trim suffixOverrides=",">
+			    <if test='alarmMail == "Y"'> 
+					'00',
+				</if>
+				<if test='alarmNoticeboard == "Y"'> 
+					'10',
+				</if>
+				<if test='alarmFreeboard == "Y"'> 
+					'11',
+				</if>
+				<if test='alarmAnonymousboard == "Y"'>
+					'12',
+				</if>
+				<if test='alarmDeptboard == "Y"'>
+					'13',
+				</if>
+				<if test='alarmAllschedule == "Y"'>
+					'20',
+				</if>
+				<if test='alarmTeamschedule == "Y"'>
+					'21',
+				</if>
+				<if test='alarmPersonalschedule == "Y"'>
+					'22',
+				</if>
+				<if test='alarmPayarrive == "Y"'>
+					'30',
+				</if>
+				<if test='alarmPaycancle == "Y"'>
+					'31',
+				</if>
+				<if test='alarmPaycompanion == "Y"'>
+					'32',
+				</if>
+				<if test='alarmPaycomplete == "Y"'>
+					'33',
+				</if>
+				<if test='alarmSurvey == "Y"'>
+					'40'
+				</if>
+		    </trim>
+			)
 		    ORDER BY ALARM_DATE DESC, ALARM_NO DESC
 		) <![CDATA[WHERE ROWNUM <= 10]]>
 	</select>
