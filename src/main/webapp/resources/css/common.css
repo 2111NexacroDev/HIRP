@@ -1264,3 +1264,7 @@ article {
 .colorBlue {
     color: #1860d6;
 }
+
+div[name=alarmDiv]:hover {
+    background-color: #f4f4f4;
+}
