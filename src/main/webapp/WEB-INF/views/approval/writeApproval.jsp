@@ -76,11 +76,11 @@
 				<form action="/register/appr.hirp" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="formNo" value="${apprform.formNo}">
 				</c:if>	
-				<c:if test="${msg eq '연차신청서'}">
+				<c:if test="${msg eq '휴가신청서'}">
 				<form action="/register/annualLeaveAppr.hirp" method="post" enctype="multipart/form-data">
 				</c:if>	
 					<input type="hidden" name="emplId" value="${emplId}">
-					<div style="border: solid 1px #888; border-radius: 4px; margin-top: 20px; position: relative;">
+					<div style="border: solid 1px #888;  margin-top: 20px; position: relative;">
 						<table id="apprTable">
 							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
 								<td>기안자</td>
@@ -107,13 +107,23 @@
 						</div>
 						
 						</div>
-						<div class="row mt-20">
+						<c:if test="${msg eq '휴가신청서' }">
+						
+						<div style="border:solid 1px #888;border-top:none; padding :5px 0px 20px 0px;">
+						<p><br></p><p style="text-align: center; "><b><span style="font-size: 22px;">휴가신청서</span></b></p><p><br></p><p style="text-align: center; "><br></p><p style="text-align: center; "><br></p><p> 
+						</c:if>
+						<c:if test="${msg eq '근태조정신청서'}">
+						<div style="border:solid 1px #888;border-top:none; padding :5px 0px 20px 0px;">
+						<p><br></p><p style="text-align: center; "><b><span style="font-size: 22px;">근태조정신청서</span></b></p><p><br></p><p style="text-align: center; "><br></p><p style="text-align: center; "><br></p><p> 
+						
+						</c:if>
+					<div class="row mt-20">
 							<div style="width: 6%">
 								<div style="font-size: 15px; line-height: 30px; text-align: center;">제목</div>
 							</div>
 
 							<div>
-								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;">
+								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;border:solid 1px #888;">
 							</div>
 						</div>
 						<div class="row mt-20" id="refDiv">
@@ -122,7 +132,7 @@
 							</div>
 
 							<div>
-								<input type="text" size="125" id="refInput" style="border-radius: 4px;" >
+								<input type="text" size="125" id="refInput" style="border-radius: 4px;border:solid 1px #888;" >
 							</div>
 						</div>
 						<div class="row mt-20">
@@ -132,11 +142,12 @@
 							</div>
 							<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display: none;"> 
 							<span style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-							<div class="data_file_txt" id="data_file_txt" style="margin: 40px; margin-left:0px; width:100%">
+							<div class="data_file_txt" id="data_file_txt" style="margin-top:20px; margin-left:80px; width:960px; height:100px; border:1px solid #888;">
 								<span></span> <br>
 								<div id="articlefileChange"></div>
 							</div>
 						</div>
+					
 					
 					<br>
 					<c:if test="${msg eq '결재양식' }">
@@ -144,8 +155,8 @@
 						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
 					</div>
 					</c:if>
-					<c:if test="${msg eq '연차신청서' }">
-					<div class="row mt-20">
+					<c:if test="${msg eq '휴가신청서' }">
+					<!-- <div class="row mt-20">
 						<div style="width: 6%">
 							<p class=" " style="line-height: 25px;">종류</p>
 			            </div>
@@ -167,12 +178,81 @@
 			            <div>
 							<textarea placeholder="사유를 작성해주세요" rows="10" cols="140" name="vacationContent"></textarea>
 						</div>
-					</div>
+					</div> -->
+					
+					</p><p></p><table class="__se_tbl" style="text-align: center;  width:960px; margin-top: 0px; margin-left:69px; color: black; background: white; border: 1px solid black; font-size: 12px; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; border-collapse: collapse !important;"><tbody> 
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">휴가&nbsp;종류</td> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"> <span id="vacationTypeArea" name="select" style="font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><select class="editor_slt" data-dsl="{{cSel_연차_조퇴_지각_경조사_공가_병가}}" name="select_type">
+					     <option value="연차">연차</option>
+					     <option value="조퇴">조퇴</option>
+					     <option value="지각">지각</option>
+					     <option value="경조사">경조사</option>
+					     <option value="공가">공가</option>
+					     <option value="병가">병가</option>
+					</select>
+					</span> </td> 
+					  </tr> 
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">기간&nbsp;및&nbsp;일시</td> 
+					   <td style="padding: 3px; border: 1px solid black; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px;  vertical-align: middle; background: rgb(255, 255, 255);"> <input type="date" name="vacationStart">&nbsp;~&nbsp; <input type="date" name="vacationEnd"> <span id="usingPointArea">
+					<b id="usingPoint_Comment" style="font-weight:bold; color:red"></b>
+					</span> </td> 
+					  </tr> 
+					  
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 80px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"> &nbsp;휴가&nbsp;사유 </td> 
+					   <td style="padding: 3px; border: 1px solid black; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px;  vertical-align: top; "> <textarea class="txta_editor" data-dsl="{{textarea:description}}" name="description" id="description" value="" data-id="description" data-name="description" data-require="false" data-maxlength="" data-width="" data-defaultstr="" data-editable="true" data-value="" placeholder=""></textarea> </td> 
+					  </tr> 
+					  
+					 </tbody> 
+					</table>
 				
 					<input type="hidden" value="${emplName}" name="vacationName">
 					<input type="hidden" value="${employee.deptCode}" name="vacationDepartment">
-					
+					</div>
 					</c:if>
+					
+					
+					
+					<c:if test="${msg eq '근태조정신청서' }">
+					
+					
+					</p><p></p><table class="__se_tbl" style="text-align: center;  width:960px; margin-top: 0px; margin-left:69px; color: black; background: white; border: 1px solid black; font-size: 12px; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; border-collapse: collapse !important;"><tbody> 
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">조정&nbsp;일자</td> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"> <span id="vacationTypeArea" name="select" style="font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+					<input type="date">
+					</span> </td> 
+					  </tr> 
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">출근&nbsp;시간</td> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"> <span id="vacationTypeArea" name="select" style="font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+					<input type="time">
+					</span> </td> 
+					  </tr> 
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">퇴근&nbsp;시간</td> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"> <span id="vacationTypeArea" name="select" style="font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+					<input type="time">
+					</span> </td> 
+					  </tr> 
+					  
+					  <tr> 
+					   <td style=" padding: 5px; border: 1px solid black; height: 80px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"> &nbsp;변경&nbsp;사유 </td> 
+					   <td style="padding: 3px; border: 1px solid black; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px;  vertical-align: top; "> <textarea class="txta_editor" data-dsl="{{textarea:description}}" name="description" id="description" value="" data-id="description" data-name="description" data-require="false" data-maxlength="" data-width="" data-defaultstr="" data-editable="true" data-value="" placeholder=""></textarea> </td> 
+					  </tr> 
+					  
+					 </tbody> 
+					</table>
+				
+					<input type="hidden" value="${emplName}" name="vacationName">
+					<input type="hidden" value="${employee.deptCode}" name="vacationDepartment">
+					</div>
+					</c:if>
+					
+					
+					
 			<button class="point mt-20 apprbtn" type="submit">상신하기</button>
 			<button class="basic mt-20 apprbtn" type="button" onclick="tempStorage(this.form)">임시 저장</button>
 			</form>

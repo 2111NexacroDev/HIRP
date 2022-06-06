@@ -59,15 +59,15 @@
                             <h3>결재양식 선택</h3>
                             <p class="mb-20">
                                <div>
-		                            <div class="container" id="groupContainer"  style="width: 250px; height:180px;">
+		                            <div class="container" id="groupContainer"  style="width: 500px; height:200px;">
 		                            <!-- id="formListDiv"  -->
 		                            <c:url var="annualLeaveDetail" value="/annualLeaveForm/detail.hirp">
 									</c:url>
-									<c:url var="fDetail" value="/approvalForm/detail.hirp">
+									<c:url var="timeModifyDetail" value="/timeModifylForm/detail.hirp">
 									</c:url>
 		                            <ul id="apprFormListUl">
-		                            <li><a href="${annualLeaveDetail }">연차신청서</a></li>
-		                            <li><a href="${fDetail }">근태조정신청서</a></li>
+		                            <li><a href="${annualLeaveDetail }">휴가신청서</a></li>
+		                            <li><a href="${timeModifyDetail }">근태조정신청서</a></li>
 		                            </ul>
 		                            </div>
                       		  </div>
@@ -101,6 +101,12 @@
                     <ul>       
                         <li><a href="/ref/appr.hirp">참조문서함</a></li>
                         <li><a href="/viewer/appr.hirp">열람문서함</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">양식관리</a>
+                    <ul>       
+                        <li><a href="/approval/writeForm.hirp">양식생성</a></li>
                     </ul>
                 </li>
             </ul>
