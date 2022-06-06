@@ -22,7 +22,7 @@
 		<article id="sub">
         	<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
         	<h1 class="basic-border-bottom">알림 설정</h1>
-        	<form id="alarmSettingForm" action="/alarm/setting_update" method="POST">
+        	<form id="alarmSettingForm" action="/alarm/setting_update.hirp" method="POST"  enctype="multipart/form-data">
 	        	<div id="" class="subConts padding-0">
 	        		<div class="basic-border-bottom padding-20">
 	        			<h2 class="mb-20">메일</h2>
@@ -90,6 +90,7 @@
     			} else {
     				$checkBox[i].value = "N";
     			}
+    			console.log(i+"번째 : "+$checkBox[i].value);
     		}
     		console.log($checkBox);
     		

@@ -39,19 +39,24 @@ public class AlarmController {
 	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
 	
 	//알림 설정 정보 업데이트
-	@RequestMapping(value="/alarm/setting_update", method=RequestMethod.POST)
+	@RequestMapping(value="/alarm/setting_update.hirp", method=RequestMethod.POST)
 	public ModelAndView updateAlarmSetting(
 			ModelAndView mv
 			, @ModelAttribute AlarmSetting alarmSetting
 			, HttpServletRequest request) {
-		System.out.println(alarmSetting);
-		HttpSession session = request.getSession();
-		String emplId = session.getAttribute("emplId").toString();
-		alarmSetting.setEmplId(emplId);
-		
-		int result = aService.updateAlarmSetting(alarmSetting);
-		if(result > 0) {
-			mv.setViewName("redirect:/alarm/settingPage.hirp");
+		try {
+			HttpSession session = request.getSession();
+			String emplId = session.getAttribute("emplId").toString();
+			alarmSetting.setEmplId(emplId);
+			System.out.println(alarmSetting);
+			AlarmSetting alarmSetting2 = new AlarmSetting(emplId, "Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y");
+			
+			int result = aService.updateAlarmSetting(alarmSetting2);
+			mv.setViewName("redirect:/main.hirp");
+			
+		} catch(Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
 		}
 		
 		return mv;
@@ -163,9 +168,7 @@ public class AlarmController {
 	//전체 알림 삭제
 	public ModelAndView deleteAllAlarm(ModelAndView mv) {
 //		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
+//		String emplId = session.getAttribute("emplId").toString();
 		
 		//아이디 넘겨서 전체 알림 삭제하기
 		return mv;

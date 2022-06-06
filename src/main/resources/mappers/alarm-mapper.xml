@@ -106,13 +106,46 @@
 	<!-- 알림 설정 정보 업데이트 -->
 	<update id="updateAlarmSetting">
 		UPDATE ALARMSETTING_TBL
-		SET ALARM_MAIL = #{alarmMail},
-		ALARM_NOTICEBOARD = #{alarmNoticeboard}, ALARM_FREEBOARD = #{alarmFreeboard},
-		ALARM_ANONYMOUSBOARD = #{alarmAnonymousboard}, ALARM_DEPTBOARD = #{alarmDeptboard},
-		ALARM_ALLSCHEDULE = #{alarmAllschedule}, ALARM_TEAMSCHEDULE = #{alarmTeamschedule},
-		ALARM_PERSONALSCHEDULE = #{alarmPersonalschedule}, ALARM_PAYARRIVE = #{alarmPayarrive},
-		ALARM_PAYCANCLE = #{alarmPaycancle}, ALARM_PAYCOMPANION = #{alarmPaycompanion},
-		ALARM_PAYCOMPLETE = #{alarmPaycomplete}, ALARM_SURVEY = #{alarmSurvey}
+		SET 
+		<if test='alarmMail != null '> 
+			ALARM_MAIL = #{alarmMail},
+		</if>
+		<if test='alarmNoticeboard != null '> 
+			ALARM_NOTICEBOARD = #{alarmNoticeboard},
+		</if>
+		<if test='alarmFreeboard != null '> 
+			ALARM_FREEBOARD = #{alarmFreeboard},
+		</if>
+		<if test='alarmAnonymousboard != null '>
+			ALARM_ANONYMOUSBOARD = #{alarmAnonymousboard}, 
+		</if>
+		<if test='alarmDeptboard != null '>
+			ALARM_DEPTBOARD = #{alarmDeptboard},
+		</if>
+		<if test='alarmAllschedule != null '>
+			ALARM_ALLSCHEDULE = #{alarmAllschedule}, 
+		</if>
+		<if test='alarmTeamschedule != null '>
+			ALARM_TEAMSCHEDULE = #{alarmTeamschedule},
+		</if>
+		<if test='alarmPersonalschedule != null '>
+			ALARM_PERSONALSCHEDULE = #{alarmPersonalschedule}, 
+		</if>
+		<if test='alarmPayarrive != null '>
+			ALARM_PAYARRIVE = #{alarmPayarrive},
+		</if>
+		<if test='alarmPaycancle != null '>
+			ALARM_PAYCANCLE = #{alarmPaycancle},
+		</if>
+		<if test='alarmPaycompanion != null '>
+			ALARM_PAYCOMPANION = #{alarmPaycompanion},
+		</if>
+		<if test='alarmPaycomplete != null '>
+			ALARM_PAYCOMPLETE = #{alarmPaycomplete}, 
+		</if>
+		<if test='alarmSurvey != null '>
+			ALARM_SURVEY = #{alarmSurvey}
+		</if>
 		WHERE EMPL_ID = #{emplId}
 	</update>
 	
