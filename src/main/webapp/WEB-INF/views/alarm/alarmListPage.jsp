@@ -58,11 +58,11 @@
                 </li>
                 <li>
                     <a href="">게시판</a>
-                    <ul>       
+                    <ul>
                         <li><a href="/alarm/printAlarm10.hirp">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
-                        <li><a href="#">부서게시판</a></li>
+                        <li><a href="/alarm/printAlarm11.hirp">자유게시판</a></li>
+                        <li><a href="/alarm/printAlarm12.hirp">익명게시판</a></li>
+                        <li><a href="/alarm/printAlarm13.hirp">부서게시판</a></li>
                     </ul>
                 </li>
                 <li>
@@ -95,6 +95,15 @@
 	        	<c:if test="${fn:substring(path, 17, 19) eq '10'}" >
 	        		공지게시판
 	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '11'}" >
+	        		자유게시판
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '12'}" >
+	        		익명게시판
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '13'}" >
+	        		부서게시판
+	        	</c:if>
 	        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
 	        		전사 일정
 	        	</c:if>
@@ -110,7 +119,7 @@
 	        	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
 	        		설문조사
 	        	</c:if>
-	        	&nbsp;&nbsp;&nbsp;<button type="button"><i class="fa-solid fa-xmark"></i> 전체 삭제</button>
+	        	&nbsp;&nbsp;&nbsp;<button type="button" onclick="location.href='/alarm/deleteAllAlarm.hirp?${sessionScope.emplId}'"><i class="fa-solid fa-xmark"></i> 전체 삭제</button>
         	</h1>
         	
             <!-- 메인 상단 끝 -->
