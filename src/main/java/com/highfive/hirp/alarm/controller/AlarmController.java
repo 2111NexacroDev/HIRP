@@ -154,11 +154,18 @@ public class AlarmController {
 	}
 	
 	//특정 알림 삭제
-	public ModelAndView deleteAlarmByNo(ModelAndView mv
-			,@RequestParam("alarmNo") int alarmNo) {
+	@ResponseBody
+	@RequestMapping(value="/alarm/deleteAlarmByNo.hirp", method = RequestMethod.POST)
+	public String deleteAlarmByNo(
+			@RequestParam("alarmNo") int alarmNo) {
 		
 		//알림 번호로 알림 삭제
-		return mv;
+		int result = aService.deleteAlarmByNo(alarmNo);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	

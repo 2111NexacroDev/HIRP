@@ -20,5 +20,5 @@ public interface AlarmService {
 	public int insertAlarm(Alarm alarm); //알림 추가하기
 	public int updateReadAlarm(String emplId); //종 누르먼 전부 읽음으로 update
 	public int deleteAllAlarm(String emplId); //전체 알림 삭제하기
-	public int deleteAlarmByNo(String alarmNo); //특정 알림 삭제하기
+	public int deleteAlarmByNo(int alarmNo); //특정 알림 삭제하기
 }

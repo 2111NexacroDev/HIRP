@@ -85,4 +85,10 @@
 		#{alarmContents},
 		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
 	</insert>
+	
+	<!-- 특정 알림 삭제 -->
+	<delete id="deleteAlarmByNo">
+		DELETE FROM ALARM_TBL
+		WHERE ALARM_NO = #{alarmNo}
+	</delete>
 </mapper>

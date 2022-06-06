@@ -71,7 +71,7 @@ public class AlarmStoreLogic implements AlarmStore{
 	}
 
 	@Override
-	public int deleteAlarmByNo(SqlSession sqlSession, String alarmNo) {
+	public int deleteAlarmByNo(SqlSession sqlSession, int alarmNo) {
 		int result = sqlSession.delete("AlarmMapper.deleteAlarmByNo", alarmNo);
 		return result;
 	}
