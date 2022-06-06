@@ -26,14 +26,14 @@
                 <li>
                     <button type="button">회의실</button>
                     <ul>
-                    <c:forEach items="${uList }" var="utility">
-                    <c:if test="${utility.utilityCategory eq 'room'}">
-                        <li>
-                            ${utility.utilityName}
-                            <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
-                        </li>
-                    </c:if>
-                    </c:forEach>
+                        <c:forEach items="${uList }" var="utility">
+                            <c:if test="${utility.utilityCategory eq 'room'}">
+                                <li>
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
+                                    <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
+                                </li>
+                            </c:if>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li>
@@ -42,7 +42,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'car'}">
                                 <li>
-                                    ${utility.utilityName}
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
@@ -55,7 +55,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'etc'}">
                                 <li>
-                                    ${utility.utilityName}
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
@@ -398,6 +398,12 @@
         $(function(){
             let removeT = $('.td--date').text().replaceAll('T',' ');
             $('.td--date').text(removeT);
+
+            $('.ul--utility>li>ul>li>span').on('click', function(){
+                let selectedNo = $(this).attr('data-no');
+                $('.fc-event').hide();
+                $('.utility'+selectedNo).show();
+            }); 
         });
 
         // 자산 반납
@@ -657,6 +663,7 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: 'purple',
                         borderColor: 'purple',
+                        className: 'utility${rList.utility.utilityNo }',
                         extendedProps: {
                             'reservationNo': '${rList.reservationNo }'
                         }
@@ -669,6 +676,7 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: 'black',
                         borderColor: 'black',
+                        className: 'utility${rList.utility.utilityNo }',
                         extendedProps: {
                             'reservationNo': '${rList.reservationNo }'
                         }
@@ -681,6 +689,7 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: '#ffdc3c',
                         borderColor: '#ffdc3c',
+                        className: 'utility${rList.utility.utilityNo }',
                         textColor: '#000',
                         extendedProps: {
                             'reservationNo': '${rList.reservationNo }'

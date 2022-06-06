@@ -671,6 +671,10 @@ section[class^="todo--"] {
     background-color: transparent;
 }
 
+.ul--utility span {
+    cursor: pointer;
+}
+
 /* #todo .fc .fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:before {
     content: url("../images/icons/icon_success.png");
     position: absolute;
