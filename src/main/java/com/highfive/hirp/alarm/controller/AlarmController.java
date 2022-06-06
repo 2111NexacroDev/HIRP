@@ -96,9 +96,7 @@ public class AlarmController {
 		
 		HttpSession session = request.getSession();
 		String emplId = session.getAttribute("emplId").toString();
-		
-		
-		
+
 		List<Alarm> alarmList = aService.selectAlarmByCode(emplId, alarmCode);
 		mv.addObject("alarmList", alarmList);
 		System.out.println(alarmList);
