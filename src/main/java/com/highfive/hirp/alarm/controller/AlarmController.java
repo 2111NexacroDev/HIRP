@@ -52,7 +52,7 @@ public class AlarmController {
 			AlarmSetting alarmSetting2 = new AlarmSetting(emplId, "Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y");
 			
 			int result = aService.updateAlarmSetting(alarmSetting2);
-			mv.setViewName("redirect:/main.hirp");
+			mv.setViewName("redirect:/home.hirp");
 			
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());
