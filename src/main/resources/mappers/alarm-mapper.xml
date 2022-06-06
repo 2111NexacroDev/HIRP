@@ -86,6 +86,12 @@
 		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
 	</insert>
 	
+	<!-- 내 알림 전체 읽음 처리 (UPDATE) -->
+	<update id="updateReadAlarm">
+		UPDATE ALARM_TBL SET ALARM_STATUS = 'Y'
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
 	<!-- 특정 알림 삭제 -->
 	<delete id="deleteAlarmByNo">
 		DELETE FROM ALARM_TBL
