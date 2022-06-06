@@ -36,6 +36,12 @@
 		<result property="alarmSurvey" column="ALARM_SURVEY"/>
 	</resultMap>
 	
+	<!-- 내 알림 설정 가져오기 -->
+	<select id="selectAlarmSetting" resultMap="alarmSettingResultMap">
+		SELECT * FROM ALARMSETTING_TBL
+		WHERE EMPL_ID = #{emplId}
+	</select>
+	
 	<!-- 모든 알림 -->
 	<select id="selectAllAlarm" resultMap="alarmResultMap">
 		SELECT 

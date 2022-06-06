@@ -32,8 +32,17 @@ public class AlarmController {
 
 	//알림 설정 페이지로 이동
 	@RequestMapping(value="/alarm/settingPage.hirp", method=RequestMethod.GET)
-	public ModelAndView alarmSettingPage(ModelAndView mv) {
-		mv.setViewName("alarm/alarmSettingPage");
+	public ModelAndView alarmSettingPage(ModelAndView mv
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
+		if(alarmSetting != null) {
+			mv.addObject("alarmSetting", alarmSetting);
+			mv.setViewName("alarm/alarmSettingPage");
+		}
+		
 		return mv;
 	}
 	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
@@ -44,15 +53,15 @@ public class AlarmController {
 			ModelAndView mv
 			, @ModelAttribute AlarmSetting alarmSetting
 			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		try {
-			HttpSession session = request.getSession();
-			String emplId = session.getAttribute("emplId").toString();
 			alarmSetting.setEmplId(emplId);
 			System.out.println(alarmSetting);
 			
 			int result = aService.updateAlarmSetting(alarmSetting);
 			if(result > 0) {
-				mv.setViewName("redirect:/home.hirp");
+				mv.setViewName("alarm/alarmSettingPage");
 			}
 			
 		} catch(Exception e) {
