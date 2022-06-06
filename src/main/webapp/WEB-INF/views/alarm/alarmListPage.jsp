@@ -49,7 +49,7 @@
 <!-- 	            </li> -->
 <!--             </ul> -->
 			<!-- 접는 버전 -->
-			<ul>
+			<ul class="no-icon">
                 <li>
                     <a href="/alarm/allAlarm.hirp">전체 알림</a>
                 </li>
@@ -133,18 +133,14 @@
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
 			        		<!-- 알림 한 묶음 시작 -->
 			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
-							    <div class="alarm-row" onclick="">
-								    <div class="mr-20 ml-20" style="width:30px;">
-									    <button class="btn--profile" type="button">
-									    	<c:if test="${alarm.emplProfile eq null}">
-										        <img src="../resources/images/img_no_profile.png" alt="profile">
-						      		    	</c:if>
-						      		    	<c:if test="${alarm.emplProfile ne null}">
-										        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
-						      		    	</c:if>
-					      		    	</button>
-								    </div>
-				            	</div>
+							    <button class="btn--profile mr-20 ml-20" type="button">
+							    	<c:if test="${alarm.emplProfile eq null}">
+								        <img src="../resources/images/img_no_profile.png" alt="profile">
+				      		    	</c:if>
+				      		    	<c:if test="${alarm.emplProfile ne null}">
+								        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
+				      		    	</c:if>
+			      		    	</button>
 							    <div>
 						        	${alarm.alarmContents }
 						        	<div class="mt-10">

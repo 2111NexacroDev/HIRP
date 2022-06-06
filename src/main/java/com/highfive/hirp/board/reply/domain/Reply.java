@@ -2,6 +2,8 @@ package com.highfive.hirp.board.reply.domain;
 
 import java.sql.Date;
 
+import com.highfive.hirp.employee.domain.Employee;
+
 public class Reply {
 
 	private int replyNo;
@@ -15,24 +17,9 @@ public class Reply {
 	private Date writeDate;
 	private Date updateDate;
 	private String status;
+	private Employee employee;
 	
 	public Reply() {}
-
-	public Reply(int replyNo, String boardCode, int boardNo, int parentReplyNo, int replyOrder, int replyDepth,
-			String emplId, String replyContents, Date writeDate, Date updateDate, String status) {
-		super();
-		this.replyNo = replyNo;
-		this.boardCode = boardCode;
-		this.boardNo = boardNo;
-		this.parentReplyNo = parentReplyNo;
-		this.replyOrder = replyOrder;
-		this.replyDepth = replyDepth;
-		this.emplId = emplId;
-		this.replyContents = replyContents;
-		this.writeDate = writeDate;
-		this.updateDate = updateDate;
-		this.status = status;
-	}
 
 	public int getReplyNo() {
 		return replyNo;
@@ -122,13 +109,23 @@ public class Reply {
 		this.status = status;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", boardCode=" + boardCode + ", boardNo=" + boardNo + ", parentReplyNo="
 				+ parentReplyNo + ", replyOrder=" + replyOrder + ", replyDepth=" + replyDepth + ", emplId=" + emplId
 				+ ", replyContents=" + replyContents + ", writeDate=" + writeDate + ", updateDate=" + updateDate
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", employee=" + employee + "]";
 	}
+
+	
 
 	
 }
