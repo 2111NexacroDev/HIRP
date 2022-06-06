@@ -50,7 +50,7 @@
 							<td><a href="${fDetail }">${free.freeNo }</a></td>
 							
 							<td><a href="${fDetail }">&nbsp; ${free.freeTitle }</a></td>
-							<td>${free.emplId }</td>
+							<td>${free.employee.emplName }</td>
 							<td>${free.writeDate}</td>
 							<td>${free.freeCount }</td>
 							<td>
