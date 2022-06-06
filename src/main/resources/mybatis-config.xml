@@ -29,8 +29,6 @@
 		<typeAlias type="com.highfive.hirp.time.user.domain.Vacation" alias="Vacation"></typeAlias>
 		
 		<!-- 민수 -->
-		<typeAlias type="com.highfive.hirp.favority.domain.Favority" alias="Favority"></typeAlias>
-		<typeAlias type="com.highfive.hirp.mail.domain.Address" alias="Address"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.Mail" alias="Mail"></typeAlias>
 		<typeAlias type="com.highfive.hirp.mail.domain.MailFile" alias="MailFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.position.domain.Position" alias="Position"></typeAlias>
@@ -92,7 +90,6 @@
 		<mapper resource="mappers/boardreply-mapper.xml"/>
 		<mapper resource="mappers/approval-mapper.xml"/>
 		<!-- 민수 -->
-		<mapper resource="mappers/favority-mapper.xml" />
 		<mapper resource="mappers/mail-mapper.xml" />
 		<mapper resource="mappers/position-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />

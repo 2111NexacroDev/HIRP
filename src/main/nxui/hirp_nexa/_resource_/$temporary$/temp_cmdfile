@@ -1,0 +1,27 @@
+﻿-P
+"C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\hirp_nexa.xprj"
+-O
+"C:\Users\smart\Documents\nexacro\17.1\outputs\hirp_nexa"
+-B
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-FILE
+"'C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\environment.xml','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\Application_Desktop.xadl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\color.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptAddPopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptColorPicker.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptDeletePopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptEmplListPopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptManage.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\empDetail.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplApproval.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplList.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\form_home.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Left.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\messageGuide.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\positionView.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\std_info.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeModify.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeVacation.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeView.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\_resource_\_theme_\default','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\_resource_\_theme_\hirpTheme'"
+-JSVERSION
+"ECMAScript 2015(ES6)"
+-BOOTSTRAP
+-MODULE
+-BROWSER
+NRE,Internet Explorer 11,Internet Explorer 10,Chrome,Safari,
+-D2
+"C:\Users\smart\git\HIRP\src\main\webapp\nexaui\."
+-DB2
+"C:\Program Files (x86)\nexacro\17.1\nexacro17lib\"
+-DT2
+4369
+-DF2
+"'C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\environment.xml','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\Application_Desktop.xadl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\color.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptAddPopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptColorPicker.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptDeletePopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptEmplListPopup.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\deptManage.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\empDetail.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplApproval.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\emplList.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\form_home.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\Form_Left.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\messageGuide.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\positionView.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\std_info.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeModify.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeVacation.xfdl','C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\FrameBase\timeView.xfdl'"
+-IGNORECOMPRESS
+"C:\Users\smart\git\HIRP\src\main\nxui\hirp_nexa\.ignorecompress"
+-RTL
+-Q
+67840

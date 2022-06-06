@@ -8,20 +8,12 @@
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
 <link rel="stylesheet" href="../../../resources/css/project.css?after">
-
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                메일
-            </h1>
+            <h1>메일</h1>
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">
@@ -53,7 +45,6 @@
             </form>
         	
         	<h1 class="basic-border-bottom">
-				임시 제목 고치기
 				<c:if test="${mailCategory == 'R' }">
 					받은메일함
 	            </c:if>
@@ -73,13 +64,11 @@
 					휴지통
             	</c:if>
             </h1>
-
 			<div class="btns-wrap padding-20">
 				<button class="basic" type="button" onclick="location.href='/mail/mailReplyView.hirp'">답장</button>
 				<button class="basic" type="button" onclick="wasteMail(${mail.mailNo});">삭제</button>
 				<button class="basic" type="button" onclick="location.href='/mail/mailRelayView.hirp'">전달</button>
-				<!-- 오른쪽으로 밀어야 함 -->
-				<button class="basic" style="float:right;"><a href="/mail/list.hirp">목록</a></button>
+				<button class="basic" style="float:right;" onclick="historyBack();">목록</button>
 			</div>            
             <div class="subConts padding-0">
 	            <form class="padding-20" action="/mail/detail.hirp" method="get">
@@ -106,6 +95,12 @@
 	            			<td>받는사람 :</td>
 	            			<td>${mail.mailRecipient }</td>
 	            		</tr>
+	            		<c:if test="${not empty mail.mailReferrer }">
+		            		<tr>
+		            			<td>참조 :</td>
+		            			<td>${mail.mailReferrer }</td>
+		            		</tr>
+	            		</c:if>
 	            		<tr>
 	            			<td style="padding-bottom:20px;">보낸날짜 :</td>
 	            			<td style="padding-bottom:20px;">${mail.mailDate }</td>
@@ -129,6 +124,11 @@
 		</article>
 	</div>
 	<script>
+		function historyBack() {
+			history.back();
+		}
+	
+		// 메일 휴지통 이동
 		function wasteMail(mailNo) {
 			$.ajax({
 				url : "/mail/wasteMail.hirp",

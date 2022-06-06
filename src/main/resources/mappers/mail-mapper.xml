@@ -35,79 +35,79 @@
 	<!-- 받은메일함 -->
 	<select id="selectRecMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE MAIL_RECIPIENT = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 보낸메일함 -->
 	<select id="selectSendMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE MAIL_SENDER = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE MAIL_SENDER = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 임시보관함 -->
 	<select id="selectTemMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 내게쓴메일함 -->
 	<select id="selectMyMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 중요메일함 -->
 	<select id="selectImpMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
-		ORDER BY MAIL_NO DESC
+		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 휴지통 -->
 	<select id="selectWasMail" resultMap="MailResultMap">
 		SELECT * FROM MAIL_TBL
-		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
-		ORDER BY MAIL_NO DESC
+		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+		ORDER BY MAIL_DATE DESC
 	</select>
 	
 	<!-- 받은메일함 갯수 -->
 	<select id="selectMailCountR" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE MAIL_RECIPIENT = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		WHERE MAIL_RECIPIENT = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 보낸메일함 갯수 -->
 	<select id="selectMailCountS" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE MAIL_SENDER = #{emplId} AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
+		WHERE MAIL_SENDER = CONCAT(#{emplId},'@hirp.com') AND MAIL_SENDER != MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N' AND TEMPORARY_STORAGE = 'N'
 	</select>
 	
 	<!-- 임시보관함 갯수 -->
 	<select id="selectMailCountT" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		WHERE TEMPORARY_STORAGE = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 내게쓴메일함 갯수 -->
 	<select id="selectMailCountM" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		WHERE MAIL_SENDER = MAIL_RECIPIENT AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 중요메일함 갯수 -->
 	<select id="selectMailCountI" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = #{emplId} AND MAIL_WASTE_BASKET = 'N'
+		WHERE IMPORTANT_MAIL = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com') AND MAIL_WASTE_BASKET = 'N'
 	</select>
 	
 	<!-- 휴지통 갯수 -->
 	<select id="selectMailCountW" resultType="_int">
 		SELECT COUNT(*) FROM MAIL_TBL
-		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = #{emplId}
+		WHERE MAIL_WASTE_BASKET = 'Y' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
 	</select>
 	
 	<!-- 메일함 상세조회 -->
@@ -122,25 +122,57 @@
 		WHERE MAIL_NO = #{mailNo}
 	</select>
 	
+	<!-- 메일 검색 -->
+	<select id="searchMail" resultMap="MailResultMap">
+		<if test="searchCondition.toString() =='referrer'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_REFERRER LIKE '%' || #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+		<if test="searchCondition.toString() =='recipient'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_RECIPIENT LIKE '%' || #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+		<if test="searchCondition.toString() =='sender'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_SENDER LIKE '%' || #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+  		<if test="searchCondition.toString() =='title'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_TITLE LIKE '%'|| #{searchValue}||  '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+  		<if test="searchCondition.toString() =='contents'">
+  			SELECT * FROM MAIL_TBL
+  			WHERE MAIL_CONTENTS LIKE '%' ||  #{searchValue} ||  '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+  		<if test="searchCondition.toString() =='all'">
+	  		SELECT * FROM MAIL_TBL
+	  		WHERE MAIL_CONTENTS LIKE '%' ||  #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+	  		OR MAIL_TITLE LIKE '%' ||  #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+	  		OR MAIL_SENDER LIKE '%' ||  #{searchValue} ||  '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+	  		OR MAIL_RECIPIENT LIKE '%' || #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+	  		OR MAIL_REFERRER LIKE '%' || #{searchValue} || '%' AND EMPL_ID = CONCAT(#{emplId},'@hirp.com')
+  		</if>
+	</select>
+	
 	<!-- 메일 및 버그리포트 전송(보낸사람) -->
 	<insert id="sendMail" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{emplId})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CONCAT(#{emplId},'@hirp.com'))
 	</insert>
 	
 	<!-- 메일 전송 시 수신자 -->
 	<insert id="sendMailRecipient" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{mailRecipient})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{mailRecipient})
 	</insert>
 	
 	<!-- 메일 및 버그리포트 전송 시 참조자 -->
 	<insert id="sendMailReferrer" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{mailReferrer})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), #{mailRecipient}, #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{mailReferrer})
 	</insert>
 	
 	<!-- 메일 및 버그리포트 및 임시저장 시 첨부파일 저장 -->
@@ -154,7 +186,7 @@
 	<insert id="teporaryStorageMail" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, #{mailRecipient}, #{mailReferrer}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, #{emplId})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), #{mailRecipient}, #{mailReferrer}, #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, 'Y', DEFAULT, CONCAT(#{emplId},'@hirp.com'))
 	</insert>
 	
 	<!-- 임시저장된 메일 수정 -->
@@ -168,7 +200,7 @@
 	<insert id="sendBugReportRecipient" parameterType="Mail">
 		INSERT INTO
 		MAIL_TBL
-		VALUES(MAIL_NO.NEXTVAL, #{emplId}, 'hirpDevelopment', #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{emplId})
+		VALUES(MAIL_NO.NEXTVAL, CONCAT(#{emplId},'@hirp.com'), 'hirpDevelopment@hirp.com', #{mailReferrer} , #{mailTitle}, #{mailContents}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CONCAT(#{emplId},'@hirp.com'))
 	</insert>
 	
 	<!-- 메일 휴지통으로 이동 -->

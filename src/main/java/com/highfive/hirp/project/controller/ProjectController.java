@@ -3,15 +3,9 @@ package com.highfive.hirp.project.controller;
 import java.sql.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,18 +13,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.project.domain.Board;
 import com.highfive.hirp.project.domain.Project;
 import com.highfive.hirp.project.service.ProjectService;
 
 @Controller
 public class ProjectController {
-
 	@Autowired
 	private ProjectService pService;
+	@Autowired
+	private EmployeeAdminService eaService;
 	
 	// 프로젝트 목록 보기 화면
 	@RequestMapping(value="/project/list.hirp", method=RequestMethod.GET)
@@ -61,8 +57,10 @@ public class ProjectController {
 	public ModelAndView projectDetailView(ModelAndView mv
 			, @RequestParam("projectNo") Integer projectNo) {
 		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
 			Project project = pService.printOneByNo(projectNo);
 			if(project != null) {
+				mv.addObject("emplList", emplList);
 				mv.addObject("project", project);
 				mv.setViewName("project/projectDetailView");
 			}else {
@@ -80,7 +78,11 @@ public class ProjectController {
 	@RequestMapping(value="/project/writeView.hirp", method=RequestMethod.GET)
 	public ModelAndView projectWriteView(ModelAndView mv) {
 		try {
-			mv.setViewName("project/projectWriteForm");
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			if(emplList != null) {
+				mv.addObject("emplList", emplList);
+				mv.setViewName("project/projectWriteForm");
+			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");

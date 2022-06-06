@@ -1,7 +1,5 @@
 package com.highfive.hirp.mail.domain;
 
-import java.sql.Date;
-
 public class Mail {
 	private int mailNo;
 	private String mailSender;
@@ -9,7 +7,7 @@ public class Mail {
 	private String mailReferrer;
 	private String mailTitle;
 	private String mailContents;
-	private Date mailDate;
+	private String mailDate;
 	private String mailRead;
 	private String importantMail;
 	private String temporaryStorage;
@@ -22,7 +20,7 @@ public class Mail {
 	public Mail() {}
 
 	public Mail(int mailNo, String mailSender, String mailRecipient, String mailReferrer, String mailTitle,
-			String mailContents, Date mailDate, String mailRead, String importantMail, String temporaryStorage,
+			String mailContents, String mailDate, String mailRead, String importantMail, String temporaryStorage,
 			String mailWasteBasket, String fileName, String fileReName, String filePath, String emplId) {
 		super();
 		this.mailNo = mailNo;
@@ -90,11 +88,11 @@ public class Mail {
 		this.mailContents = mailContents;
 	}
 
-	public Date getMailDate() {
+	public String getMailDate() {
 		return mailDate;
 	}
 
-	public void setMailDate(Date mailDate) {
+	public void setMailDate(String mailDate) {
 		this.mailDate = mailDate;
 	}
 
