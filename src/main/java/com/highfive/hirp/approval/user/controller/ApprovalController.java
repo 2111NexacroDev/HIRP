@@ -1,6 +1,8 @@
 package com.highfive.hirp.approval.user.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.user.domain.ApprAccept;
 import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
@@ -49,6 +53,9 @@ public class ApprovalController {
 
 	@Autowired
 	private EmployeeAdminService eaService;
+	
+	@Autowired
+	private AlarmService alarmService;
 
 	
 	
@@ -183,9 +190,20 @@ public class ApprovalController {
 	public ModelAndView registerAppr(ModelAndView mv, @ModelAttribute Approval approval,
 			@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
 			HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		
+		//오늘 날짜
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = formatter.format(date);
+//		System.out.println("today: " + today);
+				
 		try {
 
 			int result = aService.registerAppr(approval);
+			//열람자(승인가능)
 			List<ApprAccept> aList = approval.getaList();
 			int apprNo = aService.printRecentApprNo();
 			for (int i = 0; i < aList.size(); i++) {
@@ -194,8 +212,16 @@ public class ApprovalController {
 				apprAccept.setEmplId(aList.get(i).getEmplId());
 				apprAccept.setApprType(aList.get(i).getApprType());
 				int apprResult = aService.registerApprover(apprAccept);
+				
+				//열람자 알림 추가
+//				Alarm alarm = new Alarm(apprAccept.getEmplId(), today , "[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
+//						"30", "N", emplId);
+//				int result3 = alarmService.insertAlarm(alarm);
+//				if(result3 > 0) {
+//					System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
+//				}
 			}
-			
+			//참조자
 			List<Reference> rList = approval.getrList();
 			for (int i = 0; i < aList.size(); i++) {
 				Reference reference = new Reference();
@@ -203,6 +229,7 @@ public class ApprovalController {
 				reference.setEmplId(rList.get(i).getEmplId());
 				reference.setRefType(rList.get(i).getRefType());
 				int refResult = aService.registerApprRef(reference);
+				
 			}
 			
 			
