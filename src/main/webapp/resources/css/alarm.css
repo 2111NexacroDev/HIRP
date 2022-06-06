@@ -14,3 +14,7 @@
     margin-right: 10px;
     transition: all .3s;
 }
+
+div[name=alarmDiv]:hover {
+    background-color: Aqua;
+}

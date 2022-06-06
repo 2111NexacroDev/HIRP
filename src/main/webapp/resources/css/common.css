@@ -551,6 +551,12 @@ button.next {
     opacity: 1;
 }
 
+#gnb nav li.on {
+    /* 클래스로 on이 붙어 있을 때 강조디자인 추가 */
+    background-color: #00498c;
+    opacity: 1;
+}
+
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
@@ -1257,4 +1263,8 @@ article {
 
 .colorBlue {
     color: #1860d6;
+}
+
+div[name=alarmDiv]:hover {
+    background-color: #f4f4f4;
 }

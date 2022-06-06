@@ -223,11 +223,11 @@ public class SurveyController {
 		//응답자 리스트
 		List<String> subjectList = new ArrayList<String>();
 		
-		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String today = formatter.format(date);
-		System.out.println("today: " + today);
+//		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = formatter.format(date);
+//		System.out.println("today: " + today);
 		
 		try {
 			//설문 응답자 타입에 따라서 다르게 담아줌.
@@ -271,7 +271,7 @@ public class SurveyController {
 						result2 = sService.insertSurveySub(surveySub);
 						//설문조사 알림 추가
 						if(result2 > 0) {
-							Alarm alarm = new Alarm(surveySub.getSubId(), today, "[설문조사] '"+survey.getSurveyTitle()+"' 설문조사가 등록되었습니다.",
+							Alarm alarm = new Alarm(surveySub.getSubId(), "[설문조사] '"+survey.getSurveyTitle()+"' 설문조사가 등록되었습니다.",
 									"40", "N", emplId);
 							int result3 = aService.insertAlarm(alarm);
 							if(result3 > 0) {

@@ -141,7 +141,7 @@
 	        		<c:if test="${fn:length(alarmList) ne 0 }">
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
 			        		<!-- 알림 한 묶음 시작 -->
-			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
+			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10" onclick="alarmClickEvent('${alarm.alarmCode}');">
 							    <button class="btn--profile mr-20 ml-20" type="button">
 							    	<c:if test="${alarm.emplProfile eq null}">
 								        <img src="../resources/images/img_no_profile.png" alt="profile">
@@ -220,6 +220,31 @@
 				}
 			});
 		}
+		
+		//알림 클릭 시 이동
+		function alarmClickEvent(alarmCode){
+	    	console.log(alarmCode+" 클릭");
+	    	if(alarmCode == '00'){ //메일
+	    		location.href = "/mail/Rlist.hirp";
+	    	} else if(alarmCode == '10'){ //공지
+	    		location.href = "/notice/list.hirp";
+	    	} else if(alarmCode == '11'){ //자유
+	    		location.href = "/free/list.hirp";
+	    	} else if(alarmCode == '12'){ //익명
+	    		location.href = "/anonymous/list.hirp";
+	    	} else if(alarmCode == '13'){ //부서
+	    		location.href = "/department/list.hirp";
+	    	} else if(alarmCode == '20' || alarmCode == '21' || alarmCode == '22'){ //전사, 부서, 개인
+	    		location.href = "/schedule/list.hirp";
+	    	} else if(alarmCode == '30' || alarmCode == '31' || alarmCode == '32' || alarmCode == '33'){ 
+	    		//결재 도착, 취소, 반려, 완료
+	    		location.href = "/approval/main.hirp";
+	    	} else if(alarmCode == '40'){
+	    		location.href = "/survey/main.hirp";
+	    	} else {
+	    		console.log("알림 코드가 없습니다.");
+	    	}
+	    }
 	
 	</script>
 </body>

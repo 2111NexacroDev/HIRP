@@ -94,7 +94,7 @@
 					//data의 date (ex:2022-06-06)
 					var alarmDate = aList[i].alarmDate.substr(0, 4) +  "-" + aList[i].alarmDate.substr(5, 2) + "-" + aList[i].alarmDate.substr(8, 2);
 					
-					var $alarmDiv = "<div class='mt-20'>"
+					var $alarmDiv = "<div name='alarmDiv' class='mt-20' onclick='alarmClickEvent("+aList[i].alarmCode+");'>"
 				        	+ "<div class='mb-10'>"
 					        	+ aList[i].alarmContents
 				        	+ "</div>";
@@ -152,6 +152,38 @@
 //     			alert("알림 읽음 처리 실패");
     		}
 		});
+    }
+    
+    function alarmClickEvent(alarmCode){
+    	console.log(alarmCode+" 클릭");
+    	if(alarmCode == '00'){ //메일
+    		location.href = "/mail/Rlist.hirp";
+    	} else if(alarmCode == '10'){ //공지
+    		location.href = "/notice/list.hirp";
+    	} else if(alarmCode == '11'){ //자유
+    		location.href = "/free/list.hirp";
+    	} else if(alarmCode == '12'){ //익명
+    		location.href = "/anonymous/list.hirp";
+    	} else if(alarmCode == '13'){ //부서
+    		location.href = "/department/list.hirp";
+    	} else if(alarmCode == '20' || alarmCode == '21' || alarmCode == '22'){ //전사, 부서, 개인
+    		location.href = "/schedule/list.hirp";
+    	} else if(alarmCode == '30' || alarmCode == '31' || alarmCode == '32' || alarmCode == '33'){ 
+    		//결재 도착, 취소, 반려, 완료
+    		location.href = "/approval/main.hirp";
+//     	} else if(alarmCode == '30'){ //결재 도착, 결재문서함
+//     		location.href = "/waiting/appr.hirp";
+//     	} else if(alarmCode == '31'){ //결재 취소, 메인 페이지
+//     		location.href = "/approval/main.hirp";
+//     	} else if(alarmCode == '32'){ //결재 반려, 반려문서함
+//     		location.href = "/written/appr.hirp";
+//     	} else if(alarmCode == '33'){ //결재 완료, 완료문서함
+//     		location.href = "/completed/appr.hirp";
+    	} else if(alarmCode == '40'){
+    		location.href = "/survey/main.hirp";
+    	} else {
+    		console.log("알림 코드가 없습니다.");
+    	}
     }
 
 </script>
