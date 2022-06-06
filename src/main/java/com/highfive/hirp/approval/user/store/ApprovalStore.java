@@ -9,6 +9,7 @@ import com.highfive.hirp.approval.user.domain.ApprAccept;
 import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.time.user.domain.Vacation;
 
@@ -48,7 +49,7 @@ public interface ApprovalStore {
 
 	int updateApprovalStatus(SqlSession sqlSession, Approval approval);
 
-	int deleteApproval(SqlSession sqlSession, int docNo);
+	int deleteApproval(SqlSession sqlSession, int apprNo);
 
 	int deleteApprAccept(SqlSession sqlSession, int docNo);
 
@@ -84,6 +85,11 @@ public interface ApprovalStore {
 	int insertVacation(SqlSession sqlSession, Vacation vacation);
 
 	int insertVacationAppr(SqlSession sqlSession, Approval approval);
+
+	//결재문서함(전체)
+	List<Approval> selectAllAppr(SqlSession sqlSession, String emplId);
+
+	int selectListCount(SqlSession sqlSession);
 
 
 

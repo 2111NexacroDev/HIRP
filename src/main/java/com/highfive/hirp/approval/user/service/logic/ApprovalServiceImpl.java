@@ -13,6 +13,7 @@ import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.service.ApprovalService;
 import com.highfive.hirp.approval.user.store.ApprovalStore;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.time.user.domain.Vacation;
 
@@ -123,8 +124,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 	}
 
 	@Override
-	public int removeApproval(int docNo) {
-		int result = aStore.deleteApproval(sqlSession,docNo);
+	public int removeApproval(int apprNo) {
+		int result = aStore.deleteApproval(sqlSession,apprNo);
 		return result;
 	}
 
@@ -224,6 +225,19 @@ public class ApprovalServiceImpl implements ApprovalService{
 	public int registerVacationAppr(Approval approval) {
 		int result = aStore.insertVacationAppr(sqlSession, approval);
 		return result;
+	}
+
+	@Override
+	public List<Approval> printAllAppr(String emplId) {
+		List<Approval> allList = aStore.selectAllAppr(sqlSession,emplId);
+		return allList;
+	}
+
+	@Override
+	public int getListCount() {
+		int totalCount = aStore.selectListCount(sqlSession);
+		return totalCount;
+		
 	}
 
 

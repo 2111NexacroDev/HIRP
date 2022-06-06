@@ -6,7 +6,7 @@
     <button class="btn--chat" type="button" 
     	onclick="window.open('/chatMain.hirp','chatting','width=400,height=600,location=no,status=no,scrollbars=no');"></button>
     <button class="btn--alarm" type="button">
-        <span>3</span>
+        <span id="newAlarm"></span>
     </button>
     <button class="btn--star" type="button"></button>
     <button class="btn--profile" type="button">
@@ -28,6 +28,9 @@
     
     <section class="nav--right__alarm">
     	<!-- 알림 리스트 -->
+    	<div style="text-align:right;">
+    		<button type="button" class="noneBackground  padding-10" onclick="readAllAlarm();">모두 읽음</button>
+    	</div>
     	<div id="alarmList" style="max-height:300px; overflow:scroll;">
 	        <div class="mt-20">
 	        	<div class="mb-10">
@@ -62,8 +65,17 @@
         }
     });
     
+    $(document).ready(function() {
+    	selectNewAlarm(); //화면 열 때 한번 불러와서 데이터 있으면 N으로 넣어주기
+    });
+    
     //알림 버튼 클릭 시
     $('.btn--alarm').on('click', function () {
+    	selectNewAlarm();
+//     	readAllAlarm(); //읽음 처리
+    });
+    
+    function selectNewAlarm(){
 //     	alert("알림");
     	$.ajax({
 			url:"/alarm/printUnreadAlarm.hirp",
@@ -106,6 +118,7 @@
 				    $alarmListDiv.append($alarmDiv);
 				}
 				
+				$("#newAlarm").html(aCount);
 			},
     		error: function(){
 //     			alert("알림 조회 실패");
@@ -117,6 +130,28 @@
 				$alarmListDiv.append($alarmDiv);
     		}
 		});
-    });
+    }
+    
+    function readAllAlarm(){
+//     	alert("알림");
+    	$.ajax({
+			url:"/alarm/readAllAlarm.hirp",
+			type:"post",
+			data:{},
+			success: function(aList){
+// 				alert("알림 읽음 처리 성공");
+				$("#newAlarm").html(""); //읽으면 알림에 표시 안 뜨게
+				var $alarmListDiv = $("#alarmList");
+				$alarmListDiv.html("");
+				var $alarmDiv = "<div class='mt-20 padding-20 t-c'>"
+						        	+ "새로운 알림이 없습니다."
+						        + "</div>";
+				$alarmListDiv.append($alarmDiv);
+			},
+    		error: function(){
+//     			alert("알림 읽음 처리 실패");
+    		}
+		});
+    }
 
 </script>

@@ -125,7 +125,9 @@
 				
 	        	<div id="alarmList" class="">
 	        		<c:if test="${fn:length(alarmList) eq 0 }">
-	        		
+	        			<div class="basic-border-bottom padding-20 t-c">
+	        				등록된 알림이 없습니다.
+	        			</div>
 	        		</c:if>
 	        		<c:if test="${fn:length(alarmList) ne 0 }">
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
@@ -160,7 +162,7 @@
 						        	</div>
 					        	</div>
 					        	<div style="position:absolute; right:20px;">
-						        	<button type="button" class="noneBackground" ><i class="fa-solid fa-xmark"></i></button>
+						        	<button type="button" class="noneBackground" onclick="deleteAlarmByNo(this, ${alarm.alarmNo});" ><i class="fa-solid fa-xmark"></i></button>
 					        	</div>
 			            	</div>
 			            	<!-- 알림 한 묶음 끝 -->
@@ -194,5 +196,26 @@
 	    	</div>
         </article>
 	</div>
+	<script>
+	
+		//알림 선택해서 삭제
+		function deleteAlarmByNo(obj, alarmNo){
+			console.log($(obj).parent().parent()); //알림 묶음 찾음
+			
+			$.ajax({
+				url:"/alarm/deleteAlarmByNo.hirp",
+				type:"post",
+				data:{"alarmNo" : alarmNo},
+				success: function(data){
+					alert("성공");
+					$(obj).parent().parent().remove(); //알림 묶음 지우기
+				},
+				error: function(){
+					alert("실패");
+				}
+			});
+		}
+	
+	</script>
 </body>
 </html>

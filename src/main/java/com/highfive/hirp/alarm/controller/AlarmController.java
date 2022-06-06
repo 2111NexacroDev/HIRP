@@ -142,6 +142,23 @@ public class AlarmController {
 	//알림 추가
 	//여기에 따로 만들게 아니라 다른 사람들 한 거에서 실행될 때마다 나오도록 해야할 듯.
 	
+	//전체 알림 읽기
+	@ResponseBody
+	@RequestMapping(value="/alarm/readAllAlarm.hirp", method = RequestMethod.POST)
+	public String readAllAlarm(
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		//아이디 넘겨서 전체 알림 읽기
+		int result = aService.updateReadAlarm(emplId);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
 	//전체 알림 삭제
 	public ModelAndView deleteAllAlarm(ModelAndView mv) {
 //		HttpSession session = request.getSession();
@@ -154,11 +171,18 @@ public class AlarmController {
 	}
 	
 	//특정 알림 삭제
-	public ModelAndView deleteAlarmByNo(ModelAndView mv
-			,@RequestParam("alarmNo") int alarmNo) {
+	@ResponseBody
+	@RequestMapping(value="/alarm/deleteAlarmByNo.hirp", method = RequestMethod.POST)
+	public String deleteAlarmByNo(
+			@RequestParam("alarmNo") int alarmNo) {
 		
 		//알림 번호로 알림 삭제
-		return mv;
+		int result = aService.deleteAlarmByNo(alarmNo);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	

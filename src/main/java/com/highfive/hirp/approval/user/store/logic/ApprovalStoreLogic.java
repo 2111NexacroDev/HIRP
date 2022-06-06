@@ -2,6 +2,7 @@ package com.highfive.hirp.approval.user.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
 import com.highfive.hirp.approval.user.store.ApprovalStore;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.time.user.domain.Vacation;
 @Repository
@@ -82,15 +84,12 @@ public class ApprovalStoreLogic implements ApprovalStore{
 
 	@Override
 	public List<Approval> selectAllMyAppr(SqlSession sqlSession, String emplId) {
+		
 		List<Approval> aList = sqlSession.selectList("ApprMapper.selectAllMyAppr",emplId);
 		return aList;
 	}
 	
-//	@Override
-//	public Approval selectOneWaitingAppr(SqlSession sqlSession, int docNo) {
-//		Approval approval = sqlSession.selectOne("",docNo);
-//		return approval;
-//	}
+
 
 	//결재자 정보 조회
 	@Override
@@ -117,8 +116,8 @@ public class ApprovalStoreLogic implements ApprovalStore{
 	}
 
 	@Override
-	public int deleteApproval(SqlSession sqlSession, int docNo) {
-		int result = sqlSession.delete("",docNo);
+	public int deleteApproval(SqlSession sqlSession, int apprNo) {
+		int result = sqlSession.delete("ApprMapper.deleteApproval",apprNo);
 		return result;
 	}
 
@@ -218,6 +217,21 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		int result = sqlSession.insert("ApprMapper.insertVacationAppr",approval);
 		return result;
 	}
+
+	//결재문서함(전쳬)
+	@Override
+	public List<Approval> selectAllAppr(SqlSession sqlSession, String emplId) {
+		List<Approval> allList = sqlSession.selectList("ApprMapper.selectAllAppr",emplId);
+		return allList;
+	}
+
+	@Override
+	public int selectListCount(SqlSession sqlSession) {
+		int totalCount = sqlSession.selectOne("ApprMapper.selectListCount");
+		return totalCount;
+	}
+
+	
 
 
 

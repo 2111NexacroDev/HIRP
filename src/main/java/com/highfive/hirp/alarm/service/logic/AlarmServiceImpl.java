@@ -79,7 +79,7 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public int deleteAlarmByNo(String alarmNo) {
+	public int deleteAlarmByNo(int alarmNo) {
 		int result = aStore.deleteAlarmByNo(sqlSession, alarmNo);
 		return result;
 	}
