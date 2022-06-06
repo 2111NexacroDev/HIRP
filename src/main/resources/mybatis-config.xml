@@ -53,6 +53,9 @@
 		<typeAlias type="com.highfive.hirp.chat.domain.ChatFile" alias="ChatFile"></typeAlias>
 		<typeAlias type="com.highfive.hirp.chat.domain.Message" alias="Message"></typeAlias>
 		<typeAlias type="com.highfive.hirp.chat.domain.ChatList" alias="ChatList"></typeAlias>
+		<!-- 알림 -->
+		<typeAlias type="com.highfive.hirp.alarm.domain.Alarm" alias="Alarm"></typeAlias>
+		<typeAlias type="com.highfive.hirp.alarm.domain.AlarmSetting" alias="AlarmSetting"></typeAlias>
 		
 		<!-- 우정 -->
 		<typeAlias type="com.highfive.hirp.board.notice.domain.NoticeBoard" alias="NoticeBoard"></typeAlias>

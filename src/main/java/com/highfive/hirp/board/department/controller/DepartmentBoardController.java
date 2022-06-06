@@ -1,5 +1,7 @@
 package com.highfive.hirp.board.department.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
 import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
@@ -26,12 +30,20 @@ import com.highfive.hirp.board.department.service.DepartmentBoardService;
 import com.highfive.hirp.board.reply.domain.Reply;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 
 @Controller
 public class DepartmentBoardController {
 
 	@Autowired
 	private DepartmentBoardService dService;
+	
+	@Autowired
+	public AlarmService aService;
+	
+	@Autowired
+	public EmployeeAdminService eaService;
 	
 	@RequestMapping(value="department/writeView.hirp")
 	public String DepartmentWriteView(ModelAndView mv) {
@@ -106,6 +118,11 @@ public class DepartmentBoardController {
 				departmentboard.setEmplId(emplId);
 				departmentboard.setDeptCode(deptCode);
 				
+				//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
+				Date date = new Date();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String today = formatter.format(date);
+				System.out.println("today: " + today);
 
 				//부서 테이블 등록
 				int result = dService.registerDepartment(departmentboard);
@@ -128,6 +145,21 @@ public class DepartmentBoardController {
 				}
 					 try { 
 					  if(result > 0) {
+						  //부서 게시판 알림
+//						  List<Employee> deptEmplList = eaService.printEmployeeWithDeptCode(deptCode);
+//						  if(!deptEmplList.isEmpty()) {
+//								for(int i=0; i<deptEmplList.size(); i++) {
+//									if(!deptEmplList.get(i).getEmplId().equals(emplId)) {
+//										//부서게시판 알림 추가
+//										Alarm alarm = new Alarm(deptEmplList.get(i).getEmplId(), today, "[부서게시판] '"+departmentboard.getDeptTitle()+"' 글이 등록되었습니다.",
+//												"10", "N", emplId);
+//										int result2 = aService.insertAlarm(alarm);
+//										if(result2 > 0) {
+//											System.out.println(departmentboard.getDeptTitle()+"글의 알림이 추가되었습니다.");
+//										}
+//									}
+//								}
+//							}
 						  	mv.setViewName("redirect:/department/list.hirp"); 
 					  }else { 
 						    mv.addObject("msg","부서사항등록 실패"); 

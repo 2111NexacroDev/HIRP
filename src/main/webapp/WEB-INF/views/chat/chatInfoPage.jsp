@@ -210,6 +210,108 @@
 			});
 		}
 		
+		//직원 목록에서 검색 (ajax)
+		function emplSearch(obj){ //버튼 클릭 시 동작
+			console.log(obj);
+			console.log($(obj).prev()); //검색창 input
+			console.log($(obj).parent().next()); //id empllist 또는 모달창 empllist div
+			console.log($(obj).parent().next()[0]); //div의 아이디값 가져오기
+// 			console.log($("#emplList"));
+			var searchVal = $(obj).prev().val(); //검색한 내용
+			var $emplListDiv = $(obj).parent().next(); //id empllist 또는 모달창 empllist div
+			var emplDivId = $emplListDiv[0].id; //div의 아이디값 가져오기
+			console.log(searchVal);
+			console.log(emplDivId);
+			if(emplDivId == 'emplList'){
+				console.log("모달 아님");
+			} else {
+				console.log("모달임");
+			}
+			
+			$.ajax({
+				url:"/searchEmplList.hirp",
+				type:"post",
+				data:{"emplSearchKeyword" : searchVal},
+				success: function(eList){
+					console.log("성공");
+	    			console.log(eList);
+	    			var count = eList.length;
+	    			var myId = "${sessionScope.emplId}";
+	    			console.log("아이디 : " + myId);
+	    			
+// 	    			var $emplDiv = $("#emplList");
+	    			$emplListDiv.html("");//기존 내용 있으면 비우기
+	    			
+	    			//list가 null값이면 아무 데이터도 안나옴. controller에서 empty 체크 안함.
+	    			for(var i=0; i<count; i++){
+	    				if(eList[i].emplId != myId){ //내가 아닌 데이터만 가져오기
+	    					var countUp = "";
+	    					var emplOneDiv = "";
+	    					
+							if(emplDivId == 'emplList'){ //직원 리스트 검색일 때
+			    				countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
+			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10' ondblclick='addPersonalChatroom(\""+eList[i].emplId+"\")'>"
+													  +  "<div class='mr-20 ml-20' style='width:30px;'>"
+										      		  +  "<button class='btn--profile' type='button'>";
+								if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
+									emplOneDiv += "<img src='../resources/images/img_no_profile.png' alt='profile'>";
+								} else {
+									emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
+								}
+								
+								emplOneDiv +=	"</button>"
+										+    "</div>";
+								emplOneDiv +=	"<div class='ml-20'>"
+												    +	eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
+											+    "</div>"
+							            +	"</div>";
+							} else { //모달창 내부 검색일 때
+								countUp = "<c:set var='count' value='"+i+"' />" //원래는 여기 roomId 들어가야 할 듯.
+			    				emplOneDiv = "<div class='chat-row mt-10  padding-bottom-10'>"
+													  +  "<div class='mr-20 ml-20' style='width:30px;'>"
+										      		  +  "<button class='btn--profile' type='button'>";
+								if(eList[i].emplProfile == null) { //사진 null값 체크해서 다르게 넣어줌.
+									emplOneDiv += "<img src='../resources/images/img_no_profile.png' alt='profile'>";
+								} else {
+									emplOneDiv += "<img src='../resources/uploadFiles/"+eList[i].emplProfile+"' alt='profile'>";
+								}
+								
+								emplOneDiv +=	"</button>"
+										+    "</div>";
+										
+								emplOneDiv += "<div class='modal--chatSelect__empList__checkbox-wrap pos-rel ml-20'>"
+										    	+ "<label for=" + eList[i].emplId + ">"
+										    		+ eList[i].deptName+" "+eList[i].emplName+" "+eList[i].positionName
+										    	+ "</label>"
+										    	+ "<input type='checkbox' id="+eList[i].emplId+" name='joinchatId' value="+eList[i].emplId+">"
+										    + "</div>"
+										+	"</div>";
+							}
+							
+							$emplListDiv.append(countUp);
+							$emplListDiv.append(emplOneDiv);
+							
+	    				}
+					}
+	    			if(emplDivId == 'emplList'){
+	    				console.log("모달 아님");
+	    			} else {
+	    				console.log("모달임");
+	    			}
+	    		},
+	    		error: function(){
+	    			console.log("실패");
+// 	    			console.log(searchVal);
+// 					var $tableBody = $("#emplTable tbody");
+// 	    			$tableBody.html("");//기존 내용 있으면 비우기
+// 	    			var $tr = $("<tr>");
+// 	    			var $text = $("<div class='t-c' style='align:center;'>").html("검색 결과가 없습니다."); //이거 td 안 합쳐짐.
+// 					$tr.append($text);
+// 					$tableBody.append($tr);
+	    		}
+			});
+		}
+		
 		$(function(){
 			//직원 초대창 열기
 			$("#addEmpl").on("click", function(){

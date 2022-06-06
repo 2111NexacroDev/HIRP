@@ -25,6 +25,26 @@ $(function () {
         $('.nav--right__info').stop().fadeToggle(100);
     });
 
+    // 즐겨찾기
+    $('.btn--star').on('click', function () {
+        var title = document.title; //현재 보고 있는 페이지의 Title
+        var url = location.href; //현재 보고 있는 페이지의 Url
+        if (window.sidebar && window.sidebar.addPanel) { //firefox
+            window.sidebar.addPanel(title, url, "");
+        } else if (window.opera && window.print) { //opera
+            var elem = document.createElement('a');
+            elem.setAttribute('href', url);
+            elem.setAttribute('title', title);
+            elem.setAttribute('rel', 'sidebar');
+            elem.click();
+        } else if (document.all) { //msie
+            window.external.AddFavorite(url, title);
+        } else {
+            alert("해당브라우저는 즐겨찾기 추가기능이 지원되지 않습니다.\n\nCtrl+D를 눌러 즐겨찾기에 추가해주세요!");
+            return true;
+        }
+    });
+
     // 주소별 gnb 강조색 위치 변경
     let addr = location.href;
     let fullAddr = addr.split('/');
@@ -83,9 +103,14 @@ $(function () {
         containment: 'window'
     });
 
+    // 알림 메뉴 열기/닫기
+    $('.btn--alarm').on('click', function () {
+        $('.nav--right__alarm').stop().fadeToggle(100);
+    });
+    //알림 클릭 시 숫자 없어짐
     $('.btn--alarm').on('click', function () {
         $(this).children('span').text('');
-    })
+    });
 
     // 서브메뉴 접힘/펼침
     $('#snb>ul>li>a, #snb>ul>li>button').on('click', function () {

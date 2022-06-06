@@ -2,10 +2,32 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/approval/approvalCommonPage.jsp" %>
-<h1 class="basic-border-bottom">결재문서함</h1>
+<h1 class="basic-border-bottom">문서함</h1>
 <div id="guide" class="subConts">
 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가,필요 없으면 지울 것 -->
+			<c:if test="${approval.emplId eq emplId && approval.apprStatus eq '대기'}">
 			
+			<button class="emergency mt-20" type="button" style="float:right;" onclick="openAlert(this);">상신취소</button>
+                    <section class="section--alert">
+                        <div class="bg-black"></div>
+                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+                        <div class="section--alert__conts">
+                            <button class="btn--close" type="button"></button>
+                            <p>
+                                확인을 누르시면<br>
+                                상신이 취소됩니다. 취소하시겠습니까?
+                            </p>
+                            
+                            <div class="btns-wrap mt-20">
+	                            <c:url var="aDelete" value="/appr/remove.hirp">
+									<c:param name="apprNo" value="${approval.apprNo} "></c:param>
+								</c:url>
+                                <button class="point" type="button" onclick="location.href='${aDelete }'">확인</button>
+                                <button class="finished closeWindow" type="button">닫기</button>
+                            </div>
+                        </div>
+                    </section>
+			</c:if>
 			<div style="border: solid 1px #888; border-radius: 4px; margin-top: 60px; position: relative;">
 			
 			<table id="apprTable">
@@ -78,6 +100,35 @@
 								반대 ${appr.apprDate}
 								</div>
 								</c:if>
+								<c:if test="${not empty appr.apprComment }">
+								<c:if test="${appr.aStatus eq'승인'}">
+								<button class="basic" type="button" onclick="openModal(this);" style="margin-top:5px; border-radius:4px;">결재의견</button>
+								</c:if>
+								<c:if test="${appr.aStatus eq'반려'}">
+								<button class="basic" type="button" onclick="openModal(this);" style="margin-top:5px; border-radius:4px;">반려의견</button>
+								</c:if>
+                    <section class="section--modal">
+                        <div class="bg-black"></div>
+                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+                        <div class="section--modal__conts">
+                            <button class="btn--close" type="button"></button>
+                            
+                            <c:if test="${appr.aStatus eq'승인'}">
+                            <h3>${appr.employee.emplName} 결재의견</h3>
+                           </c:if>
+                           <c:if test="${appr.aStatus eq'반려'}">
+                           <h3>${appr.employee.emplName} 반려의견</h3>
+                           </c:if>
+                           
+                               <div style="width:300px;height:200px;border:solid 1px #999"> ${appr.apprComment }</div>
+                           
+                            
+                            <div class="btns-wrap mt-20 t-r">
+                                <button class=" point finished closeWindow" type="button">확인</button>
+                            </div>
+                        </div>
+                    </section>
+							</c:if>	
 							</div>	
 						</c:forEach>
 						</div>
@@ -94,13 +145,21 @@
 						</div>
 				
 				<div id="apprContents">${approval.apprContents }</div>
+			
+			<c:if test="${not empty approval.fList}">
 			<div id="attached-file-div">	 
 					<div style="margin-bottom : 10px; font-size:15px; font-weight:bolder;">첨부파일</div>
 					<c:forEach var="file" items="${approval.fList}">
 						<div><img src="../../../../resources/images/icons/attachedFile.png" style="width:12px; height:auto; vertical-align: middle;"/><a href="../../../../resources/uploadFiles/${file.fileRename }" download>${file.fileName}</a></div>
 					</c:forEach>
 			</div>
+			</c:if>
+			
+			
+			
 			</div>
+			
+			
 			<script>
 			
 			function submitForm(){

@@ -11,6 +11,7 @@ import com.highfive.hirp.approval.user.domain.ApprAccept;
 import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
 import com.highfive.hirp.approval.user.domain.Approval;
 import com.highfive.hirp.approval.user.domain.Reference;
+import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Search;
 import com.highfive.hirp.group.domain.Group;
 import com.highfive.hirp.time.user.domain.Vacation;
@@ -73,7 +74,7 @@ public interface ApprovalService {
 		
 		//결재상신 취소
 		//delete approval
-		public int removeApproval(int docNo);
+		public int removeApproval(int apprNo);
 		//delete appr_accept
 		public int removeApprAccept(int docNo);
 		//상신문서함(select List)
@@ -106,6 +107,10 @@ public interface ApprovalService {
 		//연차등록
 		public int registerVacation(Vacation vacation);
 		public int registerVacationAppr(Approval approval);
+		//결재문서함(전체)
+		public List<Approval> printAllAppr(String emplId);
+		
+		public int getListCount();
 		
 	
 	

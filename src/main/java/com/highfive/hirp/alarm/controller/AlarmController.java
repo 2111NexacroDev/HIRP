@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.highfive.hirp.alarm.domain.Alarm;
 import com.highfive.hirp.alarm.domain.AlarmCode;
 import com.highfive.hirp.alarm.domain.AlarmSetting;
@@ -27,8 +31,9 @@ public class AlarmController {
 	private AlarmService aService;
 
 	//알림 설정 페이지로 이동
-	@RequestMapping(value="/alarm/settingPage", method=RequestMethod.GET)
+	@RequestMapping(value="/alarm/settingPage.hirp", method=RequestMethod.GET)
 	public ModelAndView alarmSettingPage(ModelAndView mv) {
+		mv.setViewName("alarm/alarmSettingPage");
 		return mv;
 	}
 	//회원가입 후 관리자 승인 시에 insertAlarmSetting 해주기
@@ -51,32 +56,35 @@ public class AlarmController {
 		return mv;
 	}
 	
-	//전체 알림 가져오기
+	//전체 알림 페이지로 이동
+	@RequestMapping(value="/alarm/allAlarm.hirp", method=RequestMethod.GET)
 	public ModelAndView printAllAlarm(
 			ModelAndView mv,
 			HttpServletRequest request) {
 		
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		List<Alarm> allAlarm = aService.selectAllAlarm(emplId);
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		
+		List<Alarm> allAlarm = aService.selectAllAlarm(emplId);
+		mv.addObject("alarmList", allAlarm);
+		mv.setViewName("alarm/alarmListPage");
 		return mv;
 	}
 	
 	//코드별로 알림 가져오기
+	@RequestMapping(value="/alarm/printAlarm{param}.hirp", method=RequestMethod.GET)
 	public ModelAndView printAlarmByCode(
 			ModelAndView mv
 			,HttpServletRequest request
-			,@RequestParam("alarmCode") String alarmCode) {
+			,@PathVariable("param") String alarmCode) {
 		
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		
 		List<Alarm> alarmList = aService.selectAlarmByCode(emplId, alarmCode);
+		mv.addObject("alarmList", alarmList);
+		System.out.println(alarmList);
+		mv.setViewName("alarm/alarmListPage");
 		//화면에서 나눠진 항목을 클릭할 때 alarmCode를 같이 넘겨주어 조회
 		
 //		List<Alarm> mailAlarm = aService.selectAlarmByCode(emplId, "00");
@@ -104,23 +112,52 @@ public class AlarmController {
 	}
 	
 	//안읽은 알림 가져오기(종 누르면 설정한 알림만 보는 거)
-	public ModelAndView printUnReadAlarm(
-			ModelAndView mv) {
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
+	@ResponseBody
+	@RequestMapping(value="/alarm/printUnreadAlarm.hirp", method = RequestMethod.POST
+			, produces="application/json;charset=utf-8")
+	public String printUnReadAlarm(
+			Model model
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		//임시
+		AlarmSetting alarmSetting = new AlarmSetting();
+		alarmSetting.setEmplId(emplId);
+		//알림 셋팅 가져오기
+//		AlarmSetting alarmSetting = aService.selectAlarmSetting(emplId);
 		//안 읽은 알림 띄워주기
-		List<Alarm> unreadAlarm = aService.selectUnreadAlarm(alarmSetting);
+		List<Alarm> unreadAlarmList = aService.selectUnreadAlarm(alarmSetting);
+		model.addAttribute("unreadAlarmList", unreadAlarmList);
 		//알림 읽음으로 상태 변경하기
 		
-		return mv;
+		
+		if(!unreadAlarmList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			return gson.toJson(unreadAlarmList);
+		}
+		return "";
 	}
 	
 	
 	//알림 추가
 	//여기에 따로 만들게 아니라 다른 사람들 한 거에서 실행될 때마다 나오도록 해야할 듯.
+	
+	//전체 알림 읽기
+	@ResponseBody
+	@RequestMapping(value="/alarm/readAllAlarm.hirp", method = RequestMethod.POST)
+	public String readAllAlarm(
+			HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		
+		//아이디 넘겨서 전체 알림 읽기
+		int result = aService.updateReadAlarm(emplId);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
 	//전체 알림 삭제
 	public ModelAndView deleteAllAlarm(ModelAndView mv) {
@@ -134,11 +171,18 @@ public class AlarmController {
 	}
 	
 	//특정 알림 삭제
-	public ModelAndView deleteAlarmByNo(ModelAndView mv
-			,@RequestParam("alarmNo") int alarmNo) {
+	@ResponseBody
+	@RequestMapping(value="/alarm/deleteAlarmByNo.hirp", method = RequestMethod.POST)
+	public String deleteAlarmByNo(
+			@RequestParam("alarmNo") int alarmNo) {
 		
 		//알림 번호로 알림 삭제
-		return mv;
+		int result = aService.deleteAlarmByNo(alarmNo);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	

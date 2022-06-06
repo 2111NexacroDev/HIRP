@@ -1037,4 +1037,38 @@ section[class^="todo--"] {
     margin-top: 20px;
 }
 
+#groupView>div {
+    display: flex;
+    align-items: center;
+    max-width: 800px;
+    padding: 30px 20px;
+}
+
+#groupView .profile-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    margin-right: 60px;
+}
+
+#groupView .profile-wrap img {
+    width: 100%;
+}
+
+#groupView label {
+    width: 130px;
+    font-weight: 500;
+}
+
+#groupView label,
+#groupView input {
+    font-size: 16px;
+}
+
+#groupView input {
+    width: calc(100% - 160px);
+}
+
 /* 조직도 끝 */

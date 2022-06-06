@@ -27,6 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.board.common.BoardAttachedFile;
 import com.highfive.hirp.board.common.BoardPagination;
 import com.highfive.hirp.board.common.SaveMultipartFile;
@@ -38,6 +40,8 @@ import com.highfive.hirp.board.reply.domain.Reply;
 import com.highfive.hirp.common.PageInfo;
 
 import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 
 @Controller
 public class NoticeController {
@@ -47,6 +51,12 @@ public class NoticeController {
 	
 	@Autowired
 	public DepartmentBoardService dService;
+	
+	@Autowired
+	public AlarmService aService;
+	
+	@Autowired
+	public EmployeeAdminService eaService;
 
 	@RequestMapping(value = "board/main.hirp")
 	public ModelAndView boardMain(ModelAndView mv) {
@@ -134,6 +144,12 @@ public class NoticeController {
 		String emplId = (String) session.getAttribute("emplId");
 		noticeboard.setEmplId(emplId);
 
+		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+		System.out.println("today: " + today);
+				
 		// 공지 테이블 등록
 		int result = nService.registerNotice(noticeboard);
 		if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {
@@ -154,7 +170,23 @@ public class NoticeController {
 			}
 		}
 		try {
+			//공지게시글 추가 성공 시 알림 추가
 			if (result > 0) {
+				//전 사원 목록 가져와서 내가 아닌 모두에게 알림 추가
+				List<Employee> emplList = eaService.printAllEmployee();
+				if(!emplList.isEmpty()) {
+					for(int i=0; i<emplList.size(); i++) {
+						if(!emplList.get(i).getEmplId().equals(emplId)) {
+							//공지게시판 알림 추가
+							Alarm alarm = new Alarm(emplList.get(i).getEmplId(), today, "[공지게시판] '"+noticeboard.getNoticeTitle()+"' 글이 등록되었습니다.",
+									"10", "N", emplId);
+							int result2 = aService.insertAlarm(alarm);
+							if(result2 > 0) {
+								System.out.println(noticeboard.getNoticeTitle()+"글의 알림이 추가되었습니다.");
+							}
+						}
+					}
+				}
 				mv.setViewName("redirect:/notice/list.hirp");
 			} else {
 				mv.addObject("msg", "공지사항등록 실패");
