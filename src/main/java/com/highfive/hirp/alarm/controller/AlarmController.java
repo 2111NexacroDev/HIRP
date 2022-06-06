@@ -166,11 +166,17 @@ public class AlarmController {
 	}
 	
 	//전체 알림 삭제
-	public ModelAndView deleteAllAlarm(ModelAndView mv) {
-//		HttpSession session = request.getSession();
-//		String emplId = session.getAttribute("emplId").toString();
+	@RequestMapping(value="/alarm/deleteAllAlarm.hirp", method = RequestMethod.GET)
+	public ModelAndView deleteAllAlarm(ModelAndView mv
+			,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
 		
 		//아이디 넘겨서 전체 알림 삭제하기
+		int result = aService.deleteAllAlarm(emplId);
+		if(result > 0) {
+			mv.setViewName("redirect:/alarm/allAlarm.hirp");
+		}
 		return mv;
 	}
 	

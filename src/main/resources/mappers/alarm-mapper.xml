@@ -160,4 +160,10 @@
 		DELETE FROM ALARM_TBL
 		WHERE ALARM_NO = #{alarmNo}
 	</delete>
+	
+	<!-- 전체 알림 삭제 -->
+	<delete id ="deleteAllAlarm">
+		DELETE FROM ALARM_TBL
+		WHERE EMPL_ID = #{emplId}
+	</delete>
 </mapper>
