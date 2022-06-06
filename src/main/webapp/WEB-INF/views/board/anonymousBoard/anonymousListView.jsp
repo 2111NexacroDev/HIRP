@@ -18,6 +18,18 @@
        
             <%@ include file="/WEB-INF/views/include/inc_nav_right.jsp" %>
 
+			<form class="form--srch" action="/anonymous/searchList.hirp" method="get">
+			<input type="hidden" name="currentPage" value="1">
+			<input type="hidden" name="listLimit" value="10">
+				<select name="searchCondition">
+					<option value="all">전체</option>
+					<option value="title">제목</option>
+					<option value="contents">내용</option>
+				</select>
+				<input type="text" name="searchValue" placeholder="게시판검색">
+				<button type="submit"></button>
+			</form>
+					
             <h1 class="basic-border-bottom">익명게시판</h1>
 
             <div id="anonymous" class="subConts padding-0">
@@ -70,19 +82,6 @@
 					<c:if test="${pi.currentPage < pi.endNavi }">
 						<button class="fa-solid fa-angle-right next" onclick="location.href='/anonymous/list.hirp?page=${pi.currentPage+1 }'"></button>
 					</c:if>
-				</div>
-				<div class="board__srch-wrap t-c">
-					<form action="/anonymous/searchList.hirp" method="get">
-					<input type="hidden" name="currentPage" value="1">
-					<input type="hidden" name="listLimit" value="10">
-						<select name="searchCondition">
-							<option value="all">전체</option>
-							<option value="title">제목</option>
-							<option value="contents">내용</option>
-						</select>
-						<input type="text" name="searchValue">
-						<input type="submit" value="검색">
-					</form>
 				</div>
             </div>
         </article>

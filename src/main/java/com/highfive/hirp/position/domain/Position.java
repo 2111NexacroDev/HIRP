@@ -3,18 +3,24 @@ package com.highfive.hirp.position.domain;
 public class Position {
 	private String positionCode;
 	private String positionName;
-	private int positionUseMember;
+	private int positionUseManager;
 	private int positionSequence;
 	private int positionLevel;
 	
 	public Position() {}
 
-	public Position(String positionCode, String positionName, int positionUseMember, int positionSequence,
+	public Position(String positionCode, String positionName) {
+		super();
+		this.positionCode = positionCode;
+		this.positionName = positionName;
+	}
+
+	public Position(String positionCode, String positionName, int positionUseManager, int positionSequence,
 			int positionLevel) {
 		super();
 		this.positionCode = positionCode;
 		this.positionName = positionName;
-		this.positionUseMember = positionUseMember;
+		this.positionUseManager = positionUseManager;
 		this.positionSequence = positionSequence;
 		this.positionLevel = positionLevel;
 	}
@@ -35,12 +41,12 @@ public class Position {
 		this.positionName = positionName;
 	}
 
-	public int getPositionUseMember() {
-		return positionUseMember;
+	public int getPositionUseManager() {
+		return positionUseManager;
 	}
 
-	public void setPositionUseMember(int positionUseMember) {
-		this.positionUseMember = positionUseMember;
+	public void setPositionUseManager(int positionUseManager) {
+		this.positionUseManager = positionUseManager;
 	}
 
 	public int getPositionSequence() {
@@ -61,9 +67,9 @@ public class Position {
 
 	@Override
 	public String toString() {
-		return "Position [positionCode=" + positionCode + ", positionName=" + positionName + ", positionUseMember="
-				+ positionUseMember + ", positionSequence=" + positionSequence + ", positionLevel=" + positionLevel
+		return "Position [positionCode=" + positionCode + ", positionName=" + positionName + ", positionUseManager="
+				+ positionUseManager + ", positionSequence=" + positionSequence + ", positionLevel=" + positionLevel
 				+ "]";
 	}
-	
+
 }

@@ -75,8 +75,8 @@ public class FreeBoardController {
 	// 자유게시판 디테일 조회
 	@RequestMapping(value = "/free/detail.hirp", method = RequestMethod.GET)
 	public ModelAndView freeDetailView(ModelAndView mv, @RequestParam("freeNo") int freeNo) {
-		FreeBoard freeboard = fService.printOneFree(freeNo);
 		Integer FreeViewCount = fService.viewCount(freeNo);
+		FreeBoard freeboard = fService.printOneFree(freeNo);
 		if (freeboard != null) {
 			mv.addObject("free", freeboard);
 			mv.setViewName("board/freeBoard/freeDetail");

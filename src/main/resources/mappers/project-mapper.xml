@@ -30,22 +30,29 @@
 		SELECT * FROM PROJECT_TBL ORDER BY PROJECT_NO DESC
 	</select>
 	
+	<!-- 프로젝트 상세 조회 -->
 	<select id="selectOneByNo" resultMap="projectResultMap">
-		SELECT * FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
+		SELECT PROJECT_NO, PROJECT_NAME, P.START_DATE, P.END_DATE, E.EMPL_NAME "PROJECT_MANAGER"
+		FROM PROJECT_TBL P JOIN EMPL_TBL E ON (P.PROJECT_MANAGER = E.EMPL_ID)
+		WHERE PROJECT_NO = #{projectNo}
 	</select>
 	
+	<!-- 프로젝트 생성 -->
 	<insert id="insertProject" parameterType="Project">
 		INSERT INTO PROJECT_TBL VALUES(PROJECT_NO.NEXTVAL, #{projectName}, #{startDate}, #{endDate}, #{projectManager})
 	</insert>
 
+	<!-- 프로젝트 수정 -->
 	<update id="updateProject" parameterType="Project">
 		UPDATE PROJECT_TBL SET PROJECT_NAME=#{projectName}, START_DATE=#{startDate}, END_DATE=#{endDate}, PROJECT_MANAGER=#{projectManager} WHERE PROJECT_NO=#{projectNo}
 	</update>
 	
+	<!-- 프로젝트 삭제 -->
 	<delete id="deleteProject" parameterType="Project">
 		DELETE FROM PROJECT_TBL WHERE PROJECT_NO = #{projectNo}
 	</delete>
 	
+	<!-- 칸반보드 조회 -->
 	<select id="selectAllBoard" resultMap="BoardResultMap">
 		SELECT * 
 		FROM BOARD_TBL 
@@ -53,16 +60,19 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
+	<!-- 칸반보드 생성 -->
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD_TBL VALUES(BOARD_NO.NEXTVAL, #{projectNo}, #{emplName}, #{boardContents}, #{boardStatus})
 	</insert>
 	
+	<!-- 칸반보드 드래그앤드롭 시 상태값 수정 -->
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD_TBL SET
 		BOARD_STATUS = #{boardStatus}
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 칸반보드 삭제 -->
 	<delete id="deleteBoard">
 		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
 	</delete>

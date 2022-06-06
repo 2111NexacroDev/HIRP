@@ -24,15 +24,15 @@ import com.highfive.hirp.alarm.domain.Alarm;
 import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
-import com.highfive.hirp.employee.domain.Employee;
-import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
+import com.highfive.hirp.common.Search;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 
 @Controller
 public class MailController {
-
 	@Autowired
 	private MailService mService;
 	@Autowired
@@ -44,7 +44,11 @@ public class MailController {
 	@RequestMapping(value="/mail/writeView.hirp", method=RequestMethod.GET)
 	public ModelAndView showSend(ModelAndView mv) {
 		try {
-			mv.setViewName("mail/mailWriteForm");
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			if(emplList != null) {
+				mv.addObject("emplList", emplList);
+				mv.setViewName("mail/mailWriteForm");
+			}
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
@@ -59,7 +63,6 @@ public class MailController {
 			, @ModelAttribute MailFile mailFile
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			, HttpServletRequest request) {
-		
 		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -69,6 +72,7 @@ public class MailController {
 		try {
 			HttpSession session = request.getSession();
 			String emplId = (String) session.getAttribute("emplId");
+			String emplEmail = emplId + "@hirp.com";
 			String referrer = mail.getMailReferrer();
 			mail.setEmplId(emplId);
 			mailFile.setEmplId(emplId);
@@ -86,7 +90,7 @@ public class MailController {
 				}
 			}
 			int result = mService.sendMail(mail);
-			if(!emplId.equals(mail.getMailRecipient())) { 
+			if(!emplEmail.equals(mail.getMailRecipient())) {
 				result = mService.sendMailRecipient(mail);
 				//내가 수신자가 아닐 때 수신자한테 알림 띄워줌
 				String recipient = mail.getMailRecipient().substring(0, mail.getMailRecipient().indexOf("@"));
@@ -101,7 +105,7 @@ public class MailController {
 					}
 				}
 			}
-			if(!referrer.isEmpty()) { //참조자가 있을 때
+			if(!referrer.isEmpty()) {
 				result = mService.sendMailReferrer(mail);
 				//수신자한테 알림 띄워줌
 				String refer = mail.getMailReferrer().substring(0, mail.getMailReferrer().indexOf("@"));
@@ -245,6 +249,8 @@ public class MailController {
 	@RequestMapping(value="/bugReport/WriteView.hirp", method=RequestMethod.GET)
 	public ModelAndView showBugReport(ModelAndView mv) {
 		try {
+			List<Employee> emplList = eaService.printAllEmployeeWithName();
+			mv.addObject("emplList", emplList);
 			mv.setViewName("mail/bugReportWriteForm");
 		}catch(Exception e) {
 			mv.addObject("msg", e.toString());
@@ -384,24 +390,27 @@ public class MailController {
 		}
 	}
 	
-	// 검색
-	public ModelAndView searchList(ModelAndView mv
-			, @ModelAttribute Mail mail) {
-		return mv;
-	}
-	
-	// 주소록 보여주는 코드
-	public ModelAndView addressView(ModelAndView mv) {
-		return mv;
-	}
-	
-	// 주소록 저장
-	public ModelAndView saveAddress(ModelAndView mv) {
-		return mv;
-	}
-	
-	// 주소록 삭제
-	public ModelAndView deleteAddress(ModelAndView mv) {
+	// 메일 검색
+	@RequestMapping(value = "/mail/searchMail.hirp", method = RequestMethod.GET)
+	public ModelAndView mailSearchList(ModelAndView mv
+			, @ModelAttribute Search search
+			, HttpServletRequest request) {
+		try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			search.setEmplId(emplId);
+			List<Mail> mList = mService.searchMail(search);
+			if (!mList.isEmpty()) {
+				mv.addObject("mList", mList);
+				mv.setViewName("mail/mailList");
+			} else {
+				mv.addObject("msg", "검색조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
@@ -536,13 +545,6 @@ public class MailController {
 			mv.addObject("msg", e.toString());
 			mv.setViewName("common/errorPage");
 		}
-		return mv;
-	}
-	
-	
-	// 메일 휴지통에서 삭제
-	public ModelAndView mailDelete(ModelAndView mv
-			, @ModelAttribute Mail mail) {
 		return mv;
 	}
 	

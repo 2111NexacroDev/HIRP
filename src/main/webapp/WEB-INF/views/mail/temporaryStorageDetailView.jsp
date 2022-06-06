@@ -10,18 +10,12 @@
 <!-- textarea 에디터 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                	메일
-            </h1>
+            <h1>메일</h1>
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">
@@ -51,7 +45,6 @@
 				메일쓰기
             </h1>
             <div id="mailWrite" class="subConts padding-0">
-<!--             	폼태그 바꿔줘야함 -->
             	<form action="/mail/send.hirp" method="post" enctype="multipart/form-data">
 					<div class="btns-wrap mt-20">
 						<button class="basic" type="submit">보내기</button>
@@ -61,7 +54,6 @@
 						<li>
 							<div class="d-flex align-items-center">
 								<h4>받는사람</h4>							
-								<!-- 체크박스 선택하면 로그인 유저 아이디 나와야 함 -->
 								<input id="check1" class="mt-20" type="checkbox" name="check1" onclick="myMail();">
 								<label for="check1">나에게</label>
 							</div>
@@ -95,7 +87,7 @@
 		// 나에게
 		function myMail() {
 			if($("#check1").prop("checked")) {
-				$("#mailRecipient").val("${sessionScope.emplId}");
+				$("#mailRecipient").val("${sessionScope.emplId}@hirp.com");
 			}else {
 				$("#mailRecipient").val("${mail.mailRecipient }");
 			}
@@ -106,7 +98,7 @@
 			var mailRecipient = $("input[name=mailRecipient]").val();
 			var mailReferrer = $("input[name=mailReferrer]").val();
 			var mailTitle = $("input[name=mailTitle]").val();
-// 			var mailFile = $("input[name=uploadFile]").val();
+			var mailFile = $("input[name=uploadFile]").val();
 			var mailContents = $("textarea[name=mailContents]").val();
 			$.ajax({
 				url : "/mail/updateTemporaryStorage.hirp",
@@ -115,7 +107,7 @@
 						 "mailRecipient" : mailRecipient,
 						 "mailReferrer" : mailReferrer,
 						 "mailTitle" : mailTitle,
-// 						 "mailFile" : mailFile,
+						 "mailFile" : mailFile,
 						 "mailContents" : mailContents},
 				success : function() {
 					location.href="Tlist.hirp";

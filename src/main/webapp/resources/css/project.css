@@ -1,4 +1,26 @@
 @charset "UTF-8";
+/* 응답자 테이블 스크롤 */
+#emplTable{
+    /* table-layout: fixed; */
+    border-collapse: collapse;
+}
+
+#emplTable th, #emplTable td {
+  padding: 10px;
+  text-align: left;
+  width: 100px;
+  text-align: center;
+}
+
+#emplTable thead {
+    display:block;
+}
+
+#emplTable tbody{
+    display:block;
+    overflow:auto;
+    height:200px;
+}
 
 .progress-bar {
 	width: 100%;

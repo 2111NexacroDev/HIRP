@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frm_emp" width="800" height="600" titletext="New Form" onload="frm_emp_onload" border="0px" font="normal bold 10pt/normal &quot;Arial&quot;">
+    <Layouts>
+      <Layout height="600" width="800">
+        <Button id="btn_pwUpdate" taborder="0" text="비밀번호 변경" left="610" top="25" width="95" height="30" onclick="btn_pwUpdate_onclick"/>
+        <Button id="btn_save" taborder="1" text="저장" left="725" top="25" width="50" height="30" onclick="btn_save_onclick"/>
+        <Edit id="Edit00" taborder="2" left="114" top="78" width="110" height="20" textAlign="center" readonly="true" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00" taborder="3" left="114" top="138" width="110" height="20" textAlign="center" readonly="true" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00" taborder="4" left="114" top="108" width="110" height="20" textAlign="center" readonly="true" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00_00" taborder="5" left="354" top="78" width="110" height="20" textAlign="center" readonly="true" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00_00_00" taborder="6" left="354" top="108" width="110" height="20" textAlign="center" readonly="true" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00_00_00_00" taborder="7" left="585" top="87" width="200" height="20" textAlign="center" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00_00_00_00_00" taborder="8" left="354" top="138" width="110" height="20" textAlign="center" borderRadius="7px / 7px"/>
+        <Edit id="Edit00_00_00_00_00_00_00_00" taborder="9" left="585" top="124" width="200" height="20" textAlign="center" borderRadius="7px / 7px"/>
+        <PopupDiv id="PopupDiv00" text="PopupDiv00" visible="false" left="915" top="3" width="325" height="169" positionstep="0" background="white">
+          <Layouts>
+            <Layout>
+              <Button id="btn_OK" taborder="0" text="OK" left="110" top="120" width="104" height="33" onclick="PopupDiv00_btn_OK_onclick"/>
+              <Static id="Static00" taborder="1" text="현재 비밀번호를 입력해주세요" left="53" top="20" width="219" height="27" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Edit id="pwd" taborder="2" left="50" top="57" width="218" height="40" password="true" borderRadius="7px / 7px"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="PopupDiv01" text="PopupDiv00" visible="false" left="895" top="200" width="325" height="339" positionstep="0" background="white">
+          <Layouts>
+            <Layout>
+              <Button id="btn_OK2" taborder="0" text="OK" left="105" top="280" width="104" height="33" onclick="PopupDiv01_btn_OK2_onclick"/>
+              <Static id="Static00" taborder="1" text="변경할 비밀번호를 입력해주세요" left="53" top="17" width="209" height="27" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Edit id="rePwd1" taborder="2" left="55" top="64" width="218" height="40" password="true" borderRadius="7px / 7px"/>
+              <Static id="Static00_00" taborder="3" text="변경할 비밀번호를 한번더 입력해주세요" left="34" top="130" width="247" height="27" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Edit id="rePwd2" taborder="4" left="55" top="179" width="218" height="40" password="true" borderRadius="7px / 7px"/>
+              <Static id="pwdSame" taborder="5" text="변경할 비밀번호가 서로 일치 하지 않습니다" left="34" top="233" width="260" height="27" color="white" onclick="PopupDiv01_pwdSame_onclick" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Div id="Div01" taborder="13" text="" left="18" top="18" width="5" height="25" background="rgb(0, 74, 38)"/>
+        <Static id="Static00_02" taborder="14" text="학생 기초 정보" left="40" top="15" width="219" height="30"/>
+        <Div id="Div00" taborder="15" text="" left="0" top="70" width="100" height="100" background="rgb(231, 232, 226)">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학과" left="24" top="6" width="50" height="20" onclick="Div00_Static00_onclick" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Static id="Static00_00" taborder="1" text="학번" left="24" top="36" width="50" height="20" onclick="Div00_Static00_onclick" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Static id="Static00_00_00" taborder="2" text="이름" left="24" top="66" width="50" height="20" onclick="Div00_Static00_onclick" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="12" text="" left="240" top="70" width="100" height="100" background="rgb(231, 232, 226)">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="학년" left="24" top="6" width="50" height="20" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Static id="Static00_00" taborder="1" text="전화번호" left="14" top="66" width="70" height="20" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Static id="Static00_00_00" taborder="2" text="생년월일" left="14" top="36" width="70" height="20" onclick="Div02_Static00_00_00_onclick" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div04" taborder="11" text="" left="480" top="70" width="100" height="100" background="rgb(231, 232, 226)">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="주소" left="25" top="17" width="50" height="20" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+              <Static id="Static00_00" taborder="1" text="이메일" left="25" top="53" width="50" height="20" textAlign="center" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="16" text="" left="0" top="65" width="800" height="5" background="rgba(16, 65, 44, 0.2)" border="0" color="transparent"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_stdInfo">
+        <ColumnInfo>
+          <Column id="departmentName" type="STRING" size="256"/>
+          <Column id="studentNo" type="STRING" size="256"/>
+          <Column id="studentName" type="STRING" size="256"/>
+          <Column id="studentGrade" type="STRING" size="256"/>
+          <Column id="studentBirth" type="STRING" size="256"/>
+          <Column id="studentAddress" type="STRING" size="256"/>
+          <Column id="studentPhonenumber" type="STRING" size="256"/>
+          <Column id="studentEmail" type="STRING" size="256"/>
+          <Column id="studentState" type="STRING" size="256"/>
+          <Column id="professorName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/********************************************************************
+    created:	  2022/02/18
+    filename: 	C:\KH_edu17.1\Work\frm_emp.xfdl
+    file path:	C:\KH_edu17.1\Work
+    file base: 	frm_emp
+    file ext:	  xfdl
+    author:		  
+
+    purpose:	  
+*********************************************************************/
+
+this.fn_callback = function(id, sRtn)
+{
+	
+}
+
+this.out_var ="";
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{
+	
+	if(id == "std_info")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("코드 조회 실패 : " + sErrorMsg);
+			return;
+		}
+	}	
+	
+	if(id == "pwd_same")
+	{
+		if(nErrorCode > 0) {
+			this.PopupDiv01.trackPopupByComponent(this.btn_pwUpdate, -300, 150);
+			return;
+		} else {
+			this.alert("비밀번호가 일치하지 않습니다");
+			return;
+		}
+	}
+	
+	if(id == "pwd_change")
+	{
+		if(nErrorCode > 0) {
+			this.PopupDiv01.closePopup();
+			return;
+		} else {
+			this.alert("비밀번호 변경 실패");
+			return;
+		}
+	}	
+}
+
+this.frm_emp_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+//학생정보
+	this.transaction(
+		"std_info"// 1.ID
+		,"CmURL::student/stdInfo.kh"// 2.URL
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"ds_stdInfo=out_stdInfo" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+// 교수 정보
+// 	this.transaction(
+// 		"prf_info"// 1.ID
+// 		,"CmURL::professor/prfInfo.kh"// 2.URL
+// 		,"" // 3.InDs : F->S jsp(I,U,D)
+// 		,"ds_stdInfo=out_prfInfo" // 4.OutDs : S->F jsp(SELECT)
+// 		,"" // 5.InVar : F->S(var)
+// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+// 	);
+// 관리자 학생 정보
+// this.transaction(
+// 		"mag_info"// 1.ID
+// 		,"CmURL::manager/stdInfo.kh"// 2.URL
+// 		,"" // 3.InDs : F->S jsp(I,U,D)
+// 		,"ds_stdInfo=out_stdAllInfo" // 4.OutDs : S->F jsp(SELECT)
+// 		,"" // 5.InVar : F->S(var)
+// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+// 	);
+
+// 관리자 교수 정보
+// this.transaction(
+// 		"mag_info"// 1.ID
+// 		,"CmURL::manager/prfInfo.kh"// 2.URL
+// 		,"" // 3.InDs : F->S jsp(I,U,D)
+// 		,"ds_stdInfo=out_prfAllInfo" // 4.OutDs : S->F jsp(SELECT)
+// 		,"" // 5.InVar : F->S(var)
+// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+// 	);
+// 관리자 관리자 정보
+// this.transaction(
+// 		"mag_info"// 1.ID
+// 		,"CmURL::manager/magInfo.kh"// 2.URL
+// 		,"" // 3.InDs : F->S jsp(I,U,D)
+// 		,"ds_stdInfo=out_magAllInfo" // 4.OutDs : S->F jsp(SELECT)
+// 		,"" // 5.InVar : F->S(var)
+// 		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+// 	);
+};
+
+this.btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction(
+		"std_update"// 1.ID
+		,"CmURL::student/stdUpdate.kh"// 2.URL
+		,"in_std=ds_stdInfo:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,""// 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+
+};
+
+this.btn_pwUpdate_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PopupDiv00.trackPopupByComponent(obj, -300, 150);
+};
+
+// 비밀번호가 일치하는지 확인
+this.PopupDiv00_btn_OK_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var pwd = this.PopupDiv00.form.pwd.text;
+	if(pwd != "") {
+		this.transaction(
+			"pwd_same"// 1.ID
+			,"CmURL::login/pwdSame.kh"// 2.URL
+			,"" // 3.InDs : F->S jsp(I,U,D)
+			,"" // 4.OutDs : S->F jsp(SELECT)
+			,"in_pwd="+pwd// 5.InVar : F->S(var)
+			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+		);
+	} else {
+		this.alert("현재 비밀번호가 빈칸 입니다.");
+	}
+};
+
+this.PopupDiv01_btn_OK2_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var rePwd1 = this.PopupDiv01.form.rePwd1.text;
+	var rePwd2 = this.PopupDiv01.form.rePwd2.text;
+	
+	// 변경할 비밀번호 일치 여부
+	if(rePwd1 != rePwd2) {
+		this.PopupDiv01.form.pwdSame.set_color("red");
+	} else {
+		this.PopupDiv01.form.pwdSame.set_color("white");
+		// 비밀번호 변경
+		this.transaction(
+			"pwd_change"// 1.ID
+			,"CmURL::login/pwdChange.kh"// 2.URL
+			,"" // 3.InDs : F->S jsp(I,U,D)
+			,"" // 4.OutDs : S->F jsp(SELECT)
+			,"in_pwd="+rePwd1// 5.InVar : F->S(var)
+			,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+		);
+	}
+};
+
+
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_stdInfo" columnid="departmentName"/>
+      <BindItem id="item1" compid="Edit00_00" propid="value" datasetid="ds_stdInfo" columnid="studentNo"/>
+      <BindItem id="item2" compid="Edit00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentName"/>
+      <BindItem id="item3" compid="Edit00_00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentGrade"/>
+      <BindItem id="item4" compid="Edit00_00_00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentBirth"/>
+      <BindItem id="item5" compid="Edit00_00_00_00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentAddress"/>
+      <BindItem id="item6" compid="Edit00_00_00_00_00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentPhonenumber"/>
+      <BindItem id="item7" compid="Edit00_00_00_00_00_00_00_00" propid="value" datasetid="ds_stdInfo" columnid="studentEmail"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -8,7 +8,7 @@ import com.highfive.hirp.project.domain.Project;
 
 public interface ProjectService {
 
-	public int getListCount();
+	public int getListCount(); // 전체 프로젝트 갯수
 	public List<Project> printAll(PageInfo pi); // 프로젝트 전체 조회
 	public Project printOneByNo(int projectNo); // 프로젝트 상세 조회
 	public int registerProject(Project project); // 프로젝트 생성

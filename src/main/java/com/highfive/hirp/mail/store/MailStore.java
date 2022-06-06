@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.highfive.hirp.common.PageInfo;
-import com.highfive.hirp.mail.domain.Address;
+import com.highfive.hirp.common.Search;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 
@@ -40,12 +40,10 @@ public interface MailStore {
 	int impMail(SqlSession sqlSession, Mail mail); // 중요 메일
 	int readMail(SqlSession sqlSession, Mail mail); // 메일 읽음표시
 	
-	List<Mail> searchMail(SqlSession sqlSession, Mail mail);
-	int replyMail(SqlSession sqlSession, Mail mail);
-	int relayMail(SqlSession sqlSession, Mail mail);
-	int removeMail(SqlSession sqlSession, Mail mail);
-	int registerAddress(SqlSession sqlSession, Address address);
-	int removeAddress(SqlSession sqlSession, Address address);
+	List<Mail> searchMail(SqlSession sqlSession, Search search); // 메일 검색
+	
+	int replyMail(SqlSession sqlSession, Mail mail); // 답장
+	int relayMail(SqlSession sqlSession, Mail mail); // 전달
 	
 	int selectMailCountR(SqlSession sqlSession, Mail mail); // 받은메일함 갯수
 	int selectMailCountS(SqlSession sqlSession, Mail mail); // 보낸메일함 갯수
