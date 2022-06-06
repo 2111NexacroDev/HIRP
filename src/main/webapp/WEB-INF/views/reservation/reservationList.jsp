@@ -250,8 +250,8 @@
                         <h3>공용품 예약 상세정보</h3>
                         <ul>                            
                             <li>
-                                <label class="mr-20" for="emplId">예약자</label>
-                                <span class="emplId"></span>
+                                <label class="mr-20" for="emplInfo">예약자</label>
+                                <span class="emplInfo"></span>
                             </li>
                             <li>
                                 <label class="mr-20" for="utilityNo">예약대상</label>
@@ -377,7 +377,7 @@
                                 </c:when>
                             </c:choose>
                             <td>${myList.utility.utilityName}</td>
-                            <td>${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
+                            <td class="td--date">${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
                             <c:choose>
                                 <c:when test="${myList.isReturn eq 'N'}">
                                     <td><button class="basic" type="button" onclick="returnUtility(${myList.reservationNo})">반납하기</button></td>
@@ -395,6 +395,11 @@
     </div>
 
     <script>
+        $(function(){
+            let removeT = $('.td--date').text().replaceAll('T',' ');
+            $('.td--date').text(removeT);
+        });
+
         // 자산 반납
         function returnUtility(reservationNo) {
             $.ajax({
@@ -439,9 +444,10 @@
 
         function openReservation() {
             // 오늘 날짜 세팅
-            let today = new Date().toISOString().split('T')[0];
+            let today = new Date().toISOString().split('T')[0]; 
             $('input[name="startDate"]').val(today);
             $('input[name="endDate"]').val(today);
+            $('.time-select-2').val('09');
             $('.modal--reservation').css('display', 'flex');
         }
 
@@ -487,7 +493,7 @@
                     $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val(endTime);
                     $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val(endMinutes);
                     
-                    $('.modal--reservationEdit .emplId').text(data["emplId"]);
+                    $('.modal--reservationEdit .emplInfo').text(data["deptName"]+" "+data["positionName"]+" "+data["emplName"]);
                     $('.modal--reservationEdit select[name="utilityNo"]').val(data["utilityNo"]);
                     $('.modal--reservationEdit input[name="reservationNo"]').val(data["reservationNo"]);
                     $('.modal--reservationEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
@@ -652,7 +658,7 @@
                         backgroundColor: 'purple',
                         borderColor: 'purple',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>
@@ -664,7 +670,7 @@
                         backgroundColor: 'black',
                         borderColor: 'black',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>
@@ -677,7 +683,7 @@
                         borderColor: '#ffdc3c',
                         textColor: '#000',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>

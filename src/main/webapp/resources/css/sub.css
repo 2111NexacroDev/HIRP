@@ -1093,6 +1093,7 @@ section[class^="todo--"] {
     width: 300px;
     height: 300px;
     margin-right: 60px;
+    overflow: hidden;
 }
 
 #groupView .profile-wrap img {
