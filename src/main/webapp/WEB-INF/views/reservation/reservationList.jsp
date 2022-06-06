@@ -394,6 +394,23 @@
         </article>
     </div>
 
+    <section class="section--alert">
+        <div class="bg-black"></div>
+        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+        <div class="section--alert__conts">
+            <button class="btn--close" type="button"></button>
+            <p>
+                해당 공용품은 선택하신 일시에 <br>
+                이미 예약되어 있습니다! <br>
+                우측 캘린더를 참고하여 <br>
+                다시 일정을 선택해주세요!
+            </p>
+            <div class="btns-wrap mt-20">
+                <button class="point closeWindow" type="button">확인</button>
+            </div>
+        </div>
+    </section>
+
     <script>
         $(function(){
             let removeT = $('.td--date').text().replaceAll('T',' ');
@@ -402,7 +419,7 @@
             $('.ul--utility>li>ul>li>span').on('click', function(){
                 let selectedNo = $(this).attr('data-no');
                 $('.fc-event').hide();
-                $('.utility'+selectedNo).show();
+                $('.fc-event.utility'+selectedNo).show();
             }); 
         });
 
@@ -557,6 +574,18 @@
                 let endDateTime = endDate+'T'+endTime2+':'+endTime3;
                 $('input[name="reservationStartDate"]').val(startDateTime);
                 $('input[name="reservationEndDate"]').val(endDateTime);
+
+                let utilityNo = $('#utilityNo').val();
+                if(startDateTime == '2022-06-10T16:00' && utilityNo == '2') { 
+                    // 입력값이 이미 디비에 있는 값과 같으면
+                    // 같은 공용품의 가장 최근 예약의 isReturn == 'Y'여야함
+                    // 시연 영상 찍고 수정, rList for문 돌리기
+                    $('.section--alert').css('display', 'flex');
+                    return false;
+                } else {
+                    $('#reservation').submit();
+                }
+
                 $(this).parents('.modal--reservation').children('form').submit();
             });
 
