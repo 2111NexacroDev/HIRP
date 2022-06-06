@@ -24,43 +24,42 @@
 			<%@ include file="/WEB-INF/views/include/inc_nav_right.jsp"%>
 
 			<h1 class="basic-border-bottom">상세 회원 정보 조회</h1>
-			<div id="mypage" class="subConts mypage-update">
-				<ul>
-					<li>
-						<label for="">사진</label>
-						<div class="profile-wrap">
-							<img src="../../../resources/images/img_no_profile.png" alt="프로필사진 없음">
-						</div>
-					</li>
-					<li>
-						<label for="">이름</label> 
-						<input name="emplName" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">부서</label>
-						<input name="deptCode" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">직위</label>
-						<input name="positionCode" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">직통번호</label>
-						<input name="directNo" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">이메일</label>
-						<input name="email" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">연락처</label>
-						<input name="phoneNo" type="text" value="선택된 직원 없음" readonly>
-					</li>
-					<li>
-						<label for="">생년월일</label>
-						<input name="birthday" type="text" value="선택된 직원 없음" readonly>
-					</li>
-				</ul>
+			<div id="groupView" class="subConts mypage-update">
+				<div>
+					<div class="profile-wrap">
+						<img src="../../../resources/images/img_no_profile_big.png" alt="프로필사진 없음">
+					</div>
+					<ul>
+						<li>
+							<label for="">이름</label> 
+							<input name="emplName" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">부서</label>
+							<input name="deptCode" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">직위</label>
+							<input name="positionCode" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">직통번호</label>
+							<input name="directNo" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">이메일</label>
+							<input name="email" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">연락처</label>
+							<input name="phoneNo" type="text" value="선택된 직원 없음" readonly>
+						</li>
+						<li>
+							<label for="">생년월일</label>
+							<input name="birthday" type="text" value="선택된 직원 없음" readonly>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</article>
 	</div>
