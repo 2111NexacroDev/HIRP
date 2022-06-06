@@ -767,7 +767,7 @@ button.next {
 #snb:not(.snb--org)>ul>li>ul>li:first-child {
     margin-top: 16px;
 }
-
+#snb:not(.snb--org)>ul>li.on,
 #snb:not(.snb--org)>ul>li>ul>li.on {
     font-weight: 500;
     color: #00498c;
