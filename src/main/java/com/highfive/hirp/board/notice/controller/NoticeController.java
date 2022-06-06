@@ -145,10 +145,10 @@ public class NoticeController {
 		noticeboard.setEmplId(emplId);
 
 		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String today = formatter.format(date);
-		System.out.println("today: " + today);
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = formatter.format(date);
+//		System.out.println("today: " + today);
 				
 		// 공지 테이블 등록
 		int result = nService.registerNotice(noticeboard);
@@ -178,7 +178,7 @@ public class NoticeController {
 					for(int i=0; i<emplList.size(); i++) {
 						if(!emplList.get(i).getEmplId().equals(emplId)) {
 							//공지게시판 알림 추가
-							Alarm alarm = new Alarm(emplList.get(i).getEmplId(), today, "[공지게시판] '"+noticeboard.getNoticeTitle()+"' 글이 등록되었습니다.",
+							Alarm alarm = new Alarm(emplList.get(i).getEmplId(), "[공지게시판] '"+noticeboard.getNoticeTitle()+"' 글이 등록되었습니다.",
 									"10", "N", emplId);
 							int result2 = aService.insertAlarm(alarm);
 							if(result2 > 0) {
