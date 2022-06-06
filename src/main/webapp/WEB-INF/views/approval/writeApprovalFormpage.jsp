@@ -16,10 +16,10 @@
                 <!-- 여백 필요 없을 경우 클래스에 padding-0 추가, 
             	필요 없으면 지울 것 -->
        
-                <div>제목<input type="text" size="100" name="formTitle"></div>
+                <div><input type="text" size="135" name="formTitle" placeholder="등록할 결재폼명을 입력해주세요"></div>
                 <textarea id="summernote" name="formContents"></textarea>
                 </form>
-                	<button type="submit" style="border: 1px solid #ddd; outline: none;">전송</button>
+                	<button type="submit" class="point mt-20" style="float:right;">등록하기</button>
     <script>
       $('#summernote').summernote({
         placeholder: 'Hello stand alone ui',
