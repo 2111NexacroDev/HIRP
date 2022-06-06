@@ -49,10 +49,11 @@ public class AlarmController {
 			String emplId = session.getAttribute("emplId").toString();
 			alarmSetting.setEmplId(emplId);
 			System.out.println(alarmSetting);
-			AlarmSetting alarmSetting2 = new AlarmSetting(emplId, "Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y","Y");
 			
-			int result = aService.updateAlarmSetting(alarmSetting2);
-			mv.setViewName("redirect:/home.hirp");
+			int result = aService.updateAlarmSetting(alarmSetting);
+			if(result > 0) {
+				mv.setViewName("redirect:/home.hirp");
+			}
 			
 		} catch(Exception e) {
 			mv.addObject("msg", e.toString());

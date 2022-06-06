@@ -110,41 +110,80 @@
 		<if test='alarmMail != null '> 
 			ALARM_MAIL = #{alarmMail},
 		</if>
+		<if test='alarmMail == null '> 
+			ALARM_MAIL = 'N',
+		</if>
 		<if test='alarmNoticeboard != null '> 
 			ALARM_NOTICEBOARD = #{alarmNoticeboard},
+		</if>
+		<if test='alarmNoticeboard == null '> 
+			ALARM_NOTICEBOARD = 'N',
 		</if>
 		<if test='alarmFreeboard != null '> 
 			ALARM_FREEBOARD = #{alarmFreeboard},
 		</if>
+		<if test='alarmFreeboard == null '> 
+			ALARM_FREEBOARD = 'N',
+		</if>
 		<if test='alarmAnonymousboard != null '>
 			ALARM_ANONYMOUSBOARD = #{alarmAnonymousboard}, 
+		</if>
+		<if test='alarmAnonymousboard == null '>
+			ALARM_ANONYMOUSBOARD = 'N',
 		</if>
 		<if test='alarmDeptboard != null '>
 			ALARM_DEPTBOARD = #{alarmDeptboard},
 		</if>
+		<if test='alarmDeptboard == null '>
+			ALARM_DEPTBOARD = 'N',
+		</if>
 		<if test='alarmAllschedule != null '>
 			ALARM_ALLSCHEDULE = #{alarmAllschedule}, 
+		</if>
+		<if test='alarmAllschedule == null '>
+			ALARM_ALLSCHEDULE = 'N',
 		</if>
 		<if test='alarmTeamschedule != null '>
 			ALARM_TEAMSCHEDULE = #{alarmTeamschedule},
 		</if>
+		<if test='alarmTeamschedule == null '>
+			ALARM_TEAMSCHEDULE = 'N',
+		</if>
 		<if test='alarmPersonalschedule != null '>
 			ALARM_PERSONALSCHEDULE = #{alarmPersonalschedule}, 
+		</if>
+		<if test='alarmPersonalschedule == null '>
+			ALARM_PERSONALSCHEDULE = 'N', 
 		</if>
 		<if test='alarmPayarrive != null '>
 			ALARM_PAYARRIVE = #{alarmPayarrive},
 		</if>
+		<if test='alarmPayarrive == null '>
+			ALARM_PAYARRIVE = 'N',
+		</if>
 		<if test='alarmPaycancle != null '>
 			ALARM_PAYCANCLE = #{alarmPaycancle},
+		</if>
+		<if test='alarmPaycancle == null '>
+			ALARM_PAYCANCLE = 'N',
 		</if>
 		<if test='alarmPaycompanion != null '>
 			ALARM_PAYCOMPANION = #{alarmPaycompanion},
 		</if>
+		<if test='alarmPaycompanion == null '>
+			ALARM_PAYCOMPANION = 'N',
+		</if>
 		<if test='alarmPaycomplete != null '>
 			ALARM_PAYCOMPLETE = #{alarmPaycomplete}, 
 		</if>
+		<if test='alarmPaycomplete == null '>
+			ALARM_PAYCOMPLETE = 'N',
+		</if>
 		<if test='alarmSurvey != null '>
 			ALARM_SURVEY = #{alarmSurvey}
+		</if>
+		<if test='alarmSurvey == null '>
+			ALARM_SURVEY = 'N'
 		</if>
 		WHERE EMPL_ID = #{emplId}
 	</update>
