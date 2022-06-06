@@ -19,6 +19,23 @@
 		<result property="emplProfile" column="EMPL_PROFILE"/>
 	</resultMap>
 	
+	<resultMap type="AlarmSetting" id="alarmSettingResultMap">
+		<id property="emplId" column="EMPL_ID"/>
+		<result property="alarmMail" column="ALARM_MAIL"/>
+		<result property="alarmNoticeboard" column="ALARM_NOTICEBOARD"/>
+		<result property="alarmFreeboard" column="ALARM_FREEBOARD"/>
+		<result property="alarmAnonymousboard" column="ALARM_ANONYMOUSBOARD"/>
+		<result property="alarmDeptboard" column="ALARM_DEPTBOARD"/>
+		<result property="alarmAllschedule" column="ALARM_ALLSCHEDULE"/>
+		<result property="alarmTeamschedule" column="ALARM_TEAMSCHEDULE"/>
+		<result property="alarmPersonalschedule" column="ALARM_PERSONALSCHEDULE"/>
+		<result property="alarmPayarrive" column="ALARM_PAYARRIVE"/>
+		<result property="alarmPaycancle" column="ALARM_PAYCANCLE"/>
+		<result property="alarmPaycompanion" column="ALARM_PAYCOMPANION"/>
+		<result property="alarmPaycomplete" column="ALARM_PAYCOMPLETE"/>
+		<result property="alarmSurvey" column="ALARM_SURVEY"/>
+	</resultMap>
+	
 	<!-- 모든 알림 -->
 	<select id="selectAllAlarm" resultMap="alarmResultMap">
 		SELECT 
@@ -85,6 +102,19 @@
 		#{alarmContents},
 		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
 	</insert>
+	
+	<!-- 알림 설정 정보 업데이트 -->
+	<update id="updateAlarmSetting">
+		UPDATE ALARMSETTING_TBL
+		SET ALARM_MAIL = #{alarmMail},
+		ALARM_NOTICEBOARD = #{alarmNoticeboard}, ALARM_FREEBOARD = #{alarmFreeboard},
+		ALARM_ANONYMOUSBOARD = #{alarmAnonymousboard}, ALARM_DEPTBOARD = #{alarmDeptboard},
+		ALARM_ALLSCHEDULE = #{alarmAllschedule}, ALARM_TEAMSCHEDULE = #{alarmTeamschedule},
+		ALARM_PERSONALSCHEDULE = #{alarmPersonalschedule}, ALARM_PAYARRIVE = #{alarmPayarrive},
+		ALARM_PAYCANCLE = #{alarmPaycancle}, ALARM_PAYCOMPANION = #{alarmPaycompanion},
+		ALARM_PAYCOMPLETE = #{alarmPaycomplete}, ALARM_SURVEY = #{alarmSurvey}
+		WHERE EMPL_ID = #{emplId}
+	</update>
 	
 	<!-- 내 알림 전체 읽음 처리 (UPDATE) -->
 	<update id="updateReadAlarm">

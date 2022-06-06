@@ -44,14 +44,15 @@ public class AlarmController {
 			ModelAndView mv
 			, @ModelAttribute AlarmSetting alarmSetting
 			, HttpServletRequest request) {
-		
-//		HttpSession session = request.getSession();
-//		Employee employee = (Employee) session.getAttribute("loginMember");
-//		String emplId = employee.getEmplId();
-		String emplId = "사용자 아이디";
-		//alarmSetting.setEmplId(userId); //필요하먼 넣기
+		System.out.println(alarmSetting);
+		HttpSession session = request.getSession();
+		String emplId = session.getAttribute("emplId").toString();
+		alarmSetting.setEmplId(emplId);
 		
 		int result = aService.updateAlarmSetting(alarmSetting);
+		if(result > 0) {
+			mv.setViewName("redirect:/alarm/settingPage.hirp");
+		}
 		
 		return mv;
 	}
