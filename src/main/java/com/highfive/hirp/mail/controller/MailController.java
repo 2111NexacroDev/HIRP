@@ -20,8 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.common.PageInfo;
 import com.highfive.hirp.common.Pagination;
+import com.highfive.hirp.employee.domain.Employee;
+import com.highfive.hirp.employee.service.EmployeeAdminService;
 import com.highfive.hirp.mail.domain.Mail;
 import com.highfive.hirp.mail.domain.MailFile;
 import com.highfive.hirp.mail.service.MailService;
@@ -31,6 +35,10 @@ public class MailController {
 
 	@Autowired
 	private MailService mService;
+	@Autowired
+	private EmployeeAdminService eaService;
+	@Autowired
+	private AlarmService aService;
 	
 	// 메일 작성 페이지 이동
 	@RequestMapping(value="/mail/writeView.hirp", method=RequestMethod.GET)
@@ -51,6 +59,13 @@ public class MailController {
 			, @ModelAttribute MailFile mailFile
 			, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			, HttpServletRequest request) {
+		
+		//오늘 날짜, oracle date형태로 넣으려면 이러케 넣어야 함.
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+		System.out.println("today: " + today);
+		
 		try {
 			HttpSession session = request.getSession();
 			String emplId = (String) session.getAttribute("emplId");
@@ -71,11 +86,35 @@ public class MailController {
 				}
 			}
 			int result = mService.sendMail(mail);
-			if(!emplId.equals(mail.getMailRecipient())) {
+			if(!emplId.equals(mail.getMailRecipient())) { 
 				result = mService.sendMailRecipient(mail);
+				//내가 수신자가 아닐 때 수신자한테 알림 띄워줌
+				String recipient = mail.getMailRecipient().substring(0, mail.getMailRecipient().indexOf("@"));
+				if(result > 0) {
+					Employee employee = eaService.printEmployeeInfo(emplId);
+					Alarm alarm = new Alarm(recipient, today, 
+							"[메일 도착] '"+employee.getDeptName() +" "+ employee.getEmplName() +" "+employee.getPositionName() +"' 로부터 메일이 도착했습니다.",
+							"00", "N", emplId);
+					int result3 = aService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println(mail.getMailRecipient()+"의 메일 알림이 추가되었습니다.");
+					}
+				}
 			}
-			if(!referrer.isEmpty()) {
+			if(!referrer.isEmpty()) { //참조자가 있을 때
 				result = mService.sendMailReferrer(mail);
+				//수신자한테 알림 띄워줌
+				String refer = mail.getMailReferrer().substring(0, mail.getMailReferrer().indexOf("@"));
+				if(result > 0) {
+					Employee employee = eaService.printEmployeeInfo(emplId);
+					Alarm alarm = new Alarm(refer, today, 
+							"[메일 도착] '"+employee.getDeptName() +" "+ employee.getEmplName() +" "+employee.getPositionName() +"' 로부터 메일이 도착했습니다.",
+							"00", "N", emplId);
+					int result3 = aService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println(mail.getMailRecipient()+"의 메일 알림이 추가되었습니다.");
+					}
+				}
 			}
 			result = mService.saveFile(mailFile);
 			if(result > 0) {

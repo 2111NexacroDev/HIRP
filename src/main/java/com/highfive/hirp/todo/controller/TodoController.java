@@ -124,7 +124,7 @@ public class TodoController {
 			,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String emplId = (String) session.getAttribute("emplId");
-		if(selectedDate.equals("TODAY")) {
+		if(selectedDate.equals("TODAY") || selectedDate.equals("오늘의 업무")) {
 			Date now = Date.valueOf(LocalDate.now());
 			todo.setTodoDate(now);
 		} else {

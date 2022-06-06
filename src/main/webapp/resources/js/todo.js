@@ -84,8 +84,8 @@ function addTodo(obj) {
         },
         success: function (data) {
             if (data == 'success') {
-                console.log('등록 성공!');
-                window.location.reload();
+                alert('등록 성공!');
+                //window.location.reload();
             } else {
                 console.log('등록 실패');
             }

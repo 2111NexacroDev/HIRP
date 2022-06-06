@@ -15,7 +15,7 @@
 
 			<ul class="no-icon">
 				<li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
-				<li><a href="#">알림 설정</a></li>
+				<li><a href="/alarm/settingPage.hirp">알림 설정</a></li>
 			</ul>
 		</aside>
 

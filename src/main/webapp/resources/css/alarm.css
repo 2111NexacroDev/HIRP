@@ -1,0 +1,8 @@
+/* .subConts>.alarm-row { */
+/*     font-size: 16px; */
+/* } */
+
+.alarm-row {
+    display: flex;
+    align-items: center;
+}

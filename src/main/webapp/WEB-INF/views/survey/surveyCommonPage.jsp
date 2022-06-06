@@ -31,6 +31,5 @@
                 </li>
             </ul>
         </aside>
-        
 </body>
 </html>
