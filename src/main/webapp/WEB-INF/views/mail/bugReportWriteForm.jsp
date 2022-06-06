@@ -19,20 +19,6 @@
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">
-<<<<<<< HEAD
-               <li>
-                   <a href="#none">메일함</a>
-                   <ul>
-                       <li <c:if test="${mailCategory == 'R' }">class="on"</c:if>><a href="/mail/Rlist.hirp">받은메일함</a></li>
-                       <li <c:if test="${mailCategory == 'S' }">class="on"</c:if>><a href="/mail/Slist.hirp">보낸메일함</a></li>
-                       <li <c:if test="${mailCategory == 'T' }">class="on"</c:if>><a href="/mail/Tlist.hirp">임시보관함</a></li>
-                       <li <c:if test="${mailCategory == 'M' }">class="on"</c:if>><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
-                       <li <c:if test="${mailCategory == 'I' }">class="on"</c:if>><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li <c:if test="${mailCategory == 'W' }">class="on"</c:if>><a href="/mail/Wlist.hirp">휴지통</a><button class="basic" type="button" onclick="deleteAllMail();">비우기</button></li>
-                   </ul>
-               </li>
-            </ul>
-=======
                 <li>
                     <a href="#none">메일함</a>
                     <ul>
@@ -45,8 +31,6 @@
                     </ul>
                 </li>
              </ul>
->>>>>>> refs/remotes/origin/main
-            
              <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">
 				<img src="../../../resources/images/icons/icon_bugreport.png" alt="icon">
 				버그리포트 작성
@@ -61,59 +45,6 @@
             </h1>
             <div class="subConts">
             	<form action="/bugReport/send.hirp" method="post" enctype="multipart/form-data">
-<<<<<<< HEAD
-		            <button class="basic mt-20" type="submit">보내기</button>
-		            <button class="basic mt-20" type="button">임시저장</button>
-	            	<h4>받는사람</h4>
-	            	<h4>hirpDevelopment@hirp.com</h4>
-	            	<h4>참조</h4>
-	            	<input type="text" name="mailReferrer" id="mailReferrer">
-	            	<button class="basic mt-20" type="button" onclick="onAddEmplButtonRef(this);">주소록</button>
-	            	<section class="section--modal modal--chat">
-						<div class="section--modal__conts" style="border: none">
-							<button class="btn--close" type="button"></button>
-							<h3>참조</h3>
-							<div class="mb-20">
-								<ul>
-									<li>
-										<input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
-										<button class="point" type="button" onclick="emplSearch();">검색</button>
-									</li>
-								</ul>
-								<table class="table--basic mt-20" id="emplTable">
-									<thead>
-										<tr>
-											<th>부서</th>
-											<th>직급</th>
-											<th>이름</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${emplList }" var="empl">
-											<tr onclick="emplTrClickRef(this);">
-												<td>${empl.deptName}</td>
-												<td>${empl.positionName}</td>
-												<td>${empl.emplName}</td>
-											</tr>
-											<input type="hidden" name="deptCode" value="${empl.deptCode }">
-											<input type="hidden" name="positionCode" value="${empl.positionCode }">
-											<input type="hidden" name="emplId" value="${empl.emplId }">
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<div class="btns-wrap mt-20 t-r">
-								<button class="finished closeWindow" type="button">닫기</button>
-							</div>
-						</div>
-					</section>
-					<br>
-	            	<h4>제목</h4>
-	            	<input type="text" name="mailTitle"><br>
-	            	<h4>파일첨부</h4>
-	            	<input type="file" size="50" name="uploadFile" value="파일선택">
-	            	<textarea id="summernote" rows="" cols="" name="mailContents"></textarea>
-=======
                     <div class="btns-wrap">
                         <button class="basic mt-20" type="submit">보내기</button>
                         <button class="basic mt-20" type="button">임시저장</button>
@@ -126,8 +57,46 @@
                         <li class="mt-20">
                             <h4>참조</h4>
                             <div>
-                                <input type="text" name="referrerId">
-                                <button class="basic" type="button">주소록</button>
+                                <input type="text" name="mailReferrer" id="mailReferrer">
+								<button class="basic" type="button" onclick="onAddEmplButtonRef(this);">주소록</button>
+					            	<section class="section--modal modal--chat modal--referrer">
+										<div class="section--modal__conts" style="border: none">
+											<button class="btn--close" type="button"></button>
+											<h3>참조</h3>
+											<div class="mb-20">
+												<ul>
+													<li>
+														<input type="text" name="emplSearchKeyword" size="25" placeholder="부서명 또는 사원명 검색">
+														<button class="point" type="button" onclick="emplSearch();">검색</button>
+													</li>
+												</ul>
+												<table class="table--basic mt-20" id="emplTable">
+													<thead>
+														<tr>
+															<th>부서</th>
+															<th>직급</th>
+															<th>이름</th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach items="${emplList }" var="empl">
+															<tr onclick="emplTrClickRef(this);">
+																<td>${empl.deptName}</td>
+																<td>${empl.positionName}</td>
+																<td>${empl.emplName}</td>
+															</tr>
+															<input type="hidden" name="deptCode" value="${empl.deptCode }">
+															<input type="hidden" name="positionCode" value="${empl.positionCode }">
+															<input type="hidden" name="emplId" value="${empl.emplId }">
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+											<div class="btns-wrap mt-20 t-r">
+												<button class="finished closeWindow" type="button">닫기</button>
+											</div>
+										</div>
+									</section>
                             </div>
                         </li>
                         <li>
@@ -140,7 +109,6 @@
                         </li>
                     </ul>
                     <textarea id="summernote" rows="" cols="" name="mailContents"></textarea>
->>>>>>> refs/remotes/origin/main
             	</form>
 	        </div>
         </article>

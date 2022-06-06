@@ -93,24 +93,13 @@
 			</div>
             
             <div class="subConts">
-<<<<<<< HEAD
-	        	<table class="table--basic">	        	
-                    <colgroup>
-                        <col style="width:2%;">
-                        <col style="width:2%;">
-                        <col style="width:2%;">
-                        <col style="width:15%;">
-                        <col style="width:53%;">
-                        <col style="width:10%;">
-                    </colgroup>
-=======
 	        	<table class="table--basic">
 					<c:if test="${mailCategory == 'W' }">
 						<colgroup>
 							<col style="width:2%;">
 							<col style="width:2%;">
-							<col style="width:60%;">
-							<col style="width:8%;">
+							<col style="width:15%;">
+							<col style="width:53%;">
 							<col style="width:10%;">
 						</colgroup>
 					</c:if>
@@ -119,25 +108,17 @@
 							<col style="width:2%;">
 							<col style="width:2%;">
 							<col style="width:2%;">
-							<col style="width:60%;">
-							<col style="width:8%;">
+							<col style="width:15%;">
+							<col style="width:53%;">
 							<col style="width:10%;">
 						</colgroup>
 					</c:if>
->>>>>>> refs/remotes/origin/main
                    	<c:forEach items="${mList }" var="mail">
-<<<<<<< HEAD
-                   	<!-- 검색 -->
+                   		<!-- 검색 -->
                   		<c:if test="${mailCategory != 'R' && mailCategory != 'S' && mailCategory != 'T'
             			&& mailCategory != 'M' && mailCategory != 'I' && mailCategory != 'W' }">
 	                    	<tr>
-	                            <c:url var="mDetail" value="/mail/Rdetail.hirp">
-=======
-                    	<!-- 받은메일함 -->
-                    	<c:if test="${mailCategory == 'R' }"> 	
-	                        <tr>
 	                            <c:url var="mDetail" value="/mail/detail.hirp">
->>>>>>> refs/remotes/origin/main
 									<c:param name="mailNo" value="${mail.mailNo }"></c:param>
 								</c:url>
 								<td>
@@ -328,37 +309,14 @@
 										<label for="read${mail.mailNo }"></label>
 									</div>
 								</td>
-								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailSender }</td>
+								<td><a href="${mDetail}" onclick="readMail(this, ${mail.mailNo});">${mail.mailTitle }</a></td>
 								<td>${mail.mailDate }</td>
 	                        </tr>
-							<c:if test="${mList eq null}">
-								<tr>
-									<td colspan="5">휴지통이 비어 있습니다.</td>
-								</tr>
-							</c:if>
 	                    </c:if>
 					</c:forEach>
                 </table>
                 
-                <!-- 검색 페이징 -->
-                <c:if test="${mailCategory != 'R' && mailCategory != 'S' && mailCategory != 'T'
-            	&& mailCategory != 'M' && mailCategory != 'I' && mailCategory != 'W' }">
-	                <div class="btns--paging">
-		                <c:if test="${pi.currentPage > '1' }">
-		                	<button class="fa-solid fa-angle-left prev" onclick="location.href='/mail/Rlist.hirp?page=${pi.currentPage-1 }'"></button>
-		                </c:if>
-		                <c:forEach var="p" begin="${pi.startNavi }" end="${pi.endNavi }">
-		                	<c:url var="pagination" value="/mail/Rlist.hirp">
-		                		<c:param name="page" value="${p }"></c:param>
-		                	</c:url>
-		                	&nbsp;<a href="${pagination }">${p }</a>&nbsp;
-		                </c:forEach>
-		                <c:if test="${pi.currentPage < pi.endNavi }">
-		                	<button class="fa-solid fa-angle-right next" onclick="location.href='/mail/Rlist.hirp?page=${pi.currentPage+1 }'"></button>
-		                </c:if>
-	                </div>
-                </c:if>
                 <!-- 받은메일함 페이징 -->
                 <c:if test="${mailCategory == 'R' }">
 	                <div class="btns--paging">

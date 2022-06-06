@@ -17,20 +17,6 @@
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">
-<<<<<<< HEAD
-               <li>
-                   <a href="#none">메일함</a>
-                   <ul>
-                       <li <c:if test="${mailCategory == 'R' }">class="on"</c:if>><a href="/mail/Rlist.hirp">받은메일함</a></li>
-                       <li <c:if test="${mailCategory == 'S' }">class="on"</c:if>><a href="/mail/Slist.hirp">보낸메일함</a></li>
-                       <li <c:if test="${mailCategory == 'T' }">class="on"</c:if>><a href="/mail/Tlist.hirp">임시보관함</a></li>
-                       <li <c:if test="${mailCategory == 'M' }">class="on"</c:if>><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
-                       <li <c:if test="${mailCategory == 'I' }">class="on"</c:if>><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li <c:if test="${mailCategory == 'W' }">class="on"</c:if>><a href="/mail/Wlist.hirp">휴지통</a><button class="basic" type="button" onclick="deleteAllMail();">비우기</button></li>
-                   </ul>
-               </li>
-            </ul>
-=======
                 <li>
                     <a href="#none">메일함</a>
                     <ul>
@@ -43,7 +29,6 @@
                     </ul>
                 </li>
              </ul>
->>>>>>> refs/remotes/origin/main
             
              <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">
 				<img src="../../../resources/images/icons/icon_bugreport.png" alt="icon">
@@ -60,7 +45,6 @@
             </form>
         	
         	<h1 class="basic-border-bottom">
-				임시 제목 고치기
 				<c:if test="${mailCategory == 'R' }">
 					받은메일함
 	            </c:if>
@@ -80,29 +64,15 @@
 					휴지통
             	</c:if>
             </h1>
-<<<<<<< HEAD
-            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailReplyView.hirp?mailNo=${mail.mailNo}'">답장</button>
-            <button class="basic mt-20" type="button" onclick="wasteMail(${mail.mailNo});">삭제</button>
-            <button class="basic mt-20" type="button" onclick="location.href='/mail/mailRelayView.hirp?mailNo=${mail.mailNo}'">전달</button>
-            <!-- 오른쪽으로 밀어야 함 -->
-            <button class="basic mt-20" type="button" onclick="historyBack();">목록</button>
-            
-            <div class="subConts">
-	            <form action="/mail/{mailCategory}detail.hirp" method="get">
-	            	<table class="table--basic mt-20">	        	
-=======
-
 			<div class="btns-wrap padding-20">
 				<button class="basic" type="button" onclick="location.href='/mail/mailReplyView.hirp'">답장</button>
 				<button class="basic" type="button" onclick="wasteMail(${mail.mailNo});">삭제</button>
 				<button class="basic" type="button" onclick="location.href='/mail/mailRelayView.hirp'">전달</button>
-				<!-- 오른쪽으로 밀어야 함 -->
-				<button class="basic" style="float:right;"><a href="/mail/list.hirp">목록</a></button>
+				<button class="basic" style="float:right;" onclick="historyBack();">목록</button>
 			</div>            
             <div class="subConts padding-0">
 	            <form class="padding-20" action="/mail/detail.hirp" method="get">
 	            	<table class="table--basic">	        	
->>>>>>> refs/remotes/origin/main
 	                    <colgroup>
 	                        <col style="width:10%;">
 	                        <col style="width:90%;">
@@ -125,6 +95,12 @@
 	            			<td>받는사람 :</td>
 	            			<td>${mail.mailRecipient }</td>
 	            		</tr>
+	            		<c:if test="${not empty mail.mailReferrer }">
+		            		<tr>
+		            			<td>참조 :</td>
+		            			<td>${mail.mailReferrer }</td>
+		            		</tr>
+	            		</c:if>
 	            		<tr>
 	            			<td style="padding-bottom:20px;">보낸날짜 :</td>
 	            			<td style="padding-bottom:20px;">${mail.mailDate }</td>

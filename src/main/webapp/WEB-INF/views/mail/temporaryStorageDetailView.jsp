@@ -19,20 +19,6 @@
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">
-<<<<<<< HEAD
-               <li>
-                   <a href="#none">메일함</a>
-                   <ul>
-                       <li <c:if test="${mailCategory == 'R' }">class="on"</c:if>><a href="/mail/Rlist.hirp">받은메일함</a></li>
-                       <li <c:if test="${mailCategory == 'S' }">class="on"</c:if>><a href="/mail/Slist.hirp">보낸메일함</a></li>
-                       <li <c:if test="${mailCategory == 'T' }">class="on"</c:if>><a href="/mail/Tlist.hirp">임시보관함</a></li>
-                       <li <c:if test="${mailCategory == 'M' }">class="on"</c:if>><a href="/mail/Mlist.hirp">내게쓴메일함</a></li>
-                       <li <c:if test="${mailCategory == 'I' }">class="on"</c:if>><a href="/mail/Ilist.hirp">중요메일함</a></li>
-                       <li <c:if test="${mailCategory == 'W' }">class="on"</c:if>><a href="/mail/Wlist.hirp">휴지통</a><button class="basic" type="button" onclick="deleteAllMail();">비우기</button></li>
-                   </ul>
-               </li>
-            </ul>
-=======
                 <li>
                     <a href="#none">메일함</a>
                     <ul>
@@ -45,7 +31,6 @@
                     </ul>
                 </li>
              </ul>
->>>>>>> refs/remotes/origin/main
             
              <a class="btn--function bugReport" href="/bugReport/WriteView.hirp">
 				<img src="../../../resources/images/icons/icon_bugreport.png" alt="icon">
@@ -60,7 +45,6 @@
 				메일쓰기
             </h1>
             <div id="mailWrite" class="subConts padding-0">
-<!--             	폼태그 바꿔줘야함 -->
             	<form action="/mail/send.hirp" method="post" enctype="multipart/form-data">
 					<div class="btns-wrap mt-20">
 						<button class="basic" type="submit">보내기</button>
@@ -70,7 +54,6 @@
 						<li>
 							<div class="d-flex align-items-center">
 								<h4>받는사람</h4>							
-								<!-- 체크박스 선택하면 로그인 유저 아이디 나와야 함 -->
 								<input id="check1" class="mt-20" type="checkbox" name="check1" onclick="myMail();">
 								<label for="check1">나에게</label>
 							</div>
@@ -104,7 +87,7 @@
 		// 나에게
 		function myMail() {
 			if($("#check1").prop("checked")) {
-				$("#mailRecipient").val("${sessionScope.emplId}");
+				$("#mailRecipient").val("${sessionScope.emplId}@hirp.com");
 			}else {
 				$("#mailRecipient").val("${mail.mailRecipient }");
 			}
