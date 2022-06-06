@@ -73,7 +73,22 @@
 	        		</div>
 	        	</div>
 	        	<div class="t-c mt-20 padding-20">
-	        		<button type="button" class="point " onclick="alarmSettingSubmit();">설정 완료</button>
+	        		<button type="button" class="point " onclick="openModal(this);">설정 완료</button>
+	        		<section class="section--modal">
+                        <div class="bg-black"></div>
+                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+                        <div class="section--modal__conts" style="width:400px;">
+                            <button class="btn--close" type="button"></button>
+                            <h3 align="left">알림 설정 정보 수정</h3>
+                            <p class="mb-20 padding-bottom">
+                                알림 설정 정보 수정이 완료 되었습니다.
+                            </p>
+                            <div class="btns-wrap mt-20 t-r">
+                                <button class="point" type="button" onclick="alarmSettingSubmit();">확인</button>
+                                <button class="finished closeWindow" type="button" onclick="cleanEmplSearchKeyword();">취소</button>
+                            </div>
+                        </div>
+                    </section>
 	        	</div>
         	</form>
         </article>
