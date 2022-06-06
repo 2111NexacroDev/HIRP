@@ -959,6 +959,8 @@ button.next {
     position: absolute;
     top: 15px;
     right: 210px;
+    display: flex;
+    align-items: center;
 }
 
 .form--srch input {
@@ -975,6 +977,13 @@ button.next {
     .form--srch:hover input {
         border-color: #00a1b9;
     }
+}
+
+.form--srch select {
+    width: 90px;
+    height: 32px;
+    font-size: 13px;
+    margin-right: 4px;
 }
 
 .form--srch input::placeholder {
@@ -1159,6 +1168,7 @@ article {
     height: 500px;
     background-color: #fff;
     border: 1px solid #ccc;
+    overflow: hidden;
 }
 
 .modal--chatSelect {
@@ -1229,11 +1239,22 @@ article {
     cursor: pointer;
 }
 
+.modal--recipient,
+.modal--referrer {
+    top: 40px;
+    left: 40px;
+}
+
+#emplTable td {
+    cursor: pointer;
+}
+
 /* 채팅창 끝 */
 
 .colorGrey {
-	color: #888888;
+    color: #888888;
 }
+
 .colorBlue {
-	color: #1860d6;
+    color: #1860d6;
 }
