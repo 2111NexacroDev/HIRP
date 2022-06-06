@@ -8,6 +8,20 @@
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
 <script src="https://kit.fontawesome.com/08c05a1f0f.js" crossorigin="anonymous"></script> <!-- fontawesome -->
 <link rel="stylesheet" href="../../resources/css/survey.css"><!-- 하이알피 공통 스타일(header, input, select, ...) CSS -->
+<script>
+    $(function(){
+        let addr = location.href;
+        if(addr.match('/proceed.hirp')) {
+            $('#snb>ul>li>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('closed.hirp')) {
+            $('#snb>ul>li>ul>li:nth-child(2)').addClass('on');
+        }
+        if(addr.match('mySurvey.hirp')) {
+            $('#snb>ul>li>ul>li:nth-child(3)').addClass('on');
+        }
+    });
+</script>
 
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
