@@ -18,6 +18,9 @@
 		<result property="reservationEndDate" column="RESERVATION_END_DATE"/>
 		<result property="reservationConts" column="RESERVATION_CONTS"/>
 		<result property="isReturn" column="IS_RETURN"/>
+		<result property="emplName" column="EMPL_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="positionName" column="POSITION_NAME"/>
 		<association javaType="Utility" property="utility" column="UTILITY_NO">
 			<id property="utilityNo" column="UTILITY_NO"/>
 			<result property="utilityName" column="UTILITY_NAME"/>
@@ -60,8 +63,11 @@
 		ORDER BY RESERVATION_START_DATE DESC
 	</select>
 	<select id="selectOneReservationByNo" resultMap="reservationResultMap">
-		SELECT *
+		SELECT RESERVATION_NO, UTILITY_NO, EMPL_ID, EMPL_NAME, DEPT_NAME, POSITION_NAME, RESERVATION_START_DATE, RESERVATION_END_DATE, RESERVATION_CONTS, IS_RETURN
 		FROM RESERVATION_TBL
+		JOIN EMPL_TBL USING(EMPL_ID)
+		JOIN DEPT_TBL USING(DEPT_CODE)
+		JOIN POSITION_TBL USING(POSITION_CODE)
 		WHERE RESERVATION_NO = #{reservationNo}
 	</select>
 	<insert id="insertReservation">

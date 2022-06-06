@@ -307,6 +307,48 @@ section[class^="todo--"] {
     text-align: left;
 }
 
+.fc .fc-highlight {
+    /* background: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
+    background-size: 300% 300%;
+    animation: gradient 6s ease forwards; */
+    border: 1px solid #0b2a60;
+    opacity: .7;
+}
+
+.fc .fc-highlight:before {
+    content: "드래그 범위 만큼 일시가 자동 세팅됩니다 :)";
+    position: absolute;
+    left: 10px;
+    width: 300px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    bottom: 10px;
+}
+
+.fc .fc-highlight:after {
+    content: "Selected Date";
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #000;
+    bottom: calc(100% + 14px);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
 .fc .fc-toolbar.fc-header-toolbar {
     margin: 1.5em 0 0;
     padding: 0 20px;
@@ -1051,6 +1093,7 @@ section[class^="todo--"] {
     width: 300px;
     height: 300px;
     margin-right: 60px;
+    overflow: hidden;
 }
 
 #groupView .profile-wrap img {
