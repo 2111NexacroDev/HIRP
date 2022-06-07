@@ -85,8 +85,9 @@
 #apprContents{
 border: solid 1px #888;
 border-radius:4px 4px 4px 4px; 
-padding-left:120px;
 margin-top :20px;
+padding-top : 50px;
+padding-bottom : 50px;
 }
 
 #attached-file-div{

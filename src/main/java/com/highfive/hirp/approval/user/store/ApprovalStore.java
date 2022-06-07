@@ -15,9 +15,20 @@ import com.highfive.hirp.time.user.domain.Vacation;
 
 public interface ApprovalStore {
 
+	
+	//양식 등록
+	int insertApprForm(SqlSession sqlSession, ApprForm apprForm);
+	//양식 수정
+	int updateApprForm(SqlSession sqlSession, ApprForm apprForm);
+	//양식 삭제
+	int deleteApprForm(SqlSession sqlSession, int formNo);
+	
 	//폼 전체 조회
 	List<ApprForm> selectAllApprForm(SqlSession sqlSession);
+	List<ApprForm> selectAdminApprForm(SqlSession sqlSession);
+	List<ApprForm> selectNotAdminApprForm(SqlSession sqlSession,String emplId);
 
+	
 	List<ApprForm> selectSearchApprForm(SqlSession sqlSession, Search search);
 
 	ApprForm selectApprForm(SqlSession sqlSession, int formNo);
@@ -32,9 +43,8 @@ public interface ApprovalStore {
 	//임시저장
 	int insertTempAppr(SqlSession sqlSession, Approval approval);
 
-	int updateTempAppr(SqlSession sqlSession, Approval approval);
-
-	int deleteTempAppr(SqlSession sqlSession, int apprNo);
+	
+	
 	//결재대기함
 	List<Approval> selectAllWaitingAppr(SqlSession sqlSession, String emplId);
 	//상신문서함
@@ -64,8 +74,7 @@ public interface ApprovalStore {
 	//결재문서 보기
 	Approval selectOneAppr(SqlSession sqlSession,int apprNo);
 
-	//양식등록
-	int insertApprForm(SqlSession sqlSession, ApprForm apprForm);
+	
 
 	//최근등록한 결재번호 확인
 	int selectRecentApprNo(SqlSession sqlSession);
@@ -90,6 +99,11 @@ public interface ApprovalStore {
 	List<Approval> selectAllAppr(SqlSession sqlSession, String emplId);
 
 	int selectListCount(SqlSession sqlSession);
+	
+	//임시저장 수정
+	int updateTempAppr(SqlSession sqlSession, int apprNo);
+	
+	
 
 
 

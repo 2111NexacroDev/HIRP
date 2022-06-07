@@ -78,21 +78,22 @@
 				</c:if>	
 				<c:if test="${msg eq '휴가신청서'}">
 				<form action="/register/annualLeaveAppr.hirp" method="post" enctype="multipart/form-data">
-				</c:if>	
+				</c:if>
+					
 					<input type="hidden" name="emplId" value="${emplId}">
 					<div style="border: solid 1px #888;  margin-top: 20px; position: relative;">
 						<table id="apprTable">
-							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
+							<tr style="height: 30px; border: solid 1px #c0c0c0;  line-height: 30px;">
 								<td>기안자</td>
 								<td>${emplName} ${employee.positionCode }</td>
 							</tr>
 							<tr
-								style="height: 30px; border: solid 1px #888; line-height: 30px;">
+								style="height: 30px; border: solid 1px #c0c0c0; line-height: 30px;">
 								<td>기안일</td>
 								<td><div id="current_date" /></td>
 							</tr>
 							<tr
-								style="height: 35px; border: solid 1px #888; line-height: 30px;">
+								style="height: 35px; border: solid 1px #c0c0c0; line-height: 30px;">
 								<td>소속</td>
 								<td>${employee.deptCode}</td>
 							</tr>
@@ -123,7 +124,7 @@
 							</div>
 
 							<div>
-								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;border:solid 1px #888;">
+								<input type="text" size="125" name="apprTitle" style="border-radius: 4px;border:solid 1px #c0c0c0;">
 							</div>
 						</div>
 						<div class="row mt-20" id="refDiv">
@@ -132,7 +133,7 @@
 							</div>
 
 							<div>
-								<input type="text" size="125" id="refInput" style="border-radius: 4px;border:solid 1px #888;" >
+								<input type="text" size="125" id="refInput" style="border-radius: 4px;border:solid 1px #c0c0c0;" >
 							</div>
 						</div>
 						<div class="row mt-20">
@@ -142,7 +143,7 @@
 							</div>
 							<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display: none;"> 
 							<span style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-							<div class="data_file_txt" id="data_file_txt" style="margin-top:20px; margin-left:80px; width:960px; height:100px; border:1px solid #888;">
+							<div class="data_file_txt" id="data_file_txt" style="margin-top:20px; margin-left:80px; width:960px; height:100px; border:1px solid #c0c0c0;">
 								<span></span> <br>
 								<div id="articlefileChange"></div>
 							</div>
@@ -150,7 +151,7 @@
 					
 					
 					<br>
-					<c:if test="${msg eq '결재양식' }">
+					<c:if test="${msg eq '결재양식'}">
 					<div>
 						<textarea id="summernote" name="apprContents">${apprform.formContents}</textarea>
 					</div>
@@ -255,6 +256,7 @@
 					
 			<button class="point mt-20 apprbtn" type="submit">상신하기</button>
 			<button class="basic mt-20 apprbtn" type="button" onclick="tempStorage(this.form)">임시 저장</button>
+			
 			</form>
 			</div>
 		</article>

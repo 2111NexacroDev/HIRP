@@ -45,9 +45,7 @@
 		                            </p>
 		                            
 		                            <div class="btns-wrap mt-20">
-			                            <c:url var="aDelete" value="/appr/remove.hirp">
-											<c:param name="apprNo" value="${approval.apprNo} "></c:param>
-										</c:url>
+			                            
 		                                <button class="point" type="button" onclick="location.href='${nDelete }'">확인</button>
 		                                <button class="finished closeWindow" type="button">닫기</button>
 		                            </div>

@@ -49,7 +49,7 @@
 							<td><a href="${nDetail }">${notice.noticeNo }</a></td>
 							
 							<td><a href="${nDetail }">&nbsp; ${notice.noticeTitle }</a></td>
-							<td>${notice.emplId }</td>
+							<td>${notice.employee.emplName }</td>
 							<td>${notice.writeDate}</td>
 							<td>${notice.noticeCount }</td>
 							<td>

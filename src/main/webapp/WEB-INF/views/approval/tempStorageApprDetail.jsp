@@ -50,22 +50,22 @@
 					<input type="hidden" name="apprNo" value="${approval.apprNo}">
 					<div style="border: solid 1px #888; border-radius: 4px; margin-top: 20px; position: relative;">
 						<table id="apprTable">
-							<tr style="height: 30px; border: solid 1px #888;  line-height: 30px;">
+							<tr style="height: 30px; border: solid 1px #c0c0c0;  line-height: 30px;">
 								<td>기안자</td>
 								<td>${approval.employee.emplName} ${approval.employee.positionCode }</td>
 							</tr>
 							<tr
-								style="height: 30px; border: solid 1px #888; line-height: 30px;">
+								style="height: 30px; border: solid 1px #c0c0c0; line-height: 30px;">
 								<td>기안일</td>
 								<td><div id="current_date" /></td>
 							</tr>
 							<tr
-								style="height: 35px; border: solid 1px #888; line-height: 30px;">
+								style="height: 35px; border: solid 1px #c0c0c0; line-height: 30px;">
 								<td>소속</td>
 								<td>${approval.employee.deptCode}</td>
 							</tr>
 						</table>
-						<div id="approvalLine">
+						<div id="approvalLine" class="fz-0">
 							<!-- <div class="singleApprType">기안자</div> -->
 							<div class="singleApprLine">
 							<div class='singleApprLineTop'>기안자</div>
@@ -92,18 +92,33 @@
 								<input type="text" size="125" name="apprTitle"  value="${approval.apprTitle} "style="border-radius: 4px;">
 							</div>
 						</div>
+						<div class="row mt-20" id="refDiv">
+							<div style="width: 6%">
+								<div style="font-size: 15px; line-height: 30px; text-align: center;">참조자</div>
+							</div>
+
+							<div>
+								<c:forEach var="rList" items="${approval.rList}">
+								<input type="text" size="125" id="refInput" value="${rList.emplName}"style="border-radius: 4px;border:solid 1px #c0c0c0;" >
+								</c:forEach>
+							</div>
+						</div>
 						<div class="row mt-20">
 							<div style="line-height: 25px;">첨부파일</div>
 							<div>
 								<button id="btn-upload" type="button""style= "background-color: white; border: solid 1px #888; border-radius: 4px;">파일 추가</button>
 							</div>
-							<c:forEach var="fList" items="${approval.fList}">
-									<span class="mr-10">${fList.fileName}</span>									
-							</c:forEach>
+							
 							<input id="uploadFiles" name="uploadFiles" type="file" multiple style="display: none;"> 
 							<span style="font-size: 10px; color: gray; line-height: 25px;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-							<div class="data_file_txt" id="data_file_txt" style="margin: 40px; margin-left:0px; width:100%">
-								<span></span> <br>
+							<br>	
+							
+							<div class="data_file_txt" id="data_file_txt" style="margin-top:20px; margin-left:80px; width:960px; height:100px; border:1px solid #c0c0c0;">
+								<span>
+								<c:forEach var="fList" items="${approval.fList}">
+									<br><span class="mr-10">${fList.fileName}</span>									
+								</c:forEach>
+								</span> <br>
 								<div id="articlefileChange"></div>
 							</div>
 						</div>
@@ -112,7 +127,26 @@
 					<div>
 						<textarea id="summernote" name="apprContents">${approval.apprContents}</textarea>
 					</div>
-			<button class="emergency mt-20 apprbtn" type="button">삭제</button>
+					<button class="emergency mt-20" type="button" style="float:right; margin-left:10px;" onclick="openAlert(this);">삭제하기</button>
+	                    <section class="section--alert">
+	                        <div class="bg-black"></div>
+	                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+	                        <div class="section--alert__conts">
+	                            <button class="btn--close" type="button"></button>
+	                            <p>
+	                                확인을 누르시면<br>
+	                                임시저장된 문서가 삭제됩니다. 삭제하시겠습니까?
+	                            </p>
+	                            
+	                            <div class="btns-wrap mt-20">
+		                            <c:url var="aDelete" value="/remove/TempAppr.hirp">
+										<c:param name="apprNo" value="${approval.apprNo} "></c:param>
+									</c:url>
+	                                <button class="point" type="button" onclick="location.href='${aDelete }'">확인</button>
+	                                <button class="finished closeWindow" type="button">닫기</button>
+	                            </div>
+	                        </div>
+	                    </section>
 			<button class="point mt-20 apprbtn" type="submit">상신하기</button>
 			</form>
 			</div>

@@ -9,6 +9,7 @@
 <result property="formContents" column="FORM_CONTENTS"></result>
 <result property="writeDate" column="FORM_CRATE_DATE"></result>
 <result property="status" column="FORM_STATUS"></result>
+<result property="emplId" column="EMPL_ID"></result>
 </resultMap>
 <resultMap type="Approval" id="apprResultMap">
 <id 	property="apprNo" column="APPR_NO"></id>
@@ -52,6 +53,7 @@
 <id 	property="refNo" column="REF_NO"></id>
 <result property="apprNo" column="APPR_NO"></result>
 <result property="emplId" column="EMPL_ID"></result>
+<result property="emplName" column="EMPL_NAME"></result>
 <result property="refType" column="REF_TYPE"></result>
 </resultMap>
 
@@ -80,13 +82,28 @@
 		<result property="emplProfile" column="EMPL_PROFILE" />
 </resultMap>
 
-<!-- 결재 폼 등록 -->
+<!-- 결재 양식 등록 -->
 <insert id="insertApprForm">
-	INSERT INTO APPR_FORM_TBL VALUES(APPR_FORM_SEQ.NEXTVAL, #{formTitle},#{formContents},DEFAULT,DEFAULT)
+	INSERT INTO APPR_FORM_TBL VALUES(APPR_FORM_SEQ.NEXTVAL, #{formTitle},#{formContents},DEFAULT,DEFAULT,#{emplId})
 </insert>
+<!-- 결재 양식 수정 -->
+<update id="updateApprForm">
+	UPDATE APPR_FORM_TBL SET FORM_TITLE = #{formTitle}, Form_Contents = #{formContents} WHERE FORM_NO = #{formNo}
+</update>
+<!-- 결재 양식 삭제 -->
+<delete id="deleteApprForm">
+	DELETE FROM APPR_FORM_TBL WHERE FORM_NO = #{formNo} 
+</delete>
+
 <!-- 결재 폼 전체 조회 -->
 <select id="selectAllApprForm" resultMap="apprFormResultMap">
-	SELECT * FROM APPR_FORM_TBL
+	SELECT * FROM APPR_FORM_TBL WHERE FORM_STATUS='Y'
+</select>
+<select id="selectAdminApprForm" resultMap="apprFormResultMap">
+	SELECT * FROM APPR_FORM_TBL WHERE EMPL_ID = 'admin'
+</select>
+<select id="selectNotAdminApprForm" resultMap="apprFormResultMap">
+	SELECT * FROM APPR_FORM_TBL WHERE EMPL_ID = #{emplId}
 </select>
 <!-- 결재홈 하나 조회 -->
 <select id="selectApprForm" resultMap="apprFormResultMap">
@@ -192,6 +209,11 @@
 	INSERT INTO APPROVAL_TBL(APPR_NO,FORM_NO,EMPL_ID,APPR_TITLE,APPR_CONTENTS,TEMPORARY_STORAGE) VALUES(APPR_SEQ.NEXTVAL,#{formNo},#{emplId},#{apprTitle},#{apprContents},'Y')
 </insert>
 
+<update id="updateTempAppr">
+	UPDATE APPROVAL_TBL SET TEMPORARY_STORAGE = 'N' WHERE APPR_NO = #{apprNo}
+</update>
+
+
 <!-- 임시저장 리스트 조회 -->
 <select id="selectAllTempAppr" resultMap="apprResultMap">
 	SELECT  A.APPR_NO , FORM_TITLE "FORM_NO",  EMPL_NAME "EMPL_ID",APPR_TITLE ,APPR_CONTENTS ,A.APPR_STATUS ,WRITE_DATE,TEMPORARY_STORAGE ,DOC_NO 
@@ -221,21 +243,15 @@
 	WHERE A.EMPL_ID = #{emplId} AND APPR_STATUS ='완료' AND TEMPORARY_STORAGE ='N'
 	ORDER BY A.WRITE_DATE DESC
 </select>
-<!-- 임시저장 문서 수정 -->
-<update id="updateStorageAppr">
-	UPDATE APPROVAL_TBL SET APPR_TITLE = #{apprTitle}, APPR_CONTENTS=#{apprContents}, WRITE_DATE = SYSDATE, TEMPORARY_STORAGE = 'N' WHERE APPR_NO = #{apprNo}
-</update>
 
-<delete id="deleteStorageApprAccept">
-	DELETE FROM APPR_ACCEPT_TBL WHERE APPR_NO = #{apprNo}
-</delete>
 
-<delete id="deleteStorageApprFile">
-	DELETE FROM APPR_ATTACHED_FILE_TBL WHERE APPR_NO = #{apprNo}
-</delete>
+
 
 <select id="selectAllReference" resultMap="referenceResultMap">
-	SELECT * FROM APPR_REFERENCE_TBL WHERE APPR_NO = #{apprNo}
+	 SELECT REF_NO,APPR_NO,R.EMPL_ID,E.EMPL_NAME,REF_TYPE 
+     FROM APPR_REFERENCE_TBL R 
+     JOIN EMPL_TBL E ON(R.EMPL_ID = E.EMPL_ID)
+     WHERE R.APPR_NO= #{apprNo}
 </select>
 
 

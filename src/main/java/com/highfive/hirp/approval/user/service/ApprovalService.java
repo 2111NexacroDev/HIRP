@@ -18,8 +18,19 @@ import com.highfive.hirp.time.user.domain.Vacation;
 
 public interface ApprovalService {
 
+		//양식등록
+		public int registerApprForm(ApprForm apprForm);
+		//양식수정
+		public int modifyApprForm(ApprForm apprForm);
+		//양식삭제
+		public int removeApprForm(int formNo);
+		
+		
+	
 		//폼 선택 화면
 		public List<ApprForm> printAllApprForm();
+		public List<ApprForm> printAdminApprForm();
+		public List<ApprForm> printNotAdminApprForm(String emplId);
 		//폼 검색 조회
 		public List<ApprForm>  printSearchApprForm(Search search);
 		//폼 가져오기(select appr_form)
@@ -53,10 +64,8 @@ public interface ApprovalService {
 		//TEMPORARY_STORAGE 'Y';
 		public int registerTempAppr(Approval approval);
 		
-		//임시저장된 문서 수정
-		public int modifyTempAppr(Approval approval);
-		//임시저장된 문서 삭제
-		public int removeTempAppr(int apprNo);
+		
+		
 		
 		//결재대기 문서함(select List session에서 id, 진행사항  : 대기)
 		public List<Approval> printAllWaitingAppr(String emplId); 
@@ -91,8 +100,6 @@ public interface ApprovalService {
 		public Approval printOneAppr(int apprNo);
 		
 		
-		//양식등록
-		public int registerApprForm(ApprForm apprForm);
 		
 		//최근 등록한 결재번호 조회
 		public int printRecentApprNo();
@@ -111,6 +118,12 @@ public interface ApprovalService {
 		public List<Approval> printAllAppr(String emplId);
 		
 		public int getListCount();
+		
+		//임시저장 수정
+		public int modifyTempAppr(int apprNo);
+		
+		
+		
 		
 	
 	

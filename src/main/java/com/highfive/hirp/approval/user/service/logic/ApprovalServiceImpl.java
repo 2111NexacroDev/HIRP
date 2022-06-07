@@ -26,17 +26,50 @@ public class ApprovalServiceImpl implements ApprovalService{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//양식등록
+	@Override
+	public int registerApprForm(ApprForm apprForm) {
+		int result = aStore.insertApprForm(sqlSession,apprForm);
+		return result;
+	}
+	
+	//양식 수정
+	@Override
+	public int modifyApprForm(ApprForm apprForm) {
+		int result = aStore.updateApprForm(sqlSession,apprForm);
+		return result;
+	}
+	
+	//양식 삭제
+	@Override
+	public int removeApprForm(int formNo) {
+		int result = aStore.deleteApprForm(sqlSession,formNo);
+		return result;
+	}
+	
 	@Override
 	public List<ApprForm> printAllApprForm() {
 		List<ApprForm> aList = aStore.selectAllApprForm(sqlSession);
 		return aList;
 	}
-
+	
 	@Override
-	public List<ApprForm> printSearchApprForm(Search search) {
-		List<ApprForm> aList = aStore.selectSearchApprForm(sqlSession,search);
+	public List<ApprForm> printAdminApprForm() {
+		List<ApprForm> aList = aStore.selectAdminApprForm(sqlSession);
 		return aList;
 	}
+	
+	@Override
+	public List<ApprForm> printNotAdminApprForm(String emplId) {
+		List<ApprForm> aList = aStore.selectNotAdminApprForm(sqlSession,emplId);
+		return aList;
+	}
+
+//	@Override
+//	public List<ApprForm> printSearchApprForm(Search search) {
+//		List<ApprForm> aList = aStore.selectSearchApprForm(sqlSession,search);
+//		return aList;
+//	}
 
 	@Override
 	public ApprForm printApprForm(int formNo) {
@@ -71,17 +104,9 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return result;
 	}
 
-	@Override
-	public int modifyTempAppr(Approval approval) {
-		int result = aStore.updateTempAppr(sqlSession,approval);
-		return result;
-	}
+	
 
-	@Override
-	public int removeTempAppr(int apprNo) {
-		int result = aStore.deleteTempAppr(sqlSession,apprNo);
-		return result;
-	}
+
 	//결재대기함
 	@Override
 	public List<Approval> printAllWaitingAppr(String emplId) {
@@ -169,12 +194,7 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return approval;
 	}
 
-	//양식등록
-	@Override
-	public int registerApprForm(ApprForm apprForm) {
-		int result = aStore.insertApprForm(sqlSession,apprForm);
-		return result;
-	}
+	
 
 	//최근 등록한 양식번호 조회
 	@Override
@@ -239,6 +259,24 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return totalCount;
 		
 	}
+
+	@Override
+	public List<ApprForm> printSearchApprForm(Search search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//임시저장 수정
+	@Override
+	public int modifyTempAppr(int apprNo) {
+		int result = aStore.updateTempAppr(sqlSession, apprNo);
+		return result;
+	}
+
+	
+
+	
+	
 
 
 

@@ -13,6 +13,7 @@
 <result property="noticeCount" column="NOTICE_COUNT"></result>
 <result property="status" column="NOTICE_STATUS"></result>
 <collection property="bList" column="NOTICE_NO" javaType="java.util.ArrayList" ofType="BoardAttachedFile" select="selectAllFile"></collection>
+<collection property="employee" column="EMPL_ID" ofType="Employee"  select="selectEmplById"></collection>
 </resultMap>
 <resultMap type="BoardAttachedFile" id="boardFileResultMap">
 <id 	property="fileNo" column="FILE_NO"></id>
@@ -21,6 +22,32 @@
 <result property="fileName" column="FILE_NAME"></result>
 <result property="fileRename" column="FILE_RENAME"></result>
 <result property="filePath" column="FILE_PATH"></result>
+</resultMap>
+<resultMap type="com.highfive.hirp.employee.domain.Employee" id="employeeResultMap"> <!-- 필요한 값만 적으면 됨 -->
+	<id property="emplId" column="EMPL_ID" />
+	<result property="deptCode" column="DEPT_CODE" />
+	<result property="positionCode" column="POSITION_CODE" />
+	<result property="emplPw" column="EMPL_PW" />
+	<result property="emplName" column="EMPL_NAME" />
+	<result property="startDate" column="START_DATE" />
+	<result property="email" column="EMAIL" />
+	<result property="directNo" column="DIRECT_NO" />
+	<result property="phoneNo" column="PHONE_NO" />
+	<result property="recruitCategory" column="RECRUIT_CATEGORY" />
+	<result property="salaryCategory" column="SALARY_CATEGORY" />
+	<result property="referrer" column="REFERRER" />
+	<result property="isStatus" column="IS_STATUS" />
+	<result property="birthday" column="BIRTHDAY" />
+	<result property="gender" column="GENDER" />
+	<result property="isMarriage" column="IS_MARRIAGE" />
+	<result property="isDisability" column="IS_DISABILITY" />
+	<result property="isVeterans" column="IS_VETERANS" />
+	<result property="endDate" column="END_DATE" />
+	<result property="endReason" column="END_REASON" />
+	<result property="emplProfile" column="EMPL_PROFILE" />
+	<!-- 이름 추가 -->
+	<result property="deptName" column="DEPT_NAME" />
+	<result property="positionName" column="POSITION_NAME" />
 </resultMap>
 <!-- 게시글 등록  -->
 <insert id="insertNotice">
@@ -99,7 +126,15 @@
   	SELECT  * FROM BOARD_NOTICE_TBL WHERE EMPL_ID = #{emplId}
   </select>
   
-  
+    <!-- 회원정보 -->
+  	<select id="selectEmplById" resultMap="employeeResultMap">
+		SELECT EMPL_PROFILE, EMPL_NAME, EMPL_ID, EMPL_PW, DEPT_NAME "DEPT_CODE", POSITION_NAME "POSITION_CODE",
+		DIRECT_NO, EMAIL, PHONE_NO, TO_CHAR(BIRTHDAY, 'YYYY-MM-DD') "BIRTHDAY" <!-- string을 날짜형태로 변환하기 위해 적어줌 ""에는 컬럼명 써줌 -->
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE EMPL_ID = #{emplId}
+	</select>
   
   
   

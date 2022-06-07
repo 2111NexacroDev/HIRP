@@ -995,19 +995,19 @@ section[class^="todo--"] {
 }
 
 /* 전자결재 */
-#apprFormListUl {
+.apprFormListUl {
     display: flex;
     justify-content: space-between;
     padding: 10px;
 }
 
-#apprFormListUl>li {
+.apprFormListUl>li {
     margin-top: 0 !important;
     margin: 0 4px;
     text-align: center;
 }
 
-#apprFormListUl>li>a {
+.apprFormListUl>li>a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1021,7 +1021,7 @@ section[class^="todo--"] {
     transition: background-color .3s;
 }
 
-#apprFormListUl>li>a:hover {
+.apprFormListUl>li>a:hover {
     background-color: #00498c;
     color: #fff;
 }

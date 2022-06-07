@@ -49,28 +49,148 @@ public class ApprovalController {
 	@Autowired
 	private EmployeeService eService;
 
-	@Autowired
-	private EmployeeAdminService eaService;
+	
+	// 전자결재 양식 작성폼
+	@RequestMapping(value = "/approval/writeForm.hirp")
+	public String writeApprovalForm() {
+		return "/approval/writeApprovalFormpage";
+	}
+	
+	// 전자결재 양식 등록
+	@RequestMapping(value = "/register/apprForm.hirp", method = RequestMethod.POST)
+	public ModelAndView registerApprovalForm(ModelAndView mv, @ModelAttribute ApprForm apprForm) {
+		try {
+			int result = aService.registerApprForm(apprForm);
+			if (result > 0) {
+				mv.addObject("msg", "양식이 등록되었습니다.");
+				mv.addObject("url","/approval/formView.hirp");
+				mv.setViewName("common/errorPage2");
+			} else {
+				mv.addObject("msg", "양식등록 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.setViewName("common/errorPage");
+			mv.addObject("msg", e.toString());
+		}
+		return mv;
+	}
+	
+	//결재양식 수정
+	@RequestMapping(value = "/modify/apprForm.hirp", method = RequestMethod.POST)
+	public ModelAndView modifyApprovalForm(ModelAndView mv, @ModelAttribute ApprForm apprForm) {
+		try {
+			int result = aService.modifyApprForm(apprForm);
+			int formNo = apprForm.getFormNo();
+			if (result > 0) {
+				 mv.addObject("msg", "양식이 수정되었습니다.");
+				 mv.addObject("url","/approvalForm/detailView.hirp?formNo=");
+				 mv.addObject("formNo",formNo); mv.setViewName("common/errorPage2");
+			} else {
+				mv.addObject("msg", "양식등록 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.setViewName("common/errorPage");
+			mv.addObject("msg", e.toString());
+		}
+		return mv;
+	}
+	
+	//결재양식 삭제
+	@RequestMapping(value = "/remove/apprForm.hirp", method = RequestMethod.GET)
+	public ModelAndView deleteApprForm(ModelAndView mv, @RequestParam("formNo") int formNo) {
+		try {
+		int result = aService.removeApprForm(formNo);
+		if (result > 0) {
+			mv.addObject("msg", "양식이 삭제되었습니다.");
+			mv.addObject("url","/approval/formView.hirp");
+			mv.setViewName("common/errorPage2");
+		} else {
+			mv.addObject("msg", "양식등록 실패");
+			mv.setViewName("common/errorPage");
+		}
+	} catch (Exception e) {
+		mv.addObject("msg", e.toString());
+		mv.setViewName("common/errorPage");
+	}
+	return mv;
+	}
 
 	
-	
+	//결재 양식 선택하는 모달창 -> 기안하기 버튼 눌렀을 때 (ajax)
 	@ResponseBody
 	@RequestMapping(value = "/apprForm/list.hirp", method = RequestMethod.GET)
 	public void boardReplyView( HttpServletResponse response)
 			throws JsonIOException, IOException {
-
-		List<ApprForm> formList = aService.printAllApprForm();
-		if (!formList.isEmpty()) {
+		
+		List<ApprForm> apprformList = aService.printAllApprForm();
+		if (!apprformList.isEmpty()) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-			gson.toJson(formList, response.getWriter());
-
+			gson.toJson(apprformList, response.getWriter());
 		}
-
 	}
 	
+	//양식관리->양식 조회
+	@RequestMapping(value ="/approval/formView.hirp", method = RequestMethod.GET)
+	public ModelAndView apprFormView(ModelAndView mv,HttpServletRequest request) {
+		try {
+			List<ApprForm> formList = aService.printAdminApprForm();
+			if (!formList.isEmpty()) {
+				mv.addObject("formList", formList);
+			}
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			List<ApprForm> myApprForm = aService.printNotAdminApprForm(emplId);
+			if (!myApprForm.isEmpty()) {
+				mv.addObject("myApprForm", myApprForm);
+			}
+			mv.setViewName("approval/apprformList");
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+				
+	}
 	
+	//내가 생성한 양식 조회
+	@RequestMapping(value = "/approvalForm/detailView.hirp", method =RequestMethod.GET)
+	public ModelAndView approvalFormDetailView(ModelAndView mv, @RequestParam("formNo") int formNo) {
+		try {
+		ApprForm apprform = aService.printApprForm(formNo);
+		if (apprform != null) {
+			mv.addObject("apprform", apprform);
+			mv.addObject("msg", "결재양식조회");
+		}
+		mv.setViewName("approval/writeApprovalFormpage");
+	} catch (Exception e) {
+		mv.addObject("msg", e.toString());
+		mv.setViewName("common/errorPage");
+	}
+	return mv;
 	
-	// 전자결재 메인
+	}
+	
+	// 관리자가 생성한 양식 조회
+	@RequestMapping(value = "/approvalAdminForm/detail.hirp", method =RequestMethod.GET)
+	public ModelAndView approvalAdminFormdetailView(ModelAndView mv, @RequestParam("formNo") int formNo) {
+		try {
+		ApprForm apprform = aService.printApprForm(formNo);
+		if (apprform != null) {
+			mv.addObject("apprform", apprform);
+			mv.addObject("msg", "결재양식조회");
+		}
+		mv.setViewName("approval/apprFormView");
+	} catch (Exception e) {
+		mv.addObject("msg", e.toString());
+		mv.setViewName("common/errorPage");
+	}
+	return mv;
+	
+	}
+	
+	// 전자결재 메인(결재대기,진행중,결재완료)
 	@RequestMapping(value = "/approval/main.hirp", method = RequestMethod.GET)
 	public ModelAndView approvalMain(ModelAndView mv,HttpServletRequest request) {
 		try {
@@ -91,43 +211,18 @@ public class ApprovalController {
 			mv.setViewName("approval/approvalMain");
 		} catch (Exception e) {
 			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage2");
+			mv.setViewName("common/errorPage");
 		}
 		return mv;
 				
 	}
 
-	// 전자결재 양식 작성폼
-	@RequestMapping(value = "/approval/writeForm.hirp")
-	public String writeApprovalForm() {
-		return "/approval/writeApprovalFormpage";
-	}
-
-	// 전자결재 양식 등록
-	@RequestMapping(value = "/register/apprForm.hirp", method = RequestMethod.POST)
-	public ModelAndView registerApprovalForm(ModelAndView mv, @ModelAttribute ApprForm apprForm) {
-		try {
-			int result = aService.registerApprForm(apprForm);
-			if (result > 0) {
-				mv.setViewName("redirect:/approval/main.hirp");
-			} else {
-				mv.addObject("msg", "양식등록 성공");
-				mv.setViewName("common/errorPage2");
-			}
-		} catch (Exception e) {
-			mv.setViewName("common/errorPage2");
-			mv.addObject("msg", e.toString());
-		}
-		return mv;
-	}
-
 	// 폼 검색 조회
-	/*
-	 * public ModelAndView printSearchApprForm(ModelAndView mv,@ModelAttribute
-	 * Search search) { return mv; }
-	 */
+	//	 public ModelAndView printSearchApprForm(ModelAndView mv,@ModelAttribute
+	//	 Search search) { return mv; }
+	 
 	
-	// 휴가신청서
+	// 휴가신청서 작성 화면
 		@RequestMapping(value = "/annualLeaveForm/detail.hirp", method =RequestMethod.GET)
 		public ModelAndView annualLeaveForm(ModelAndView mv, HttpServletRequest request) {
 			try {
@@ -146,27 +241,29 @@ public class ApprovalController {
 			return mv;
 		}
 	
-		// 근태조정신청서
-				@RequestMapping(value = "/timeModifylForm/detail.hirp", method =RequestMethod.GET)
-				public ModelAndView timeModifylForm(ModelAndView mv, HttpServletRequest request) {
-					try {
-					HttpSession session = request.getSession();
-					String emplId = (String) session.getAttribute("emplId");
-					Employee employee = eService.employeeMyPage(emplId);
-					if(employee != null) {
-					mv.addObject("employee", employee);
-					}
-					mv.addObject("msg", "근태조정신청서");
-					mv.setViewName("approval/writeApproval");
-				} catch (Exception e) {
-					mv.addObject("msg", e.toString());
-					mv.setViewName("common/errorPage2");
-				}
-					return mv;
-				}
+		// 근태조정신청서 작성 화면
+		@RequestMapping(value = "/timeModifylForm/detail.hirp", method =RequestMethod.GET)
+		public ModelAndView timeModifylForm(ModelAndView mv, HttpServletRequest request) {
+			try {
+			HttpSession session = request.getSession();
+			String emplId = (String) session.getAttribute("emplId");
+			Employee employee = eService.employeeMyPage(emplId);
+			if(employee != null) {
+			mv.addObject("employee", employee);
+			}
+			mv.addObject("msg", "근태조정신청서");
+			mv.setViewName("approval/writeApproval");
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage2");
+		}
+			return mv;
+		}
 
+				
+				
+	//기안하기 화면			
 	@RequestMapping(value = "/approvalForm/detail.hirp", method = { RequestMethod.GET, RequestMethod.POST })
-	// 폼 가져오기(select appr_form)
 	public ModelAndView printApprForm(ModelAndView mv, @RequestParam("formNo") int formNo, HttpServletRequest request) {
 		try {
 			HttpSession session = request.getSession();
@@ -187,26 +284,20 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 결재자 검색 조회(select search)
-	// public ModelAndView groupSearchView(ModelAndView mv, @ModelAttribute Search
-	// search) {
-	// return mv;
-	// }
+	
 
 	
-	// 문서 상신(insert approval)
-	// TEMPORARY_STORAGE DEFAULT값인 'N'로 들어감
-	// 임시저장(insert approval)
-	// TEMPORARY_STORAGE 'Y';
+	//문서 상신
 	@RequestMapping(value = "/register/appr.hirp", method = RequestMethod.POST)
 	public ModelAndView registerAppr(ModelAndView mv, @ModelAttribute Approval approval,
 			@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
 			HttpServletRequest request) {
 		try {
 
-			int result = aService.registerAppr(approval);
-			List<ApprAccept> aList = approval.getaList();
-			int apprNo = aService.printRecentApprNo();
+			int result = aService.registerAppr(approval);//결재 등록
+			
+			int apprNo = aService.printRecentApprNo();//결재번호 가져오기
+			List<ApprAccept> aList = approval.getaList();//결재라인 등록
 			for (int i = 0; i < aList.size(); i++) {
 				ApprAccept apprAccept = new ApprAccept();
 				apprAccept.setApprNo(apprNo);
@@ -214,19 +305,19 @@ public class ApprovalController {
 				apprAccept.setApprType(aList.get(i).getApprType());
 				int apprResult = aService.registerApprover(apprAccept);
 			}
-			
+			//참조자 있을때만 실행
+			if(!approval.getrList().isEmpty()){
 			List<Reference> rList = approval.getrList();
-			for (int i = 0; i < aList.size(); i++) {
+			for (int i = 0; i < rList.size(); i++) {
 				Reference reference = new Reference();
 				reference.setApprNo(apprNo);
 				reference.setEmplId(rList.get(i).getEmplId());
 				reference.setRefType(rList.get(i).getRefType());
 				int refResult = aService.registerApprRef(reference);
-			}
+			}}
 			
-			
+			//첨부파일 있을때만 실행
 			if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {
-
 				List<Map<String, String>> fileList = SaveMultipartFile.saveFile(multipartfile, request);
 				for (int i = 0; i < multipartfile.size(); i++) {
 					String fileName = fileList.get(i).get("fileName");
@@ -243,9 +334,13 @@ public class ApprovalController {
 				}
 			}
 			if (result > 0) {
-				mv.setViewName("redirect:/approval/main.hirp");
+				mv.addObject("msg", "상신되었습니다.");
+				mv.addObject("url","/appr/detail.hirp?apprNo=");
+				mv.addObject("apprNo",apprNo); 
+				mv.setViewName("common/errorPage2");
+				
 			} else {
-				mv.addObject("msg", "문서 상신 실패");
+				mv.addObject("msg", "상신 실패");
 				mv.setViewName("common/errorPage");
 			}
 		} catch (Exception e) {
@@ -255,6 +350,98 @@ public class ApprovalController {
 		return mv;
 	}
 
+	
+		//임시저장
+		@RequestMapping(value = "/temporaryStorage/appr.hirp", method = RequestMethod.POST)
+		public ModelAndView  temporaryStorageAppr(ModelAndView mv, @ModelAttribute Approval approval,
+				@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
+				HttpServletRequest request) {
+			try {
+
+				int result = aService.registerTempAppr(approval);//결재 등록
+				
+				int apprNo = aService.printRecentApprNo();//결재번호 가져오기
+				//결재라인 있을때만 실행
+				if(!approval.getaList().isEmpty()){
+				List<ApprAccept> aList = approval.getaList();
+				for (int i = 0; i < aList.size(); i++) {
+					ApprAccept apprAccept = new ApprAccept();
+					apprAccept.setApprNo(apprNo);
+					apprAccept.setEmplId(aList.get(i).getEmplId());
+					apprAccept.setApprType(aList.get(i).getApprType());
+					int apprResult = aService.registerApprover(apprAccept);
+				}}
+				//참조자 있을때만 실행
+				if(!approval.getrList().isEmpty()){
+				List<Reference> rList = approval.getrList();
+				for (int i = 0; i < rList.size(); i++) {
+					Reference reference = new Reference();
+					reference.setApprNo(apprNo);
+					reference.setEmplId(rList.get(i).getEmplId());
+					reference.setRefType(rList.get(i).getRefType());
+					int refResult = aService.registerApprRef(reference);
+				}}
+				
+				//첨부파일 있을때만 실행
+				if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {
+					List<Map<String, String>> fileList = SaveMultipartFile.saveFile(multipartfile, request);
+					for (int i = 0; i < multipartfile.size(); i++) {
+						String fileName = fileList.get(i).get("fileName");
+						String fileRename = fileList.get(i).get("fileRename");
+						String filePath = fileList.get(i).get("filePath");
+						// 첨부파일 테이블 등록
+						ApprAttachedFile apprFile = new ApprAttachedFile();
+						apprFile.setApprNo(apprNo);
+						apprFile.setFileName(fileName);
+						apprFile.setFileRename(fileRename);
+						apprFile.setFilePath(filePath);
+
+						int fileResult = aService.registerApprFile(apprFile);
+					}
+				}
+				if (result > 0) {
+					mv.setViewName("redirect:/temporaryStorage/appr.hirp");
+				} else {
+					mv.addObject("msg", "임시저장 실패");
+					mv.setViewName("common/errorPage");
+				}
+			} catch (Exception e) {
+				mv.addObject("msg", e.toString());
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+	
+		// 임시저장된 문서 상신하기
+		@RequestMapping(value = "/register/TempAppr.hirp", method = RequestMethod.POST)
+		public ModelAndView modifyTemporaryStoragedAppr(ModelAndView mv, @RequestParam("apprNo") int apprNo){
+			int result = aService.modifyTempAppr(apprNo);//결재 등록
+			if (result > 0) {
+				mv.addObject("msg", "상신되었습니다.");
+				mv.addObject("url","/written/appr.hirp");
+				mv.setViewName("common/errorPage2");
+			} else {
+				mv.addObject("msg", "상신 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+		
+		// 임시저장된 문서 삭제
+		@RequestMapping(value = "/remove/TempAppr.hirp", method = RequestMethod.GET)
+		public ModelAndView removeTemporaryStoragedAppr(ModelAndView mv, @RequestParam("apprNo") int apprNo) {
+			int result = aService.removeApproval(apprNo);
+			if (result > 0) {
+				mv.addObject("msg", "삭제되었습니다.");
+				mv.addObject("url","/temporaryStorage/appr.hirp");
+				mv.setViewName("common/errorPage2");
+			} else {
+				mv.addObject("msg", "삭제 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+		
 	
 	// 임시저장함(select List)
 	@RequestMapping(value = "/temporaryStorage/appr.hirp", method = RequestMethod.GET)
@@ -275,53 +462,7 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 문서 임시저장
-	@RequestMapping(value = "/temporaryStorage/appr.hirp", method = RequestMethod.POST)
-	public ModelAndView temporaryStorageAppr(ModelAndView mv, @ModelAttribute Approval approval,
-			@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
-			HttpServletRequest request) {
-		try {
-			int result = aService.registerTempAppr(approval);
-			int apprNo = aService.printRecentApprNo();
-			if(!approval.getaList().isEmpty()){
-			List<ApprAccept> aList = approval.getaList();
-			for (int i = 0; i < aList.size(); i++) {
-				ApprAccept apprAccept = new ApprAccept();
-				apprAccept.setApprNo(apprNo);
-				apprAccept.setEmplId(aList.get(i).getEmplId());
-				apprAccept.setApprType(aList.get(i).getApprType());
-				int apprResult = aService.registerApprover(apprAccept);
-			}}
-			if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {
 
-				List<Map<String, String>> fileList = SaveMultipartFile.saveFile(multipartfile, request);
-				for (int i = 0; i < multipartfile.size(); i++) {
-					String fileName = fileList.get(i).get("fileName");
-					String fileRename = fileList.get(i).get("fileRename");
-					String filePath = fileList.get(i).get("filePath");
-					// 첨부파일 테이블 등록
-					ApprAttachedFile apprFile = new ApprAttachedFile();
-					apprFile.setApprNo(apprNo);
-					apprFile.setFileName(fileName);
-					apprFile.setFileRename(fileRename);
-					apprFile.setFilePath(filePath);
-
-					int fileResult = aService.registerApprFile(apprFile);
-				}
-			}
-
-			if (result > 0) {
-				mv.setViewName("redirect:/approval/main.hirp");
-			} else {
-				mv.addObject("msg", "문서 임시저장 실패");
-				mv.setViewName("common/errorPage2");
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage2");
-		}
-		return mv;
-	}
 
 	// 임시저장된 문서 조회
 	@RequestMapping(value = "/tempAppr/detail.hirp", method = RequestMethod.GET)
@@ -346,58 +487,10 @@ public class ApprovalController {
 		return mv;
 	}
 
-	// 임시저장된 문서 상신하기
-	@RequestMapping(value = "/register/TempAppr.hirp", method = RequestMethod.POST)
-	public ModelAndView modifyTemporaryStoragedAppr(ModelAndView mv, @ModelAttribute Approval approval,
-			@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
-			HttpServletRequest request) {
-		try {
-			int result = aService.modifyTempAppr(approval);
-			int apprNo = approval.getApprNo();
-			int delete = aService.removeTempAppr(apprNo);
-			List<ApprAccept> aList = approval.getaList();
-			for (int i = 0; i < aList.size(); i++) {
-				ApprAccept apprAccept = new ApprAccept();
-				apprAccept.setApprNo(apprNo);
-				apprAccept.setEmplId(aList.get(i).getEmplId());
-				apprAccept.setApprType(aList.get(i).getApprType());
-				int apprResult = aService.registerApprover(apprAccept);
-			}
-			if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {
-
-				List<Map<String, String>> fileList = SaveMultipartFile.saveFile(multipartfile, request);
-				for (int i = 0; i < multipartfile.size(); i++) {
-					String fileName = fileList.get(i).get("fileName");
-					String fileRename = fileList.get(i).get("fileRename");
-					String filePath = fileList.get(i).get("filePath");
-					// 첨부파일 테이블 등록
-					ApprAttachedFile apprFile = new ApprAttachedFile();
-					apprFile.setApprNo(apprNo);
-					apprFile.setFileName(fileName);
-					apprFile.setFileRename(fileRename);
-					apprFile.setFilePath(filePath);
-
-					int fileResult = aService.registerApprFile(apprFile);
-				}
-			}
-			if (result > 0) {
-				mv.setViewName("redirect:/approval/main.hirp");
-			} else {
-				mv.addObject("msg", "문서 상신 실패");
-				mv.setViewName("common/errorPage2");
-			}
-		} catch (Exception e) {
-			mv.addObject("msg", e.toString());
-			mv.setViewName("common/errorPage2");
-		}
-		return mv;
-	}
+	
 
 	
-	// 임시저장된 문서 삭제
-	public ModelAndView removeTemporaryStoragedAppr(ModelAndView mv, @RequestParam("apprNo") int apprNo) {
-		return mv;
-	}
+	
 
 	
 	// 결재대기 문서함(select List session에서 id, 진행사항 : 대기)

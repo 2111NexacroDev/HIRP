@@ -32,13 +32,37 @@
 							<c:param name="noticeNo" value="${notice.noticeNo} "></c:param>
 						</c:url>
 
-						<button class="board-detail-btn" onclick="remove()" style='color:rgb(192, 57, 43);'><img src="../../../../resources/images/icons/redgarbage.png"style="width:16px; height:auto; vertical-align: middle;"/>삭제하기</button>
-						<button class="board-detail-btn" onclick="location.href='${nModify }'"><img src="../../../../resources/images/icons/write.png"style="width:16px; height:auto; vertical-align: middle;"/>수정하기</button>	
+						<c:if test="${notice.emplId eq emplId }">	
+						<button class="board-detail-btn" type="button"  style='color:rgb(192, 57, 43);' onclick="openAlert(this);"><img src="../../../../resources/images/icons/redgarbage.png"style="width:16px; height:auto; vertical-align: middle;"/>삭제하기</button>
+		                    <section class="section--alert">
+		                        <div class="bg-black"></div>
+		                        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+		                        <div class="section--alert__conts">
+		                            <button class="btn--close" type="button"></button>
+		                            <p>
+		                                확인을 누르시면<br>
+		                             게시글이 삭제됩니다. 삭제하시겠습니까?
+		                            </p>
+		                            
+		                            <div class="btns-wrap mt-20">
+			                            <c:url var="aDelete" value="/appr/remove.hirp">
+											<c:param name="apprNo" value="${approval.apprNo} "></c:param>
+										</c:url>
+		                                <button class="point" type="button" onclick="location.href='${nDelete }'">확인</button>
+		                                <button class="finished closeWindow" type="button">닫기</button>
+		                            </div>
+		                        </div>
+		                    </section>
+		                    <button class="board-detail-btn" onclick="location.href='${nModify }'"><img src="../../../../resources/images/icons/write.png"style="width:16px; height:auto; vertical-align: middle;"/>수정하기</button>	
+					</c:if>
 					</div>
-
 					<div id="title-div"> ${notice.noticeTitle }</div>
-						<div class="write-div"><img src="../../../../resources/images/profile.jpg" style="width:40px; height:auto; vertical-align: middle;"/> ${notice.emplId }</div>
-						<div class="write-div">${notice.writeDate }</div>
+						<c:if test="${notice.employee.emplProfile ne null}">
+            				<div class="write-div"><img src="../../../resources/uploadFiles/${notice.employee.emplProfile }" alt="프로필사진"style="width:35px; height:auto; vertical-align: middle;">${notice.employee.emplName }</div>
+        				</c:if>
+        				<c:if test="${notice.employee.emplProfile eq null}">
+            				<div class="write-div"><img src="../../../resources/images/img_no_profile.png" alt="프로필사진">${notice.employee.emplName }</div>
+        				</c:if>						<div class="write-div">${notice.writeDate }</div>
 					<div id="attached-file-div">		
 						<c:forEach var="file" items="${notice.bList}">
 							<div><img src="../../../../resources/images/icons/attachedFile.png" style="width:12px; height:auto; vertical-align: middle;"/><a href="../../../../resources/uploadFiles/${file.fileRename }" download>${file.fileName}</a></div>
@@ -131,8 +155,8 @@
 						var $tr = $("<tr>");
 
 						var $br = $("<br>");
-						var $rWriter 	 = $("<td width='160'><b>").text(data[i].emplId).append("</b>");
-						var $reWriter 	 = $("<td width='160' id='reWriter'><img src='../../../../resources/images/icons/rereply.png' style='width:20px; height:auto; vertical-align: middle; align :right;'/><b>"+data[i].emplId+"</b>");
+						var $rWriter 	 = $("<td width='160'><b>").text(data[i].employee.emplName).append("</b>");
+						var $reWriter 	 = $("<td width='160' id='reWriter'><img src='../../../../resources/images/icons/rereply2.png' style='width:20px; height:auto; vertical-align: middle; align :right;'/><b>"+data[i].employee.emplName+"</b>");
 						var $rContent 	 = $("<td width='250' colspan='2' class='rContent'>").text(data[i].replyContents);
 						var $reContent 	 = $("<td width='250' colspan='2' class='rContent' >").text(data[i].replyContents);
 						var $rCreateDate = $("<td class='t-c' width='120'>").text(data[i].writeDate);

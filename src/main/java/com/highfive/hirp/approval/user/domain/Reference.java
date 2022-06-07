@@ -5,6 +5,7 @@ public class Reference {
 	private int refNo;
 	private int apprNo;
 	private String emplId;
+	private String emplName;
 	private String refType;
 	
 	public Reference() {}
@@ -33,6 +34,14 @@ public class Reference {
 		this.emplId = emplId;
 	}
 
+	public String getEmplName() {
+		return emplName;
+	}
+
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+
 	public String getRefType() {
 		return refType;
 	}
@@ -43,8 +52,11 @@ public class Reference {
 
 	@Override
 	public String toString() {
-		return "Reference [refNo=" + refNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", refType=" + refType + "]";
+		return "Reference [refNo=" + refNo + ", apprNo=" + apprNo + ", emplId=" + emplId + ", emplName=" + emplName
+				+ ", refType=" + refType + "]";
 	}
+
+	
 
 
 	

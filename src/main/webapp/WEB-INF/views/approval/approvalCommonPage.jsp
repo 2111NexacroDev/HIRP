@@ -29,7 +29,7 @@
         crossorigin="anonymous"></script>
     <script src="../../resources/js/common.js"></script>
 	<!-- 하이알피 서브페이지 CSS -->
-	<link rel="stylesheet" href="../../../resources/css/sub.css">
+	<link rel="stylesheet" href="../../../resources/css/sub.css?after">
 	<!-- editor -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -65,7 +65,7 @@
 									</c:url>
 									<c:url var="timeModifyDetail" value="/timeModifylForm/detail.hirp">
 									</c:url>
-		                            <ul id="apprFormListUl">
+		                            <ul class="apprFormListUl" id="apprFormListUl">
 		                            <li><a href="${annualLeaveDetail }">휴가신청서</a></li>
 		                            <li><a href="${timeModifyDetail }">근태조정신청서</a></li>
 		                            </ul>
@@ -107,6 +107,7 @@
                     <a href="">양식관리</a>
                     <ul>       
                         <li><a href="/approval/writeForm.hirp">양식생성</a></li>
+                        <li><a href="/approval/formView.hirp">양식조회</a></li>
                     </ul>
                 </li>
             </ul>

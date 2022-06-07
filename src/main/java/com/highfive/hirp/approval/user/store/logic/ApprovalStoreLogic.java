@@ -18,9 +18,44 @@ import com.highfive.hirp.time.user.domain.Vacation;
 @Repository
 public class ApprovalStoreLogic implements ApprovalStore{
 
+	//양식등록
+	@Override
+	public int insertApprForm(SqlSession sqlSession, ApprForm apprForm) {
+		int result = sqlSession.insert("ApprMapper.insertApprForm",apprForm);
+		return result;
+	}
+	
+	//양식 수정
+	@Override
+	public int updateApprForm(SqlSession sqlSession, ApprForm apprForm) {
+		int result = sqlSession.update("ApprMapper.updateApprForm",apprForm);
+		return result;
+	}
+	
+	//양식 삭제
+	@Override
+	public int deleteApprForm(SqlSession sqlSession, int formNo) {
+		int result = sqlSession.delete("ApprMapper.deleteApprForm",formNo);
+		return result;
+	}
+	
+	
 	@Override
 	public List<ApprForm> selectAllApprForm(SqlSession sqlSession) {
 		List<ApprForm> aList = sqlSession.selectList("ApprMapper.selectAllApprForm");
+		return aList;
+	}
+	
+	
+	@Override
+	public List<ApprForm> selectAdminApprForm(SqlSession sqlSession) {
+		List<ApprForm> aList = sqlSession.selectList("ApprMapper.selectAdminApprForm");
+		return aList;
+	}
+	
+	@Override
+	public List<ApprForm> selectNotAdminApprForm(SqlSession sqlSession,String emplId) {
+		List<ApprForm> aList = sqlSession.selectList("ApprMapper.selectNotAdminApprForm",emplId);
 		return aList;
 	}
 
@@ -63,18 +98,9 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return result;
 	}
 
-	@Override
-	public int updateTempAppr(SqlSession sqlSession, Approval approval) {
-		int result = sqlSession.update("ApprMapper.updateTempAppr",approval);
-		return result;
-	}
+	
 
-	@Override
-	public int deleteTempAppr(SqlSession sqlSession, int apprNo) {
-		int result = sqlSession.delete("ApprMapper.deleteStorageApprAccept",apprNo);
-		int result2 = sqlSession.delete("ApprMapper.deleteStorageApprFile",apprNo);
-		return result;
-	}
+
 
 	@Override
 	public List<Approval> selectAllWaitingAppr(SqlSession sqlSession, String emplId) {
@@ -160,12 +186,7 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		return approval;
 	}
 
-	//양식등록
-	@Override
-	public int insertApprForm(SqlSession sqlSession, ApprForm apprForm) {
-		int result = sqlSession.insert("ApprMapper.insertApprForm",apprForm);
-		return result;
-	}
+	
 
 	//가장 최근 등록한 결재번호 확인
 	@Override
@@ -230,6 +251,18 @@ public class ApprovalStoreLogic implements ApprovalStore{
 		int totalCount = sqlSession.selectOne("ApprMapper.selectListCount");
 		return totalCount;
 	}
+
+	//임시저장 수정
+	@Override
+	public int updateTempAppr(SqlSession sqlSession, int apprNo) {
+		int result = sqlSession.insert("ApprMapper.updateTempAppr",apprNo);
+		return result;
+	}
+
+	
+
+
+	
 
 	
 

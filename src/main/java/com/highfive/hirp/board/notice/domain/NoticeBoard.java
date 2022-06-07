@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.highfive.hirp.board.common.BoardAttachedFile;
+import com.highfive.hirp.employee.domain.Employee;
 
 public class NoticeBoard {
 
@@ -16,9 +17,9 @@ public class NoticeBoard {
 	private int noticeCount;
 	private String status;
 	private List<BoardAttachedFile> bList;
+	private Employee employee;
 	
 	public NoticeBoard() {}
-
 
 	public int getNoticeNo() {
 		return noticeNo;
@@ -92,15 +93,23 @@ public class NoticeBoard {
 		this.bList = bList;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoard [noticeNo=" + noticeNo + ", boardCode=" + boardCode + ", emplId=" + emplId
 				+ ", noticeTitle=" + noticeTitle + ", noticeContents=" + noticeContents + ", writeDate=" + writeDate
-				+ ", noticeCount=" + noticeCount + ", status=" + status + ", bList=" + bList + "]";
+				+ ", noticeCount=" + noticeCount + ", status=" + status + ", bList=" + bList + ", employee=" + employee
+				+ "]";
 	}
 
 
-	
 	
 
 }

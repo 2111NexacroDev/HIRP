@@ -9,17 +9,9 @@ public class ApprForm {
 	private String formContents;
 	private Date writeDate;
 	private String status;
+	private String emplId;
 	
 	public ApprForm() {}
-
-	public ApprForm(int formNo, String formTitle, String formContents, Date writeDate, String status) {
-		super();
-		this.formNo = formNo;
-		this.formTitle = formTitle;
-		this.formContents = formContents;
-		this.writeDate = writeDate;
-		this.status = status;
-	}
 
 	public int getFormNo() {
 		return formNo;
@@ -61,11 +53,20 @@ public class ApprForm {
 		this.status = status;
 	}
 
+	public String getEmplId() {
+		return emplId;
+	}
+
+	public void setEmplId(String emplId) {
+		this.emplId = emplId;
+	}
+
 	@Override
 	public String toString() {
 		return "ApprForm [formNo=" + formNo + ", formTitle=" + formTitle + ", formContents=" + formContents
-				+ ", writeDate=" + writeDate + ", status=" + status + "]";
+				+ ", writeDate=" + writeDate + ", status=" + status + ", emplId=" + emplId + "]";
 	}
 
+	
 	
 }
