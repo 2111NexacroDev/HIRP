@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Work" width="1280" height="720" titletext="Form_Work" onload="Form_Work_onload">
+    <Layouts>
+      <Layout width="1280" height="720" screenid="Desktop_screen">
+        <Button id="btn_Add" taborder="0" text="추가" top="80" width="80" height="30" onclick="btn_Add_onclick" right="220"/>
+        <Button id="btn_Update" taborder="1" text="수정" height="30" onclick="btn_Update_onclick" top="80" right="120" width="80"/>
+        <Button id="btn_Delete" taborder="2" text="삭제" top="80" width="80" height="30" onclick="btn_Delete_onclick" right="20"/>
+        <Grid id="Grid00" taborder="3" left="20" top="120" height="580" binddataset="ds_position" onheadclick="Grid00_onheadclick" autofittype="col" right="20">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="51"/>
+                <Column size="188"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="positionSequence" color="black" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="명칭" color="black"/>
+                <Cell col="2" text="코드" color="black"/>
+                <Cell col="3" text="사용멤버" color="black"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:positionSequence" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:positionName"/>
+                <Cell col="2" text="bind:positionCode"/>
+                <Cell col="3" text="bind:positionUseManager"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00_00" taborder="4" text="직급 목록" left="0" top="0" onclick="Static00_onclick" padding="16px 20px" font="bold 22px/normal &quot;Noto Sans KR&quot;" letterSpacing="-1px" border="0px none, 0px none, 1px solid #dddddd" height="60" right="0"/>
+        <PopupDiv id="PositionAdd" text="PopupDiv00" visible="false" left="1320" top="0" width="500" height="300" background="white" border="1px solid black">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="직급추가" left="20" top="20" width="100" height="30" onclick="PopupDiv00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01" taborder="1" text="코드" left="20" top="80" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+              <Static id="Static02" taborder="2" text="명칭" left="20" top="120" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+              <Edit id="Edit_code" taborder="3" left="100" top="90" width="140" height="20" onchanged="PositionAdd_Edit_code_onchanged"/>
+              <Edit id="Edit_position" taborder="4" left="100" top="130" width="140" height="20" onchanged="PositionAdd_Edit_position_onchanged"/>
+              <Button id="btn_Save" taborder="5" text="저장" left="170" top="250" width="70" height="30" onclick="PositionAdd_btn_save_onclick"/>
+              <Button id="btn_Cancel" taborder="6" text="취소" left="260" top="250" width="70" height="30" onclick="PositionAdd_btn_cancel_onclick"/>
+              <PopupDiv id="PositionAdd" text="PopupDiv00" visible="false" left="1320" top="0" width="500" height="300" background="white">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="직급추가" left="20" top="20" width="100" height="30" onclick="PopupDiv00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+                    <Static id="Static01" taborder="1" text="코드" left="20" top="80" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                    <Static id="Static02" taborder="2" text="명칭" left="20" top="120" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                    <Edit id="Edit_code" taborder="3" left="100" top="90" width="140" height="20" onchanged="PositionAdd_Edit_code_onchanged"/>
+                    <Edit id="Edit_position" taborder="4" left="100" top="130" width="140" height="20" onchanged="PositionAdd_Edit_position_onchanged"/>
+                    <Button id="btn_Save" taborder="5" text="저장" left="170" top="250" width="70" height="30" onclick="PositionAdd_btn_save_onclick"/>
+                    <Button id="btn_Cancel" taborder="6" text="취소" left="260" top="250" width="70" height="30" onclick="PositionAdd_btn_cancel_onclick"/>
+                  </Layout>
+                </Layouts>
+              </PopupDiv>
+              <PopupDiv id="PositionAdd00" text="PopupDiv00" visible="false" left="1330" top="10" width="500" height="300" background="white">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="직급추가" left="20" top="20" width="100" height="30" onclick="PopupDiv00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+                    <Static id="Static01" taborder="1" text="코드" left="20" top="80" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                    <Static id="Static02" taborder="2" text="명칭" left="20" top="120" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                    <Edit id="Edit_code" taborder="3" left="100" top="90" width="140" height="20" onchanged="PositionAdd_Edit_code_onchanged"/>
+                    <Edit id="Edit_position" taborder="4" left="100" top="130" width="140" height="20" onchanged="PositionAdd_Edit_position_onchanged"/>
+                    <Button id="btn_Save" taborder="5" text="저장" left="170" top="250" width="70" height="30" onclick="PositionAdd_btn_save_onclick"/>
+                    <Button id="btn_Cancel" taborder="6" text="취소" left="260" top="250" width="70" height="30" onclick="PositionAdd_btn_cancel_onclick"/>
+                    <PopupDiv id="PositionAdd" text="PopupDiv00" visible="false" left="1320" top="0" width="500" height="300" background="white">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="0" text="직급추가" left="20" top="20" width="100" height="30" onclick="PopupDiv00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+                          <Static id="Static01" taborder="1" text="코드" left="20" top="80" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                          <Static id="Static02" taborder="2" text="명칭" left="20" top="120" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+                          <Edit id="Edit_code" taborder="3" left="100" top="90" width="140" height="20" onchanged="PositionAdd_Edit_code_onchanged"/>
+                          <Edit id="Edit_position" taborder="4" left="100" top="130" width="140" height="20" onchanged="PositionAdd_Edit_position_onchanged"/>
+                          <Button id="btn_Save" taborder="5" text="저장" left="170" top="250" width="70" height="30" onclick="PositionAdd_btn_save_onclick"/>
+                          <Button id="btn_Cancel" taborder="6" text="취소" left="260" top="250" width="70" height="30" onclick="PositionAdd_btn_cancel_onclick"/>
+                        </Layout>
+                      </Layouts>
+                    </PopupDiv>
+                  </Layout>
+                </Layouts>
+              </PopupDiv>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="PositionDelete" text="PopupDiv00" visible="false" left="1845" top="0" width="500" height="300" background="white" border="1px solid black">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="선택한 항목을 삭제하시겠습니까?" left="20" top="80" width="380" height="40" font="bold 18px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01" taborder="1" text="항목을 삭제하면 복구되지 않습니다." left="20" top="130" width="270" height="30" font="14px/normal &quot;Gulim&quot;"/>
+              <Button id="btn_Position_Delete" taborder="2" text="삭제" left="170" top="250" width="70" height="30" onclick="PositionDelete_btn_Position_Delete_onclick"/>
+              <Button id="btn_Cancel" taborder="3" text="취소" left="260" top="250" width="70" height="30" onclick="PositionDelete_btn_Cancel_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="PositionUpdate" text="PopupDiv00" visible="false" left="1320" top="340" width="500" height="300" background="white" border="1px solid black">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="직급수정" left="20" top="20" width="100" height="30" onclick="PopupDiv00_Static00_onclick" font="bold 18px/normal &quot;Gulim&quot;"/>
+              <Static id="Static01" taborder="1" text="코드" left="20" top="80" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+              <Static id="Static02" taborder="2" text="명칭" left="20" top="120" width="60" height="30" font="16px/normal &quot;Gulim&quot;"/>
+              <Edit id="Edit_code" taborder="3" left="100" top="90" width="140" height="20" onchanged="PositionAdd_Edit_code_onchanged"/>
+              <Edit id="Edit_position" taborder="4" left="100" top="130" width="140" height="20" onchanged="PositionAdd_Edit_position_onchanged"/>
+              <Button id="btn_UpdateSave" taborder="5" text="저장" left="170" top="250" width="70" height="30" onclick="PositionUpdate_btn_UpdateSave_onclick"/>
+              <Button id="btn_Cancel" taborder="6" text="취소" left="260" top="250" width="70" height="30" onclick="PositionUpdate_btn_Cancel_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// 결과 체크 콜백 함수
+this.fn_callback_tran = function(id, nErrorCode, sErrorMsg)
+{	
+	if(id=="position_select")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("직급 목록 조회 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("직급 조회 성공");
+	}	
+	if(id=="position_Delete")
+	{
+		if(nErrorCode < 0)
+		{
+			this.alert("직급 삭제 실패 : " + sErrorMsg);
+			return;
+		}
+		this.alert("직급 삭제 성공");
+	}	
+}
+
+this.btn_Add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionAdd.trackPopupByComponent(obj, -500, 150);
+};
+
+this.fn_addCallback = function(id, rtn) {
+	trace(rtn);
+	//추가를 누르면 rtn이 값을 담은 string을 반환한다.
+	var nRow = this.ds_dept.rowposition;
+	if(rtn != "cancel"){
+		var sVal = rtn.split(":");
+		trace("deptname: " + sVal[0] + " deptcode: " + sVal[1] + " deptsecond: " + sVal[2] + " deptcolor: " + sVal[3]);
+ 		this.ds_dept.insertRow(nRow+1); //선택한 cell의 다음 위치에 삽입
+		this.ds_dept.setColumn(nRow+1,"deptCode",sVal[1]);
+		this.ds_dept.setColumn(nRow+1,"deptName",sVal[0]);
+		this.ds_dept.setColumn(nRow+1,"deptSecondname",sVal[2]);
+		this.ds_dept.setColumn(nRow+1,"deptColor",sVal[3]);
+		
+		this.ds_dept.setColumn(nRow+1,"deptHiredate", today );
+		this.ds_dept.setColumn(nRow+1,"deptUppercode", this.ds_dept.getColumn(nRow, "deptCode"));
+		this.ds_dept.setColumn(nRow+1,"deptLevel", this.ds_dept.getColumn(nRow, "deptLevel") + 1);
+	}
+	//취소를 누르면 rtn이 cancel
+	
+	//추가
+	this.transaction(
+		"position_add"// 1.ID
+		,"HirpURL::admin/positionInsert.hirp"// 2.URL
+		,"in_dept=ds_dept:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+	
+}
+
+this.btn_Update_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionUpdate.trackPopupByComponent(obj, -600, 150);
+};
+
+this.btn_Delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionDelete.trackPopupByComponent(obj, -700, 150);
+};
+
+this.Grid00_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(obj.getCellProperty("head", e.cell, "displaytype")=="checkboxcontrol")
+   {
+      // 1-> 0 -> 1
+      var nVal = obj.getCellText(-1, e.cell);
+      nVal = (nVal=="1"?"0":"1");
+      
+      //Head 
+      obj.setCellProperty("head", e.cell, "text", nVal);
+      
+      //Body
+      var objDs = obj.getBindDataset();
+      for(var i=0; i<objDs.rowcount; i++)
+      {
+         objDs.setColumn(i, "선택", nVal);
+      }      
+   }
+};
+
+this.Form_Work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.transaction(
+		"position_select"// 1.ID
+		,"HirpURL::admin/positionInfo.hirp"// 2.URL	
+		,"" // 3.InDs : F->S jsp(I,U,D)
+		,"ds_position=in_position" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+this.PositionAdd_btn_save_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var editCode = this.PositionAdd.form.Edit_code.text;
+	var editPosition = this.PositionAdd.form.Edit_position.text;
+	this.ds_positionAdd.setColumn(0, 0, editCode);
+	this.ds_positionAdd.setColumn(0, 1, editPosition);
+	this.transaction(
+		"position_add"// 1.ID
+		,"HirpURL::admin/positionInsert.hirp"// 2.URL
+		,"in_position=ds_positionAdd:I" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+this.PositionAdd_btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionAdd.closePopup();
+};
+
+this.PositionDelete_btn_Position_Delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var arrChk = this.ds_position.extractRows("positionSequence=='1'");
+	this.ds_position.deleteMultiRows(arrChk);
+	this.transaction(
+		"position_Delete"// 1.ID
+		,"HirpURL::admin/positionDelete.hirp"// 2.URL
+		,"in_position=ds_position:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+// 직급 수정
+this.PositionUpdate_btn_UpdateSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var editCode = this.PositionUpdate.form.Edit_code.text;
+	var editPosition = this.PositionUpdate.form.Edit_position.text;
+	this.ds_positionUpdate.setColumn(0, 0, editCode);
+	this.ds_positionUpdate.setColumn(0, 1, editPosition);
+	this.ds_positionUpdate.getColumn(this.ds_position.rowposition, "positionSequence");
+	trace(this.ds_positionUpdate.getColumn(this.ds_position.rowposition, "positionSequence"));
+	this.transaction(
+		"position_Update"// 1.ID
+		,"HirpURL::admin/positionUpdate.hirp"// 2.URL
+		,"in_position=ds_positionUpdate:U" // 3.InDs : F->S jsp(I,U,D)
+		,"" // 4.OutDs : S->F jsp(SELECT)
+		,"" // 5.InVar : F->S(var)
+		,"fn_callback_tran" // 6.callback function(transaction 완료시 호출되는 함수)
+	);
+};
+
+this.PositionDelete_btn_Cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionDelete.closePopup();
+};
+
+this.PositionUpdate_btn_Cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PositionUpdate.closePopup();
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_position">
+        <ColumnInfo>
+          <Column id="positionSequence" type="STRING" size="256"/>
+          <Column id="positionName" type="STRING" size="256"/>
+          <Column id="positionCode" type="STRING" size="256"/>
+          <Column id="positionUseManager" type="STRING" size="256"/>
+          <Column id="positionLevel" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_positionAdd">
+        <ColumnInfo>
+          <Column id="positionCode" type="STRING" size="256"/>
+          <Column id="positionName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="PositionUpdate.form.Edit_code" propid="value" datasetid="ds_position" columnid="positionCode"/>
+      <BindItem id="item1" compid="PositionUpdate.form.Edit_position" propid="value" datasetid="ds_position" columnid="positionName"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -10,18 +10,12 @@
 <!-- textarea 에디터 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                메일
-            </h1>
+            <h1>메일</h1>
             <a class="btn--function" href="/mail/writeView.hirp">메일쓰기</a>
 
             <ul class="ul--mail">

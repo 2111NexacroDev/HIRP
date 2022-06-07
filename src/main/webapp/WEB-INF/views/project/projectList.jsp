@@ -5,19 +5,12 @@
 <html>
 <%@ include file="/WEB-INF/views/include/inc_head.jsp" %>
 <link rel="stylesheet" href="../../../resources/css/sub.css"><!-- 하이알피 서브페이지 CSS -->
-
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<%@ include file="/WEB-INF/views/include/inc_header.jsp" %>
 	
 	<div id="conts">
         <aside id="snb">
-            <h1>
-                프로젝트 관리
-            </h1>
+            <h1>프로젝트 관리</h1>
             <a class="btn--function" href="/project/writeView.hirp">프로젝트 만들기</a>
 
             <ul>

@@ -6,7 +6,7 @@
     <button class="btn--chat" type="button" 
     	onclick="window.open('/chatMain.hirp','chatting','width=400,height=600,location=no,status=no,scrollbars=no');"></button>
     <button class="btn--alarm" type="button">
-        <span>3</span>
+        <span id="newAlarm"></span>
     </button>
     <button class="btn--star" type="button"></button>
     <button class="btn--profile" type="button">
@@ -21,13 +21,16 @@
     <section class="nav--right__info">
         <ul>
             <li><a href="/employee/mypageView1.hirp">내 정보 보기</a></li>
-            <li><a href="#">알림 설정</a></li>
+            <li><a href="/alarm/settingPage.hirp">알림 설정</a></li>
             <li><a href="/employee/logout.hirp">로그아웃</a></li>
         </ul>
     </section>
     
     <section class="nav--right__alarm">
     	<!-- 알림 리스트 -->
+    	<div style="text-align:right;">
+    		<button type="button" class="noneBackground  padding-10" onclick="readAllAlarm();">모두 읽음</button>
+    	</div>
     	<div id="alarmList" style="max-height:300px; overflow:scroll;">
 	        <div class="mt-20">
 	        	<div class="mb-10">
@@ -36,51 +39,8 @@
 	        	<span class="mr-10 colorGrey">3시간 전</span>
 	        	<span class="colorGrey">관리자</span>
 	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-	        <div class="mt-20">
-	        	<div class="mb-10">
-		        	[일정 알림] '권진실 과장 생일' 일정 알림입니다.
-	        	</div>
-	        	<span class="mr-10 colorGrey">3시간 전</span>
-	        	<span class="colorGrey">관리자</span>
-	        </div>
-    	
     	</div>
-        <a class="mt-10 mb-10 t-c colorBlue" href="#">전체 알림 보기</a>
+        <a class="mt-10 mb-10 t-c colorBlue" href="/alarm/allAlarm.hirp">전체 알림 보기</a>
     </section>
 </nav>
 
@@ -105,8 +65,17 @@
         }
     });
     
+    $(document).ready(function() {
+    	selectNewAlarm(); //화면 열 때 한번 불러와서 데이터 있으면 N으로 넣어주기
+    });
+    
     //알림 버튼 클릭 시
     $('.btn--alarm').on('click', function () {
+    	selectNewAlarm();
+//     	readAllAlarm(); //읽음 처리
+    });
+    
+    function selectNewAlarm(){
 //     	alert("알림");
     	$.ajax({
 			url:"/alarm/printUnreadAlarm.hirp",
@@ -125,7 +94,7 @@
 					//data의 date (ex:2022-06-06)
 					var alarmDate = aList[i].alarmDate.substr(0, 4) +  "-" + aList[i].alarmDate.substr(5, 2) + "-" + aList[i].alarmDate.substr(8, 2);
 					
-					var $alarmDiv = "<div class='mt-20'>"
+					var $alarmDiv = "<div name='alarmDiv' class='mt-20' onclick='alarmClickEvent("+aList[i].alarmCode+");'>"
 				        	+ "<div class='mb-10'>"
 					        	+ aList[i].alarmContents
 				        	+ "</div>";
@@ -142,13 +111,14 @@
 		        	
 	        		$alarmDiv += "</span>"
 					        	+ "<span class='colorGrey'>"
-					        		+ aList[i].emplName
+					        		+ aList[i].deptName +" "+ aList[i].emplName +" " + aList[i].positionName
 					        	+"</span>"
 					        + "</div>";
 				    
 				    $alarmListDiv.append($alarmDiv);
 				}
 				
+				$("#newAlarm").html(aCount);
 			},
     		error: function(){
 //     			alert("알림 조회 실패");
@@ -160,6 +130,60 @@
 				$alarmListDiv.append($alarmDiv);
     		}
 		});
-    });
+    }
+    
+    function readAllAlarm(){
+//     	alert("알림");
+    	$.ajax({
+			url:"/alarm/readAllAlarm.hirp",
+			type:"post",
+			data:{},
+			success: function(aList){
+// 				alert("알림 읽음 처리 성공");
+				$("#newAlarm").html(""); //읽으면 알림에 표시 안 뜨게
+				var $alarmListDiv = $("#alarmList");
+				$alarmListDiv.html("");
+				var $alarmDiv = "<div class='mt-20 padding-20 t-c'>"
+						        	+ "새로운 알림이 없습니다."
+						        + "</div>";
+				$alarmListDiv.append($alarmDiv);
+			},
+    		error: function(){
+//     			alert("알림 읽음 처리 실패");
+    		}
+		});
+    }
+    
+    function alarmClickEvent(alarmCode){
+    	console.log(alarmCode+" 클릭");
+    	if(alarmCode == '00'){ //메일
+    		location.href = "/mail/Rlist.hirp";
+    	} else if(alarmCode == '10'){ //공지
+    		location.href = "/notice/list.hirp";
+    	} else if(alarmCode == '11'){ //자유
+    		location.href = "/free/list.hirp";
+    	} else if(alarmCode == '12'){ //익명
+    		location.href = "/anonymous/list.hirp";
+    	} else if(alarmCode == '13'){ //부서
+    		location.href = "/department/list.hirp";
+    	} else if(alarmCode == '20' || alarmCode == '21' || alarmCode == '22'){ //전사, 부서, 개인
+    		location.href = "/schedule/list.hirp";
+    	} else if(alarmCode == '30' || alarmCode == '31' || alarmCode == '32' || alarmCode == '33'){ 
+    		//결재 도착, 취소, 반려, 완료
+    		location.href = "/approval/main.hirp";
+//     	} else if(alarmCode == '30'){ //결재 도착, 결재문서함
+//     		location.href = "/waiting/appr.hirp";
+//     	} else if(alarmCode == '31'){ //결재 취소, 메인 페이지
+//     		location.href = "/approval/main.hirp";
+//     	} else if(alarmCode == '32'){ //결재 반려, 반려문서함
+//     		location.href = "/written/appr.hirp";
+//     	} else if(alarmCode == '33'){ //결재 완료, 완료문서함
+//     		location.href = "/completed/appr.hirp";
+    	} else if(alarmCode == '40'){
+    		location.href = "/survey/main.hirp";
+    	} else {
+    		console.log("알림 코드가 없습니다.");
+    	}
+    }
 
 </script>

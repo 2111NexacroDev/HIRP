@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.employee.domain.Employee;
 import com.highfive.hirp.employee.service.EmployeeService;
 
@@ -26,6 +27,8 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService eService;
+	@Autowired
+	private AlarmService aService;
 
 // get - 조회(select)
 // post- 생성(insert),수정(update),삭제(delete)
@@ -47,6 +50,11 @@ public class EmployeeController {
 		try {
 			int result = eService.registerEmployee(employee); // .뒤는 서비스의 ()로 가겠다
 			if (result > 0) { // 1성공
+				//회원가입 성공 시 알림 추가
+				int result2 = aService.insertAlarmSetting(emplId);
+//				if(result2 > 0) {
+//					System.out.println("알림 설정 추가 성공");
+//				}
 				return "redirect:/employee/loginView.hirp";
 			} else { // 0실패
 				model.addAttribute("msg", "회원가입에 실패했습니다.");

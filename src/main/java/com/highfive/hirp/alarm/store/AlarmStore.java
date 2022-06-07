@@ -22,6 +22,6 @@ public interface AlarmStore {
 	public int insertAlarm(SqlSession sqlSession, Alarm alarm);
 	public int updateReadAlarm(SqlSession sqlSession, String emplId);
 	public int deleteAllAlarm(SqlSession sqlSession, String emplId);	//알림 전체 삭제
-	public int deleteAlarmByNo(SqlSession sqlSession, String alarmNo);  //특정 알림 삭제
+	public int deleteAlarmByNo(SqlSession sqlSession, int alarmNo);  //특정 알림 삭제
 
 }

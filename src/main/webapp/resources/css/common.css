@@ -551,6 +551,12 @@ button.next {
     opacity: 1;
 }
 
+#gnb nav li.on {
+    /* 클래스로 on이 붙어 있을 때 강조디자인 추가 */
+    background-color: #00498c;
+    opacity: 1;
+}
+
 @media screen and (min-width: 1201px) {
     #gnb nav a:hover {
         /* 마우스 올렸을 때 강조디자인 추가 */
@@ -767,7 +773,7 @@ button.next {
 #snb:not(.snb--org)>ul>li>ul>li:first-child {
     margin-top: 16px;
 }
-
+#snb:not(.snb--org)>ul>li.on,
 #snb:not(.snb--org)>ul>li>ul>li.on {
     font-weight: 500;
     color: #00498c;
@@ -959,6 +965,8 @@ button.next {
     position: absolute;
     top: 15px;
     right: 210px;
+    display: flex;
+    align-items: center;
 }
 
 .form--srch input {
@@ -975,6 +983,13 @@ button.next {
     .form--srch:hover input {
         border-color: #00a1b9;
     }
+}
+
+.form--srch select {
+    width: 90px;
+    height: 32px;
+    font-size: 13px;
+    margin-right: 4px;
 }
 
 .form--srch input::placeholder {
@@ -1159,6 +1174,7 @@ article {
     height: 500px;
     background-color: #fff;
     border: 1px solid #ccc;
+    overflow: hidden;
 }
 
 .modal--chatSelect {
@@ -1229,11 +1245,26 @@ article {
     cursor: pointer;
 }
 
+.modal--recipient,
+.modal--referrer {
+    top: 40px;
+    left: 40px;
+}
+
+#emplTable td {
+    cursor: pointer;
+}
+
 /* 채팅창 끝 */
 
 .colorGrey {
-	color: #888888;
+    color: #888888;
 }
+
 .colorBlue {
-	color: #1860d6;
+    color: #1860d6;
+}
+
+div[name=alarmDiv]:hover {
+    background-color: #f4f4f4;
 }

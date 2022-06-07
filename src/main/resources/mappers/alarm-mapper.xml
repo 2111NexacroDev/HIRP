@@ -19,6 +19,29 @@
 		<result property="emplProfile" column="EMPL_PROFILE"/>
 	</resultMap>
 	
+	<resultMap type="AlarmSetting" id="alarmSettingResultMap">
+		<id property="emplId" column="EMPL_ID"/>
+		<result property="alarmMail" column="ALARM_MAIL"/>
+		<result property="alarmNoticeboard" column="ALARM_NOTICEBOARD"/>
+		<result property="alarmFreeboard" column="ALARM_FREEBOARD"/>
+		<result property="alarmAnonymousboard" column="ALARM_ANONYMOUSBOARD"/>
+		<result property="alarmDeptboard" column="ALARM_DEPTBOARD"/>
+		<result property="alarmAllschedule" column="ALARM_ALLSCHEDULE"/>
+		<result property="alarmTeamschedule" column="ALARM_TEAMSCHEDULE"/>
+		<result property="alarmPersonalschedule" column="ALARM_PERSONALSCHEDULE"/>
+		<result property="alarmPayarrive" column="ALARM_PAYARRIVE"/>
+		<result property="alarmPaycancle" column="ALARM_PAYCANCLE"/>
+		<result property="alarmPaycompanion" column="ALARM_PAYCOMPANION"/>
+		<result property="alarmPaycomplete" column="ALARM_PAYCOMPLETE"/>
+		<result property="alarmSurvey" column="ALARM_SURVEY"/>
+	</resultMap>
+	
+	<!-- 내 알림 설정 가져오기 -->
+	<select id="selectAlarmSetting" resultMap="alarmSettingResultMap">
+		SELECT * FROM ALARMSETTING_TBL
+		WHERE EMPL_ID = #{emplId}
+	</select>
+	
 	<!-- 모든 알림 -->
 	<select id="selectAllAlarm" resultMap="alarmResultMap">
 		SELECT 
@@ -51,7 +74,190 @@
 		    WHERE A.EMPL_ID = #{emplId}
 		    <![CDATA[AND ALARM_DATE <= SYSDATE]]>
 		    AND ALARM_STATUS = 'N'
+		    AND ALARM_CODE IN (
+		    <trim suffixOverrides=",">
+			    <if test='alarmMail == "Y"'> 
+					'00',
+				</if>
+				<if test='alarmNoticeboard == "Y"'> 
+					'10',
+				</if>
+				<if test='alarmFreeboard == "Y"'> 
+					'11',
+				</if>
+				<if test='alarmAnonymousboard == "Y"'>
+					'12',
+				</if>
+				<if test='alarmDeptboard == "Y"'>
+					'13',
+				</if>
+				<if test='alarmAllschedule == "Y"'>
+					'20',
+				</if>
+				<if test='alarmTeamschedule == "Y"'>
+					'21',
+				</if>
+				<if test='alarmPersonalschedule == "Y"'>
+					'22',
+				</if>
+				<if test='alarmPayarrive == "Y"'>
+					'30',
+				</if>
+				<if test='alarmPaycancle == "Y"'>
+					'31',
+				</if>
+				<if test='alarmPaycompanion == "Y"'>
+					'32',
+				</if>
+				<if test='alarmPaycomplete == "Y"'>
+					'33',
+				</if>
+				<if test='alarmSurvey == "Y"'>
+					'40'
+				</if>
+		    </trim>
+			)
 		    ORDER BY ALARM_DATE DESC, ALARM_NO DESC
 		) <![CDATA[WHERE ROWNUM <= 10]]>
 	</select>
+	
+	<!-- 코드별로 알림 가져오기 -->
+	<select id="selectAlarmByCode" resultMap="alarmResultMap">
+		SELECT 
+		ALARM_NO, A.EMPL_ID,
+		TO_CHAR(ALARM_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ALARM_DATE,
+		ALARM_CONTENTS, ALARM_CODE, ALARM_STATUS, A.ALARM_SENDID,
+		EMPL_NAME, DEPT_NAME, POSITION_NAME, EMPL_PROFILE
+		FROM ALARM_TBL A
+		JOIN EMPL_TBL E ON E.EMPL_ID = A.ALARM_SENDID
+		JOIN DEPT_TBL D USING(DEPT_CODE)
+		JOIN POSITION_TBL P USING(POSITION_CODE)
+		WHERE A.EMPL_ID = #{emplId}
+		<![CDATA[ AND ALARM_DATE <= SYSDATE]]>
+		AND ALARM_CODE LIKE #{alarmCode}
+		ORDER BY ALARM_DATE DESC
+	</select>
+	
+	<!-- 알림 설정 추가 -->
+	<insert id="insertAlarmSetting">
+		INSERT INTO ALARMSETTING_TBL(EMPL_ID)
+		VALUES(#{emplId})
+	</insert>
+	
+	<!-- 알림 추가 -->
+	<insert id="insertAlarm">
+		INSERT INTO ALARM_TBL
+		VALUES(ALARM_SEQ.NEXTVAL, #{emplId}, 
+		<if test='alarmDate == null'>
+			SYSDATE,
+		</if>
+		<if test='alarmDate != null'>
+			#{alarmDate},
+		</if>
+		#{alarmContents},
+		#{alarmCode}, #{alarmStatus}, #{alarmSendid})
+	</insert>
+	
+	<!-- 알림 설정 정보 업데이트 -->
+	<update id="updateAlarmSetting">
+		UPDATE ALARMSETTING_TBL
+		SET 
+		<if test='alarmMail != null '> 
+			ALARM_MAIL = #{alarmMail},
+		</if>
+		<if test='alarmMail == null '> 
+			ALARM_MAIL = 'N',
+		</if>
+		<if test='alarmNoticeboard != null '> 
+			ALARM_NOTICEBOARD = #{alarmNoticeboard},
+		</if>
+		<if test='alarmNoticeboard == null '> 
+			ALARM_NOTICEBOARD = 'N',
+		</if>
+		<if test='alarmFreeboard != null '> 
+			ALARM_FREEBOARD = #{alarmFreeboard},
+		</if>
+		<if test='alarmFreeboard == null '> 
+			ALARM_FREEBOARD = 'N',
+		</if>
+		<if test='alarmAnonymousboard != null '>
+			ALARM_ANONYMOUSBOARD = #{alarmAnonymousboard}, 
+		</if>
+		<if test='alarmAnonymousboard == null '>
+			ALARM_ANONYMOUSBOARD = 'N',
+		</if>
+		<if test='alarmDeptboard != null '>
+			ALARM_DEPTBOARD = #{alarmDeptboard},
+		</if>
+		<if test='alarmDeptboard == null '>
+			ALARM_DEPTBOARD = 'N',
+		</if>
+		<if test='alarmAllschedule != null '>
+			ALARM_ALLSCHEDULE = #{alarmAllschedule}, 
+		</if>
+		<if test='alarmAllschedule == null '>
+			ALARM_ALLSCHEDULE = 'N',
+		</if>
+		<if test='alarmTeamschedule != null '>
+			ALARM_TEAMSCHEDULE = #{alarmTeamschedule},
+		</if>
+		<if test='alarmTeamschedule == null '>
+			ALARM_TEAMSCHEDULE = 'N',
+		</if>
+		<if test='alarmPersonalschedule != null '>
+			ALARM_PERSONALSCHEDULE = #{alarmPersonalschedule}, 
+		</if>
+		<if test='alarmPersonalschedule == null '>
+			ALARM_PERSONALSCHEDULE = 'N', 
+		</if>
+		<if test='alarmPayarrive != null '>
+			ALARM_PAYARRIVE = #{alarmPayarrive},
+		</if>
+		<if test='alarmPayarrive == null '>
+			ALARM_PAYARRIVE = 'N',
+		</if>
+		<if test='alarmPaycancle != null '>
+			ALARM_PAYCANCLE = #{alarmPaycancle},
+		</if>
+		<if test='alarmPaycancle == null '>
+			ALARM_PAYCANCLE = 'N',
+		</if>
+		<if test='alarmPaycompanion != null '>
+			ALARM_PAYCOMPANION = #{alarmPaycompanion},
+		</if>
+		<if test='alarmPaycompanion == null '>
+			ALARM_PAYCOMPANION = 'N',
+		</if>
+		<if test='alarmPaycomplete != null '>
+			ALARM_PAYCOMPLETE = #{alarmPaycomplete}, 
+		</if>
+		<if test='alarmPaycomplete == null '>
+			ALARM_PAYCOMPLETE = 'N',
+		</if>
+		<if test='alarmSurvey != null '>
+			ALARM_SURVEY = #{alarmSurvey}
+		</if>
+		<if test='alarmSurvey == null '>
+			ALARM_SURVEY = 'N'
+		</if>
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<!-- 내 알림 전체 읽음 처리 (UPDATE) -->
+	<update id="updateReadAlarm">
+		UPDATE ALARM_TBL SET ALARM_STATUS = 'Y'
+		WHERE EMPL_ID = #{emplId}
+	</update>
+	
+	<!-- 특정 알림 삭제 -->
+	<delete id="deleteAlarmByNo">
+		DELETE FROM ALARM_TBL
+		WHERE ALARM_NO = #{alarmNo}
+	</delete>
+	
+	<!-- 전체 알림 삭제 -->
+	<delete id ="deleteAllAlarm">
+		DELETE FROM ALARM_TBL
+		WHERE EMPL_ID = #{emplId}
+	</delete>
 </mapper>

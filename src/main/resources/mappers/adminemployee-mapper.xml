@@ -135,9 +135,14 @@
 	<select id="selectTempEmployee" resultMap="emplResultMap">
 		SELECT * FROM EMPL_TBL WHERE IS_STATUS = '임시'
 	</select>
-	
+	<!-- 0606 민선 수정 -->
 	<select id="selectOneEmployee" resultMap="emplResultMap">
-		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId }
+<!-- 		SELECT * FROM EMPL_TBL WHERE EMPL_ID = #{emplId } -->
+		SELECT *
+		FROM EMPL_TBL E
+		JOIN DEPT_TBL D ON(E.DEPT_CODE = D.DEPT_CODE)
+		JOIN POSITION_TBL P ON(E.POSITION_CODE = P.POSITION_CODE)
+		WHERE EMPL_ID = #{emplId }
 	</select>
 	
 	<select id="selectAllRetiree" resultMap="emplResultMap">

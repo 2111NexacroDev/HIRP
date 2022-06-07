@@ -1,6 +1,8 @@
 package com.highfive.hirp.approval.user.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.highfive.hirp.alarm.domain.Alarm;
+import com.highfive.hirp.alarm.service.AlarmService;
 import com.highfive.hirp.approval.admin.domain.ApprForm;
 import com.highfive.hirp.approval.user.domain.ApprAccept;
 import com.highfive.hirp.approval.user.domain.ApprAttachedFile;
@@ -48,6 +52,11 @@ public class ApprovalController {
 
 	@Autowired
 	private EmployeeService eService;
+
+
+	
+	@Autowired
+	private AlarmService alarmService;
 
 	
 	// 전자결재 양식 작성폼
@@ -292,21 +301,50 @@ public class ApprovalController {
 	public ModelAndView registerAppr(ModelAndView mv, @ModelAttribute Approval approval,
 			@RequestParam(value = "uploadFiles", required = false) List<MultipartFile> multipartfile,
 			HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String emplId = (String) session.getAttribute("emplId");
+		
+		//오늘 날짜
+//		Date date = new Date();
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		String today = formatter.format(date);
+//		System.out.println("today: " + today);
+				
 		try {
+
 
 			int result = aService.registerAppr(approval);//결재 등록
 			
 			int apprNo = aService.printRecentApprNo();//결재번호 가져오기
 			List<ApprAccept> aList = approval.getaList();//결재라인 등록
+
 			for (int i = 0; i < aList.size(); i++) {
 				ApprAccept apprAccept = new ApprAccept();
 				apprAccept.setApprNo(apprNo);
 				apprAccept.setEmplId(aList.get(i).getEmplId());
 				apprAccept.setApprType(aList.get(i).getApprType());
 				int apprResult = aService.registerApprover(apprAccept);
+				if(apprResult > 0) {
+					System.out.println("열람자 : " + apprAccept.getEmplId());
+					System.out.println("제목 : " + approval.getApprTitle());
+					String acceptId = apprAccept.getEmplId();
+					
+					//열람자 알림 추가
+					Alarm alarm = new Alarm(acceptId, 
+							"[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
+							"30", "N", emplId);
+					System.out.println("알림 : " + alarm);
+					int result3 = alarmService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
+					}
+				}
 			}
+
 			//참조자 있을때만 실행
 			if(!approval.getrList().isEmpty()){
+
 			List<Reference> rList = approval.getrList();
 			for (int i = 0; i < rList.size(); i++) {
 				Reference reference = new Reference();
@@ -314,7 +352,29 @@ public class ApprovalController {
 				reference.setEmplId(rList.get(i).getEmplId());
 				reference.setRefType(rList.get(i).getRefType());
 				int refResult = aService.registerApprRef(reference);
+
 			}}
+
+				
+				if(refResult > 0) {
+					System.out.println("열람자 : " + reference.getEmplId());
+					System.out.println("제목 : " + approval.getApprTitle());
+					String referId = reference.getEmplId();
+					
+					//열람자 알림 추가
+					Alarm alarm = new Alarm(referId, 
+							"[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
+							"30", "N", emplId);
+					System.out.println("알림 : " + alarm);
+					int result3 = alarmService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
+					}
+				}
+				
+			}
+			
+
 			
 			//첨부파일 있을때만 실행
 			if (multipartfile.size() > 0 && !multipartfile.get(0).getOriginalFilename().equals("")) {

@@ -13,19 +13,20 @@ import com.highfive.hirp.alarm.store.AlarmStore;
 
 @Repository
 public class AlarmStoreLogic implements AlarmStore{
-
+	//알림 설정 가져오기
 	@Override
 	public AlarmSetting selectAlarmSetting(SqlSession sqlSession, String emplId) {
 		AlarmSetting alarmSetting = sqlSession.selectOne("AlarmMapper.selectAlarmSetting", emplId);
 		return alarmSetting;
 	}
 
+	//알림 설정 추가
 	@Override
 	public int insertAlarmSetting(SqlSession sqlSession, String emplId) {
 		int result = sqlSession.insert("AlarmMapper.insertAlarmSetting", emplId);
 		return result;
 	}
-
+	//알림 설정 수정
 	@Override
 	public int updateAlarmSetting(SqlSession sqlSession, AlarmSetting alarmSetting) {
 		int result = sqlSession.update("AlarmMapper.updateAlarmSetting", alarmSetting);
@@ -70,7 +71,7 @@ public class AlarmStoreLogic implements AlarmStore{
 	}
 
 	@Override
-	public int deleteAlarmByNo(SqlSession sqlSession, String alarmNo) {
+	public int deleteAlarmByNo(SqlSession sqlSession, int alarmNo) {
 		int result = sqlSession.delete("AlarmMapper.deleteAlarmByNo", alarmNo);
 		return result;
 	}

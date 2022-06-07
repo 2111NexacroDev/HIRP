@@ -38,7 +38,7 @@
 			            		<!-- 근데 생각해보니까 참여한 건 여기 출력되지 않아도 될 것 같아서 미참여로 고정함 -->
 								<button class="emergency" type="button" style="cursor:default;">미참여</button>
 								<!-- <button class="finished" type="button">참여완료</button>	 -->
-								<h2 class="mt-10">${myList.surveyTitle }</h2>
+								<h2 class="mt-10" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${myList.surveyTitle }</h2>
 								<p class="mt-10 color-grey">${fn:substring(myList.surveyStartdate, 0, 10) } ~ ${fn:substring(myList.surveyEnddate, 0, 10) }</p>
 								
 								<div class="row mt-10">

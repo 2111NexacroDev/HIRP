@@ -1,6 +1,5 @@
 package com.highfive.hirp.alarm.domain;
 
-import java.sql.Date;
 
 public class Alarm {
 	private int alarmNo;
@@ -17,6 +16,28 @@ public class Alarm {
 	private String emplProfile;
 	
 	public Alarm() {}
+
+	//알림 insert할 때 사용
+	public Alarm(String emplId, String alarmDate, String alarmContents, String alarmCode, String alarmStatus,
+			String alarmSendid) {
+		super();
+		this.emplId = emplId;
+		this.alarmDate = alarmDate;
+		this.alarmContents = alarmContents;
+		this.alarmCode = alarmCode;
+		this.alarmStatus = alarmStatus;
+		this.alarmSendid = alarmSendid;
+	}
+	
+	public Alarm(String emplId, String alarmContents, String alarmCode, String alarmStatus,
+			String alarmSendid) {
+		super();
+		this.emplId = emplId;
+		this.alarmContents = alarmContents;
+		this.alarmCode = alarmCode;
+		this.alarmStatus = alarmStatus;
+		this.alarmSendid = alarmSendid;
+	}
 
 	public Alarm(int alarmNo, String emplId, String alarmDate, String alarmContents, String alarmCode,
 			String alarmStatus, String alarmSendid, String emplName, String deptName, String positionName,
