@@ -231,23 +231,46 @@ public class ApprovalController {
 				apprAccept.setEmplId(aList.get(i).getEmplId());
 				apprAccept.setApprType(aList.get(i).getApprType());
 				int apprResult = aService.registerApprover(apprAccept);
-				
-				//열람자 알림 추가
-//				Alarm alarm = new Alarm(apprAccept.getEmplId(), today , "[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
-//						"30", "N", emplId);
-//				int result3 = alarmService.insertAlarm(alarm);
-//				if(result3 > 0) {
-//					System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
-//				}
+				if(apprResult > 0) {
+					System.out.println("열람자 : " + apprAccept.getEmplId());
+					System.out.println("제목 : " + approval.getApprTitle());
+					String acceptId = apprAccept.getEmplId();
+					
+					//열람자 알림 추가
+					Alarm alarm = new Alarm(acceptId, 
+							"[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
+							"30", "N", emplId);
+					System.out.println("알림 : " + alarm);
+					int result3 = alarmService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
+					}
+				}
 			}
 			//참조자
 			List<Reference> rList = approval.getrList();
-			for (int i = 0; i < aList.size(); i++) {
+			for (int i = 0; i < rList.size(); i++) {
 				Reference reference = new Reference();
 				reference.setApprNo(apprNo);
 				reference.setEmplId(rList.get(i).getEmplId());
 				reference.setRefType(rList.get(i).getRefType());
 				int refResult = aService.registerApprRef(reference);
+				
+				if(refResult > 0) {
+					System.out.println("열람자 : " + reference.getEmplId());
+					System.out.println("제목 : " + approval.getApprTitle());
+					String referId = reference.getEmplId();
+					
+					//열람자 알림 추가
+					Alarm alarm = new Alarm(referId, 
+							"[결재 도착] '"+approval.getApprTitle()+"'이(가) 도착했습니다.",
+							"30", "N", emplId);
+					System.out.println("알림 : " + alarm);
+					int result3 = alarmService.insertAlarm(alarm);
+					if(result3 > 0) {
+						System.out.println("[결재 도착] "+approval.getApprTitle()+"의 알림이 추가되었습니다.");
+					}
+				}
 				
 			}
 			

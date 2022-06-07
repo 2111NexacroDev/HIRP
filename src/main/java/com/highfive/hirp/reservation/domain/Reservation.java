@@ -9,12 +9,16 @@ public class Reservation {
 	private String reservationConts;
 	private String isReturn;
 	private Utility utility;
+	private String emplName;
+	private String deptName;
+	private String positionName;
 
 	public Reservation() {
 	}
 
 	public Reservation(int reservationNo, String emplId, int utilityNo, String reservationStartDate,
-			String reservationEndDate, String reservationConts, String isReturn, Utility utility) {
+			String reservationEndDate, String reservationConts, String isReturn, Utility utility, String emplName,
+			String deptName, String positionName) {
 		super();
 		this.reservationNo = reservationNo;
 		this.emplId = emplId;
@@ -24,6 +28,9 @@ public class Reservation {
 		this.reservationConts = reservationConts;
 		this.isReturn = isReturn;
 		this.utility = utility;
+		this.emplName = emplName;
+		this.deptName = deptName;
+		this.positionName = positionName;
 	}
 
 	public int getReservationNo() {
@@ -90,10 +97,35 @@ public class Reservation {
 		this.utility = utility;
 	}
 
+	public String getEmplName() {
+		return emplName;
+	}
+
+	public void setEmplName(String emplName) {
+		this.emplName = emplName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getPositionName() {
+		return positionName;
+	}
+
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation [reservationNo=" + reservationNo + ", emplId=" + emplId + ", utilityNo=" + utilityNo
 				+ ", reservationStartDate=" + reservationStartDate + ", reservationEndDate=" + reservationEndDate
-				+ ", reservationConts=" + reservationConts + ", isReturn=" + isReturn + ", utility=" + utility + "]";
+				+ ", reservationConts=" + reservationConts + ", isReturn=" + isReturn + ", utility=" + utility
+				+ ", emplName=" + emplName + ", deptName=" + deptName + ", positionName=" + positionName + "]";
 	}
 }

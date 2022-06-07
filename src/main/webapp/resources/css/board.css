@@ -99,7 +99,6 @@
     float: right;
     background-color: white;
     border: solid 1px lightgray;
-    border-radius: 6px;
     margin-left: 6px;
     display: flex;
     align-items: center;
@@ -159,9 +158,7 @@
     padding: 16px 20px;
 }
 
-.rContent {
-    color: gray;
-}
+
 
 #reWriter {
     padding: 16px 10px 16px 30px;

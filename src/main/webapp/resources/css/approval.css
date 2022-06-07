@@ -1,180 +1,179 @@
 @charset "UTF-8";
 
 .apprbtn {
-	float: right;
-	margin-left : 10px;
-	margin-bottom : 50px;
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 50px;
 }
 
 #apprTable {
-	border: solid 1px #888;
-	width: 230px;
-	font-size: 15px;
-	text-align: center;
-	margin: 40px;
+    border: solid 1px #888;
+    width: 230px;
+    font-size: 15px;
+    text-align: center;
+    margin: 40px;
 }
 
 #approvalLine {
-	position: absolute;
-	right: 30px;
-	top: 25px;
+    position: absolute;
+    right: 30px;
+    top: 25px;
 }
 
 .singleApprLine {
-	width: 100px;
-	height: 110px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-	margin : 0px;
-	font-size:14px; 
-	vertical-align : top;
+    width: 100px;
+    height: 110px;
+    display: inline-block;
+    text-align: center;
+    border: solid 1px #888;
+    margin: 0px;
+    font-size: 14px;
+    vertical-align: top;
 }
 
-.singleApprType{
-	width: 20px;
-	height: 100px;
-	display: inline-block;
-	text-align : center;
-	border: solid 1px #888;
-
-}
-
-
-.singleApprLineTop{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 2px;
-}
-
-.singleApprLineMiddle{
-	width: 100%;
-	height: 60%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
-	padding-top : 23px;
+.singleApprType {
+    width: 20px;
+    height: 100px;
+    display: inline-block;
+    text-align: center;
+    border: solid 1px #888;
 
 }
 
-.singleApprLineMiddle2{
-	width: 100%;
-	height: 60%;
-	display: inline-block;
-	text-align : center;
-	border-bottom: solid 1px #888;
-	margin : 0px;
+
+.singleApprLineTop {
+    width: 100%;
+    height: 20%;
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid 1px #888;
+    margin: 0px;
+    padding-top: 2px;
+}
+
+.singleApprLineMiddle {
+    width: 100%;
+    height: 60%;
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid 1px #888;
+    margin: 0px;
+    padding-top: 23px;
 
 }
 
-.singleApprLineBottom{
-	width: 100%;
-	height: 20%;
-	display: inline-block;
-	text-align : center;
-	margin : 0px;
-	padding-top : 2px;
+.singleApprLineMiddle2 {
+    width: 100%;
+    height: 60%;
+    display: inline-block;
+    text-align: center;
+    border-bottom: solid 1px #888;
+    margin: 0px;
+
+}
+
+.singleApprLineBottom {
+    width: 100%;
+    height: 20%;
+    display: inline-block;
+    text-align: center;
+    margin: 0px;
+    padding-top: 2px;
 }
 
 
-#apprContents{
-border: solid 1px #888;
-border-radius:4px 4px 4px 4px; 
-padding-left:120px;
-margin-top :20px;
+#apprContents {
+    border: solid 1px #888;
+    border-radius: 4px 4px 4px 4px;
+    padding-left: 120px;
+    margin-top: 20px;
 }
 
-#attached-file-div{
-border : solid 1px #888;
-border-top : none;
-border-radius:0px 0px 4px 4px;
-padding : 10px;
+#attached-file-div {
+    border: solid 1px #888;
+    border-top: none;
+    border-radius: 0px 0px 4px 4px;
+    padding: 10px;
 }
 
 
 
-<!---------------------------------->
-
- 
-#approvalLine-btn {
-	background-color: white;
-	border: solid 1px #888;
-	border-radius: 4px;
-	width: 80px;
-	height: 35px;
-	float: right;
+< !---------------------------------->#approvalLine-btn {
+    background-color: white;
+    border: solid 1px #888;
+    border-radius: 4px;
+    width: 80px;
+    height: 35px;
+    float: right;
 }
 
 #submit-btn {
-	background-color: white;
-	border: solid 1px #888;
-	border-radius: 4px;
-	width: 80px;
-	height: 35px;
-	float: right;
-	margin :30px 0px;
-} 
+    background-color: white;
+    border: solid 1px #888;
+    border-radius: 4px;
+    width: 80px;
+    height: 35px;
+    float: right;
+    margin: 30px 0px;
+}
 
 
 
-.container{
-	border:1px solid #999;
-	overflow: auto;
-	height:300px;
-	}
+.container {
+    border: 1px solid #999;
+    overflow: auto;
+    height: 300px;
+}
 
-	#groupContainer{
-		width:200px; 
-		margin-right : 20px;
-		
-	}
+#groupContainer {
+    width: 200px;
+    margin-right: 20px;
 
- .container::-webkit-scrollbar {
+}
+
+.container::-webkit-scrollbar {
     width: 10px;
-  }
-  .container::-webkit-scrollbar-thumb {
+}
+
+.container::-webkit-scrollbar-thumb {
     background-color: #999;
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
-  }
-  .container::-webkit-scrollbar-track {
+}
+
+.container::-webkit-scrollbar-track {
     background-color: lightgray;
     border-radius: 10px;
     box-shadow: inset 0px 0px 5px white;
-  }
-
-
-
-
-
-ul.tabs{
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-ul.tabs li{
-	background: none;
-	color: #999;
-	display: inline-block;
-	padding: 10px 15px; 
-	cursor: pointer;
 }
 
-ul.tabs li.current{
-	color: #0b2a60;
+ul.tabs {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
 }
 
-.tab-content{
-	display: none;
-	padding: 15px;
+ul.tabs li {
+    background: none;
+    color: #999;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
 }
 
-.tab-content.current{
-	display: inherit;
+ul.tabs li.current {
+    font-weight: 500;
+    color: #0b2a60;
+    border-bottom: 2px solid #0b2a60;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+}
+
+.tab-content.current {
+    display: inherit;
 }

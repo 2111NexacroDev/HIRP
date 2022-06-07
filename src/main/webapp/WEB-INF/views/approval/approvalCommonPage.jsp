@@ -41,7 +41,43 @@
 <script src="../../../resources/js/jquery.treeview.js"></script>
 <link rel="stylesheet" href="../../../resources/css/jquery.treeview.css" />
 <link rel="stylesheet" href="../../../resources/css/screen.css" />
-
+<script>
+    $(function(){
+        let addr = location.href;
+        if(addr.match('/waiting/appr.hirp')) {            
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(1)>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('/written/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(2)>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('/temporaryStorage/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(2)>ul>li:nth-child(2)').addClass('on');
+        }
+        if(addr.match('/rejected/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(2)>ul>li:nth-child(3)').addClass('on');
+        }
+        if(addr.match('/completed/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(2)>ul>li:nth-child(4)').addClass('on');
+        }
+        if(addr.match('/ref/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(3)>ul>li:nth-child(1)').addClass('on');
+        }
+        if(addr.match('/viewer/appr.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(3)>ul>li:nth-child(2)').addClass('on');
+        }
+        if(addr.match('/approval/writeForm.hirp')) {
+            $('#gnb ul>li:nth-child(7) a').addClass('on');
+            $('#snb>ul>li:nth-child(4)>ul>li:nth-child(1)').addClass('on');
+        }
+    });
+</script>
 </head>
 
 <body>

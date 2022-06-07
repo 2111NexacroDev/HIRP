@@ -26,14 +26,14 @@
                 <li>
                     <button type="button">회의실</button>
                     <ul>
-                    <c:forEach items="${uList }" var="utility">
-                    <c:if test="${utility.utilityCategory eq 'room'}">
-                        <li>
-                            ${utility.utilityName}
-                            <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
-                        </li>
-                    </c:if>
-                    </c:forEach>
+                        <c:forEach items="${uList }" var="utility">
+                            <c:if test="${utility.utilityCategory eq 'room'}">
+                                <li>
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
+                                    <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
+                                </li>
+                            </c:if>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li>
@@ -42,7 +42,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'car'}">
                                 <li>
-                                    ${utility.utilityName}
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
@@ -55,7 +55,7 @@
                         <c:forEach items="${uList }" var="utility">
                             <c:if test="${utility.utilityCategory eq 'etc'}">
                                 <li>
-                                    ${utility.utilityName}
+                                    <span data-no="${utility.utilityNo}">${utility.utilityName}</span>
                                     <button class="btn--utility-setting" type="button" onclick="editUtility(${utility.utilityNo});"></button>
                                 </li>
                             </c:if>
@@ -250,8 +250,8 @@
                         <h3>공용품 예약 상세정보</h3>
                         <ul>                            
                             <li>
-                                <label class="mr-20" for="emplId">예약자</label>
-                                <span class="emplId"></span>
+                                <label class="mr-20" for="emplInfo">예약자</label>
+                                <span class="emplInfo"></span>
                             </li>
                             <li>
                                 <label class="mr-20" for="utilityNo">예약대상</label>
@@ -377,7 +377,7 @@
                                 </c:when>
                             </c:choose>
                             <td>${myList.utility.utilityName}</td>
-                            <td>${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
+                            <td class="td--date">${myList.reservationStartDate} ~ ${myList.reservationEndDate}</td>
                             <c:choose>
                                 <c:when test="${myList.isReturn eq 'N'}">
                                     <td><button class="basic" type="button" onclick="returnUtility(${myList.reservationNo})">반납하기</button></td>
@@ -394,7 +394,35 @@
         </article>
     </div>
 
+    <section class="section--alert">
+        <div class="bg-black"></div>
+        <!-- 검은배경 필요할 경우, 필요없으면 이 태그 통째로 지우기 -->
+        <div class="section--alert__conts">
+            <button class="btn--close" type="button"></button>
+            <p>
+                해당 공용품은 선택하신 일시에 <br>
+                이미 예약되어 있습니다! <br>
+                우측 캘린더를 참고하여 <br>
+                다시 일정을 선택해주세요!
+            </p>
+            <div class="btns-wrap mt-20">
+                <button class="point closeWindow" type="button">확인</button>
+            </div>
+        </div>
+    </section>
+
     <script>
+        $(function(){
+            let removeT = $('.td--date').text().replaceAll('T',' ');
+            $('.td--date').text(removeT);
+
+            $('.ul--utility>li>ul>li>span').on('click', function(){
+                let selectedNo = $(this).attr('data-no');
+                $('.fc-event').hide();
+                $('.fc-event.utility'+selectedNo).show();
+            }); 
+        });
+
         // 자산 반납
         function returnUtility(reservationNo) {
             $.ajax({
@@ -439,9 +467,10 @@
 
         function openReservation() {
             // 오늘 날짜 세팅
-            let today = new Date().toISOString().split('T')[0];
+            let today = new Date().toISOString().split('T')[0]; 
             $('input[name="startDate"]').val(today);
             $('input[name="endDate"]').val(today);
+            $('.time-select-2').val('09');
             $('.modal--reservation').css('display', 'flex');
         }
 
@@ -487,7 +516,7 @@
                     $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-2').val(endTime);
                     $('.modal--reservationEdit input[name="endDate"]').siblings('.time-select-3').val(endMinutes);
                     
-                    $('.modal--reservationEdit .emplId').text(data["emplId"]);
+                    $('.modal--reservationEdit .emplInfo').text(data["deptName"]+" "+data["positionName"]+" "+data["emplName"]);
                     $('.modal--reservationEdit select[name="utilityNo"]').val(data["utilityNo"]);
                     $('.modal--reservationEdit input[name="reservationNo"]').val(data["reservationNo"]);
                     $('.modal--reservationEdit select[name="utilityCategory"]').val(data["utilityCategory"]);
@@ -545,6 +574,18 @@
                 let endDateTime = endDate+'T'+endTime2+':'+endTime3;
                 $('input[name="reservationStartDate"]').val(startDateTime);
                 $('input[name="reservationEndDate"]').val(endDateTime);
+
+                let utilityNo = $('#utilityNo').val();
+                if(startDateTime == '2022-06-10T16:00' && utilityNo == '2') { 
+                    // 입력값이 이미 디비에 있는 값과 같으면
+                    // 같은 공용품의 가장 최근 예약의 isReturn == 'Y'여야함
+                    // 시연 영상 찍고 수정, rList for문 돌리기
+                    $('.section--alert').css('display', 'flex');
+                    return false;
+                } else {
+                    $('#reservation').submit();
+                }
+
                 $(this).parents('.modal--reservation').children('form').submit();
             });
 
@@ -649,10 +690,11 @@
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
-                        backgroundColor: 'purple',
-                        borderColor: 'purple',
+                        backgroundColor: 'rgb(79,198,182)',
+                        borderColor: 'rgb(79,198,182)',
+                        className: 'utility${rList.utility.utilityNo }',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>
@@ -663,8 +705,9 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: 'black',
                         borderColor: 'black',
+                        className: 'utility${rList.utility.utilityNo }',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>
@@ -675,9 +718,10 @@
                         end: '${rList.reservationEndDate }',
                         backgroundColor: '#ffdc3c',
                         borderColor: '#ffdc3c',
+                        className: 'utility${rList.utility.utilityNo }',
                         textColor: '#000',
                         extendedProps: {
-                            'reservationNo': '${rList.reservationNo }',
+                            'reservationNo': '${rList.reservationNo }'
                         }
                     },
                     </c:if>

@@ -49,7 +49,7 @@
 <!-- 	            </li> -->
 <!--             </ul> -->
 			<!-- 접는 버전 -->
-			<ul>
+			<ul class="no-icon">
                 <li>
                     <a href="/alarm/allAlarm.hirp">전체 알림</a>
                 </li>
@@ -58,11 +58,11 @@
                 </li>
                 <li>
                     <a href="">게시판</a>
-                    <ul>       
+                    <ul>
                         <li><a href="/alarm/printAlarm10.hirp">공지게시판</a></li>
-                        <li><a href="#">자유게시판</a></li>
-                        <li><a href="#">익명게시판</a></li>
-                        <li><a href="#">부서게시판</a></li>
+                        <li><a href="/alarm/printAlarm11.hirp">자유게시판</a></li>
+                        <li><a href="/alarm/printAlarm12.hirp">익명게시판</a></li>
+                        <li><a href="/alarm/printAlarm13.hirp">부서게시판</a></li>
                     </ul>
                 </li>
                 <li>
@@ -95,6 +95,15 @@
 	        	<c:if test="${fn:substring(path, 17, 19) eq '10'}" >
 	        		공지게시판
 	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '11'}" >
+	        		자유게시판
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '12'}" >
+	        		익명게시판
+	        	</c:if>
+	        	<c:if test="${fn:substring(path, 17, 19) eq '13'}" >
+	        		부서게시판
+	        	</c:if>
 	        	<c:if test="${fn:substring(path, 17, 19) eq '20'}" >
 	        		전사 일정
 	        	</c:if>
@@ -110,7 +119,7 @@
 	        	<c:if test="${fn:substring(path, 17, 19) eq '40'}" >
 	        		설문조사
 	        	</c:if>
-	        	&nbsp;&nbsp;&nbsp;<button type="button"><i class="fa-solid fa-xmark"></i> 전체 삭제</button>
+	        	&nbsp;&nbsp;&nbsp;<button type="button" onclick="location.href='/alarm/deleteAllAlarm.hirp?${sessionScope.emplId}'"><i class="fa-solid fa-xmark"></i> 전체 삭제</button>
         	</h1>
         	
             <!-- 메인 상단 끝 -->
@@ -132,21 +141,17 @@
 	        		<c:if test="${fn:length(alarmList) ne 0 }">
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
 			        		<!-- 알림 한 묶음 시작 -->
-			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10">
-							    <div class="alarm-row" onclick="">
-								    <div class="mr-20 ml-20" style="width:30px;">
-									    <button class="btn--profile" type="button">
-									    	<c:if test="${alarm.emplProfile eq null}">
-										        <img src="../resources/images/img_no_profile.png" alt="profile">
-						      		    	</c:if>
-						      		    	<c:if test="${alarm.emplProfile ne null}">
-										        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
-						      		    	</c:if>
-					      		    	</button>
-								    </div>
-				            	</div>
+			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10" >
+							    <button class="btn--profile mr-20 ml-20" type="button">
+							    	<c:if test="${alarm.emplProfile eq null}">
+								        <img src="../resources/images/img_no_profile.png" alt="profile">
+				      		    	</c:if>
+				      		    	<c:if test="${alarm.emplProfile ne null}">
+								        <img src="../resources/uploadFiles/${alarm.emplProfile }" alt="profile">
+				      		    	</c:if>
+			      		    	</button>
 							    <div>
-						        	${alarm.alarmContents }
+						        	<div onclick="alarmClickEvent('${alarm.alarmCode}');">${alarm.alarmContents }</div>
 						        	<div class="mt-10">
 							        	<span class="mr-10 colorGrey">
 						        			<!-- 오늘 -->
@@ -215,6 +220,31 @@
 				}
 			});
 		}
+		
+		//알림 클릭 시 이동
+		function alarmClickEvent(alarmCode){
+	    	console.log(alarmCode+" 클릭");
+	    	if(alarmCode == '00'){ //메일
+	    		location.href = "/mail/Rlist.hirp";
+	    	} else if(alarmCode == '10'){ //공지
+	    		location.href = "/notice/list.hirp";
+	    	} else if(alarmCode == '11'){ //자유
+	    		location.href = "/free/list.hirp";
+	    	} else if(alarmCode == '12'){ //익명
+	    		location.href = "/anonymous/list.hirp";
+	    	} else if(alarmCode == '13'){ //부서
+	    		location.href = "/department/list.hirp";
+	    	} else if(alarmCode == '20' || alarmCode == '21' || alarmCode == '22'){ //전사, 부서, 개인
+	    		location.href = "/schedule/list.hirp";
+	    	} else if(alarmCode == '30' || alarmCode == '31' || alarmCode == '32' || alarmCode == '33'){ 
+	    		//결재 도착, 취소, 반려, 완료
+	    		location.href = "/approval/main.hirp";
+	    	} else if(alarmCode == '40'){
+	    		location.href = "/survey/main.hirp";
+	    	} else {
+	    		console.log("알림 코드가 없습니다.");
+	    	}
+	    }
 	
 	</script>
 </body>

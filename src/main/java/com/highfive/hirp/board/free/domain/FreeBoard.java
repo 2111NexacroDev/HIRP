@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.highfive.hirp.board.common.BoardAttachedFile;
+import com.highfive.hirp.employee.domain.Employee;
 
 public class FreeBoard {
 
@@ -17,23 +18,9 @@ public class FreeBoard {
 	private int recommendCount;
 	private String status;
 	private List<BoardAttachedFile> bList;
+	private Employee employee;
 	
 	public FreeBoard() {}
-
-	public FreeBoard(int freeNo, String boardCode, String emplId, String freeTitle, String freeContents, Date writeDate,
-			int freeCount, int recommendCount, String status, List<BoardAttachedFile> bList) {
-		super();
-		this.freeNo = freeNo;
-		this.boardCode = boardCode;
-		this.emplId = emplId;
-		this.freeTitle = freeTitle;
-		this.freeContents = freeContents;
-		this.writeDate = writeDate;
-		this.freeCount = freeCount;
-		this.recommendCount = recommendCount;
-		this.status = status;
-		this.bList = bList;
-	}
 
 	public int getFreeNo() {
 		return freeNo;
@@ -115,11 +102,22 @@ public class FreeBoard {
 		this.bList = bList;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeBoard [freeNo=" + freeNo + ", boardCode=" + boardCode + ", emplId=" + emplId + ", freeTitle="
 				+ freeTitle + ", freeContents=" + freeContents + ", writeDate=" + writeDate + ", freeCount=" + freeCount
-				+ ", recommendCount=" + recommendCount + ", status=" + status + ", bList=" + bList + "]";
+				+ ", recommendCount=" + recommendCount + ", status=" + status + ", bList=" + bList + ", employee="
+				+ employee + "]";
 	}
+
+	
 
 }

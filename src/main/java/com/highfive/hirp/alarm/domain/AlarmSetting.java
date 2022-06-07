@@ -2,41 +2,41 @@ package com.highfive.hirp.alarm.domain;
 
 public class AlarmSetting {
 	private String emplId;
-	private String alramMail;
-	private String alramNoticeboard;
-	private String alramFreeboard;
-	private String alramAnonymousboard;
-	private String alramDeptboard;
-	private String alramAllschedule;
-	private String alramTeamschedule;
-	private String alramPersonalschedule;
-	private String alramPayarrive;
-	private String alramPaycancle;
-	private String alramPaycompanion;
-	private String alramPaycomplete;
-	private String alramSurvey;
+	private String alarmMail;
+	private String alarmNoticeboard;
+	private String alarmFreeboard;
+	private String alarmAnonymousboard;
+	private String alarmDeptboard;
+	private String alarmAllschedule;
+	private String alarmTeamschedule;
+	private String alarmPersonalschedule;
+	private String alarmPayarrive;
+	private String alarmPaycancle;
+	private String alarmPaycompanion;
+	private String alarmPaycomplete;
+	private String alarmSurvey;
 	
 	public AlarmSetting() {}
 
-	public AlarmSetting(String emplId, String alramMail, String alramNoticeboard, String alramFreeboard,
-			String alramAnonymousboard, String alramDeptboard, String alramAllschedule, String alramTeamschedule,
-			String alramPersonalschedule, String alramPayarrive, String alramPaycancle, String alramPaycompanion,
-			String alramPaycomplete, String alramSurvey) {
+	public AlarmSetting(String emplId, String alarmMail, String alarmNoticeboard, String alarmFreeboard,
+			String alarmAnonymousboard, String alarmDeptboard, String alarmAllschedule, String alarmTeamschedule,
+			String alarmPersonalschedule, String alarmPayarrive, String alarmPaycancle, String alarmPaycompanion,
+			String alarmPaycomplete, String alarmSurvey) {
 		super();
 		this.emplId = emplId;
-		this.alramMail = alramMail;
-		this.alramNoticeboard = alramNoticeboard;
-		this.alramFreeboard = alramFreeboard;
-		this.alramAnonymousboard = alramAnonymousboard;
-		this.alramDeptboard = alramDeptboard;
-		this.alramAllschedule = alramAllschedule;
-		this.alramTeamschedule = alramTeamschedule;
-		this.alramPersonalschedule = alramPersonalschedule;
-		this.alramPayarrive = alramPayarrive;
-		this.alramPaycancle = alramPaycancle;
-		this.alramPaycompanion = alramPaycompanion;
-		this.alramPaycomplete = alramPaycomplete;
-		this.alramSurvey = alramSurvey;
+		this.alarmMail = alarmMail;
+		this.alarmNoticeboard = alarmNoticeboard;
+		this.alarmFreeboard = alarmFreeboard;
+		this.alarmAnonymousboard = alarmAnonymousboard;
+		this.alarmDeptboard = alarmDeptboard;
+		this.alarmAllschedule = alarmAllschedule;
+		this.alarmTeamschedule = alarmTeamschedule;
+		this.alarmPersonalschedule = alarmPersonalschedule;
+		this.alarmPayarrive = alarmPayarrive;
+		this.alarmPaycancle = alarmPaycancle;
+		this.alarmPaycompanion = alarmPaycompanion;
+		this.alarmPaycomplete = alarmPaycomplete;
+		this.alarmSurvey = alarmSurvey;
 	}
 
 	public String getEmplId() {
@@ -47,118 +47,118 @@ public class AlarmSetting {
 		this.emplId = emplId;
 	}
 
-	public String getAlramMail() {
-		return alramMail;
+	public String getalarmMail() {
+		return alarmMail;
 	}
 
-	public void setAlramMail(String alramMail) {
-		this.alramMail = alramMail;
+	public void setalarmMail(String alarmMail) {
+		this.alarmMail = alarmMail;
 	}
 
-	public String getAlramNoticeboard() {
-		return alramNoticeboard;
+	public String getalarmNoticeboard() {
+		return alarmNoticeboard;
 	}
 
-	public void setAlramNoticeboard(String alramNoticeboard) {
-		this.alramNoticeboard = alramNoticeboard;
+	public void setalarmNoticeboard(String alarmNoticeboard) {
+		this.alarmNoticeboard = alarmNoticeboard;
 	}
 
-	public String getAlramFreeboard() {
-		return alramFreeboard;
+	public String getalarmFreeboard() {
+		return alarmFreeboard;
 	}
 
-	public void setAlramFreeboard(String alramFreeboard) {
-		this.alramFreeboard = alramFreeboard;
+	public void setalarmFreeboard(String alarmFreeboard) {
+		this.alarmFreeboard = alarmFreeboard;
 	}
 
-	public String getAlramAnonymousboard() {
-		return alramAnonymousboard;
+	public String getalarmAnonymousboard() {
+		return alarmAnonymousboard;
 	}
 
-	public void setAlramAnonymousboard(String alramAnonymousboard) {
-		this.alramAnonymousboard = alramAnonymousboard;
+	public void setalarmAnonymousboard(String alarmAnonymousboard) {
+		this.alarmAnonymousboard = alarmAnonymousboard;
 	}
 
-	public String getAlramDeptboard() {
-		return alramDeptboard;
+	public String getalarmDeptboard() {
+		return alarmDeptboard;
 	}
 
-	public void setAlramDeptboard(String alramDeptboard) {
-		this.alramDeptboard = alramDeptboard;
+	public void setalarmDeptboard(String alarmDeptboard) {
+		this.alarmDeptboard = alarmDeptboard;
 	}
 
-	public String getAlramAllschedule() {
-		return alramAllschedule;
+	public String getalarmAllschedule() {
+		return alarmAllschedule;
 	}
 
-	public void setAlramAllschedule(String alramAllschedule) {
-		this.alramAllschedule = alramAllschedule;
+	public void setalarmAllschedule(String alarmAllschedule) {
+		this.alarmAllschedule = alarmAllschedule;
 	}
 
-	public String getAlramTeamschedule() {
-		return alramTeamschedule;
+	public String getalarmTeamschedule() {
+		return alarmTeamschedule;
 	}
 
-	public void setAlramTeamschedule(String alramTeamschedule) {
-		this.alramTeamschedule = alramTeamschedule;
+	public void setalarmTeamschedule(String alarmTeamschedule) {
+		this.alarmTeamschedule = alarmTeamschedule;
 	}
 
-	public String getAlramPersonalschedule() {
-		return alramPersonalschedule;
+	public String getalarmPersonalschedule() {
+		return alarmPersonalschedule;
 	}
 
-	public void setAlramPersonalschedule(String alramPersonalschedule) {
-		this.alramPersonalschedule = alramPersonalschedule;
+	public void setalarmPersonalschedule(String alarmPersonalschedule) {
+		this.alarmPersonalschedule = alarmPersonalschedule;
 	}
 
-	public String getAlramPayarrive() {
-		return alramPayarrive;
+	public String getalarmPayarrive() {
+		return alarmPayarrive;
 	}
 
-	public void setAlramPayarrive(String alramPayarrive) {
-		this.alramPayarrive = alramPayarrive;
+	public void setalarmPayarrive(String alarmPayarrive) {
+		this.alarmPayarrive = alarmPayarrive;
 	}
 
-	public String getAlramPaycancle() {
-		return alramPaycancle;
+	public String getalarmPaycancle() {
+		return alarmPaycancle;
 	}
 
-	public void setAlramPaycancle(String alramPaycancle) {
-		this.alramPaycancle = alramPaycancle;
+	public void setalarmPaycancle(String alarmPaycancle) {
+		this.alarmPaycancle = alarmPaycancle;
 	}
 
-	public String getAlramPaycompanion() {
-		return alramPaycompanion;
+	public String getalarmPaycompanion() {
+		return alarmPaycompanion;
 	}
 
-	public void setAlramPaycompanion(String alramPaycompanion) {
-		this.alramPaycompanion = alramPaycompanion;
+	public void setalarmPaycompanion(String alarmPaycompanion) {
+		this.alarmPaycompanion = alarmPaycompanion;
 	}
 
-	public String getAlramPaycomplete() {
-		return alramPaycomplete;
+	public String getalarmPaycomplete() {
+		return alarmPaycomplete;
 	}
 
-	public void setAlramPaycomplete(String alramPaycomplete) {
-		this.alramPaycomplete = alramPaycomplete;
+	public void setalarmPaycomplete(String alarmPaycomplete) {
+		this.alarmPaycomplete = alarmPaycomplete;
 	}
 
-	public String getAlramSurvey() {
-		return alramSurvey;
+	public String getalarmSurvey() {
+		return alarmSurvey;
 	}
 
-	public void setAlramSurvey(String alramSurvey) {
-		this.alramSurvey = alramSurvey;
+	public void setalarmSurvey(String alarmSurvey) {
+		this.alarmSurvey = alarmSurvey;
 	}
 
 	@Override
 	public String toString() {
-		return "AlramSetting [emplId=" + emplId + ", alramMail=" + alramMail + ", alramNoticeboard=" + alramNoticeboard
-				+ ", alramFreeboard=" + alramFreeboard + ", alramAnonymousboard=" + alramAnonymousboard
-				+ ", alramDeptboard=" + alramDeptboard + ", alramAllschedule=" + alramAllschedule
-				+ ", alramTeamschedule=" + alramTeamschedule + ", alramPersonalschedule=" + alramPersonalschedule
-				+ ", alramPayarrive=" + alramPayarrive + ", alramPaycancle=" + alramPaycancle + ", alramPaycompanion="
-				+ alramPaycompanion + ", alramPaycomplete=" + alramPaycomplete + ", alramSurvey=" + alramSurvey + "]";
+		return "alarmSetting [emplId=" + emplId + ", alarmMail=" + alarmMail + ", alarmNoticeboard=" + alarmNoticeboard
+				+ ", alarmFreeboard=" + alarmFreeboard + ", alarmAnonymousboard=" + alarmAnonymousboard
+				+ ", alarmDeptboard=" + alarmDeptboard + ", alarmAllschedule=" + alarmAllschedule
+				+ ", alarmTeamschedule=" + alarmTeamschedule + ", alarmPersonalschedule=" + alarmPersonalschedule
+				+ ", alarmPayarrive=" + alarmPayarrive + ", alarmPaycancle=" + alarmPaycancle + ", alarmPaycompanion="
+				+ alarmPaycompanion + ", alarmPaycomplete=" + alarmPaycomplete + ", alarmSurvey=" + alarmSurvey + "]";
 	}
 	
 	

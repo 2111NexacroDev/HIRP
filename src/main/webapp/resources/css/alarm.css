@@ -1,8 +1,20 @@
-/* .subConts>.alarm-row { */
+/* .subContsConts>.alarm-row { */
 /*     font-size: 16px; */
 /* } */
 
 .alarm-row {
     display: flex;
     align-items: center;
+}
+
+
+#sub:not(.snb--org)>ul>li>a:before, #sub:not(.snb--org)>ul>li>button:before {
+    content: "\f107";
+    font-family: "Fontawesome";
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+div[name=alarmDiv]:hover {
+    background-color: Aqua;
 }
