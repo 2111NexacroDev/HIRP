@@ -156,7 +156,12 @@
 							        	<span class="mr-10 colorGrey">
 						        			<!-- 오늘 -->
 							        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) eq today}">
-							        			${ fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13) }시간 전
+							        			<c:if test="${ (fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13)) eq 0}">
+							        				방금 전
+							        			</c:if>
+							        			<c:if test="${ (fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13)) ne 0}">
+								        			${ fn:substring(time, 0, 2) - fn:substring(alarm.alarmDate, 11, 13) }시간 전
+							        			</c:if>
 							        		</c:if>
 							        		<!-- 오늘 아님 -->
 							        		<c:if test="${fn:substring(alarm.alarmDate, 0, 10) ne today}">

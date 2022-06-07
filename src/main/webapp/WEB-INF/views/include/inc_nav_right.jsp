@@ -102,7 +102,11 @@
 		        	$alarmDiv += "<span class='mr-10 colorGrey'>"
 		        	
 		        	if(dateString == alarmDate) { //오늘 뜬 알림일 때
-		        		$alarmDiv += (hours - aList[i].alarmDate.substring(11, 13)*1) + "시간 전";
+		        		if((hours - aList[i].alarmDate.substring(11, 13)*1) == 0){
+		        			$alarmDiv += "방금 전";
+		        		} else {
+			        		$alarmDiv += (hours - aList[i].alarmDate.substring(11, 13)*1) + "시간 전";
+		        		}
 		        	} else { //오늘 뜬 알림이 아닐 때
 		        		$alarmDiv += aList[i].alarmDate.substr(5, 2) + "-" + aList[i].alarmDate.substr(8, 2) + " " 
 		        			+ aList[i].alarmDate.substring(11, 13) + ":" + aList[i].alarmDate.substring(14, 16);
