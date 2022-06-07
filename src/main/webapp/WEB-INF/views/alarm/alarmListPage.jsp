@@ -141,7 +141,7 @@
 	        		<c:if test="${fn:length(alarmList) ne 0 }">
 		        		<c:forEach items="${alarmList }" var="alarm" varStatus="status">
 			        		<!-- 알림 한 묶음 시작 -->
-			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10" onclick="alarmClickEvent('${alarm.alarmCode}');">
+			        		<div class="alarm-row mt-10 basic-border-bottom padding-bottom-10" >
 							    <button class="btn--profile mr-20 ml-20" type="button">
 							    	<c:if test="${alarm.emplProfile eq null}">
 								        <img src="../resources/images/img_no_profile.png" alt="profile">
@@ -151,7 +151,7 @@
 				      		    	</c:if>
 			      		    	</button>
 							    <div>
-						        	${alarm.alarmContents }
+						        	<div onclick="alarmClickEvent('${alarm.alarmCode}');">${alarm.alarmContents }</div>
 						        	<div class="mt-10">
 							        	<span class="mr-10 colorGrey">
 						        			<!-- 오늘 -->
