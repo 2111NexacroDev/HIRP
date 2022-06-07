@@ -333,7 +333,6 @@
         			this.alert("직급 목록 조회 실패 : " + sErrorMsg);
         			return;
         		}
-        		this.alert("직급 조회 성공");
         	}
         	if(id=="position_Delete")
         	{
@@ -532,6 +531,6 @@
         
         // Remove Reference
         obj = null;
-    };
+    }; 
 }
 )();
