@@ -690,8 +690,8 @@
                         title: '${rList.utility.utilityName }',
                         start: '${rList.reservationStartDate }',
                         end: '${rList.reservationEndDate }',
-                        backgroundColor: 'purple',
-                        borderColor: 'purple',
+                        backgroundColor: 'rgb(79,198,182)',
+                        borderColor: 'rgb(79,198,182)',
                         className: 'utility${rList.utility.utilityNo }',
                         extendedProps: {
                             'reservationNo': '${rList.reservationNo }'
