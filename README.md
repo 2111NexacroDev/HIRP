@@ -74,6 +74,14 @@ HIRP = High + ERP<br>
 근태관리, 전자결재, 일정관리, 업무관리, 메일, 사내메신저, ...<br>
 업무 시 필요한 모든 기능을 한 번에 해결할 수 있도록 빠짐없이 담았습니다.
 <br><br>
+- ###### 로그인페이지
+![로그인페이지](https://user-images.githubusercontent.com/100409006/172547394-a27e1482-8b7d-48c1-a435-7de77a96f7a4.png)
+- ###### 홈페이지
+![홈페이지](https://user-images.githubusercontent.com/100409006/172547405-7825691a-d16f-4641-8791-22e7b2427e06.png)
+
+[HIRP : 최종 보고서.pptx](https://github.com/1129khNexapring/HIRP/files/8858925/HIRP_final.pptx)
+
+[HIRP : 최종 보고서.pdf](https://github.com/1129khNexapring/HIRP/files/8858924/HIRP_final.pdf)
 
 ## 6. document
 
