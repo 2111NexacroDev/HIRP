@@ -79,9 +79,10 @@ HIRP = High + ERP<br>
 - ###### 홈페이지
 ![홈페이지](https://user-images.githubusercontent.com/100409006/172547405-7825691a-d16f-4641-8791-22e7b2427e06.png)
 
-[HIRP : 최종 보고서.pptx](https://github.com/1129khNexapring/HIRP/files/8858925/HIRP_final.pptx)
+- ###### 이외 자세한 기능은 최종 보고서에 기술해두었습니다.
+[HIRP : 최종 보고서.pptx](https://github.com/1129khNexapring/HIRP/files/8858925/-._220607_.pptx)
 
-[HIRP : 최종 보고서.pdf](https://github.com/1129khNexapring/HIRP/files/8858924/HIRP_final.pdf)
+[HIRP : 최종 보고서.pdf](https://github.com/1129khNexapring/HIRP/files/8858924/-._220607_.pdf)
 
 ## 6. document
 
