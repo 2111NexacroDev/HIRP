@@ -76,3 +76,6 @@ HIRP = High + ERP<br>
 <br><br>
 
 ## 6. document
+
+#### ERD
+![HIRP ERD 수정](https://user-images.githubusercontent.com/100409006/172546399-d5db3118-14e6-4fe0-bac1-3fc877b71f94.png)
