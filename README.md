@@ -75,7 +75,7 @@ HIRP = High + ERP<br>
 업무 시 필요한 모든 기능을 한 번에 해결할 수 있도록 빠짐없이 담았습니다.
 <br><br>
 - ###### 로그인페이지(대유그룹 사내 인트라넷 포털 프론트 디자인 클론 코딩)
-![로그인페이지](https://user-images.githubusercontent.com/100409006/172547394-a27e1482-8b7d-48c1-a435-7de77a96f7a4.png)
+![로그인페이지](https://user-images.githubusercontent.com/40844404/172876842-406cb8a7-7ab4-471c-8450-481fedd5093b.png)
 - ###### 홈페이지(다우기술 다우오피스 프론트 클론 코딩, 백엔드 자체 구성)
 ![홈페이지](https://user-images.githubusercontent.com/100409006/172547405-7825691a-d16f-4641-8791-22e7b2427e06.png)
 
