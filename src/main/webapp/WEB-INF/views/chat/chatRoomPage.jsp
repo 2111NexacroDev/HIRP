@@ -49,7 +49,7 @@
 <%-- 				      		    	</c:if> --%>
 <!-- 							    </button> -->
 <!-- 						    </div> -->
-						    <div class="ml-20 pos-rel" style="width:100%;">
+						    <div class="ml-20 pos-rel" style="width:94%;">
 						    	<h3 class="mb-20 inline-block">
 						    		${chat.chatroomName} 
 						    		<c:if test="${chat.chatroomType eq 'G'}">
@@ -185,7 +185,7 @@
 		    			console.log(cList[i].message.msgSenddate);
 	    				var countUp = "<c:set var='count' value='"+i+"' />";//원래는 여기 roomId 들어가야 할 듯.
 						var chatroomOneDiv =   "<div class='chat-row mt-10 basic-border-bottom padding-bottom-10' onclick=''>"
-							   + "<div class='ml-20 pos-rel' style='width:100%;'>"
+							   + "<div class='ml-20 pos-rel' style='width:94%;'>"
 							    	+ "<h3 class='mb-20 inline-block'>"+cList[i].chatroomName;
 						
 						if(cList[i].chatroomType == 'G'){
