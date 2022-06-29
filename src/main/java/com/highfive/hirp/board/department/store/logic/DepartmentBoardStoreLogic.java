@@ -1,7 +1,9 @@
 package com.highfive.hirp.board.department.store.logic;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -112,5 +114,25 @@ public class DepartmentBoardStoreLogic implements DepartmentBoardStore{
 	public List<DepartmentBoard> selectNewestDepartment(SqlSession sqlSession) {
 		List<DepartmentBoard> dList = sqlSession.selectList("DepartmentBoardMapper.selectNewestDepartment");
 		return dList;
+	}
+
+	//통계
+	@Override
+	public List<Map<String,Object>> departmentStatistic(Map dateMap, SqlSession sqlSession) {
+		List<Map<String,Object>> dList = sqlSession.selectList("DepartmentBoardMapper.departmentStatistic",dateMap);
+		return dList;
+	}
+
+	//접속한 IP정보 등록
+	@Override
+	public int insertRemoteAddrInfo(Map<String, Object> addrMap, SqlSession sqlSession) {
+		int result = sqlSession.insert("DepartmentBoardMapper.insertRemoteAddrInfo", addrMap);
+		return result;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectRemoteApprInfoList(Map<String, Object> dataMap,SqlSession sqlSession) {
+		List<Map<String, Object>> mapList = sqlSession.selectList("DepartmentBoardMapper.selectRemoteApprInfoList",dataMap);
+		return mapList;
 	}
 }

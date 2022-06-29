@@ -17,26 +17,10 @@ public class DepartmentBoard {
 	private int deptCount;
 	private String isNotice;
 	private String status;
+	private int statisticCount;
 	private List<BoardAttachedFile> bList;
 	
 	public DepartmentBoard() {}
-
-	public DepartmentBoard(int deptNo, String boardCode, String emplId, String deptCode, String deptTitle,
-			String deptContents, Date writeDate, int deptCount, String isNotice, String status,
-			List<BoardAttachedFile> bList) {
-		super();
-		this.deptNo = deptNo;
-		this.boardCode = boardCode;
-		this.emplId = emplId;
-		this.deptCode = deptCode;
-		this.deptTitle = deptTitle;
-		this.deptContents = deptContents;
-		this.writeDate = writeDate;
-		this.deptCount = deptCount;
-		this.isNotice = isNotice;
-		this.status = status;
-		this.bList = bList;
-	}
 
 	public int getDeptNo() {
 		return deptNo;
@@ -118,6 +102,14 @@ public class DepartmentBoard {
 		this.status = status;
 	}
 
+	public int getStatisticCount() {
+		return statisticCount;
+	}
+
+	public void setStatisticCount(int statisticCount) {
+		this.statisticCount = statisticCount;
+	}
+
 	public List<BoardAttachedFile> getbList() {
 		return bList;
 	}
@@ -130,10 +122,9 @@ public class DepartmentBoard {
 	public String toString() {
 		return "DepartmentBoard [deptNo=" + deptNo + ", boardCode=" + boardCode + ", emplId=" + emplId + ", deptCode="
 				+ deptCode + ", deptTitle=" + deptTitle + ", deptContents=" + deptContents + ", writeDate=" + writeDate
-				+ ", deptCount=" + deptCount + ", isNotice=" + isNotice + ", status=" + status + ", bList=" + bList
-				+ "]";
+				+ ", deptCount=" + deptCount + ", isNotice=" + isNotice + ", status=" + status + ", statisticCount="
+				+ statisticCount + ", bList=" + bList + "]";
 	}
 
-	
 	
 }

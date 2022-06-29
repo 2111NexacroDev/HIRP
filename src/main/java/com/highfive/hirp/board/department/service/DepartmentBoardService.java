@@ -1,6 +1,7 @@
 package com.highfive.hirp.board.department.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.highfive.hirp.board.anonymous.domain.AnonymousBoard;
 import com.highfive.hirp.board.common.BoardAttachedFile;
@@ -39,4 +40,13 @@ public interface DepartmentBoardService {
 		public int modifyDepartmentFile(BoardAttachedFile bFile);
 
 		public List<DepartmentBoard> printNewestDepartment();
+
+		//통계
+		public List<Map<String,Object>> departmentStatistic(Map dateMap);
+
+		//접속한 아이피 정보 저장
+		public int registerRemoteAddrInfo(Map<String, Object> addrMap);
+
+		//접속한 아이피 정보 조회
+		public List<Map<String, Object>> remoteApprInfoList(Map<String, Object> dataMap);
 }

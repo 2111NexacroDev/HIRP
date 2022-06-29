@@ -1,6 +1,7 @@
 package com.highfive.hirp.board.department.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -39,6 +40,15 @@ public interface DepartmentBoardStore {
 
 	public int updateBoardFile(SqlSession sqlSession, BoardAttachedFile boardFile);
 	public List<DepartmentBoard> selectNewestDepartment(SqlSession sqlSession);
+	
+	//통계
+	public List<Map<String,Object>> departmentStatistic(Map dateMap,SqlSession sqlSession);
+
+	//접속한 IP정보 등록
+	public int insertRemoteAddrInfo(Map<String, Object> addrMap, SqlSession sqlSession);
+	
+	//접속한 IP정보 조회
+	public List<Map<String, Object>> selectRemoteApprInfoList(Map<String, Object> dataMap, SqlSession sqlSession);
 
 
 }

@@ -14,6 +14,7 @@
 <result property="deptCount" column="DEPT_COUNT"></result>
 <result property="isNotice" column="IS_NOTICE"></result>
 <result property="status" column="DEPT_STATUS"></result>
+<result property="statisticCount" column="STATISTIC_COUNT"></result>
 <collection property="bList" column="DEPT_NO" javaType="java.util.ArrayList" ofType="BoardAttachedFile" select="selectAllFile"></collection>
 </resultMap>
 <resultMap type="BoardAttachedFile" id="boardFileResultMap">
@@ -95,4 +96,18 @@
   <delete id="deleteFile">
   	DELETE FROM BOARD_ATTACHED_FILE_TBL WHERE FILE_NO = #{fileNo}
   </delete>
+  
+  <!-- 통계 -->
+  <select id="departmentStatistic" parameterType="map" resultType="map">
+  SELECT EMPL_ID, COUNT(DEPT_NO) "STATISTIC_COUNT" FROM BOARD_DEPT_TBL WHERE TO_CHAR(DEPT_WRITE_DATE,'YYYY-MM-DD') >= #{startDate} AND TO_CHAR(DEPT_WRITE_DATE,'YYYY-MM-DD') <![CDATA[ < ]]>= #{endDate} GROUP BY EMPL_ID
+  </select>
+  
+  <insert id="insertRemoteAddrInfo" parameterType="map" >
+  	INSERT INTO REMOTE_ADDR_INFO_TBL VALUES(REMOTE_ADDR_SEQ.NEXTVAL, #{remoteAddr},#{remoteDate},#{remoteTime})
+  </insert>
+  
+  <select id="selectRemoteApprInfoList" resultType="map">
+  	SELECT * FROM REMOTE_ADDR_INFO_TBL ORDER BY REMOTE_ADDR_NO ASC
+  </select>
+  
 </mapper>
