@@ -413,8 +413,8 @@
 
     <script>
         $(function(){
-            let removeT = $('.td--date').text().replaceAll('T',' ');
-            $('.td--date').text(removeT);
+            // let removeT = $('.td--date').text().replaceAll('T',' ');
+            // $('.td--date').text(removeT);
 
             $('.ul--utility>li>ul>li>span').on('click', function(){
                 let selectedNo = $(this).attr('data-no');
