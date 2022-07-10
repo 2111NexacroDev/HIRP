@@ -1,6 +1,7 @@
 package com.highfive.hirp.board.department.service.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +108,27 @@ public class DepartmentBoardServiceImpl implements DepartmentBoardService{
 	public List<DepartmentBoard> printNewestDepartment() {
 		List<DepartmentBoard> dList = dStore.selectNewestDepartment(sqlSession);
 		return dList;
+	}
+	
+	//통계
+	@Override
+	public List<Map<String,Object>> departmentStatistic(Map dateMap) {
+		List<Map<String,Object>> dList = dStore.departmentStatistic(dateMap,sqlSession);
+		return dList;
+	}
+	
+	//접속한 IP정보
+	@Override
+	public int registerRemoteAddrInfo(Map<String, Object> addrMap) {
+		int result = dStore.insertRemoteAddrInfo(addrMap,sqlSession);
+		return result;
+	}
+	
+	//접속한 IP정보 조회
+	@Override
+	public List<Map<String, Object>> remoteApprInfoList(Map<String, Object> dataMap) {
+		List<Map<String, Object>> mapList = dStore.selectRemoteApprInfoList(dataMap,sqlSession);
+		return mapList;
 	}
 	
 
